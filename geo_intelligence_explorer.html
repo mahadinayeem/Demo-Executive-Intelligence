@@ -971,11 +971,16 @@
             filtered.forEach(r => {
                 csv += `"${r.division}",${r.lat},${r.lng},"${r.address}","${r.stores_sample}",${r.total},${r.active},${r.unsold},${r.blind},${r.red_flag},${r.revenue},${r.visits},${r.orders}\n`;
             });
-            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = `sokrio_geo_data_${activeDivision.replace(/\s+/g, '_').toLowerCase()}.csv`;
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", `sokrio_geo_data_${activeDivision.replace(/\s+/g, '_').toLowerCase()}.csv`);
+            link.style.display = 'none';
+            document.body.appendChild(link);
             link.click();
+            document.body.removeChild(link);
+            setTimeout(() => URL.revokeObjectURL(url), 2000);
         }
 
         // Initialize Nationwide Default

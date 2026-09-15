@@ -1865,16 +1865,18 @@ function downloadFilteredCSV() {
 
   const headers = Object.keys(exportData[0]).join(',');
   const rows = exportData.map(row => Object.values(row).map(v => `"${v}"`).join(','));
-  const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers, ...rows].join('\n');
-  
-  const encodedUri = encodeURI(csvContent);
+  const csvContent = [headers, ...rows].join('\n');
+  const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   const filename = `Outlets_${activeDivision||'BD'}_${activeDistrict||'All'}_${activeThana||'All'}_${healthFilter}_${subTierFilter}_${new Date().toISOString().slice(0,10)}.csv`;
-  link.setAttribute('href', encodedUri);
+  link.setAttribute('href', url);
   link.setAttribute('download', filename);
+  link.style.display = 'none';
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
 }
 
 /* ═══════════════ RESET TO NATIONAL ═══════════════ */
