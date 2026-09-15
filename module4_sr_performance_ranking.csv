@@ -1,0 +1,967 @@
+﻿Rank,SR_ID,SR_Name,SR_Code,Territory,Persona,Quadrant,Revenue_BDT,Revenue_Share_Pct,Orders,AOV_BDT,Total_Visits,Visits_Per_Day,Conversion_Rate_Pct,Strike_Rate_Pct,Working_Days,Avg_Visit_Duration_Mins,Is_Red_Flag,Red_Flag_Reason
+1,1063,Md. Alamgir,11066,Ma Baba Dua Department Store,High-Efficiency Closer,Star Performers,27529061.9,0.6,187,147214.0,146,1.5,100.0,100.0,98,6.7,NO,Normal
+2,1283,Md.Moniruzzman,11114,Saha Distribution 2,High-Efficiency Closer,Star Performers,25086478.9,0.54,91,275676.0,70,0.8,100.0,100.0,92,85.9,NO,Normal
+3,1123,Anisur Rahman,11014,Mizi Enterprise,High-Efficiency Closer,Star Performers,23062387.6,0.5,434,53139.0,329,3.4,100.0,100.0,97,1.3,NO,Normal
+4,1188,Md. Sahidul Islam,11017,Rahmat and Sons,High-Efficiency Closer,Star Performers,20605660.9,0.45,1874,10996.0,1496,13.5,100.0,100.0,111,4.2,NO,Normal
+5,1061,Alauddin,11064,Amina Enterprise,High-Efficiency Closer,Star Performers,19313851.1,0.42,158,122240.0,139,2.2,100.0,100.0,64,2.7,NO,Normal
+6,1266,Maniruzzaman Molla,11097,Rafnan Enterprise,High-Efficiency Closer,Star Performers,18898364.9,0.41,499,37872.0,387,4.0,100.0,100.0,97,1.5,NO,Normal
+7,260,Masud Hossain Sarkar,SM000495,K. M. Motors,High-Efficiency Closer,Star Performers,16563182.9,0.36,1882,8801.0,1467,15.0,100.0,100.0,98,0.9,NO,Normal
+8,1074,Md. Shamsul Islam,11077,Makkha Enterprise,High-Efficiency Closer,Star Performers,16407041.8,0.35,250,65628.0,196,2.0,100.0,100.0,97,14.6,NO,Normal
+9,1103,Md. Sohel Howlader,10994,Abu Zafar Traders,High-Volume Runner,Volume Drivers,16292078.8,0.35,3441,4735.0,4342,42.2,79.2,99.1,103,0.8,NO,Normal
+10,168,Nasim,SM000357,D. S. Enterprise,High-Efficiency Closer,Star Performers,16256730.2,0.35,4129,3937.0,3342,34.5,100.0,100.0,97,1.6,NO,Normal
+11,1116,Khorshed Alam,11007,Pita Mata General store,High-Volume Runner,Volume Drivers,16046082.9,0.35,1204,13327.0,1823,18.6,66.0,75.9,98,0.4,NO,Normal
+12,1005,Sha Alam Howlader,10935,Abul & Sons,High-Efficiency Closer,Star Performers,15836919.8,0.34,1444,10967.0,1247,12.7,100.0,100.0,98,1.6,NO,Normal
+13,1083,Kamrul Hasan,11083,Ahmed Enterprise,High-Volume Runner,Volume Drivers,15424869.4,0.33,108,142823.0,109,1.1,99.1,95.5,97,9.1,NO,Normal
+14,1348,Md. Razzak Islam,11177,Sahin Store,High-Volume Runner,Volume Drivers,15301374.5,0.33,955,16022.0,1361,13.7,70.2,99.5,99,0.0,NO,Normal
+15,1290,Md. Abu Ahmed Siddique,11122,Ayesha Siddika Enterprise,High-Efficiency Closer,Star Performers,14937959.7,0.32,3330,4486.0,2763,27.9,100.0,99.1,99,1.8,NO,Normal
+16,1275,Kh. Monowarul Islam,11106,Meghna Enterprise-2,High-Efficiency Closer,Star Performers,14929967.4,0.32,92,162282.0,62,0.7,100.0,100.0,89,18.5,NO,Normal
+17,178,Yeasin,SM000374,Rahman Enterprise SYLC,High-Efficiency Closer,Star Performers,14236734.0,0.31,3822,3725.0,3145,32.4,100.0,99.7,97,5.4,NO,Normal
+18,1056,Kajal Kanti Nath,11057,Nazmul Enterprise COMC,High-Efficiency Closer,Star Performers,13992302.5,0.3,225,62188.0,170,1.8,100.0,100.0,96,7.6,NO,Normal
+19,284,Md. Tobarak Hossain,SM000534,Arun Traders,High-Efficiency Closer,Star Performers,13845641.8,0.3,3541,3910.0,2814,29.9,100.0,100.0,94,1.2,NO,Normal
+20,1302,Bazlur Rashid,11129,Haziganj Tradres,High-Efficiency Closer,Star Performers,13652117.0,0.3,197,69300.0,155,1.6,100.0,100.0,97,13.9,NO,Normal
+21,99,Md. Al Mahmud,SM000203,Brothers International,High-Efficiency Closer,Star Performers,13313594.15,0.29,98,135853.0,82,0.9,100.0,100.0,93,20.9,NO,Normal
+22,477,Md. Sumon Sheikh,SM000283,Shofi Store,High-Volume Runner,Volume Drivers,13285798.8,0.29,4886,2719.0,4920,50.2,99.3,100.0,98,6.7,NO,Normal
+23,710,Selim Reza,10578,Suchitra Traders,High-Volume Runner,Volume Drivers,13208069.0,0.29,4231,3122.0,4874,51.3,86.8,99.5,95,3.2,NO,Normal
+24,1115,Md. Abu Sohel,11006,Monir General Store,High-Volume Runner,Volume Drivers,13070917.5,0.28,842,15524.0,2328,24.0,36.2,72.1,97,0.0,NO,Normal
+25,5,Nazim Uddin,SM000007,Sailas Enterprise,High-Efficiency Closer,Star Performers,13014725.4,0.28,1471,8848.0,1213,13.8,100.0,100.0,88,2.9,NO,Normal
+26,856,Ishtiaq Khan,11050041,Sabur & Brothers,High-Efficiency Closer,Star Performers,12735182.5,0.28,2765,4606.0,2094,20.7,100.0,100.0,101,0.9,NO,Normal
+27,440,Md. Abdur Rakib,SM000237,M.A.S. Distribution,High-Efficiency Closer,Star Performers,12697457.55,0.27,1138,11158.0,863,8.9,100.0,100.0,97,2.0,NO,Normal
+28,1300,Kamal  Hossain,11127,Shehnaz Enterprise,High-Volume Runner,Volume Drivers,12569300.15,0.27,97,129580.0,171,1.7,56.7,66.2,102,13.0,NO,Normal
+29,1068,Lokman Hossain,11076,J. S. Traders,High-Efficiency Closer,Star Performers,12200080.25,0.26,171,71345.0,50,0.5,100.0,100.0,96,83.7,NO,Normal
+30,250,Bedarul Islam,SM000485,Amin Store,High-Efficiency Closer,Star Performers,12100381.3,0.26,1741,6950.0,1380,14.1,100.0,100.0,98,1.0,NO,Normal
+31,1291,Jahangir Alam,11123,Partho Traders,High-Efficiency Closer,Star Performers,11857613.3,0.26,103,115122.0,64,0.6,100.0,60.0,99,64.2,NO,Normal
+32,118,Khorshed Alom -2,SM000282,Shofi Store,High-Efficiency Closer,Star Performers,11844114.3,0.26,3972,2982.0,3174,32.4,100.0,100.0,98,11.9,NO,Normal
+33,1070,Abdur Rashid,11075,J. S. Traders,High-Efficiency Closer,Star Performers,11825586.2,0.26,121,97732.0,100,1.0,100.0,77.8,97,1.3,NO,Normal
+34,1325,Subuj Matabor,11154,Bhuiya Store,High-Efficiency Closer,Star Performers,11761487.6,0.25,660,17820.0,619,6.4,100.0,100.0,97,3.4,NO,Normal
+35,1045,Md Soharob Hosen,10922,Limon Store,High-Volume Runner,Volume Drivers,11709729.0,0.25,1344,8713.0,1390,14.3,96.7,100.0,97,1.0,NO,Normal
+36,765,Md. Rafiqul Islam,10233,Nobobi Enterprise,High-Volume Runner,Volume Drivers,11678146.5,0.25,910,12833.0,912,9.9,99.8,100.0,92,3.3,NO,Normal
+37,1268,Nazir Hossain,11099,Karnafuly Trading,High-Efficiency Closer,Star Performers,11484223.8,0.25,130,88340.0,75,0.8,100.0,100.0,97,15.9,NO,Normal
+38,1303,Saiful Islam,11130,Al-Amin Enterprise,High-Efficiency Closer,Star Performers,11455648.55,0.25,102,112310.0,74,0.8,100.0,100.0,97,20.5,NO,Normal
+39,1097,Md. Zafar Ali Khan,10988,Al Insaf Enterprise,High-Volume Runner,Volume Drivers,11391407.9,0.25,1299,8769.0,1424,14.4,91.2,99.6,99,3.0,NO,Normal
+40,817,Md. Humayun Kabir,10897,Oyshi Trade Link,High-Efficiency Closer,Star Performers,11379916.3,0.25,1453,7832.0,1114,11.4,100.0,100.0,98,9.3,NO,Normal
+41,1281,Md.Sayed Ahmed Khan,11112,Saha Distribution,High-Efficiency Closer,Star Performers,11364702.55,0.25,94,120901.0,57,0.6,100.0,100.0,91,82.8,NO,Normal
+42,1071,Abul Khair,11070,Shaheen Enterprise,High-Volume Runner,Volume Drivers,11339856.45,0.25,179,63351.0,204,2.1,87.7,89.4,95,5.7,NO,Normal
+43,677,Mohammad Ali Swapon,10456,Sajib Enterprise,High-Efficiency Closer,Star Performers,11323137.6,0.24,3501,3234.0,2698,28.7,100.0,100.0,94,0.4,NO,Normal
+44,1117,Omar Faruk,11008,Nabila Enterprise,High-Efficiency Closer,Star Performers,11275822.6,0.24,194,58123.0,160,1.7,100.0,94.4,92,27.3,NO,Normal
+45,1102,Md. Rajib Hossain,10993,Liza Trading,High-Efficiency Closer,Star Performers,11273029.8,0.24,300,37577.0,245,2.5,100.0,100.0,100,14.3,NO,Normal
+46,85,Md. Mominul Islam,SM000175,Rafique Traders,High-Efficiency Closer,Star Performers,11199388.7,0.24,3352,3341.0,2574,26.3,100.0,100.0,98,1.5,NO,Normal
+47,275,Rafiqul Islam Masum,SM000519,Akkas Store,High-Efficiency Closer,Star Performers,11141134.2,0.24,2153,5175.0,1695,17.7,100.0,100.0,96,0.7,NO,Normal
+48,711,Tanvir Alam,10579,Rumpa Enterprise,High-Volume Runner,Volume Drivers,11136891.4,0.24,3776,2949.0,4572,47.6,82.6,99.7,96,6.5,NO,Normal
+49,1078,Md. Eshak Miah,11081,Abdul Matin Store,High-Efficiency Closer,Star Performers,11022358.0,0.24,96,114816.0,84,0.9,100.0,100.0,95,12.2,NO,Normal
+50,432,Iqubal All Bakkar,SM000229,R.D Global Trade,High-Efficiency Closer,Star Performers,10952002.05,0.24,462,23706.0,389,4.1,100.0,100.0,96,2.6,NO,Normal
+51,1089,Mohibul Anower,11090,Taher & Sons,High-Efficiency Closer,Star Performers,10688304.4,0.23,97,110189.0,1,0.0,100.0,100.0,96,10.0,YES,Ghost Orders (High revenue with no recorded visit audit trail)
+52,222,Md. Shah Jamal,SM000447,Sapon Store,High-Efficiency Closer,Star Performers,10664752.2,0.23,1748,6101.0,1347,13.9,100.0,100.0,97,1.2,NO,Normal
+53,406,Md. Forhad Hossain,SM000181,Ahmmed Enterprise,High-Efficiency Closer,Star Performers,10654987.8,0.23,151,70563.0,135,1.5,100.0,100.0,93,42.9,NO,Normal
+54,1095,Md. Mizanur Rahaman,10986,Nandani Enterprise,High-Efficiency Closer,Star Performers,10581466.0,0.23,2150,4922.0,1700,17.3,100.0,100.0,98,3.3,NO,Normal
+55,18,Md Abdul Wahed,SM000073,Yashin & Minhaj Enterprise,High-Volume Runner,Volume Drivers,10564655.6,0.23,5580,1893.0,6329,65.2,88.2,99.0,97,0.6,NO,Normal
+56,1060,Jahangir Alam,11063,Madina Vandar,High-Efficiency Closer,Star Performers,10531617.0,0.23,136,77438.0,95,1.0,100.0,100.0,93,43.7,NO,Normal
+57,1273,Mizanur Rahman,11104,Meghna Enterprise,High-Efficiency Closer,Star Performers,10509973.95,0.23,241,43610.0,213,2.2,100.0,100.0,97,15.6,NO,Normal
+58,96,Md. Atiqur Rahman,SM000197,Vai Vai Store,High-Efficiency Closer,Star Performers,10489013.7,0.23,854,12282.0,707,7.4,100.0,100.0,95,5.0,NO,Normal
+59,670,Md. Rajib Uddin,10449,B.L Enterprise,High-Efficiency Closer,Star Performers,10119252.3,0.22,3888,2603.0,2973,31.3,100.0,100.0,95,0.8,NO,Normal
+60,111,Md. Uzzal Hossain,SM000267,Sohel Traders,High-Efficiency Closer,Star Performers,10085942.75,0.22,5817,1734.0,5006,51.1,100.0,100.0,98,5.4,NO,Normal
+61,1156,Faruq Hossain,10649,R.S Trading,High-Efficiency Closer,Star Performers,10068380.15,0.22,153,65806.0,120,1.2,100.0,100.0,96,7.0,NO,Normal
+62,1030,Ashikul Islam,10960,Ma Store DHKS,High-Efficiency Closer,Star Performers,10063398.3,0.22,147,68458.0,141,1.5,100.0,100.0,97,6.6,NO,Normal
+63,86,Md. Masud Sarker,SM000177,Zabed Enterprise,High-Efficiency Closer,Star Performers,10030813.4,0.22,116,86473.0,95,1.0,100.0,100.0,97,2.9,NO,Normal
+64,245,Abul Kader Miah,SM000480,Heron Store,High-Efficiency Closer,Star Performers,9992939.0,0.22,3007,3323.0,2316,23.6,100.0,100.0,98,1.1,NO,Normal
+65,1282,Md.Tahsin Abrar Shuvo,11113,Saha Distribution 1,High-Efficiency Closer,Star Performers,9954468.8,0.22,91,109390.0,71,0.8,100.0,100.0,91,17.0,NO,Normal
+66,780,Jahangir Hossain,10250,PK Trade International,High-Efficiency Closer,Star Performers,9947536.1,0.22,978,10171.0,825,8.2,100.0,99.0,101,1.3,NO,Normal
+67,256,Mojaaharul Islam,SM000491,Shahana Store,High-Volume Runner,Volume Drivers,9800778.0,0.21,1816,5397.0,2545,26.0,71.4,100.0,98,16.9,NO,Normal
+68,251,Dipankar Ghosh,SM000486,Vai Vai StoreDINC,High-Efficiency Closer,Star Performers,9778247.5,0.21,2004,4879.0,1737,17.7,100.0,100.0,98,8.4,NO,Normal
+69,282,MD. Ishaque,SM000530,Mishuk Enterprise,High-Volume Runner,Volume Drivers,9761733.6,0.21,48,203369.0,72,2.7,66.7,100.0,27,0.1,NO,Normal
+70,11,Altaf Hossen,SM000028,Bengol Trading,High-Efficiency Closer,Star Performers,9743185.8,0.21,97,100445.0,87,1.1,100.0,100.0,77,15.4,NO,Normal
+71,68,Alip Saha,SM000148,Sajal Enterprise (Khulna),High-Efficiency Closer,Star Performers,9701419.4,0.21,2006,4836.0,1632,16.7,100.0,100.0,98,3.1,NO,Normal
+72,45,Md Hasanuzzaman,SM000110,Asmot Ali Traders,High-Volume Runner,Volume Drivers,9616008.3,0.21,110,87418.0,172,1.8,64.0,48.9,93,2.9,NO,Normal
+73,1122,Mohammad Ismail,11013,Z&Z Corporation-2,High-Efficiency Closer,Star Performers,9548719.7,0.21,813,11745.0,651,6.8,100.0,100.0,96,1.5,NO,Normal
+74,191,Rikadul Alam Rana,SM000396,Saha Store,High-Efficiency Closer,Star Performers,9519222.4,0.21,612,15554.0,400,4.1,100.0,100.0,98,16.4,NO,Normal
+75,101,Md. Jalal Uddin,SM000208,Royal Brothers,High-Efficiency Closer,Star Performers,9502858.7,0.21,149,63778.0,128,1.3,100.0,100.0,98,19.7,NO,Normal
+76,1432,Obaydullaha Al Mamun,SM000675,Shaheen Traders,High-Volume Runner,Volume Drivers,9491211.0,0.21,336,28248.0,1614,16.6,20.8,60.0,97,0.3,NO,Normal
+77,469,Md. Mohasin Ali,SM000268,Sohel Traders,High-Efficiency Closer,Star Performers,9474918.5,0.2,5678,1669.0,4848,49.5,100.0,100.0,98,6.4,NO,Normal
+78,687,Iftikharul Alam Bhuiyan,10504,Chowdhury Traders,High-Efficiency Closer,Star Performers,9468247.5,0.2,3393,2791.0,3242,33.1,100.0,96.5,98,3.3,NO,Normal
+79,692,Md. Julkar Nayim,10633,Fariaz Traders,High-Efficiency Closer,Star Performers,9409369.2,0.2,1686,5581.0,1178,11.9,100.0,100.0,99,1.2,NO,Normal
+80,135,Robiul Islam,SM000310,Ruqayyah Nur Traders,High-Volume Runner,Volume Drivers,9334590.9,0.2,1972,4734.0,3621,36.9,54.5,91.6,98,0.5,NO,Normal
+81,329,Zamsed Alam,SM000027,Md. Shajahan Traders,High-Efficiency Closer,Star Performers,9292472.45,0.2,4145,2242.0,3295,34.7,100.0,100.0,95,2.4,NO,Normal
+82,3,Abdul Wazed,SM000004,Chowdhury Enterprise,High-Volume Runner,Volume Drivers,9285930.0,0.2,175,53062.0,2352,25.6,7.4,17.9,92,0.1,NO,Normal
+83,1421,Sujan Sutradhar,SM000664,Care Enterprise,High-Efficiency Closer,Star Performers,9283760.5,0.2,95,97724.0,78,0.8,100.0,100.0,94,22.0,NO,Normal
+84,107,Md. Rafit Reza,SM000222,AlAmin Store KISC,High-Efficiency Closer,Star Performers,9224314.4,0.2,267,34548.0,167,1.7,100.0,100.0,99,58.0,NO,Normal
+85,116,Bipul Kumar Sarkar,SM000278,Salam Traders,High-Efficiency Closer,Star Performers,9205099.65,0.2,2818,3267.0,2417,24.9,100.0,99.4,97,5.9,NO,Normal
+86,1107,Md. Habibullah,10998,Sonali Bazar,High-Efficiency Closer,Star Performers,9123813.4,0.2,3139,2907.0,2400,24.0,100.0,100.0,100,13.8,NO,Normal
+87,1279,Md.Abu Bakkar Siddique11110,11110,M R Traders,High-Volume Runner,Volume Drivers,8965626.0,0.19,113,79342.0,149,1.5,75.8,61.1,97,5.7,NO,Normal
+88,1094,Md. Mahmudur Rahman Shipon,10985,Mohanagor General Store,High-Efficiency Closer,Star Performers,8938051.05,0.19,3865,2313.0,3787,39.0,100.0,100.0,97,2.3,NO,Normal
+89,934,Md. Shakib Hossain,10803,Sahariar Traders,High-Efficiency Closer,Star Performers,8925073.1,0.19,203,43966.0,158,1.7,100.0,100.0,93,2.7,NO,Normal
+90,681,Md. Dalwar Hossan,10467,Jahir Traders,High-Efficiency Closer,Star Performers,8900291.0,0.19,3723,2391.0,2897,29.6,100.0,100.0,98,0.6,NO,Normal
+91,54,Md. Alamgir Hossain,SM000125,Mizan Telecom,High-Efficiency Closer,Star Performers,8883481.6,0.19,196,45324.0,154,1.6,100.0,100.0,98,5.5,NO,Normal
+92,1457,Md.Tajul Islam,SM000701,Tobarak Molla Store,High-Efficiency Closer,Star Performers,8781485.6,0.19,1528,5747.0,1421,25.8,100.0,100.0,55,1.2,NO,Normal
+93,1204,Mir Habib Md Mujayar,10976,Insaf Grocery Shop,High-Efficiency Closer,Star Performers,8779854.65,0.19,1536,5716.0,1219,12.4,100.0,100.0,98,1.2,NO,Normal
+94,113,Emdadul Hoque,SM000270,Sanot Store,High-Volume Runner,Volume Drivers,8740367.35,0.19,3282,2663.0,4672,47.7,70.2,99.4,98,0.4,NO,Normal
+95,264,Abdul Jalil,SM000499,Akbar Ali Store,High-Efficiency Closer,Star Performers,8696282.4,0.19,2161,4024.0,1689,17.2,100.0,100.0,98,0.7,NO,Normal
+96,691,Md. Abdullah Al Mamun,10592,Raihan Enterprise,High-Efficiency Closer,Star Performers,8627243.35,0.19,2750,3137.0,2111,22.5,100.0,100.0,94,0.7,NO,Normal
+97,223,Md. Bulbul Ahmed,SM000449,Jugal Krishna Paul,High-Efficiency Closer,Star Performers,8624635.0,0.19,289,29843.0,227,2.3,100.0,100.0,97,34.8,NO,Normal
+98,231,Md. Nurul Islam,SM000463,Talukdar Traders,High-Efficiency Closer,Star Performers,8574892.2,0.19,2935,2922.0,2340,24.1,100.0,100.0,97,0.9,NO,Normal
+99,786,Sadekul Islam,10256,Bijoy Store,High-Efficiency Closer,Star Performers,8569284.4,0.19,3572,2399.0,3255,33.6,100.0,100.0,97,4.7,NO,Normal
+100,205,Abul Khair Mia,SM000417,Tahmid Enterprise,High-Efficiency Closer,Star Performers,8504431.8,0.18,5290,1608.0,4419,43.8,100.0,100.0,101,0.6,NO,Normal
+101,678,Md Ziaull Haque,10457,Purabi Enterprise,High-Efficiency Closer,Star Performers,8468366.4,0.18,3379,2506.0,2663,27.2,100.0,100.0,98,0.7,NO,Normal
+102,243,Sazzad Hossain,SM000478,Mirajul Traders,High-Efficiency Closer,Star Performers,8420859.3,0.18,3115,2703.0,2452,25.5,100.0,100.0,96,0.8,NO,Normal
+103,1052,Nazrul Islam Howlader,10929,Ma Enterprise,High-Efficiency Closer,Star Performers,8398859.0,0.18,2067,4063.0,1624,16.6,100.0,100.0,98,0.7,NO,Normal
+104,1050,Pabitra Biswas,10927,Talukder Enterprise,High-Efficiency Closer,Star Performers,8384309.0,0.18,1571,5337.0,1385,14.1,100.0,100.0,98,1.7,NO,Normal
+105,90,Md. Suzon Al Mamun,SM000187,Ayesha Traders,High-Efficiency Closer,Star Performers,8381315.2,0.18,207,40489.0,152,1.5,100.0,100.0,99,5.0,NO,Normal
+106,121,Mohammad Yasin Ali,SM000288,Maisha Store,High-Efficiency Closer,Star Performers,8362604.7,0.18,4419,1892.0,3362,34.3,100.0,100.0,98,9.6,NO,Normal
+107,279,Osim Kumar Roy,SM000526,Abul Store,High-Efficiency Closer,Star Performers,8355109.35,0.18,656,12736.0,500,5.2,100.0,100.0,97,10.8,NO,Normal
+108,129,Sree Anup Kumar Mahanta,SM000300,Amina General Store,High-Volume Runner,Volume Drivers,8343273.7,0.18,2909,2868.0,3727,38.8,78.1,92.4,96,7.9,NO,Normal
+109,805,Md. Robiul Islam,10885,Sumon Enterprise,High-Efficiency Closer,Star Performers,8336283.0,0.18,261,31940.0,198,2.0,100.0,100.0,98,2.1,NO,Normal
+110,1431,Joynal Abedin,SM000674,JKM Enterprise,High-Efficiency Closer,Star Performers,8295337.1,0.18,576,14402.0,481,5.1,100.0,100.0,95,2.3,NO,Normal
+111,32,Utpal Das Gupta,SM000096,Emon Store,High-Volume Runner,Volume Drivers,8166871.4,0.18,4710,1734.0,5730,57.3,82.2,100.0,100,2.1,NO,Normal
+112,717,Shimul Islam,10589,Nure Mohammadia Store,High-Volume Runner,Volume Drivers,8153965.2,0.18,3021,2699.0,3219,33.5,93.8,94.1,96,0.1,NO,Normal
+113,1205,Md. Mesbah Uddin,110301,AI Trading,High-Efficiency Closer,Star Performers,8108460.15,0.18,1464,5539.0,1387,14.8,100.0,99.4,94,3.2,NO,Normal
+114,1305,Arif Khan,11132,Bangla Store,High-Efficiency Closer,Star Performers,8091307.0,0.17,101,80112.0,81,0.8,100.0,100.0,97,3.3,NO,Normal
+115,56,Mounur Rahman Siddique,SM000130,Niloy Enterprise,High-Efficiency Closer,Star Performers,7956051.1,0.17,98,81184.0,85,1.2,100.0,100.0,72,3.2,NO,Normal
+116,806,Md. Arif Khan,10886,Sajim Traders,High-Efficiency Closer,Star Performers,7934683.4,0.17,99,80148.0,87,0.9,100.0,100.0,93,55.9,NO,Normal
+117,248,Yousuf Ali,SM000483,Akhi Enterprise,High-Efficiency Closer,Star Performers,7926869.2,0.17,2701,2935.0,2073,21.6,100.0,99.5,96,2.2,NO,Normal
+118,247,Sacouth Hosan,SM000482,Arman Store,High-Volume Runner,Volume Drivers,7924142.9,0.17,3370,2351.0,4517,46.1,74.6,100.0,98,0.1,NO,Normal
+119,873,Md. Ahsan Habib,23020049,Dui Bon Varieties Store,High-Efficiency Closer,Star Performers,7901458.3,0.17,3452,2289.0,2925,30.5,100.0,99.6,96,1.3,NO,Normal
+120,1134,Sanaullah Mia,SM000652,Zilani Store,High-Volume Runner,Volume Drivers,7889315.2,0.17,98,80503.0,293,3.1,33.4,87.2,95,0.0,NO,Normal
+121,707,Aminul Islam TNGC,10573,Tanha Tanisha Commercial Service,High-Efficiency Closer,Star Performers,7887195.9,0.17,3189,2473.0,2942,31.0,100.0,100.0,95,0.6,NO,Normal
+122,498,Farhad Alom,SM000348,Sajib Traders,High-Volume Runner,Volume Drivers,7886799.2,0.17,2401,3285.0,3711,38.3,64.7,89.9,97,4.3,NO,Normal
+123,828,Md. Al Amin Hossain,10908,Mondal Traders,High-Efficiency Closer,Star Performers,7880178.7,0.17,2874,2742.0,2030,20.5,100.0,100.0,99,11.9,NO,Normal
+124,1054,Md Shazzad Hosain,10931,Bismillah Store DHKW,High-Efficiency Closer,Star Performers,7859991.45,0.17,1505,5223.0,1409,14.4,100.0,100.0,98,2.4,NO,Normal
+125,1026,Shahin Alam,10956,Jannat Enterprise DHKS,High-Volume Runner,Volume Drivers,7856860.2,0.17,1583,4963.0,1689,17.6,93.7,97.0,96,0.4,NO,Normal
+126,106,Md. Abdullah Al Mabud,SM000220,Shahen Shah Enterprise,High-Efficiency Closer,Star Performers,7844771.2,0.17,404,19418.0,356,3.6,100.0,100.0,99,7.5,NO,Normal
+127,431,Md. Bashir Ahmmed,SM000228,Unity Trading,High-Efficiency Closer,Star Performers,7808901.5,0.17,614,12718.0,472,4.8,100.0,100.0,98,2.0,NO,Normal
+128,933,Md. Ershad Ali,10802,Sahariar Traders,High-Efficiency Closer,Star Performers,7792362.0,0.17,181,43052.0,141,1.4,100.0,100.0,98,107.3,NO,Normal
+129,1090,Mahabub Alam,11092,Kabir Store,High-Volume Runner,Volume Drivers,7746438.0,0.17,218,35534.0,243,2.6,89.7,94.8,95,0.5,NO,Normal
+130,235,Md. Jahidul Mostofa,SM000469,Sharif Store,High-Volume Runner,Volume Drivers,7727962.2,0.17,1884,4102.0,2386,24.6,79.0,97.7,97,1.6,NO,Normal
+131,1022,Md. Siddiqur Rahman,10952,Sahil Traders,High-Efficiency Closer,Star Performers,7721731.8,0.17,187,41293.0,142,1.5,100.0,100.0,96,2.1,NO,Normal
+132,1101,Md. Harun Ur Rashid 10992,10992,Pick & Go,High-Efficiency Closer,Star Performers,7703932.6,0.17,1929,3994.0,1614,16.1,100.0,100.0,100,1.1,NO,Normal
+133,192,Sakhawat Hossen,SM000398,Alif Traders,High-Efficiency Closer,Star Performers,7630007.75,0.16,4149,1839.0,2870,29.3,100.0,100.0,98,15.7,NO,Normal
+134,285,Proshanto Kumar,SM000535,Gandheswari Vandar,High-Volume Runner,Volume Drivers,7623814.6,0.16,2955,2580.0,3946,41.1,74.9,99.4,96,2.0,NO,Normal
+135,785,Obaidur Rahman,10255,Abir General Store,High-Efficiency Closer,Star Performers,7620612.0,0.16,1864,4088.0,1368,14.1,100.0,100.0,97,0.7,NO,Normal
+136,1320,Abdul Muyakher,11149,Sahin Store,High-Efficiency Closer,Star Performers,7582039.0,0.16,156,48603.0,135,1.5,100.0,100.0,91,52.2,NO,Normal
+137,1280,Md.Abul Khair,11111,M R Traders 1,High-Efficiency Closer,Star Performers,7566305.4,0.16,2299,3291.0,1769,18.2,100.0,100.0,97,1.0,NO,Normal
+138,1020,Zahedul Islam,10950,Habib Traders,High-Efficiency Closer,Star Performers,7553999.4,0.16,3014,2506.0,2388,24.6,100.0,100.0,97,0.8,NO,Normal
+139,1400,Bipul Chandra Roy,10982,Alamgir Traders,High-Efficiency Closer,Star Performers,7535495.6,0.16,148,50916.0,108,1.1,100.0,100.0,96,25.6,NO,Normal
+140,126,Habibur Rahman,SM000295,Mobin Enterprise,High-Volume Runner,Volume Drivers,7490613.7,0.16,3909,1916.0,4440,45.3,88.0,96.3,98,2.2,NO,Normal
+141,229,Md. Mozammel Haque,SM000459,Sabiha Enterprise,High-Efficiency Closer,Star Performers,7479651.8,0.16,2375,3149.0,1827,18.8,100.0,100.0,97,8.9,NO,Normal
+142,6,Didarul Alam Chy,SM000011,AlBarakah Enterprise,High-Efficiency Closer,Star Performers,7390930.8,0.16,2323,3182.0,1782,18.8,100.0,100.0,95,3.7,NO,Normal
+143,274,Md. Solayman,SM000518,Pal Brother Store,High-Efficiency Closer,Star Performers,7388173.8,0.16,2809,2630.0,2287,24.6,100.0,99.7,93,1.0,NO,Normal
+144,70,Rezaul Karim Khlc,SM000151,S&S Enterprise,High-Efficiency Closer,Star Performers,7384843.1,0.16,2708,2727.0,2068,21.1,100.0,100.0,98,3.3,NO,Normal
+145,71,Ferdusur Rahman,SM000154,Toha Enterprise,High-Efficiency Closer,Star Performers,7383106.4,0.16,4307,1714.0,3758,38.3,100.0,100.0,98,0.4,NO,Normal
+146,25,Amir Hossain,SM000084,Ma Enterpise,High-Efficiency Closer,Star Performers,7373763.8,0.16,1638,4502.0,1366,14.4,100.0,100.0,95,0.9,NO,Normal
+147,879,Md. Mostafizur Rahman,11040234,Ahasan Enterprise,High-Efficiency Closer,Star Performers,7366941.8,0.16,3380,2180.0,2653,27.1,100.0,100.0,98,1.0,NO,Normal
+148,782,Alok Kumar Biswas,10252,Chaity Saree Bitan,High-Efficiency Closer,Star Performers,7356655.55,0.16,2570,2863.0,2457,25.6,100.0,99.3,96,1.5,NO,Normal
+149,770,Hasibul Islam,10238,Shahin Confectionary & General Store,High-Efficiency Closer,Star Performers,7353148.4,0.16,1703,4318.0,1638,17.1,100.0,100.0,96,2.4,NO,Normal
+150,39,Dhuel Das,SM000103,Rahman Enterprise CTGS,High-Efficiency Closer,Star Performers,7347300.45,0.16,2389,3075.0,1880,19.6,100.0,100.0,96,2.1,NO,Normal
+151,772,Amirul Islam,10240,Munna General Store,High-Efficiency Closer,Star Performers,7326590.6,0.16,3113,2354.0,2761,29.1,100.0,100.0,95,0.8,NO,Normal
+152,414,Md. Noyan Mia,SM000198,Vai Vai Store,High-Volume Runner,Volume Drivers,7299658.6,0.16,3307,2207.0,4579,46.3,72.2,99.0,99,1.3,NO,Normal
+153,1008,Sumon Kumar Gosh,10938,Jakir Store,High-Efficiency Closer,Star Performers,7255660.2,0.16,3120,2326.0,2568,26.5,100.0,100.0,97,1.4,NO,Normal
+154,376,Mohiuddin Chowdhury,SM000093,Alauddin Enterprise,High-Efficiency Closer,Star Performers,7203362.0,0.16,3060,2354.0,2448,24.7,100.0,100.0,99,6.4,NO,Normal
+155,1435,Ibrahim Miah SM000678,SM000678,Shajid Traders,High-Efficiency Closer,Star Performers,7180300.9,0.16,4184,1716.0,4019,41.9,100.0,100.0,96,7.0,NO,Normal
+156,104,Md. Amirul Haque,SM000216,Khan Enterprise,High-Volume Runner,Volume Drivers,7179365.2,0.16,2039,3521.0,2171,21.9,93.9,98.0,99,1.3,NO,Normal
+157,92,Abul Hossain Mollah,SM000190,Elma Traders,High-Efficiency Closer,Star Performers,7175703.9,0.16,1629,4405.0,1355,14.7,100.0,100.0,92,1.9,NO,Normal
+158,1057,Md. Akther Hossain,11058,Jilani Traders,High-Volume Runner,Volume Drivers,7159505.6,0.15,161,44469.0,1184,12.2,13.6,33.1,97,0.1,NO,Normal
+159,1308,Rasel Mia,11139,Shaheen Enterprise,High-Efficiency Closer,Star Performers,7149721.55,0.15,312,22916.0,283,3.0,100.0,100.0,93,6.6,NO,Normal
+160,1299,Md. Abul Kalam Azad,11136,Maa Store,High-Efficiency Closer,Star Performers,7131601.7,0.15,3153,2262.0,2817,28.7,100.0,100.0,98,11.8,NO,Normal
+161,790,Milon Islam,10411,HR vareities Store,High-Volume Runner,Volume Drivers,7130891.5,0.15,2096,3402.0,2159,24.8,97.1,93.9,87,2.4,NO,Normal
+162,97,Kazi Riktaruzzaman,SM000199,Hira Enterprise,High-Efficiency Closer,Star Performers,7129203.6,0.15,166,42947.0,117,1.1,100.0,100.0,102,2.0,NO,Normal
+163,1096,Md. Raza Babu,10987,Sikder General Store,High-Efficiency Closer,Star Performers,7125555.75,0.15,1920,3711.0,1535,15.8,100.0,94.7,97,9.8,NO,Normal
+164,165,Hanif,SM000353,Anna Store,High-Efficiency Closer,Star Performers,7118468.8,0.15,3743,1902.0,3000,30.6,100.0,100.0,98,4.4,NO,Normal
+165,942,Md. Rafiqul Islam,10810,Sheikh Enterprise,High-Efficiency Closer,Star Performers,7118405.4,0.15,2101,3388.0,2095,21.4,100.0,100.0,98,0.2,NO,Normal
+166,130,Zarzis Ahmed,SM000302,Vai Vai Satata Store,High-Volume Runner,Volume Drivers,7085868.6,0.15,2116,3349.0,2582,26.3,82.0,90.2,98,6.7,NO,Normal
+167,812,Md. Hasem Ali,10892,Sabit Enterprise,High-Efficiency Closer,Star Performers,7082810.9,0.15,1883,3761.0,1831,18.7,100.0,97.6,98,3.4,NO,Normal
+168,265,Jahirul Islam,SM000500,Lukman Store,High-Efficiency Closer,Star Performers,7076777.3,0.15,428,16535.0,331,3.4,100.0,100.0,98,1.7,NO,Normal
+169,242,Shafiqul Islam,SM000477,Brothers Store,High-Efficiency Closer,Star Performers,7061854.6,0.15,2068,3415.0,1572,16.0,100.0,100.0,98,2.1,NO,Normal
+170,263,Aabdus Shobhan,SM000498,Nesar Ahamed & Brothers,High-Volume Runner,Volume Drivers,7042650.4,0.15,721,9768.0,752,7.8,95.9,100.0,96,7.2,NO,Normal
+171,518,Md. Jahangir Alam,SM000397,Saha Store,High-Efficiency Closer,Star Performers,7031423.8,0.15,1634,4303.0,1133,11.3,100.0,100.0,100,4.9,NO,Normal
+172,811,Md. Sayeedur Rahman,10891,Sabit Enterprise,High-Volume Runner,Volume Drivers,7025500.9,0.15,2305,3048.0,2809,28.7,82.1,97.6,98,4.8,NO,Normal
+173,781,Mosharraf Hossain Khan,10251,PK Trade International,High-Efficiency Closer,Star Performers,6991271.1,0.15,2293,3049.0,1920,20.6,100.0,100.0,93,0.9,NO,Normal
+174,730,Md. Shahadat Hossain,10769,Aynal Oil Mils,High-Efficiency Closer,Star Performers,6970400.85,0.15,2106,3310.0,1805,18.8,100.0,100.0,96,1.2,NO,Normal
+175,391,Hamidul Islam,SM000143,Baby store,High-Efficiency Closer,Star Performers,6953835.45,0.15,4506,1543.0,3508,35.8,100.0,100.0,98,11.3,NO,Normal
+176,84,Farid Uddin,SM000173,Sayam Store,High-Efficiency Closer,Star Performers,6940729.9,0.15,3562,1949.0,2860,29.2,100.0,100.0,98,1.6,NO,Normal
+177,674,Md. Nurul Islam,10453,Ayon Store,High-Volume Runner,Volume Drivers,6928762.9,0.15,948,7309.0,978,10.2,96.9,92.0,96,7.7,NO,Normal
+178,88,Md. Rakibul Islam,SM000183,New Rakib Enterprise,High-Efficiency Closer,Star Performers,6920930.0,0.15,588,11770.0,452,4.8,100.0,100.0,95,13.5,NO,Normal
+179,901,Roushan Jamil Chowdhory,15040034,Arafat Enterprise,High-Efficiency Closer,Star Performers,6920021.6,0.15,2093,3306.0,1649,17.0,100.0,100.0,97,0.6,NO,Normal
+180,946,Abul Bashar,10814,Boishakhi Enterprise,High-Efficiency Closer,Star Performers,6893612.45,0.15,79,87261.0,54,0.7,100.0,100.0,78,12.3,NO,Normal
+181,224,Md. Monirul Islam Khan,SM000451,Nafiz Enterprise,High-Efficiency Closer,Star Performers,6874708.6,0.15,3129,2197.0,2891,31.4,100.0,100.0,92,1.2,NO,Normal
+182,808,Md. Ziaur Rahman,10888,Mizan Store,High-Efficiency Closer,Star Performers,6824140.5,0.15,3106,2197.0,2403,24.5,100.0,100.0,98,1.2,NO,Normal
+183,198,Mizanur Rahman,SM000406,Taher Enterprise,High-Efficiency Closer,Star Performers,6819568.0,0.15,2862,2383.0,2249,23.2,100.0,100.0,97,5.9,NO,Normal
+184,94,Md. Helal Uddin Shekh,SM000193,Kamrul Store,High-Volume Runner,Volume Drivers,6802659.0,0.15,1303,5221.0,1587,16.0,82.1,99.7,99,1.8,NO,Normal
+185,819,Md. Bappy Chowdhory,10899,Mayer Doa Enterprise,High-Efficiency Closer,Star Performers,6786496.7,0.15,983,6904.0,775,7.9,100.0,100.0,98,2.8,NO,Normal
+186,66,Saifullah Gazi,SM000146,Bhai Bhai Store KHLC,High-Efficiency Closer,Star Performers,6772920.0,0.15,3783,1790.0,3538,36.1,100.0,100.0,98,0.8,NO,Normal
+187,24,Mizanur Rahman,SM000082,Delower Hossain & Sons,High-Efficiency Closer,Star Performers,6765508.8,0.15,2276,2973.0,1621,17.1,100.0,100.0,95,1.4,NO,Normal
+188,57,Subal Baidya,SM000132,Rahmania Traders,High-Efficiency Closer,Star Performers,6736713.45,0.15,125,53894.0,102,1.1,100.0,100.0,92,3.4,NO,Normal
+189,503,Bodrul Hasan,SM000360,Kowshik Enterprise,High-Volume Runner,Volume Drivers,6734260.3,0.15,4410,1527.0,5018,51.2,87.9,92.7,98,0.0,NO,Normal
+190,1124,Shawkat Hossain Bhuiyan,11015,F.F. Enterprise,High-Efficiency Closer,Star Performers,6689704.5,0.14,674,9925.0,544,5.7,100.0,100.0,96,3.5,NO,Normal
+191,172,Kazi Najmol Haque,SM000365,Tanni General Store,High-Volume Runner,Volume Drivers,6681751.7,0.14,2559,2611.0,4111,39.9,62.2,89.8,103,0.3,NO,Normal
+192,708,Zahidul Islam,10574,Nafian Store,High-Efficiency Closer,Star Performers,6673551.2,0.14,4526,1474.0,4317,44.5,100.0,100.0,97,0.3,NO,Normal
+193,14,Md. Daud Uddin,SM000067,Ma Baba Enterprise,High-Volume Runner,Volume Drivers,6662055.8,0.14,2102,3169.0,2242,23.4,93.8,96.3,96,0.9,NO,Normal
+194,258,Ramjan Ali,SM000493,Sattar Store,High-Efficiency Closer,Star Performers,6659969.4,0.14,1061,6277.0,911,9.3,100.0,100.0,98,2.0,NO,Normal
+195,1009,Mostafa Kamal DKS,10939,Safwan Traders,High-Efficiency Closer,Star Performers,6638561.0,0.14,2743,2420.0,2062,21.5,100.0,100.0,96,0.9,NO,Normal
+196,684,Shafiur Rahman,10470,Didar Enterprise,High-Efficiency Closer,Star Performers,6631657.0,0.14,694,9556.0,615,6.3,100.0,100.0,97,2.3,NO,Normal
+197,127,Rofikul Islam,SM000297,Shoaib Traders,High-Volume Runner,Volume Drivers,6623520.2,0.14,3041,2178.0,3472,35.4,87.6,100.0,98,5.5,NO,Normal
+198,26,Abul Kalam,SM000086,Najaah Enterprise,High-Efficiency Closer,Star Performers,6596893.4,0.14,3425,1926.0,2504,25.6,100.0,100.0,98,2.0,NO,Normal
+199,150,Anamul Hasan,10756,Ritu Store,High-Volume Runner,Volume Drivers,6596314.0,0.14,242,27257.0,251,2.7,96.4,86.7,93,23.6,NO,Normal
+200,2,Abul Foyez,SM000001,A R Enterprise,High-Efficiency Closer,Star Performers,6589439.7,0.14,268,24587.0,221,2.4,100.0,100.0,92,1.3,NO,Normal
+201,114,Mahadi Hassan,SM000272,Rekha Enterprise,High-Efficiency Closer,Star Performers,6585499.2,0.14,4212,1564.0,3842,39.2,100.0,99.8,98,1.7,NO,Normal
+202,110,Gour Ghosh,SM000265,Sadia Enterprise,High-Efficiency Closer,Star Performers,6578515.4,0.14,4460,1475.0,3425,35.3,100.0,100.0,97,10.3,NO,Normal
+203,854,Sekendar Ali Molla 1,10698,Manha Traders BOGC,High-Efficiency Closer,Star Performers,6572693.0,0.14,629,10449.0,436,4.4,100.0,100.0,98,0.5,NO,Normal
+204,1023,Md. Elius,10953,Tobarak Molla Store,High-Volume Runner,Volume Drivers,6540506.3,0.14,1458,4486.0,1520,33.8,95.9,98.9,45,0.9,NO,Normal
+205,1434,Mehedi Hasan,SM000677,Shaheen Traders,High-Efficiency Closer,Star Performers,6536260.7,0.14,1323,4940.0,1154,12.1,100.0,100.0,95,1.8,NO,Normal
+206,1018,Monjur Morshed,10948,AI Trading,High-Efficiency Closer,Star Performers,6506935.1,0.14,130,50053.0,94,1.0,100.0,100.0,93,0.1,NO,Normal
+207,230,Md. Belayat Hossan,SM000461,Kamal Store,High-Efficiency Closer,Star Performers,6504514.1,0.14,3671,1772.0,3039,31.3,100.0,100.0,97,3.9,NO,Normal
+208,87,Md. Rokonuzzaman,SM000179,Ahmmed Enterprise,High-Efficiency Closer,Star Performers,6491135.15,0.14,153,42426.0,142,1.6,100.0,96.8,88,58.1,NO,Normal
+209,218,Md. Abu Syed,SM000440,Shekhar Chandro Sarkar,High-Efficiency Closer,Star Performers,6469798.7,0.14,2641,2450.0,1949,20.7,100.0,100.0,94,0.7,NO,Normal
+210,941,Amzad Hossain,10808,Sheikh Enterprise,High-Efficiency Closer,Star Performers,6445181.6,0.14,1068,6035.0,802,8.4,100.0,100.0,95,1.8,NO,Normal
+211,387,Sujon Das,SM000131,Niloy Enterprise,High-Efficiency Closer,Star Performers,6437666.7,0.14,203,31713.0,153,1.6,100.0,100.0,98,42.2,NO,Normal
+212,16,Md. Sohrab Hosan,SM000070,Alhaj Md. Jobier & Sons,High-Efficiency Closer,Star Performers,6432607.4,0.14,1880,3422.0,1369,14.4,100.0,100.0,95,5.2,NO,Normal
+213,1324,Jobair Arman,11153,Ispahani Foods Ltd.,High-Efficiency Closer,Star Performers,6399101.78,0.14,12,533258.0,1,0.1,100.0,100.0,11,1.7,YES,Ghost Orders (High revenue with no recorded visit audit trail)
+214,886,"Mijanur Rahman, TO-Raninagor",12060029,Al Amin Store BOGC,High-Volume Runner,Volume Drivers,6398240.4,0.14,2750,2327.0,3760,39.2,73.1,98.8,96,1.1,NO,Normal
+215,72,Abdul Kuddus Fakir,SM000156,New Maa Kali Banijjya Bhander,High-Efficiency Closer,Star Performers,6393144.4,0.14,4705,1359.0,3769,38.5,100.0,100.0,98,1.4,NO,Normal
+216,478,Md. Manik Uddin,SM000285,Proshanto Enterprise,High-Volume Runner,Volume Drivers,6381724.8,0.14,3918,1629.0,4069,41.5,96.3,100.0,98,6.0,NO,Normal
+217,1106,Md. Rahad Islam,10997,Parsha Trading Corporation,High-Efficiency Closer,Star Performers,6375529.6,0.14,797,7999.0,755,7.8,100.0,100.0,97,5.2,NO,Normal
+218,75,Gopinath Sarker,SM000160,Gobindo Store,High-Volume Runner,Volume Drivers,6367547.6,0.14,4167,1528.0,5446,55.6,76.5,100.0,98,4.6,NO,Normal
+219,194,Md. Khairul Islam,SM000400,New Joy Durga Vander,High-Efficiency Closer,Star Performers,6360956.45,0.14,1099,5788.0,895,9.1,100.0,100.0,98,1.6,NO,Normal
+220,480,Md Habibul Bashar,SM000289,Maisha Store,High-Efficiency Closer,Star Performers,6352542.65,0.14,3121,2035.0,2387,24.4,100.0,100.0,98,4.4,NO,Normal
+221,949,Md. Roknuzzaman,10816,Shah Traders,High-Efficiency Closer,Star Performers,6346601.4,0.14,1062,5976.0,846,8.9,100.0,100.0,95,0.7,NO,Normal
+222,206,Jalal Uddin,SM000418,Shamima Rashid Enterprise,High-Efficiency Closer,Star Performers,6346464.6,0.14,1626,3903.0,1610,16.3,100.0,98.7,99,0.5,NO,Normal
+223,1025,Feroz Shaik,10955,Tobarak Molla Store,High-Efficiency Closer,Star Performers,6334220.0,0.14,699,9062.0,486,5.2,100.0,100.0,94,9.9,NO,Normal
+224,325,Sabbir Akter Siddique,SM000022,S K Enterprise,High-Efficiency Closer,Star Performers,6328350.95,0.14,195,32453.0,159,1.7,100.0,100.0,96,78.8,NO,Normal
+225,64,Koushik Chandra Das,SM000142,Baby store,High-Efficiency Closer,Star Performers,6321879.7,0.14,4015,1575.0,3032,30.9,100.0,100.0,98,11.6,NO,Normal
+226,1192,Anowar Hossain,11038,Bismillah Enterprise DHKW,High-Efficiency Closer,Star Performers,6321525.3,0.14,2486,2543.0,2266,22.4,100.0,100.0,101,2.1,NO,Normal
+227,476,Md. Shorif Uddin,SM000281,Shamim Traders,High-Efficiency Closer,Star Performers,6314835.6,0.14,3569,1769.0,3306,33.7,100.0,100.0,98,8.4,NO,Normal
+228,257,Abdul Mazid,SM000492,Pancharupa,High-Efficiency Closer,Star Performers,6307319.5,0.14,1243,5074.0,938,10.1,100.0,100.0,93,1.6,NO,Normal
+229,259,Abdul Momin Sarder,SM000494,Kader Store,High-Efficiency Closer,Star Performers,6286654.4,0.14,2403,2616.0,1821,19.0,100.0,100.0,96,0.6,NO,Normal
+230,426,Md. Ansarul Islam,SM000219,Maa Traders,High-Efficiency Closer,Star Performers,6262786.3,0.14,142,44104.0,111,1.2,100.0,100.0,92,16.0,NO,Normal
+231,1104,Md. Harun ur Rashid,10995,Bismillah Traders DHKC,High-Efficiency Closer,Star Performers,6229877.2,0.13,2338,2665.0,1835,18.9,100.0,100.0,97,0.9,NO,Normal
+232,272,Abdul Momen,SM000513,Suditi Departmental Store,High-Efficiency Closer,Star Performers,6208589.0,0.13,2646,2346.0,2063,21.3,100.0,100.0,97,0.8,NO,Normal
+233,719,Md. Tanvir Rana,10591,Borhan Enterprise,High-Efficiency Closer,Star Performers,6203807.6,0.13,3516,1764.0,2978,30.7,100.0,100.0,97,1.3,NO,Normal
+234,1433,Taimur Rahman Shown,SM000676,Shaheen Traders,High-Volume Runner,Volume Drivers,6188145.2,0.13,373,16590.0,486,5.2,76.7,79.3,94,0.8,NO,Normal
+235,283,Mahadeb Chandra Biswas,SM000532,Swapnil Traders,High-Efficiency Closer,Star Performers,6179316.6,0.13,377,16391.0,332,3.4,100.0,100.0,98,6.7,NO,Normal
+236,1041,Nazrul Islam,10971,Dulal Store,High-Efficiency Closer,Star Performers,6139003.0,0.13,386,15904.0,283,2.9,100.0,100.0,96,2.7,NO,Normal
+237,209,Md. Rubel Howlader,SM000423,Bhai Bhai Enterprise BARC,High-Volume Runner,Volume Drivers,6122315.7,0.13,2580,2373.0,2952,30.4,87.4,98.8,97,6.8,NO,Normal
+238,270,Shuyeb Murshed,SM000508,Mobina Traders,High-Volume Runner,Volume Drivers,6121504.7,0.13,1715,3569.0,3680,37.9,46.6,95.5,97,0.4,NO,Normal
+239,788,Abu Taher,10308,Salim Traders,High-Efficiency Closer,Star Performers,6119493.0,0.13,1832,3340.0,1626,18.3,100.0,100.0,89,1.1,NO,Normal
+240,21,Md. Nezam Uddin Chowdhury,SM000077,Aysha Enterprise,High-Volume Runner,Volume Drivers,6112458.1,0.13,3400,1798.0,4327,44.6,78.6,98.5,97,0.1,NO,Normal
+241,253,Abdur Rahim Mondol,SM000488,Faruk & Brothers,High-Efficiency Closer,Star Performers,6107413.4,0.13,1600,3817.0,1216,12.4,100.0,100.0,98,0.6,NO,Normal
+242,1032,Nazrul Islam Rizvi,10962,Madina Traders-DHKS,High-Efficiency Closer,Star Performers,6078603.0,0.13,898,6769.0,782,8.1,100.0,94.6,97,17.0,NO,Normal
+243,122,Rashel Rana,SM000290,Mutual Enterprise,High-Efficiency Closer,Star Performers,6077834.1,0.13,4082,1489.0,3127,32.2,100.0,100.0,97,0.7,NO,Normal
+244,109,Md. Jubayer Hossain,SM000225,Joni Enterprise,High-Efficiency Closer,Star Performers,6047690.8,0.13,98,61711.0,98,1.0,100.0,100.0,95,5.4,NO,Normal
+245,849,Emran Chowdhury Jiban,11100012,Polash Traders,High-Efficiency Closer,Star Performers,6034269.0,0.13,3439,1755.0,3005,31.3,100.0,100.0,96,8.3,NO,Normal
+246,153,Farid Beg,SM000335,Babu Store,High-Volume Runner,Volume Drivers,6034136.0,0.13,4406,1370.0,4488,45.3,98.2,99.8,99,0.1,NO,Normal
+247,103,Md. Rashiduzzaman,SM000214,Koli Store,High-Efficiency Closer,Star Performers,6024037.25,0.13,216,27889.0,163,1.7,100.0,100.0,97,7.9,NO,Normal
+248,1100,Md. Abu Bakar Siddik10991,10991,Ahona Traders,High-Volume Runner,Volume Drivers,6022760.3,0.13,140,43020.0,223,2.1,62.8,43.1,105,12.8,NO,Normal
+249,458,Jibon Hossain,SM000255,Trimoj Enterprise,High-Efficiency Closer,Star Performers,6021580.9,0.13,3704,1626.0,3017,30.8,100.0,100.0,98,1.9,NO,Normal
+250,1027,Addur Rahman,10957,Jannat Enterprise DHKS,High-Volume Runner,Volume Drivers,6009309.8,0.13,1416,4244.0,1567,16.2,90.4,100.0,97,0.7,NO,Normal
+251,183,Anamul Haque,10584,Ibrahim Enterprise,High-Efficiency Closer,Star Performers,6005992.8,0.13,3412,1760.0,3228,32.9,100.0,96.8,98,0.9,NO,Normal
+252,1415,Mamun Hossen,SM000659,Bismillah Store FARC,High-Efficiency Closer,Star Performers,6000156.9,0.13,1365,4396.0,1223,12.4,100.0,100.0,99,20.2,NO,Normal
+253,19,Md. Muminul Hoque,SM000075,Rash Bihari Enterprise,High-Efficiency Closer,Star Performers,5992951.35,0.13,2606,2300.0,1863,19.4,100.0,100.0,96,7.7,NO,Normal
+254,233,Ashraful Khan,SM000467,Sayd Enterprise,High-Efficiency Closer,Star Performers,5947957.15,0.13,4134,1439.0,3379,34.8,100.0,100.0,97,7.4,NO,Normal
+255,112,Ahoshan Habib,SM000269,Kingshuk Traders,High-Efficiency Closer,Star Performers,5921688.9,0.13,3008,1969.0,2859,29.2,100.0,99.6,98,5.0,NO,Normal
+256,316,Rimon Das,SM000009,Sailas Enterprise,High-Efficiency Closer,Star Performers,5919700.9,0.13,2345,2524.0,2150,24.4,100.0,100.0,88,3.8,NO,Normal
+257,758,Nurul Huda Sobuj,10225,Anis Tea & Co.,High-Efficiency Closer,Star Performers,5908404.7,0.13,1963,3010.0,1344,15.3,100.0,100.0,88,0.7,NO,Normal
+258,58,Shahjahan Ali,SM000133,Samiha Store,High-Efficiency Closer,Star Performers,5896563.2,0.13,1756,3358.0,1394,14.7,100.0,99.7,95,0.6,NO,Normal
+259,415,Md. Jalal Ahmmad,SM000200,Hira Enterprise,High-Volume Runner,Volume Drivers,5890860.0,0.13,4408,1336.0,4780,48.3,92.2,99.3,99,8.1,NO,Normal
+260,249,Jalal Uddin,SM000484,Mohar Ali Store,High-Efficiency Closer,Star Performers,5884676.5,0.13,2637,2232.0,2042,21.1,100.0,100.0,97,0.5,NO,Normal
+261,273,Abdur Rahim Mia,SM000516,TR Brothers Enterprise,High-Volume Runner,Volume Drivers,5873065.3,0.13,3909,1502.0,3988,41.5,98.0,98.8,96,0.5,NO,Normal
+262,79,Shodip Kumar,SM000165,Habib Enterprise,High-Volume Runner,Volume Drivers,5867779.6,0.13,3033,1935.0,3096,31.6,98.0,100.0,98,8.5,NO,Normal
+263,143,Md. Zamirul Islam,SM000321,Rahela Enterprise,High-Efficiency Closer,Star Performers,5858086.0,0.13,616,9510.0,399,4.0,100.0,100.0,99,18.3,NO,Normal
+264,225,Md. Kamrul Islam,SM000453,A.R Traders,High-Efficiency Closer,Star Performers,5844890.1,0.13,3352,1744.0,2685,28.0,100.0,100.0,96,0.7,NO,Normal
+265,1120,Md. Alamgir Patwary,11011,Onnopurna Store,High-Volume Runner,Volume Drivers,5840966.35,0.13,202,28916.0,297,3.2,68.0,68.7,93,20.1,NO,Normal
+266,1387,Shafikul Islam Aso,11215,Abedia Store,High-Efficiency Closer,Star Performers,5839934.0,0.13,141,41418.0,103,1.0,100.0,100.0,99,51.6,NO,Normal
+267,1319,Osama Abdullah,11148,Halim Store,High-Volume Runner,Volume Drivers,5837650.05,0.13,443,13178.0,503,5.5,88.1,97.3,91,0.1,NO,Normal
+268,514,Md. Hasibul Islam,10639,M M Enterprise,High-Efficiency Closer,Star Performers,5833112.5,0.13,4925,1184.0,4253,44.8,100.0,100.0,95,8.8,NO,Normal
+269,1414,Md. Matiur Rahman,SM000658,Shipon Traders,High-Volume Runner,Volume Drivers,5832249.8,0.13,1709,3413.0,1777,18.3,96.2,100.0,97,1.0,NO,Normal
+270,669,Alamgir Hossain,10448,Kalam Traders,High-Volume Runner,Volume Drivers,5830961.3,0.13,2074,2811.0,2132,21.8,97.3,98.7,98,2.5,NO,Normal
+271,123,Md. Rezaul Karim,SM000291,Sheikh Traders,High-Efficiency Closer,Star Performers,5814996.0,0.13,4438,1310.0,3782,38.6,100.0,100.0,98,3.2,NO,Normal
+272,471,Mosharrof Hossein,SM000273,Rekha Enterprise,High-Efficiency Closer,Star Performers,5800068.45,0.13,3605,1609.0,2744,28.0,100.0,100.0,98,0.6,NO,Normal
+273,190,Md. Sabu Ali,SM000394,Athoi Traders,High-Efficiency Closer,Star Performers,5796334.0,0.13,113,51295.0,90,1.0,100.0,100.0,94,101.0,NO,Normal
+274,131,Mukul Kumar Mahanta,SM000303,Anando Confectionary,High-Volume Runner,Volume Drivers,5780858.2,0.12,3058,1890.0,3197,32.6,95.7,100.0,98,1.1,NO,Normal
+275,41,Ahsanur Rahman,SM000105,Rahman Distribution,High-Efficiency Closer,Star Performers,5771710.6,0.12,3206,1800.0,2569,26.2,100.0,100.0,98,5.0,NO,Normal
+276,881,Bimal Hemborn,11060423,Ahasan Enterprise,High-Volume Runner,Volume Drivers,5763740.8,0.12,3379,1706.0,5355,55.2,63.1,100.0,97,5.7,NO,Normal
+277,438,Md.Sajjad Hossain,SM000235,Rupia Enterprise JESC,High-Volume Runner,Volume Drivers,5750449.2,0.12,3210,1791.0,3639,37.1,88.2,98.9,98,1.3,NO,Normal
+278,863,Rafiqul Islam,11050028,Vai Vai Store BOGC,High-Efficiency Closer,Star Performers,5738980.2,0.12,2489,2306.0,2007,21.1,100.0,100.0,95,0.9,NO,Normal
+279,507,Monirul Islam,SM000371,Lovely Store,High-Efficiency Closer,Star Performers,5738380.3,0.12,4838,1186.0,3861,40.2,100.0,98.4,96,0.7,NO,Normal
+280,389,Abdour Rouf,SM000138,Ideal Cake & Food Plaza,High-Efficiency Closer,Star Performers,5725821.85,0.12,3407,1681.0,2658,26.8,100.0,100.0,99,4.1,NO,Normal
+281,703,Saidul Sheikh,10858,Ashraf Enterprise,High-Volume Runner,Volume Drivers,5712107.3,0.12,810,7052.0,936,10.1,86.5,96.6,93,0.3,NO,Normal
+282,1179,Nazim Uddin CTGS,10852,Alauddin Enterprise,High-Efficiency Closer,Star Performers,5706099.0,0.12,4407,1295.0,4116,42.0,100.0,99.7,98,9.3,NO,Normal
+283,108,Sheik Habibur Rahman,SM000223,Marjan Enterprise,High-Efficiency Closer,Star Performers,5704184.8,0.12,173,32972.0,126,1.3,100.0,100.0,97,38.0,NO,Normal
+284,1215,Md. Sherjul Islam,11095,Shathy Enterprise,High-Efficiency Closer,Star Performers,5671147.6,0.12,2258,2512.0,2092,21.8,100.0,100.0,96,1.6,NO,Normal
+285,128,Anamul Haque Molla,SM000298,Liton Store,High-Efficiency Closer,Star Performers,5666657.1,0.12,3172,1786.0,2946,30.4,100.0,99.8,97,0.1,NO,Normal
+286,822,Md. Fosir Uddin,10902,Ekra Trading,High-Efficiency Closer,Star Performers,5633947.1,0.12,2303,2446.0,1750,18.0,100.0,100.0,97,0.7,NO,Normal
+287,1049,Md Yousuf,10926,Bismillah Enterprise DHKW,High-Efficiency Closer,Star Performers,5626559.5,0.12,3364,1673.0,2645,27.0,100.0,100.0,98,1.0,NO,Normal
+288,216,Md. Abdul Latif,SM000434,Ruma Enterprise,High-Volume Runner,Volume Drivers,5623517.1,0.12,2055,2737.0,2145,22.1,95.8,97.5,97,0.8,NO,Normal
+289,1014,Hridoy Ahammed,10944,Himel Enterprise,High-Efficiency Closer,Star Performers,5617630.4,0.12,124,45303.0,104,1.1,100.0,100.0,92,36.7,NO,Normal
+290,800,Md. Akteruzzaman,10880,AB Traders,High-Efficiency Closer,Star Performers,5593129.7,0.12,750,7458.0,572,5.8,100.0,100.0,98,1.4,NO,Normal
+291,525,Md. Kibria,SM000419,Shamima Rashid Enterprise,High-Efficiency Closer,Star Performers,5571513.0,0.12,2091,2665.0,1655,16.7,100.0,100.0,99,0.9,NO,Normal
+292,196,Monir Hossain,SM000403,Toppader Enterprise,High-Efficiency Closer,Star Performers,5567614.0,0.12,1541,3613.0,1159,11.8,100.0,100.0,98,1.0,NO,Normal
+293,1222,Rasel Shaik,11096,Kumud Ranjan Kundu,High-Efficiency Closer,Star Performers,5561778.3,0.12,2060,2700.0,1529,15.9,100.0,100.0,96,0.5,NO,Normal
+294,154,Ashraful Alam,SM000337,Esmail Enterprise,High-Volume Runner,Volume Drivers,5551551.4,0.12,1565,3547.0,2270,22.9,68.9,97.6,99,4.7,NO,Normal
+295,842,S. M. Rashed,19090007,Ratan Store,High-Efficiency Closer,Star Performers,5546445.1,0.12,707,7845.0,511,5.3,100.0,100.0,97,4.6,NO,Normal
+296,136,Dost Mohammad,SM000312,Saha Traders,High-Volume Runner,Volume Drivers,5538505.2,0.12,4079,1358.0,4310,44.0,94.6,96.1,98,5.5,NO,Normal
+297,483,Pappu Kumer Kabiraz,SM000299,Liton Store,High-Volume Runner,Volume Drivers,5527786.1,0.12,4622,1196.0,4839,49.9,95.5,100.0,97,7.7,NO,Normal
+298,725,Mamun Hossin,10641,Suchitra Traders,High-Efficiency Closer,Star Performers,5521336.6,0.12,5058,1092.0,4995,51.5,100.0,100.0,97,1.7,NO,Normal
+299,417,Md. Saddam Hosin,SM000204,Brothers International,High-Volume Runner,Volume Drivers,5511978.8,0.12,187,29476.0,208,2.4,89.9,100.0,87,13.8,NO,Normal
+300,1173,Aman Hosson,11018,Haque Store,High-Efficiency Closer,Star Performers,5491219.6,0.12,4484,1225.0,3513,36.6,100.0,100.0,96,0.5,NO,Normal
+301,547,Babul Hossain,SM000475,Esahak Enterprise,High-Efficiency Closer,Star Performers,5489039.7,0.12,3038,1807.0,2921,29.8,100.0,100.0,98,1.0,NO,Normal
+302,392,Bikash Mondol,SM000144,Baby store,High-Efficiency Closer,Star Performers,5484454.8,0.12,2901,1891.0,2203,22.5,100.0,100.0,98,12.6,NO,Normal
+303,766,Mahmudul Hasan,10234,Jaman Traders,High-Efficiency Closer,Star Performers,5484276.4,0.12,195,28124.0,80,0.8,100.0,100.0,97,0.4,NO,Normal
+304,217,Md. Solaiman Mia,SM000437,Maurin Enterprise,High-Volume Runner,Volume Drivers,5452565.65,0.12,1804,3022.0,1963,19.8,91.9,100.0,99,0.3,NO,Normal
+305,134,Shahidul Islam,SM000308,S. S. Traders,High-Efficiency Closer,Star Performers,5443776.1,0.12,3393,1604.0,3251,33.2,100.0,98.5,98,9.6,NO,Normal
+306,874,Shamim Hossain,21010007,Sumi Store,High-Efficiency Closer,Star Performers,5441948.9,0.12,3584,1518.0,2729,29.3,100.0,100.0,93,3.5,NO,Normal
+307,1055,Repon Sardar,10932,Mithu Enterprise,High-Efficiency Closer,Star Performers,5439459.5,0.12,871,6245.0,705,7.2,100.0,100.0,98,53.5,NO,Normal
+308,401,Askarul Alom,SM000170,Abu Huraira Enterprise,High-Efficiency Closer,Star Performers,5435550.95,0.12,3747,1451.0,3222,32.9,100.0,98.8,98,2.8,NO,Normal
+309,892,Kamal Hossain BOGC,11040194,Maa Distribution,High-Efficiency Closer,Star Performers,5434426.15,0.12,2696,2016.0,2102,21.9,100.0,100.0,96,4.3,NO,Normal
+310,470,Tuhin Hossain,SM000271,Sanot Store,High-Volume Runner,Volume Drivers,5434036.75,0.12,3015,1802.0,3539,36.1,85.2,100.0,98,11.4,NO,Normal
+311,74,Dipto,SM000159,Mohabbat Enterprise,High-Efficiency Closer,Star Performers,5432900.2,0.12,2544,2136.0,2019,20.6,100.0,100.0,98,11.0,NO,Normal
+312,162,Shahadat Hossin,SM000347,Sajib Traders,High-Volume Runner,Volume Drivers,5424622.2,0.12,3301,1643.0,4103,43.2,80.5,96.6,95,5.5,NO,Normal
+313,185,Rajib Biswas,10576,Zim Enterprise,High-Volume Runner,Volume Drivers,5422818.2,0.12,2610,2078.0,2811,29.0,92.8,99.4,97,0.9,NO,Normal
+314,939,Md. Shohag Hossain Molla,10809,Boishakhi Enterprise,High-Efficiency Closer,Star Performers,5383860.8,0.12,90,59821.0,46,0.6,100.0,100.0,79,5.0,NO,Normal
+315,801,Md. Rokibul Islam,10881,AB Traders,High-Efficiency Closer,Star Performers,5369304.9,0.12,1550,3464.0,1137,11.6,100.0,100.0,98,0.6,NO,Normal
+316,132,Fohim Uddin,SM000305,Imdadul Haque Store,High-Efficiency Closer,Star Performers,5322435.0,0.12,839,6344.0,681,6.9,100.0,100.0,98,3.9,NO,Normal
+317,328,Rajib Das,SM000026,Md. Shajahan Traders,High-Volume Runner,Volume Drivers,5320465.3,0.12,3292,1616.0,3417,36.7,96.3,100.0,93,2.6,NO,Normal
+318,1286,Md. Selim Hoshen,11117,Jahir Traders,High-Efficiency Closer,Star Performers,5310192.0,0.11,2300,2309.0,2031,22.8,100.0,100.0,89,4.5,NO,Normal
+319,714,Sanouar Hossain,10583,M S Enterprise,High-Efficiency Closer,Star Performers,5300284.2,0.11,3583,1479.0,3487,36.3,100.0,99.7,96,0.3,NO,Normal
+320,475,Khorshed Alom,SM000279,Salam Traders,High-Efficiency Closer,Star Performers,5292084.4,0.11,4004,1322.0,3062,31.2,100.0,100.0,98,0.6,NO,Normal
+321,62,Mainul Islam Nahid,SM000139,Sumon Trading,High-Efficiency Closer,Star Performers,5288728.7,0.11,4531,1167.0,4458,45.5,100.0,100.0,98,7.7,NO,Normal
+322,767,Humayun Kabir,10235,Jaman Traders,High-Volume Runner,Volume Drivers,5269750.8,0.11,393,13409.0,1286,13.8,30.6,38.8,93,0.1,NO,Normal
+323,1053,Omar Faruk,10930,A Z Enterprise,High-Efficiency Closer,Star Performers,5265943.8,0.11,1153,4567.0,913,9.4,100.0,100.0,97,1.4,NO,Normal
+324,789,Sarowar Hossain,10320,AF Meherima Enterprise,High-Volume Runner,Volume Drivers,5265869.6,0.11,2899,1816.0,3013,32.8,96.2,100.0,92,1.0,NO,Normal
+325,139,Abdur Rouf,SM000316,Farhad Enterprise,High-Volume Runner,Volume Drivers,5265133.7,0.11,4054,1299.0,4609,47.0,88.0,99.5,98,7.4,NO,Normal
+326,1318,Sariful Islam,11147,Salam Store,High-Volume Runner,Volume Drivers,5261657.2,0.11,128,41107.0,160,1.6,80.0,91.4,99,22.5,NO,Normal
+327,204,Sabbir Ali,SM000416,Ma Store,High-Efficiency Closer,Star Performers,5252275.6,0.11,2101,2500.0,1653,17.0,100.0,100.0,97,1.2,NO,Normal
+328,804,Md. Ashadul Haque,10884,Amirul Traders,High-Efficiency Closer,Star Performers,5235968.7,0.11,285,18372.0,225,2.3,100.0,100.0,99,13.1,NO,Normal
+329,1047,Md Mijanur Rahman,10924,Zakir Traders,High-Efficiency Closer,Star Performers,5209251.5,0.11,863,6036.0,642,6.8,100.0,100.0,95,22.3,NO,Normal
+330,841,Mohasin Ali,13010046,Gopal Mohanta Store,High-Efficiency Closer,Star Performers,5196154.6,0.11,1281,4056.0,929,9.7,100.0,100.0,96,0.8,NO,Normal
+331,883,Md. Rifat Mahmud,10746,Dui Bon Varieties Store,High-Efficiency Closer,Star Performers,5187855.3,0.11,2795,1856.0,2132,22.2,100.0,100.0,96,3.2,NO,Normal
+332,728,Solayman Hossen,10644,Borhan Enterprise,High-Efficiency Closer,Star Performers,5186384.4,0.11,2127,2438.0,1891,19.5,100.0,100.0,97,5.9,NO,Normal
+333,326,Shaiful Alam,SM000023,S K Enterprise,High-Efficiency Closer,Star Performers,5174625.5,0.11,415,12469.0,319,3.3,100.0,100.0,97,7.2,NO,Normal
+334,1059,Md. Rafiqul Islam,11062,Jamal Enterprise,High-Efficiency Closer,Star Performers,5171171.05,0.11,158,32729.0,144,1.5,100.0,100.0,98,33.6,NO,Normal
+335,1013,Mahabubur Rahman,10943,Jonaet Enterprise,High-Efficiency Closer,Star Performers,5167318.2,0.11,2309,2238.0,1865,19.6,100.0,100.0,95,0.7,NO,Normal
+336,81,Abdul Halim,SM000169,Abu Huraira Enterprise,High-Volume Runner,Volume Drivers,5151580.6,0.11,4764,1081.0,4835,49.3,98.5,99.8,98,0.8,NO,Normal
+337,35,Rajeshwar Sharma,SM000099,Momtaz Store,High-Efficiency Closer,Star Performers,5135886.6,0.11,1984,2589.0,1563,15.9,100.0,100.0,98,0.7,NO,Normal
+338,1425,Md. Abdur Rashid,SM000668,Lubaba Enterprise,High-Efficiency Closer,Star Performers,5134720.2,0.11,3432,1496.0,3032,31.6,100.0,100.0,96,1.5,NO,Normal
+339,484,Shahin Alam,SM000301,Amina General Store,High-Efficiency Closer,Star Performers,5131887.1,0.11,3826,1341.0,3287,33.5,100.0,100.0,98,11.5,NO,Normal
+340,333,Sajal Barua,SM000033,Rowshan Distribution,High-Volume Runner,Volume Drivers,5130663.6,0.11,2966,1730.0,3441,36.2,86.2,98.8,95,1.7,NO,Normal
+341,193,Sirajul Islam,SM000399,Atiar Store,High-Volume Runner,Volume Drivers,5121019.3,0.11,4487,1141.0,4823,50.8,93.0,99.8,95,1.3,NO,Normal
+342,495,Anis Rahman,SM000336,Babu Store,High-Volume Runner,Volume Drivers,5115886.0,0.11,1165,4391.0,3605,36.4,32.3,72.3,99,2.4,NO,Normal
+343,384,Md. Nur Alam,SM000126,Mizan Telecom,High-Efficiency Closer,Star Performers,5114127.4,0.11,300,17047.0,209,2.1,100.0,100.0,98,99.9,NO,Normal
+344,762,Md.Shariful Islam,10230,Rakib Enterprise,High-Efficiency Closer,Star Performers,5104545.1,0.11,1358,3759.0,878,9.1,100.0,100.0,97,0.7,NO,Normal
+345,1098,Md. Zakir Hossain,10989,Mayer Doa General Store 1,High-Efficiency Closer,Star Performers,5100609.2,0.11,622,8200.0,533,5.4,100.0,100.0,98,13.2,NO,Normal
+346,40,A. H. M. Yahiya,SM000104,Safa Enterprise,High-Volume Runner,Volume Drivers,5099875.1,0.11,2479,2057.0,4327,42.4,57.3,84.2,102,1.5,NO,Normal
+347,671,Zulfikar Rahman,10450,Bismillah Enterprise CTGN,High-Efficiency Closer,Star Performers,5098005.65,0.11,1356,3760.0,1141,11.9,100.0,100.0,96,1.8,NO,Normal
+348,820,Md. Boshirul Alam,10900,S.R Traders,High-Efficiency Closer,Star Performers,5091505.4,0.11,2916,1746.0,2284,23.3,100.0,100.0,98,1.4,NO,Normal
+349,809,Md. Maidul Islam,10889,Mukaddes Store,High-Efficiency Closer,Star Performers,5091024.4,0.11,204,24956.0,158,1.6,100.0,100.0,97,1.9,NO,Normal
+350,774,Nazrul Islam,10242,HR vareities Store,High-Efficiency Closer,Star Performers,5090865.6,0.11,2133,2387.0,1919,21.6,100.0,100.0,89,1.2,NO,Normal
+351,506,Mahbub Alam,SM000369,D.S Enterprise2,High-Efficiency Closer,Star Performers,5082878.8,0.11,4597,1106.0,4532,46.2,100.0,100.0,98,3.6,NO,Normal
+352,175,Foyez Ahmed,SM000368,D.S Enterprise2,High-Volume Runner,Volume Drivers,5081541.6,0.11,4382,1160.0,4575,46.7,95.8,100.0,98,1.2,NO,Normal
+353,489,Osman Goni Shakil,SM000313,Saha Traders,High-Volume Runner,Volume Drivers,5072649.1,0.11,3786,1340.0,3798,38.8,99.7,99.0,98,7.0,NO,Normal
+354,783,Hashmot Ali,10253,Chaity Saree Bitan,High-Efficiency Closer,Star Performers,5063891.0,0.11,689,7350.0,454,4.9,100.0,100.0,93,2.2,NO,Normal
+355,482,Mominul Islam,SM000296,Mobin Enterprise,High-Efficiency Closer,Star Performers,5038545.6,0.11,2936,1716.0,2894,29.5,100.0,96.7,98,0.1,NO,Normal
+356,1093,Md. Manik Molla,10984,Porsha Trading Corporation 2,High-Volume Runner,Volume Drivers,5030582.0,0.11,2748,1831.0,2808,29.2,97.9,100.0,96,0.8,NO,Normal
+357,276,Anowar Hossain,SM000521,Elahi Enterprise,High-Efficiency Closer,Star Performers,5021610.6,0.11,3003,1672.0,2228,23.5,100.0,100.0,95,3.1,NO,Normal
+358,82,Moydul Islam,SM000171,Saroar Enterprise,High-Efficiency Closer,Star Performers,5018857.45,0.11,2288,2194.0,1744,17.8,100.0,100.0,98,1.4,NO,Normal
+359,1386,Shopon Chandra Ray,11214,Abedia Store,High-Efficiency Closer,Star Performers,5018593.5,0.11,106,47345.0,79,0.8,100.0,100.0,99,46.8,NO,Normal
+360,399,Selim Hossain,SM000166,Habib Enterprise,High-Efficiency Closer,Star Performers,5017749.45,0.11,2874,1746.0,2144,21.9,100.0,100.0,98,1.4,NO,Normal
+361,1338,Abdul Malek,11167,Taifur Enterprise,High-Efficiency Closer,Star Performers,5006905.7,0.11,357,14025.0,346,3.5,100.0,100.0,99,76.2,NO,Normal
+362,1358,Chonchol Kumar Datta,11186,Ashraf Enterprise,High-Efficiency Closer,Star Performers,5005834.6,0.11,3429,1460.0,2651,27.9,100.0,100.0,95,1.2,NO,Normal
+363,278,MD. Sujon Mia,SM000525,Tasrif Enterprise,High-Efficiency Closer,Star Performers,5003057.4,0.11,766,6531.0,503,5.1,100.0,100.0,99,1.2,NO,Normal
+364,409,Md. Habib Ullah,SM000188,Kamrul Store,High-Efficiency Closer,Star Performers,4970960.2,0.11,1704,2917.0,1679,17.0,100.0,99.2,99,2.9,NO,Normal
+365,887,Md. Juwel Hossain,22010039,Al Amin Store BOGC,High-Volume Runner,Volume Drivers,4966756.8,0.11,2916,1703.0,5481,56.5,53.2,80.8,97,1.4,NO,Normal
+366,1271,S. M Zakirul Islam,11102,Karnafuly Trading-2,High-Efficiency Closer,Star Performers,4950456.2,0.11,246,20124.0,224,2.3,100.0,80.0,97,2.9,NO,Normal
+367,210,Md. G M Maola,SM000425,Thakur Business point,High-Efficiency Closer,Star Performers,4948238.0,0.11,4165,1188.0,3246,33.8,100.0,100.0,96,1.4,NO,Normal
+368,473,Abdur Rahman,SM000276,Firoz Trade International,High-Efficiency Closer,Star Performers,4930771.5,0.11,4086,1207.0,3485,35.9,100.0,100.0,97,3.3,NO,Normal
+369,65,Litu Biswas,SM000145,Dutta Store,High-Efficiency Closer,Star Performers,4908135.0,0.11,3529,1391.0,2653,27.1,100.0,100.0,98,0.6,NO,Normal
+370,493,Mostafa Kamal RNG,10843,Raiyan Varieties Store,High-Efficiency Closer,Star Performers,4903720.0,0.11,167,29364.0,142,1.4,100.0,100.0,99,15.7,NO,Normal
+371,672,Md. Rafiqul Islam,10451,Bismillah Traders,High-Efficiency Closer,Star Performers,4901389.2,0.11,2588,1894.0,1971,21.0,100.0,100.0,94,0.6,NO,Normal
+372,1044,Md Ferose Kabir,10921,Prodhan Store,High-Efficiency Closer,Star Performers,4901322.65,0.11,871,5627.0,743,7.9,100.0,100.0,94,3.2,NO,Normal
+373,796,Md. Rakibul Islam,10876,Siddik Enterprise,High-Efficiency Closer,Star Performers,4886214.6,0.11,738,6621.0,535,5.5,100.0,100.0,98,1.3,NO,Normal
+374,197,Mekail Islam,SM000404,Anwar Traders,High-Volume Runner,Volume Drivers,4883417.2,0.11,3323,1470.0,3662,38.1,90.7,99.1,96,3.5,NO,Normal
+375,676,Mizanur Rahaman,10455,Bhai Bhai Store CTGN,High-Efficiency Closer,Star Performers,4881480.6,0.11,5467,893.0,4137,42.2,100.0,100.0,98,0.3,NO,Normal
+376,517,Abul Kalam,SM000395,Athoi Traders,High-Efficiency Closer,Star Performers,4875132.5,0.11,110,44319.0,83,0.9,100.0,100.0,96,137.6,NO,Normal
+377,784,Belal Hossain,10254,Kayum Enterprise,High-Volume Runner,Volume Drivers,4869765.35,0.11,2320,2099.0,2885,29.1,80.4,99.4,99,0.8,NO,Normal
+378,166,Sohel Rana,SM000354,Shuvo Veraities Store,High-Efficiency Closer,Star Performers,4852784.9,0.1,2909,1668.0,2366,24.6,100.0,100.0,96,15.6,NO,Normal
+379,20,Md. Saifuddin,SM000076,Raz Enterprise,High-Volume Runner,Volume Drivers,4851685.15,0.1,2103,2307.0,2834,28.9,74.2,88.9,98,2.5,NO,Normal
+380,682,Md. Jamal Hussain,10468,Popular Distribution Mart,High-Efficiency Closer,Star Performers,4832222.4,0.1,2895,1669.0,2280,23.5,100.0,100.0,97,1.7,NO,Normal
+381,407,Md. Rasidul Islam,SM000182,Ahmmed Enterprise,High-Efficiency Closer,Star Performers,4818045.3,0.1,523,9212.0,331,3.4,100.0,100.0,96,1.7,NO,Normal
+382,890,Saokat Ali,11050034,Maya Electric,High-Efficiency Closer,Star Performers,4816413.7,0.1,2703,1782.0,2137,22.0,100.0,100.0,97,0.5,NO,Normal
+383,752,Ehsanul Huq Gazi,10219,M.I.S Traders,High-Efficiency Closer,Star Performers,4814851.95,0.1,2909,1655.0,2360,24.3,100.0,100.0,97,0.7,NO,Normal
+384,221,Md. Riad,SM000446,Alamin Store BARC,High-Efficiency Closer,Star Performers,4798094.55,0.1,2950,1626.0,2581,27.2,100.0,100.0,95,0.2,NO,Normal
+385,894,Chandan Kumar,24120004,Maa Distribution,High-Efficiency Closer,Star Performers,4792853.25,0.1,3170,1512.0,2796,29.1,100.0,100.0,96,0.8,NO,Normal
+386,1011,Faruk Ahmmad,10941,Rashel Store,High-Efficiency Closer,Star Performers,4791926.6,0.1,881,5439.0,677,7.0,100.0,100.0,97,1.2,NO,Normal
+387,1017,Fazlur Rahman,10947,AI Trading,High-Volume Runner,Volume Drivers,4790756.1,0.1,3049,1571.0,3957,40.4,77.1,100.0,98,0.6,NO,Normal
+388,155,Rafiqul Islam,SM000338,Fariha & Jakaria Traders,High-Volume Runner,Volume Drivers,4786202.0,0.1,738,6485.0,1065,10.8,69.3,81.9,99,0.4,NO,Normal
+389,219,MD. Bodiuzzaman,SM000442,Shohag Traders,High-Efficiency Closer,Star Performers,4769971.3,0.1,1293,3689.0,1056,12.0,100.0,100.0,88,2.0,NO,Normal
+390,60,Sabbir Hossain,SM000136,Aziz Enterprise,High-Efficiency Closer,Star Performers,4769184.7,0.1,3568,1337.0,3467,35.4,100.0,100.0,98,8.5,NO,Normal
+391,520,Sakib Haider,SM000405,Anwar Traders,High-Efficiency Closer,Star Performers,4768256.6,0.1,2871,1661.0,2141,22.5,100.0,99.6,95,0.7,NO,Normal
+392,214,Md. Ibrahim Shekh,SM000431,Sadananda Kundu,High-Volume Runner,Volume Drivers,4763356.15,0.1,3960,1203.0,3975,41.0,99.6,100.0,97,7.7,NO,Normal
+393,271,MD. Nazmul Haque,SM000510,Imran Enterprise,High-Efficiency Closer,Star Performers,4751053.0,0.1,3447,1378.0,3021,32.1,100.0,100.0,94,0.4,NO,Normal
+394,555,Fuad Hossen,SM000515,Suditi Departmental Store,High-Efficiency Closer,Star Performers,4750675.1,0.1,2643,1797.0,2010,20.7,100.0,100.0,97,0.8,NO,Normal
+395,715,Moniruzzaman,10587,Shirin Enterprise,High-Efficiency Closer,Star Performers,4744158.6,0.1,2913,1629.0,2796,28.8,100.0,100.0,97,0.7,NO,Normal
+396,720,Musfiqur Rahman,10634,Dipto Enterprise,High-Efficiency Closer,Star Performers,4728143.5,0.1,3183,1485.0,2492,27.7,100.0,100.0,90,0.4,NO,Normal
+397,884,Rustom Ali,12060032,Mawla Store,High-Volume Runner,Volume Drivers,4722653.1,0.1,4991,946.0,5434,56.0,91.8,100.0,97,5.5,NO,Normal
+398,402,Aminul Islam KHLC,SM000174,Sayam Store,High-Efficiency Closer,Star Performers,4721373.15,0.1,4405,1072.0,3380,34.5,100.0,100.0,98,0.7,NO,Normal
+399,764,Azim Khan,10232,Khan Traders,High-Efficiency Closer,Star Performers,4712138.8,0.1,3454,1364.0,2575,26.5,100.0,100.0,97,12.1,NO,Normal
+400,4,Shakawat Hossen,SM000006,Saiful & Brothers,High-Efficiency Closer,Star Performers,4704693.8,0.1,225,20910.0,201,2.1,100.0,95.5,95,11.5,NO,Normal
+401,1016,Reazul Islam Reaz,10946,Rozi Varities Store,High-Efficiency Closer,Star Performers,4702895.0,0.1,652,7213.0,472,5.0,100.0,100.0,95,1.5,NO,Normal
+402,827,Md. Aktharuzzaman,10907,Insan Distributor,High-Efficiency Closer,Star Performers,4701001.8,0.1,134,35082.0,107,1.3,100.0,100.0,85,45.0,NO,Normal
+403,78,Rafiqul Islam,SM000164,Gazi Jabir Enterprise,High-Efficiency Closer,Star Performers,4694130.7,0.1,3021,1554.0,2396,24.4,100.0,100.0,98,3.4,NO,Normal
+404,734,Md. Azizul Haque,10821,Akbar Genarel Store,High-Efficiency Closer,Star Performers,4686997.4,0.1,3418,1371.0,2593,28.2,100.0,100.0,92,0.3,NO,Normal
+405,254,Abu Baker,SM000489,Sotota Traders,High-Efficiency Closer,Star Performers,4685886.8,0.1,1959,2392.0,1514,15.4,100.0,100.0,98,1.5,NO,Normal
+406,821,Md. Aslam Sikder,10901,S.R Traders,High-Efficiency Closer,Star Performers,4685621.6,0.1,2616,1791.0,2004,20.4,100.0,100.0,98,0.8,NO,Normal
+407,98,Md. Torikul Islam,SM000201,Bismillah Motors,High-Volume Runner,Volume Drivers,4668043.1,0.1,1404,3325.0,2419,25.5,58.0,61.9,95,5.5,NO,Normal
+408,799,Md. Sohel Rana,10879,Rahim Traders,High-Efficiency Closer,Star Performers,4646740.2,0.1,436,10658.0,393,4.7,100.0,100.0,83,1.3,NO,Normal
+409,508,S M Humayun Kabir,SM000373,Manager Store,High-Efficiency Closer,Star Performers,4645456.6,0.1,1325,3506.0,1021,10.4,100.0,100.0,98,24.9,NO,Normal
+410,119,Md. Rofiqul Islam,SM000284,Proshanto Enterprise,High-Volume Runner,Volume Drivers,4641372.3,0.1,3521,1318.0,4063,41.5,86.7,95.8,98,3.4,NO,Normal
+411,424,Md. Abdul Halim,SM000215,Koli Store,High-Volume Runner,Volume Drivers,4631616.1,0.1,184,25172.0,1677,17.7,11.0,24.8,95,13.1,NO,Normal
+412,1353,Md. Rubel Mia,11181,IS Traders,High-Efficiency Closer,Star Performers,4626559.7,0.1,113,40943.0,55,0.6,100.0,100.0,95,46.8,NO,Normal
+413,77,Nashir Uddin,SM000162,United Distribution House,High-Efficiency Closer,Star Performers,4614912.95,0.1,3507,1316.0,2738,27.9,100.0,100.0,98,4.2,NO,Normal
+414,268,MD. Monirul Haque,SM000505,Matri Store,High-Efficiency Closer,Star Performers,4608700.85,0.1,2792,1651.0,2059,21.0,100.0,100.0,98,0.9,NO,Normal
+415,42,Md. Mahabubul Alam,SM000106,Asma Enterprise,High-Volume Runner,Volume Drivers,4608398.8,0.1,5291,871.0,6031,61.5,87.7,100.0,98,4.4,NO,Normal
+416,860,Shafikul Islam,12090138,Maa Enterprise,High-Efficiency Closer,Star Performers,4603888.2,0.1,2815,1635.0,2189,23.0,100.0,100.0,95,0.9,NO,Normal
+417,815,Md. Mohiuddin,10895,Mizan Traders KUST,High-Efficiency Closer,Star Performers,4600668.55,0.1,686,6707.0,502,5.3,100.0,100.0,95,2.9,NO,Normal
+418,877,Ashrafuzzaman,15040008,Abrar Traders,High-Efficiency Closer,Star Performers,4592194.72,0.1,2689,1708.0,2091,21.3,100.0,100.0,98,1.9,NO,Normal
+419,386,Shohalur Rhaman,SM000129,New Biswanath Vander,High-Efficiency Closer,Star Performers,4588253.25,0.1,307,14945.0,238,2.5,100.0,100.0,97,4.9,NO,Normal
+420,63,Harun Ur Rashid,SM000141,South Link,High-Efficiency Closer,Star Performers,4584449.85,0.1,3375,1358.0,2563,26.2,100.0,100.0,98,0.6,NO,Normal
+421,843,Mosabber Hossain,10687,Mawla Store,High-Efficiency Closer,Star Performers,4582654.25,0.1,2676,1713.0,2110,22.0,100.0,100.0,96,0.7,NO,Normal
+422,1099,Mohammad Ali Zinnah,10990,Mayer Doa General Store 2,High-Efficiency Closer,Star Performers,4575200.0,0.1,1790,2556.0,1437,14.8,100.0,100.0,97,3.0,NO,Normal
+423,418,Md. Fazlur Rahman,SM000205,Brothers International,High-Efficiency Closer,Star Performers,4569464.1,0.1,83,55054.0,58,0.8,100.0,100.0,75,8.7,NO,Normal
+424,1428,Md. Iqbal Hasan,SM000671,Bhai Bhai EnterpriseTNG,High-Efficiency Closer,Star Performers,4564145.8,0.1,2968,1538.0,2265,23.4,100.0,100.0,97,1.2,NO,Normal
+425,911,Kamal Uddin,11060331,Kader Store,High-Efficiency Closer,Star Performers,4555859.0,0.1,2509,1816.0,1884,19.2,100.0,100.0,98,1.9,NO,Normal
+426,420,Shishir Ahmed,SM000209,Royal Brothers,High-Efficiency Closer,Star Performers,4554818.2,0.1,204,22328.0,161,1.6,100.0,100.0,100,15.7,NO,Normal
+427,510,Manjurul Alam,SM000380,Mahfuz Enterprise,High-Volume Runner,Volume Drivers,4547288.8,0.1,3438,1323.0,3703,39.0,92.8,100.0,95,0.5,NO,Normal
+428,729,Jahurul Islam,10645,Dipto Enterprise,High-Efficiency Closer,Star Performers,4542327.6,0.1,3856,1178.0,2888,32.1,100.0,100.0,90,0.5,NO,Normal
+429,33,Md. Mostafijur Rahman,SM000097,Heaven Distribution,High-Efficiency Closer,Star Performers,4540982.0,0.1,2033,2234.0,1475,15.1,100.0,100.0,98,6.3,NO,Normal
+430,390,Prokash Roy,SM000140,Sumon Trading,High-Volume Runner,Volume Drivers,4540813.4,0.1,3853,1179.0,3929,40.1,98.1,98.8,98,9.3,NO,Normal
+431,266,Rashidul Islam,SM000501,Rana Traders,High-Efficiency Closer,Star Performers,4532623.4,0.1,2633,1721.0,2424,25.2,100.0,99.6,96,0.5,NO,Normal
+432,314,Hamid Hossain,SM000005,Chowdhury Enterprise,High-Volume Runner,Volume Drivers,4527960.9,0.1,169,26793.0,1814,20.2,9.3,34.2,90,1.8,NO,Normal
+433,861,Mostafigor Rahman,12090148,Maa Enterprise,High-Efficiency Closer,Star Performers,4525889.15,0.1,3219,1406.0,3202,33.0,100.0,100.0,97,5.2,NO,Normal
+434,1086,Tamim Hossain,11087,Noor Enterprise,High-Efficiency Closer,Star Performers,4520773.2,0.1,360,12558.0,249,3.2,100.0,100.0,78,3.3,NO,Normal
+435,55,Md. Ajharul Islam,SM000127,New Biswanath Vander,High-Efficiency Closer,Star Performers,4520505.25,0.1,1616,2797.0,1220,12.8,100.0,99.4,95,1.9,NO,Normal
+436,1033,Md. Ashraful Islam,10963,Madina Traders-DHKS,High-Efficiency Closer,Star Performers,4517942.0,0.1,132,34227.0,121,1.2,100.0,78.0,97,76.1,NO,Normal
+437,512,Liton,10646,Ibrahim Enterprise,High-Efficiency Closer,Star Performers,4511701.5,0.1,2984,1512.0,2644,27.3,100.0,100.0,97,1.2,NO,Normal
+438,938,Md. Shahiduzzaman,10807,S. A. Enterprise,High-Efficiency Closer,Star Performers,4510995.1,0.1,1618,2788.0,1310,13.5,100.0,100.0,97,0.7,NO,Normal
+439,1405,Md. Ismail Hossain,11233,Farjana Traders,High-Efficiency Closer,Star Performers,4507531.5,0.1,3312,1361.0,2609,26.6,100.0,100.0,98,5.1,NO,Normal
+440,829,Abu Sayeed,10909,Rupia Enterprise,High-Volume Runner,Volume Drivers,4506451.2,0.1,88,51210.0,91,1.0,96.7,85.4,94,8.3,NO,Normal
+441,1384,Md. Rahmoth Ullah,11212,Rahela Enterprise,High-Efficiency Closer,Star Performers,4501313.0,0.1,865,5204.0,734,7.4,100.0,100.0,99,4.9,NO,Normal
+442,427,Md. Tohidul Haque,SM000221,Shahen Shah Enterprise,High-Efficiency Closer,Star Performers,4500703.2,0.1,238,18911.0,238,2.4,100.0,84.7,99,4.6,NO,Normal
+443,137,Musaddarul Haque,SM000314,Subash Chandra Saha Store,High-Efficiency Closer,Star Performers,4495283.8,0.1,1292,3479.0,1154,11.8,100.0,100.0,98,1.6,NO,Normal
+444,228,Md. Saifur Rahaman,SM000457,Sakura Traders,High-Efficiency Closer,Star Performers,4488076.7,0.1,2257,1989.0,1694,17.5,100.0,100.0,97,3.1,NO,Normal
+445,1043,Abu Sayed,10973,Nihal Electric & Hardware,High-Efficiency Closer,Star Performers,4484509.2,0.1,976,4595.0,815,8.4,100.0,100.0,97,2.2,NO,Normal
+446,93,F.M Rashedur Rahman,SM000192,Samia Enterprise,High-Volume Runner,Volume Drivers,4481378.8,0.1,2169,2066.0,2981,30.4,72.8,92.1,98,0.3,NO,Normal
+447,176,Asikur Rahman,SM000370,Lovely Store,High-Efficiency Closer,Star Performers,4480218.2,0.1,1893,2367.0,1714,17.5,100.0,97.7,98,2.4,NO,Normal
+448,312,Niaz Masud,SM000002,A R Enterprise,High-Efficiency Closer,Star Performers,4475335.55,0.1,256,17482.0,162,1.7,100.0,100.0,94,2.8,NO,Normal
+449,1004,Saiful Islam,10934,Manha Traders DHKS,High-Efficiency Closer,Star Performers,4473340.3,0.1,2307,1939.0,1873,20.6,100.0,100.0,91,1.2,NO,Normal
+450,236,Md. Ziaul Hasan,SM000470,Sohel Store,High-Efficiency Closer,Star Performers,4472229.2,0.1,675,6626.0,500,5.6,100.0,100.0,90,4.5,NO,Normal
+451,405,Md. Ittefaqur Rahman,SM000180,Ahmmed Enterprise,High-Efficiency Closer,Star Performers,4465586.4,0.1,226,19759.0,207,2.2,100.0,80.0,96,15.7,NO,Normal
+452,823,Md. Monir Hosen,10903,Ekra Trading,High-Efficiency Closer,Star Performers,4461964.85,0.1,2056,2170.0,1575,16.2,100.0,100.0,97,5.1,NO,Normal
+453,824,Md. Ayub Hossain,10904,Raiyan Enterprise,High-Efficiency Closer,Star Performers,4459071.8,0.1,633,7044.0,608,7.2,100.0,96.8,85,7.8,NO,Normal
+454,100,Golam Rosul,SM000206,Rayat Enterprise,High-Efficiency Closer,Star Performers,4456008.65,0.1,293,15208.0,255,3.9,100.0,100.0,65,5.7,NO,Normal
+455,580,Md. Mostafijur Rahman,11034,Limon Store,High-Volume Runner,Volume Drivers,4454807.5,0.1,2193,2031.0,2243,24.1,97.8,100.0,93,0.4,NO,Normal
+456,1191,Md Shahirul Islam,11037,Bhuiya Store,High-Volume Runner,Volume Drivers,4448154.8,0.1,1547,2875.0,1894,21.0,81.7,100.0,90,3.4,NO,Normal
+457,792,Md. Ahenur Khan,10473,Zihad Store,High-Efficiency Closer,Star Performers,4418319.0,0.1,1617,2732.0,1485,16.1,100.0,100.0,92,12.4,NO,Normal
+458,1051,Niaz Ahmed,10928,Bismillah Traders DHKW,High-Efficiency Closer,Star Performers,4402567.0,0.1,943,4669.0,716,7.5,100.0,100.0,95,0.6,NO,Normal
+459,1046,Md Altaf Hossain,10923,Tayyeba Store,High-Efficiency Closer,Star Performers,4401665.2,0.1,330,13338.0,257,2.7,100.0,100.0,94,10.7,NO,Normal
+460,485,Farid Hossan,SM000304,Anando Confectionary,High-Volume Runner,Volume Drivers,4396610.75,0.1,2904,1514.0,3546,36.2,81.9,100.0,98,6.1,NO,Normal
+461,686,Suman Kumar Paul,10503,Chowdhury Traders,High-Efficiency Closer,Star Performers,4385386.0,0.09,1407,3117.0,1031,10.6,100.0,100.0,97,1.9,NO,Normal
+462,1371,Md. Shakil Hosen,11199,Ahasan Enterprise,High-Efficiency Closer,Star Performers,4383158.2,0.09,2164,2025.0,1749,18.0,100.0,100.0,97,2.5,NO,Normal
+463,797,Md. Salim Sarder,10877,Siddik Enterprise,High-Efficiency Closer,Star Performers,4381505.3,0.09,2143,2045.0,1844,19.4,100.0,100.0,95,1.3,NO,Normal
+464,336,Uttam Kanti Das,SM000036,Rowshan Distribution,High-Efficiency Closer,Star Performers,4373998.2,0.09,729,6000.0,542,5.8,100.0,100.0,93,1.7,NO,Normal
+465,34,Md. Delowar Hossain,SM000098,Azmir Traders,High-Efficiency Closer,Star Performers,4365213.2,0.09,1191,3665.0,889,9.1,100.0,100.0,98,5.3,NO,Normal
+466,429,S. M. Abdul Mannan,SM000226,Rumi Enterprise,High-Efficiency Closer,Star Performers,4356880.9,0.09,2183,1996.0,1656,17.2,100.0,100.0,96,4.4,NO,Normal
+467,865,Md. Naim Shekh,24100007,Vai Vai Store BOGC,High-Efficiency Closer,Star Performers,4355914.4,0.09,2366,1841.0,1840,19.0,100.0,100.0,97,0.7,NO,Normal
+468,117,Abu Maris Shak,SM000280,Shamim Traders,High-Efficiency Closer,Star Performers,4335333.65,0.09,2701,1605.0,2231,22.8,100.0,100.0,98,9.2,NO,Normal
+469,680,Arjun Chandra Paul,10463,Shimul and Brothers,High-Efficiency Closer,Star Performers,4324381.4,0.09,489,8843.0,380,3.9,100.0,100.0,98,11.4,NO,Normal
+470,551,Abul Hasem,SM000509,Bismillah Store MYMC,High-Volume Runner,Volume Drivers,4324357.55,0.09,2257,1916.0,2658,28.3,84.9,89.6,94,2.0,NO,Normal
+471,37,Shahab Uddin,SM000101,Bismillah Enterprise CTGS,High-Efficiency Closer,Star Performers,4318979.0,0.09,3082,1401.0,2311,23.6,100.0,100.0,98,20.5,NO,Normal
+472,1121,Md. Rashedul Alam Khan,11012,Jannat Enterprise,High-Volume Runner,Volume Drivers,4318776.8,0.09,1817,2377.0,2684,28.3,67.7,100.0,95,0.4,NO,Normal
+473,379,Mohammad Hossain,SM000114,Care Enterprise,High-Volume Runner,Volume Drivers,4317405.4,0.09,115,37543.0,117,1.2,98.3,100.0,98,33.5,NO,Normal
+474,722,Mokhlesur Rahman,10637,Nafian Store,High-Efficiency Closer,Star Performers,4314187.0,0.09,3910,1103.0,2964,30.6,100.0,100.0,97,0.8,NO,Normal
+475,775,Abul Kalam Azad,10244,Master General Store,High-Efficiency Closer,Star Performers,4311715.9,0.09,2532,1703.0,1937,21.3,100.0,100.0,91,0.9,NO,Normal
+476,1323,Md. Suruj Ali,11152,Mison Kumar Ray,High-Volume Runner,Volume Drivers,4308426.2,0.09,1397,3084.0,1799,18.2,77.7,100.0,99,0.1,NO,Normal
+477,910,MD Asanur,23040004,K. M. Motors,High-Efficiency Closer,Star Performers,4308223.8,0.09,2028,2124.0,1653,16.9,100.0,100.0,98,2.0,NO,Normal
+478,83,Abdul Wadud,10317,Deb Enterprise,High-Efficiency Closer,Star Performers,4299509.65,0.09,2188,1965.0,2033,20.5,100.0,100.0,99,3.2,NO,Normal
+479,1393,Azzad Ali,11221,S&S Enterprise,High-Efficiency Closer,Star Performers,4295921.95,0.09,4057,1059.0,3054,31.2,100.0,100.0,98,3.0,NO,Normal
+480,922,Chan Miah,11060325,Heron Store,High-Efficiency Closer,Star Performers,4282273.0,0.09,3680,1164.0,3052,31.1,100.0,100.0,98,0.4,NO,Normal
+481,17,Md. Jabul Hoque,SM000071,Nur Foods,High-Efficiency Closer,Star Performers,4277836.6,0.09,3154,1356.0,2498,26.3,100.0,100.0,95,2.2,NO,Normal
+482,23,Amtaker Khan Chowdhury,SM000080,S.M.Trading,High-Volume Runner,Volume Drivers,4268942.8,0.09,288,14823.0,717,7.8,40.2,64.9,92,0.7,NO,Normal
+483,487,Abdul Bari,SM000309,Teen Bhai Traders,High-Volume Runner,Volume Drivers,4268664.4,0.09,3790,1126.0,3839,39.2,98.7,97.4,98,1.8,NO,Normal
+484,896,Md. Kawsar Prodhan,24090025,Ovi Enteterprise,Targeted Specialist,High Potential,4258948.0,0.09,2986,1426.0,2902,30.5,100.0,100.0,95,9.0,NO,Normal
+485,899,Abdul Awal,22060031,Amir Hamza Confectionery,Targeted Specialist,High Potential,4258316.2,0.09,2709,1572.0,2121,22.1,100.0,99.4,96,0.6,NO,Normal
+486,733,Md. Afjal Hossain,10789,S S Enterprise,Targeted Specialist,High Potential,4248822.8,0.09,2346,1811.0,2097,22.3,100.0,100.0,94,0.2,NO,Normal
+487,1382,Md. Oasimul Bashar Fahad,11210,M.A.S. Distribution,Targeted Specialist,High Potential,4247937.0,0.09,427,9948.0,421,4.4,100.0,100.0,95,35.2,NO,Normal
+488,763,Abdullah Al Mamun,10231,Bhai Bhai Enterprise DHKE,Low-Productivity Laggard,Needs Intervention,4247337.1,0.09,2706,1570.0,3341,34.1,81.0,100.0,98,8.5,NO,Normal
+489,1285,Md. Hasan,11116,Sajib Enterprise,Targeted Specialist,High Potential,4238484.0,0.09,3220,1316.0,2524,26.6,100.0,100.0,95,2.4,NO,Normal
+490,1446,Abdus Samad,SM000690,Bulbul Traders,Targeted Specialist,High Potential,4237286.2,0.09,562,7540.0,541,9.2,100.0,100.0,59,1.3,NO,Normal
+491,668,Abul Kalam Azad,10447,Kalam Traders,Low-Productivity Laggard,Needs Intervention,4232694.9,0.09,326,12984.0,375,7.1,86.9,86.9,53,0.7,NO,Normal
+492,43,Md Azahar Islam,10502,Care Enterprise,Targeted Specialist,High Potential,4220854.1,0.09,106,39819.0,85,0.9,100.0,100.0,98,10.6,NO,Normal
+493,397,Nasiruddin - 2,SM000158,Molla Store,Targeted Specialist,High Potential,4215482.9,0.09,2802,1504.0,2306,23.5,100.0,100.0,98,1.0,NO,Normal
+494,735,Asraful Islam,10822,Akbar Genarel Store,Low-Productivity Laggard,Needs Intervention,4208810.3,0.09,2442,1724.0,3971,41.4,61.5,97.2,96,0.3,NO,Normal
+495,1209,Ashotosh Sarkar,11051,Ahona Traders 2,Targeted Specialist,High Potential,4192614.6,0.09,207,20254.0,179,1.8,100.0,100.0,99,7.9,NO,Normal
+496,187,Jamal Uddin,10570,Labib Enterprise,Low-Productivity Laggard,Needs Intervention,4182902.8,0.09,4431,944.0,4499,46.4,98.5,99.7,97,0.4,NO,Normal
+497,252,Ashraful Haque,SM000487,Ador Nohan Store,Targeted Specialist,High Potential,4177603.6,0.09,1710,2443.0,1264,13.0,100.0,100.0,97,2.0,NO,Normal
+498,321,Md. Jonayed,SM000016,Taima Enterprise,Targeted Specialist,High Potential,4175082.5,0.09,107,39019.0,65,0.7,100.0,100.0,95,58.4,NO,Normal
+499,140,Rojibul Islam,SM000317,Habiba Traders,Low-Productivity Laggard,Needs Intervention,4166810.6,0.09,3894,1070.0,4431,45.2,87.9,100.0,98,8.4,NO,Normal
+500,1038,Abu Taher,10968,Khan Enterprise DHKS,Targeted Specialist,High Potential,4166785.15,0.09,1850,2252.0,1451,15.1,100.0,100.0,96,0.9,NO,Normal
+501,895,Minhajul Islam Sarder,17050047,Ovi Enteterprise,Targeted Specialist,High Potential,4154337.65,0.09,3301,1259.0,2593,26.7,100.0,100.0,97,14.6,NO,Normal
+502,201,Riajul Islam,SM000410,Imrose Imran Traders,Targeted Specialist,High Potential,4151896.25,0.09,168,24714.0,129,1.3,100.0,100.0,96,13.0,NO,Normal
+503,396,Sohan Shaikh,SM000155,Toha Enterprise,Low-Productivity Laggard,Needs Intervention,4143914.1,0.09,3175,1305.0,4930,50.3,64.4,97.6,98,1.9,NO,Normal
+504,1119,Md. Ismail,11010,Aleenas Distribution,Low-Productivity Laggard,Needs Intervention,4139882.4,0.09,57,72630.0,385,9.0,14.8,50.0,43,0.1,NO,Normal
+505,943,Md. Enamul Haque 10811,10811,R.D Global Trade,Targeted Specialist,High Potential,4130888.5,0.09,1222,3380.0,990,10.5,100.0,100.0,94,2.5,NO,Normal
+506,756,Moin Uddin,10223,Noakhali Traders,Low-Productivity Laggard,Needs Intervention,4126972.25,0.09,2384,1731.0,2506,26.4,95.1,100.0,95,0.6,NO,Normal
+507,913,Shohidul Islam Babul,16120016,Pancharupa,Targeted Specialist,High Potential,4125913.5,0.09,2634,1566.0,2083,21.3,100.0,100.0,98,1.8,NO,Normal
+508,419,Md. Mojummal Hoque,SM000207,Rayat Enterprise,Low-Productivity Laggard,Needs Intervention,4123629.4,0.09,304,13565.0,327,3.9,93.0,87.0,84,21.5,NO,Normal
+509,526,Abdul Jalil Mridha,SM000421,Kumud Ranjan Kundu,Targeted Specialist,High Potential,4109029.8,0.09,2303,1784.0,1873,19.5,100.0,100.0,96,0.8,NO,Normal
+510,105,Md. Sojol Islam,SM000218,Maa Traders,Targeted Specialist,High Potential,4095555.4,0.09,133,30794.0,108,1.2,100.0,100.0,90,10.0,NO,Normal
+511,1343,Shorif Ahmed,11172,D. S. Enterprise,Targeted Specialist,High Potential,4078241.35,0.09,1355,3010.0,967,9.9,100.0,100.0,98,2.6,NO,Normal
+512,1214,M. A. Toyob,11094,Shathy Enterprise,Low-Productivity Laggard,Needs Intervention,4077128.4,0.09,591,6899.0,623,6.5,94.9,95.9,96,1.3,NO,Normal
+513,472,Belal Hossen,SM000275,Firoz Trade International,Targeted Specialist,High Potential,4055125.4,0.09,4035,1005.0,3404,34.7,100.0,100.0,98,3.7,NO,Normal
+514,303,Kawser Ahmmed,10724,Bismillah Food Product,Low-Productivity Laggard,Needs Intervention,4053473.45,0.09,3413,1188.0,3559,37.1,95.9,100.0,96,7.2,NO,Normal
+515,244,Abul Kasim,SM000479,Aroshi Store,Low-Productivity Laggard,Needs Intervention,4052366.8,0.09,3333,1216.0,4143,43.2,80.4,100.0,96,0.5,NO,Normal
+516,579,Tohidul Islam,11033,Prodhan Store,Targeted Specialist,High Potential,4047304.8,0.09,1163,3480.0,875,9.0,100.0,100.0,97,1.9,NO,Normal
+517,246,Masiur Rahman,SM000481,Vai Vai Traders-Dinajpur,Targeted Specialist,High Potential,4038262.2,0.09,602,6708.0,483,4.9,100.0,100.0,98,1.5,NO,Normal
+518,1197,Md. Shamim Mia,11046,IS Traders,Targeted Specialist,High Potential,4033475.9,0.09,103,39160.0,22,0.2,100.0,100.0,91,39.5,NO,Normal
+519,1079,Kajol Miah,11059,Jilani Traders,Targeted Specialist,High Potential,4024538.75,0.09,110,36587.0,83,0.9,100.0,100.0,95,4.7,NO,Normal
+520,281,MD. Rana Mia,SM000529,Saha Store MYMC,Targeted Specialist,High Potential,4017914.4,0.09,2425,1657.0,1874,19.5,100.0,100.0,96,0.8,NO,Normal
+521,1354,Md. Masud Rana,11182,Shawon Traders,Targeted Specialist,High Potential,4017860.85,0.09,974,4125.0,756,8.0,100.0,100.0,95,2.3,NO,Normal
+522,1376,Md. Shiraban Islam,11204,R.D Global Trade,Targeted Specialist,High Potential,4014313.9,0.09,771,5207.0,643,7.3,100.0,100.0,88,1.1,NO,Normal
+523,1109,Md. Anwar Kabir,11000,Sumayia Varaties Store,Low-Productivity Laggard,Needs Intervention,4013750.0,0.09,1955,2053.0,2132,20.1,91.7,97.0,106,2.5,NO,Normal
+524,936,Aynul Bari,10805,Alam Traders,Targeted Specialist,High Potential,4007459.4,0.09,268,14953.0,218,2.2,100.0,100.0,98,30.7,NO,Normal
+525,1140,Saiful Islam,11041,Ma Enterprise,Targeted Specialist,High Potential,4007216.5,0.09,2022,1982.0,1937,19.8,100.0,100.0,98,7.6,NO,Normal
+526,120,Md. Shamiur Rahman,SM000286,Rosa Enterprise,Targeted Specialist,High Potential,3981910.6,0.09,3488,1142.0,2663,27.2,100.0,100.0,98,0.8,NO,Normal
+527,769,Md. Rubel Islam,10237,Shourov Trading,Targeted Specialist,High Potential,3979075.05,0.09,2910,1367.0,2233,23.0,100.0,100.0,97,8.3,NO,Normal
+528,897,Faraizul Islam,13070066,Bismillah Food Product,Low-Productivity Laggard,Needs Intervention,3978131.1,0.09,3321,1198.0,3677,38.7,90.3,100.0,95,6.3,NO,Normal
+529,527,Md. Kalam Hawlader,SM000424,Bhai Bhai Enterprise BARC,Targeted Specialist,High Potential,3976480.75,0.09,3246,1225.0,3163,32.6,100.0,100.0,97,10.4,NO,Normal
+530,803,Md. Sohag Milon,10883,Amirul Traders,Targeted Specialist,High Potential,3976015.5,0.09,468,8496.0,361,4.3,100.0,100.0,83,4.9,NO,Normal
+531,813,Md. Riaz Hosen,10893,Swad Enterprise,Low-Productivity Laggard,Needs Intervention,3974637.0,0.09,922,4311.0,1013,11.0,91.0,93.4,92,1.5,NO,Normal
+532,540,Md. Shohidul Liton,SM000452,Nafiz Enterprise,Low-Productivity Laggard,Needs Intervention,3971237.4,0.09,3345,1187.0,3633,37.5,92.1,100.0,97,1.1,NO,Normal
+533,80,Zulhash Khan,SM000167,Allar Dan Enterprise,Targeted Specialist,High Potential,3970572.85,0.09,593,6696.0,435,4.4,100.0,100.0,98,5.0,NO,Normal
+534,553,Mizanur Rahman,SM000512,Imran Enterprise,Targeted Specialist,High Potential,3961388.6,0.09,3350,1183.0,2576,26.6,100.0,99.2,97,0.6,NO,Normal
+535,727,Sohidul Islam,10643,Shirin Enterprise,Targeted Specialist,High Potential,3951797.8,0.09,2831,1396.0,2759,28.4,100.0,100.0,97,0.6,NO,Normal
+536,726,Zahid Hasan,10642,Rumpa Enterprise,Targeted Specialist,High Potential,3949630.1,0.09,4636,852.0,3859,39.8,100.0,100.0,97,11.0,NO,Normal
+537,832,Md. Israfil Hossain,11170,Trimoj Enterprise,Targeted Specialist,High Potential,3946225.9,0.09,3650,1081.0,3056,31.8,100.0,99.6,96,0.4,NO,Normal
+538,125,Aminul Islam RAJC,SM000294,Shoriful Traders,Targeted Specialist,High Potential,3945261.8,0.09,3317,1189.0,3286,33.2,100.0,99.4,99,3.8,NO,Normal
+539,548,Istiak Ahammed,SM000503,Babul Store,Targeted Specialist,High Potential,3944237.4,0.09,229,17224.0,173,1.8,100.0,100.0,96,191.0,NO,Normal
+540,768,Swapon Kumar Biswas,10236,PK Trade International,Targeted Specialist,High Potential,3930889.0,0.08,865,4544.0,575,7.6,100.0,100.0,76,1.2,NO,Normal
+541,522,Shohidul Islam,SM000411,Imrose Imran Traders,Targeted Specialist,High Potential,3930276.85,0.08,638,6160.0,521,5.7,100.0,100.0,92,3.1,NO,Normal
+542,490,Julhas Uddin,SM000318,Habiba Traders,Low-Productivity Laggard,Needs Intervention,3924307.1,0.08,2949,1331.0,3750,38.3,78.6,96.9,98,8.0,NO,Normal
+543,751,Abdul Karim,10218,MACAW Distribution,Targeted Specialist,High Potential,3916098.8,0.08,2528,1549.0,2058,21.4,100.0,100.0,96,0.6,NO,Normal
+544,147,Alfaz Ali Sardar,10767,Lucky Store,Low-Productivity Laggard,Needs Intervention,3914897.0,0.08,201,19477.0,244,2.5,82.4,60.0,99,5.0,NO,Normal
+545,1437,Anwar Hossain RAJC,SM000680,Subash Chandra Saha Store,Targeted Specialist,High Potential,3913620.8,0.08,3262,1200.0,3185,32.5,100.0,100.0,98,5.0,NO,Normal
+546,889,Serazul Islam,21070023,Podder Traders,Targeted Specialist,High Potential,3911909.1,0.08,3393,1153.0,2769,28.8,100.0,100.0,96,1.5,NO,Normal
+547,403,Md. Alam Hossain,SM000176,Rafique Traders,Targeted Specialist,High Potential,3897655.8,0.08,247,15780.0,207,2.2,100.0,100.0,95,13.7,NO,Normal
+548,532,Md. Hanif Mridha,SM000436,Ruma Enterprise,Targeted Specialist,High Potential,3895296.7,0.08,1897,2053.0,1536,15.8,100.0,99.5,97,0.3,NO,Normal
+549,515,Md. Sabbir Hossain,10874,Nirala Traders,Targeted Specialist,High Potential,3885213.85,0.08,2757,1409.0,2344,24.2,100.0,100.0,97,0.7,NO,Normal
+550,1342,Zuwel Islam,11171,Mishuk Enterprise,Low-Productivity Laggard,Needs Intervention,3872436.6,0.08,2525,1534.0,3100,32.0,81.5,99.1,97,0.4,NO,Normal
+551,519,Md. Rumon Mollah,SM000402,Monir Store,Targeted Specialist,High Potential,3870000.4,0.08,1272,3042.0,957,9.9,100.0,100.0,97,1.3,NO,Normal
+552,937,Md. Khirul Islam,10806,Alam Traders,Targeted Specialist,High Potential,3867743.2,0.08,199,19436.0,149,1.6,100.0,100.0,94,21.5,NO,Normal
+553,262,Robioul Awal,SM000497,Ava Varieties Store,Targeted Specialist,High Potential,3865928.8,0.08,1365,2832.0,1225,12.5,100.0,100.0,98,17.0,NO,Normal
+554,1211,Rasel Hasan,11054,Z&Z Corporation,Targeted Specialist,High Potential,3863207.05,0.08,384,10060.0,290,3.1,100.0,100.0,95,1.8,NO,Normal
+555,928,Ashim Kumar Biswas,10797,Dewan Traders,Low-Productivity Laggard,Needs Intervention,3861921.2,0.08,294,13136.0,1245,12.7,23.6,51.6,98,0.6,NO,Normal
+556,690,Mohammed Bahar Uddin,10507,Shimul and Brothers,Targeted Specialist,High Potential,3860000.4,0.08,1829,2110.0,1404,14.3,100.0,100.0,98,0.6,NO,Normal
+557,1138,Ruhul Amin,11039,Talukder Enterprise,Low-Productivity Laggard,Needs Intervention,3858622.0,0.08,843,4577.0,1293,13.2,65.2,100.0,98,12.9,NO,Normal
+558,741,Md Marifur Rahman Riad,10871,TR Brothers Enterprise,Low-Productivity Laggard,Needs Intervention,3854464.4,0.08,3469,1111.0,4258,43.9,81.5,99.2,97,0.9,NO,Normal
+559,1402,Md. Mumin Hossen-11230,11230,Teen Bhai Traders,Targeted Specialist,High Potential,3845853.4,0.08,3536,1088.0,2902,29.6,100.0,100.0,98,1.1,NO,Normal
+560,528,Sujon Chandro,SM000426,Thakur Business point,Targeted Specialist,High Potential,3843377.2,0.08,4075,943.0,3083,31.8,100.0,100.0,97,0.9,NO,Normal
+561,1287,Swarup Datta Setu,11118,Fariaz Traders,Targeted Specialist,High Potential,3840736.1,0.08,1774,2165.0,1319,13.6,100.0,100.0,97,0.6,NO,Normal
+562,844,Manik Kumar Pramanik,19110022,Sotata Varieties Store,Targeted Specialist,High Potential,3825789.0,0.08,2099,1823.0,1655,17.1,100.0,100.0,97,0.9,NO,Normal
+563,395,Kabiur Rahman,SM000153,S&S Enterprise,Targeted Specialist,High Potential,3810296.4,0.08,3387,1125.0,2479,25.3,100.0,100.0,98,1.0,NO,Normal
+564,521,Md. Al Amin,SM000408,Nazmul Enterprise,Targeted Specialist,High Potential,3800447.6,0.08,4361,871.0,4040,43.0,100.0,99.7,94,9.3,NO,Normal
+565,144,Rokonuzzaman,10757,Shijan Varieties Store,Targeted Specialist,High Potential,3799005.2,0.08,735,5169.0,539,5.4,100.0,100.0,99,13.3,NO,Normal
+566,48,Md. Kazi Nurul Islam,10054,Hani Enterprise,Targeted Specialist,High Potential,3794514.15,0.08,228,16643.0,189,2.0,100.0,100.0,95,6.9,NO,Normal
+567,27,Md. Nasir Uddin,SM000088,Mostafa Traders,Targeted Specialist,High Potential,3794353.65,0.08,3966,957.0,3662,44.1,100.0,100.0,83,4.1,NO,Normal
+568,1193,Khadamul Islam,11040,Bismillah Traders DHKW,Targeted Specialist,High Potential,3787748.7,0.08,1479,2561.0,1268,13.5,100.0,100.0,94,3.2,NO,Normal
+569,870,Md. Mamunur Rashid,24110055,Shahidul Traders,Targeted Specialist,High Potential,3778379.4,0.08,2836,1332.0,2646,27.6,100.0,99.3,96,2.2,NO,Normal
+570,810,Md. Kamal Uddin,10890,Mukaddes Store,Low-Productivity Laggard,Needs Intervention,3777148.45,0.08,183,20640.0,295,3.1,62.0,53.3,96,5.9,NO,Normal
+571,1088,Abu Naim,11088,Ovi Traders,Low-Productivity Laggard,Needs Intervention,3770104.8,0.08,454,8304.0,2186,22.5,20.8,69.5,97,1.9,NO,Normal
+572,232,Md. Alomgir Hossain,SM000464,Rogina Enterprise,Targeted Specialist,High Potential,3759069.35,0.08,3673,1023.0,2958,31.8,100.0,100.0,93,2.1,NO,Normal
+573,1301,Abul Basar,11128,Shehnaz Enterprise,Targeted Specialist,High Potential,3758869.45,0.08,95,39567.0,30,0.3,100.0,100.0,97,14.5,NO,Normal
+574,89,Md. Milon Hossain,SM000185,Nibir Traders,Targeted Specialist,High Potential,3757145.15,0.08,1281,2933.0,968,9.9,100.0,100.0,98,3.6,NO,Normal
+575,1203,Hazroth Ali,10911,Hazi Sifath Ali & Sons,Targeted Specialist,High Potential,3752735.8,0.08,2512,1494.0,1668,17.0,100.0,100.0,98,0.6,NO,Normal
+576,876,Abdul Ashir,11050010,Abrar Traders,Targeted Specialist,High Potential,3750074.6,0.08,2242,1673.0,1766,18.2,100.0,100.0,97,1.0,NO,Normal
+577,1208,Firoj Hossain,11050,Bhai Bhai Enterprise DHKE,Targeted Specialist,High Potential,3743497.6,0.08,3253,1151.0,2482,25.9,100.0,100.0,96,0.5,NO,Normal
+578,830,Mominul Haque Jihad,10910,Rupia Enterprise,Targeted Specialist,High Potential,3701802.95,0.08,436,8490.0,356,4.1,100.0,86.6,86,40.9,NO,Normal
+579,904,Sirajul Islam Pappu,11100009,Rana Traders,Low-Productivity Laggard,Needs Intervention,3688347.5,0.08,4725,781.0,5491,56.0,86.0,99.1,98,1.9,NO,Normal
+580,1176,Nabi Hossain,11021,Heaven Distribution,Targeted Specialist,High Potential,3675942.8,0.08,2760,1332.0,2183,22.3,100.0,99.7,98,0.9,NO,Normal
+581,929,Md. Sadikur Rahman 1,10798,Maisha Enterprise,Targeted Specialist,High Potential,3663016.2,0.08,3367,1088.0,2540,25.9,100.0,100.0,98,0.6,NO,Normal
+582,541,Md. S M Sumon Hossen,SM000454,A.R Traders,Targeted Specialist,High Potential,3647450.85,0.08,2382,1531.0,1852,19.1,100.0,100.0,97,4.7,NO,Normal
+583,492,Md. Humayun Kabir (2),SM000326,Shofi Vander,Targeted Specialist,High Potential,3633801.6,0.08,1598,2274.0,1521,15.4,100.0,100.0,99,9.1,NO,Normal
+584,124,Rohul Amin,SM000292,Mosarof Store,Targeted Specialist,High Potential,3633736.85,0.08,2972,1223.0,2842,28.7,100.0,100.0,99,4.7,NO,Normal
+585,1010,Amirul Islam,10940,Safwan Traders,Targeted Specialist,High Potential,3633706.15,0.08,3560,1021.0,2871,29.6,100.0,100.0,97,0.6,NO,Normal
+586,552,Osman Goni,SM000511,Imran Enterprise,Targeted Specialist,High Potential,3628454.3,0.08,3192,1137.0,2615,28.1,100.0,100.0,93,1.2,NO,Normal
+587,277,Sofiqul Islam Azad,10614,Partho Traders,Low-Productivity Laggard,Needs Intervention,3626543.95,0.08,138,26279.0,178,1.8,77.5,82.7,98,4.6,NO,Normal
+588,280,Fakhrul Islam,SM000527,Joy Store,Targeted Specialist,High Potential,3619417.5,0.08,4270,848.0,3204,33.0,100.0,100.0,97,8.9,NO,Normal
+589,545,Md. Jasim uddin,SM000465,Rogina Enterprise,Targeted Specialist,High Potential,3615687.15,0.08,2487,1454.0,1983,21.1,100.0,100.0,94,1.6,NO,Normal
+590,683,Konak Chandra Majumder,10469,Popular Distribution Mart,Low-Productivity Laggard,Needs Intervention,3615166.6,0.08,2232,1620.0,3015,31.1,74.0,98.1,97,3.2,NO,Normal
+591,239,Md. Musabbir Hasan,SM000473,Redoan Traders,Targeted Specialist,High Potential,3612935.1,0.08,2574,1404.0,2267,23.4,100.0,100.0,97,4.3,NO,Normal
+592,215,Md. Ariful Haque,SM000432,Khairul Store,Low-Productivity Laggard,Needs Intervention,3612893.9,0.08,3298,1095.0,3309,34.1,99.7,98.8,97,0.2,NO,Normal
+593,693,Sajibur Rahman,10651,Didar Enterprise,Targeted Specialist,High Potential,3608405.0,0.08,524,6886.0,429,4.6,100.0,100.0,94,4.8,NO,Normal
+594,213,Md. Delower Hossain,SM000429,Antor & Arpon Enterprise,Targeted Specialist,High Potential,3598057.1,0.08,2787,1291.0,2678,27.6,100.0,100.0,97,2.1,NO,Normal
+595,667,Md. Golam Kibria,10446,Chowdhury Traders,Targeted Specialist,High Potential,3593950.9,0.08,1335,2692.0,941,10.2,100.0,100.0,92,6.8,NO,Normal
+596,742,Md Fardus Alam,10872,Arun Traders,Targeted Specialist,High Potential,3590920.9,0.08,3407,1054.0,2625,27.3,100.0,100.0,96,0.8,NO,Normal
+597,1451,Md. Hafizur Rahman,SM000695,Raiyan Enterprise,Targeted Specialist,High Potential,3586080.0,0.08,107,33515.0,98,1.8,100.0,100.0,53,13.1,NO,Normal
+598,1019,Robiul Aual,10949,AI Trading,Low-Productivity Laggard,Needs Intervention,3580574.9,0.08,288,12433.0,609,6.5,47.3,57.3,94,0.3,NO,Normal
+599,1440,Md Kawsarul Islam,SM000683,Rahman EnterpriseJa,Targeted Specialist,High Potential,3576861.1,0.08,3045,1175.0,2853,29.1,100.0,100.0,98,0.3,NO,Normal
+600,560,Rakib Ahmed,SM000528,Joy Store,Targeted Specialist,High Potential,3572362.8,0.08,3603,991.0,3461,35.3,100.0,100.0,98,9.2,NO,Normal
+601,373,Md Mostafa,SM000087,Najaah Enterprise,Low-Productivity Laggard,Needs Intervention,3563156.0,0.08,1526,2335.0,2053,21.2,74.3,98.1,97,3.1,NO,Normal
+602,754,Rashed Khan,10221,AF Meherima Enterprise,Targeted Specialist,High Potential,3557265.4,0.08,1482,2400.0,973,10.1,100.0,100.0,96,5.9,NO,Normal
+603,538,Md. Hossain Ali,SM000448,Sapon Store,Targeted Specialist,High Potential,3555032.4,0.08,364,9767.0,313,3.3,100.0,100.0,94,2.2,NO,Normal
+604,834,Shujit Kumar Roy,24110049,Esmail Enterprise,Low-Productivity Laggard,Needs Intervention,3551626.2,0.08,2060,1724.0,2577,26.0,79.9,98.9,99,7.9,NO,Normal
+605,30,Niloy Mazumder,SM000094,Shukkur Store,Targeted Specialist,High Potential,3542350.2,0.08,2999,1181.0,2273,23.0,100.0,100.0,99,1.5,NO,Normal
+606,1413,Tareq Rabbani Tushar,SM000657,Salam Store,Targeted Specialist,High Potential,3537250.4,0.08,222,15934.0,212,2.2,100.0,100.0,98,0.0,NO,Normal
+607,199,Melon Hossain,SM000407,Nazmul Enterprise,Targeted Specialist,High Potential,3536079.8,0.08,2017,1753.0,1597,16.8,100.0,100.0,95,3.1,NO,Normal
+608,374,Md. Monir Ahmed,SM000089,Mostafa Traders,Targeted Specialist,High Potential,3533583.05,0.08,2796,1264.0,2090,21.8,100.0,100.0,96,0.5,NO,Normal
+609,372,Md Farid Meah,SM000085,Ma Enterpise,Low-Productivity Laggard,Needs Intervention,3530408.5,0.08,2840,1243.0,5302,54.7,53.6,97.6,97,8.1,NO,Normal
+610,1028,Masud Rana,10958,Jannat Enterprise DHKS,Targeted Specialist,High Potential,3525119.1,0.08,1166,3023.0,1011,10.5,100.0,100.0,96,7.3,NO,Normal
+611,1389,Rana Hossain,11216,Kowshik Enterprise,Low-Productivity Laggard,Needs Intervention,3523354.75,0.08,3337,1056.0,3847,40.5,86.7,96.3,95,0.5,NO,Normal
+612,1454,Somor Chakrobartti,SM000698,Rahman Enterprise1,Targeted Specialist,High Potential,3517755.0,0.08,245,14358.0,230,4.3,100.0,100.0,53,4.9,NO,Normal
+613,370,Younus Gazi,SM000081,S.M.Trading,Low-Productivity Laggard,Needs Intervention,3515907.2,0.08,277,12693.0,2269,23.4,12.2,34.0,97,0.1,NO,Normal
+614,1194,Md Momroz Ali,11044,Mithu Enterprise,Targeted Specialist,High Potential,3510896.1,0.08,703,4994.0,498,5.1,100.0,100.0,97,3.1,NO,Normal
+615,513,Md.Jony Khan,10772,Nure Mohammadia Store,Low-Productivity Laggard,Needs Intervention,3501593.6,0.08,2373,1476.0,3302,34.4,71.9,100.0,96,0.2,NO,Normal
+616,1196,Md. Yasin Ali,11045,Abbas & Brothers,Low-Productivity Laggard,Needs Intervention,3497860.2,0.08,266,13150.0,519,5.9,51.3,70.2,88,2.2,NO,Normal
+617,255,Mydul Islam,SM000490,Bhowmik & Brothers,Targeted Specialist,High Potential,3492574.8,0.08,863,4047.0,700,7.1,100.0,100.0,98,1.3,NO,Normal
+618,488,Abu Motaleb,SM000311,Ruqayyah Nur Traders,Low-Productivity Laggard,Needs Intervention,3484657.7,0.08,3543,984.0,4541,46.3,78.0,95.6,98,2.5,NO,Normal
+619,486,Arif Hasan,SM000307,S. S. Traders,Targeted Specialist,High Potential,3479871.4,0.08,2974,1170.0,2481,25.3,100.0,99.2,98,1.4,NO,Normal
+620,1029,Asadulla Al Galib,10959,Malek Store2,Targeted Specialist,High Potential,3478002.2,0.08,1655,2102.0,1300,14.6,100.0,100.0,89,2.1,NO,Normal
+621,867,Murad Mredha,11070033,S.M Enterprise BOGC,Targeted Specialist,High Potential,3466545.8,0.07,3097,1119.0,2607,27.2,100.0,100.0,96,4.0,NO,Normal
+622,1021,Rofikul Islam,10951,Habib Traders,Targeted Specialist,High Potential,3459798.95,0.07,3110,1112.0,2423,25.0,100.0,100.0,97,0.7,NO,Normal
+623,237,Md. Nurzzaman Howlader,SM000471,Chadni & Mim Enterprise,Low-Productivity Laggard,Needs Intervention,3445929.0,0.07,2045,1685.0,2193,23.3,93.3,100.0,94,0.4,NO,Normal
+624,914,Shamsuddoha Shuman,24090013,Shahana Store,Low-Productivity Laggard,Needs Intervention,3445385.0,0.07,1780,1936.0,2191,22.4,81.2,100.0,98,7.5,NO,Normal
+625,226,Rezaul Karim,SM000455,Kader Hawlader Traders,Targeted Specialist,High Potential,3431979.8,0.07,2272,1511.0,1719,17.7,100.0,100.0,97,0.7,NO,Normal
+626,115,Md. Sabuj Sarker,SM000274,Firoz Trade International,Low-Productivity Laggard,Needs Intervention,3424531.5,0.07,3549,965.0,3839,39.6,92.4,100.0,97,3.0,NO,Normal
+627,269,Khalisur Rahman Rukan,SM000506,Shamim Store,Targeted Specialist,High Potential,3420510.5,0.07,1818,1881.0,1461,15.5,100.0,100.0,94,3.2,NO,Normal
+628,479,Md. Shakib Hasan,SM000287,Rosa Enterprise,Low-Productivity Laggard,Needs Intervention,3412818.8,0.07,3019,1130.0,3066,31.6,98.5,100.0,97,0.7,NO,Normal
+629,759,Rifatul Islam,10227,Anis Tea & Co.,Targeted Specialist,High Potential,3409665.8,0.07,2403,1419.0,2350,25.5,100.0,99.0,92,4.7,NO,Normal
+630,1040,Ehsanul Karim-10970,10970,Rozi Varities Store,Targeted Specialist,High Potential,3397316.9,0.07,157,21639.0,148,1.6,100.0,97.5,91,0.1,NO,Normal
+631,951,Md. Tariqul Islam,10825,Bhai Bhai Enterprise JESC,Targeted Specialist,High Potential,3390832.05,0.07,3533,960.0,2925,30.2,100.0,100.0,97,1.7,NO,Normal
+632,836,Mamun Mia,24110051,Abbas & Brothers,Low-Productivity Laggard,Needs Intervention,3382047.2,0.07,201,16826.0,304,3.1,66.1,78.4,98,0.1,NO,Normal
+633,188,Aminul Islam 2 JESC,10577,Sotota Enterprise,Targeted Specialist,High Potential,3373660.95,0.07,2725,1238.0,2229,25.9,100.0,100.0,86,0.3,NO,Normal
+634,1174,Homaun Rashid,11019,Haque Store,Low-Productivity Laggard,Needs Intervention,3351425.8,0.07,2256,1486.0,3332,36.6,67.7,99.3,91,4.6,NO,Normal
+635,411,Md. Juwel Munsi,SM000191,Elma Traders,Low-Productivity Laggard,Needs Intervention,3336832.3,0.07,940,3550.0,1216,12.9,77.3,95.3,94,2.5,NO,Normal
+636,227,Md. Pervezur Rahman,SM000456,Muttakin Traders,Low-Productivity Laggard,Needs Intervention,3325520.2,0.07,2662,1249.0,3012,32.4,88.4,100.0,93,0.5,NO,Normal
+637,826,Md. Majedul Islam,10906,Enan Distribution Point,Targeted Specialist,High Potential,3317472.2,0.07,165,20106.0,105,1.2,100.0,100.0,84,49.2,NO,Normal
+638,544,Md. Amir Hossan,SM000462,Kamal Store,Targeted Specialist,High Potential,3308632.0,0.07,2638,1254.0,2233,23.5,100.0,100.0,95,1.6,NO,Normal
+639,474,Md. Razon Ali,SM000277,Firoz Trade International,Targeted Specialist,High Potential,3294640.75,0.07,3579,921.0,2861,29.2,100.0,100.0,98,1.8,NO,Normal
+640,61,Mahbubur Rahman,10136,Sajal Enterprise (Khulna),Targeted Specialist,High Potential,3294249.5,0.07,1948,1691.0,1772,19.1,100.0,98.1,93,1.9,NO,Normal
+641,850,Abu Bakkar Siddik,12060070,Polash Traders,Targeted Specialist,High Potential,3281751.0,0.07,2670,1229.0,2151,22.2,100.0,99.5,97,4.9,NO,Normal
+642,848,Sukumar Hembrom,15040026,Manha Traders BOGC,Targeted Specialist,High Potential,3280265.3,0.07,2240,1464.0,1733,18.4,100.0,100.0,94,1.0,NO,Normal
+643,1439,Md. Rasel Mia MYM,SM000682,Mishuk Enterprise,Targeted Specialist,High Potential,3277121.6,0.07,1947,1683.0,1547,16.1,100.0,100.0,96,0.9,NO,Normal
+644,335,Shimul Datta,SM000035,Rowshan Distribution,Targeted Specialist,High Potential,3276112.4,0.07,933,3511.0,734,8.0,100.0,100.0,92,2.2,NO,Normal
+645,1304,Nasir Uddin,11131,Al-Amin Enterprise,Targeted Specialist,High Potential,3270909.4,0.07,99,33039.0,15,0.2,100.0,100.0,97,18.8,NO,Normal
+646,536,Md. Shaikh Laikat Ali,SM000443,Shohag Traders,Low-Productivity Laggard,Needs Intervention,3267947.4,0.07,3172,1030.0,3335,35.5,95.1,100.0,94,0.8,NO,Normal
+647,980,M. M. Nazimuddin,25010008,Taher Enterprise,Targeted Specialist,High Potential,3263021.7,0.07,143,22818.0,127,1.6,100.0,100.0,80,22.4,NO,Normal
+648,46,Md Habibur Rahman,SM000112,Ayush Enterprise,Targeted Specialist,High Potential,3252011.2,0.07,706,4606.0,522,6.0,100.0,100.0,87,8.4,NO,Normal
+649,334,Sajjad Hossain,SM000034,Rowshan Distribution,Low-Productivity Laggard,Needs Intervention,3232805.4,0.07,990,3265.0,2112,23.5,46.9,70.7,90,5.1,NO,Normal
+650,7,Nurul Arif,SM000015,Taima Enterprise,Targeted Specialist,High Potential,3226925.0,0.07,2191,1473.0,1667,17.2,100.0,100.0,97,0.8,NO,Normal
+651,749,Saidur Rahman,10216,Sattar General Store,Targeted Specialist,High Potential,3218923.8,0.07,1167,2758.0,919,9.8,100.0,100.0,94,1.0,NO,Normal
+652,67,Shaikh Sohel Rana,SM000147,Bhai Bhai Traders,Targeted Specialist,High Potential,3215506.2,0.07,4891,657.0,3664,37.4,100.0,100.0,98,0.6,NO,Normal
+653,847,Sofekur Rahman,10691,K.N Rich Mill & Agency,Targeted Specialist,High Potential,3212407.2,0.07,2175,1477.0,1711,18.2,100.0,100.0,94,0.6,NO,Normal
+654,220,Md. Abu Naser,SM000444,Hazi A. Sukkur Store,Targeted Specialist,High Potential,3210526.0,0.07,1833,1752.0,1561,16.1,100.0,94.9,97,1.8,NO,Normal
+655,1108,Md. Kabir Khan,10999,Mahbub Traders DHKC,Targeted Specialist,High Potential,3206401.8,0.07,1810,1771.0,1426,14.6,100.0,100.0,98,3.7,NO,Normal
+656,1114,Md. Saddam Hossain,11005,Anha Enterprise,Targeted Specialist,High Potential,3195512.4,0.07,129,24771.0,109,1.8,100.0,100.0,62,7.7,NO,Normal
+657,926,Nur Hossain,21060017,Lily Mudi Store,Low-Productivity Laggard,Needs Intervention,3189818.4,0.07,1880,1697.0,2235,22.8,84.1,98.0,98,4.3,NO,Normal
+658,1200,Md. Samsuzzaman,11048,Lucky Store,Targeted Specialist,High Potential,3184322.7,0.07,207,15383.0,175,1.8,100.0,100.0,99,20.7,NO,Normal
+659,900,Md. Ibrahim T.O,11060035,Amir Hamza Confectionery,Targeted Specialist,High Potential,3183523.2,0.07,2767,1151.0,2111,22.0,100.0,100.0,96,0.7,NO,Normal
+660,750,Helal Uddin Patwary,10217,MACAW Distribution,Targeted Specialist,High Potential,3178680.4,0.07,2347,1354.0,1847,19.2,100.0,100.0,96,0.6,NO,Normal
+661,1349,Md. Labu Mia,11178,Halim Store,Targeted Specialist,High Potential,3178593.3,0.07,1277,2489.0,1028,11.2,100.0,100.0,92,1.3,NO,Normal
+662,1445,Md. Nurun Nabi,SM000689,J. S. Traders,Targeted Specialist,High Potential,3178403.95,0.07,104,30562.0,66,1.0,100.0,100.0,69,20.8,NO,Normal
+663,825,Md. Shahnawaz Khan,10905,Raiyan Enterprise,Low-Productivity Laggard,Needs Intervention,3172387.8,0.07,114,27828.0,127,1.7,89.8,100.0,73,40.5,NO,Normal
+664,535,Md. Aktaruzzaman,SM000441,Shekhar Chandro Sarkar,Targeted Specialist,High Potential,3167352.6,0.07,1562,2028.0,1267,13.1,100.0,100.0,97,1.1,NO,Normal
+665,524,Ajoy Kumar Sutradhar,SM000415,Sanjit Store,Targeted Specialist,High Potential,3164188.3,0.07,3677,861.0,2769,28.0,100.0,100.0,99,0.5,NO,Normal
+666,757,Md. Chanaullah,10224,Noakhali Traders,Targeted Specialist,High Potential,3160010.4,0.07,2293,1378.0,2125,23.4,100.0,100.0,91,1.2,NO,Normal
+667,558,Mominul Islam SM000523,SM000523,Bismillah Store MYMC,Low-Productivity Laggard,Needs Intervention,3150056.5,0.07,963,3271.0,1156,13.0,83.3,91.5,89,2.6,NO,Normal
+668,1436,Habibur Rahman RANC,SM000679,Fariha & Jakaria Traders,Low-Productivity Laggard,Needs Intervention,3144007.4,0.07,784,4010.0,863,8.7,90.8,100.0,99,0.2,NO,Normal
+669,211,Md. Taslim Khan,SM000427,Shahin & Brothers,Targeted Specialist,High Potential,3142564.2,0.07,3831,820.0,3199,33.3,100.0,99.7,96,7.9,NO,Normal
+670,313,Robiul Hossain,SM000003,A R Enterprise,Targeted Specialist,High Potential,3139287.8,0.07,122,25732.0,100,1.1,100.0,100.0,87,3.7,NO,Normal
+671,743,Md. Imran Hossain,10526,Rashidul Store,Targeted Specialist,High Potential,3137508.4,0.07,1769,1774.0,1510,15.3,100.0,99.7,99,0.1,NO,Normal
+672,212,Md. Mostafizur Rahaman,SM000428,Amin Traders,Targeted Specialist,High Potential,3135799.6,0.07,2129,1473.0,1974,20.4,100.0,100.0,97,7.1,NO,Normal
+673,10,Arshed,SM000025,Md. Shajahan Traders,Targeted Specialist,High Potential,3127450.95,0.07,92,33994.0,69,0.8,100.0,100.0,86,5.1,NO,Normal
+674,1190,Md Mosharouf Hosssain,11036,Zakir Traders,Targeted Specialist,High Potential,3125629.9,0.07,1567,1995.0,1187,12.5,100.0,100.0,95,11.0,NO,Normal
+675,771,Amanullah Juwel,10239,Shahin Confectionary & General Store,Targeted Specialist,High Potential,3116703.7,0.07,2533,1230.0,1984,21.1,100.0,100.0,94,1.0,NO,Normal
+676,779,Eman Ali,10249,Zihad Store,Low-Productivity Laggard,Needs Intervention,3109146.5,0.07,1637,1899.0,2285,23.8,71.6,97.4,96,11.4,NO,Normal
+677,261,Habibur Rahman,SM000496,Anjuman Traders,Targeted Specialist,High Potential,3091990.4,0.07,1964,1574.0,1490,15.2,100.0,100.0,98,7.7,NO,Normal
+678,22,Md Abu Taleb,SM000078,S.B. Traders,Targeted Specialist,High Potential,3091176.0,0.07,519,5956.0,422,4.4,100.0,100.0,95,2.9,NO,Normal
+679,794,Sadik Hossain,10489,PK Trade International,Targeted Specialist,High Potential,3090987.4,0.07,1220,2534.0,1050,11.1,100.0,100.0,95,9.5,NO,Normal
+680,481,Zakir Hossain,SM000293,Mosarof Store,Targeted Specialist,High Potential,3089681.45,0.07,2649,1166.0,2001,20.4,100.0,100.0,98,0.9,NO,Normal
+681,36,Emdadul Hoque,SM000100,Ahanaf Traders,Targeted Specialist,High Potential,3080945.1,0.07,2941,1048.0,2560,26.7,100.0,100.0,96,2.3,NO,Normal
+682,1314,Biplozit Bishwas,11145,Tanni General Store,Low-Productivity Laggard,Needs Intervention,3077831.7,0.07,2096,1468.0,3333,36.6,62.9,97.7,91,0.0,NO,Normal
+683,787,Abdur Razzak,10257,Shaha Traders,Targeted Specialist,High Potential,3074385.1,0.07,1483,2073.0,1081,12.0,100.0,100.0,90,2.1,NO,Normal
+684,1277,Ruhul Alam Razu,11108,Meghna Enterprise-3,Targeted Specialist,High Potential,3070123.3,0.07,78,39361.0,65,1.0,100.0,100.0,68,3.1,NO,Normal
+685,330,Farhad Chowdhury,SM000029,Bengol Trading,Targeted Specialist,High Potential,3060562.6,0.07,3064,999.0,2411,25.9,100.0,100.0,93,0.5,NO,Normal
+686,366,Md. Parvez,SM000069,Miskath Enterprise,Low-Productivity Laggard,Needs Intervention,3058491.8,0.07,2885,1060.0,2888,29.8,99.9,100.0,97,2.2,NO,Normal
+687,1394,Leon Sarder,11223,Molla Store,Targeted Specialist,High Potential,3057597.25,0.07,539,5673.0,342,3.5,100.0,100.0,98,5.9,NO,Normal
+688,1294,Polash Biswas,11126,Suraiya Consumer Products,Targeted Specialist,High Potential,3033798.2,0.07,1569,1934.0,1259,13.0,100.0,100.0,97,0.6,NO,Normal
+689,499,Mofazzal Hoque,SM000349,Sajib Traders,Targeted Specialist,High Potential,3030051.0,0.07,3009,1007.0,2696,27.5,100.0,100.0,98,0.2,NO,Normal
+690,1039,Tarikul Islam,10969,Khan Enterprise DHKS,Targeted Specialist,High Potential,3027470.45,0.07,174,17399.0,134,1.6,100.0,100.0,86,3.1,NO,Normal
+691,1344,Jakir Ahmed,11173,Shahin Store,Low-Productivity Laggard,Needs Intervention,3015297.8,0.07,4280,705.0,4742,49.4,90.3,100.0,96,8.1,NO,Normal
+692,852,"Nazrul Islam, T.O",12110040,Abdull Maleq Traders,Low-Productivity Laggard,Needs Intervention,3010052.45,0.07,3171,949.0,4425,45.6,71.7,95.6,97,0.5,NO,Normal
+693,142,Shafikul Islam 2,10750,Anis Enterprise,Targeted Specialist,High Potential,3008916.7,0.07,2643,1138.0,2589,26.4,100.0,98.8,98,0.6,NO,Normal
+694,1339,Tofael Hossin,11168,Taifur Enterprise,Targeted Specialist,High Potential,3007989.45,0.07,106,28377.0,63,0.7,100.0,100.0,94,84.3,NO,Normal
+695,332,Jaker Hossen,SM000032,Rowshan Distribution,Targeted Specialist,High Potential,3004797.8,0.06,1825,1646.0,1579,17.4,100.0,99.6,91,0.1,NO,Normal
+696,1372,Md Reayad Hossen,11200,Purabi Enterprise,Targeted Specialist,High Potential,3001130.2,0.06,1510,1988.0,1506,16.2,100.0,99.5,93,0.6,NO,Normal
+697,1363,Shantonu Sarker,11191,Mamun Enterprise,Targeted Specialist,High Potential,2996810.8,0.06,2211,1355.0,1657,17.1,100.0,100.0,97,0.3,NO,Normal
+698,673,Abul Khair,10452,Yousuf Traders,Low-Productivity Laggard,Needs Intervention,2995954.0,0.06,1999,1499.0,3105,32.0,64.4,93.0,97,0.4,NO,Normal
+699,1365,Md. Asaduzzaman,11193,Safa Traders,Targeted Specialist,High Potential,2987967.5,0.06,2452,1219.0,2133,21.8,100.0,98.3,98,0.5,NO,Normal
+700,529,Md. Masum Biswas,SM000430,Antor & Arpon Enterprise,Targeted Specialist,High Potential,2982343.55,0.06,2706,1102.0,2211,22.8,100.0,100.0,97,0.6,NO,Normal
+701,853,Md. Sumon Mia,24110057,Abdull Maleq Traders,Low-Productivity Laggard,Needs Intervention,2972423.7,0.06,2958,1005.0,3901,40.2,75.8,100.0,97,1.4,NO,Normal
+702,875,Md. Sohag Mia,23020016,Sumi Store,Targeted Specialist,High Potential,2968752.05,0.06,2350,1263.0,1837,19.1,100.0,100.0,96,0.7,NO,Normal
+703,1426,Shariful Islam,SM000669,M M Enterprise,Targeted Specialist,High Potential,2954348.3,0.06,3126,945.0,2823,29.1,100.0,100.0,97,0.5,NO,Normal
+704,777,Zakir Hossain,10246,Najjomullo2 General Store,Targeted Specialist,High Potential,2938961.3,0.06,1043,2818.0,800,8.4,100.0,100.0,95,1.4,NO,Normal
+705,846,Fajlur Haque,23020032,Rabeya Store,Low-Productivity Laggard,Needs Intervention,2924718.4,0.06,2340,1250.0,2431,25.1,96.3,94.0,97,2.7,NO,Normal
+706,369,Md Khorshadul Alam,SM000079,S.B. Traders,Targeted Specialist,High Potential,2906144.0,0.06,815,3566.0,642,7.9,100.0,100.0,81,0.8,NO,Normal
+707,795,Md. Abdur Razzak,10491,Shourov Trading,Low-Productivity Laggard,Needs Intervention,2888772.8,0.06,3384,854.0,3996,41.6,84.7,99.4,96,4.1,NO,Normal
+708,950,Md. Mojibor Rahaman,10817,Shah Traders,Targeted Specialist,High Potential,2887964.8,0.06,1088,2654.0,867,9.0,100.0,100.0,96,1.3,NO,Normal
+709,908,Rofiqul Islam,11060327,Ava Varieties Store,Targeted Specialist,High Potential,2882923.8,0.06,1639,1759.0,1228,12.5,100.0,100.0,98,0.6,NO,Normal
+710,851,Mahmudul Hasan Rony,11060405,Polash Traders,Targeted Specialist,High Potential,2864819.0,0.06,2389,1199.0,2072,21.4,100.0,100.0,97,5.4,NO,Normal
+711,920,Azhar Ali,11219,Akhi Enterprise,Targeted Specialist,High Potential,2861838.0,0.06,2661,1075.0,2195,22.4,100.0,100.0,98,2.2,NO,Normal
+712,1105,Md. Shafiqul Islam,10996,Kamal Store DHKC,Low-Productivity Laggard,Needs Intervention,2859038.1,0.06,2247,1272.0,3548,36.2,63.3,93.9,98,5.2,NO,Normal
+713,1330,Al Amin,11159,Ahona Traders 2,Targeted Specialist,High Potential,2844914.8,0.06,1260,2258.0,1234,12.5,100.0,96.9,99,1.8,NO,Normal
+714,916,Chakro Mohan,15050040,Sotota Traders,Targeted Specialist,High Potential,2828107.6,0.06,1479,1912.0,1136,11.6,100.0,100.0,98,1.0,NO,Normal
+715,410,Nor Mohammad Shovro,SM000189,Rashidul Store,Targeted Specialist,High Potential,2821240.2,0.06,384,7347.0,200,2.2,100.0,100.0,90,57.0,NO,Normal
+716,554,Nurul Islam,SM000514,Suditi Departmental Store,Targeted Specialist,High Potential,2819873.4,0.06,3295,856.0,3144,32.4,100.0,100.0,97,0.9,NO,Normal
+717,38,Maksudul Alam,SM000102,Jahir Enterprise,Targeted Specialist,High Potential,2817439.0,0.06,865,3257.0,576,5.9,100.0,100.0,98,0.9,NO,Normal
+718,927,Shahadat Hosen,25020012,Lily Mudi Store,Low-Productivity Laggard,Needs Intervention,2795400.7,0.06,2125,1315.0,2385,24.3,89.1,100.0,98,11.5,NO,Normal
+719,862,Rasel Mahmud,11060426,Maa Enterprise,Targeted Specialist,High Potential,2786159.4,0.06,2946,946.0,2253,23.2,100.0,100.0,97,0.4,NO,Normal
+720,1378,Md. Altaf Hossain,11206,Rupia Enterprise JESC,Targeted Specialist,High Potential,2784815.65,0.06,2310,1206.0,2139,22.1,100.0,98.9,97,0.9,NO,Normal
+721,931,Md. Shahadat Hossain,10800,Rozina Enterprise,Low-Productivity Laggard,Needs Intervention,2772244.2,0.06,2789,994.0,3204,34.8,87.0,99.7,92,0.6,NO,Normal
+722,919,Rijavan Ahmed,24020029,Mohar Ali Store,Low-Productivity Laggard,Needs Intervention,2771283.95,0.06,3151,879.0,3283,33.8,96.0,100.0,97,0.1,NO,Normal
+723,1395,Joy Dev Das,11224,United Distribution House,Low-Productivity Laggard,Needs Intervention,2762898.8,0.06,1064,2597.0,1155,11.9,92.1,97.1,97,4.6,NO,Normal
+724,28,Md. Salim Jahangir,SM000090,Bin Hasan Traders,Targeted Specialist,High Potential,2758066.0,0.06,862,3200.0,612,6.3,100.0,100.0,97,1.8,NO,Normal
+725,1042,Omer Faruk,10972,Abdul Awal Store,Targeted Specialist,High Potential,2752342.0,0.06,693,3972.0,537,5.8,100.0,100.0,93,18.2,NO,Normal
+726,367,Mr Chandan Bhattacharje,SM000072,Nur Foods,Targeted Specialist,High Potential,2729417.7,0.06,1499,1821.0,1253,13.8,100.0,100.0,91,2.0,NO,Normal
+727,888,Shahabuddin Khan,11050032,Podder Traders,Targeted Specialist,High Potential,2727612.15,0.06,3308,825.0,2553,26.3,100.0,100.0,97,0.4,NO,Normal
+728,907,Nazair Hossain,12090044,Nesar Ahamed & Brothers,Targeted Specialist,High Potential,2723561.1,0.06,1751,1555.0,1459,14.9,100.0,100.0,98,1.6,NO,Normal
+729,534,Md. Ahadul Alam,SM000439,Maurin Enterprise,Targeted Specialist,High Potential,2721109.0,0.06,1158,2350.0,910,10.0,100.0,100.0,91,0.0,NO,Normal
+730,814,Md. Delwar Hosen,10894,Swad Enterprise,Targeted Specialist,High Potential,2720618.2,0.06,712,3821.0,590,6.1,100.0,100.0,96,0.5,NO,Normal
+731,1201,Pintu Bishwas,11031,Tonusree Enterprise,Targeted Specialist,High Potential,2713782.4,0.06,1077,2520.0,850,9.3,100.0,100.0,91,0.6,NO,Normal
+732,546,Md. Shahid Mridha,SM000466,Rogina Enterprise,Targeted Specialist,High Potential,2712451.9,0.06,2115,1282.0,1584,16.5,100.0,100.0,96,1.3,NO,Normal
+733,31,Abdullah Al Raihan,SM000095,Haque Store,Low-Productivity Laggard,Needs Intervention,2712364.0,0.06,2350,1154.0,2500,25.8,94.0,85.9,97,3.0,NO,Normal
+734,902,Abdul Matin,11050471,Arafat Enterprise,Targeted Specialist,High Potential,2708893.4,0.06,2844,952.0,2524,26.3,100.0,100.0,96,1.0,NO,Normal
+735,59,Abdul Wahid,SM000134,Shayan Traders,Targeted Specialist,High Potential,2707815.2,0.06,110,24617.0,87,1.6,100.0,100.0,56,6.6,NO,Normal
+736,1337,Md. Mehedi Hasan Masum,11166,Brothers International,Targeted Specialist,High Potential,2695998.2,0.06,166,16241.0,135,1.5,100.0,100.0,93,1.5,NO,Normal
+737,1171,Rabiul Islam,10745,Sotata Varieties Store,Targeted Specialist,High Potential,2680244.4,0.06,1838,1458.0,1485,15.8,100.0,100.0,94,1.2,NO,Normal
+738,9,H. M. Bashir Ahmed,SM000019,S K Enterprise,Targeted Specialist,High Potential,2679827.0,0.06,95,28209.0,73,0.8,100.0,100.0,97,14.1,NO,Normal
+739,1292,Himel Ahmed,11124,Partho Traders,Targeted Specialist,High Potential,2668162.5,0.06,96,27793.0,3,0.0,100.0,100.0,92,145.6,YES,Ghost Orders (High revenue with no recorded visit audit trail)
+740,1031,Parves Islam,10961,Ma Store DHKS,Low-Productivity Laggard,Needs Intervention,2667532.6,0.06,422,6321.0,519,5.6,81.3,88.9,93,7.6,NO,Normal
+741,543,Md. Shamsul Haque,SM000460,Sabiha Enterprise,Targeted Specialist,High Potential,2650469.8,0.06,695,3814.0,557,5.8,100.0,100.0,96,2.3,NO,Normal
+742,13,Md. Abu Tayab,SM000065,Shah Amanat Store,Low-Productivity Laggard,Needs Intervention,2627960.2,0.06,2836,927.0,3430,35.7,82.7,97.9,96,3.4,NO,Normal
+743,1408,Abdul Hai,SM000653,Sotota Enterprise,Low-Productivity Laggard,Needs Intervention,2626802.1,0.06,3319,791.0,3716,38.7,89.3,99.4,96,0.5,NO,Normal
+744,1397,Kamrul Islam Sumon,11225,Elahi Enterprise,Targeted Specialist,High Potential,2612293.6,0.06,3608,724.0,2860,30.4,100.0,100.0,94,0.8,NO,Normal
+745,378,Faysal Miah,SM000111,Asmot Ali Traders,Targeted Specialist,High Potential,2604637.6,0.06,102,25536.0,76,0.8,100.0,100.0,91,11.1,NO,Normal
+746,583,Md Aminul Islam Talukder,11042,A Z Enterprise,Targeted Specialist,High Potential,2602659.0,0.06,1099,2368.0,859,8.8,100.0,100.0,98,0.6,NO,Normal
+747,1062,Mominul Isalm,11065,Amina Enterprise,Targeted Specialist,High Potential,2578213.6,0.06,119,21666.0,102,1.6,100.0,100.0,63,2.3,NO,Normal
+748,1423,Md. Sohag Mia TNG,SM000666,Nirala Traders,Low-Productivity Laggard,Needs Intervention,2576418.0,0.06,2106,1223.0,2551,36.4,82.6,99.7,70,3.6,NO,Normal
+749,1399,Md. Monir Hossain,11227,Rashel Store,Low-Productivity Laggard,Needs Intervention,2567336.1,0.06,624,4114.0,1158,12.1,53.9,97.4,96,0.1,NO,Normal
+750,755,Amirul Islam-1,10222,M.I.S Traders,Targeted Specialist,High Potential,2521926.85,0.05,762,3310.0,642,10.2,100.0,100.0,63,1.2,NO,Normal
+751,416,Md. Salman Ahamed,SM000202,Bismillah Motors,Targeted Specialist,High Potential,2520714.35,0.05,2293,1099.0,2009,21.1,100.0,100.0,95,3.9,NO,Normal
+752,549,Shorif Mia,SM000504,Babul Store,Low-Productivity Laggard,Needs Intervention,2520092.2,0.05,179,14079.0,1356,14.1,13.2,24.9,96,6.4,NO,Normal
+753,195,Mojibor Rahman Mollah,SM000401,Monir Store,Targeted Specialist,High Potential,2515916.0,0.05,1074,2343.0,869,9.0,100.0,100.0,97,1.0,NO,Normal
+754,1403,Diplu Sutradhar,11002,Kalipod Roy & Sons,Targeted Specialist,High Potential,2498588.2,0.05,116,21540.0,90,0.9,100.0,100.0,98,3.9,NO,Normal
+755,1024,Md. Ismail,10954,Tobarak Molla Store,Targeted Specialist,High Potential,2493975.0,0.05,1478,1687.0,1418,15.1,100.0,100.0,94,0.1,NO,Normal
+756,955,MD Mizanur Rahman,25040005,Shohag Traders,Targeted Specialist,High Potential,2488080.0,0.05,775,3210.0,750,7.8,100.0,100.0,96,0.6,NO,Normal
+757,1361,Shusanta Chandra Das,11189,Shayan Traders,Targeted Specialist,High Potential,2485067.55,0.05,110,22592.0,83,1.2,100.0,100.0,67,9.8,NO,Normal
+758,76,Al-Amin,SM000161,Bandhon Enterprise,Targeted Specialist,High Potential,2463677.2,0.05,3542,696.0,2722,27.5,100.0,100.0,99,1.5,NO,Normal
+759,776,Mehedi Hasan,10245,Master General Store,Low-Productivity Laggard,Needs Intervention,2462782.0,0.05,1202,2049.0,1575,16.2,76.3,94.8,97,1.9,NO,Normal
+760,1458,Abdur Jabbar,SM000702,S S Enterprise,Low-Productivity Laggard,Needs Intervention,2461777.4,0.05,1642,1499.0,1787,34.4,91.9,100.0,52,1.4,NO,Normal
+761,1452,Md. Akram Hossain,SM000696,Rupia Enterprise,Low-Productivity Laggard,Needs Intervention,2453884.1,0.05,59,41591.0,165,2.9,35.8,61.4,56,98.7,NO,Normal
+762,412,Md. Sajon Ali,SM000194,Ayesha Traders,Low-Productivity Laggard,Needs Intervention,2435323.6,0.05,102,23876.0,386,3.9,26.4,35.1,99,37.7,NO,Normal
+763,1297,M.D Al Mamun,11134,K.N Rich Mill & Agency,Targeted Specialist,High Potential,2413112.2,0.05,2357,1024.0,1805,18.6,100.0,100.0,97,3.9,NO,Normal
+764,501,Md. Jasim Ahmed Siblu,SM000355,Shuvo Veraities Store,Low-Productivity Laggard,Needs Intervention,2408471.85,0.05,2365,1018.0,3392,35.3,69.7,88.1,96,5.5,NO,Normal
+765,404,Md. Jahirul Pathan,SM000178,Zabed Enterprise,Targeted Specialist,High Potential,2404888.6,0.05,110,21863.0,82,0.9,100.0,100.0,96,2.1,NO,Normal
+766,898,Farukul Islam,10738,Abu Alif Store,Targeted Specialist,High Potential,2393851.8,0.05,2422,988.0,1838,19.1,100.0,100.0,96,0.8,NO,Normal
+767,700,Sakil Sheikh,10290,MR Trading,Targeted Specialist,High Potential,2390588.6,0.05,959,2493.0,801,12.7,100.0,100.0,63,1.6,NO,Normal
+768,315,Palash Dhar,SM000008,Sailas Enterprise,Targeted Specialist,High Potential,2388453.5,0.05,90,26538.0,6,0.1,100.0,100.0,90,251.1,NO,Normal
+769,918,Shofiqul Islam Shujon,13090029,Amin Store,Targeted Specialist,High Potential,2370725.2,0.05,3010,788.0,2367,24.4,100.0,100.0,97,0.8,NO,Normal
+770,530,Md. Abdus Sattar,SM000433,Khairul Store,Low-Productivity Laggard,Needs Intervention,2369110.1,0.05,1246,1901.0,1820,18.8,68.5,87.6,97,0.1,NO,Normal
+771,688,Md Mosharof Hossain,10505,Bismillah Traders,Targeted Specialist,High Potential,2360368.0,0.05,1959,1205.0,1554,16.2,100.0,100.0,96,0.7,NO,Normal
+772,375,Pulak Kumar Gupta,SM000091,Bin Hasan Traders,Targeted Specialist,High Potential,2345374.1,0.05,2577,910.0,2018,20.6,100.0,100.0,98,0.8,NO,Normal
+773,523,Pallab Kumar Sarkar,SM000413,Siam Enterprise,Targeted Specialist,High Potential,2344955.5,0.05,635,3693.0,478,6.5,100.0,100.0,74,1.8,NO,Normal
+774,1417,Mir Ratul Islam,SM000661,Rahmania Traders,Targeted Specialist,High Potential,2342833.8,0.05,98,23906.0,95,1.2,100.0,100.0,77,6.9,NO,Normal
+775,1177,Kazi Jahed Hossain,11022,Azmir Traders,Targeted Specialist,High Potential,2338300.6,0.05,1224,1910.0,994,10.2,100.0,99.5,97,1.5,NO,Normal
+776,557,Abu Jafor Sajol,SM000520,Akkas Store,Targeted Specialist,High Potential,2336816.4,0.05,2696,867.0,2336,24.3,100.0,100.0,96,4.7,NO,Normal
+777,50,Shukanta Chandra Das,SM000118,Iqra Enterprise,Targeted Specialist,High Potential,2323442.6,0.05,158,14705.0,138,1.7,100.0,100.0,79,4.0,NO,Normal
+778,706,Md. Sorwar Alam Khan,10571,S S Enterprise,Low-Productivity Laggard,Needs Intervention,2317296.4,0.05,1245,1861.0,1371,31.2,90.8,99.0,44,0.7,NO,Normal
+779,15,Mr Subrata Barua,SM000068,Miskath Enterprise,Targeted Specialist,High Potential,2294172.5,0.05,1939,1183.0,1333,13.7,100.0,100.0,97,0.5,NO,Normal
+780,556,Shariar Hossain,SM000517,TR Brothers Enterprise,Low-Productivity Laggard,Needs Intervention,2288869.8,0.05,2427,943.0,3509,36.2,69.2,100.0,97,0.7,NO,Normal
+781,1390,Nibir Shom,11217,Insaf Grocery Shop,Targeted Specialist,High Potential,2274698.6,0.05,379,6002.0,285,3.0,100.0,100.0,94,6.2,NO,Normal
+782,69,Atiar Rahman,SM000150,Adarsha Traders,Targeted Specialist,High Potential,2273421.55,0.05,4005,568.0,3587,36.6,100.0,100.0,98,0.6,NO,Normal
+783,953,Md. Imam Hossain,10818,Ibrahim Store,Targeted Specialist,High Potential,2273403.4,0.05,505,4502.0,412,4.3,100.0,100.0,96,7.7,NO,Normal
+784,744,Md. Rakibul Islam,10527,Samia Enterprise,Low-Productivity Laggard,Needs Intervention,2254902.4,0.05,106,21273.0,170,1.8,62.4,56.7,93,25.1,NO,Normal
+785,816,Md. Anwar Ali,10896,Mizan Traders KUST,Low-Productivity Laggard,Needs Intervention,2238573.6,0.05,280,7995.0,298,8.5,94.0,96.5,35,3.0,NO,Normal
+786,163,Md. Rubel Mia,SM000350,Bhai Bhai Enterprise SYLC,Low-Productivity Laggard,Needs Intervention,2236407.8,0.05,2008,1114.0,2308,24.0,87.0,99.4,96,0.3,NO,Normal
+787,1355,Md. Angur Mia,11183,Shijan Varieties Store,Targeted Specialist,High Potential,2228312.8,0.05,208,10713.0,186,2.0,100.0,100.0,95,31.0,NO,Normal
+788,365,Md. Safiul Alam,SM000066,Shah Amanat Store,Low-Productivity Laggard,Needs Intervention,2205527.2,0.05,2848,774.0,3260,35.4,87.4,98.9,92,6.9,NO,Normal
+789,1429,Md. Anisur Rahman,SM000672,Mim Store,Targeted Specialist,High Potential,2202468.2,0.05,1846,1193.0,1592,16.4,100.0,100.0,97,0.9,NO,Normal
+790,944,Md. Jahangir Alam,10812,Sonar Bangla Bakery,Low-Productivity Laggard,Needs Intervention,2197705.3,0.05,736,2986.0,790,8.1,93.2,98.2,98,1.5,NO,Normal
+791,1306,Pollob Hore,11137,S. A. Enterprise,Targeted Specialist,High Potential,2193710.45,0.05,1529,1435.0,1461,15.7,100.0,100.0,93,3.3,NO,Normal
+792,807,Md. Jahangir Alam,10887,Sajim Traders,Low-Productivity Laggard,Needs Intervention,2187351.4,0.05,88,24856.0,115,1.5,76.5,93.9,79,2.9,NO,Normal
+793,1298,Anowar Hossen,11135,F M Enterprise,Low-Productivity Laggard,Needs Intervention,2184577.9,0.05,97,22521.0,120,1.4,80.8,91.4,87,0.1,NO,Normal
+794,909,Arifuzzaman,25020013,Anjuman Traders,Targeted Specialist,High Potential,2182798.6,0.05,1998,1092.0,1855,19.3,100.0,100.0,96,5.6,NO,Normal
+795,146,Sha Alam Sagor,SM000325,Shofi Vander,Targeted Specialist,High Potential,2181349.1,0.05,841,2594.0,734,8.3,100.0,97.1,88,8.7,NO,Normal
+796,912,Haydar Ali,12040018,Sattar Store,Targeted Specialist,High Potential,2178092.05,0.05,2241,972.0,1963,20.2,100.0,100.0,97,0.8,NO,Normal
+797,1072,Tapas Chandra Ghosh,11061,Jamal Enterprise,Targeted Specialist,High Potential,2177557.2,0.05,274,7947.0,216,2.3,100.0,100.0,94,0.5,NO,Normal
+798,1311,Md Arshad,11142,Bismillah Store MYMC,Low-Productivity Laggard,Needs Intervention,2176250.4,0.05,1883,1156.0,2929,31.2,64.3,99.7,94,0.4,NO,Normal
+799,1392,Shahinur Islam,11220,Ideal Cake & Food Plaza,Low-Productivity Laggard,Needs Intervention,2154167.05,0.05,1349,1597.0,1704,17.4,79.2,97.1,98,0.9,NO,Normal
+800,866,Rahenur Islam,20060007,S.M Enterprise BOGC,Low-Productivity Laggard,Needs Intervention,2140893.3,0.05,2191,977.0,2365,24.9,92.6,96.6,95,4.1,NO,Normal
+801,422,Md. Anwar Parvez,SM000212,Liza Enterprise,Low-Productivity Laggard,Needs Intervention,2138943.3,0.05,126,16976.0,373,6.5,33.8,45.2,57,21.6,NO,Normal
+802,891,"Nazrul Islam, S.O",15040055,Maya Electric,Targeted Specialist,High Potential,2135575.3,0.05,2101,1016.0,1752,18.2,100.0,100.0,96,1.1,NO,Normal
+803,317,Tanvir Iqbal Fahim,SM000010,Sailas Enterprise,Targeted Specialist,High Potential,2111646.1,0.05,103,20501.0,90,1.1,100.0,100.0,81,51.5,NO,Normal
+804,773,Kamrul Hasan,10241,Munna General Store,Targeted Specialist,High Potential,2094333.6,0.05,3184,658.0,2427,26.4,100.0,100.0,92,0.8,NO,Normal
+805,1461,Md Shohanul Islam,SM000705,Dipto Enterprise,Low-Productivity Laggard,Needs Intervention,2093684.25,0.05,1386,1511.0,1859,46.5,74.6,100.0,40,1.1,NO,Normal
+806,675,Mohammad Rezaur Rahim,10454,Shimul and Brothers,Targeted Specialist,High Potential,2090635.4,0.05,1187,1761.0,883,9.1,100.0,100.0,97,0.6,NO,Normal
+807,428,Md. Arafat Islam Apon,SM000224,Marjan Enterprise,Targeted Specialist,High Potential,2079646.8,0.04,197,10557.0,138,1.4,100.0,100.0,100,10.9,NO,Normal
+808,871,Arman Ali,24070007,Shahidul Traders,Targeted Specialist,High Potential,2077439.5,0.04,1897,1095.0,1603,17.2,100.0,100.0,93,1.6,NO,Normal
+809,1373,Aminul Haque Bhuiyan,11201,Shamim Store,Targeted Specialist,High Potential,2070690.2,0.04,199,10405.0,174,1.9,100.0,100.0,92,20.5,NO,Normal
+810,1213,Abul Khayer Khan Shiplu,11093,Shathy Enterprise,Targeted Specialist,High Potential,2068773.55,0.04,273,7578.0,249,4.3,100.0,100.0,58,1.3,NO,Normal
+811,1455,Dipu Rudra Paul,SM000699,Jalal Trade International,Low-Productivity Laggard,Needs Intervention,2048556.6,0.04,367,5582.0,371,7.0,98.9,97.4,53,5.1,NO,Normal
+812,1326,Kawsar Hossain,11155,Porsha Trading Corporation 2,Targeted Specialist,High Potential,2045755.0,0.04,105,19483.0,79,0.8,100.0,100.0,96,3.9,NO,Normal
+813,1406,Md. Shamim,11234,Farjana Traders,Low-Productivity Laggard,Needs Intervention,2033240.1,0.04,2270,896.0,2730,29.0,83.2,100.0,94,3.4,NO,Normal
+814,1462,Md. Elias,SM000706,Rahi Departmental Store,Low-Productivity Laggard,Needs Intervention,2027311.3,0.04,313,6477.0,380,12.7,82.4,83.6,30,8.7,NO,Normal
+815,1334,Abdul Jalil,11163,Liza Trading,Targeted Specialist,High Potential,2025941.6,0.04,113,17929.0,85,0.9,100.0,100.0,98,20.6,NO,Normal
+816,1359,Bidhan Chandra Dey,11187,Iqra Enterprise,Low-Productivity Laggard,Needs Intervention,2023194.2,0.04,1125,1798.0,1148,16.4,98.0,100.0,70,0.8,NO,Normal
+817,923,Abdul Baki,13120014,Aroshi Store,Low-Productivity Laggard,Needs Intervention,2022229.8,0.04,1988,1017.0,2010,20.5,98.9,100.0,98,0.4,NO,Normal
+818,533,Prodesh Kanti Dey,SM000438,Maurin Enterprise,Low-Productivity Laggard,Needs Intervention,2010044.4,0.04,899,2236.0,997,16.3,90.2,97.5,61,0.1,NO,Normal
+819,857,Md. Bipul Mia,21120128,Sabur & Brothers,Targeted Specialist,High Potential,1997200.0,0.04,3404,587.0,2598,27.1,100.0,100.0,96,0.7,NO,Normal
+820,1006,Md. Mostafa Kamal DKS,10936,Rafsan Store,Low-Productivity Laggard,Needs Intervention,1994880.0,0.04,116,17197.0,119,2.0,97.5,94.1,59,1.5,NO,Normal
+821,905,Babul Karim,18050040,Lukman Store,Targeted Specialist,High Potential,1992295.0,0.04,315,6325.0,255,2.6,100.0,100.0,98,1.4,NO,Normal
+822,1189,Iqram Hossen,11035,Tayyeba Store,Targeted Specialist,High Potential,1986065.8,0.04,616,3224.0,434,4.4,100.0,100.0,98,6.8,NO,Normal
+823,1346,Md. Sajibur Rahman,11175,Rahman Enterprise1,Low-Productivity Laggard,Needs Intervention,1961622.8,0.04,499,3931.0,528,16.5,94.5,98.3,32,2.0,NO,Normal
+824,1424,Yasin  Arafat-ctge,SM000667,Alhaj Md. Jobier & Sons,Targeted Specialist,High Potential,1959348.8,0.04,2533,774.0,1784,18.8,100.0,100.0,95,8.1,NO,Normal
+825,793,Rakibul Islam,10475,Kayum Enterprise,Targeted Specialist,High Potential,1869211.05,0.04,1573,1188.0,1420,14.8,100.0,100.0,96,1.1,NO,Normal
+826,563,Khurshed Alam,SM000536,Mobina Traders,Low-Productivity Laggard,Needs Intervention,1868329.65,0.04,1001,1866.0,2993,30.5,33.4,89.3,98,0.6,NO,Normal
+827,1459,Abdullah Al Mamun(TNG),SM000703,Zim Enterprise,Low-Productivity Laggard,Needs Intervention,1868189.3,0.04,1439,1298.0,2303,43.5,62.5,87.5,53,1.2,NO,Normal
+828,531,Md. Kazi Toufiqul Islam,SM000435,Ruma Enterprise,Targeted Specialist,High Potential,1867124.1,0.04,1317,1418.0,1290,15.2,100.0,93.8,85,0.3,NO,Normal
+829,1186,Md. Morad Hossain,11029,Himel Enterprise,Targeted Specialist,High Potential,1858462.0,0.04,241,7711.0,196,2.1,100.0,100.0,93,13.1,NO,Normal
+830,761,Jahangir Hossain-1,10229,NS Traders,Targeted Specialist,High Potential,1857981.0,0.04,369,5035.0,306,3.2,100.0,95.9,96,0.1,NO,Normal
+831,954,Md. Masud Rana,10849,Ibrahim Store,Targeted Specialist,High Potential,1845285.1,0.04,583,3165.0,372,3.9,100.0,100.0,95,0.8,NO,Normal
+832,948,Md. Monjurul Islam,10873,Zihad Traders,Targeted Specialist,High Potential,1844219.35,0.04,729,2530.0,686,7.0,100.0,100.0,98,2.0,NO,Normal
+833,323,Main Uddin,SM000020,S K Enterprise,Low-Productivity Laggard,Needs Intervention,1843054.85,0.04,64,28798.0,83,1.9,77.1,88.9,44,16.8,NO,Normal
+834,906,Zillur Rahman,14100001,Akbar Ali Store,Targeted Specialist,High Potential,1836914.0,0.04,2356,780.0,1998,21.0,100.0,100.0,95,0.5,NO,Normal
+835,1391,Muhammad Shifaul Karim,11218,Anny Traders,Targeted Specialist,High Potential,1836724.8,0.04,1071,1715.0,848,10.9,100.0,100.0,78,0.7,NO,Normal
+836,925,Awual Miah,20100005,Brothers Store,Targeted Specialist,High Potential,1833218.4,0.04,2214,828.0,1897,19.4,100.0,100.0,98,1.8,NO,Normal
+837,940,Md. Helal Hossain,10848,Mizan Traders,Targeted Specialist,High Potential,1824574.2,0.04,556,3282.0,469,6.5,100.0,100.0,72,2.0,NO,Normal
+838,1296,Manik Kumar Quari,11133,F M Enterprise,Low-Productivity Laggard,Needs Intervention,1798260.3,0.04,48,37464.0,58,1.1,82.8,88.4,54,39.5,NO,Normal
+839,1441,Rajib Chandra Das,SM000684,Jalal Trade International,Low-Productivity Laggard,Needs Intervention,1771213.8,0.04,402,4406.0,471,11.2,85.4,87.0,42,6.5,NO,Normal
+840,1404,Ratnadip Das,11232,Tonusree Enterprise,Low-Productivity Laggard,Needs Intervention,1757772.4,0.04,910,1932.0,1165,16.2,78.1,97.0,72,0.5,NO,Normal
+841,1416,Mizanur Rahman BOGC,SM000660,Rabeya Store,Targeted Specialist,High Potential,1756755.4,0.04,2707,649.0,2489,25.9,100.0,100.0,96,1.1,NO,Normal
+842,818,Minto Kumar,10898,Mayer Doa Enterprise,Low-Productivity Laggard,Needs Intervention,1742873.9,0.04,196,8892.0,225,6.1,87.1,89.8,37,2.4,NO,Normal
+843,1328,Jamal Uddin DHK,11157,Rahmat and Sons,Targeted Specialist,High Potential,1697077.6,0.04,304,5582.0,222,2.1,100.0,90.9,106,4.8,NO,Normal
+844,371,Kajal Nath,SM000083,Delower Hossain & Sons,Targeted Specialist,High Potential,1689382.0,0.04,3261,518.0,2332,24.5,100.0,100.0,95,0.5,NO,Normal
+845,1449,Md. Masum Ali,SM000693,Mayer Doa Enterprise,Targeted Specialist,High Potential,1640074.4,0.04,282,5816.0,261,6.2,100.0,100.0,42,6.5,NO,Normal
+846,721,Saiful Islam,10636,Tanha Tanisha Commercial Service,Low-Productivity Laggard,Needs Intervention,1638722.4,0.04,1798,911.0,2480,25.8,72.5,92.4,96,0.6,NO,Normal
+847,550,Ziaur Rahman,SM000507,Shamim Store,Low-Productivity Laggard,Needs Intervention,1613279.3,0.03,1151,1402.0,1176,16.8,97.9,100.0,70,11.3,NO,Normal
+848,778,Saddam Hossain,10247,Najjomullo2 General Store,Targeted Specialist,High Potential,1606104.45,0.03,1011,1589.0,790,8.9,100.0,100.0,89,1.2,NO,Normal
+849,1118,Md. Monir Hossain,11009,Aleenas Distribution,Low-Productivity Laggard,Needs Intervention,1587122.6,0.03,760,2088.0,1258,28.6,60.4,100.0,44,0.0,NO,Normal
+850,1175,Mohammed Amir Khasru,11020,Haque Store,Targeted Specialist,High Potential,1581335.0,0.03,1931,819.0,1450,14.8,100.0,100.0,98,4.1,NO,Normal
+851,1207,Md. Monjurul Islam,10917,Liza Enterprise,Low-Productivity Laggard,Needs Intervention,1574686.7,0.03,785,2006.0,1067,11.7,73.6,99.7,91,14.5,NO,Normal
+852,878,Abdul Khaled,11040236,Abrar Traders,Targeted Specialist,High Potential,1569131.2,0.03,2684,585.0,2192,22.6,100.0,100.0,97,0.5,NO,Normal
+853,921,Raju Ahmed,14050007,Arman Store,Targeted Specialist,High Potential,1556041.4,0.03,2937,530.0,2245,22.9,100.0,100.0,98,0.8,NO,Normal
+854,1447,Md. Anwar Hossain,SM000691,Rahim Traders,Targeted Specialist,High Potential,1555875.0,0.03,66,23574.0,61,1.5,100.0,100.0,41,6.7,NO,Normal
+855,1084,Md. Awlad,11085,Fatima-Naz Enterprise,Targeted Specialist,High Potential,1537903.4,0.03,138,11144.0,121,2.1,100.0,100.0,58,2.0,NO,Normal
+856,864,Fagla Rabby,15030044,Vai Vai Store BOGC,Targeted Specialist,High Potential,1476320.35,0.03,1484,995.0,1296,13.4,100.0,100.0,97,2.0,NO,Normal
+857,164,Junaed Ahmed,SM000351,Anny Traders,Targeted Specialist,High Potential,1468148.8,0.03,1183,1241.0,1182,12.7,100.0,100.0,93,0.5,NO,Normal
+858,1332,Tarikul Islam,11161,Ahona Traders,Targeted Specialist,High Potential,1456483.4,0.03,110,13241.0,86,0.8,100.0,100.0,106,11.9,NO,Normal
+859,1456,Md. Tuhinuzzaman,SM000700,Shahin Store,Low-Productivity Laggard,Needs Intervention,1456289.5,0.03,1773,821.0,2546,50.9,69.6,88.6,50,7.4,NO,Normal
+860,685,Md. Tammimul Haque,10495,Raihan Enterprise,Targeted Specialist,High Potential,1452957.7,0.03,708,2052.0,594,7.0,100.0,100.0,85,2.0,NO,Normal
+861,1007,Ridwan Ahmed,10937,Rafsan Store,Targeted Specialist,High Potential,1451292.2,0.03,78,18606.0,76,1.5,100.0,100.0,52,9.0,NO,Normal
+862,141,Nuruzzaman,SM000319,Mayer Dowa Varietes Store,Targeted Specialist,High Potential,1444669.8,0.03,203,7117.0,155,1.9,100.0,100.0,81,9.9,NO,Normal
+863,1410,Shamim Mia SYLC,SM000654,Manager Store,Targeted Specialist,High Potential,1427621.2,0.03,776,1840.0,448,4.9,100.0,100.0,92,33.4,NO,Normal
+864,1418,Mohammad Kamruzzaman,SM000662,B.L Enterprise,Low-Productivity Laggard,Needs Intervention,1425878.2,0.03,820,1739.0,835,19.9,98.2,100.0,42,1.4,NO,Normal
+865,1430,Emdadul Hoque- TNG,SM000673,Lubaba Enterprise,Low-Productivity Laggard,Needs Intervention,1398857.1,0.03,1152,1214.0,1168,26.5,98.6,100.0,44,1.0,NO,Normal
+866,1219,Gilullah,11078,Makkha Enterprise,Targeted Specialist,High Potential,1384053.4,0.03,105,13181.0,86,1.0,100.0,100.0,90,2.2,NO,Normal
+867,1472,Md. Jahirul Islam,SM000716,Malek Store2,Low-Productivity Laggard,Needs Intervention,1372624.0,0.03,244,5626.0,407,21.4,60.0,58.2,19,0.9,NO,Normal
+868,331,F.R Akram,SM000030,Bengol Trading,Targeted Specialist,High Potential,1339892.95,0.03,47,28508.0,27,0.5,100.0,50.0,54,76.4,NO,Normal
+869,1427,Lokomoy Saha,SM000670,Zim Enterprise,Low-Productivity Laggard,Needs Intervention,1332915.0,0.03,694,1921.0,851,29.3,81.6,88.1,29,4.3,NO,Normal
+870,802,Md. Waheduzzaman,10882,Alapon Telecom,Low-Productivity Laggard,Needs Intervention,1322130.6,0.03,551,2400.0,557,19.2,98.9,99.5,29,0.8,NO,Normal
+871,1035,Md. Dalim,10965,Madina Traders-DHKS,Low-Productivity Laggard,Needs Intervention,1310966.4,0.03,1619,810.0,1998,20.6,81.0,99.5,97,3.3,NO,Normal
+872,1333,Sohag Howlader,11162,Pick & Go,Targeted Specialist,High Potential,1305899.7,0.03,2020,646.0,1622,16.6,100.0,100.0,98,0.6,NO,Normal
+873,1422,Priyas Talukder SYLC,SM000665,Mahfuz Enterprise,Low-Productivity Laggard,Needs Intervention,1299786.8,0.03,1152,1128.0,1203,18.0,95.8,100.0,67,0.8,NO,Normal
+874,1463,Md. Sohag Sardar,SM000707,Maurin Enterprise,Targeted Specialist,High Potential,1289770.0,0.03,645,2000.0,544,15.1,100.0,100.0,36,0.1,NO,Normal
+875,400,Asafur Rahman,SM000168,Allar Dan Enterprise,Targeted Specialist,High Potential,1278519.4,0.03,2003,638.0,1434,14.6,100.0,100.0,98,1.1,NO,Normal
+876,915,Sahin Hossain,17010052,Bhowmik & Brothers,Targeted Specialist,High Potential,1246440.2,0.03,763,1634.0,728,7.4,100.0,98.5,98,18.8,NO,Normal
+877,855,Rohan Saddik Lizan,23030027,K.N Rich Mill & Agency,Targeted Specialist,High Potential,1220154.4,0.03,2329,524.0,1765,18.4,100.0,100.0,96,0.5,NO,Normal
+878,1069,Zakir Hossain,11072,Madina Enterprise,Targeted Specialist,High Potential,1158859.6,0.03,115,10077.0,98,1.1,100.0,100.0,91,5.7,NO,Normal
+879,1329,Ruhul Amin Mondol,11158,M R Traders,Low-Productivity Laggard,Needs Intervention,1139992.9,0.02,1580,722.0,2289,24.6,69.0,98.8,93,0.6,NO,Normal
+880,1385,Ripon Chandra Ray,11213,Ritu Store,Low-Productivity Laggard,Needs Intervention,1122782.0,0.02,266,4221.0,813,9.3,32.7,60.4,87,15.2,NO,Normal
+881,1438,Md. Rasel sheikh,SM000681,Jahangir Traders,Targeted Specialist,High Potential,1111567.8,0.02,278,3998.0,226,2.4,100.0,100.0,95,2.5,NO,Normal
+882,504,Saian Ahmed,SM000362,Shahin Store,Low-Productivity Laggard,Needs Intervention,1108825.6,0.02,1622,684.0,2687,61.1,60.4,96.8,44,6.7,NO,Normal
+883,421,Aushok Kumar Rk.,SM000211,Liza Enterprise,Low-Productivity Laggard,Needs Intervention,1107737.4,0.02,432,2564.0,462,6.9,93.5,99.5,67,4.3,NO,Normal
+884,189,Shuvo Kumar Sen,SM000392,Jahangir Traders,Targeted Specialist,High Potential,1093930.2,0.02,296,3696.0,220,2.3,100.0,100.0,97,2.7,NO,Normal
+885,859,Md. Mamun Mia,24110058,Sabur & Brothers,Targeted Specialist,High Potential,1092206.65,0.02,1967,555.0,1451,15.3,100.0,100.0,95,1.4,NO,Normal
+886,585,Jashim Howlader,11043,Bismillah Store DHKW,Targeted Specialist,High Potential,1049397.3,0.02,391,2684.0,324,3.6,100.0,100.0,91,18.8,NO,Normal
+887,44,Abdul Basit Siddique,SM000108,Alamgir Traders,Low-Productivity Laggard,Needs Intervention,1040018.0,0.02,19,54738.0,22,1.2,86.4,85.0,19,6.9,NO,Normal
+888,425,Sree Ripon Kumar Nandi,SM000217,Khan Enterprise,Targeted Specialist,High Potential,1037701.9,0.02,2380,436.0,1999,20.2,100.0,100.0,99,0.5,NO,Normal
+889,1307,Md. Nazmul Alam,11138,Ma Baba Dua Department Store,Targeted Specialist,High Potential,1026373.6,0.02,252,4073.0,212,2.2,100.0,100.0,97,3.1,NO,Normal
+890,1180,Md. Fardous Hossain,10916,New Rakib Enterprise,Low-Productivity Laggard,Needs Intervention,1019469.0,0.02,454,2246.0,463,11.0,98.1,99.7,42,0.5,NO,Normal
+891,689,Jafar Ullah,10506,Yousuf Traders,Targeted Specialist,High Potential,1014241.0,0.02,366,2771.0,279,2.9,100.0,100.0,96,5.9,NO,Normal
+892,49,Suyeb Hossain Siddique,SM000116,Fozlu & Sons,Targeted Specialist,High Potential,1013065.05,0.02,115,8809.0,102,1.3,100.0,100.0,80,5.4,NO,Normal
+893,327,Sultan Md Giasuddin,SM000024,S K Enterprise,Targeted Specialist,High Potential,1004206.6,0.02,183,5487.0,146,1.6,100.0,100.0,90,0.5,NO,Normal
+894,12,Jahangir Alam,SM000031,Bengol Trading,Low-Productivity Laggard,Needs Intervention,990229.0,0.02,1589,623.0,2388,26.2,66.5,96.1,91,0.0,NO,Normal
+895,798,Md. Foyez Mollah,10878,Rahim Traders,Low-Productivity Laggard,Needs Intervention,963861.0,0.02,188,5127.0,196,6.3,95.9,96.5,31,2.4,NO,Normal
+896,1453,Md. Ashraful Islam(DHKS),SM000697,Rafsan Store,Targeted Specialist,High Potential,956065.4,0.02,88,10864.0,78,2.1,100.0,100.0,37,9.5,NO,Normal
+897,1412,Abdul Gafur,SM000656,M.A.S. Distribution,Low-Productivity Laggard,Needs Intervention,952739.9,0.02,447,2131.0,500,5.3,89.4,100.0,94,1.3,NO,Normal
+898,748,Ahsanul Kabir,10215,Sattar General Store,Low-Productivity Laggard,Needs Intervention,951526.3,0.02,96,9912.0,599,6.5,16.0,33.3,92,2.8,NO,Normal
+899,858,Ismail Hossain Akanda,11100080,Sabur & Brothers,Targeted Specialist,High Potential,918229.3,0.02,1052,873.0,725,7.6,100.0,100.0,96,2.1,NO,Normal
+900,932,Prokash Kumar Bishwash,10801,Rozina Enterprise,Targeted Specialist,High Potential,907729.6,0.02,722,1257.0,470,4.9,100.0,100.0,95,2.0,NO,Normal
+901,1331,Mohi Uddin,11160,M R Traders 1,Targeted Specialist,High Potential,884058.0,0.02,996,888.0,850,8.8,100.0,100.0,97,0.9,NO,Normal
+902,95,Md. Monjurul Haque,SM000195,Tasin Traders,Targeted Specialist,High Potential,881206.0,0.02,174,5064.0,161,1.9,100.0,100.0,83,4.9,NO,Normal
+903,1076,Imam Hossain,11080,Muntaha Enterprise,Targeted Specialist,High Potential,843409.2,0.02,178,4738.0,166,1.7,100.0,100.0,98,0.1,NO,Normal
+904,234,MD. Esmail Howlader,SM000468,Sikder Store,Targeted Specialist,High Potential,839658.8,0.02,995,844.0,831,8.5,100.0,100.0,98,0.1,NO,Normal
+905,701,Shamol Kumar Guha,10856,MR Trading,Targeted Specialist,High Potential,836299.7,0.02,294,2845.0,224,2.5,100.0,100.0,88,1.4,NO,Normal
+906,1468,Debasish Biswas,SM000712,Boishakhi Enterprise,Targeted Specialist,High Potential,833248.7,0.02,21,39679.0,21,1.1,100.0,100.0,20,29.0,NO,Normal
+907,1065,Rajib Ahmed,11069,Shahadat Store,Targeted Specialist,High Potential,817922.2,0.02,100,8179.0,86,1.1,100.0,100.0,76,44.6,NO,Normal
+908,903,MD Alamin Hossain,21120008,Faruk & Brothers,Targeted Specialist,High Potential,811852.2,0.02,257,3159.0,171,2.0,100.0,100.0,87,7.7,NO,Normal
+909,202,Elius Hossain,SM000412,Siam Enterprise,Targeted Specialist,High Potential,788455.7,0.02,224,3520.0,196,4.8,100.0,100.0,41,0.3,NO,Normal
+910,760,Obaidur Rahman Ripon,10228,NS Traders,Targeted Specialist,High Potential,780267.0,0.02,307,2542.0,248,2.6,100.0,100.0,96,0.8,NO,Normal
+911,1206,Saju Mahmud,11049,Fozlu & Sons,Low-Productivity Laggard,Needs Intervention,772905.1,0.02,259,2984.0,446,4.8,58.1,67.3,93,4.8,NO,Normal
+912,869,Manob Kumar,21110060,Shahidul Traders,Targeted Specialist,High Potential,771083.4,0.02,1923,401.0,1513,15.6,100.0,100.0,97,0.8,NO,Normal
+913,1335,Joj Mia,11164,Sonali Bazar,Low-Productivity Laggard,Needs Intervention,762550.8,0.02,2311,330.0,2336,24.9,98.9,99.3,94,10.8,NO,Normal
+914,1085,Sumon Chandra Pal,11086,Noor Enterprise,Targeted Specialist,High Potential,758217.0,0.02,103,7361.0,88,1.4,100.0,100.0,64,4.6,NO,Normal
+915,1465,Musarof Hossen,SM000709,Tonusree Enterprise,Targeted Specialist,High Potential,695150.0,0.02,299,2325.0,218,9.1,100.0,100.0,24,1.0,NO,Normal
+916,53,Md. Al Amin Akanda,SM000124,Laxmi Narayan Bhander1,Low-Productivity Laggard,Needs Intervention,665846.7,0.01,385,1729.0,415,5.8,92.8,93.4,71,0.5,NO,Normal
+917,1448,Md Ferdous,SM000692,Ferdous Traders,Targeted Specialist,High Potential,650240.0,0.01,3,216747.0,2,0.7,100.0,100.0,3,1.7,YES,Ghost Orders (High revenue with no recorded visit audit trail)
+918,167,Abu Abdull,SM000356,Nusrat & Sakib Enterprise,Targeted Specialist,High Potential,638195.4,0.01,468,1364.0,395,4.4,100.0,100.0,90,4.1,NO,Normal
+919,1471,Bipul Ahmed,SM000715,Nirala Traders,Low-Productivity Laggard,Needs Intervention,614284.0,0.01,351,1750.0,413,22.9,85.0,82.6,18,0.2,NO,Normal
+920,924,Abu Sayeed,24050010,Mirajul Traders,Targeted Specialist,High Potential,610206.6,0.01,559,1092.0,532,24.2,100.0,100.0,22,2.1,NO,Normal
+921,1388,Arifur Rahman,11026,Foijane Khaja Newaj Enterprise,Targeted Specialist,High Potential,587271.6,0.01,113,5197.0,105,1.9,100.0,100.0,55,12.7,NO,Normal
+922,158,Sohel Rana,SM000342,Mison Kumar Ray,Targeted Specialist,High Potential,586055.2,0.01,678,864.0,519,5.2,100.0,100.0,99,1.6,NO,Normal
+923,91,Md. Imran Hossain,SM000186,Nibir Traders,Targeted Specialist,High Potential,569621.6,0.01,284,2006.0,222,2.6,100.0,100.0,84,5.1,NO,Normal
+924,1360,Shoaeb Hasan,11188,Laxmi Narayan Bhander1,Targeted Specialist,High Potential,560672.6,0.01,797,703.0,592,7.5,100.0,100.0,79,19.6,NO,Normal
+925,385,Md Sumon Miah,SM000128,New Biswanath Vander,Targeted Specialist,High Potential,557135.2,0.01,421,1323.0,360,3.7,100.0,100.0,98,1.4,NO,Normal
+926,200,Md. Saiful Islam,SM000409,Bhai Bhai Store,Targeted Specialist,High Potential,527236.4,0.01,2099,251.0,1558,15.9,100.0,100.0,98,18.4,NO,Normal
+927,1380,Md. Rafikul Islam 2,11208,Rumi Enterprise,Targeted Specialist,High Potential,519112.6,0.01,1634,318.0,1264,12.9,100.0,100.0,98,0.5,NO,Normal
+928,511,Bidya Miah,SM000381,J.F Corporation,Targeted Specialist,High Potential,518107.0,0.01,429,1208.0,351,3.6,100.0,100.0,97,1.6,NO,Normal
+929,1034,Md. Babul Mia,10964,Madina Traders-DHKS,Low-Productivity Laggard,Needs Intervention,505010.0,0.01,119,4244.0,148,4.6,80.4,84.0,32,2.2,NO,Normal
+930,1469,Md Motabbir Mia,SM000713,Alamgir Traders,Targeted Specialist,High Potential,464119.0,0.01,29,16004.0,22,1.2,100.0,100.0,19,11.2,NO,Normal
+931,1168,M. Atiqul Islam,10337,Foijane Khaja Newaj Enterprise,Targeted Specialist,High Potential,454435.4,0.01,197,2307.0,165,2.1,100.0,100.0,78,5.7,NO,Normal
+932,1419,Md. Ataur Rahman,SM000663,Ayon Store,Targeted Specialist,High Potential,447713.2,0.01,83,5394.0,61,2.0,100.0,100.0,30,1.7,NO,Normal
+933,1460,Md Atikur Rahman,SM000704,Tanha Tanisha Commercial Service,Low-Productivity Laggard,Needs Intervention,431272.7,0.01,873,494.0,1384,34.6,63.1,96.0,40,0.3,NO,Normal
+934,51,Abdus Salam Mir,SM000120,Kalipod Roy & Sons,Targeted Specialist,High Potential,424549.0,0.01,357,1189.0,302,3.4,100.0,100.0,89,0.7,NO,Normal
+935,47,Md Aminul Islam HANC,SM000113,Hani Enterprise,Targeted Specialist,High Potential,388439.8,0.01,121,3210.0,121,3.5,100.0,100.0,35,1.0,NO,Normal
+936,930,Sultan Mahmud,10799,Zihad Traders,Targeted Specialist,High Potential,381696.5,0.01,265,1440.0,204,2.6,100.0,100.0,77,0.4,NO,Normal
+937,1113,Md. Shahinul Islam,11004,Anha Enterprise,Targeted Specialist,High Potential,363667.55,0.01,255,1426.0,219,3.0,100.0,100.0,73,0.4,NO,Normal
+938,318,Forkanur Rahman,SM000012,AlBarakah Enterprise,Targeted Specialist,High Potential,354204.8,0.01,145,2443.0,126,2.3,100.0,100.0,54,0.7,NO,Normal
+939,203,Abdul Kayum,SM000414,Sanjit Store,Targeted Specialist,High Potential,350849.8,0.01,250,1403.0,204,2.3,100.0,100.0,89,0.8,NO,Normal
+940,238,MD. Nadiur Rahman,SM000472,Sikder & Sons,Targeted Specialist,High Potential,277088.0,0.01,1598,173.0,1261,13.3,100.0,100.0,95,5.1,NO,Normal
+941,539,Md. Obidul Haque,SM000450,Jugal Krishna Paul,Low-Productivity Laggard,Needs Intervention,261119.0,0.01,140,1865.0,153,2.0,91.5,91.2,78,6.3,NO,Normal
+942,542,Md. Shah Alom,SM000458,Sakura Traders,Low-Productivity Laggard,Needs Intervention,248253.6,0.01,90,2758.0,190,4.6,47.4,67.0,41,6.0,NO,Normal
+943,1064,Ajmir Hossain Pabel,11068,Madina Traders,Targeted Specialist,High Potential,247066.25,0.01,219,1128.0,187,3.1,100.0,100.0,61,0.1,NO,Normal
+944,1081,Saiful Khan,11073,Madina Enterprise,Targeted Specialist,High Potential,236602.8,0.01,122,1939.0,106,1.2,100.0,100.0,85,3.6,NO,Normal
+945,1464,MD Azharul Islam Akanda,SM000708,Shamim Store,Targeted Specialist,High Potential,228935.2,0.0,193,1186.0,78,6.5,100.0,100.0,12,4.4,NO,Normal
+946,1467,Belal Ahmed,SM000711,Mahfuz Enterprise,Low-Productivity Laggard,Needs Intervention,219251.8,0.0,56,3915.0,62,5.2,90.3,89.5,12,0.8,NO,Normal
+947,1443,Abdullah Al Sabid Bin Shahid,SM000687,Riyadh And Brothers,Targeted Specialist,High Potential,211190.2,0.0,29,7282.0,16,1.5,100.0,100.0,11,6.0,NO,Normal
+948,1170,Nezam Uddin,10404,Foijane Khaja Newaj Enterprise,Targeted Specialist,High Potential,206801.0,0.0,137,1509.0,113,1.8,100.0,100.0,63,1.1,NO,Normal
+949,413,Md. Aminur Rahman,SM000196,Tasin Traders,Targeted Specialist,High Potential,198277.2,0.0,338,587.0,290,3.3,100.0,98.5,87,1.7,NO,Normal
+950,423,Md. Shamim Hossain,SM000213,Liza Enterprise,Low-Productivity Laggard,Needs Intervention,166566.4,0.0,307,543.0,363,4.8,84.6,92.4,76,10.2,NO,Normal
+951,1442,Md. Alamgir Hossen,SM000686,Bhai Bhai EnterpriseTNG,Low-Productivity Laggard,Needs Intervention,159067.0,0.0,207,768.0,216,16.6,95.8,99.3,13,1.8,NO,Normal
+952,52,Md. Shafiqul Islam,SM000122,Laxmi Narayan Bhander,Targeted Specialist,High Potential,144821.6,0.0,408,355.0,340,4.9,100.0,100.0,69,0.3,NO,Normal
+953,705,Saiful Islam,10860,Ashraf Enterprise,Targeted Specialist,High Potential,137575.0,0.0,362,380.0,319,4.8,100.0,100.0,66,2.1,NO,Normal
+954,1216,Muhammad Osman,11067,Muntaha Enterprise,Targeted Specialist,High Potential,131274.8,0.0,111,1183.0,90,1.2,100.0,100.0,74,0.4,NO,Normal
+955,1058,Eusuf Ali,11060,Sinha Traders,Targeted Specialist,High Potential,127753.0,0.0,138,926.0,117,1.7,100.0,100.0,68,2.0,NO,Normal
+956,324,Mohammad Ali,SM000021,S K Enterprise,Targeted Specialist,High Potential,117342.4,0.0,144,815.0,126,2.1,100.0,100.0,60,0.4,NO,Normal
+957,1073,Md. Alahi Mia,11089,Dulal Store COMC,Targeted Specialist,High Potential,115380.85,0.0,162,712.0,154,5.0,100.0,100.0,31,0.5,NO,Normal
+958,1470,Pinku Dey,SM000714,Iqra Enterprise,Targeted Specialist,High Potential,108974.8,0.0,21,5189.0,16,1.0,100.0,100.0,16,4.3,NO,Normal
+959,383,Md. Darbesh Mia,SM000123,Laxmi Narayan Bhander,Targeted Specialist,High Potential,105888.0,0.0,258,410.0,216,2.2,100.0,100.0,98,0.5,NO,Normal
+960,319,Palash Das,SM000013,AlBarakah Enterprise,Targeted Specialist,High Potential,93223.0,0.0,208,448.0,166,2.5,100.0,100.0,67,0.5,NO,Normal
+961,1218,Rayhan Ahmed,11074,Madina Enterprise,Targeted Specialist,High Potential,58991.1,0.0,144,410.0,130,1.8,100.0,100.0,74,4.6,NO,Normal
+962,1310,Md Mahamudul Hasan,11141,Madina Traders,Targeted Specialist,High Potential,58949.6,0.0,137,430.0,98,1.1,100.0,100.0,86,3.4,NO,Normal
+963,1126,Nasir Ahamed,south 3,Anha Enterprise,Targeted Specialist,High Potential,41696.0,0.0,24,1737.0,24,1.6,100.0,100.0,15,10.1,NO,Normal
+964,1128,Amir Hossain Selim,south 4,Pita Mata General store,Low-Productivity Laggard,Needs Intervention,18275.0,0.0,1,18275.0,2,1.0,50.0,50.0,2,61.1,NO,Normal
+965,1270,Alam Miah,11101,Karnafuly Trading,Targeted Specialist,High Potential,14833.0,0.0,2,7416.0,1,0.5,100.0,100.0,2,215.4,NO,Normal
+966,1269,SR #1269,,Unknown Territory,Inactive / Dormant,Dormant,0,0.0,0,0,13,1.4,0.0,0.0,9,54.0,NO,Normal

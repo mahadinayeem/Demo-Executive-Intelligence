@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 3 — Customer Retention & Behavioral Segmentation | SmartPitch Advisor™</title>
+<meta name="description" content="Retail Spotlight™ — RFM Segmentation, Churn Risk Prediction, Silent Bleed & Drop-Off Analysis">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script src="module3_data.js?v=20260915_3"></script>
+<style>
+:root {
+  --bg:#060912; --bg2:#0d1117; --bg3:#161b27;
+  --card:#111827; --card2:#1a2235;
+  --border:#1e2d45; --border2:#263350;
+  --text:#f0f4ff; --text2:#8899bb; --text3:#5a6a88;
+  --accent:#4f8ef7; --accent2:#7c3aed;
+  --gold:#f59e0b; --emerald:#10b981; --rose:#f43f5e;
+  --cyan:#06b6d4; --orange:#f97316; --violet:#8b5cf6;
+}
+[data-theme="light"]{
+  --bg:#f8fafc; --bg2:#ffffff; --bg3:#f1f5f9;
+  --card:#ffffff; --card2:#f8fafc;
+  --border:#e2e8f0; --border2:#cbd5e1;
+  --text:#0f172a; --text2:#334155; --text3:#64748b;
+}
+[data-theme="light"] .header { background:linear-gradient(135deg,#fff 0%,#f8fafc 50%,#fff 100%); }
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* ── HEADER ─────────────────────────────────────── */
+.header{
+  background:linear-gradient(135deg,#060912 0%,#0d1117 40%,#111827 70%,#0d1117 100%);
+  border-bottom:1px solid var(--border);
+  padding:22px 40px; position:sticky; top:0; z-index:100;
+}
+.header-inner{max-width:1700px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.module-badge{
+  background:linear-gradient(135deg,var(--rose),var(--orange));
+  color:#fff;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 12px;border-radius:20px;margin-bottom:6px;display:inline-block;
+}
+.header h1{font-size:clamp(16px,2vw,22px);font-weight:800;color:var(--text);line-height:1.2}
+.header h1 span{color:var(--accent)}
+.header-right{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hstat{text-align:center;padding:0 16px;border-right:1px solid var(--border)}
+.hstat:last-of-type{border-right:none}
+.hstat-val{font-size:20px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--accent)}
+.hstat-val.danger{color:var(--rose)}
+.hstat-val.warn{color:var(--gold)}
+.hstat-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.8px;margin-top:2px}
+.btn{
+  background:var(--card);border:1px solid var(--border2);color:var(--text);
+  padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;font-size:12px;
+  display:flex;align-items:center;gap:7px;transition:all .2s;white-space:nowrap;
+}
+.btn:hover{background:var(--card2);border-color:var(--accent);color:var(--accent)}
+.btn svg{flex-shrink:0}
+
+/* ── NAV ─────────────────────────────────────────── */
+.nav{background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:73px;z-index:99}
+.nav-inner{max-width:1700px;margin:0 auto;display:flex;overflow-x:auto}
+.nav-tab{
+  padding:13px 22px;font-size:13px;font-weight:600;color:var(--text3);cursor:pointer;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s;
+  display:flex;align-items:center;gap:8px;
+}
+.nav-tab:hover{color:var(--text2);background:rgba(79,142,247,.05)}
+.nav-tab.active{color:var(--accent);border-bottom-color:var(--accent);background:rgba(79,142,247,.07)}
+.nav-tab .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+
+/* ── MAIN ─────────────────────────────────────────── */
+.main{max-width:1700px;margin:0 auto;padding:28px 40px}
+.section{display:none;animation:fadeIn .3s ease}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── KPI CARDS ───────────────────────────────────── */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:28px}
+.kpi{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:20px 22px;position:relative;overflow:hidden;transition:transform .25s,border-color .25s;
+}
+.kpi:hover{transform:translateY(-3px);border-color:var(--border2)}
+.kpi.danger{border-color:rgba(244,63,94,.25)}
+.kpi.danger:hover{border-color:var(--rose)}
+.kpi.warn{border-color:rgba(245,158,11,.2)}
+.kpi.warn:hover{border-color:var(--gold)}
+.kpi-glow{position:absolute;inset:0;background:radial-gradient(circle at 10% 10%,rgba(79,142,247,.07),transparent 65%);pointer-events:none}
+.kpi.danger .kpi-glow{background:radial-gradient(circle at 10% 10%,rgba(244,63,94,.1),transparent 65%)}
+.kpi.warn .kpi-glow{background:radial-gradient(circle at 10% 10%,rgba(245,158,11,.08),transparent 65%)}
+.kpi-lbl{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+.kpi-val{font-size:26px;font-weight:800;color:var(--text);font-family:'JetBrains Mono',monospace;line-height:1}
+.kpi-val.danger{color:var(--rose)}
+.kpi-val.warn{color:var(--gold)}
+.kpi-val.good{color:var(--emerald)}
+.kpi-sub{font-size:12px;color:var(--text3);margin-top:6px;display:flex;align-items:center;gap:4px}
+.kpi-sub .pill{
+  font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;
+  background:rgba(244,63,94,.15);color:var(--rose);
+}
+.kpi-sub .pill.g{background:rgba(16,185,129,.15);color:var(--emerald)}
+
+/* ── CHART CARDS ─────────────────────────────────── */
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:20px;margin-bottom:20px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px;margin-bottom:20px}
+.g1{display:grid;grid-template-columns:1fr;gap:20px;margin-bottom:20px}
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:22px;display:flex;flex-direction:column;
+}
+.card h3{font-size:15px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.badge{background:rgba(79,142,247,.1);color:var(--accent);font-size:11px;padding:2px 9px;border-radius:10px;font-weight:600}
+.badge.rose{background:rgba(244,63,94,.1);color:var(--rose)}
+.badge.gold{background:rgba(245,158,11,.1);color:var(--gold)}
+.badge.emerald{background:rgba(16,185,129,.1);color:var(--emerald)}
+.badge.violet{background:rgba(139,92,246,.1);color:var(--violet)}
+.card-desc{font-size:12px;color:var(--text3);line-height:1.5;margin-bottom:18px}
+.chart-wrap{flex:1;min-height:320px;position:relative}
+
+/* ── INSIGHT BOX ─────────────────────────────────── */
+.insight{
+  background:rgba(79,142,247,.05);border-left:3px solid var(--accent);
+  padding:14px 18px;border-radius:0 8px 8px 0;margin-top:16px;
+}
+.insight h4{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.insight p{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:6px}
+.insight p:last-child{margin-bottom:0}
+.insight.rose{border-left-color:var(--rose);background:rgba(244,63,94,.05)}
+.insight.rose h4{color:var(--rose)}
+.insight.gold{border-left-color:var(--gold);background:rgba(245,158,11,.05)}
+.insight.gold h4{color:var(--gold)}
+.insight.emerald{border-left-color:var(--emerald);background:rgba(16,185,129,.05)}
+.insight.emerald h4{color:var(--emerald)}
+
+/* ── TABLES ──────────────────────────────────────── */
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{
+  padding:10px 14px;background:var(--bg3);color:var(--text2);font-weight:600;
+  text-transform:uppercase;letter-spacing:.4px;font-size:10px;
+  border-bottom:1px solid var(--border);position:sticky;top:0;z-index:2;
+}
+th:first-child{border-radius:6px 0 0 0}
+th:last-child{border-radius:0 6px 0 0}
+td{padding:12px 14px;border-bottom:1px solid rgba(30,45,69,.5);transition:background .15s}
+tr:hover td{background:var(--card2)}
+.mono{font-family:'JetBrains Mono',monospace;font-weight:500}
+.hl{color:var(--accent);font-weight:600}
+.tbl-wrap{overflow-x:auto;max-height:420px}
+.tbl-wrap::-webkit-scrollbar{width:5px;height:5px}
+.tbl-wrap::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ── RISK BADGE ──────────────────────────────────── */
+.risk-badge{
+  display:inline-block;padding:2px 10px;border-radius:20px;font-size:10px;font-weight:700;
+}
+.risk-badge.High{background:rgba(244,63,94,.15);color:var(--rose)}
+.risk-badge.Medium{background:rgba(245,158,11,.15);color:var(--gold)}
+.risk-badge.Low{background:rgba(16,185,129,.15);color:var(--emerald)}
+
+/* ── SEGMENT PROFILE CARDS ───────────────────────── */
+.profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:20px}
+.profile-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:20px;position:relative;overflow:hidden;transition:transform .2s;
+}
+.profile-card:hover{transform:translateY(-2px)}
+.profile-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.profile-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.profile-name{font-weight:700;font-size:15px;color:var(--text)}
+.profile-sub{font-size:11px;color:var(--text3);margin-top:2px}
+.profile-stat{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)}
+.profile-stat:last-child{border-bottom:none}
+.profile-stat-lbl{font-size:11px;color:var(--text3)}
+.profile-stat-val{font-size:13px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--text)}
+.profile-playbook{
+  background:rgba(79,142,247,.06);border:1px solid rgba(79,142,247,.15);
+  border-radius:8px;padding:12px;margin-top:12px;
+}
+.profile-playbook h5{font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.profile-playbook p{font-size:11px;color:var(--text2);line-height:1.5}
+
+/* ── DONUT CENTER TEXT ───────────────────────────── */
+.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
+.donut-center-val{font-size:24px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--text)}
+.donut-center-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
+
+/* ── FILTER BAR ──────────────────────────────────── */
+.filter-bar{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--bg3);border:1px solid var(--border);
+  padding:12px 16px;border-radius:10px;margin-bottom:14px;
+}
+.filter-bar label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.filter-select{
+  background:var(--card);border:1px solid var(--border2);color:var(--text);
+  padding:6px 10px;border-radius:7px;font-size:12px;cursor:pointer;
+  font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;
+}
+.filter-select:hover,.filter-select:focus{border-color:var(--accent)}
+.filter-input{
+  background:var(--card);border:1px solid var(--border2);color:var(--text);
+  padding:6px 10px;border-radius:7px;font-size:12px;width:140px;
+  font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;
+}
+.filter-input:focus{border-color:var(--accent)}
+.filter-count{margin-left:auto;font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.dl-btn{
+  margin-left:auto;background:var(--card);border:1px solid var(--border2);color:var(--text);
+  padding:5px 12px;border-radius:7px;cursor:pointer;font-size:11px;font-weight:600;
+  display:flex;align-items:center;gap:5px;transition:all .2s;
+}
+.dl-btn:hover{border-color:var(--accent);color:var(--accent)}
+.chart-dl{
+  margin-left:auto;background:transparent;border:1px solid var(--border2);color:var(--text3);
+  padding:4px 10px;border-radius:6px;cursor:pointer;font-size:10px;font-weight:600;
+  display:flex;align-items:center;gap:4px;transition:all .2s;white-space:nowrap;flex-shrink:0;
+}
+.chart-dl:hover{border-color:var(--accent);color:var(--accent);background:rgba(79,142,247,.06)}
+
+@media(max-width:768px){
+  .header{padding:16px 20px}
+  .main{padding:16px 20px}
+  .g2,.g3{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div>
+      <span class="module-badge">Module 3 · Retail Spotlight™</span>
+      <h1>Customer Retention & <span>Behavioral Segmentation</span></h1>
+    </div>
+    <div class="header-right">
+      <div class="hstat"><div class="hstat-val" id="hActive">--</div><div class="hstat-lbl">Active Outlets</div></div>
+      <div class="hstat"><div class="hstat-val danger" id="hRisk">--</div><div class="hstat-lbl">Revenue at Risk</div></div>
+      <div class="hstat"><div class="hstat-val warn" id="hBleed">--</div><div class="hstat-lbl">Silent Bleed</div></div>
+      <button class="btn" onclick="exportCSVAll()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Export CSVs
+      </button>
+      <button class="btn" onclick="toggleTheme()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-inner">
+    <div class="nav-tab active" id="tab-rfm"    onclick="showTab('rfm')">   <span class="dot" style="color:var(--emerald)"></span>RFM Segmentation</div>
+    <div class="nav-tab"        id="tab-churn"  onclick="showTab('churn')"> <span class="dot" style="color:var(--rose)"></span>Churn & Drop-Off</div>
+    <div class="nav-tab"        id="tab-risk"   onclick="showTab('risk')">  <span class="dot" style="color:var(--orange)"></span>Churn Risk Radar</div>
+    <div class="nav-tab"        id="tab-bleed"  onclick="showTab('bleed')"> <span class="dot" style="color:var(--gold)"></span>Silent Bleed</div>
+    <div class="nav-tab"        id="tab-flags"  onclick="showTab('flags')"> <span class="dot" style="color:var(--violet)"></span>Red Flag Outlets</div>
+    <div class="nav-tab"        id="tab-play"   onclick="showTab('play')">  <span class="dot" style="color:var(--cyan)"></span>Commercial Playbook</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- GLOBAL KPI ROW (always visible) -->
+  <div class="kpi-row" id="globalKpis">
+    <div class="kpi"><div class="kpi-glow"></div><div class="kpi-lbl">Total Active Outlets</div><div class="kpi-val good" id="kActive">--</div><div class="kpi-sub">Ordered in last 60 days</div></div>
+    <div class="kpi warn"><div class="kpi-glow"></div><div class="kpi-lbl">Churn Risk Outlets</div><div class="kpi-val warn" id="kRiskCount">--</div><div class="kpi-sub"><span class="pill">Immediate Action</span></div></div>
+    <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Revenue at Churn Risk</div><div class="kpi-val danger" id="kRiskRev">--</div><div class="kpi-sub"><span class="pill">2× their normal cycle</span></div></div>
+    <div class="kpi warn"><div class="kpi-glow"></div><div class="kpi-lbl">Silent Bleed Outlets</div><div class="kpi-val warn" id="kBleedCount">--</div><div class="kpi-sub">Active but AOV down >50%</div></div>
+    <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Wallet Share Lost</div><div class="kpi-val danger" id="kBleedRev">--</div><div class="kpi-sub">Silent Bleed revenue loss</div></div>
+    <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Red Flag Outlets</div><div class="kpi-val danger" id="kFlags">--</div><div class="kpi-sub">>5 visits, 0 conversions</div></div>
+  </div>
+
+  <!-- ═══════════ TAB: RFM ═══════════ -->
+  <div id="sec-rfm" class="section active">
+    <div class="g2">
+      <div class="card">
+        <h3>RFM Retail Universe <span class="badge">Outlet Distribution</span> <button class="chart-dl" onclick="chartDL('rfm-donut')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">How your 184K+ active retailers are distributed across behavioural segments. Champions represent your highest-value segment.</p>
+        <div class="chart-wrap" style="position:relative">
+          <canvas id="chartRFMDonut"></canvas>
+          <div class="donut-center" id="rfmCenter">
+            <div class="donut-center-val" id="rfmCenterVal">--</div>
+            <div class="donut-center-lbl" id="rfmCenterLbl">Active Only</div>
+          </div>
+        </div>
+        <div class="insight emerald">
+          <h4>How to read this</h4>
+          <p>Each slice = % of active retail outlets in that RFM tier. Larger Loyal Base + Champions = healthier retention. A growing At-Risk slice = immediate revenue threat.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Revenue Contribution <span class="badge">vs Outlet Share</span> <button class="chart-dl" onclick="chartDL('rfm-bar')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">Champions are a small % of outlets but drive disproportionate revenue — protect them at all cost.</p>
+        <div class="chart-wrap">
+          <canvas id="chartRFMBar"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-grid" id="profileGrid"></div>
+  </div>
+
+  <!-- ═══════════ TAB: CHURN ═══════════ -->
+  <div id="sec-churn" class="section">
+    <div class="g2">
+      <div class="card">
+        <h3>Buyer Drop-Off Funnel <span class="badge rose">Retention</span> <button class="chart-dl" onclick="chartDL('churn-funnel')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">Total active base → At-Risk → Lost. Each drop is quantified with exact lost revenue.</p>
+        <div class="chart-wrap">
+          <canvas id="chartFunnel"></canvas>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Root Cause Analysis <span class="badge rose">Visit Gap vs Service Gap</span> <button class="chart-dl" onclick="chartDL('root-cause')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">For every churned outlet — why did they leave? Was it a <strong>Visit Gap</strong> (field never came) or a <strong>Service Gap</strong> (visited but failed to retain)?</p>
+        <div class="chart-wrap">
+          <canvas id="chartRootCause"></canvas>
+        </div>
+        <div class="insight rose">
+          <h4>Action Insight</h4>
+          <p id="rootCauseInsight">Loading...</p>
+        </div>
+      </div>
+    </div>
+    <div class="g1">
+      <div class="card">
+        <h3>Churn KPI Summary <span class="badge rose">Drop-Off</span></h3>
+        <div class="kpi-row" style="margin-bottom:0;margin-top:12px">
+          <div class="kpi danger" style="background:var(--bg3)"><div class="kpi-glow"></div><div class="kpi-lbl">Churned Buyers</div><div class="kpi-val danger" id="churnCount">--</div></div>
+          <div class="kpi danger" style="background:var(--bg3)"><div class="kpi-glow"></div><div class="kpi-lbl">Lost Revenue</div><div class="kpi-val danger" id="churnRev">--</div></div>
+          <div class="kpi warn" style="background:var(--bg3)"><div class="kpi-glow"></div><div class="kpi-lbl">Visit Gap (No Field)</div><div class="kpi-val warn" id="visitGap">--</div></div>
+          <div class="kpi" style="background:var(--bg3)"><div class="kpi-glow"></div><div class="kpi-lbl">Service Gap (Visited)</div><div class="kpi-val" id="serviceGap">--</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ TAB: CHURN RISK RADAR ═══════════ -->
+  <div id="sec-risk" class="section">
+    <div class="kpi-row">
+      <div class="kpi warn"><div class="kpi-glow"></div><div class="kpi-lbl">At-Risk Outlets (2×+ gap)</div><div class="kpi-val warn" id="riskTotal">--</div><div class="kpi-sub">Order gap = 2x their norm</div></div>
+      <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">HIGH Risk (2.5×+ gap)</div><div class="kpi-val danger" id="riskHigh">--</div><div class="kpi-sub">Immediate intervention needed</div></div>
+      <div class="kpi"><div class="kpi-glow"></div><div class="kpi-lbl">Medium Risk (2–2.5×)</div><div class="kpi-val" id="riskMed">--</div><div class="kpi-sub">Monitor & call in 7 days</div></div>
+      <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Revenue at Immediate Risk</div><div class="kpi-val danger" id="riskRev">--</div><div class="kpi-sub">Expected next-order value</div></div>
+    </div>
+
+    <div class="g2">
+      <div class="card">
+        <h3>Risk Distribution <span class="badge gold">High vs Medium</span> <button class="chart-dl" onclick="chartDL('risk-dist')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">Outlet count by risk level. High = order gap is 2.5× their historical average, meaning they are almost certainly about to churn.</p>
+        <div class="chart-wrap">
+          <canvas id="chartRiskDist"></canvas>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Revenue at Risk by Territory <span class="badge gold">Geo Breakdown</span> <button class="chart-dl" onclick="chartDL('risk-territory')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">Which territories have the highest concentration of at-risk revenue? Prioritize these for SR outreach.</p>
+        <div class="chart-wrap">
+          <canvas id="chartRiskTerritory"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Churn Risk Radar — Outlet List <span class="badge gold">Top 100</span></h3>
+      <p class="card-desc">Regular buyers (≥3 orders) whose current order silence exceeds 2.0× their historical purchase interval. Higher multiplier = greater urgency.</p>
+      <div class="filter-bar">
+        <label>Risk Level</label>
+        <select class="filter-select" id="fRiskLevel" onchange="filterRisk()">
+          <option value="">All</option>
+          <option value="High">High (2.5×+)</option>
+          <option value="Medium">Medium (2–2.5×)</option>
+        </select>
+        <label style="margin-left:8px">Min Rev at Risk</label>
+        <input class="filter-input" id="fRiskMinRev" type="number" placeholder="e.g. 5000" oninput="filterRisk()">
+        <span class="filter-count" id="riskCount"></span>
+        <button class="dl-btn" onclick="downloadCSV('risk')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Download
+        </button>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>Outlet ID</th><th>Territory</th><th>Avg Gap (Days)</th>
+            <th>Current Silence</th><th>Gap Multiplier</th><th>Risk Level</th><th>Rev at Risk</th>
+          </tr></thead>
+          <tbody id="riskTbody"></tbody>
+        </table>
+      </div>
+      <div class="insight gold">
+        <h4>7-Day Follow-Up Rule</h4>
+        <p>Research shows 55% of orders are placed same-day as a visit. For high-value silent buyers, if no order within 7 days of last visit → mandatory follow-up visit required. The average conversion window is <strong>7.38 days</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ TAB: SILENT BLEED ═══════════ -->
+  <div id="sec-bleed" class="section">
+    <div class="kpi-row">
+      <div class="kpi warn"><div class="kpi-glow"></div><div class="kpi-lbl">Bleeding Outlets</div><div class="kpi-val warn" id="bleedTotal">--</div><div class="kpi-sub">Active, but AOV contracted</div></div>
+      <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Revenue Lost (Wallet Share)</div><div class="kpi-val danger" id="bleedLost">--</div><div class="kpi-sub">vs. their own historical AOV</div></div>
+    </div>
+
+    <div class="g2">
+      <div class="card">
+        <h3>AOV Contraction Severity <span class="badge gold">Silent Bleed</span> <button class="chart-dl" onclick="chartDL('bleed-severity')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">Scatter-like visualization: how many outlets are bleeding at different severity levels (% AOV drop).</p>
+        <div class="chart-wrap">
+          <canvas id="chartBleedSeverity"></canvas>
+        </div>
+        <div class="insight gold">
+          <h4>What is Silent Bleed?</h4>
+          <p>These outlets still place orders. But their basket size has shrunk by >50%. This means competitors have taken over their wallet — your SKUs are losing shelf space invisibly.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Lost Revenue by Territory <span class="badge gold">Geo Exposure</span> <button class="chart-dl" onclick="chartDL('bleed-territory')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">Territories with the highest accumulated wallet-share loss. These need immediate cross-sell re-engagement (see Module 2 Basket Analysis).</p>
+        <div class="chart-wrap">
+          <canvas id="chartBleedTerritory"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Silent Bleed Outlet List <span class="badge gold">Top 100 by Lost Revenue</span></h3>
+      <div class="filter-bar">
+        <label>Min AOV Drop</label>
+        <select class="filter-select" id="fBleedDrop" onchange="filterBleed()">
+          <option value="0">Any (≥50%)</option>
+          <option value="60">≥60% Drop</option>
+          <option value="70">≥70% Drop</option>
+          <option value="80">≥80% Drop</option>
+          <option value="90">≥90% Drop</option>
+        </select>
+        <label style="margin-left:8px">Min Wallet Lost</label>
+        <input class="filter-input" id="fBleedMinLost" type="number" placeholder="e.g. 10000" oninput="filterBleed()">
+        <span class="filter-count" id="bleedCount"></span>
+        <button class="dl-btn" onclick="downloadCSV('bleed')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Download
+        </button>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>Outlet ID</th><th>Territory</th><th>Historical AOV</th><th>Recent AOV</th><th>AOV Drop %</th><th>Wallet Lost</th>
+          </tr></thead>
+          <tbody id="bleedTbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ TAB: RED FLAGS ═══════════ -->
+  <div id="sec-flags" class="section">
+    <div class="kpi-row">
+      <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Red Flag Outlets</div><div class="kpi-val danger" id="flagTotal">--</div><div class="kpi-sub">>5 visits, 0 conversions</div></div>
+    </div>
+    <div class="g2">
+      <div class="card">
+        <h3>Red Flag Count Overview <span class="badge violet">Visit vs Conversion</span> <button class="chart-dl" onclick="chartDL('flag-visits')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">The sheer number of outlets that have received multiple field visits but have never generated a single order is a direct SR performance issue.</p>
+        <div class="chart-wrap">
+          <canvas id="chartFlagVisits"></canvas>
+        </div>
+        <div class="insight rose">
+          <h4>What this signals</h4>
+          <p>These are not cold leads — they have been visited 5+ times. The failure to convert indicates either a <strong>product-market mismatch</strong>, a <strong>pricing barrier</strong>, or an <strong>SR capability gap</strong> that requires direct manager intervention.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Red Flags by Territory <span class="badge violet">Field Accountability</span> <button class="chart-dl" onclick="chartDL('flag-territory')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">Which territories have the worst visit-to-conversion failure rate?</p>
+        <div class="chart-wrap">
+          <canvas id="chartFlagTerritory"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Red Flag Outlet List <span class="badge violet">Top 100 by Visits</span></h3>
+      <div class="filter-bar">
+        <label>Min Visits</label>
+        <select class="filter-select" id="fFlagMinVisits" onchange="filterFlags()">
+          <option value="5">Any (>5)</option>
+          <option value="10">≥10 visits</option>
+          <option value="20">≥20 visits</option>
+          <option value="30">≥30 visits</option>
+          <option value="50">≥50 visits</option>
+        </select>
+        <label style="margin-left:8px">Search Outlet ID</label>
+        <input class="filter-input" id="fFlagSearch" type="text" placeholder="Outlet ID..." oninput="filterFlags()">
+        <span class="filter-count" id="flagCount"></span>
+        <button class="dl-btn" onclick="downloadCSV('flags')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Download
+        </button>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Outlet ID</th><th>Territory</th><th>Total Visits</th><th>Last Visit</th><th>Hist. Orders</th></tr></thead>
+          <tbody id="flagTbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ TAB: COMMERCIAL PLAYBOOK ═══════════ -->
+  <div id="sec-play" class="section">
+    <div class="g2" style="margin-bottom:20px">
+      <div class="card" style="border-color:rgba(16,185,129,.3)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <span style="font-size:28px">🏆</span>
+          <div><h3 style="margin-bottom:2px;color:var(--emerald)">Champions</h3><p style="font-size:12px;color:var(--text3)" id="play-champ-sub"></p></div>
+        </div>
+        <div class="insight emerald" style="margin-top:0">
+          <h4>Strategy: Protect & Expand</h4>
+          <p>• <strong>DO NOT</strong> offer commodity discounts — they undermine perceived value.</p>
+          <p>• Use Module 2 basket analysis to push premium SKU combos (UHT Chocolate + IFCMP bundles).</p>
+          <p>• Assign dedicated, senior SRs. Never rotate these accounts without a handoff call.</p>
+          <p>• Invite to exclusive brand activations / first-look previews of new SKUs.</p>
+        </div>
+      </div>
+      <div class="card" style="border-color:rgba(79,142,247,.3)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <span style="font-size:28px">💎</span>
+          <div><h3 style="margin-bottom:2px;color:var(--accent)">Loyal Base</h3><p style="font-size:12px;color:var(--text3)" id="play-loyal-sub"></p></div>
+        </div>
+        <div class="insight" style="margin-top:0">
+          <h4>Strategy: Deepen AOV</h4>
+          <p>• Push volume-based incentives: "Buy 10, get 1 free" on high-margin SKUs.</p>
+          <p>• Cross-sell into categories they haven't bought (use Module 2 basket analysis).</p>
+          <p>• Visit frequency should be at least bi-weekly. Any gap >14 days is a risk signal.</p>
+          <p>• Monthly performance reviews by territory manager for top 30% of Loyal Base.</p>
+        </div>
+      </div>
+      <div class="card" style="border-color:rgba(245,158,11,.3)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <span style="font-size:28px">🌱</span>
+          <div><h3 style="margin-bottom:2px;color:var(--gold)">Potential / Promising</h3><p style="font-size:12px;color:var(--text3)" id="play-pot-sub"></p></div>
+        </div>
+        <div class="insight gold" style="margin-top:0">
+          <h4>Strategy: Build Purchase Habit</h4>
+          <p>• Increase visit frequency — first 3 orders are the most critical. Habit is built by order #3.</p>
+          <p>• Recommend top 3 best-sellers from their territory. Don't overwhelm with full catalogue.</p>
+          <p>• Offer new-outlet onboarding incentive: credit note on 3rd successful order.</p>
+          <p>• Target: convert 30% to Loyal Base within 90 days.</p>
+        </div>
+      </div>
+      <div class="card" style="border-color:rgba(249,115,22,.3)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <span style="font-size:28px">⚠️</span>
+          <div><h3 style="margin-bottom:2px;color:var(--orange)">At-Risk</h3><p style="font-size:12px;color:var(--text3)" id="play-risk-sub"></p></div>
+        </div>
+        <div class="insight" style="border-left-color:var(--orange);background:rgba(249,115,22,.05);margin-top:0">
+          <h4 style="color:var(--orange)">Strategy: Win-Back Campaign</h4>
+          <p>• Manager-level (not SR-level) phone call within 48 hours of identification.</p>
+          <p>• Offer one-time re-activation incentive (not a discount — a free-trial of new SKU).</p>
+          <p>• If unresponsive after 2 attempts → escalate to Area Manager for in-person visit.</p>
+          <p>• Root cause: compare with Churn Risk Radar to see if they appear there too.</p>
+        </div>
+      </div>
+      <div class="card" style="border-color:rgba(244,63,94,.3)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <span style="font-size:28px">💀</span>
+          <div><h3 style="margin-bottom:2px;color:var(--rose)">Lost / Inactive</h3><p style="font-size:12px;color:var(--text3)" id="play-lost-sub"></p></div>
+        </div>
+        <div class="insight rose" style="margin-top:0">
+          <h4>Strategy: Reactivation or Declassify</h4>
+          <p>• Cross-reference with Drop-Off analysis: was it a Visit Gap or Service Gap?</p>
+          <p>• Visit Gap: deploy SR for cold reintroduction visit with fresh product samples.</p>
+          <p>• Service Gap: investigate pricing complaints / product fit before re-engaging.</p>
+          <p>• Any outlet inactive >180 days with no response → flag for territory review.</p>
+        </div>
+      </div>
+      <div class="card" style="border-color:rgba(139,92,246,.3)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <span style="font-size:28px">🚩</span>
+          <div><h3 style="margin-bottom:2px;color:var(--violet)">Red Flag Outlets</h3><p style="font-size:12px;color:var(--text3)" id="play-flags-sub"></p></div>
+        </div>
+        <div class="insight" style="border-left-color:var(--violet);background:rgba(139,92,246,.05);margin-top:0">
+          <h4 style="color:var(--violet)">Strategy: SR Accountability Audit</h4>
+          <p>• Pull the Red Flag CSV → assign each outlet to their responsible SR by territory.</p>
+          <p>• Demand written explanation for each outlet with >10 visits and 0 orders.</p>
+          <p>• If product mismatch: remove from SR's active list, re-evaluate territory assignment.</p>
+          <p>• If SR capability: place under Performance Improvement Plan (PIP) with 30-day target.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+Chart.register(ChartDataLabels);
+Chart.defaults.color = '#5a6a88';
+Chart.defaults.font.family = "'Inter', sans-serif";
+
+const TT = {
+  backgroundColor:'rgba(13,17,23,0.97)',
+  titleColor:'#f0f4ff', bodyColor:'#8899bb',
+  borderColor:'rgba(30,45,69,0.8)', borderWidth:1,
+  padding:12, boxPadding:6, cornerRadius:10,
+  titleFont:{size:13,weight:'700'},
+  bodyFont:{size:12,family:"'JetBrains Mono',monospace"}
+};
+
+function fmt(n, d=1){
+  if(Math.abs(n)>=1e9) return (n/1e9).toFixed(d)+'B';
+  if(Math.abs(n)>=1e6) return (n/1e6).toFixed(d)+'M';
+  if(Math.abs(n)>=1e3) return (n/1e3).toFixed(d)+'K';
+  return n.toFixed(d);
+}
+function fc(n){ return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,','); }
+function pct(a,b){ return b>0?((a/b)*100).toFixed(1)+'%':'0%'; }
+
+const C={};
+function dc(id){ if(C[id]){C[id].destroy();} }
+
+let D;
+const SEG_COLORS = {
+  'Champions':'#10b981','Loyal Base':'#4f8ef7',
+  'Potential':'#f59e0b','At-Risk':'#f97316','Lost':'#f43f5e'
+};
+
+async function initApp(){
+  D = window.MODULE3_DATA || (typeof MODULE3_DATA !== 'undefined' ? MODULE3_DATA : null);
+  if(!D) {
+    try {
+      const resp = await fetch('module3_data.json?t=' + Date.now());
+      D = await resp.json();
+      window.MODULE3_DATA = D;
+    } catch(e) {
+      console.error('Failed to fetch module3_data.json:', e);
+    }
+  }
+  if(!D) {
+    console.warn('MODULE3_DATA not yet available');
+    return;
+  }
+  try { renderGlobal(); } catch(e){ console.error('Error in renderGlobal:', e); }
+  try { renderRFM(); } catch(e){ console.error('Error in renderRFM:', e); }
+  try { renderChurn(); } catch(e){ console.error('Error in renderChurn:', e); }
+  try { renderRisk(); } catch(e){ console.error('Error in renderRisk:', e); }
+  try { renderBleed(); } catch(e){ console.error('Error in renderBleed:', e); }
+  try { renderFlags(); } catch(e){ console.error('Error in renderFlags:', e); }
+  try { renderPlaybook(); } catch(e){ console.error('Error in renderPlaybook:', e); }
+}
+
+if(document.readyState === 'complete' || document.readyState === 'interactive'){
+  setTimeout(initApp, 50);
+} else {
+  document.addEventListener('DOMContentLoaded', initApp);
+  window.addEventListener('load', initApp);
+}
+
+function renderGlobal(){
+  const K = D.kpis || D.summary || {};
+  if(document.getElementById('hActive')) document.getElementById('hActive').innerText = fc(K.total_active || K.active_outlets || 0);
+  if(document.getElementById('hRisk')) document.getElementById('hRisk').innerText   = 'BDT '+fmt(K.churn_risk_rev || K.churn_risk_revenue || 0);
+  if(document.getElementById('hBleed')) document.getElementById('hBleed').innerText  = fc(K.silent_bleed_count || 0);
+
+  if(document.getElementById('kActive')) document.getElementById('kActive').innerText     = fc(K.total_active || K.active_outlets || 0);
+  if(document.getElementById('kRiskCount')) document.getElementById('kRiskCount').innerText  = fc(K.churn_risk_count||0);
+  if(document.getElementById('kRiskRev')) document.getElementById('kRiskRev').innerText    = 'BDT '+fmt(K.churn_risk_rev||K.churn_risk_revenue||0);
+  if(document.getElementById('kBleedCount')) document.getElementById('kBleedCount').innerText = fc(K.silent_bleed_count||0);
+  if(document.getElementById('kBleedRev')) document.getElementById('kBleedRev').innerText   = 'BDT '+fmt(K.silent_bleed_lost||0);
+  if(document.getElementById('kFlags')) document.getElementById('kFlags').innerText      = fc(K.red_flag_count||K.red_flags_count||0);
+}
+
+// ── RFM ──────────────────────────────────────────────────────────────────────
+function renderRFM(){
+  const segs = D.segments;
+  const labels = Object.keys(segs);
+  const counts = labels.map(l=>segs[l].count);
+  const revs   = labels.map(l=>segs[l].revenue);
+  const revPcts= labels.map(l=>segs[l].rev_pct);
+  const colors = labels.map(l=>SEG_COLORS[l]);
+  const totalActive = counts.reduce((a,b)=>a+b,0);
+  // Only count active tiers (Champions + Loyal Base + Potential) for center text
+  const activeOnly = (segs['Champions']?.count||0) + (segs['Loyal Base']?.count||0) + (segs['Potential']?.count||0);
+
+  document.getElementById('rfmCenterVal').innerText = fc(activeOnly);
+  document.getElementById('rfmCenterLbl').innerText = 'Active Only';
+
+  dc('rfmDonut');
+  C['rfmDonut'] = new Chart(document.getElementById('chartRFMDonut'),{
+    type:'doughnut',
+    data:{ labels, datasets:[{data:counts, backgroundColor:colors, borderWidth:2, borderColor:'rgba(6,9,18,.8)'}]},
+    options:{
+      responsive:true, maintainAspectRatio:false, cutout:'62%',
+      plugins:{
+        legend:{position:'right', labels:{color:'#8899bb',font:{size:12},padding:14,
+          generateLabels: chart=>{
+            return labels.map((l,i)=>({
+              text: `${l}  (${fc(counts[i])})`,
+              fillStyle: colors[i], strokeStyle:'transparent', index:i
+            }));
+          }
+        }},
+        tooltip:{...TT, callbacks:{label:ctx=>`${fc(ctx.raw)} outlets (${pct(ctx.raw,totalActive)})`}},
+        datalabels:{
+          color:'#fff', font:{size:11,weight:'700'},
+          formatter:(v,ctx)=>{ const p=(v/totalActive*100); return p>3?p.toFixed(1)+'%':''; }
+        }
+      }
+    }
+  });
+
+  dc('rfmBar');
+  const cntPcts = counts.map(c=>+(c/totalActive*100).toFixed(1));
+  C['rfmBar'] = new Chart(document.getElementById('chartRFMBar'),{
+    type:'bar',
+    data:{
+      labels,
+      datasets:[
+        {label:'Outlet Share %', data:cntPcts, backgroundColor:colors.map(c=>c+'88'), borderColor:colors, borderWidth:1, borderRadius:5, yAxisID:'y'},
+        {label:'Revenue Share %', data:revPcts, backgroundColor:colors.map(c=>c+'44'), borderColor:colors, borderWidth:1, borderDash:[4,4], type:'line', yAxisID:'y', tension:.3, pointRadius:5, pointBackgroundColor:colors}
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{labels:{color:'#8899bb', font:{size:11}}},
+        tooltip:{...TT, callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.raw}%`}},
+        datalabels:{
+          anchor:'end', align:'end', color:ctx=>colors[ctx.dataIndex],
+          font:{size:10,weight:'700'},
+          formatter:(v,ctx)=>ctx.datasetIndex===0?v+'%':null
+        }
+      },
+      scales:{
+        y:{max:100, ticks:{color:'#5a6a88',callback:v=>v+'%'}, grid:{color:'rgba(30,45,69,.3)'},title:{display:true,text:'%',color:'#5a6a88'}},
+        x:{grid:{display:false}, ticks:{color:'#8899bb'}}
+      }
+    }
+  });
+
+  // Profile Cards
+  const profileHTML = labels.map(l=>{
+    const s = segs[l]; const c = SEG_COLORS[l];
+    const icons = {Champions:'🏆','Loyal Base':'💎','Potential':'🌱','At-Risk':'⚠️','Lost':'💀'};
+    const playbook = {
+      Champions:'Upsell premium SKUs. Protect AOV. No discounts.',
+      'Loyal Base':'Increase basket size. Cross-sell via Module 2.',
+      Potential:'Build habit: target 3rd order milestone.',
+      'At-Risk':'Manager-level win-back call within 48 hrs.',
+      Lost:'Root cause review: Visit Gap vs Service Gap.'
+    };
+    return `<div class="profile-card" style="border-top:3px solid ${c}">
+      <div class="profile-header">
+        <div class="profile-icon" style="background:${c}22">${icons[l]}</div>
+        <div><div class="profile-name">${l}</div><div class="profile-sub">${fc(s.count)} Outlets · ${s.rev_pct}% Revenue</div></div>
+      </div>
+      <div class="profile-stat"><span class="profile-stat-lbl">Revenue Contribution</span><span class="profile-stat-val">BDT ${fmt(s.revenue)}</span></div>
+      <div class="profile-stat"><span class="profile-stat-lbl">Avg Order Value (AOV)</span><span class="profile-stat-val">BDT ${fc(Math.round(s.aov))}</span></div>
+      <div class="profile-stat"><span class="profile-stat-lbl">Avg Orders / Outlet</span><span class="profile-stat-val">${s.freq}</span></div>
+      <div class="profile-stat"><span class="profile-stat-lbl">Avg SKU Breadth</span><span class="profile-stat-val">${s.skus}</span></div>
+      <div class="profile-playbook" style="border-color:${c}33;background:${c}0a">
+        <h5 style="color:${c}">Commercial Action</h5>
+        <p>${playbook[l]}</p>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('profileGrid').innerHTML = profileHTML;
+}
+
+// ── CHURN ─────────────────────────────────────────────────────────────────────
+function renderChurn(){
+  const segs = D.segments || D.rfm_segments || {};
+  const dropoff = D.dropoff || { total_lost: 0, lost_revenue: 0, visit_gap: 0, service_gap: 0 };
+
+  document.getElementById('churnCount').innerText = fc(dropoff.total_lost || 0);
+  document.getElementById('churnRev').innerText   = 'BDT '+fmt(dropoff.lost_revenue || 0);
+  document.getElementById('visitGap').innerText   = fc(dropoff.visit_gap || 0);
+  document.getElementById('serviceGap').innerText = fc(dropoff.service_gap || 0);
+
+  // Funnel
+  const totalAll = Object.values(segs).reduce((a,s)=>a+(s.count||0),0);
+  const active = (segs['Champions']?.count||0) + (segs['Loyal Base']?.count||0) + (segs['Potential']?.count||0);
+  const atRisk = segs['At-Risk']?.count || 0;
+  const lost   = segs['Lost']?.count || 0;
+
+  dc('churnFunnel');
+  C['churnFunnel'] = new Chart(document.getElementById('chartFunnel'),{
+    type:'bar',
+    data:{
+      labels:['Total Profiled','Active (L60D)','At-Risk (61-120D)','Churned (>120D)'],
+      datasets:[{
+        label:'Outlets',
+        data:[totalAll, active, atRisk, lost],
+        backgroundColor:['rgba(79,142,247,.8)','rgba(16,185,129,.8)','rgba(249,115,22,.8)','rgba(244,63,94,.8)'],
+        borderRadius:6, borderSkipped:false
+      }]
+    },
+    options:{
+      indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{...TT, callbacks:{label:ctx=>`${fc(ctx.raw)} Outlets`}},
+        datalabels:{
+          anchor:'center', align:'center', color:'#fff',
+          font:{size:12,weight:'700'},
+          formatter:v=>fc(v)
+        }
+      },
+      scales:{
+        x:{grid:{color:'rgba(30,45,69,.3)'}, ticks:{color:'#5a6a88',callback:v=>fmt(v,0)}},
+        y:{grid:{display:false}, ticks:{color:'#8899bb',font:{size:12}}}
+      }
+    }
+  });
+
+  // Root Cause
+  const vg = dropoff.visit_gap || 0, sg = dropoff.service_gap || 0;
+  dc('rootCause');
+  C['rootCause'] = new Chart(document.getElementById('chartRootCause'),{
+    type:'doughnut',
+    data:{
+      labels:['Visit Gap (Field Never Came)','Service Gap (Visited, Still Churned)'],
+      datasets:[{
+        data:[vg,sg],
+        backgroundColor:['rgba(249,115,22,.8)','rgba(244,63,94,.8)'],
+        borderWidth:0
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false, cutout:'58%',
+      plugins:{
+        legend:{position:'bottom', labels:{color:'#8899bb',font:{size:11},padding:16}},
+        tooltip:{...TT, callbacks:{label:ctx=>`${fc(ctx.raw)} outlets (${pct(ctx.raw,vg+sg)})`}},
+        datalabels:{
+          color:'#fff', font:{size:13,weight:'700'},
+          formatter:(v)=>fc(v)
+        }
+      }
+    }
+  });
+
+  const dominant = vg > sg ? 'Visit Gap' : 'Service Gap';
+  const domCount = vg > sg ? vg : sg;
+  const domPct   = (vg+sg) > 0 ? pct(domCount, vg+sg) : '0%';
+  document.getElementById('rootCauseInsight').innerHTML = (vg+sg) > 0 ?
+    `<strong>${domPct} of churned outlets are a ${dominant}.</strong> ` +
+    (dominant==='Visit Gap'
+      ? `The field team is not visiting these outlets. This is a direct SR accountability issue — assign immediate re-coverage tasks.`
+      : `Field visits are happening but failing to retain. Investigate pricing, product fit, and SR pitch quality in these territories.`)
+    : `<strong>No full churn drop-offs (>120 days) observed during this 4-month audit window.</strong> Proactive retention is actively tracked via At-Risk (61-120D) and Silent Bleed pipelines.`;
+}
+
+// ── CHURN RISK RADAR ──────────────────────────────────────────────────────────
+function renderRisk(){
+  const S = D.churn_risk_summary;
+  document.getElementById('riskTotal').innerText = fc(S.total_count);
+  document.getElementById('riskHigh').innerText  = fc(S.high_count);
+  document.getElementById('riskMed').innerText   = fc(S.medium_count);
+  document.getElementById('riskRev').innerText   = 'BDT '+fmt(S.total_rev);
+
+  // Distribution donut
+  dc('riskDist');
+  C['riskDist'] = new Chart(document.getElementById('chartRiskDist'),{
+    type:'doughnut',
+    data:{
+      labels:['High Risk (2.5×+)','Medium Risk (2.0–2.5×)'],
+      datasets:[{
+        data:[S.high_count, S.medium_count],
+        backgroundColor:['rgba(244,63,94,.85)','rgba(245,158,11,.75)'],
+        borderWidth:0
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false, cutout:'60%',
+      plugins:{
+        legend:{position:'bottom', labels:{color:'#8899bb',font:{size:12},padding:16}},
+        tooltip:{...TT, callbacks:{label:ctx=>`${fc(ctx.raw)} outlets (${pct(ctx.raw,S.total_count)})`}},
+        datalabels:{
+          color:'#fff', font:{size:13,weight:'700'},
+          formatter:v=>fc(v)
+        }
+      }
+    }
+  });
+
+  // Territory bar
+  const terr = (S.by_territory||[]).slice(0,10);
+  const trunc = s => s && s.length > 18 ? s.substring(0,17)+'…' : (s||'Unknown');
+  dc('riskTerritory');
+  C['riskTerritory'] = new Chart(document.getElementById('chartRiskTerritory'),{
+    type:'bar',
+    data:{
+      labels:terr.map(t=>trunc(t.territory)),
+      datasets:[{
+        label:'Revenue at Risk (BDT)',
+        data:terr.map(t=>t.rev),
+        backgroundColor:'rgba(244,63,94,.7)',
+        borderColor:'#f43f5e', borderWidth:1, borderRadius:4
+      },{
+        label:'Outlet Count',
+        data:terr.map(t=>t.count),
+        backgroundColor:'rgba(245,158,11,.5)',
+        borderColor:'#f59e0b', borderWidth:1, borderRadius:4,
+        yAxisID:'y2'
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{labels:{color:'#8899bb',font:{size:11}}},
+        tooltip:{...TT, callbacks:{label:ctx=>ctx.datasetIndex===0?`BDT ${fmt(ctx.raw)}`:`${fc(ctx.raw)} outlets`}},
+        datalabels:{
+          anchor:'end', align:'top', color:ctx=>ctx.datasetIndex===0?'#f43f5e':'#f59e0b',
+          font:{size:9,weight:'700'},
+          formatter:(v,ctx)=>ctx.datasetIndex===0?'BDT '+fmt(v):fc(v)
+        }
+      },
+      scales:{
+        y:{ ticks:{color:'#5a6a88',callback:v=>'BDT '+fmt(v)}, grid:{color:'rgba(30,45,69,.3)'}},
+        y2:{ position:'right', ticks:{color:'#5a6a88'}, grid:{display:false}},
+        x:{ grid:{display:false}, ticks:{color:'#8899bb',maxRotation:35,font:{size:10}}}
+      }
+    }
+  });
+
+  // Table — rendered by filterRisk()
+  filterRisk();
+}
+
+function filterRisk(){
+  const level = document.getElementById('fRiskLevel')?.value||'';
+  const minRev = parseFloat(document.getElementById('fRiskMinRev')?.value)||0;
+  const data = (D.churn_risk||[]).filter(r=>{
+    if(level && r.risk_level!==level) return false;
+    if(minRev && r.rev_at_risk<minRev) return false;
+    return true;
+  });
+  document.getElementById('riskCount').innerText = `Showing ${data.length} outlets`;
+  document.getElementById('riskTbody').innerHTML = data.map(r=>`<tr>
+    <td class="hl mono">${r.outlet}</td>
+    <td>${r.territory||'—'}</td>
+    <td class="mono">${r.avg_gap} days</td>
+    <td class="mono">${r.current_gap} days</td>
+    <td class="mono" style="color:${r.risk_level==='High'?'var(--rose)':'var(--gold)'}">${r.multiplier}×</td>
+    <td><span class="risk-badge ${r.risk_level}">${r.risk_level}</span></td>
+    <td class="mono" style="color:var(--rose)">BDT ${fc(Math.round(r.rev_at_risk))}</td>
+  </tr>`).join('');
+}
+
+// ── SILENT BLEED ──────────────────────────────────────────────────────────────
+function renderBleed(){
+  const SB = D.silent_bleed_summary;
+  document.getElementById('bleedTotal').innerText = fc(SB.total_count);
+  document.getElementById('bleedLost').innerText  = 'BDT '+fmt(SB.total_lost);
+
+  // Severity chart — group by drop % ranges
+  const buckets = {'50–60%':0,'60–70%':0,'70–80%':0,'80–90%':0,'90%+':0};
+  (D.silent_bleed||[]).forEach(b=>{
+    const d = b.drop_pct;
+    if(d<60) buckets['50–60%']++;
+    else if(d<70) buckets['60–70%']++;
+    else if(d<80) buckets['70–80%']++;
+    else if(d<90) buckets['80–90%']++;
+    else buckets['90%+']++;
+  });
+
+  dc('bleedSeverity');
+  C['bleedSeverity'] = new Chart(document.getElementById('chartBleedSeverity'),{
+    type:'bar',
+    data:{
+      labels:Object.keys(buckets),
+      datasets:[{
+        label:'Outlets',
+        data:Object.values(buckets),
+        backgroundColor:['rgba(245,158,11,.7)','rgba(249,115,22,.7)','rgba(239,68,68,.7)','rgba(220,38,38,.8)','rgba(185,28,28,.9)'],
+        borderRadius:6, borderWidth:0
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{...TT, callbacks:{label:ctx=>`${fc(ctx.raw)} Outlets`}},
+        datalabels:{
+          anchor:'end', align:'top', color:'#f59e0b',
+          font:{size:11,weight:'700'},
+          formatter:v=>fc(v)
+        }
+      },
+      scales:{
+        y:{ticks:{color:'#5a6a88',callback:v=>fc(v)}, grid:{color:'rgba(30,45,69,.3)'}},
+        x:{grid:{display:false}, ticks:{color:'#8899bb'}, title:{display:true,text:'AOV Drop Severity',color:'#5a6a88'}}
+      }
+    }
+  });
+
+  // Territory bar
+  const terr2 = (SB.by_territory||[]).slice(0,10);
+  const trunc2 = s => s && s.length > 18 ? s.substring(0,17)+'\u2026' : (s||'Unknown');
+  dc('bleedTerritory');
+  C['bleedTerritory'] = new Chart(document.getElementById('chartBleedTerritory'),{
+    type:'bar',
+    data:{
+      labels:terr2.map(t=>trunc2(t.territory)),
+      datasets:[{
+        label:'Wallet Share Lost (BDT)',
+        data:terr2.map(t=>t.lost),
+        backgroundColor:'rgba(245,158,11,.7)',
+        borderColor:'#f59e0b', borderWidth:1, borderRadius:4
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{...TT, callbacks:{label:ctx=>`BDT ${fmt(ctx.raw)}`}},
+        datalabels:{
+          anchor:'end', align:'top', color:'#f59e0b',
+          font:{size:9,weight:'700'},
+          formatter:v=>'BDT '+fmt(v)
+        }
+      },
+      scales:{
+        y:{ticks:{color:'#5a6a88',callback:v=>'BDT '+fmt(v)}, grid:{color:'rgba(30,45,69,.3)'}},
+        x:{grid:{display:false}, ticks:{color:'#8899bb',maxRotation:35,font:{size:10}}}
+      }
+    }
+  });
+
+  // Table — rendered by filterBleed()
+  filterBleed();
+}
+
+function filterBleed(){
+  const minDrop = parseFloat(document.getElementById('fBleedDrop')?.value)||0;
+  const minLost = parseFloat(document.getElementById('fBleedMinLost')?.value)||0;
+  const data = (D.silent_bleed||[]).filter(b=>{
+    if(b.drop_pct < minDrop) return false;
+    if(minLost && b.lost_rev < minLost) return false;
+    return true;
+  });
+  document.getElementById('bleedCount').innerText = `Showing ${data.length} outlets`;
+  document.getElementById('bleedTbody').innerHTML = data.map(b=>`<tr>
+    <td class="hl mono">${b.outlet}</td>
+    <td>${b.territory||'—'}</td>
+    <td class="mono">BDT ${fc(Math.round(b.hist_aov))}</td>
+    <td class="mono" style="color:var(--rose)">BDT ${fc(Math.round(b.rec_aov))}</td>
+    <td><span class="risk-badge High">▼${b.drop_pct}%</span></td>
+    <td class="mono" style="color:var(--rose)">BDT ${fc(Math.round(b.lost_rev))}</td>
+  </tr>`).join('');
+}
+
+// ── RED FLAGS ─────────────────────────────────────────────────────────────────
+function renderFlags(){
+  const RF = D.red_flag_summary;
+  document.getElementById('flagTotal').innerText = fc(RF.total_count);
+
+  // Visit bucket distribution (from top 100 sample)
+  const buckets = {'6–10':0,'11–20':0,'21–30':0,'31–50':0,'50+':0};
+  (D.red_flags||[]).forEach(f=>{
+    const v=f.visits;
+    if(v<=10) buckets['6–10']++;
+    else if(v<=20) buckets['11–20']++;
+    else if(v<=30) buckets['21–30']++;
+    else if(v<=50) buckets['31–50']++;
+    else buckets['50+']++;
+  });
+
+  dc('flagVisits');
+  C['flagVisits'] = new Chart(document.getElementById('chartFlagVisits'),{
+    type:'bar',
+    data:{
+      labels:Object.keys(buckets),
+      datasets:[{
+        label:'Outlets',
+        data:Object.values(buckets),
+        backgroundColor:'rgba(139,92,246,.7)',
+        borderColor:'#8b5cf6', borderRadius:6, borderWidth:1
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{...TT, callbacks:{label:ctx=>`${fc(ctx.raw)} Outlets`}},
+        datalabels:{
+          anchor:'end', align:'top', color:'#8b5cf6',
+          font:{size:11,weight:'700'}, formatter:v=>fc(v)
+        }
+      },
+      scales:{
+        y:{ticks:{color:'#5a6a88'}, grid:{color:'rgba(30,45,69,.3)'}},
+        x:{grid:{display:false}, ticks:{color:'#8899bb'}, title:{display:true,text:'Visit Count Bucket',color:'#5a6a88'}}
+      }
+    }
+  });
+
+  // Territory distribution
+  const terrMap = {};
+  (D.red_flags||[]).forEach(f=>{ const t=f.territory||'Unknown'; terrMap[t]=(terrMap[t]||0)+1; });
+  const terrArr = Object.entries(terrMap).sort((a,b)=>b[1]-a[1]).slice(0,10);
+
+  dc('flagTerritory');
+  C['flagTerritory'] = new Chart(document.getElementById('chartFlagTerritory'),{
+    type:'bar',
+    data:{
+      labels:terrArr.map(t=>t[0]),
+      datasets:[{
+        label:'Red Flag Outlets',
+        data:terrArr.map(t=>t[1]),
+        backgroundColor:'rgba(139,92,246,.65)',
+        borderColor:'#8b5cf6', borderRadius:4, borderWidth:1
+      }]
+    },
+    options:{
+      indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{...TT, callbacks:{label:ctx=>`${fc(ctx.raw)} Red Flag Outlets`}},
+        datalabels:{
+          anchor:'center', align:'center', color:'#fff',
+          font:{size:10,weight:'700'}, formatter:v=>fc(v)
+        }
+      },
+      scales:{
+        x:{grid:{color:'rgba(30,45,69,.3)'}, ticks:{color:'#5a6a88'}},
+        y:{grid:{display:false}, ticks:{color:'#8899bb',font:{size:11}}}
+      }
+    }
+  });
+
+  // Table — rendered by filterFlags()
+  filterFlags();
+}
+
+function filterFlags(){
+  const minVisits = parseInt(document.getElementById('fFlagMinVisits')?.value)||5;
+  const search = (document.getElementById('fFlagSearch')?.value||'').toLowerCase();
+  const data = (D.red_flags||[]).filter(f=>{
+    if(f.visits < minVisits) return false;
+    if(search && !String(f.outlet).toLowerCase().includes(search)) return false;
+    return true;
+  });
+  document.getElementById('flagCount').innerText = `Showing ${data.length} outlets`;
+  document.getElementById('flagTbody').innerHTML = data.map(f=>`<tr>
+    <td class="hl mono">${f.outlet}</td>
+    <td>${f.territory||'—'}</td>
+    <td class="mono" style="color:var(--violet)">${fc(f.visits)}</td>
+    <td class="mono">${f.last_visit||'—'}</td>
+    <td class="mono">${fc(f.historical_orders||0)}</td>
+  </tr>`).join('');
+}
+
+// ── PLAYBOOK ──────────────────────────────────────────────────────────────────
+function renderPlaybook(){
+  const segs = D.segments;
+  document.getElementById('play-champ-sub').innerText = `${fc(segs.Champions.count)} outlets · BDT ${fmt(segs.Champions.revenue)} revenue`;
+  document.getElementById('play-loyal-sub').innerText = `${fc(segs['Loyal Base'].count)} outlets · ${segs['Loyal Base'].rev_pct}% of revenue`;
+  document.getElementById('play-pot-sub').innerText   = `${fc(segs.Potential.count)} outlets · avg AOV BDT ${fc(Math.round(segs.Potential.aov))}`;
+  document.getElementById('play-risk-sub').innerText  = `${fc(segs['At-Risk'].count)} outlets · BDT ${fmt(segs['At-Risk'].revenue)} revenue`;
+  document.getElementById('play-lost-sub').innerText  = `${fc(segs.Lost.count)} outlets · BDT ${fmt(D.kpis.lost_revenue)} lost`;
+  document.getElementById('play-flags-sub').innerText = `${fc(D.kpis.red_flag_count)} outlets with >5 visits, 0 orders`;
+}
+
+// ── UI ────────────────────────────────────────────────────────────────────────
+function showTab(t){
+  document.querySelectorAll('.nav-tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  document.getElementById('sec-'+t).classList.add('active');
+}
+
+function toggleTheme(){
+  const r = document.documentElement;
+  r.getAttribute('data-theme')==='light' ? r.removeAttribute('data-theme') : r.setAttribute('data-theme','light');
+}
+
+function downloadCSV(type){
+  let rows = [], headers = [], filename = '';
+
+  if(type==='risk'){
+    const level = document.getElementById('fRiskLevel')?.value||'';
+    const minRev = parseFloat(document.getElementById('fRiskMinRev')?.value)||0;
+    const data = (D.churn_risk||[]).filter(r=>{
+      if(level && r.risk_level!==level) return false;
+      if(minRev && r.rev_at_risk<minRev) return false;
+      return true;
+    });
+    headers = ['Outlet_ID','Territory','Avg_Gap_Days','Current_Gap_Days','Multiplier','Risk_Level','Rev_at_Risk'];
+    rows = data.map(r=>[r.outlet, r.territory||'', r.avg_gap, r.current_gap, r.multiplier, r.risk_level, r.rev_at_risk]);
+    filename = 'module3_churn_risk_filtered.csv';
+  } else if(type==='bleed'){
+    const minDrop = parseFloat(document.getElementById('fBleedDrop')?.value)||0;
+    const minLost = parseFloat(document.getElementById('fBleedMinLost')?.value)||0;
+    const data = (D.silent_bleed||[]).filter(b=> b.drop_pct>=minDrop && (!minLost||b.lost_rev>=minLost));
+    headers = ['Outlet_ID','Territory','Historical_AOV','Recent_AOV','AOV_Drop_Pct','Wallet_Lost_BDT'];
+    rows = data.map(b=>[b.outlet, b.territory||'', b.hist_aov, b.rec_aov, b.drop_pct, b.lost_rev]);
+    filename = 'module3_silent_bleed_filtered.csv';
+  } else if(type==='flags'){
+    const minVisits = parseInt(document.getElementById('fFlagMinVisits')?.value)||5;
+    const search = (document.getElementById('fFlagSearch')?.value||'').toLowerCase();
+    const data = (D.red_flags||[]).filter(f=> f.visits>=minVisits && (!search||String(f.outlet).toLowerCase().includes(search)));
+    headers = ['Outlet_ID','Territory','Total_Visits','Last_Visit','Historical_Orders'];
+    rows = data.map(f=>[f.outlet, f.territory||'', f.visits, f.last_visit||'', f.historical_orders||0]);
+    filename = 'module3_red_flags_filtered.csv';
+  } else {
+    // Export all three
+    downloadCSV('risk'); downloadCSV('bleed'); downloadCSV('flags'); return;
+  }
+
+  const csvContent = [headers, ...rows].map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
+  const blob = new Blob([csvContent], {type:'text/csv;charset=utf-8;'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function exportCSVAll(){ downloadCSV('all'); }
+
+// ── PER-CHART DOWNLOAD ────────────────────────────────────────────────────────
+function chartDL(chartId){
+  let headers = [], rows = [], filename = '';
+  const segs = D.segments;
+  const S    = D.churn_risk_summary;
+  const SB   = D.silent_bleed_summary;
+
+  if(chartId === 'rfm-donut'){
+    headers = ['Segment','Outlet_Count','Revenue_BDT','Revenue_Share_Pct','Avg_AOV_BDT','Avg_Orders','Avg_SKUs'];
+    rows = Object.entries(segs).map(([k,s])=>[
+      k, s.count, s.revenue, s.rev_pct, s.aov, s.freq, s.skus
+    ]);
+    filename = 'RFM_Outlet_Distribution.csv';
+
+  } else if(chartId === 'rfm-bar'){
+    headers = ['Segment','Outlet_Share_Pct','Revenue_Share_Pct','Outlet_Count','Revenue_BDT'];
+    const total = Object.values(segs).reduce((a,s)=>a+s.count,0);
+    rows = Object.entries(segs).map(([k,s])=>[
+      k, +((s.count/total*100).toFixed(1)), s.rev_pct, s.count, s.revenue
+    ]);
+    filename = 'RFM_Revenue_vs_Outlet_Share.csv';
+
+  } else if(chartId === 'churn-funnel'){
+    const active = segs['Champions'].count+segs['Loyal Base'].count+segs['Potential'].count;
+    headers = ['Stage','Outlet_Count','Lost_Revenue_BDT'];
+    rows = [
+      ['Total Profiled', Object.values(segs).reduce((a,s)=>a+s.count,0), ''],
+      ['Active (Last 60 Days)', active, ''],
+      ['At-Risk (61-120 Days)', segs['At-Risk'].count, segs['At-Risk'].revenue],
+      ['Churned (>120 Days)', segs['Lost'].count, D.kpis.lost_revenue]
+    ];
+    filename = 'Churn_DropOff_Funnel.csv';
+
+  } else if(chartId === 'root-cause'){
+    headers = ['Root_Cause','Churned_Outlets','Description'];
+    rows = [
+      ['Visit Gap (Field Never Came)', D.dropoff.visit_gap, 'Churned outlets that received zero visits in the risk period'],
+      ['Service Gap (Visited but Lost)', D.dropoff.service_gap, 'Churned outlets that were visited but still failed to order']
+    ];
+    filename = 'Churn_Root_Cause_Analysis.csv';
+
+  } else if(chartId === 'risk-dist'){
+    headers = ['Risk_Level','Outlet_Count','Revenue_at_Risk_BDT','Description'];
+    rows = [
+      ['High Risk (2.5x+ gap)', S.high_count, S.high_rev, 'Order gap exceeds 2.5x their historical normal — immediate action required'],
+      ['Medium Risk (2.0-2.5x gap)', S.medium_count, S.total_rev - S.high_rev, 'Order gap is 2-2.5x their normal — monitor and follow up within 7 days']
+    ];
+    filename = 'Churn_Risk_Distribution.csv';
+
+  } else if(chartId === 'risk-territory'){
+    headers = ['Territory','At_Risk_Outlets','Revenue_at_Risk_BDT'];
+    rows = (S.by_territory||[]).map(t=>[t.territory||'Unknown', t.count, t.rev]);
+    filename = 'Churn_Risk_by_Territory.csv';
+
+  } else if(chartId === 'bleed-severity'){
+    const buckets = [['50-60% Drop',0],['60-70% Drop',0],['70-80% Drop',0],['80-90% Drop',0],['90%+ Drop',0]];
+    (D.silent_bleed||[]).forEach(b=>{
+      const d=b.drop_pct;
+      if(d<60)buckets[0][1]++; else if(d<70)buckets[1][1]++;
+      else if(d<80)buckets[2][1]++; else if(d<90)buckets[3][1]++; else buckets[4][1]++;
+    });
+    headers = ['AOV_Drop_Severity','Outlet_Count'];
+    rows = buckets;
+    filename = 'Silent_Bleed_Severity_Distribution.csv';
+
+  } else if(chartId === 'bleed-territory'){
+    headers = ['Territory','Bleeding_Outlets','Wallet_Share_Lost_BDT'];
+    rows = (SB.by_territory||[]).map(t=>[t.territory||'Unknown', t.count, t.lost]);
+    filename = 'Silent_Bleed_by_Territory.csv';
+
+  } else if(chartId === 'flag-visits'){
+    const buckets = [['6-10 visits',0],['11-20 visits',0],['21-30 visits',0],['31-50 visits',0],['50+ visits',0]];
+    (D.red_flags||[]).forEach(f=>{
+      const v=f.visits;
+      if(v<=10)buckets[0][1]++; else if(v<=20)buckets[1][1]++;
+      else if(v<=30)buckets[2][1]++; else if(v<=50)buckets[3][1]++; else buckets[4][1]++;
+    });
+    headers = ['Visit_Count_Bucket','Red_Flag_Outlets'];
+    rows = buckets;
+    filename = 'Red_Flag_Visit_Distribution.csv';
+
+  } else if(chartId === 'flag-territory'){
+    const terrMap = {};
+    (D.red_flags||[]).forEach(f=>{ const t=f.territory||'Unknown'; terrMap[t]=(terrMap[t]||0)+1; });
+    headers = ['Territory','Red_Flag_Outlet_Count'];
+    rows = Object.entries(terrMap).sort((a,b)=>b[1]-a[1]).map(([t,c])=>[t,c]);
+    filename = 'Red_Flag_by_Territory.csv';
+  }
+
+  if(!rows.length){ alert('No data available for this chart.'); return; }
+  const csv = [headers, ...rows].map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>

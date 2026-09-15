@@ -1,0 +1,12 @@
+# Large raw data files (Not needed on web server since JSONs are pre-compiled)
+itl_orders.csv
+itl_orders.csv.zip
+itl_checkings.csv
+itl_dept.csv
+product_profile.csv
+*.pptx
+~$*
+*.pyc
+__pycache__/
+.env
+.DS_Store

@@ -1,0 +1,501 @@
+dept_id,outlet_name,outlet_code,territory_id,total_visits,address
+122462,মেসার্স গৌরী টেডার্স,O1351750143070791,14396,27,মনি চত্বর মাস্টার পাড়ার সঙ্গে মুখে
+55119,সোহান স্টোর,O1131747287222759,9635,25,ঈশ্বরদী বাজার
+95730,হৃদয় স্টোর,O1131748241959686,9635,25,ঈশ্বরদী বাজার
+61493,হাসান স্টোর,O1351747541523152,14397,23,মুড়ি পট্টি
+67075,সাফি স্টোর,O9041747636277060,14934,23,"Rail Bazar Road, 5200, Dinajpur, Dinajpur District, Rangpur Division, Bangladesh"
+67795,সফিকুল স্টোর,O9041747639854305,14934,23,"রেলবাজার রোড, দিনাজপুর, দিনাজপুর জেলা, রংপুর বিভাগ, Bangladesh"
+103689,মনির স্টোর,O1351748407990562,14397,23,সুখী মার্কেট সাহেব বাজার
+123666,শাহ আলম এন্ড সন্স,O1351750221421878,14397,23,সুখী মার্কেট সাহেব বাজার মাংসে পট্টির পাশে
+54355,ইকরা স্টোর,O1351747282183410,14398,21,আর ডি এ
+63604,পিয়ারুল ইস্টোর,O1351747552149007,14397,21,মুড়ি পড়তে
+270477,vai vai store,O11341775145372102,18772,20,"Joymot Khan Road, Pagar, টঙ্গী, গাজীপুর জেলা, ঢাকা বিভাগ, Bangladesh"
+119608,শরিফুল ষ্টোর,O1351750048008190,14398,18,আরডিএ ন্যাশনাল ব্যাংকের গলি
+66487,হিয়া হিয়া,O4951747633558468,14763,16,"Jhunagach Chapani, Nilphamari District, Rangpur Division, Bangladesh"
+148336,M/S Taher Store,O10881750841020491,16811,16,"R140, Gridakalondiya, Chandpur District, Chittagong Division, Bangladesh"
+148351,Arffat Store,O10881750841164575,16811,16,"Gridakalondiya, Chandpur District, Chittagong Division, Bangladesh"
+186491,Kawaser Store,O10881751787067238,16811,16,"Gridakalondiya, Chandpur District, Chittagong Division, Bangladesh"
+57553,ওসমান কফি হাউস,O4901747454836575,14351,15,মেডিকেল মোড়
+89187,রাজ্জাক ফল ভান্ডার,O8871748149800493,15221,15,স্টেশন রোড রানীনগর
+110173,নয়ন স্টোর,O7101748681683549,13829,15,"BSCIC Main Road, 1750, Kaliakair, Gazipur District, Dhaka Division, Bangladesh"
+130284,ফারুক স্টোর,O4901750485833880,14351,15,স্টেশন বাজার
+186206,সজিব স্টোর,O4881751784685517,14392,15,বউ বাজার
+200595,প্রদিব স্টোর,O4951752483204235,14763,15,"Rangpur, Nilphamari District, Rangpur Division, Bangladesh"
+268332,জালাল স্টোর,O13291772865386814,18816,15,"93/A, 93/A, Bashir Uddin Road, Kalabagan, 1205, Dhaka, Dhaka District, Dhaka Division, Bangladesh"
+1839,Shopno shuda Store,O31744433481073,7400,14,"হালিশহর, চট্টগ্রাম, চট্টগ্রাম জেলা, চট্টগ্রাম বিভাগ, Bangladesh"
+9806,Anjuman store,O31745040067160,7400,14,"Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+9851,Azmir store,O31745040318929,7400,14,"7, 7, College Road, Pahartali, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+39507,ফাইযা স্টোর,O5041746601507987,10392,14,"লাল বাজার  Sylhet District, Sylhet Division, Bangladesh"
+39731,জাহান এন্টারপ্রাইজ,O5041746605149037,10392,14,"লাল বাজার Al-Falah Complex, Laldighirpar Road, Barudkhana, Sylhet, Sylhet District, Sylhet Division, Bangladesh"
+43978,তাওহীদ স্টোর,O2851746879545885,11357,14,কাঁচা বাজার নকলা
+58190,সোহেল স্টোর,O1291747459779090,14446,14,গাংগোর বাজার
+66249,মাইনুর স্টোর,O4951747632155069,14763,14,"Jhunagach Chapani, Nilphamari District, Rangpur Division, Bangladesh"
+68486,জোয়াদ্দার স্টোর,O4951747644468069,14763,14,"Jaldhaka-Dalia Road, Jhunagach Chapani, Nilphamari District, Rangpur Division, Bangladesh"
+82943,সামিয়া স্টোর,O9281748059599011,16033,14,"রুস্তমপুর  District, Khulna Division, Bangladesh"
+83503,উৎসব স্টোর,O8871748062102611,15218,14,বেলঘড়িয়া বাজার
+84055,মাহবুব ষ্টোর,O9281748064422574,16033,14,"আড়পাড়া বাজার  District, Khulna Division, Bangladesh"
+84125,মাসুম স্টোর,O9281748064702185,16033,14,"আরপাড়া বাজার  District, Khulna Division, Bangladesh"
+84413,রানা স্টোর,O8871748065723349,15218,14,বিল কৃষ্ণপুর বাজার
+84652,সাত্তার পান স্টোর,O8871748066540663,15218,14,বিল কৃষ্ণপুর বাজার
+86466,আনিসা স্টোর,O8871748075765038,15218,14,ডোবাগারি বাজার
+86717,মিথি স্টোর,O1191748078092706,9716,14,বেঙ্গল হসপিটাল জেসি রোড
+89208,আরিফ ফল ভান্ডার,O8871748149900605,15221,14,স্টেশন রোড রানীনগর
+91075,আপ্যায়ন রেস্তোরাঁ,O1621748156483323,10304,14,"Hospital - College Road, Sunamganj, Sunamganj District, Sylhet Division, Bangladesh"
+108807,প্রতাপ টি স্টল,O8871748666242792,15218,14,বেলঘড়িয়া বাজার
+164844,",মা এন্টারপ্রাইজ",O4981751184954685,10310,14,"Sunamganj, Sunamganj District, Sylhet Division, Bangladesh"
+182162,বর্ষা ফল ভান্ডার,O8871751689845767,15218,14,বেলঘড়িয়া বাজার
+182588,জাহাঙ্গীর স্টোর,O8871751692974695,15218,14,বিলকিস নুপুর বাজার
+182990,safia ti,O11051751695666623,17412,14,"8, 8, Hazi Rahim Box Lane, Lalbagh, 1211, Dhaka, Dhaka District, Dhaka Division, Bangladesh"
+183145,হরেন স্টোর,O8871751696841687,15218,14,বিলকিস্ঠপুর বাজার
+184199,রফিকুল চা স্টল,O8871751707953434,15218,14,কাটরা সাইনহাট
+184493,শামসুল ষ্টোর,O8871751713206781,15218,14,রাজাপুর মোড়
+194720,Jayma store,O31752295930735,7400,14,"Lane No. 2, 11 No. South Kattali Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+195529,Liza store,O31752305300994,7400,14,"Foillatoli Bazar, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+220040,জাহিদুল ইসলাম,O4951753087678473,14763,14,"Rangpur, Nilphamari District, Rangpur Division, Bangladesh"
+230802,জাহিদ স্টোর,O5361753611069297,16384,14,মাছ বাজার ব্যাংকের হাট ভোলা
+237426,মা ভ্যারাইটি,O1351754379286202,14396,14,কুমারপাড়া মোড় এস এ পরিবহনের সামনে
+239343,Nanan store,O31754722379313,7400,14,"Foillatoli Bazar, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+239412,Allah dhan store,O31754724584749,7400,14,"Foillatoli Bazar, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+245713,আবু মুসা স্টোর,O8871756530047697,15218,14,বিল কৃষ্ণপুর বাজার
+245784,কাফি ভ্যারাইটি স্টোর,O8871756536494878,15218,14,দুবাগাড়ি বাজার
+245786,ভাই ভাই স্টোর,O8871756536906111,15218,14,ডুবা গাড়ি বাজার
+245861,নিউ শ্যামলী স্টোর,O8871756543129043,15218,14,কাটরা সাইন হাট
+245933,শাকিব স্টোর,O8871756556074572,15218,14,রাজাপুর মোর
+245934,ফারুক স্টোর,O8871756556401351,15218,14,রাজাপুর মোর
+268329,শাহাদত স্টোর,O13291772865292791,18816,14,"118, 118, Bashir Uddin Road, Kalabagan, 1205, Dhaka, Dhaka District, Dhaka Division, Bangladesh"
+1810,Arafat Departmental.Store,O31744432260530,7400,13,"Lane No. 2, 11 No. South Kattali Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+1850,Ma Enterprise,O31744433934487,7400,13,"হালিশহর, চট্টগ্রাম, চট্টগ্রাম জেলা, চট্টগ্রাম বিভাগ, Bangladesh"
+1900,Sumia Store,O31744435666478,7400,13,"Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+1916,Food Basket,O31744435921774,7400,13,"2, 2, Lane No. 1, হালিশহর, চট্টগ্রাম, চট্টগ্রাম জেলা, চট্টগ্রাম বিভাগ, Bangladesh"
+1959,Easheya puron shop,O31744437233991,7400,13,"2, 2, Lane No. 1, হালিশহর, চট্টগ্রাম, চট্টগ্রাম জেলা, চট্টগ্রাম বিভাগ, Bangladesh"
+6943,ইকবাল কুলিং কনার,O401744775717719,7940,13,"নোনাছড়ি বাজার, কালামারছড়া"
+9720,Nazim store,O31745039039004,7400,13,"Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+9776,Talukder Enterprise,O31745039231259,7400,13,"7, 7, College Road, Pahartali, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+10067,Tasnim store,O31745043313218,7400,13,"Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+10082,Orun store,O31745043733613,7400,13,"Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+10112,Babor and sons,O31745043989365,7400,13,"Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+10211,আলী ষ্টোর,O401745046035455,7940,13,নোনাছড়ি বাজার কালামারছড়া
+10418,Sharmin store,O31745051202443,7400,13,"7, 7, College Road, Pahartali, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+10441,Ruhena store,O31745051423370,7400,13,"7, 7, College Road, Pahartali, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+11138,টিশা ডিপার্টমেন্ট,O3701745130408051,12332,13,"চাঁদগাও আবাসিক 12 নং Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+11194,মুনতাহা ডিপার্টমেন্ট,O3701745131185947,12332,13,"চাঁদগাও আবাসিক ১২ Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+22216,রশিদ ষ্টোর,O401745983791584,7940,13,"নোনাছড়ি বাজার, কালামারছড়া"
+25047,রজব আলী স্টের,O5491746075532320,13982,13,গোদারিয়া মোড়
+30199,আল মদিনা স্টোর,O1621746271612048,10303,13,আমবাড়ি পয়েন্ট
+32235,জাকির স্টোর,O4981746344714223,10310,13,"Sunamganj, Sunamganj District, Sylhet Division, Bangladesh"
+42838,মেসার্স আদিল এন্ড মোনাফ ষ্টোর,O401746856515729,7940,13,"কালামারছড়া বাজার, কালামারছড়া"
+43624,আল মদিনা ভেরাইটিজ স্টোর,O1621746868400470,10303,13,"আমবাড়ী বাজার, সুনামগঞ্জ জেলা, সিলেট বিভাগ, Bangladesh"
+76392,রজব টি স্টল,O8871747820362388,15220,13,রেলগেট রাণীনগর
+82834,রিয়াদ স্টোর,O9281748058980208,16033,13,"রুস্তমপুর  District, Khulna Division, Bangladesh"
+92248,মোসাদ্দেক স্টোর,O8871748167969354,15221,13,নওগাঁ নাটোর আঞ্চলিক মহাসড় ক
+92268,সততা স্টোর,O8871748168300570,15221,13,নওগাঁ নাটোর আঞ্চলিক মহাসড়ক
+92318,ভাই ভাই স্টোর,O8871748169132777,15221,13,বিএনপির মোর রাণীনগর বাজার
+103527,panto store,O1351748407227533,14397,13,সুখী মার্কেট সাহেব বাজার
+110849,রেনুকা স্টোর,O8871748754666649,15221,13,টমটম স্ট্যান্ড রাণীনগর
+111494,মিশকাত স্টোর,O8871748765308757,15221,13,রানীনগর বাজার
+137641,Panjary store,O31750667253154,7396,13,"Lane No. 13, 25 No. Rampur Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+148021,Monire Store,O10881750838881278,16811,13,"Gridokalindia College Road, Gridakalondiya, Chandpur District, Chittagong Division, Bangladesh"
+148030,আয়মান ভেরাইটিজ স্টোর,O1691750838949472,10372,13,"টিলার গাও, Sylhet District, Sylhet Division, Bangladesh"
+148389,Shah Alam store,O10881750841432504,16811,13,"Gridakalondiya, Chandpur District, Chittagong Division, Bangladesh"
+159804,ছলেক স্টোর,O1691751100961135,10371,13,"মদিনা মার্কেট , Pathantula, Sylhet, Sylhet District, Sylhet Division, Bangladesh"
+160152,মিম স্নেকবার,O1691751105363544,10371,13,"পল্লবী  Sylhet, Sylhet District, Sylhet Division, Bangladesh"
+163005,রুস্তম স্টোর,O8871751176332217,15221,13,রানীনগর বাজার
+163119,মা ভেরাইটিজ স্টোর,O4981751176879856,10310,13,"Boro Para Road, Sunamganj, Sunamganj District, Sylhet Division, Bangladesh"
+163379,আসলাম স্টোর,O8871751177832189,15221,13,রানীনগর বাজার
+163492,টিটুস্টোর,O8871751178227770,15221,13,রাণীনগর বাজার
+164899,শিল্পী স্টোর,O4981751185470995,10310,13,"Sunamganj, Sunamganj District, Sylhet Division, Bangladesh"
+175244,মোস্তফা স্টোর,O5491751436452405,13982,13,"শানাই সাথে,  গোদারিয়া।"
+184827,হাসিব টি স্টোর,O8871751773637453,15221,13,বটতলীর মোড় রাণীনগর বাজার
+184889,লিটন স্টোর,O8871751774670092,15221,13,বটতলীর মোড় রানীনগর বাজার
+185219,রিদওয়ান স্টোর,O3701751777748905,12332,13,"চাঁদগাও আবাসিক, Chattogram, Chittagong District, Chittagong Division, Bangladesh"
+185870,বুলবুল স্টোর,O8871751782320173,15221,13,নওগাঁ নাটোর আঞ্চলিক মহাসড়ক
+185989,মোজাহার স্টোর,O4881751783231965,14392,13,"Bhadra, Rajshahi, Rajshahi District, Rajshahi Division, Bangladesh"
+187043,জালাল চা স্টোর,O8871751795630825,15221,13,বিএনপির মোড়
+195334,A K Store,O31752302505413,7400,13,"7, 7, College Road, Pahartali, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+195431,B-Sheu store,O31752303867257,7400,13,"Foillatoli Bazar, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+195463,Derindra store,O31752304134966,7400,13,"Foillatoli Bazar, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+195479,Hossion store,O31752304466543,7400,13,"Foillatoli Bazar, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+195509,Omar Osman store,O31752304903843,7400,13,"Foillatoli Bazar, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+195545,Chowdhury Store,O31752305616152,7400,13,"Foillatoli Bazar, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+195630,roja enterprise,O11051752308000867,17412,13,"Lalbagh, Dhaka, Dhaka District, Dhaka Division, Bangladesh"
+195676,Ma Babar dua store,O31752309071904,7400,13,"Foillatoli Bazar, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+211504,এস এস ভুইয়া স্টোর,O11151752895343387,17220,13,"Gazipur, Gazipur District, Dhaka Division, Bangladesh"
+216963,মাহির স্টোর,O4981753000313773,10310,13,"Sunamganj, Sunamganj District, Sylhet Division, Bangladesh"
+227275,মা বাবা জেনা স্টোর,O7901753500372761,17930,13,"Hazi Bari Mosque Road, Norosinhopur, Dhaka District, Dhaka Division, Bangladesh"
+235209,শাকিল স্টোর,O11151754105064483,17220,13,"Gazipur, Gazipur District, Dhaka Division, Bangladesh"
+239494,Nurl Islam store,O31754729116136,7400,13,"Halishahar, Chattogram, Chittagong District, Chittagong Division, Bangladesh"
+244381,মীষাদ পান স্টোর,O8871756017166595,15221,13,থানার গেট রাণীনগর
+246107,রুবেল স্টোর,O8871756623494002,15221,13,রানীনগর চালবাজার
+258824,তসলিম স্টোর,O1291768624741466,14446,13,বরাইল মোড়
+2581,Brothers Store,O31744519087615,7399,12,"37 No. North-Middle Halishahar Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+2617,Modhu Bon,O31744519383994,7399,12,"37 No. North-Middle Halishahar Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+2714,Jamal Depart: store,O31744521100478,7399,12,"পোর্ট কানেকটিং সড়ক, পোর্ট কানেকটিং সড়ক, হালিশহর, চট্টগ্রাম, চট্টগ্রাম জেলা, চট্টগ্রাম বিভাগ, Bangladesh"
+3251,Green pack,O31744526669716,7399,12,"Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+3318,Hossen store,O31744528831251,7399,12,"Port Connecting Road, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+7092,Shohal store,O31744778674293,7398,12,"চট্টগ্রাম, ২৫ নং রামপুর ওয়ার্ড, চট্টগ্রাম, চট্টগ্রাম জেলা, চট্টগ্রাম বিভাগ, Bangladesh"
+7160,Reyaz store,O31744779272051,7398,12,"Road No.1, 25 No. Rampur Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+9769,মেসার্স মক্কা ষ্টোর,O401745039448510,7940,12,"জাপুয়া মাদ্রাসা,কালামারছড়া"
+10012,মায়ের দোয়া কুলিং কনার,O401745042861349,7940,12,নোনাছড়ি বাজার কালামারছড়া
+10126,আলম ষ্টোর,O401745044495958,7940,12,নোনাছড়ি বাজার কালামারছড়া
+10412,বিসমিল্লাহ স্টোর,O3701745051146538,12333,12,"চানগাও আবাসিক বি-ব্লক ২ , Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+10460,খাজা আজমির,O3141745052663295,7404,12,"25 No. Rampur Ward, 4216, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+10466,মেসার্স ছাহেল এন্টারপ্রাইজ,O401745052834077,7940,12,কালামারছড়া বাজার কালামারছড়া
+11030,ইত্যাদি ষ্টোর,O3701745128759264,12332,12,"চাঁদগাও আবাসিক ১৩ নং, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+11120,আল মদিনা,O3701745130244434,12332,12,"চাঁদগাও আবাসিক ১৩ নং, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+11746,মদিনা জেনারেল,O3701745213156482,7813,12,", বাস টার্মিনাল রোড Chandgaon Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+14463,মনির কুলিং কনার,O401745642628591,7940,12,"ইউনুছখালী, বাজারে,কালামারছড়া"
+14965,খাজা এন্টারপ্রাই,O3701745647369116,12333,12,"চাকদা আবাসিক এ ব্লক, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+16064,মা স্টেশনারি,O3701745730460549,12332,12,"চাকদা আবাসিক ১২ নং, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+16313,রাঙ্গুনিয়া স্টার,O3701745732755034,12332,12,"চাকদা আবাসিক ১১ নং, Chandgaon Residential Area, 4212, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+17268,বিসমিল্লাহ স্টোর,O7411745742591416,13704,12,"ত্রিশাল, ত্রিশাল, ময়মনসিংহ জেলা, ময়মনসিংহ বিভাগ, Bangladesh"
+23614,মক্কা ষ্টোর,O401745995016210,7944,12,"হোয়ানক বাজার,হোয়ানক"
+27093,বাবুল স্টোর,O981746246032412,8465,12,বড়হড় নতুন বাজার কাপাসিয়া গাজীপুর
+27597,হামজা স্টোর,O4981746250384832,10309,12,Haji Para - Notun Para
+27650,রাহাত স্টোর,O4981746250602417,10309,12,"Haji Para - Notun Para Road, 3000, Sunamganj, Sunamganj District, Sylhet Division, Bangladesh"
+29791,আকবর স্টোর,O3721746267142587,7831,12,গোল আম গাছ তলা
+30135,আকিব স্টোর,O1621746270934984,10303,12,আমবাড়ি সিএনজি স্ট্যান্ড
+30387,সায়মন এন্ড নিরব এন্টারপ্রাইজ,O1621746274578061,10303,12,আমবাড়ি বাজার
+45843,সায়েম এন্ড মুসা,O4981746948991437,10310,12,"Boro Para Road, Sunamganj, Sunamganj District, Sylhet Division, Bangladesh"
+46292,আয়ান স্টোর,O2701746959354975,11204,12,ডুবার চর বাজার
+51489,শ্যামল স্টোর,O1391747129804899,14365,12,মাছ বাজার তাহেরপুর বাগমারা রাজশাহী
+52917,সাইফুল স্টোর,O1391747203244666,14367,12,খালগ্রাম বাজার বাগমারা রাজশাহী
+55571,মৃধা স্টোর,O1191747290468335,9719,12,সালুয়া ভিটা বাজার
+56505,মায়ের দোয়া মিষ্টি ভান্ডার,O4951747369116840,14766,12,"Nilphamari District, Rangpur Division, Bangladesh"
+56527,জনি স্টোর,O4951747370013874,14766,12,"Jaldhaka, Nilphamari District, Rangpur Division, Bangladesh"
+57895,লোকমান স্টোর,O1291747457722481,14446,12,গাংগোর বাজার
+58172,সুদির স্টোর,O4951747459740089,14761,12,"Dimla - Jaldhaka Road, 5330, Jaldhaka, Nilphamari District, Rangpur Division, Bangladesh"
+61007,খুশি ডিপার্টমেন্ট স্টোর,O1191747479368698,9716,12,এস বি ফজলুল হক রোড
+63120,মায়ের দোয়া স্টোর,O1191747549982567,9717,12,ভাংগা বাড়ি
+66161,মশিয়ার স্টোর,O4951747631626631,14763,12,"Jaldhaka - Dalia Road, Jaldhaka, Nilphamari District, Rangpur Division, Bangladesh"
+72467,খালিদ ট্রেডার্স,O1601747730719074,14782,12,"Nilphamari District, Rangpur Division, Bangladesh"
+73777,নওশাদ স্টোর,O8871747802691901,15220,12,শাহাগোলা
+73997,আহমেদ স্টোর,O8871747804052231,15220,12,সাহা গোলা
+74149,আলিফ স্টোর,O8871747804768851,15220,12,সাহা গোলা রেল স্টেশন
+74300,তারেক স্টোর,O8871747805504268,15220,12,সাহা গোলা রেলগেট
+76420,রাসেল স্টোর,O8871747820734221,15220,12,রেলগেট রানীনগর
+76591,মেসার্স বন্ধন ট্রেডার্স,O8871747822842306,15220,12,রানীনগর রেলগেট
+76606,সৌদিয়া স্টোর,O8871747823063870,15220,12,রানীনগর রেলগেট
+78313,মামুন স্টোর,O8871747891696600,15216,12,দেবনগর বাজার
+78390,নজরুল স্টোর,O1931747892074218,15733,12,"Rajbari District, Dhaka Division, Bangladesh"
+80263,পতিসর চা ওয়ালা,O8871747900849371,15216,12,পতিসর হাট
+81507,নূরইসলাম টি ষ্টোর,O3961747967431336,15841,12,তালা ব্রীজ মোড়
+81513,সেলিম টি ষ্টোর,O3961747967737549,15841,12,তালা ব্রীজ মোড়
+81584,ভাই বোন ষ্টোর,O3961747970350749,15841,12,তালা ব্রীজ মোড়
+82554,আব্দুর রহমান স্টোর,O9281748055938020,16033,12,"ইছাপুর বটতলা , Jessore District, Khulna Division, Bangladesh"
+83037,আক্তার  স্টোর,O9281748060042923,16033,12,"রুস্তমপুর  District, Khulna Division, Bangladesh"
+84240,ছমির স্টোর,O9281748065061726,16033,12,"আরপাড়া বাজার , ঝিকরগাছা, Jessore District, Khulna Division, Bangladesh"
+84294,জমির  স্টোর,O9281748065324560,16033,12,"Road, ঝিকরগাছা, Jessore District, Khulna Division, Bangladesh"
+90961,নাইম টি স্টোর,O811748156063279,15905,12,শতরুপার মোড়
+101579,ঘোষ স্টোর,O9281748332299754,16037,12,"আম বটতলা বাজার  District, Khulna Division, Bangladesh"
+104307,বক্কার স্টোর,O9281748410774293,16037,12,"আম্বার তলা বাজার  District, Khulna Division, Bangladesh"
+106295,উজ্জ্বল স্টোর,O8871748429444218,15220,12,হেলালিয়া হাট
+107865,ভাই ভাই পান স্টোর,O8871748510490448,15216,12,লও দুলি বাজার
+111772,মনির স্টোর,O8871748777213496,15221,12,হাসপাতাল গে ট
+125171,ভাই বোন ভেরাইটিজ,O1691750237842734,10372,12,"নতুন বাজার, Sylhet, Sylhet District, Sylhet Division, Bangladesh"
+125523,মানিক ট্রেডার্স,O1691750247223622,10372,12,"কালি বাড়ী, Sylhet District, Sylhet Division, Bangladesh"
+137602,Tajs store,O31750666798651,7396,12,"Halishahar, Chattogram, Chittagong District, Chittagong Division, Bangladesh"
+159979,ভ্যারাইটি স্টোর,O1191751102629928,9716,12,এস এস রোড
+164817,দিঘী স্টোর,O4981751184750302,10310,12,"Sunamganj, Sunamganj District, Sylhet Division, Bangladesh"
+174086,নওশাদ স্টোর,O8871751431317786,15220,12,শাহাগোলা
+174158,ছোটন পান স্টোর,O8871751431693608,15220,12,সাহাগোলা
+174581,আবু হুরাইরা স্টোর,O8871751433621320,15220,12,সাহা গোলা
+174734,হাসান স্টোর,O8871751434276847,15220,12,সাহা গোলা
+175999,স্বপন স্টোর,O8871751439976009,15220,12,আক  না বাজার
+176679,সাগর টি স্টল,O8871751444846346,15220,12,রানীনগর রেলগেট
+177513,মা স্টোর,O8871751455265764,15220,12,হেলালিয়া হাট
+177527,রায়হান স্টোর,O8871751455660040,15220,12,হেলালিয়া হাট
+180103,রশিদ স্টোর,O4981751525891636,10314,12,"Mymensingh - Sunamganj Road, Janigaon, Sunamganj District, Sylhet Division, Bangladesh"
+180266,সিদ্দিক চা স্টল,O8871751526814095,15216,12,প্রতিসর হাট
+181299,সঞ্জিত চা স্টোন,O8871751537396478,15216,12,নওদুলি বাজার
+181389,সাহেরা পান স্টোর,O8871751539481862,15216,12,নওদলী মোড়
+181398,আজগর চা স্টল,O8871751539729093,15216,12,নও দুলি মোড়
+185202,আর কে ডিপার্টমেন্ট,O3701751777577510,12332,12,"আবাসিক, Bangladesh"
+187242,গফুর স্টোর,O8871751805783084,15221,12,উপজেলা ত্রিমোহনী রোড
+193447,মোশফিক স্টোর,O4951752128400913,14766,12,"Nilphamari District, Rangpur Division, Bangladesh"
+194208,তায়েফ এন্ড সায়েফ কফি হাউজ,O1721752141319691,10411,12,"Babur Bazar ,Zakiganj, Sylhet District, Sylhet Division, Bangladesh"
+195414,Amin store,O31752303695306,7400,12,"Halishahar, Chattogram, Chittagong District, Chittagong Division, Bangladesh"
+195519,মামুনটি স্টল,O8121752305041131,14219,12,জীবন নগর বাস স্ট্যান্ড
+195563,Mahabubb store,O31752306278515,7400,12,"Foillatoli Bazar, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+195576,Thahar store,O31752306633478,7400,12,"Foillatoli Bazar, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+195601,New Shindip store,O31752307191533,7400,12,"Foillatoli Bazar, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+195614,Shaha Amanat store,O31752307480620,7400,12,"Foillatoli Bazar, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+195937,সুরুচি স্টোর,O1691752318945461,10371,12,"পল্লবি রোড, Sylhet, Sylhet District, Sylhet Division, Bangladesh"
+197295,তামিম স্টোর,O4981752393048470,10310,12,"Sunamganj, Sunamganj District, Sylhet Division, Bangladesh"
+200278,ময়নুল স্টোর,O4951752479925546,14763,12,"Chapani, 5350, ঝুনাগাছ চাপানি, নীলফামারী জেলা, রংপুর বিভাগ, Bangladesh"
+206027,মধুপুরী ষ্টোর,O401752644849555,7944,12,কালামারছড়া হোয়ানক
+210334,সেন্টু চা,O4881752737833803,14395,12,নিউমার্কেট
+213981,ঊমা স্টোর,O1691752913934070,10371,12,"মদিনা মার্কেট , Sylhet District, Sylhet Division, Bangladesh"
+216916,সিয়াম এন্টারপ্রাইজ,O7411752999643629,13704,12,পোড়া বাড়ি রোড
+228719,sumon store,O11051753516200482,17412,12,"Lalbagh, 1234, Dhaka, Dhaka District, Dhaka Division, Bangladesh"
+241994,Akibe Chowdhury  stoer,O31755324748045,7400,12,"Foillatoli Bazar, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+242593,বিসমিল্লাহ স্টোর,O8871755430910179,15221,12,হাসপাতাল গেট
+242595,শামীম স্টোর,O8871755431156902,15221,12,পশু হাসপাতাল মোড় রাণীনগর
+243612,রুবেল স্টোর,O8871755688935356,15220,12,হেলালিয়া হাট
+246167,ফেরদৌস চা স্টল,O8871756638103179,15221,12,হাসপাতাল গেট
+246172,রিপন স্টোর,O8871756641700897,15221,12,উপজেলা মোড়
+249516,ইমতিয়াজ স্টোর,O6731759896918948,12011,12,"Khashar Hat Rastar Matha Bus Stop, M 18, Noakhali District, Chittagong Division, Bangladesh"
+250353,allardan ti,O11051761980675822,17412,12,"WATER WORKS ROAD, DALPATTY DIST: DHAKA 16, লালবাগ, 1000, ঢাকা, ঢাকা জেলা, ঢাকা বিভাগ, Bangladesh"
+251169,দেলোয়ার স্টোর,O9271763266329700,15187,12,"আধারদিঘী বাজার,হরিণমারী হাট"
+252205,রাইসা স্টোর,O4981765086100430,10310,12,"teghoriya, Teghoria, Sunamganj District, Sylhet Division, Bangladesh"
+274837,সেভেন ইলেভেন ডিপার্টমেন্ট স্টোর,O14321778135643314,18948,12,"C/65, C/65, Road 4, Rampura, 1212, Dhaka, Dhaka District, Dhaka Division, Bangladesh"
+2421,মোস্তফা ষ্টোর,O401744512144635,7941,11,চাইনা মার্কেট ষষ্ঠ মারা
+2433,ভাই ভাই ষ্টোর,O401744514167238,7941,11,"জেমঘাট আগে ,শাপলাপুর"
+2498,ওয়াহিদ ষ্টোর,O401744517366040,7941,11,"জেমঘাট বাজার,শাপলাপুর"
+2546,kobir store,O3141744518621796,7403,11,"11 No. South Kattali Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+2642,Rongdhonu store,O31744520046629,7399,11,"Port Connecting Road, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+2745,All Modina store,O31744521554198,7399,11,"পোর্ট কানেকটিং সড়ক, পোর্ট কানেকটিং সড়ক, হালিশহর, চট্টগ্রাম, চট্টগ্রাম জেলা, চট্টগ্রাম বিভাগ, Bangladesh"
+2769,Rafe store,O31744521784714,7399,11,"পোর্ট কানেকটিং সড়ক, পোর্ট কানেকটিং সড়ক, হালিশহর, চট্টগ্রাম, চট্টগ্রাম জেলা, চট্টগ্রাম বিভাগ, Bangladesh"
+2815,Momin store,O31744522369969,7399,11,"পোর্ট কানেকটিং সড়ক, পোর্ট কানেকটিং সড়ক, হালিশহর, চট্টগ্রাম, চট্টগ্রাম জেলা, চট্টগ্রাম বিভাগ, Bangladesh"
+2954,Ma Babar Dowa store,O31744524075191,7399,11,"37 No. North-Middle Halishahar Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+4966,বিসমিল্লাহ স্টোর,O3701744615596530,7813,11,"খাজা রোড, 6 No. East Sholoshohor Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+4973,এম আর এন্টারপ্রাইজ,O3701744615847817,7813,11,"খাজা রোড, 6 No. East Sholoshohor Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+6093,আশেক ষ্টোর,O401744696699756,7943,11,বাংলা বাজার মাতারবাড়ী
+7114,Sjjad store,O31744778935036,7398,11,"25 No. Rampur Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+7392,Erfat Eanterprise,O31744781408355,7398,11,"1589, 1589, Proshanti Abashon, ২৫ নং রামপুর ওয়ার্ড, 4216, চট্টগ্রাম, চট্টগ্রাম জেলা, চট্টগ্রাম বিভাগ, Bangladesh"
+7455,RajiN store,O31744782791779,7398,11,"25 No. Rampur Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+8229,Saiful store,O31744863074971,7401,11,"Chittagong, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+8274,Mahim Store,O31744863668234,7401,11,"Lane Number 14, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+9454,শাহা আলম ষ্টোর,O401745033410904,7940,11,"ইউনুছখালী বাজারে উওর পাশে,কালামারছড়া"
+10409,এম বি ডিপার্টমেন্ট স্টোর,O3141745051020114,7404,11,"24 No. North Agrabad Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+10996,Babu store,O31745127052954,7399,11,"Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+11018,Aiyat store,O31745128375409,7399,11,"Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+11040,Belal store,O31745128750743,7399,11,"Port Connecting Road, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+12969,Kafil store,O31745385686963,7398,11,"চট্টগ্রাম, ২৫ নং রামপুর ওয়ার্ড, চট্টগ্রাম, চট্টগ্রাম জেলা, চট্টগ্রাম বিভাগ, Bangladesh"
+12999,আবদু ছমদ ষ্টোর,O401745386003851,7944,11,"হরিয়াছড়া,হোয়ানক"
+13141,বেলাল কুলিং কনার,O401745388329740,7944,11,"হোয়ানক বাজার আগে,হোয়ানক"
+13742,Nure super shop,O31745472375686,7401,11,"Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+13773,Najifa store,O31745472709864,7401,11,"109, 109, Lane Number 20, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+13796,Mini Mart,O31745473290966,7401,11,"Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+13822,Enamul store,O31745473724461,7401,11,"Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+13907,All In One,O31745476004268,7401,11,"Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+15416,জারিন স্টোর,O3141745655677387,7404,11,"25 No. Rampur Ward, 4216, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+15441,রামিম ষ্টোর,O401745656528971,7940,11,"কালামারছড়া বাজার,কালামারছড়া"
+18839,জি এম এম এন্টারপ্রাইজ,O2731745824295867,11250,11,"Kashigonj Bazar, Amirabari, Mymensingh District, Mymensingh Division, Bangladesh"
+20677,মুক্তি যোদ্ধা স্টোর,O2701745906164405,11206,11,কামাল পুর মোড়
+21061,হাসান ষ্টোর,O401745909214654,7943,11,"নতুন বাজার,মাতারবাড়ী"
+26235,মজিবর স্টোর,O2731746087017696,11253,11,স্টেশন রোড কালির বাজার এিশাল ময়মনসিংহ।
+27074,আদিব জেনারেল স্টোর,O7901746245732371,12731,11,"Hazi Bari Mosque Road, Norosinhopur, Dhaka District, Dhaka Division, Bangladesh"
+28961,মতিন রেস্টুরেন্ট,O1721746259462581,10406,11,"Zakigan bazar, Sylhet District, Sylhet Division, Bangladesh"
+28972,মতিন  ষ্টোর,O1721746259610788,10406,11,"R250, Zakiganj, Sylhet District, Sylhet Division, Bangladesh"
+30332,মলয় স্টোর,O1621746273853362,10303,11,আমবাড়ি বাজার
+35316,মিতু স্টোর,O1621746433525539,10305,11,নোয়াগাঁও বাজার
+35334,শাখাওয়াত ভেরাইটিজ স্টোর,O1621746433647673,10305,11,নোয়াগাঁও বাজার
+36948,সিফাত ষ্টোর,O401746510462628,7943,11,"পুরাতন বাজার পর, মাতারবাড়ী"
+37211,করিম ষ্টোর,O401746513168399,7943,11,"নতুন বাজার সি এন জি ষ্টেশন, ইউনিয়ন ব্যাংক বিপরীতে,মাতারবাড়ী"
+37429,ফাতেমা স্টোর,O5491746515292226,13980,11,আমুয়াকান্দা মোড়
+37540,কনিকা,O5491746516394813,13980,11,আমুয়াকান্দা মোড়
+37856,আশরাফুল স্টোর,O5491746520354797,13980,11,ভাজাপট্টি
+38017,ফকরুল স্টোর,O5491746522598267,13980,11,ভাজাপট্টি
+38026,ঝুমা স্টোর,O5491746522700062,13980,11,ভাজাপট্টি
+38040,হানিফ,O5491746522854608,13980,11,ভাজাপট্টি
+38078,বনিক (রাজন),O5491746523388753,13980,11,আমুয়াকান্দা
+38795,শফি কুলিং কনার,O401746591407756,7944,11,"হরিয়াছড়া,হোয়ানক"
+38809,কলিম ষ্টোর,O401746591950244,7944,11,হরিয়ারছাড়া হোয়ানক
+39322,আল জাজির সুপার সপ,O401746599412303,7944,11,"হোয়ানাক বাজার,হোয়ানক"
+39646,মিতু রাইচ এজেন্সি,O7101746603353951,13833,11,"Dhaka - Tangail Highway, 1349, Chandra, Gazipur District, Dhaka Division, Bangladesh"
+44127,সাবিদ ষ্টোর,O401746930300934,7941,11,"ষাট মারা মাদ্রাসা,শাফলাপুর"
+44207,ষাইটমারা কুলিং কনার,O401746934159600,7941,11,"ষাট মারা স্কুল,শাপলাপুর"
+44713,মোবারক স্টোর,O5491746939848967,13978,11,কারাহার মোড়
+46410,শচিনন্দন স্টোর,O2701746964081649,11204,11,বেনুয়ার চর বাজার
+47731,হাফিজুল টি স্টল,O1191747030366515,9789,11,বয়রা হাটখোলা বাজার
+49681,রুকুটিস্টল,O1191747110164331,9720,11,শাহেদ নাগর বেপারি পাড়া
+50003,মামুন  স্টোর,O4901747113088502,14354,11,বালুঘাট
+50480,লাবনী টি স্টল,O1191747116167008,9720,11,মুজিব সড়কশাহনাজ মার্কেট
+51732,হামিদুর ট্রেডার্স,O1291747133988772,14449,11,খড়িবাড়ি বাজার
+52333,জুবায়ের স্টোর,O1191747197201817,9718,11,বাহির গুলা রোড পার হাউজ গেট
+55083,আব্দুর রক্কর,O4951747287015860,14765,11,"Dauabari, Nilphamari District, Rangpur Division, Bangladesh"
+56529,ছাইদুল স্টোর,O4951747370117513,14766,11,"Jaldhaka, Nilphamari District, Rangpur Division, Bangladesh"
+56773,আনছারুল স্টোর,O4951747376981696,14766,11,"Nilphamari District, Rangpur Division, Bangladesh"
+56797,জান্নাতুল স্টোর,O4951747377841558,14766,11,"Kishoreganj - Domar Road, Nilphamari District, Rangpur Division, Bangladesh"
+57448,রহমান ষ্টোর,O401747453105224,7940,11,"জাপুয়া বাজার,কালামারছড়া"
+62313,লালটু স্টার,O4901747546493618,14352,11,জাতাহারা বাজার
+63733,সফিকুল স্টোর,O4951747552916829,14762,11,"Kacha Bazar Goli, Dimla, Nilphamari District, Rangpur Division, Bangladesh"
+65759,জাহাঙ্গীর স্টোর,O4951747628162509,14763,11,"ডালিয়া সড়ক, 5330, Jaldhaka, Nilphamari District, Rangpur Division, Bangladesh"
+65763,মহুবার স্টোর,O4951747628295514,14763,11,"ডালিয়া সড়ক, 5330, Jaldhaka, Nilphamari District, Rangpur Division, Bangladesh"
+67077,দেলোয়ার চা স্টল,O8871747636295613,15217,11,খান পুকুর রাতওয়ালের মোড়
+67432,নুর টেলিকম,O9261747637900033,15182,11,বালিয়াডাঙ্গী চৌরাস্তা
+68053,রফিক পান স্টোর,O8871747641426579,15217,11,আবাদ পুকুর কাচুর মোড় আদমদিঘী রোড
+68960,ইয়াসিন ফল ভান্ডার,O8871747648394314,15217,11,বগার বাড়ি বাজার
+69135,নাহিদ ফল ভান্ডার,O8871747649976915,15217,11,বগার বাড়ি বাজার
+70955,আসলাম স্টোর,O8871747720937111,15219,11,নগর ব্রিজ কাশিমবাজার
+71369,সাজু স্টোর,O8871747722971152,15219,11,দিঘীরপাড়
+71595,হিরো স্টোর,O4951747724103724,14764,11,"Tatuapara - Rother Bazar Road, Nilphamari District, Rangpur Division, Bangladesh"
+71971,কোটিপতি স্টোর,O4951747726665969,14764,11,"অবিলের বাজার, Rangpur - Jaldhaka Road, Kishorganj, Nilphamari District, Rangpur Division, Bangladesh"
+81569,নয়ন টি ষ্টোর,O3961747969717530,15841,11,তালা ব্রীজ মোড়
+82913,বিসমিল্লাহ ফল ঘর স্টোর,O9281748059392340,16037,11,"আম বটতলা বাজার  District, Khulna Division, Bangladesh"
+84358,সুমন ট্রেডাস,O9281748065505066,16033,11,"আরবারা বাজার  District, Khulna Division, Bangladesh"
+84416,জনি স্টোর,O9281748065675166,16033,11,"আরপাড়া বাজার  District, Khulna Division, Bangladesh"
+99721,জলিল স্টোর,O9261748323361188,15183,11,স্কুল হাট
+101890,জালাল ষ্টোর,O3961748335517865,15839,11,কালিকাপুর বাজার
+104035,রহমত আলী স্টোর,O4901748409603200,14355,11,পীরাশন বাজার
+104142,আব্দুল মতিন স্টোর,O4901748410100337,14355,11,পীরাশন বাজার
+105006,মুস্তাফিজুর ষ্টোর,O3961748414550667,15840,11,শাহপুর বাজার
+106984,রুমানা বেকারি,O9281748496065311,16038,11,"যশোর স্টান চৌগাছা  - Chaugachha Road, Chowgacha, Jessore District, Khulna Division, Bangladesh"
+107179,বিসমিল্লাহ ভ্যারাইটিজ স্টোর,O9281748498562424,16038,11,"নোভা হাসপাতালের নিচে চৌগাছা, যশোর জেলা, খুলনা বিভাগ, Bangladesh"
+123174,গৌরাঙ্গ  স্টোর ২,O1691750155359662,10374,11,"Salutikor Bazar, Angarjur, Sylhet District, Sylhet Division, Bangladesh"
+123747,আসাদুল স্টোর,O1291750222206708,14450,11,কামারপাড়া বাজার
+127082,সায়েম স্টোর,O4951750314434105,14766,11,"Nilphamari District, Rangpur Division, Bangladesh"
+128086,তানজিম  এন্ড তাওসিন,O1691750322490047,10375,11,"বন কলাপাড়া, Sylhet District, Sylhet Division, Bangladesh"
+131681,Minhaj Enterprise.,O10881750497205234,16661,11,"Haiderganj, Lakshmipur District, Chittagong Division, Bangladesh"
+131745,Daloar store,O10881750498712551,16661,11,"LANE NO 1, Haiderganj, Lakshmipur District, Chittagong Division, Bangladesh"
+131889,মেসার্স সমর ষ্টোর,O4141750502044983,8447,11,গুড় পট্রি কটিয়াদি বাজার
+137366,Melon store,O31750664097116,7396,11,"Halishahar, Chattogram, Chittagong District, Chittagong Division, Bangladesh"
+137470,Hassen store,O31750665098541,7396,11,"Halishahar, Chattogram, Chittagong District, Chittagong Division, Bangladesh"
+137535,Mahamod store,O31750665875749,7396,11,"8, 8, Lane No. 11, 25 No. Rampur Ward, 4216, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+138916,মারুফ স্টোর,O4901750736446201,14354,11,বিদ্যুৎ অফিস মোড়
+140940,মামুন হাডওয়্যার,O7411750746401471,13706,11,রামপুর
+147134,Shamoli store,O31750834788372,7398,11,"Bhuiyan Manzil, Halishahar Road, 25 No. Rampur Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+147365,Eattadi store,O31750835692493,7398,11,"Halishahar Road, 25 No. Rampur Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+147561,Sharmin store,O31750836577530,7398,11,"25 No. Rampur Ward, Chattogram, Chittagong District, Chittagong Division, Bangladesh"
+147634,Bondhon,O31750836834970,7398,11,"25 No. Rampur Ward, Chattogram, Chittagong District, Chittagong Division, Bangladesh"
+149055,khadiza azgor,O5361750848936857,16387,11,"Bhola District, Barisal Division, Bangladesh"
+149163,Bangla Bazar,O5361750850416091,16387,11,"ভোলা জেলা, ভোলা জেলা, বরিশাল বিভাগ, Bangladesh"
+153501,Nasir store,O31750923339267,7401,11,"Road Number 2, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+153552,Hossen store,O31750923760236,7401,11,"4226, 4226, Halishahar Road, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+157498,Hanif Store,O10881751090910540,16661,11,"Haiderganj, Lakshmipur District, Chittagong Division, Bangladesh"
+159459,Repon Store.,O10881751098555941,16810,11,"Rakhalia Bazar, Lakshmipur District, Chittagong Division, Bangladesh"
+160131,মাহিয়া স্টোর,O1691751105095944,10371,11,"পল্লবী , Sylhet, Sylhet District, Sylhet Division, Bangladesh"
+167767,ভাই ভাই স্টোর,O8871751263802969,15217,11,আবাদ  পুকুর নতুন বাজার
+168021,হাজি আমিন শরীফ,O131751264872292,7723,11,"Boktiar Para, Chittagong District, Chittagong Division, Bangladesh"
+170222,তাবিয়া স্টোর,O4981751348197286,10312,11,"হালোয়ার ঘাট বাজার, Sunamganj, Sunamganj District, Sylhet Division, Bangladesh"
+170499,সততা চা স্টল,O8871751349650516,15219,11,দিঘিরপার বাজার
+170611,সেকেন্দার স্টোর,O8871751350178983,15219,11,দিঘিরপার বাজার
+170934,হাসান স্টোর,O4981751351507042,10312,11,"Sunamganj District, Sylhet Division, Bangladesh"
+170981,আব্দুল কুদ্দুস চা স্টল,O8871751351671357,15219,11,দিঘীরপাড় বাজার
+171018,আনসার স্টোর,O8871751351864796,15219,11,দিঘীরপাড় বাজার
+171068,রিমন স্টোর,O8871751352027275,15219,11,দিঘিরপার বাজার
+171095,সেকেন্দার চাস্টল,O8871751352170232,15219,11,দিঘীরপাড় বাজার
+171200,হোসেন চা স্টল,O8871751352498723,15219,11,দিঘীরপাড় বাজার
+171859,নিলয় নিরব ভ্যারাইটি স্টোর,O8871751355225367,15219,11,শৈল গেছে বাজার
+173180,গৌতম স্টোর,O8871751365390669,15219,11,কুনুজ বাজার
+173188,জালাল পানস্টোর,O8871751365669563,15219,11,কোনজ বাজার
+173329,মতিলাল স্টোর,O8871751368171209,15219,11,নগর ব্রিজ
+173342,জাহিদ চা স্টল,O8871751368373516,15219,11,নগর ব্রিজ
+178636,বৈশাখ জেনারেল স্টোর,O11151751519469570,17323,11,"Gazipur, Gazipur District, Dhaka Division, Bangladesh"
+179862,mordan veraites,O11051751524708430,17417,11,"Lalbagh, 1211, Dhaka, Dhaka District, Dhaka Division, Bangladesh"
+183908,জোহা স্টোর,O4981751703326220,10309,11,"Dakshin Khan, 1230, Dhaka, Dhaka District, Dhaka Division, Bangladesh"
+184388,কামরুল স্টোর,O1721751711270891,10406,11,"Mohajon potti, Zakiganj bazar, Sylhet District, Sylhet Division, Bangladesh"
+184672,নাজমুল স্টোর,O2701751718817691,11203,11,টানা ব্রীজ বাজার
+185585,Amin Store,O311751780349998,7888,11,"কক্সবাজার, কক্সবাজার, কক্সবাজার জেলা, চট্টগ্রাম বিভাগ, Bangladesh"
+187174,জুয়েলটি ষ্টল,O1191751802001712,9717,11,সমাজ কল্যাণ মোর
+192006,Rinke store,O31752041696390,7398,11,"25 No. Rampur Ward, Chattogram, Chittagong District, Chittagong Division, Bangladesh"
+192850,Omar Osman store,O31752118961030,7401,11,"Halishahar, Chattogram, Chittagong District, Chittagong Division, Bangladesh"
+192855,Food Valy,O31752119228096,7401,11,"Halishahar, Chattogram, Chittagong District, Chittagong Division, Bangladesh"
+193202,Rofick store,O31752125265272,7401,11,"Halishahar, Chattogram, Chittagong District, Chittagong Division, Bangladesh"
+193403,রাসেল ভ্যারাইটিজ স্টোর,O8111752127626920,14217,11,থানা মোড় জীবননগর চুয়াডাঙ্গা
+198643,হামিদুল পান স্টোর,O9261752470328045,15182,11,Baliadangi
+199796,তারেক স্টোর,O3701752476499291,7813,11,"খাজা রোড  Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+199950,গফফার স্টোর,O3701752477513611,7813,11,"Khaza Road, 4 No. Chandgaon Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+200306,সামসুল স্টোর,O4951752480165339,14763,11,"Jhunagach Chapani, Nilphamari District, Rangpur Division, Bangladesh"
+210424,বাবু চা,O4881752738588017,14395,11,"Kadirganj, Rajshahi, Rajshahi District, Rajshahi Division, Bangladesh"
+211837,nabil stor,O7671752899643004,12662,11,"1340, Hemayetpur, Dhaka District, Dhaka Division, Bangladesh"
+211851,foysal stor,O7671752899741770,12662,11,"1340, Hemayetpur, Dhaka District, Dhaka Division, Bangladesh"
+216312,ইমামে আজম,O3701752994528487,12332,11,"আবাসিক ১০, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+218022,Kalam,O311753073590402,7891,11,"East, East, West Takpara Road, কক্সবাজার, কক্সবাজার জেলা, চট্টগ্রাম বিভাগ, Bangladesh"
+227288,বিসমিল্লাহ স্টোর,O7901753501018295,17930,11,"Hazi Bari Mosque Road, Norosinhopur, Dhaka District, Dhaka Division, Bangladesh"
+227928,tangail comcom and suits,O11051753508792224,17412,11,"90, 90, Water Works Road, Lalbagh, Dhaka, Dhaka District, Dhaka Division, Bangladesh"
+228656,safin ti,O11051753515200669,17412,11,"লালবাগ, লালবাগ, ঢাকা, ঢাকা জেলা, ঢাকা বিভাগ, Bangladesh"
+235246,ওসামা ষ্টোর,O401754107354003,7940,11,"জাপুয়া স্কুল সামনে,কালামারছড়া"
+238462,chad talecom,O11051754543310793,17417,11,"Apex More, 25, Haranath Ghosh Road, Lalbagh, 1211, Dhaka, Dhaka District, Dhaka Division, Bangladesh"
+239227,জিয়াবুল পান বিতান,O401754719115088,7940,11,"নোনাছড়ি বাজার,কালামারছড়া"
+242810,নয়ন ফল ভান্ডার,O8871755498207282,15217,11,কুতকুতি তোলার মোড় আবাদ পুকুর
+242821,জাহাঙ্গীর ফল ভান্ডার,O8871755498620052,15217,11,কুতকুতি তলার মোড় আবাদ পুকুর
+245176,তাকরিম ষ্টোর,O3961756271196618,15840,11,হাজরাকাটি বাজার
+245556,সাথী স্টোর,O4951756363811224,14766,11,"Nilphamari District, Rangpur Division, Bangladesh"
+248752,sohel ti,O11051758780596868,17416,11,"লালবাগ, লালবাগ, ঢাকা, ঢাকা জেলা, ঢাকা বিভাগ, Bangladesh"
+248762,redwan ti,O11051758782524850,17416,11,"Lalbagh, Dhaka, Dhaka District, Dhaka Division, Bangladesh"
+249036,বাছেদ ফল বিতান,O401759214547809,7943,11,"মাতার বাড়ি,সি এন জি নতুনবাজার"
+250348,মুন স্টোর,O4951761977712723,14763,11,"Jhunagach Chapani, Nilphamari District, Rangpur Division, Bangladesh"
+255346,আরাবি ষ্টোর,O3961767162451367,15840,11,শাহপুর বাজার
+255380,মোড়ল বাড়ি,O3961767167233081,15840,11,মহান্দী বাজার
+256724,Nazim Store,O31767845193377,7401,11,"Halishahar, Chattogram, Chittagong District, Chittagong Division, Bangladesh"
+256865,Mashfea Store,O31767851984033,7401,11,"SHOP -02, PLOT - 03, LANE -02, Road Number 3, Halishahar, 4226, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+258754,Abhara Store,O31768459340555,7401,11,"27, 27, Lane No. 1, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+258757,Abrahra Store,O31768459597319,7401,11,"Road Number 2, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+274970,আল মোল্লা জেনারেল স্টোর,O14321778309778478,18944,11,"Rampura, 1212, Dhaka, Dhaka District, Dhaka Division, Bangladesh"
+275162,ফারুক স্টার,O14321778481699578,18948,11,"125, 125, Road-2, Rampura, 1212, Dhaka, Dhaka District, Dhaka Division, Bangladesh"
+275168,ভূঁইয়া জেনারেল স্টোর,O10881778482330247,16810,11,"Rakhalia Bazar, Lakshmipur District, Chittagong Division, Bangladesh"
+2411,রাশেদ ষ্টোর,O401744509831379,7941,10,উত্তর ষষ্ঠ মারা
+3774,Bhai Bhai store,O31744603659838,7396,10,"Agrabad Access Road Bus Stop, Port Connecting Road, 25 No. Rampur Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+3809,Ma Moni store,O31744604197558,7396,10,"18, 18, Port Connecting Road, Double Mooring, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+3815,Tepo store,O3141744604434174,7406,10,"11 No. South Kattali Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+4369,আসহাব ষ্টোর,O401744609590690,7942,10,ইলিশিয়া বাজার চকরিয়া কক্সবাজার
+4513,হোছাইন ষ্টোর,O401744610778834,7942,10,দরবেশখাটা চকরিয়া কক্সবাজার
+4947,কায়সার স্টোর,O3701744615435170,7813,10,"খাজা রোড, 4 No. Chandgaon Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+5000,আল মক্কা ডিপার্টমেন্ট,O3701744616299427,7813,10,"খাজা রোড , 6 No. East Sholoshohor Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+5012,বারাকা স্টোর,O3701744616616278,7813,10,"খাজা রোড, 6 No. East Sholoshohor Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+6321,খাজা ডিপার্টমেন্ট,O3701744699536590,7810,10,"রুমজু মিয়া লেনArkan Road, Sulakbahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+6391,বিসমিল্লাহ স্টোর,O3701744700269849,7810,10,"রুমজু মিয়া লেনSulakbahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+7503,Mahim Cooling Cornr,O31744783341652,7398,10,"25 No. Rampur Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+9998,রিদুয়ান কুলিং কনার,O401745042706889,7940,10,নোনাছড়ি বাজার কালামারছড়া
+10375,কিশোরগঞ্জ স্টোর,O3141745049550950,7404,10,"Road No 1, 24 No. North Agrabad Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+10448,নাজিহা স্টোর,O3701745052248668,12333,10,"চানগাও আবাসিক, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+10577,করিম কুলিং কনার,O401745116489354,7941,10,উওর ষষ্ঠ মারা শাপশাপুর
+10843,মায়ের দোয়া,O3341745125141885,7549,10,"জানে আলাম   কমিশনার গলি    চট্টগ্রাম জেলা, চট্টগ্রাম বিভা"
+10893,মমতাজ স্টোর,O3701745126457480,12332,10,"চাঁদগাও আবাসিক ১৪ নং, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+10898,বি কে শপ,O3701745126607554,12332,10,"চানগাও আবাসিক ১৪ নং Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+11101,ইকরা স্টোর,O3141745129828674,7403,10,"West North Shapla R/A Road, 11 No. South Kattali Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+11316,আয়েশা স্টোর,O3701745132984750,12332,10,"চানগাও আবাসিক ৯ নং Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+11550,জান্নাত কূলিং কর্নার,O3341745140584553,7549,10,"Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+12271,Arman store,O31745299171370,7397,10,"25 No. Rampur Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+12365,Grocery store,O31745301784302,7397,10,"25 No. Rampur Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+12494,Akbor store,O31745304077124,7397,10,"25 No. Rampur Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+12948,কাইছার কুলিং কনার,O401745385261477,7944,10,"হরিয়াছড়া,হোয়ানক"
+12970,মিশুক ফলবিতান,O401745385773327,7944,10,"হরিয়াছড়া, হোয়ানক"
+13196,Housfull store,O31745388913589,7398,10,"21, 21, Golondaz Road, 25 No. Rampur Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+13233,Taz Tradig,O31745389558522,7398,10,"21, 21, Golondaz Road, 25 No. Rampur Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+13290,E T C,O31745390241552,7398,10,"21, 21, Golondaz Road, 25 No. Rampur Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+13721,Azhar store,O31745471969157,7401,10,"4, 4, Lane Number 2, 26 No. North Halishahar Ward, 4226, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+13941,Alam store,O31745476380371,7401,10,"Road Number 2, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+13952,Bismiallah store,O31745477215762,7401,10,"SHAHARA, Road Number 2, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+13971,Forid store,O31745477448764,7401,10,"Road Number 2, Halishahar, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+14685,রংধনু স্টোর,O3141745644280062,7404,10,"25 No. Rampur Ward, Chattogram, Chittagong District, Chittagong Division, Bangladesh"
+14865,হেলাল স্টোর,O3721745645974875,7831,10,মাজার গেইট
+18195,Anika Cooling Corner,O31745814993025,7396,10,"Agrabad Access Road Bus Stop, Port Connecting Road, 25 No. Rampur Ward, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+18610,অল ইন ওয়ান ডিপার্টমেন্ট,O3701745821272387,7813,10,"খাজা রোড খরম পাড়া, Chittagong, Chittagong District, Chittagong Division, Bangladesh"
+18748,নজরুল ষ্টোর,O401745822836137,7942,10,"দরবেশখাটা,ইলিশিয়া"
+19983,হাসান জেনা স্টোর,O7901745901531626,12718,10,"Ashulia, Dhaka District, Dhaka Division, Bangladesh"
+22370,ভাই ভাই কনফেকশনারী,O981745986347901,8468,10,বাস স্ট্যান্ড খিরাটি বাজার কাপাসিয়া গাজীপুর
+22833,ইমন স্টোর,O981745990286238,8468,10,খিরাটি বাজার কাপাসিয়া গাজীপুর
+24575,আব্দুল করিম স্টোর,O5511746012958473,13989,10,কামালতলা মোর
+26672,মোতালেব স্টোর,O7111746103620935,13840,10,"তক্তারচালা বাজার,সখিপুর, টাংগাইল।"
+28934,লাকী ষ্টোর,O1721746259284552,10406,10,"Zakiganj bazar,  Sylhet District, Sylhet Division, Bangladesh"
+30245,লিছান ষ্টোর,O1721746272402643,10406,10,"Zakiganj main road,  Sylhet District, Sylhet Division, Bangladesh"
+30715,কাইছার ষ্টোর,O401746331747451,7941,10,"জামির ছড়ি,শপলাপুর"
+32875,সামিউল স্টোর,O1621746353454254,10304,10,নতুন হাসননগর
+33765,ভাই ভাই স্টোর,O5491746420568181,13979,10,দিউ বালিয় রোড
+35385,মল্লিকা স্টোর,O4981746434078197,10313,10,"Sunamganj, Sunamganj District, Sylhet Division, Bangladesh"
+35685,খান স্টোর,O5491746437857979,13979,10,বালিয়া বাজার
+35966,অনিক স্টোর,O5631746442182082,14028,10,ধানহাটি নইমমিয়া বাজার
+37474,কার্তিক স্টোর,O5491746515673642,13980,10,আমুয়াকান্দা মোড়
+37563,রিপন স্টোর,O5491746516562308,13980,10,আমুয়াকান্দা
+37589,মারওয়ান স্টোর,O5011746516991559,10352,10,ধারণ বাজার
+37642,মিন্টু স্টোর,O5491746517650439,13980,10,আমুয়াকান্দা
+37658,বিনয় স্টোর,O5491746517995550,13980,10,আমুয়াকান্দা
+37669,শাহাবুদ্দিন পান বিতান,O5491746518145698,13980,10,আমুয়াকান্দা মসজিদ সামনে
+37778,রাজীব স্টোর,O5491746519333837,13980,10,ভাজাপট্টি
+38095,ভাই ভাই স্টোর,O5491746523554622,13980,10,আমুয়াকান্দা
+39469,মুন্নি স্টোর,O5491746601140058,13981,10,শাহাপুর বাজার
+44555,সোবান স্টোর,O5491746938441095,13978,10,গরুর হাট সাথে পয়ারী রোড
+46423,জলিল স্টোর,O2701746964425596,11204,10,বেনুয়ার চর বাজার
+47666,কামরুল স্টোর,O1191747029888914,9789,10,বয়রা হাটখোলা বাজার
+54768,মামুন স্টোর,O1261747285102753,14485,10,পুরাতন বাজার ন্যাশনাল ব্যাংকের নিচে
+56801,মোস্তফা স্টোর,O4951747377925249,14766,10,"Kishoreganj - Domar Road, Nilphamari District, Rangpur Division, Bangladesh"
+58543,লোটাস ভ্যারাইটিস,O4951747461858607,14761,10,"Jaldhaka, Nilphamari District, Rangpur Division, Bangladesh"
+59131,রেড ওয়ান সুপার শপ,O1261747465031626,14486,10,ফুড অফিস এর সামনে
+65739,সাদাম কুলিং কনার,O401747627603286,7942,10,"ড়েমুশিয়া,ইলিশিয়া"
+65813,বাবলু স্টোর,O4951747628888821,14763,10,"ডালিয়া সড়ক, 5330, Jaldhaka, Nilphamari District, Rangpur Division, Bangladesh"
+66001,সোনা মিয়া,O4951747630608130,14763,10,"Jaldhaka - Dalia Road, Jaldhaka - Dalia Road, 5330, Jaldhaka, Nilphamari District, Rangpur Division, Bangladesh"
+66619,আতিক স্টোর,O4901747634222445,14353,10,কালইর বাজার
+67302,ভাই ভাই মিষ্টান্ন ভান্ডার,O4901747637416196,14353,10,কুজা মোড়
+70412,লেলিন স্টোর,O4951747718262305,14764,10,"Jaldhaka, Nilphamari District, Rangpur Division, Bangladesh"
+70515,সেলাপ স্টোর,O4951747718901407,14764,10,"Jaldhaka, Nilphamari District, Rangpur Division, Bangladesh"
+70580,বিসমিল্লাহ স্টোর,O4951747719247444,14764,10,"Jaldhaka, Nilphamari District, Rangpur Division, Bangladesh"
+71437,সাদিয়া স্টোর,O4951747723380501,14764,10,"Rother Bazar - Binnakuri Majar Road, Rother Bazar - Binnakuri Majar Road, 5330, Nilphamari District, Rangpur Division, Bangladesh"
+71932,মায়ের দোয়া ষ্টোর,O401747726188802,7943,10,"আফজলিয়া পাড়া, সি এন জি ষ্টেশন, মাতারবাড়ী"
+72032,মনোয়ারুল স্টোর,O4951747727262488,14764,10,"অবিলের বাজার, Rangpur - Jaldhaka Road, Kishorganj, Nilphamari District, Rangpur Division, Bangladesh"
+72206,কফি হাউজ,O4951747728589904,14764,10,"অবিলের বাজার, Rangpur - Jaldhaka Road, Kishorganj, Nilphamari District, Rangpur Division, Bangladesh"
+72217,ফুয়াদ স্টোর,O4951747728715110,14764,10,"Obiler Bazar Bus Station, Rangpur - Jaldhaka Road, Nilphamari District, Rangpur Division, Bangladesh"
+74608,আলঙ্গীর স্টোর,O4951747806980578,14765,10,"Nambihin Rasta, Nambihin Rasta, Nilphamari District, Rangpur Division, Bangladesh"
+85164,মাহিম স্টোর,O9281748069274070,16035,10,"থানা রোড পাম্পের মোড় , Jessore District, Khulna Division, Bangladesh"
+85517,গাঙ্গুলি টি স্টল,O9281748070686283,16033,10,"Murad Gar, Jessore District, Khulna Division, Bangladesh"

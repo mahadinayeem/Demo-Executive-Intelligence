@@ -1,0 +1,5 @@
+﻿Rank,SR_ID,SR_Name,SR_Code,Territory,Total_Visits,Total_Orders,Revenue_BDT,Visits_Per_Day,Conversion_Rate_Pct,Red_Flag_Reason
+51,1089,Mohibul Anower,11090,Taher & Sons,1,97,10688304.4,0.0,100.0,Ghost Orders (High revenue with no recorded visit audit trail)
+213,1324,Jobair Arman,11153,Ispahani Foods Ltd.,1,12,6399101.78,0.1,100.0,Ghost Orders (High revenue with no recorded visit audit trail)
+739,1292,Himel Ahmed,11124,Partho Traders,3,96,2668162.5,0.0,100.0,Ghost Orders (High revenue with no recorded visit audit trail)
+917,1448,Md Ferdous,SM000692,Ferdous Traders,2,3,650240.0,0.7,100.0,Ghost Orders (High revenue with no recorded visit audit trail)

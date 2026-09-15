@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4 — Field Sales Productivity & Employee Diagnostics | PerformancePulse Analyzer™</title>
+<meta name="description" content="PerformancePulse Analyzer™ — Visit Quality, Conversion Latency, Pareto Concentration, Red Flag SRs, Persona Clustering & Coaching Sheets">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="module4_data.js"></script>
+<style>
+:root {
+  --bg:#060912; --bg2:#0d1117; --bg3:#161b27;
+  --card:#111827; --card2:#1a2235;
+  --border:#1e2d45; --border2:#263350;
+  --text:#f0f4ff; --text2:#8899bb; --text3:#5a6a88;
+  --accent:#3b82f6; --accent2:#8b5cf6;
+  --gold:#f59e0b; --emerald:#10b981; --rose:#f43f5e;
+  --cyan:#06b6d4; --orange:#f97316;
+}
+[data-theme="light"]{
+  --bg:#f8fafc; --bg2:#ffffff; --bg3:#f1f5f9;
+  --card:#ffffff; --card2:#f8fafc;
+  --border:#e2e8f0; --border2:#cbd5e1;
+  --text:#0f172a; --text2:#334155; --text3:#64748b;
+}
+[data-theme="light"] .header { background:linear-gradient(135deg,#fff 0%,#f8fafc 50%,#fff 100%); }
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* ── HEADER ── */
+.header{
+  background:linear-gradient(135deg,#060912 0%,#0d1117 40%,#111827 70%,#0d1117 100%);
+  border-bottom:1px solid var(--border);
+  padding:20px 40px; position:sticky; top:0; z-index:100;
+}
+.header-inner{max-width:1700px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.module-badge{
+  background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+  color:#fff;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 12px;border-radius:20px;margin-bottom:6px;display:inline-block;
+}
+.header h1{font-size:clamp(16px,2vw,22px);font-weight:800;color:var(--text);line-height:1.2}
+.header h1 span{color:var(--accent)}
+.header-right{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hstat{text-align:center;padding:0 16px;border-right:1px solid var(--border)}
+.hstat:last-of-type{border-right:none}
+.hstat-val{font-size:20px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--accent)}
+.hstat-val.danger{color:var(--rose)}
+.hstat-val.warn{color:var(--gold)}
+.hstat-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.8px;margin-top:2px}
+.btn{
+  background:var(--card);border:1px solid var(--border2);color:var(--text);
+  padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;font-size:12px;
+  display:flex;align-items:center;gap:7px;transition:all .2s;white-space:nowrap;
+}
+.btn:hover{background:var(--card2);border-color:var(--accent);color:var(--accent)}
+
+/* ── NAV ── */
+.nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 40px;position:sticky;top:81px;z-index:90}
+.nav-inner{max-width:1700px;margin:0 auto;display:flex;gap:4px;overflow-x:auto}
+.nav-tab{
+  padding:14px 18px;font-size:12.5px;font-weight:600;color:var(--text2);cursor:pointer;
+  border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;
+  display:flex;align-items:center;gap:8px;
+}
+.nav-tab:hover{color:var(--text)}
+.nav-tab.active{color:var(--accent);border-bottom-color:var(--accent);background:rgba(59,130,246,.05)}
+.nav-tab .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+
+/* ── MAIN ── */
+.main{max-width:1700px;margin:0 auto;padding:28px 40px}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* ── KPI CARDS ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-bottom:24px}
+.kpi-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:20px;position:relative;overflow:hidden;
+}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--card-accent,var(--accent))}
+.kpi-lbl{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.kpi-val{font-size:26px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--text);margin-bottom:4px}
+.kpi-sub{font-size:11px;color:var(--text2)}
+
+/* ── GRIDS & CARDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-bottom:20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:20px}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.card-title{font-size:14px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px}
+.card-sub{font-size:11px;color:var(--text3);margin-bottom:14px;line-height:1.5}
+.chart-wrap{position:relative;width:100%;height:320px}
+
+/* ── TABLE ── */
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{background:var(--bg3);color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.6px;font-size:10px;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}
+td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
+.mono{font-family:'JetBrains Mono',monospace;font-weight:500}
+.tbl-wrap{overflow-x:auto;max-height:480px}
+.tbl-wrap::-webkit-scrollbar{width:5px;height:5px}
+.tbl-wrap::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ── BADGES & PERSONAS ── */
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700}
+.badge.danger{background:rgba(244,63,94,.15);color:var(--rose)}
+.badge.warn{background:rgba(245,158,11,.15);color:var(--gold)}
+.badge.success{background:rgba(16,185,129,.15);color:var(--emerald)}
+.badge.info{background:rgba(59,130,246,.15);color:var(--accent)}
+.badge.purple{background:rgba(139,92,246,.15);color:var(--accent2)}
+.sr-link{color:var(--accent);font-weight:600;cursor:pointer;text-decoration:none;transition:all .2s}
+.sr-link:hover{text-decoration:underline;color:#60a5fa}
+
+/* ── DOWNLOAD BUTTONS ── */
+.chart-dl{
+  background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);color:var(--accent);
+  padding:4px 10px;border-radius:6px;cursor:pointer;font-size:10px;font-weight:600;
+  display:inline-flex;align-items:center;gap:4px;transition:all .2s;white-space:nowrap;margin-left:auto;
+}
+.chart-dl:hover{background:var(--accent);color:#fff;box-shadow:0 0 10px rgba(59,130,246,.3)}
+
+/* ── FILTER BAR ── */
+.filter-bar{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--bg3);border:1px solid var(--border);
+  padding:12px 16px;border-radius:10px;margin-bottom:16px;
+}
+.filter-bar label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
+.filter-select, .filter-input{
+  background:var(--card);border:1px solid var(--border2);color:var(--text);
+  padding:6px 12px;border-radius:7px;font-size:12px;cursor:pointer;outline:none;
+}
+.filter-select:focus, .filter-input:focus{border-color:var(--accent)}
+.filter-count{margin-left:auto;font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace}
+
+/* ── PERSONA CARDS ── */
+.persona-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:20px}
+.persona-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;
+  position:relative;overflow:hidden;
+}
+.persona-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.persona-icon{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.persona-title{font-size:14px;font-weight:700;color:var(--text)}
+.persona-stat{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:11px}
+.persona-stat:last-child{border-bottom:none}
+
+/* ── COACHING SHEET MODAL ── */
+.modal-overlay{
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,.75);backdrop-filter:blur(6px);
+  z-index:999;display:none;align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay.active{display:flex}
+.coach-modal{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  max-width:850px;width:100%;max-height:90vh;overflow-y:auto;padding:28px;
+  box-shadow:0 25px 50px -12px rgba(0,0,0,.5);position:relative;
+}
+.coach-modal::-webkit-scrollbar{width:6px}
+.coach-modal::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.modal-close{
+  position:absolute;top:20px;right:20px;background:var(--bg3);border:none;
+  color:var(--text2);width:32px;height:32px;border-radius:50%;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;
+}
+.modal-close:hover{background:var(--rose);color:#fff}
+.coach-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:12px}
+.coach-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px}
+.coach-stat{background:var(--bg3);padding:12px 14px;border-radius:10px;border:1px solid var(--border)}
+.coach-stat-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;margin-bottom:4px}
+.coach-stat-val{font-size:18px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--text)}
+.diag-card{background:rgba(244,63,94,.06);border:1px solid rgba(244,63,94,.2);border-radius:10px;padding:16px;margin-bottom:16px}
+.action-card{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:10px;padding:16px;margin-bottom:16px}
+
+@media(max-width:768px){
+  .header{padding:16px 20px}
+  .main{padding:16px 20px}
+  .g2,.g3{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div>
+      <span class="module-badge">Module 4 · PerformancePulse Analyzer™</span>
+      <h1>Field Sales Productivity & <span>Employee Diagnostics</span></h1>
+    </div>
+    <div class="header-right">
+      <div class="hstat"><div class="hstat-val" id="hSRs">--</div><div class="hstat-lbl">Active SRs</div></div>
+      <div class="hstat"><div class="hstat-val" id="hVisits">--</div><div class="hstat-lbl">Total Field Visits</div></div>
+      <div class="hstat"><div class="hstat-val" id="hConv">--</div><div class="hstat-lbl">Avg Conversion</div></div>
+      <div class="hstat"><div class="hstat-val danger" id="hRed">--</div><div class="hstat-lbl">Red Flags</div></div>
+      <button class="btn" onclick="exportModule4CSVs()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Export CSVs
+      </button>
+      <button class="btn" onclick="toggleTheme()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-inner">
+    <div class="nav-tab active" id="tab-overview" onclick="showTab('overview')"><span class="dot" style="color:var(--accent)"></span>Executive Overview</div>
+    <div class="nav-tab" id="tab-duration" onclick="showTab('duration')"><span class="dot" style="color:var(--emerald)"></span>1. Visit Duration Impact</div>
+    <div class="nav-tab" id="tab-latency" onclick="showTab('latency')"><span class="dot" style="color:var(--cyan)"></span>2. Conversion Latency (7-Day Rule)</div>
+    <div class="nav-tab" id="tab-pareto" onclick="showTab('pareto')"><span class="dot" style="color:var(--gold)"></span>3. SR Pareto & Rankings</div>
+    <div class="nav-tab" id="tab-personas" onclick="showTab('personas')"><span class="dot" style="color:var(--accent2)"></span>5. ML Personas</div>
+    <div class="nav-tab" id="tab-matrix" onclick="showTab('matrix')"><span class="dot" style="color:#06b6d4"></span>6. 3D Quadrant Matrix</div>
+    <div class="nav-tab" id="tab-coaching" onclick="showTab('coaching')"><span class="dot" style="color:#10b981"></span>7. SR Coaching Sheets</div>
+    <div class="nav-tab" id="tab-redflags" onclick="showTab('redflags')"><span class="dot" style="color:var(--rose)"></span>4. Red Flag Diagnostics</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ════════════════════ TAB: EXECUTIVE OVERVIEW ════════════════════ -->
+  <div class="tab-content active" id="sec-overview">
+    <div class="kpi-grid">
+      <div class="kpi-card" style="--card-accent:var(--accent)">
+        <div class="kpi-lbl">Total Field Force</div>
+        <div class="kpi-val" id="kpiTotalSRs">--</div>
+        <div class="kpi-sub">Total Sales Representatives</div>
+      </div>
+      <div class="kpi-card" style="--card-accent:var(--emerald)">
+        <div class="kpi-lbl">Total Revenue Generated</div>
+        <div class="kpi-val" id="kpiTotalRev">--</div>
+        <div class="kpi-sub">Delivered orders (Excl. Sep 2026)</div>
+      </div>
+      <div class="kpi-card" style="--card-accent:var(--cyan)">
+        <div class="kpi-lbl">Total Field Visits</div>
+        <div class="kpi-val" id="kpiTotalVisits">--</div>
+        <div class="kpi-sub">GPS-verified outlet check-ins</div>
+      </div>
+      <div class="kpi-card" style="--card-accent:var(--gold)">
+        <div class="kpi-lbl">Top 20% Revenue Dependency</div>
+        <div class="kpi-val" id="kpiTop20Dep">--</div>
+        <div class="kpi-sub">% of sales driven by top 20% SRs</div>
+      </div>
+      <div class="kpi-card" style="--card-accent:var(--rose)">
+        <div class="kpi-lbl">Red Flag Personnel</div>
+        <div class="kpi-val" id="kpiRedCount">--</div>
+        <div class="kpi-sub">Zero output / fake visit anomalies</div>
+      </div>
+    </div>
+
+    <div class="g2">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">SR Operational Personas Distribution</div>
+          <button class="chart-dl" onclick="dlChart('personaDist')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <p class="card-sub">Cluster distribution showing team sales efficiency segmentation.</p>
+        <div class="chart-wrap"><canvas id="chartPersonaDist"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Top 10 Territories by Field Productivity</div>
+          <button class="chart-dl" onclick="dlChart('terrProd')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <p class="card-sub">Revenue and conversion performance ranked by Territory name.</p>
+        <div class="chart-wrap"><canvas id="chartTerrProd"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════ TAB 1: VISIT DURATION & CONVERSION ════════════════════ -->
+  <div class="tab-content" id="sec-duration">
+    <div class="g2">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Visit Duration vs Order Conversion Rate (%)</div>
+          <button class="chart-dl" onclick="dlChart('durationConv')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <p class="card-sub">Comparing conversion yield between superficial visits (&lt;3 min) vs quality in-depth discussions (10+ min).</p>
+        <div class="chart-wrap"><canvas id="chartDurationConv"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Average Order Value (AOV) by Visit Duration</div>
+          <button class="chart-dl" onclick="dlChart('durationAOV')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <p class="card-sub">Basket size uplift achieved when SRs spend 15+ minutes per outlet.</p>
+        <div class="chart-wrap"><canvas id="chartDurationAOV"></canvas></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Visit Quality Buckets Performance Breakdown</div>
+        <button class="chart-dl" onclick="dlChart('durationTable')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Duration Bucket</th><th>Visits Count</th><th>Converted Orders</th><th>Conversion Rate</th><th>Total Revenue (BDT)</th><th>Avg Order Value (AOV)</th>
+            </tr>
+          </thead>
+          <tbody id="tblDurationBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════ TAB 2: CONVERSION LATENCY (7-DAY RULE) ════════════════════ -->
+  <div class="tab-content" id="sec-latency">
+    <div class="g2">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Visit-to-Order Conversion Latency Curve ("Half-Life" Effect)</div>
+          <button class="chart-dl" onclick="dlChart('latencyCurve')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <p class="card-sub">Daily order conversion decay following an initial field visit.</p>
+        <div class="chart-wrap"><canvas id="chartLatencyCurve"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Cumulative Conversion Retention (The 7-Day Threshold)</div>
+          <button class="chart-dl" onclick="dlChart('latencyCumul')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <p class="card-sub">Cumulative % of total orders captured within N days of visit.</p>
+        <div class="chart-wrap"><canvas id="chartLatencyCumul"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════ TAB 3: SR PARETO & RANKINGS ════════════════════ -->
+  <div class="tab-content" id="sec-pareto">
+    <div class="g2">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">SR Cumulative Revenue Concentration (Pareto Curve)</div>
+          <button class="chart-dl" onclick="dlChart('srParetoCurve')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <p class="card-sub">Measures revenue dependency on top performers vs long-tail team.</p>
+        <div class="chart-wrap"><canvas id="chartSRPareto"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Top Decile Dependency Breakdown</div>
+          <button class="chart-dl" onclick="dlChart('paretoDeciles')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <p class="card-sub">Revenue share controlled by Top 10%, Top 20%, and Top 30% SR tiers.</p>
+        <div class="chart-wrap"><canvas id="chartDecileShare"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Full SR Table -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Field Sales Force Performance Rankings (Click SR to Open Coaching Sheet)</div>
+        <button class="chart-dl" onclick="dlChart('srRankingsTable')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+      </div>
+      <div class="filter-bar">
+        <label>Filter Territory:</label>
+        <select class="filter-select" id="selTerr" onchange="filterSRTable()"><option value="">All Territories</option></select>
+        <label style="margin-left:10px">Filter Persona:</label>
+        <select class="filter-select" id="selPersona" onchange="filterSRTable()"><option value="">All Personas</option></select>
+        <label style="margin-left:10px">Search SR:</label>
+        <input type="text" class="filter-input" id="searchSR" placeholder="Name or Code..." oninput="filterSRTable()">
+        <div class="filter-count" id="srTableCount">Showing 0 SRs</div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th><th>SR Name</th><th>Code</th><th>Territory</th><th>Persona</th><th>Revenue (BDT)</th><th>Rev Share</th><th>Orders</th><th>AOV</th><th>Visits</th><th>Visits/Day</th><th>Conv Rate</th><th>Strike Rate</th><th>Coaching Action</th>
+            </tr>
+          </thead>
+          <tbody id="tblSRBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════ TAB 5: ML PERSONAS ════════════════════ -->
+  <div class="tab-content" id="sec-personas">
+    <div class="persona-grid" id="personaCards"></div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">SR Operational Personas Overview</div>
+        <button class="chart-dl" onclick="dlChart('personaDist')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+      </div>
+      <p class="card-sub">Overview of operational personas, their share of total company revenue, and required management tactics.</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Persona</th><th>SR Count</th><th>Revenue (BDT)</th><th>Rev Share %</th><th>Total Visits</th><th>Total Orders</th><th>Avg AOV (BDT)</th><th>Strategic Recommendation</th>
+            </tr>
+          </thead>
+          <tbody id="tblPersonaBreakdown"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════ TAB 6: MULTI-DIMENSIONAL QUADRANT MATRIX ════════════════════ -->
+  <div class="tab-content" id="sec-matrix">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Multi-Dimensional SR Quadrant Matrix (Call Productivity vs Strike Rate vs Drop Size)</div>
+        <button class="chart-dl" onclick="dlChart('quadrantMatrix')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+      </div>
+      <p class="card-sub">
+        <strong>X-Axis:</strong> Daily Call Productivity (Visits/Day) | <strong>Y-Axis:</strong> Strike Rate (% of visited outlets that order) | <strong>Bubble Size:</strong> Average Drop Size (AOV BDT) | <strong>Color:</strong> Training Intervention Category
+      </p>
+      <div class="chart-wrap" style="height:480px"><canvas id="chartQuadrantMatrix"></canvas></div>
+    </div>
+
+    <div class="g2">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:12px;color:var(--accent)">Quadrant Training Interventions Matrix</div>
+        <div style="font-size:12px;line-height:1.7;color:var(--text2)">
+          <div style="padding:8px 0;border-bottom:1px solid var(--border)">
+            <strong style="color:var(--gold)">• Closing & Objection Handling Gap (High Calls, Low Strike):</strong> Rep visits enough shops but fails to close orders. Requires product pitch & objection handling training.
+          </div>
+          <div style="padding:8px 0;border-bottom:1px solid var(--border)">
+            <strong style="color:var(--cyan)">• Route Discipline & Work Rate Deficit (Low Calls, High Strike):</strong> Rep converts well when visiting, but visits too few shops. Needs PJP route planning & call discipline.
+          </div>
+          <div style="padding:8px 0;border-bottom:1px solid var(--border)">
+            <strong style="color:var(--orange)">• Basket Size Underperformance (High Strike, Low AOV):</strong> Rep secures orders easily but ticket size is small. Needs multi-SKU and trade scheme upselling coaching.
+          </div>
+          <div style="padding:8px 0">
+            <strong style="color:var(--rose)">• Full Pipeline Shadowing (Low Calls, Low Strike):</strong> Struggles across both activity and closing. Requires 14-day joint field shadowing with a senior mentor.
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:12px;color:var(--emerald)">Training Interventions Distribution</div>
+        <div class="chart-wrap" style="height:220px"><canvas id="chartInterventionDist"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════ TAB 7: INDIVIDUAL SR COACHING SHEETS ════════════════════ -->
+  <div class="tab-content" id="sec-coaching">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Individual SR Coaching & Diagnostic Sheet</div>
+        <button class="chart-dl" onclick="printCoachingSheet()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>Print / Export Sheet</button>
+      </div>
+      <p class="card-sub">Select any Sales Representative to generate an automated root-cause diagnostic and personalized coaching action plan.</p>
+      
+      <div class="filter-bar" style="margin-bottom:20px">
+        <label>Select SR for Coaching Sheet:</label>
+        <select class="filter-select" id="coachSRSelect" onchange="renderCoachingCard(this.value)" style="min-width:300px"></select>
+      </div>
+
+      <div id="coachSheetContainer"></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════ TAB 4: RED FLAG DIAGNOSTICS ════════════════════ -->
+  <div class="tab-content" id="sec-redflags">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title" style="color:var(--rose)">Red Flag Field Staff Audit (Zero-Output / High-Risk Personnel)</div>
+        <button class="chart-dl" onclick="dlChart('redFlagTable')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+      </div>
+      <p class="card-sub">Personnel with excessive non-productive visits, zero revenue generation, or abnormal activity signatures.</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th><th>SR Name</th><th>Code</th><th>Territory</th><th>Total Visits</th><th>Total Orders</th><th>Revenue (BDT)</th><th>Visits / Day</th><th>Conversion %</th><th>Diagnostic Root Cause</th><th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tblRedBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- COACHING MODAL -->
+<div class="modal-overlay" id="coachModal" onclick="closeModal(event)">
+  <div class="coach-modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeCoachModal()">✕</button>
+    <div id="modalCoachContent"></div>
+  </div>
+</div>
+
+<script>
+let D = window.MODULE4_DATA || {};
+let charts = {};
+
+function fmt(n) { return (n || 0).toLocaleString('en-US'); }
+function fmtBDT(n) { return '৳ ' + Math.round(n || 0).toLocaleString('en-US'); }
+function fmtPct(n) { return (n || 0).toFixed(1) + '%'; }
+
+// Init
+window.addEventListener('DOMContentLoaded', () => {
+  if (!D.summary) return;
+  initHeaderAndKPIs();
+  initOverviewTab();
+  initDurationTab();
+  initLatencyTab();
+  initParetoTab();
+  initPersonaTab();
+  initQuadrantMatrixTab();
+  initCoachingTab();
+  initRedFlagsTab();
+});
+
+function initHeaderAndKPIs() {
+  const s = D.summary;
+  document.getElementById('hSRs').textContent = fmt(s.active_srs);
+  document.getElementById('hVisits').textContent = fmt(s.total_visits);
+  document.getElementById('hConv').textContent = fmtPct(s.avg_conversion_rate);
+  document.getElementById('hRed').textContent = fmt(s.red_flags_count);
+
+  document.getElementById('kpiTotalSRs').textContent = fmt(s.total_srs);
+  document.getElementById('kpiTotalRev').textContent = fmtBDT(s.total_revenue);
+  document.getElementById('kpiTotalVisits').textContent = fmt(s.total_visits);
+  document.getElementById('kpiTop20Dep').textContent = fmtPct(D.pareto_concentration?.top_20pct_srs?.share_pct || 0);
+  document.getElementById('kpiRedCount').textContent = fmt(s.red_flags_count);
+}
+
+function showTab(t) {
+  document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  const tBtn = document.getElementById(`tab-${t}`);
+  const sSec = document.getElementById(`sec-${t}`);
+  if (tBtn) tBtn.classList.add('active');
+  if (sSec) sSec.classList.add('active');
+}
+
+function initOverviewTab() {
+  // Persona Donut
+  const pLabels = (D.personas || []).map(p => p.persona);
+  const pData = (D.personas || []).map(p => p.sr_count);
+  const pColors = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#64748b'];
+
+  charts.personaDist = new Chart(document.getElementById('chartPersonaDist'), {
+    type: 'doughnut',
+    data: {
+      labels: pLabels,
+      datasets: [{ data: pData, backgroundColor: pColors, borderWidth: 0 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#8899bb', boxWidth: 12, font: { size: 11 } } },
+        datalabels: { color: '#fff', font: { weight: 'bold', size: 11 }, formatter: v => fmt(v) }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  // Top 10 Territories Bar
+  const topTerrs = (D.territories || []).slice(0, 10);
+  charts.terrProd = new Chart(document.getElementById('chartTerrProd'), {
+    type: 'bar',
+    data: {
+      labels: topTerrs.map(t => t.territory.length > 15 ? t.territory.slice(0, 15) + '...' : t.territory),
+      datasets: [{
+        label: 'Revenue (BDT)',
+        data: topTerrs.map(t => t.revenue_bdt),
+        backgroundColor: '#3b82f6',
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: { anchor: 'end', align: 'top', color: '#8899bb', font: { size: 10 }, formatter: v => (v/1e6).toFixed(1)+'M' }
+      },
+      scales: {
+        x: { ticks: { color: '#8899bb', font: { size: 10 } }, grid: { display: false } },
+        y: { ticks: { color: '#8899bb', font: { size: 10 }, callback: v => (v/1e6)+'M' }, grid: { color: 'rgba(255,255,255,.05)' } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+}
+
+function initDurationTab() {
+  const vq = D.visit_quality || [];
+  const labels = vq.map(v => v.bucket);
+  const convRates = vq.map(v => v.conversion_rate_pct);
+  const aovs = vq.map(v => v.aov_bdt);
+
+  charts.durationConv = new Chart(document.getElementById('chartDurationConv'), {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Conversion Rate %',
+        data: convRates,
+        backgroundColor: ['#ef4444', '#f59e0b', '#3b82f6', '#10b981'],
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: { anchor: 'end', align: 'top', color: '#f0f4ff', font: { weight: 'bold', size: 11 }, formatter: v => v + '%' }
+      },
+      scales: {
+        x: { ticks: { color: '#8899bb', font: { size: 10 } }, grid: { display: false } },
+        y: { ticks: { color: '#8899bb', font: { size: 10 }, callback: v => v+'%' }, grid: { color: 'rgba(255,255,255,.05)' } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  charts.durationAOV = new Chart(document.getElementById('chartDurationAOV'), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'AOV (BDT)',
+        data: aovs,
+        borderColor: '#10b981',
+        backgroundColor: 'rgba(16,185,129,.1)',
+        tension: 0.3, fill: true, pointRadius: 5, pointBackgroundColor: '#10b981'
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: { anchor: 'top', color: '#10b981', font: { weight: 'bold', size: 11 }, formatter: v => '৳'+fmt(v) }
+      },
+      scales: {
+        x: { ticks: { color: '#8899bb', font: { size: 10 } }, grid: { display: false } },
+        y: { ticks: { color: '#8899bb', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,.05)' } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  // Table
+  const tbody = document.getElementById('tblDurationBody');
+  tbody.innerHTML = vq.map(v => `
+    <tr>
+      <td style="font-weight:600;color:var(--text)">${v.bucket}</td>
+      <td class="mono">${fmt(v.visits)}</td>
+      <td class="mono">${fmt(v.converted_orders)}</td>
+      <td class="mono" style="color:var(--emerald);font-weight:700">${v.conversion_rate_pct}%</td>
+      <td class="mono">${fmtBDT(v.revenue_bdt)}</td>
+      <td class="mono">${fmtBDT(v.aov_bdt)}</td>
+    </tr>
+  `).join('');
+}
+
+function initLatencyTab() {
+  const lat = D.latency || [];
+  const labels = lat.map(l => l.day_label);
+  const counts = lat.map(l => l.order_count);
+  const cumuls = lat.map(l => l.cumul_pct);
+
+  charts.latencyCurve = new Chart(document.getElementById('chartLatencyCurve'), {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Converted Orders',
+        data: counts,
+        backgroundColor: '#06b6d4',
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: { anchor: 'end', align: 'top', color: '#06b6d4', font: { size: 10 }, formatter: v => fmt(v) }
+      },
+      scales: {
+        x: { ticks: { color: '#8899bb', font: { size: 10 } }, grid: { display: false } },
+        y: { ticks: { color: '#8899bb', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,.05)' } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  charts.latencyCumul = new Chart(document.getElementById('chartLatencyCumul'), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Cumulative %',
+        data: cumuls,
+        borderColor: '#8b5cf6',
+        backgroundColor: 'rgba(139,92,246,.15)',
+        tension: 0.3, fill: true, pointRadius: 4, pointBackgroundColor: '#8b5cf6'
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: { anchor: 'top', color: '#f0f4ff', font: { size: 10 }, formatter: v => v + '%' }
+      },
+      scales: {
+        x: { ticks: { color: '#8899bb', font: { size: 10 } }, grid: { display: false } },
+        y: { min: 0, max: 105, ticks: { color: '#8899bb', font: { size: 10 }, callback: v => v+'%' }, grid: { color: 'rgba(255,255,255,.05)' } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+}
+
+function initParetoTab() {
+  const srs = D.sr_rankings || [];
+  const top50 = srs.slice(0, 50);
+
+  charts.srPareto = new Chart(document.getElementById('chartSRPareto'), {
+    type: 'line',
+    data: {
+      labels: top50.map(s => `#${s.rank}`),
+      datasets: [{
+        label: 'Cumulative Revenue Share %',
+        data: top50.map(s => s.cumul_pct),
+        borderColor: '#f59e0b',
+        backgroundColor: 'rgba(245,158,11,.1)',
+        fill: true, tension: 0.2, pointRadius: 2, pointBackgroundColor: '#f59e0b'
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, datalabels: { display: false } },
+      scales: {
+        x: { ticks: { color: '#8899bb', font: { size: 9 }, maxTicksLimit: 15 }, grid: { display: false } },
+        y: { min: 0, max: 100, ticks: { color: '#8899bb', font: { size: 10 }, callback: v => v+'%' }, grid: { color: 'rgba(255,255,255,.05)' } }
+      }
+    }
+  });
+
+  const pconc = D.pareto_concentration || {};
+  charts.decileShare = new Chart(document.getElementById('chartDecileShare'), {
+    type: 'bar',
+    data: {
+      labels: ['Top 10% SRs', 'Top 20% SRs', 'Top 30% SRs'],
+      datasets: [{
+        label: 'Revenue Share %',
+        data: [pconc.top_10pct_srs?.share_pct || 0, pconc.top_20pct_srs?.share_pct || 0, pconc.top_30pct_srs?.share_pct || 0],
+        backgroundColor: ['#f59e0b', '#3b82f6', '#10b981'],
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: { anchor: 'end', align: 'top', color: '#f0f4ff', font: { weight: 'bold', size: 12 }, formatter: v => v + '%' }
+      },
+      scales: {
+        x: { ticks: { color: '#8899bb' }, grid: { display: false } },
+        y: { min: 0, max: 100, ticks: { color: '#8899bb', callback: v => v+'%' }, grid: { color: 'rgba(255,255,255,.05)' } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  // Populate filter dropdowns
+  const terrs = Array.from(new Set(srs.map(s => s.territory))).filter(Boolean).sort();
+  const selT = document.getElementById('selTerr');
+  terrs.forEach(t => { const opt = document.createElement('option'); opt.value = t; opt.textContent = t; selT.appendChild(opt); });
+
+  const personas = Array.from(new Set(srs.map(s => s.persona))).filter(Boolean).sort();
+  const selP = document.getElementById('selPersona');
+  personas.forEach(p => { const opt = document.createElement('option'); opt.value = p; opt.textContent = p; selP.appendChild(opt); });
+
+  renderSRTable(srs);
+}
+
+function filterSRTable() {
+  const srs = D.sr_rankings || [];
+  const t = document.getElementById('selTerr').value;
+  const p = document.getElementById('selPersona').value;
+  const q = document.getElementById('searchSR').value.toLowerCase().trim();
+
+  const filtered = srs.filter(s => {
+    if (t && s.territory !== t) return false;
+    if (p && s.persona !== p) return false;
+    if (q && !(s.name.toLowerCase().includes(q) || (s.code||'').toLowerCase().includes(q))) return false;
+    return true;
+  });
+  renderSRTable(filtered);
+}
+
+function renderSRTable(list) {
+  document.getElementById('srTableCount').textContent = `Showing ${list.length} SRs`;
+  const tbody = document.getElementById('tblSRBody');
+  tbody.innerHTML = list.slice(0, 150).map(s => `
+    <tr>
+      <td class="mono" style="font-weight:700;color:var(--accent)">#${s.rank}</td>
+      <td><a class="sr-link" onclick="openCoachModal('${s.id}')">${s.name}</a></td>
+      <td class="mono">${s.code || '--'}</td>
+      <td>${s.territory}</td>
+      <td><span class="badge" style="background:${s.persona_color}22;color:${s.persona_color}">${s.persona}</span></td>
+      <td class="mono" style="font-weight:700">${fmtBDT(s.revenue)}</td>
+      <td class="mono">${s.rev_share_pct}%</td>
+      <td class="mono">${fmt(s.orders)}</td>
+      <td class="mono">${fmtBDT(s.aov)}</td>
+      <td class="mono">${fmt(s.visits)}</td>
+      <td class="mono">${s.visits_per_day}</td>
+      <td class="mono" style="color:var(--emerald);font-weight:600">${s.conversion_rate}%</td>
+      <td class="mono">${s.strike_rate}%</td>
+      <td><button class="btn" style="padding:3px 8px;font-size:10px" onclick="openCoachModal('${s.id}')">Sheet</button></td>
+    </tr>
+  `).join('');
+}
+
+function initPersonaTab() {
+  const prs = D.personas || [];
+  const pIcons = {
+    'High-Efficiency Closer': '⭐',
+    'High-Volume Runner': '🏃',
+    'Targeted Specialist': '🎯',
+    'Low-Productivity Laggard': '⚠️',
+    'Inactive / Dormant': '💤',
+    'Standard Performer': '📊'
+  };
+
+  const pTactics = {
+    'High-Efficiency Closer': 'Promote to peer mentor; allocate key high-volume retail accounts.',
+    'High-Volume Runner': 'Coaching on multi-SKU cross-selling to convert high call volume into larger basket sizes.',
+    'Targeted Specialist': 'Expand route coverage (PJP) to scale their high-conversion capability across more outlets.',
+    'Low-Productivity Laggard': 'Mandate 14-day joint field shadowing with Area Sales Manager; establish 30-day PIP.',
+    'Inactive / Dormant': 'Conduct HR status audit; reassign territory or offboard if no active market presence.',
+    'Standard Performer': 'Incentivize incremental SKU lines and daily call frequency targets.'
+  };
+
+  const cwrap = document.getElementById('personaCards');
+  cwrap.innerHTML = prs.map(p => `
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-icon" style="background:rgba(59,130,246,.1)">${pIcons[p.persona] || '👤'}</div>
+        <div>
+          <div class="persona-title">${p.persona}</div>
+          <div style="font-size:11px;color:var(--text3)">${fmt(p.sr_count)} Representatives</div>
+        </div>
+      </div>
+      <div class="persona-stat"><span style="color:var(--text3)">Revenue Share</span><span class="mono" style="font-weight:700;color:var(--accent)">${p.rev_share_pct}%</span></div>
+      <div class="persona-stat"><span style="color:var(--text3)">Total Revenue</span><span class="mono">${fmtBDT(p.revenue_bdt)}</span></div>
+      <div class="persona-stat"><span style="color:var(--text3)">Total Visits</span><span class="mono">${fmt(p.total_visits)}</span></div>
+      <div class="persona-stat"><span style="color:var(--text3)">Total Orders</span><span class="mono">${fmt(p.total_orders)}</span></div>
+      <div class="persona-stat"><span style="color:var(--text3)">Avg AOV</span><span class="mono">${fmtBDT(p.avg_aov)}</span></div>
+    </div>
+  `).join('');
+
+  const tbody = document.getElementById('tblPersonaBreakdown');
+  tbody.innerHTML = prs.map(p => `
+    <tr>
+      <td style="font-weight:700;color:var(--text)">${p.persona}</td>
+      <td class="mono">${fmt(p.sr_count)}</td>
+      <td class="mono" style="font-weight:600">${fmtBDT(p.revenue_bdt)}</td>
+      <td class="mono" style="color:var(--accent)">${p.rev_share_pct}%</td>
+      <td class="mono">${fmt(p.total_visits)}</td>
+      <td class="mono">${fmt(p.total_orders)}</td>
+      <td class="mono">${fmtBDT(p.avg_aov)}</td>
+      <td style="font-size:11px;color:var(--text2)">${pTactics[p.persona] || '--'}</td>
+    </tr>
+  `).join('');
+}
+
+function initQuadrantMatrixTab() {
+  const srs = (D.sr_rankings || []).slice(0, 200);
+
+  const colors = {
+    'Closing Gap': '#f59e0b',
+    'Route Gap': '#06b6d4',
+    'Drop Size Gap': '#f97316',
+    'Full Pipeline Gap': '#ef4444',
+    'Activity Audit': '#dc2626',
+    'Growth Track': '#10b981',
+    'Dormant': '#64748b'
+  };
+
+  const matrixData = srs.map(s => ({
+    x: s.visits_per_day,
+    y: s.strike_rate || (s.outlets_visited ? (s.outlets_ordered/s.outlets_visited*100) : 0),
+    r: Math.max(4, Math.min(16, (s.aov || 1000) / 400)),
+    sr: s
+  }));
+
+  charts.quadrantMatrix = new Chart(document.getElementById('chartQuadrantMatrix'), {
+    type: 'bubble',
+    data: {
+      datasets: [{
+        label: 'Sales Representatives',
+        data: matrixData,
+        backgroundColor: matrixData.map(d => (colors[d.sr.gap_type] || '#3b82f6') + '88'),
+        borderColor: matrixData.map(d => colors[d.sr.gap_type] || '#3b82f6')
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const d = ctx.raw.sr;
+              return `${d.name} (${d.territory}) | Calls/Day: ${d.visits_per_day} | Strike Rate: ${d.strike_rate}% | Drop Size: ৳${fmt(d.aov)} | Diagnosis: ${d.diagnosis || d.persona}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: { title: { display: true, text: 'Call Productivity (Visits / Working Day)', color: '#8899bb' }, ticks: { color: '#8899bb' }, grid: { color: 'rgba(255,255,255,.05)' } },
+        y: { title: { display: true, text: 'Strike Rate (% Outlets Converting)', color: '#8899bb' }, min: 0, max: 105, ticks: { color: '#8899bb', callback: v => v+'%' }, grid: { color: 'rgba(255,255,255,.05)' } }
+      }
+    }
+  });
+
+  // Interventions distribution bar
+  const gapCounts = {};
+  srs.forEach(s => { const g = s.gap_type || 'Growth Track'; gapCounts[g] = (gapCounts[g] || 0) + 1; });
+  const gLabels = Object.keys(gapCounts);
+  const gData = Object.values(gapCounts);
+
+  charts.interventionDist = new Chart(document.getElementById('chartInterventionDist'), {
+    type: 'bar',
+    data: {
+      labels: gLabels,
+      datasets: [{ data: gData, backgroundColor: gLabels.map(l => colors[l] || '#3b82f6'), borderRadius: 4 }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: { anchor: 'end', align: 'right', color: '#8899bb', font: { size: 10 }, formatter: v => fmt(v) }
+      },
+      scales: {
+        x: { ticks: { color: '#8899bb' }, grid: { display: false } },
+        y: { ticks: { color: '#8899bb', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,.05)' } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+}
+
+function initCoachingTab() {
+  const srs = D.sr_rankings || [];
+  const sel = document.getElementById('coachSRSelect');
+  sel.innerHTML = srs.slice(0, 300).map(s => `<option value="${s.id}">#${s.rank} - ${s.name} (${s.territory}) - ${s.persona}</option>`).join('');
+  if (srs.length > 0) {
+    renderCoachingCard(srs[0].id);
+  }
+}
+
+function renderCoachingCard(srId) {
+  const s = (D.sr_rankings || []).find(r => String(r.id) === String(srId));
+  if (!s) return;
+
+  const html = `
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:24px">
+      <div class="coach-header">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+            <h2 style="font-size:20px;font-weight:800;color:var(--text)">${s.name}</h2>
+            <span class="badge" style="background:${s.persona_color}22;color:${s.persona_color}">${s.persona}</span>
+            <span class="badge purple">Rank #${s.rank}</span>
+          </div>
+          <div style="font-size:12px;color:var(--text3)">SR Code: <span class="mono" style="color:var(--text2)">${s.code || '--'}</span> | Territory: <strong style="color:var(--text)">${s.territory}</strong></div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:11px;color:var(--text3);text-transform:uppercase">Total Revenue</div>
+          <div style="font-size:22px;font-weight:800;color:var(--accent);font-family:'JetBrains Mono',monospace">${fmtBDT(s.revenue)}</div>
+        </div>
+      </div>
+
+      <div class="coach-grid">
+        <div class="coach-stat"><div class="coach-stat-lbl">Daily Calls (VPD)</div><div class="coach-stat-val">${s.visits_per_day}</div></div>
+        <div class="coach-stat"><div class="coach-stat-lbl">Strike Rate</div><div class="coach-stat-val" style="color:var(--emerald)">${s.strike_rate}%</div></div>
+        <div class="coach-stat"><div class="coach-stat-lbl">Conversion Rate</div><div class="coach-stat-val">${s.conversion_rate}%</div></div>
+        <div class="coach-stat"><div class="coach-stat-lbl">Avg Drop Size (AOV)</div><div class="coach-stat-val">${fmtBDT(s.aov)}</div></div>
+        <div class="coach-stat"><div class="coach-stat-lbl">Total Visits</div><div class="coach-stat-val">${fmt(s.visits)}</div></div>
+        <div class="coach-stat"><div class="coach-stat-lbl">Working Days</div><div class="coach-stat-val">${s.working_days || '--'}</div></div>
+      </div>
+
+      <div class="diag-card">
+        <div style="font-size:11px;font-weight:700;color:var(--rose);text-transform:uppercase;margin-bottom:4px">Automated Root-Cause Diagnostic</div>
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">${s.diagnosis || 'Standard Performance'}</div>
+        <p style="font-size:12px;color:var(--text2);line-height:1.6">${s.red_flag_reason !== 'Normal' ? s.red_flag_reason : 'Operational activity is within standard benchmark thresholds.'}</p>
+      </div>
+
+      <div class="action-card">
+        <div style="font-size:11px;font-weight:700;color:var(--emerald);text-transform:uppercase;margin-bottom:4px">Prescriptive Action Plan & Intervention</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);line-height:1.6">${s.intervention || 'Standard continuous development and target alignment.'}</div>
+      </div>
+    </div>
+  `;
+  document.getElementById('coachSheetContainer').innerHTML = html;
+}
+
+function openCoachModal(srId) {
+  const s = (D.sr_rankings || []).find(r => String(r.id) === String(srId));
+  if (!s) return;
+
+  const html = `
+    <div class="coach-header">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+          <h2 style="font-size:20px;font-weight:800;color:var(--text)">${s.name}</h2>
+          <span class="badge" style="background:${s.persona_color}22;color:${s.persona_color}">${s.persona}</span>
+          <span class="badge purple">Rank #${s.rank}</span>
+        </div>
+        <div style="font-size:12px;color:var(--text3)">SR Code: <span class="mono" style="color:var(--text2)">${s.code || '--'}</span> | Territory: <strong style="color:var(--text)">${s.territory}</strong></div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:11px;color:var(--text3);text-transform:uppercase">Total Revenue</div>
+        <div style="font-size:22px;font-weight:800;color:var(--accent);font-family:'JetBrains Mono',monospace">${fmtBDT(s.revenue)}</div>
+      </div>
+    </div>
+
+    <div class="coach-grid">
+      <div class="coach-stat"><div class="coach-stat-lbl">Daily Calls (VPD)</div><div class="coach-stat-val">${s.visits_per_day}</div></div>
+      <div class="coach-stat"><div class="coach-stat-lbl">Strike Rate</div><div class="coach-stat-val" style="color:var(--emerald)">${s.strike_rate}%</div></div>
+      <div class="coach-stat"><div class="coach-stat-lbl">Conversion Rate</div><div class="coach-stat-val">${s.conversion_rate}%</div></div>
+      <div class="coach-stat"><div class="coach-stat-lbl">Avg Drop Size (AOV)</div><div class="coach-stat-val">${fmtBDT(s.aov)}</div></div>
+      <div class="coach-stat"><div class="coach-stat-lbl">Total Visits</div><div class="coach-stat-val">${fmt(s.visits)}</div></div>
+      <div class="coach-stat"><div class="coach-stat-lbl">Working Days</div><div class="coach-stat-val">${s.working_days || '--'}</div></div>
+    </div>
+
+    <div class="diag-card">
+      <div style="font-size:11px;font-weight:700;color:var(--rose);text-transform:uppercase;margin-bottom:4px">Automated Root-Cause Diagnostic</div>
+      <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">${s.diagnosis || 'Standard Performance'}</div>
+      <p style="font-size:12px;color:var(--text2);line-height:1.6">${s.red_flag_reason !== 'Normal' ? s.red_flag_reason : 'Operational activity is within standard benchmark thresholds.'}</p>
+    </div>
+
+    <div class="action-card">
+      <div style="font-size:11px;font-weight:700;color:var(--emerald);text-transform:uppercase;margin-bottom:4px">Prescriptive Action Plan & Intervention</div>
+      <div style="font-size:13px;font-weight:600;color:var(--text);line-height:1.6">${s.intervention || 'Standard continuous development and target alignment.'}</div>
+    </div>
+  `;
+
+  document.getElementById('modalCoachContent').innerHTML = html;
+  document.getElementById('coachModal').classList.add('active');
+}
+
+function closeCoachModal() {
+  document.getElementById('coachModal').classList.remove('active');
+}
+
+function closeModal(e) {
+  if (e.target.id === 'coachModal') closeCoachModal();
+}
+
+function printCoachingSheet() {
+  window.print();
+}
+
+function initRedFlagsTab() {
+  const reds = D.red_flags || [];
+  const tbody = document.getElementById('tblRedBody');
+  tbody.innerHTML = reds.map(r => `
+    <tr>
+      <td class="mono" style="font-weight:700;color:var(--rose)">#${r.rank}</td>
+      <td><a class="sr-link" onclick="openCoachModal('${r.id}')">${r.name}</a></td>
+      <td class="mono">${r.code || '--'}</td>
+      <td>${r.territory}</td>
+      <td class="mono" style="color:var(--gold);font-weight:600">${fmt(r.visits)}</td>
+      <td class="mono">${fmt(r.orders)}</td>
+      <td class="mono">${fmtBDT(r.revenue)}</td>
+      <td class="mono">${r.visits_per_day}</td>
+      <td class="mono" style="color:var(--rose);font-weight:700">${r.conversion_rate}%</td>
+      <td><span class="badge danger">${r.red_flag_reason}</span></td>
+      <td><button class="btn" style="padding:3px 8px;font-size:10px" onclick="openCoachModal('${r.id}')">Audit</button></td>
+    </tr>
+  `).join('');
+}
+
+function dlChart(cid) {
+  let csv = "";
+  let fn = `Module4_${cid}.csv`;
+
+  if (cid === 'personaDist') {
+    fn = 'Module4_SR_Operational_Personas_Personnel_Roster.csv';
+    csv = "Rank,SR_ID,SR_Name,SR_Code,Territory,Persona_Segment,Delivered_Revenue_BDT,Revenue_Share_Pct,Orders_Count,Total_Visits,Visits_Per_Day,Conversion_Rate_Pct,Strike_Rate_Pct,AOV_BDT,Diagnostic,Prescriptive_Intervention\n";
+    (D.sr_rankings || []).forEach(s => {
+      csv += `${s.rank},"${s.id}","${s.name}","${s.code || ''}","${s.territory}","${s.persona}",${s.revenue},${s.rev_share_pct},${s.orders},${s.visits},${s.visits_per_day},${s.conversion_rate},${s.strike_rate},${s.aov},"${(s.diagnosis || '').replace(/"/g, '""')}","${(s.intervention || '').replace(/"/g, '""')}"\n`;
+    });
+  } else if (cid === 'terrProd') {
+    csv = "Territory,SR_Count,Revenue_BDT,Total_Visits,Total_Orders,Conversion_Rate_Pct,Red_Flag_SRs\n";
+    (D.territories || []).forEach(t => {
+      csv += `"${t.territory}",${t.sr_count},${t.revenue_bdt},${t.total_visits},${t.total_orders},${t.conversion_rate_pct},${t.red_flag_srs}\n`;
+    });
+  } else if (cid === 'durationConv' || cid === 'durationAOV' || cid === 'durationTable') {
+    csv = "Bucket,Visits_Count,Converted_Orders,Conversion_Rate_Pct,Revenue_BDT,AOV_BDT\n";
+    (D.visit_quality || []).forEach(v => {
+      csv += `"${v.bucket}",${v.visits},${v.converted_orders},${v.conversion_rate_pct},${v.revenue_bdt},${v.aov_bdt}\n`;
+    });
+  } else if (cid === 'latencyCurve' || cid === 'latencyCumul') {
+    csv = "Day_Lag,Day_Label,Order_Count,Pct_of_Conversions,Cumulative_Pct\n";
+    (D.latency || []).forEach(l => {
+      csv += `${l.day_lag},"${l.day_label}",${l.order_count},${l.pct_of_conversions},${l.cumul_pct}\n`;
+    });
+  } else if (cid === 'srParetoCurve' || cid === 'srRankingsTable' || cid === 'quadrantMatrix') {
+    csv = "Rank,SR_ID,SR_Name,SR_Code,Territory,Persona,Quadrant,Revenue_BDT,Revenue_Share_Pct,Orders,AOV_BDT,Total_Visits,Visits_Per_Day,Conversion_Rate_Pct,Strike_Rate_Pct,Diagnosis,Intervention\n";
+    (D.sr_rankings || []).forEach(s => {
+      csv += `${s.rank},"${s.id}","${s.name}","${s.code}","${s.territory}","${s.persona}","${s.quadrant}",${s.revenue},${s.rev_share_pct},${s.orders},${s.aov},${s.visits},${s.visits_per_day},${s.conversion_rate},${s.strike_rate},"${s.diagnosis||''}","${s.intervention||''}"\n`;
+    });
+  } else if (cid === 'paretoDeciles') {
+    const pc = D.pareto_concentration || {};
+    csv = "Tier,SR_Count,Revenue_BDT,Revenue_Share_Pct\n";
+    csv += `"Top 10% SRs",${pc.top_10pct_srs?.count},${pc.top_10pct_srs?.revenue},${pc.top_10pct_srs?.share_pct}\n`;
+    csv += `"Top 20% SRs",${pc.top_20pct_srs?.count},${pc.top_20pct_srs?.revenue},${pc.top_20pct_srs?.share_pct}\n`;
+    csv += `"Top 30% SRs",${pc.top_30pct_srs?.count},${pc.top_30pct_srs?.revenue},${pc.top_30pct_srs?.share_pct}\n`;
+  } else if (cid === 'redFlagTable') {
+    csv = "Rank,SR_ID,SR_Name,SR_Code,Territory,Total_Visits,Total_Orders,Revenue_BDT,Visits_Per_Day,Conversion_Rate_Pct,Red_Flag_Reason,Intervention\n";
+    (D.red_flags || []).forEach(r => {
+      csv += `${r.rank},"${r.id}","${r.name}","${r.code}","${r.territory}",${r.visits},${r.orders},${r.revenue},${r.visits_per_day},${r.conversion_rate},"${r.red_flag_reason}","${r.intervention||''}"\n`;
+    });
+  }
+
+  if (!csv) return;
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = fn;
+  link.click();
+}
+
+function exportModule4CSVs() {
+  dlChart('srRankingsTable');
+  setTimeout(() => dlChart('redFlagTable'), 400);
+}
+
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme');
+  document.documentElement.setAttribute('data-theme', cur === 'light' ? 'dark' : 'light');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,7040 @@
+{
+  "summary": {
+    "total_outlets": 214970,
+    "total_active": 208403,
+    "active_outlets": 208403,
+    "churned_outlets": 0,
+    "total_revenue": 4625339619.3,
+    "lost_revenue": 0.0,
+    "churn_visit_gap": 0,
+    "churn_service_gap": 0,
+    "silent_bleed_count": 18392,
+    "silent_bleed_lost": 442609415.1,
+    "churn_risk_count": 54153,
+    "churn_risk_high_count": 43486,
+    "churn_risk_med_count": 10667,
+    "churn_risk_rev": 779644814.4,
+    "churn_risk_revenue": 779644814.4,
+    "red_flag_count": 3286,
+    "red_flags_count": 3286
+  },
+  "kpis": {
+    "total_outlets": 214970,
+    "total_active": 208403,
+    "active_outlets": 208403,
+    "churned_outlets": 0,
+    "total_revenue": 4625339619.3,
+    "lost_revenue": 0.0,
+    "churn_visit_gap": 0,
+    "churn_service_gap": 0,
+    "silent_bleed_count": 18392,
+    "silent_bleed_lost": 442609415.1,
+    "churn_risk_count": 54153,
+    "churn_risk_high_count": 43486,
+    "churn_risk_med_count": 10667,
+    "churn_risk_rev": 779644814.4,
+    "churn_risk_revenue": 779644814.4,
+    "red_flag_count": 3286,
+    "red_flags_count": 3286
+  },
+  "rfm_segments": {
+    "Champions": {
+      "count": 15416,
+      "revenue": 2357086710.0,
+      "freq": 48.2,
+      "skus": 18.3,
+      "aov": 3980.8,
+      "rev_pct": 51.0
+    },
+    "Loyal Base": {
+      "count": 155329,
+      "revenue": 1982016592.8,
+      "freq": 16.9,
+      "skus": 8.5,
+      "aov": 878.8,
+      "rev_pct": 42.9
+    },
+    "Potential": {
+      "count": 17193,
+      "revenue": 59487306.3,
+      "freq": 2.1,
+      "skus": 1.9,
+      "aov": 1835.5,
+      "rev_pct": 1.3
+    },
+    "At-Risk": {
+      "count": 20465,
+      "revenue": 226749010.1,
+      "freq": 5.3,
+      "skus": 4.6,
+      "aov": 1991.9,
+      "rev_pct": 4.9
+    },
+    "Lost": {
+      "count": 0,
+      "revenue": 0.0,
+      "freq": 0.0,
+      "skus": 0.0
+    }
+  },
+  "segments": {
+    "Champions": {
+      "count": 15416,
+      "revenue": 2357086710.0,
+      "freq": 48.2,
+      "skus": 18.3,
+      "aov": 3980.8,
+      "rev_pct": 51.0
+    },
+    "Loyal Base": {
+      "count": 155329,
+      "revenue": 1982016592.8,
+      "freq": 16.9,
+      "skus": 8.5,
+      "aov": 878.8,
+      "rev_pct": 42.9
+    },
+    "Potential": {
+      "count": 17193,
+      "revenue": 59487306.3,
+      "freq": 2.1,
+      "skus": 1.9,
+      "aov": 1835.5,
+      "rev_pct": 1.3
+    },
+    "At-Risk": {
+      "count": 20465,
+      "revenue": 226749010.1,
+      "freq": 5.3,
+      "skus": 4.6,
+      "aov": 1991.9,
+      "rev_pct": 4.9
+    },
+    "Lost": {
+      "count": 0,
+      "revenue": 0.0,
+      "freq": 0.0,
+      "skus": 0.0
+    }
+  },
+  "dropoff": {
+    "total_lost": 0,
+    "lost_revenue": 0.0,
+    "visit_gap": 0,
+    "service_gap": 0
+  },
+  "churn_risk_summary": {
+    "total_count": 54153,
+    "high_count": 43486,
+    "medium_count": 10667,
+    "total_rev": 779644814.4,
+    "by_territory": [
+      {
+        "territory": "Amina Enterprise",
+        "count": 54,
+        "rev": 9414058.0,
+        "high_risk_rev": 9394908.5,
+        "medium_risk_rev": 19149.5,
+        "total_risk_rev": 9414058.0
+      },
+      {
+        "territory": "Ahmmed Enterprise",
+        "count": 178,
+        "rev": 8594050.5,
+        "high_risk_rev": 8437783.4,
+        "medium_risk_rev": 156267.1,
+        "total_risk_rev": 8594050.5
+      },
+      {
+        "territory": "Ma Baba Dua Department Store",
+        "count": 36,
+        "rev": 8588475.1,
+        "high_risk_rev": 8246313.2,
+        "medium_risk_rev": 342161.9,
+        "total_risk_rev": 8588475.1
+      },
+      {
+        "territory": "J. S. Traders",
+        "count": 42,
+        "rev": 8309025.5,
+        "high_risk_rev": 8098303.6,
+        "medium_risk_rev": 210721.9,
+        "total_risk_rev": 8309025.5
+      },
+      {
+        "territory": "Brothers International",
+        "count": 79,
+        "rev": 8063338.0,
+        "high_risk_rev": 7949603.8,
+        "medium_risk_rev": 113734.2,
+        "total_risk_rev": 8063338.0
+      },
+      {
+        "territory": "Sailas Enterprise",
+        "count": 410,
+        "rev": 7291518.0,
+        "high_risk_rev": 6994742.5,
+        "medium_risk_rev": 296775.5,
+        "total_risk_rev": 7291518.0
+      },
+      {
+        "territory": "Shehnaz Enterprise",
+        "count": 36,
+        "rev": 6464612.5,
+        "high_risk_rev": 6464612.5,
+        "medium_risk_rev": 0.0,
+        "total_risk_rev": 6464612.5
+      },
+      {
+        "territory": "Shaheen Traders",
+        "count": 163,
+        "rev": 6015699.0,
+        "high_risk_rev": 5718405.6,
+        "medium_risk_rev": 297293.4,
+        "total_risk_rev": 6015699.0
+      },
+      {
+        "territory": "Sahin Store",
+        "count": 77,
+        "rev": 5293711.4,
+        "high_risk_rev": 5084416.6,
+        "medium_risk_rev": 209294.8,
+        "total_risk_rev": 5293711.4
+      },
+      {
+        "territory": "Sahariar Traders",
+        "count": 72,
+        "rev": 5191347.8,
+        "high_risk_rev": 5109211.0,
+        "medium_risk_rev": 82136.8,
+        "total_risk_rev": 5191347.8
+      },
+      {
+        "territory": "Shaheen Enterprise",
+        "count": 57,
+        "rev": 5179165.9,
+        "high_risk_rev": 5125832.7,
+        "medium_risk_rev": 53333.2,
+        "total_risk_rev": 5179165.9
+      },
+      {
+        "territory": "Care Enterprise",
+        "count": 39,
+        "rev": 5123042.9,
+        "high_risk_rev": 5111007.3,
+        "medium_risk_rev": 12035.6,
+        "total_risk_rev": 5123042.9
+      }
+    ]
+  },
+  "churn_risk": [
+    {
+      "outlet": "143634",
+      "territory": "Nazmul Enterprise COMC",
+      "avg_gap": 0.2,
+      "current_gap": 4,
+      "multiplier": 18.28,
+      "risk_level": "High",
+      "rev_at_risk": 1509723.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "279945",
+      "territory": "Saha Distribution",
+      "avg_gap": 0.1,
+      "current_gap": 4,
+      "multiplier": 77.74,
+      "risk_level": "High",
+      "rev_at_risk": 1247971.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "109966",
+      "territory": "Sabur & Brothers",
+      "avg_gap": 5.7,
+      "current_gap": 27,
+      "multiplier": 4.71,
+      "risk_level": "High",
+      "rev_at_risk": 1222292.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "216192",
+      "territory": "Ma Baba Dua Department Store",
+      "avg_gap": 0.5,
+      "current_gap": 15,
+      "multiplier": 31.96,
+      "risk_level": "High",
+      "rev_at_risk": 1010077.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "45072",
+      "territory": "Mishuk Enterprise",
+      "avg_gap": 2.3,
+      "current_gap": 25,
+      "multiplier": 10.71,
+      "risk_level": "High",
+      "rev_at_risk": 906435.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "269259",
+      "territory": "Meghna Enterprise",
+      "avg_gap": 0.1,
+      "current_gap": 1,
+      "multiplier": 13.5,
+      "risk_level": "High",
+      "rev_at_risk": 827305.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "150927",
+      "territory": "J. S. Traders",
+      "avg_gap": 0.2,
+      "current_gap": 4,
+      "multiplier": 18.53,
+      "risk_level": "High",
+      "rev_at_risk": 816303.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "138727",
+      "territory": "Jamal Enterprise",
+      "avg_gap": 0.1,
+      "current_gap": 1,
+      "multiplier": 9.77,
+      "risk_level": "High",
+      "rev_at_risk": 804610.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "145314",
+      "territory": "Ma Baba Dua Department Store",
+      "avg_gap": 0.5,
+      "current_gap": 19,
+      "multiplier": 41.8,
+      "risk_level": "High",
+      "rev_at_risk": 802430.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "265833",
+      "territory": "Meghna Enterprise-2",
+      "avg_gap": 0.6,
+      "current_gap": 13,
+      "multiplier": 22.29,
+      "risk_level": "High",
+      "rev_at_risk": 796131.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "145483",
+      "territory": "Ma Baba Dua Department Store",
+      "avg_gap": 0.4,
+      "current_gap": 12,
+      "multiplier": 30.1,
+      "risk_level": "High",
+      "rev_at_risk": 765216.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "225968",
+      "territory": "Care Enterprise",
+      "avg_gap": 0.5,
+      "current_gap": 2,
+      "multiplier": 4.34,
+      "risk_level": "High",
+      "rev_at_risk": 725528.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "263405",
+      "territory": "Akbar Ali Store",
+      "avg_gap": 3.4,
+      "current_gap": 21,
+      "multiplier": 6.1,
+      "risk_level": "High",
+      "rev_at_risk": 716304.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "45060",
+      "territory": "Mishuk Enterprise",
+      "avg_gap": 3.4,
+      "current_gap": 28,
+      "multiplier": 8.21,
+      "risk_level": "High",
+      "rev_at_risk": 695094.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "142167",
+      "territory": "Joni Enterprise",
+      "avg_gap": 1.6,
+      "current_gap": 83,
+      "multiplier": 50.39,
+      "risk_level": "High",
+      "rev_at_risk": 687431.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "45043",
+      "territory": "Mishuk Enterprise",
+      "avg_gap": 2.6,
+      "current_gap": 16,
+      "multiplier": 6.26,
+      "risk_level": "High",
+      "rev_at_risk": 681108.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "38588",
+      "territory": "Brothers International",
+      "avg_gap": 1.2,
+      "current_gap": 5,
+      "multiplier": 4.29,
+      "risk_level": "High",
+      "rev_at_risk": 673500.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "142455",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.7,
+      "current_gap": 62,
+      "multiplier": 88.57,
+      "risk_level": "High",
+      "rev_at_risk": 664762.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "125267",
+      "territory": "Marjan Enterprise",
+      "avg_gap": 0.5,
+      "current_gap": 100,
+      "multiplier": 200.0,
+      "risk_level": "High",
+      "rev_at_risk": 653713.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "63394",
+      "territory": "Heron Store",
+      "avg_gap": 3.1,
+      "current_gap": 8,
+      "multiplier": 2.56,
+      "risk_level": "High",
+      "rev_at_risk": 640946.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "133966",
+      "territory": "J. S. Traders",
+      "avg_gap": 0.2,
+      "current_gap": 5,
+      "multiplier": 20.42,
+      "risk_level": "High",
+      "rev_at_risk": 631837.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "243142",
+      "territory": "Anha Enterprise",
+      "avg_gap": 6.0,
+      "current_gap": 34,
+      "multiplier": 5.67,
+      "risk_level": "High",
+      "rev_at_risk": 610143.8,
+      "segment": "Loyal Base"
+    },
+    {
+      "outlet": "166040",
+      "territory": "Shofi Store",
+      "avg_gap": 0.4,
+      "current_gap": 1,
+      "multiplier": 2.64,
+      "risk_level": "High",
+      "rev_at_risk": 606866.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "143557",
+      "territory": "Ma Baba Dua Department Store",
+      "avg_gap": 0.7,
+      "current_gap": 2,
+      "multiplier": 2.84,
+      "risk_level": "High",
+      "rev_at_risk": 595392.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "134436",
+      "territory": "Ahmed Enterprise",
+      "avg_gap": 0.3,
+      "current_gap": 15,
+      "multiplier": 52.5,
+      "risk_level": "High",
+      "rev_at_risk": 591724.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "131972",
+      "territory": "Al-Amin Enterprise",
+      "avg_gap": 0.2,
+      "current_gap": 2,
+      "multiplier": 9.56,
+      "risk_level": "High",
+      "rev_at_risk": 589722.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "215037",
+      "territory": "Care Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 6,
+      "multiplier": 9.98,
+      "risk_level": "High",
+      "rev_at_risk": 586340.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "138086",
+      "territory": "Ma Baba Dua Department Store",
+      "avg_gap": 0.6,
+      "current_gap": 6,
+      "multiplier": 9.96,
+      "risk_level": "High",
+      "rev_at_risk": 582156.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "169738",
+      "territory": "J. S. Traders",
+      "avg_gap": 0.3,
+      "current_gap": 27,
+      "multiplier": 79.5,
+      "risk_level": "High",
+      "rev_at_risk": 581089.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "262272",
+      "territory": "Meghna Enterprise",
+      "avg_gap": 0.2,
+      "current_gap": 1,
+      "multiplier": 6.32,
+      "risk_level": "High",
+      "rev_at_risk": 563908.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "121360",
+      "territory": "Brothers International",
+      "avg_gap": 0.8,
+      "current_gap": 13,
+      "multiplier": 16.19,
+      "risk_level": "High",
+      "rev_at_risk": 562981.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "145444",
+      "territory": "Ma Baba Dua Department Store",
+      "avg_gap": 0.8,
+      "current_gap": 19,
+      "multiplier": 24.22,
+      "risk_level": "High",
+      "rev_at_risk": 559441.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "146320",
+      "territory": "J. S. Traders",
+      "avg_gap": 0.3,
+      "current_gap": 5,
+      "multiplier": 16.76,
+      "risk_level": "High",
+      "rev_at_risk": 540244.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "170037",
+      "territory": "Mizi Enterprise",
+      "avg_gap": 1.8,
+      "current_gap": 7,
+      "multiplier": 4.0,
+      "risk_level": "High",
+      "rev_at_risk": 536978.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "280827",
+      "territory": "Ferdous Traders",
+      "avg_gap": 0.8,
+      "current_gap": 7,
+      "multiplier": 8.56,
+      "risk_level": "High",
+      "rev_at_risk": 529825.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "78468",
+      "territory": "Sahin Store",
+      "avg_gap": 2.7,
+      "current_gap": 11,
+      "multiplier": 4.1,
+      "risk_level": "High",
+      "rev_at_risk": 522172.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "134321",
+      "territory": "Ahmed Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 43,
+      "multiplier": 75.76,
+      "risk_level": "High",
+      "rev_at_risk": 519648.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "137989",
+      "territory": "Ma Baba Dua Department Store",
+      "avg_gap": 0.5,
+      "current_gap": 7,
+      "multiplier": 13.33,
+      "risk_level": "High",
+      "rev_at_risk": 518413.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "150216",
+      "territory": "Al-Amin Enterprise",
+      "avg_gap": 0.2,
+      "current_gap": 4,
+      "multiplier": 17.71,
+      "risk_level": "High",
+      "rev_at_risk": 516812.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "149609",
+      "territory": "Shehnaz Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 62,
+      "multiplier": 104.07,
+      "risk_level": "High",
+      "rev_at_risk": 506775.2,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "64525",
+      "territory": "Shahana Store",
+      "avg_gap": 2.4,
+      "current_gap": 13,
+      "multiplier": 5.32,
+      "risk_level": "High",
+      "rev_at_risk": 501165.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "243803",
+      "territory": "Mithu Enterprise",
+      "avg_gap": 0.4,
+      "current_gap": 1,
+      "multiplier": 2.52,
+      "risk_level": "High",
+      "rev_at_risk": 501084.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "159516",
+      "territory": "Shehnaz Enterprise",
+      "avg_gap": 0.4,
+      "current_gap": 57,
+      "multiplier": 153.77,
+      "risk_level": "High",
+      "rev_at_risk": 496177.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "51240",
+      "territory": "Ahmmed Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 5,
+      "multiplier": 9.05,
+      "risk_level": "High",
+      "rev_at_risk": 491705.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "137634",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.4,
+      "current_gap": 60,
+      "multiplier": 169.2,
+      "risk_level": "High",
+      "rev_at_risk": 488072.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "142115",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.3,
+      "current_gap": 6,
+      "multiplier": 17.66,
+      "risk_level": "High",
+      "rev_at_risk": 482430.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "149639",
+      "territory": "Shehnaz Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 20,
+      "multiplier": 33.66,
+      "risk_level": "High",
+      "rev_at_risk": 478229.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "137551",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.2,
+      "current_gap": 4,
+      "multiplier": 17.71,
+      "risk_level": "High",
+      "rev_at_risk": 473450.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "137149",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.5,
+      "current_gap": 40,
+      "multiplier": 81.9,
+      "risk_level": "High",
+      "rev_at_risk": 470973.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "39877",
+      "territory": "Maa Traders",
+      "avg_gap": 2.3,
+      "current_gap": 89,
+      "multiplier": 38.14,
+      "risk_level": "High",
+      "rev_at_risk": 467165.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "137429",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.3,
+      "current_gap": 28,
+      "multiplier": 81.72,
+      "risk_level": "High",
+      "rev_at_risk": 465906.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "138017",
+      "territory": "Ma Baba Dua Department Store",
+      "avg_gap": 0.4,
+      "current_gap": 7,
+      "multiplier": 18.27,
+      "risk_level": "High",
+      "rev_at_risk": 463694.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "259598",
+      "territory": "Ayesha Siddika Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 6,
+      "multiplier": 10.62,
+      "risk_level": "High",
+      "rev_at_risk": 459736.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "201532",
+      "territory": "Boishakhi Enterprise",
+      "avg_gap": 0.4,
+      "current_gap": 78,
+      "multiplier": 214.5,
+      "risk_level": "High",
+      "rev_at_risk": 457062.5,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "270377",
+      "territory": "Ahmed Enterprise",
+      "avg_gap": 0.7,
+      "current_gap": 4,
+      "multiplier": 6.06,
+      "risk_level": "High",
+      "rev_at_risk": 448832.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "210393",
+      "territory": "Aynal Oil Mils",
+      "avg_gap": 5.8,
+      "current_gap": 39,
+      "multiplier": 6.69,
+      "risk_level": "High",
+      "rev_at_risk": 448343.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "262275",
+      "territory": "Boishakhi Enterprise",
+      "avg_gap": 0.3,
+      "current_gap": 84,
+      "multiplier": 312.0,
+      "risk_level": "High",
+      "rev_at_risk": 447211.6,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "200211",
+      "territory": "Bengol Trading",
+      "avg_gap": 5.6,
+      "current_gap": 69,
+      "multiplier": 12.32,
+      "risk_level": "High",
+      "rev_at_risk": 445424.1,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "34956",
+      "territory": "Zim Enterprise",
+      "avg_gap": 1.9,
+      "current_gap": 6,
+      "multiplier": 3.11,
+      "risk_level": "High",
+      "rev_at_risk": 443836.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "142119",
+      "territory": "Ahmed Enterprise",
+      "avg_gap": 0.7,
+      "current_gap": 27,
+      "multiplier": 37.29,
+      "risk_level": "High",
+      "rev_at_risk": 442458.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "164685",
+      "territory": "Ma Baba Dua Department Store",
+      "avg_gap": 0.5,
+      "current_gap": 36,
+      "multiplier": 66.86,
+      "risk_level": "High",
+      "rev_at_risk": 435757.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "201776",
+      "territory": "Mizi Enterprise",
+      "avg_gap": 2.7,
+      "current_gap": 11,
+      "multiplier": 4.04,
+      "risk_level": "High",
+      "rev_at_risk": 435508.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "44104",
+      "territory": "Care Enterprise",
+      "avg_gap": 0.5,
+      "current_gap": 61,
+      "multiplier": 115.22,
+      "risk_level": "High",
+      "rev_at_risk": 430189.4,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "221431",
+      "territory": "Bismillah Enterprise DHKW",
+      "avg_gap": 3.0,
+      "current_gap": 9,
+      "multiplier": 3.03,
+      "risk_level": "High",
+      "rev_at_risk": 428683.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "169737",
+      "territory": "J. S. Traders",
+      "avg_gap": 0.4,
+      "current_gap": 6,
+      "multiplier": 15.33,
+      "risk_level": "High",
+      "rev_at_risk": 427615.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "176462",
+      "territory": "Brothers International",
+      "avg_gap": 5.8,
+      "current_gap": 68,
+      "multiplier": 11.72,
+      "risk_level": "High",
+      "rev_at_risk": 425682.8,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "169951",
+      "territory": "Mizi Enterprise",
+      "avg_gap": 1.6,
+      "current_gap": 4,
+      "multiplier": 2.55,
+      "risk_level": "High",
+      "rev_at_risk": 424511.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "255279",
+      "territory": "Halim Store",
+      "avg_gap": 0.3,
+      "current_gap": 62,
+      "multiplier": 194.86,
+      "risk_level": "High",
+      "rev_at_risk": 419223.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "186772",
+      "territory": "Asmot Ali Traders",
+      "avg_gap": 0.7,
+      "current_gap": 22,
+      "multiplier": 32.33,
+      "risk_level": "High",
+      "rev_at_risk": 413803.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "129309",
+      "territory": "J. S. Traders",
+      "avg_gap": 0.0,
+      "current_gap": 71,
+      "multiplier": 3834.0,
+      "risk_level": "High",
+      "rev_at_risk": 411390.6,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "134022",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.3,
+      "current_gap": 29,
+      "multiplier": 106.33,
+      "risk_level": "High",
+      "rev_at_risk": 408526.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "29601",
+      "territory": "Ayesha Traders",
+      "avg_gap": 0.8,
+      "current_gap": 13,
+      "multiplier": 15.57,
+      "risk_level": "High",
+      "rev_at_risk": 408243.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "176990",
+      "territory": "Zakir Traders",
+      "avg_gap": 2.1,
+      "current_gap": 21,
+      "multiplier": 9.8,
+      "risk_level": "High",
+      "rev_at_risk": 404962.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "217787",
+      "territory": "Bengol Trading",
+      "avg_gap": 0.7,
+      "current_gap": 69,
+      "multiplier": 97.75,
+      "risk_level": "High",
+      "rev_at_risk": 402953.9,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "223944",
+      "territory": "Akbar Ali Store",
+      "avg_gap": 8.1,
+      "current_gap": 29,
+      "multiplier": 3.58,
+      "risk_level": "High",
+      "rev_at_risk": 398565.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "149130",
+      "territory": "Al-Amin Enterprise",
+      "avg_gap": 0.3,
+      "current_gap": 5,
+      "multiplier": 18.35,
+      "risk_level": "High",
+      "rev_at_risk": 398506.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "143839",
+      "territory": "Nazmul Enterprise COMC",
+      "avg_gap": 1.1,
+      "current_gap": 37,
+      "multiplier": 34.08,
+      "risk_level": "High",
+      "rev_at_risk": 397394.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "33329",
+      "territory": "Akkas Store",
+      "avg_gap": 4.0,
+      "current_gap": 22,
+      "multiplier": 5.5,
+      "risk_level": "High",
+      "rev_at_risk": 396239.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "130870",
+      "territory": "Sahil Traders",
+      "avg_gap": 0.5,
+      "current_gap": 20,
+      "multiplier": 41.1,
+      "risk_level": "High",
+      "rev_at_risk": 395194.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "162490",
+      "territory": "Zakir Traders",
+      "avg_gap": 2.1,
+      "current_gap": 11,
+      "multiplier": 5.12,
+      "risk_level": "High",
+      "rev_at_risk": 392703.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "1590",
+      "territory": "Bengol Trading",
+      "avg_gap": 2.0,
+      "current_gap": 32,
+      "multiplier": 16.0,
+      "risk_level": "High",
+      "rev_at_risk": 392614.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "223120",
+      "territory": "PK Trade International",
+      "avg_gap": 7.3,
+      "current_gap": 23,
+      "multiplier": 3.14,
+      "risk_level": "High",
+      "rev_at_risk": 383176.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "140267",
+      "territory": "Taher & Sons",
+      "avg_gap": 0.5,
+      "current_gap": 6,
+      "multiplier": 11.74,
+      "risk_level": "High",
+      "rev_at_risk": 382929.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "211177",
+      "territory": "Joni Enterprise",
+      "avg_gap": 0.9,
+      "current_gap": 53,
+      "multiplier": 61.65,
+      "risk_level": "High",
+      "rev_at_risk": 381678.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "214317",
+      "territory": "Brothers International",
+      "avg_gap": 0.6,
+      "current_gap": 9,
+      "multiplier": 15.75,
+      "risk_level": "High",
+      "rev_at_risk": 380808.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "223582",
+      "territory": "Asmot Ali Traders",
+      "avg_gap": 2.3,
+      "current_gap": 68,
+      "multiplier": 30.0,
+      "risk_level": "High",
+      "rev_at_risk": 379431.1,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "196581",
+      "territory": "Ahmmed Enterprise",
+      "avg_gap": 0.2,
+      "current_gap": 14,
+      "multiplier": 77.0,
+      "risk_level": "High",
+      "rev_at_risk": 375616.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "174037",
+      "territory": "Bengol Trading",
+      "avg_gap": 0.8,
+      "current_gap": 20,
+      "multiplier": 23.81,
+      "risk_level": "High",
+      "rev_at_risk": 375133.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "11078",
+      "territory": "Sailas Enterprise",
+      "avg_gap": 2.6,
+      "current_gap": 22,
+      "multiplier": 8.46,
+      "risk_level": "High",
+      "rev_at_risk": 372628.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "219163",
+      "territory": "Ahmmed Enterprise",
+      "avg_gap": 0.9,
+      "current_gap": 82,
+      "multiplier": 93.71,
+      "risk_level": "High",
+      "rev_at_risk": 366708.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "270976",
+      "territory": "Nabila Enterprise",
+      "avg_gap": 0.4,
+      "current_gap": 7,
+      "multiplier": 17.8,
+      "risk_level": "High",
+      "rev_at_risk": 366497.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "265447",
+      "territory": "Mizan Traders KUST",
+      "avg_gap": 1.5,
+      "current_gap": 78,
+      "multiplier": 51.26,
+      "risk_level": "High",
+      "rev_at_risk": 366213.2,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "144026",
+      "territory": "Bangla Store",
+      "avg_gap": 0.4,
+      "current_gap": 5,
+      "multiplier": 12.71,
+      "risk_level": "High",
+      "rev_at_risk": 365928.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "236866",
+      "territory": "Liza Trading",
+      "avg_gap": 4.8,
+      "current_gap": 36,
+      "multiplier": 7.53,
+      "risk_level": "High",
+      "rev_at_risk": 365407.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "73418",
+      "territory": "K. M. Motors",
+      "avg_gap": 0.6,
+      "current_gap": 5,
+      "multiplier": 8.14,
+      "risk_level": "High",
+      "rev_at_risk": 364990.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "210545",
+      "territory": "Maa Traders",
+      "avg_gap": 0.6,
+      "current_gap": 4,
+      "multiplier": 6.62,
+      "risk_level": "High",
+      "rev_at_risk": 363127.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "71352",
+      "territory": "K. M. Motors",
+      "avg_gap": 1.0,
+      "current_gap": 13,
+      "multiplier": 12.57,
+      "risk_level": "High",
+      "rev_at_risk": 359649.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "267938",
+      "territory": "Abul & Sons",
+      "avg_gap": 0.7,
+      "current_gap": 31,
+      "multiplier": 44.73,
+      "risk_level": "High",
+      "rev_at_risk": 359383.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "131143",
+      "territory": "Ahmmed Enterprise",
+      "avg_gap": 1.8,
+      "current_gap": 53,
+      "multiplier": 29.62,
+      "risk_level": "High",
+      "rev_at_risk": 355815.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "142484",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.5,
+      "current_gap": 41,
+      "multiplier": 87.86,
+      "risk_level": "High",
+      "rev_at_risk": 355463.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "149724",
+      "territory": "Bangla Store",
+      "avg_gap": 0.4,
+      "current_gap": 4,
+      "multiplier": 8.98,
+      "risk_level": "High",
+      "rev_at_risk": 354773.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "71970",
+      "territory": "Amin Store",
+      "avg_gap": 1.3,
+      "current_gap": 6,
+      "multiplier": 4.51,
+      "risk_level": "High",
+      "rev_at_risk": 353461.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "203917",
+      "territory": "Al Insaf Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 16,
+      "multiplier": 28.14,
+      "risk_level": "High",
+      "rev_at_risk": 352712.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "167299",
+      "territory": "Bhuiya Store",
+      "avg_gap": 2.2,
+      "current_gap": 9,
+      "multiplier": 4.02,
+      "risk_level": "High",
+      "rev_at_risk": 352608.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "142048",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.5,
+      "current_gap": 48,
+      "multiplier": 87.43,
+      "risk_level": "High",
+      "rev_at_risk": 352345.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "3143",
+      "territory": "Chowdhury Enterprise",
+      "avg_gap": 0.7,
+      "current_gap": 8,
+      "multiplier": 11.12,
+      "risk_level": "High",
+      "rev_at_risk": 351362.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "155389",
+      "territory": "Bangla Store",
+      "avg_gap": 0.5,
+      "current_gap": 2,
+      "multiplier": 4.14,
+      "risk_level": "High",
+      "rev_at_risk": 350861.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "278832",
+      "territory": "Shaheen Traders",
+      "avg_gap": 0.6,
+      "current_gap": 7,
+      "multiplier": 12.35,
+      "risk_level": "High",
+      "rev_at_risk": 349809.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "4901",
+      "territory": "Sailas Enterprise",
+      "avg_gap": 4.6,
+      "current_gap": 28,
+      "multiplier": 6.09,
+      "risk_level": "High",
+      "rev_at_risk": 348000.0,
+      "segment": "Loyal Base"
+    },
+    {
+      "outlet": "140985",
+      "territory": "Kabir Store",
+      "avg_gap": 0.7,
+      "current_gap": 14,
+      "multiplier": 20.0,
+      "risk_level": "High",
+      "rev_at_risk": 347118.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "129105",
+      "territory": "Ahmed Enterprise",
+      "avg_gap": 2.3,
+      "current_gap": 72,
+      "multiplier": 30.86,
+      "risk_level": "High",
+      "rev_at_risk": 345342.9,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "46595",
+      "territory": "Salam Traders",
+      "avg_gap": 0.7,
+      "current_gap": 2,
+      "multiplier": 3.04,
+      "risk_level": "High",
+      "rev_at_risk": 344081.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "261566",
+      "territory": "Meghna Enterprise-2",
+      "avg_gap": 1.0,
+      "current_gap": 23,
+      "multiplier": 23.25,
+      "risk_level": "High",
+      "rev_at_risk": 343595.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "272340",
+      "territory": "Nabila Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 2,
+      "multiplier": 3.46,
+      "risk_level": "High",
+      "rev_at_risk": 343066.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "41898",
+      "territory": "Brothers International",
+      "avg_gap": 1.0,
+      "current_gap": 4,
+      "multiplier": 3.85,
+      "risk_level": "High",
+      "rev_at_risk": 342376.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "261154",
+      "territory": "R.D Global Trade",
+      "avg_gap": 0.4,
+      "current_gap": 78,
+      "multiplier": 211.71,
+      "risk_level": "High",
+      "rev_at_risk": 342250.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "215134",
+      "territory": "Jaman Traders",
+      "avg_gap": 0.8,
+      "current_gap": 47,
+      "multiplier": 58.06,
+      "risk_level": "High",
+      "rev_at_risk": 342184.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "198050",
+      "territory": "K. M. Motors",
+      "avg_gap": 0.7,
+      "current_gap": 7,
+      "multiplier": 9.73,
+      "risk_level": "High",
+      "rev_at_risk": 341057.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "260571",
+      "territory": "Karnafuly Trading",
+      "avg_gap": 0.6,
+      "current_gap": 21,
+      "multiplier": 37.92,
+      "risk_level": "High",
+      "rev_at_risk": 340907.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "127184",
+      "territory": "AlAmin Store KISC",
+      "avg_gap": 1.3,
+      "current_gap": 39,
+      "multiplier": 30.64,
+      "risk_level": "High",
+      "rev_at_risk": 340700.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "19208",
+      "territory": "Akkas Store",
+      "avg_gap": 2.1,
+      "current_gap": 7,
+      "multiplier": 3.36,
+      "risk_level": "High",
+      "rev_at_risk": 339840.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "259842",
+      "territory": "Al Insaf Enterprise",
+      "avg_gap": 0.4,
+      "current_gap": 21,
+      "multiplier": 51.5,
+      "risk_level": "High",
+      "rev_at_risk": 338167.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "137053",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.3,
+      "current_gap": 28,
+      "multiplier": 82.03,
+      "risk_level": "High",
+      "rev_at_risk": 338145.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "86727",
+      "territory": "AlAmin Store KISC",
+      "avg_gap": 3.4,
+      "current_gap": 23,
+      "multiplier": 6.82,
+      "risk_level": "High",
+      "rev_at_risk": 338113.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "18380",
+      "territory": "Gandheswari Vandar",
+      "avg_gap": 2.1,
+      "current_gap": 16,
+      "multiplier": 7.77,
+      "risk_level": "High",
+      "rev_at_risk": 336254.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "255945",
+      "territory": "Partho Traders",
+      "avg_gap": 4.4,
+      "current_gap": 62,
+      "multiplier": 14.09,
+      "risk_level": "High",
+      "rev_at_risk": 335436.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "97609",
+      "territory": "Zabed Enterprise",
+      "avg_gap": 0.7,
+      "current_gap": 11,
+      "multiplier": 16.5,
+      "risk_level": "High",
+      "rev_at_risk": 334488.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "183398",
+      "territory": "Alif Traders HABC",
+      "avg_gap": 0.9,
+      "current_gap": 23,
+      "multiplier": 26.83,
+      "risk_level": "High",
+      "rev_at_risk": 334352.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "135156",
+      "territory": "Zabed Enterprise",
+      "avg_gap": 0.4,
+      "current_gap": 23,
+      "multiplier": 60.79,
+      "risk_level": "High",
+      "rev_at_risk": 333624.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "45052",
+      "territory": "Mishuk Enterprise",
+      "avg_gap": 5.1,
+      "current_gap": 16,
+      "multiplier": 3.16,
+      "risk_level": "High",
+      "rev_at_risk": 333350.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "217267",
+      "territory": "Zabed Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 15,
+      "multiplier": 23.57,
+      "risk_level": "High",
+      "rev_at_risk": 332127.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "3163",
+      "territory": "Chowdhury Enterprise",
+      "avg_gap": 1.2,
+      "current_gap": 29,
+      "multiplier": 24.86,
+      "risk_level": "High",
+      "rev_at_risk": 330804.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "280687",
+      "territory": "Enan Distribution Point",
+      "avg_gap": 0.5,
+      "current_gap": 2,
+      "multiplier": 4.0,
+      "risk_level": "High",
+      "rev_at_risk": 329275.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "184943",
+      "territory": "J. S. Traders",
+      "avg_gap": 0.1,
+      "current_gap": 49,
+      "multiplier": 747.25,
+      "risk_level": "High",
+      "rev_at_risk": 329229.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "151801",
+      "territory": "Ahmmed Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 9,
+      "multiplier": 15.86,
+      "risk_level": "High",
+      "rev_at_risk": 328692.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "140194",
+      "territory": "Shehnaz Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 58,
+      "multiplier": 94.91,
+      "risk_level": "High",
+      "rev_at_risk": 328133.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "138636",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 35,
+      "multiplier": 61.36,
+      "risk_level": "High",
+      "rev_at_risk": 327364.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "148338",
+      "territory": "Shaheen Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 41,
+      "multiplier": 65.73,
+      "risk_level": "High",
+      "rev_at_risk": 325742.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "270754",
+      "territory": "Nabila Enterprise",
+      "avg_gap": 0.4,
+      "current_gap": 1,
+      "multiplier": 2.54,
+      "risk_level": "High",
+      "rev_at_risk": 325714.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "280691",
+      "territory": "Enan Distribution Point",
+      "avg_gap": 0.6,
+      "current_gap": 6,
+      "multiplier": 9.64,
+      "risk_level": "High",
+      "rev_at_risk": 325547.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "261264",
+      "territory": "Rafnan Enterprise",
+      "avg_gap": 1.7,
+      "current_gap": 6,
+      "multiplier": 3.55,
+      "risk_level": "High",
+      "rev_at_risk": 325248.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "141523",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.2,
+      "current_gap": 90,
+      "multiplier": 360.0,
+      "risk_level": "High",
+      "rev_at_risk": 325075.6,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "129033",
+      "territory": "Taher & Sons",
+      "avg_gap": 0.5,
+      "current_gap": 2,
+      "multiplier": 4.07,
+      "risk_level": "High",
+      "rev_at_risk": 325056.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "214513",
+      "territory": "Zabed Enterprise",
+      "avg_gap": 0.2,
+      "current_gap": 65,
+      "multiplier": 297.14,
+      "risk_level": "High",
+      "rev_at_risk": 323081.2,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "35262",
+      "territory": "Sajib Traders",
+      "avg_gap": 0.8,
+      "current_gap": 5,
+      "multiplier": 6.05,
+      "risk_level": "High",
+      "rev_at_risk": 322907.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "137795",
+      "territory": "Chowdhury Enterprise",
+      "avg_gap": 0.7,
+      "current_gap": 14,
+      "multiplier": 20.43,
+      "risk_level": "High",
+      "rev_at_risk": 322712.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "118667",
+      "territory": "Brothers International",
+      "avg_gap": 0.7,
+      "current_gap": 63,
+      "multiplier": 84.42,
+      "risk_level": "High",
+      "rev_at_risk": 322063.4,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "271846",
+      "territory": "Nabila Enterprise",
+      "avg_gap": 0.5,
+      "current_gap": 4,
+      "multiplier": 8.08,
+      "risk_level": "High",
+      "rev_at_risk": 320471.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "121358",
+      "territory": "Brothers International",
+      "avg_gap": 0.6,
+      "current_gap": 6,
+      "multiplier": 9.94,
+      "risk_level": "High",
+      "rev_at_risk": 320369.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "134565",
+      "territory": "Makkha Enterprise",
+      "avg_gap": 1.3,
+      "current_gap": 39,
+      "multiplier": 30.57,
+      "risk_level": "High",
+      "rev_at_risk": 319526.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "143567",
+      "territory": "Ma Baba Dua Department Store",
+      "avg_gap": 0.8,
+      "current_gap": 16,
+      "multiplier": 19.2,
+      "risk_level": "High",
+      "rev_at_risk": 319475.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "125230",
+      "territory": "Zabed Enterprise",
+      "avg_gap": 1.5,
+      "current_gap": 5,
+      "multiplier": 3.43,
+      "risk_level": "High",
+      "rev_at_risk": 317336.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "76975",
+      "territory": "Care Enterprise",
+      "avg_gap": 0.2,
+      "current_gap": 63,
+      "multiplier": 261.0,
+      "risk_level": "High",
+      "rev_at_risk": 317162.6,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "134222",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.3,
+      "current_gap": 29,
+      "multiplier": 107.71,
+      "risk_level": "High",
+      "rev_at_risk": 315057.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "161191",
+      "territory": "Royal Brothers",
+      "avg_gap": 0.7,
+      "current_gap": 9,
+      "multiplier": 12.27,
+      "risk_level": "High",
+      "rev_at_risk": 313627.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "261706",
+      "territory": "Boishakhi Enterprise",
+      "avg_gap": 0.4,
+      "current_gap": 64,
+      "multiplier": 143.36,
+      "risk_level": "High",
+      "rev_at_risk": 313256.4,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "1301",
+      "territory": "Bengol Trading",
+      "avg_gap": 0.7,
+      "current_gap": 29,
+      "multiplier": 39.7,
+      "risk_level": "High",
+      "rev_at_risk": 313024.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "155328",
+      "territory": "Insan Distributor",
+      "avg_gap": 1.6,
+      "current_gap": 82,
+      "multiplier": 51.63,
+      "risk_level": "High",
+      "rev_at_risk": 312374.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "274886",
+      "territory": "Boishakhi Enterprise",
+      "avg_gap": 0.4,
+      "current_gap": 81,
+      "multiplier": 216.96,
+      "risk_level": "High",
+      "rev_at_risk": 310443.9,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "144009",
+      "territory": "Taher & Sons",
+      "avg_gap": 0.7,
+      "current_gap": 5,
+      "multiplier": 7.4,
+      "risk_level": "High",
+      "rev_at_risk": 310115.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "190862",
+      "territory": "Alif Traders HABC",
+      "avg_gap": 0.8,
+      "current_gap": 34,
+      "multiplier": 43.71,
+      "risk_level": "High",
+      "rev_at_risk": 309851.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "269563",
+      "territory": "Meghna Enterprise-2",
+      "avg_gap": 0.8,
+      "current_gap": 21,
+      "multiplier": 25.33,
+      "risk_level": "High",
+      "rev_at_risk": 308886.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "212768",
+      "territory": "Ma Store DHKS",
+      "avg_gap": 1.4,
+      "current_gap": 9,
+      "multiplier": 6.61,
+      "risk_level": "High",
+      "rev_at_risk": 308387.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "267300",
+      "territory": "Meghna Enterprise-2",
+      "avg_gap": 1.7,
+      "current_gap": 7,
+      "multiplier": 4.16,
+      "risk_level": "High",
+      "rev_at_risk": 308352.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "150868",
+      "territory": "Abul & Sons",
+      "avg_gap": 0.9,
+      "current_gap": 4,
+      "multiplier": 4.53,
+      "risk_level": "High",
+      "rev_at_risk": 307413.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "260730",
+      "territory": "Karnafuly Trading",
+      "avg_gap": 0.6,
+      "current_gap": 12,
+      "multiplier": 21.26,
+      "risk_level": "High",
+      "rev_at_risk": 307222.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "19596",
+      "territory": "Koli Store",
+      "avg_gap": 0.7,
+      "current_gap": 13,
+      "multiplier": 17.64,
+      "risk_level": "High",
+      "rev_at_risk": 306514.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "154786",
+      "territory": "Shehnaz Enterprise",
+      "avg_gap": 0.4,
+      "current_gap": 42,
+      "multiplier": 106.5,
+      "risk_level": "High",
+      "rev_at_risk": 306283.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "60101",
+      "territory": "JKM Enterprise",
+      "avg_gap": 1.6,
+      "current_gap": 6,
+      "multiplier": 3.74,
+      "risk_level": "High",
+      "rev_at_risk": 305796.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "232134",
+      "territory": "Bengol Trading",
+      "avg_gap": 0.6,
+      "current_gap": 85,
+      "multiplier": 148.75,
+      "risk_level": "High",
+      "rev_at_risk": 305530.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "170205",
+      "territory": "Mizi Enterprise",
+      "avg_gap": 1.9,
+      "current_gap": 5,
+      "multiplier": 2.6,
+      "risk_level": "High",
+      "rev_at_risk": 304730.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "139070",
+      "territory": "Al-Amin Enterprise",
+      "avg_gap": 0.4,
+      "current_gap": 6,
+      "multiplier": 15.96,
+      "risk_level": "High",
+      "rev_at_risk": 304436.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "154866",
+      "territory": "AI Trading",
+      "avg_gap": 0.5,
+      "current_gap": 3,
+      "multiplier": 5.95,
+      "risk_level": "High",
+      "rev_at_risk": 304208.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "114595",
+      "territory": "K. M. Motors",
+      "avg_gap": 0.7,
+      "current_gap": 2,
+      "multiplier": 2.88,
+      "risk_level": "High",
+      "rev_at_risk": 304184.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "45027",
+      "territory": "Mishuk Enterprise",
+      "avg_gap": 4.7,
+      "current_gap": 20,
+      "multiplier": 4.3,
+      "risk_level": "High",
+      "rev_at_risk": 303520.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "259807",
+      "territory": "Maa Enterprise",
+      "avg_gap": 2.3,
+      "current_gap": 6,
+      "multiplier": 2.63,
+      "risk_level": "High",
+      "rev_at_risk": 303510.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "159951",
+      "territory": "Abul & Sons",
+      "avg_gap": 1.2,
+      "current_gap": 23,
+      "multiplier": 19.71,
+      "risk_level": "High",
+      "rev_at_risk": 302836.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "39871",
+      "territory": "AlAmin Store KISC",
+      "avg_gap": 1.9,
+      "current_gap": 33,
+      "multiplier": 17.57,
+      "risk_level": "High",
+      "rev_at_risk": 302206.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "263951",
+      "territory": "Yashin & Minhaj Enterprise",
+      "avg_gap": 0.9,
+      "current_gap": 81,
+      "multiplier": 89.53,
+      "risk_level": "High",
+      "rev_at_risk": 301984.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "73988",
+      "territory": "Sahin Store",
+      "avg_gap": 0.7,
+      "current_gap": 47,
+      "multiplier": 70.5,
+      "risk_level": "High",
+      "rev_at_risk": 300699.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "76543",
+      "territory": "Amin Store",
+      "avg_gap": 1.9,
+      "current_gap": 5,
+      "multiplier": 2.67,
+      "risk_level": "High",
+      "rev_at_risk": 300601.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "278103",
+      "territory": "Jilani Traders",
+      "avg_gap": 0.2,
+      "current_gap": 1,
+      "multiplier": 5.17,
+      "risk_level": "High",
+      "rev_at_risk": 298396.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "54202",
+      "territory": "Royal Brothers",
+      "avg_gap": 1.0,
+      "current_gap": 9,
+      "multiplier": 8.91,
+      "risk_level": "High",
+      "rev_at_risk": 296846.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "166784",
+      "territory": "Taher & Sons",
+      "avg_gap": 0.6,
+      "current_gap": 68,
+      "multiplier": 112.69,
+      "risk_level": "High",
+      "rev_at_risk": 296341.8,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "52936",
+      "territory": "Sajim Traders",
+      "avg_gap": 0.6,
+      "current_gap": 5,
+      "multiplier": 8.57,
+      "risk_level": "High",
+      "rev_at_risk": 296255.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "174808",
+      "territory": "Shaheen Enterprise",
+      "avg_gap": 0.3,
+      "current_gap": 34,
+      "multiplier": 116.57,
+      "risk_level": "High",
+      "rev_at_risk": 296228.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "122655",
+      "territory": "Royal Brothers",
+      "avg_gap": 1.0,
+      "current_gap": 62,
+      "multiplier": 62.0,
+      "risk_level": "High",
+      "rev_at_risk": 295679.5,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "151207",
+      "territory": "Abul & Sons",
+      "avg_gap": 1.3,
+      "current_gap": 4,
+      "multiplier": 3.01,
+      "risk_level": "High",
+      "rev_at_risk": 294229.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "180604",
+      "territory": "Bengol Trading",
+      "avg_gap": 0.6,
+      "current_gap": 74,
+      "multiplier": 120.51,
+      "risk_level": "High",
+      "rev_at_risk": 294128.4,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "179079",
+      "territory": "Monir General Store",
+      "avg_gap": 1.2,
+      "current_gap": 4,
+      "multiplier": 3.47,
+      "risk_level": "High",
+      "rev_at_risk": 291761.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "197888",
+      "territory": "Rahmania Traders",
+      "avg_gap": 0.9,
+      "current_gap": 34,
+      "multiplier": 38.79,
+      "risk_level": "High",
+      "rev_at_risk": 290951.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "155192",
+      "territory": "Care Enterprise",
+      "avg_gap": 0.7,
+      "current_gap": 5,
+      "multiplier": 6.95,
+      "risk_level": "High",
+      "rev_at_risk": 290828.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "93304",
+      "territory": "Athoi Traders",
+      "avg_gap": 0.5,
+      "current_gap": 42,
+      "multiplier": 79.8,
+      "risk_level": "High",
+      "rev_at_risk": 290518.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "51404",
+      "territory": "AlAmin Store KISC",
+      "avg_gap": 7.0,
+      "current_gap": 55,
+      "multiplier": 7.86,
+      "risk_level": "High",
+      "rev_at_risk": 289705.7,
+      "segment": "Loyal Base"
+    },
+    {
+      "outlet": "268976",
+      "territory": "Meghna Enterprise-2",
+      "avg_gap": 0.9,
+      "current_gap": 5,
+      "multiplier": 5.29,
+      "risk_level": "High",
+      "rev_at_risk": 288490.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "159227",
+      "territory": "Shehnaz Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 79,
+      "multiplier": 132.61,
+      "risk_level": "High",
+      "rev_at_risk": 287505.2,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "137193",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.3,
+      "current_gap": 97,
+      "multiplier": 335.77,
+      "risk_level": "High",
+      "rev_at_risk": 287140.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "211262",
+      "territory": "Zabed Enterprise",
+      "avg_gap": 0.8,
+      "current_gap": 53,
+      "multiplier": 63.1,
+      "risk_level": "High",
+      "rev_at_risk": 285943.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "142531",
+      "territory": "Makkha Enterprise",
+      "avg_gap": 3.3,
+      "current_gap": 20,
+      "multiplier": 6.03,
+      "risk_level": "High",
+      "rev_at_risk": 285933.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "266932",
+      "territory": "Zilani Store",
+      "avg_gap": 0.3,
+      "current_gap": 23,
+      "multiplier": 72.94,
+      "risk_level": "High",
+      "rev_at_risk": 285480.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "154430",
+      "territory": "Shehnaz Enterprise",
+      "avg_gap": 0.7,
+      "current_gap": 48,
+      "multiplier": 66.73,
+      "risk_level": "High",
+      "rev_at_risk": 285291.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "265185",
+      "territory": "Ahona Traders",
+      "avg_gap": 0.3,
+      "current_gap": 34,
+      "multiplier": 114.14,
+      "risk_level": "High",
+      "rev_at_risk": 284142.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "179136",
+      "territory": "Ahmmed Enterprise",
+      "avg_gap": 1.8,
+      "current_gap": 44,
+      "multiplier": 24.44,
+      "risk_level": "High",
+      "rev_at_risk": 283190.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "262752",
+      "territory": "Boishakhi Enterprise",
+      "avg_gap": 0.3,
+      "current_gap": 82,
+      "multiplier": 242.96,
+      "risk_level": "High",
+      "rev_at_risk": 282087.2,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "140144",
+      "territory": "Taher & Sons",
+      "avg_gap": 0.2,
+      "current_gap": 104,
+      "multiplier": 564.57,
+      "risk_level": "High",
+      "rev_at_risk": 282038.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "217304",
+      "territory": "Zabed Enterprise",
+      "avg_gap": 0.3,
+      "current_gap": 50,
+      "multiplier": 171.43,
+      "risk_level": "High",
+      "rev_at_risk": 281777.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "129008",
+      "territory": "J. S. Traders",
+      "avg_gap": 0.5,
+      "current_gap": 9,
+      "multiplier": 16.63,
+      "risk_level": "High",
+      "rev_at_risk": 280325.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "258004",
+      "territory": "Taifur Enterprise",
+      "avg_gap": 18.0,
+      "current_gap": 63,
+      "multiplier": 3.5,
+      "risk_level": "High",
+      "rev_at_risk": 279920.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "155189",
+      "territory": "Care Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 13,
+      "multiplier": 21.62,
+      "risk_level": "High",
+      "rev_at_risk": 279608.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "145546",
+      "territory": "Ma Baba Dua Department Store",
+      "avg_gap": 1.6,
+      "current_gap": 5,
+      "multiplier": 3.1,
+      "risk_level": "High",
+      "rev_at_risk": 278890.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "189039",
+      "territory": "Alif Traders HABC",
+      "avg_gap": 0.8,
+      "current_gap": 7,
+      "multiplier": 8.67,
+      "risk_level": "High",
+      "rev_at_risk": 276857.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "138733",
+      "territory": "Bangla Store",
+      "avg_gap": 0.6,
+      "current_gap": 6,
+      "multiplier": 10.17,
+      "risk_level": "High",
+      "rev_at_risk": 273139.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "80452",
+      "territory": "Amin Store",
+      "avg_gap": 1.6,
+      "current_gap": 4,
+      "multiplier": 2.51,
+      "risk_level": "High",
+      "rev_at_risk": 272696.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "164935",
+      "territory": "Haziganj Tradres",
+      "avg_gap": 0.8,
+      "current_gap": 51,
+      "multiplier": 63.51,
+      "risk_level": "High",
+      "rev_at_risk": 271792.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "198125",
+      "territory": "Ahmmed Enterprise",
+      "avg_gap": 0.7,
+      "current_gap": 21,
+      "multiplier": 29.5,
+      "risk_level": "High",
+      "rev_at_risk": 271691.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "137280",
+      "territory": "Ahmed Enterprise",
+      "avg_gap": 0.9,
+      "current_gap": 14,
+      "multiplier": 15.38,
+      "risk_level": "High",
+      "rev_at_risk": 271346.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "7241",
+      "territory": "Chowdhury Enterprise",
+      "avg_gap": 0.9,
+      "current_gap": 19,
+      "multiplier": 21.71,
+      "risk_level": "High",
+      "rev_at_risk": 270601.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "161515",
+      "territory": "Sahil Traders",
+      "avg_gap": 0.5,
+      "current_gap": 15,
+      "multiplier": 32.14,
+      "risk_level": "High",
+      "rev_at_risk": 270518.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "137564",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.4,
+      "current_gap": 14,
+      "multiplier": 33.88,
+      "risk_level": "High",
+      "rev_at_risk": 269420.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "236414",
+      "territory": "Abul & Sons",
+      "avg_gap": 1.2,
+      "current_gap": 7,
+      "multiplier": 5.64,
+      "risk_level": "High",
+      "rev_at_risk": 268844.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "37889",
+      "territory": "Mizan Telecom",
+      "avg_gap": 0.8,
+      "current_gap": 13,
+      "multiplier": 15.89,
+      "risk_level": "High",
+      "rev_at_risk": 268672.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "52783",
+      "territory": "Sajim Traders",
+      "avg_gap": 0.6,
+      "current_gap": 19,
+      "multiplier": 32.57,
+      "risk_level": "High",
+      "rev_at_risk": 268337.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "257657",
+      "territory": "Aleenas Distribution",
+      "avg_gap": 0.4,
+      "current_gap": 85,
+      "multiplier": 232.33,
+      "risk_level": "High",
+      "rev_at_risk": 268065.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "143210",
+      "territory": "Chowdhury Enterprise",
+      "avg_gap": 0.7,
+      "current_gap": 13,
+      "multiplier": 19.5,
+      "risk_level": "High",
+      "rev_at_risk": 267998.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "137862",
+      "territory": "Amina Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 49,
+      "multiplier": 78.75,
+      "risk_level": "High",
+      "rev_at_risk": 267343.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "138763",
+      "territory": "Jilani Traders",
+      "avg_gap": 0.2,
+      "current_gap": 4,
+      "multiplier": 16.9,
+      "risk_level": "High",
+      "rev_at_risk": 267138.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "260155",
+      "territory": "M R Traders",
+      "avg_gap": 0.5,
+      "current_gap": 4,
+      "multiplier": 7.82,
+      "risk_level": "High",
+      "rev_at_risk": 266776.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "65339",
+      "territory": "Sabur & Brothers",
+      "avg_gap": 1.6,
+      "current_gap": 11,
+      "multiplier": 6.73,
+      "risk_level": "High",
+      "rev_at_risk": 266256.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "270391",
+      "territory": "Ahmed Enterprise",
+      "avg_gap": 0.8,
+      "current_gap": 11,
+      "multiplier": 14.63,
+      "risk_level": "High",
+      "rev_at_risk": 265507.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "280714",
+      "territory": "Enan Distribution Point",
+      "avg_gap": 0.7,
+      "current_gap": 2,
+      "multiplier": 2.71,
+      "risk_level": "High",
+      "rev_at_risk": 264395.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "259269",
+      "territory": "Madina Traders-DHKS",
+      "avg_gap": 0.1,
+      "current_gap": 62,
+      "multiplier": 682.0,
+      "risk_level": "High",
+      "rev_at_risk": 264390.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "197682",
+      "territory": "Asmot Ali Traders",
+      "avg_gap": 0.8,
+      "current_gap": 50,
+      "multiplier": 60.71,
+      "risk_level": "High",
+      "rev_at_risk": 263144.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "180301",
+      "territory": "Alamgir Traders",
+      "avg_gap": 0.3,
+      "current_gap": 67,
+      "multiplier": 258.43,
+      "risk_level": "High",
+      "rev_at_risk": 263014.8,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "189952",
+      "territory": "Asmot Ali Traders",
+      "avg_gap": 0.5,
+      "current_gap": 41,
+      "multiplier": 79.66,
+      "risk_level": "High",
+      "rev_at_risk": 262478.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "170631",
+      "territory": "Talukder Enterprise",
+      "avg_gap": 1.4,
+      "current_gap": 9,
+      "multiplier": 6.26,
+      "risk_level": "High",
+      "rev_at_risk": 262107.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "1180",
+      "territory": "Bengol Trading",
+      "avg_gap": 0.2,
+      "current_gap": 104,
+      "multiplier": 676.0,
+      "risk_level": "High",
+      "rev_at_risk": 261669.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "133967",
+      "territory": "Abul & Sons",
+      "avg_gap": 0.7,
+      "current_gap": 43,
+      "multiplier": 61.43,
+      "risk_level": "High",
+      "rev_at_risk": 260652.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "166028",
+      "territory": "Shehnaz Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 31,
+      "multiplier": 50.73,
+      "risk_level": "High",
+      "rev_at_risk": 260475.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "253816",
+      "territory": "Salam Store",
+      "avg_gap": 0.4,
+      "current_gap": 9,
+      "multiplier": 20.31,
+      "risk_level": "High",
+      "rev_at_risk": 259710.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "134551",
+      "territory": "Makkha Enterprise",
+      "avg_gap": 0.9,
+      "current_gap": 11,
+      "multiplier": 12.51,
+      "risk_level": "High",
+      "rev_at_risk": 259463.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "271283",
+      "territory": "Nabila Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 6,
+      "multiplier": 10.17,
+      "risk_level": "High",
+      "rev_at_risk": 259072.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "263974",
+      "territory": "Boishakhi Enterprise",
+      "avg_gap": 0.4,
+      "current_gap": 77,
+      "multiplier": 182.6,
+      "risk_level": "High",
+      "rev_at_risk": 257126.5,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "128657",
+      "territory": "Marjan Enterprise",
+      "avg_gap": 2.2,
+      "current_gap": 18,
+      "multiplier": 8.23,
+      "risk_level": "High",
+      "rev_at_risk": 256726.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "7198",
+      "territory": "Sailas Enterprise",
+      "avg_gap": 1.8,
+      "current_gap": 25,
+      "multiplier": 13.67,
+      "risk_level": "High",
+      "rev_at_risk": 255663.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "175253",
+      "territory": "Niloy Enterprise",
+      "avg_gap": 1.1,
+      "current_gap": 19,
+      "multiplier": 17.84,
+      "risk_level": "High",
+      "rev_at_risk": 255657.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "13606",
+      "territory": "S K Enterprise",
+      "avg_gap": 0.3,
+      "current_gap": 63,
+      "multiplier": 184.5,
+      "risk_level": "High",
+      "rev_at_risk": 255229.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "128946",
+      "territory": "J. S. Traders",
+      "avg_gap": 0.4,
+      "current_gap": 2,
+      "multiplier": 4.65,
+      "risk_level": "High",
+      "rev_at_risk": 254805.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "71760",
+      "territory": "Sahin Store",
+      "avg_gap": 1.2,
+      "current_gap": 13,
+      "multiplier": 10.45,
+      "risk_level": "High",
+      "rev_at_risk": 254361.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "157433",
+      "territory": "Alamgir Traders",
+      "avg_gap": 0.0,
+      "current_gap": 113,
+      "multiplier": 2599.0,
+      "risk_level": "High",
+      "rev_at_risk": 253461.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "273239",
+      "territory": "Meghna Enterprise-2",
+      "avg_gap": 1.0,
+      "current_gap": 11,
+      "multiplier": 11.51,
+      "risk_level": "High",
+      "rev_at_risk": 250503.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "188745",
+      "territory": "Brothers International",
+      "avg_gap": 0.4,
+      "current_gap": 49,
+      "multiplier": 128.33,
+      "risk_level": "High",
+      "rev_at_risk": 250104.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "116874",
+      "territory": "Koli Store",
+      "avg_gap": 2.5,
+      "current_gap": 53,
+      "multiplier": 20.82,
+      "risk_level": "High",
+      "rev_at_risk": 249522.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "260715",
+      "territory": "Karnafuly Trading",
+      "avg_gap": 0.6,
+      "current_gap": 6,
+      "multiplier": 9.87,
+      "risk_level": "High",
+      "rev_at_risk": 249246.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "147480",
+      "territory": "Sahil Traders",
+      "avg_gap": 1.3,
+      "current_gap": 23,
+      "multiplier": 18.24,
+      "risk_level": "High",
+      "rev_at_risk": 249006.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "131501",
+      "territory": "Ahmmed Enterprise",
+      "avg_gap": 1.0,
+      "current_gap": 6,
+      "multiplier": 6.31,
+      "risk_level": "High",
+      "rev_at_risk": 248614.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "132354",
+      "territory": "Haziganj Tradres",
+      "avg_gap": 1.1,
+      "current_gap": 6,
+      "multiplier": 5.56,
+      "risk_level": "High",
+      "rev_at_risk": 248045.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "258768",
+      "territory": "Abedia Store",
+      "avg_gap": 0.5,
+      "current_gap": 4,
+      "multiplier": 7.43,
+      "risk_level": "High",
+      "rev_at_risk": 246748.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "266259",
+      "territory": "Ahona Traders",
+      "avg_gap": 0.3,
+      "current_gap": 7,
+      "multiplier": 21.87,
+      "risk_level": "High",
+      "rev_at_risk": 245372.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "186109",
+      "territory": "Alif Traders HABC",
+      "avg_gap": 1.2,
+      "current_gap": 8,
+      "multiplier": 6.73,
+      "risk_level": "High",
+      "rev_at_risk": 245357.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "140367",
+      "territory": "Al-Amin Enterprise",
+      "avg_gap": 0.7,
+      "current_gap": 27,
+      "multiplier": 38.93,
+      "risk_level": "High",
+      "rev_at_risk": 244142.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "141359",
+      "territory": "Ahmed Enterprise",
+      "avg_gap": 1.2,
+      "current_gap": 41,
+      "multiplier": 35.14,
+      "risk_level": "High",
+      "rev_at_risk": 243588.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "278935",
+      "territory": "Brothers International",
+      "avg_gap": 1.1,
+      "current_gap": 31,
+      "multiplier": 29.45,
+      "risk_level": "High",
+      "rev_at_risk": 243136.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "201345",
+      "territory": "Maa Traders",
+      "avg_gap": 1.1,
+      "current_gap": 35,
+      "multiplier": 31.72,
+      "risk_level": "High",
+      "rev_at_risk": 242351.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "232108",
+      "territory": "Koli Store",
+      "avg_gap": 1.0,
+      "current_gap": 84,
+      "multiplier": 87.0,
+      "risk_level": "High",
+      "rev_at_risk": 242310.6,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "260582",
+      "territory": "Karnafuly Trading",
+      "avg_gap": 0.5,
+      "current_gap": 15,
+      "multiplier": 29.56,
+      "risk_level": "High",
+      "rev_at_risk": 241568.3,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "35182",
+      "territory": "Sajib Traders",
+      "avg_gap": 2.2,
+      "current_gap": 12,
+      "multiplier": 5.44,
+      "risk_level": "High",
+      "rev_at_risk": 241080.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "159285",
+      "territory": "Shehnaz Enterprise",
+      "avg_gap": 0.7,
+      "current_gap": 16,
+      "multiplier": 23.14,
+      "risk_level": "High",
+      "rev_at_risk": 240440.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "110311",
+      "territory": "Sonar Bangla Bakery",
+      "avg_gap": 0.4,
+      "current_gap": 8,
+      "multiplier": 20.76,
+      "risk_level": "High",
+      "rev_at_risk": 240397.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "136620",
+      "territory": "Makkha Enterprise",
+      "avg_gap": 1.4,
+      "current_gap": 7,
+      "multiplier": 5.0,
+      "risk_level": "High",
+      "rev_at_risk": 239048.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "199022",
+      "territory": "Mizi Enterprise",
+      "avg_gap": 1.9,
+      "current_gap": 9,
+      "multiplier": 4.78,
+      "risk_level": "High",
+      "rev_at_risk": 238451.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "129784",
+      "territory": "Brothers International",
+      "avg_gap": 1.5,
+      "current_gap": 9,
+      "multiplier": 6.11,
+      "risk_level": "High",
+      "rev_at_risk": 238356.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "191194",
+      "territory": "J. S. Traders",
+      "avg_gap": 0.3,
+      "current_gap": 48,
+      "multiplier": 150.86,
+      "risk_level": "High",
+      "rev_at_risk": 238192.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "201522",
+      "territory": "Niloy Enterprise",
+      "avg_gap": 0.7,
+      "current_gap": 53,
+      "multiplier": 72.11,
+      "risk_level": "High",
+      "rev_at_risk": 237487.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "59626",
+      "territory": "Manha Traders BOGC",
+      "avg_gap": 1.7,
+      "current_gap": 8,
+      "multiplier": 4.8,
+      "risk_level": "High",
+      "rev_at_risk": 237186.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "164304",
+      "territory": "Al-Amin Enterprise",
+      "avg_gap": 0.2,
+      "current_gap": 57,
+      "multiplier": 329.79,
+      "risk_level": "High",
+      "rev_at_risk": 237182.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "173238",
+      "territory": "Niloy Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 27,
+      "multiplier": 47.03,
+      "risk_level": "High",
+      "rev_at_risk": 237074.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "267490",
+      "territory": "Zilani Store",
+      "avg_gap": 0.3,
+      "current_gap": 34,
+      "multiplier": 118.19,
+      "risk_level": "High",
+      "rev_at_risk": 236856.8,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "265057",
+      "territory": "Meghna Enterprise-3",
+      "avg_gap": 0.8,
+      "current_gap": 14,
+      "multiplier": 18.25,
+      "risk_level": "High",
+      "rev_at_risk": 236479.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "272665",
+      "territory": "Rafnan Enterprise",
+      "avg_gap": 4.8,
+      "current_gap": 21,
+      "multiplier": 4.36,
+      "risk_level": "High",
+      "rev_at_risk": 236347.7,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "3008",
+      "territory": "Sailas Enterprise",
+      "avg_gap": 4.0,
+      "current_gap": 75,
+      "multiplier": 18.75,
+      "risk_level": "High",
+      "rev_at_risk": 236283.3,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "149715",
+      "territory": "J. S. Traders",
+      "avg_gap": 0.5,
+      "current_gap": 20,
+      "multiplier": 36.63,
+      "risk_level": "High",
+      "rev_at_risk": 236068.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "137964",
+      "territory": "Ma Baba Dua Department Store",
+      "avg_gap": 0.7,
+      "current_gap": 35,
+      "multiplier": 50.0,
+      "risk_level": "High",
+      "rev_at_risk": 235674.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "140224",
+      "territory": "Al-Amin Enterprise",
+      "avg_gap": 0.3,
+      "current_gap": 21,
+      "multiplier": 63.0,
+      "risk_level": "High",
+      "rev_at_risk": 235503.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "169201",
+      "territory": "Shehnaz Enterprise",
+      "avg_gap": 0.2,
+      "current_gap": 21,
+      "multiplier": 129.5,
+      "risk_level": "High",
+      "rev_at_risk": 235472.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "3782",
+      "territory": "Kalam Traders",
+      "avg_gap": 0.8,
+      "current_gap": 7,
+      "multiplier": 9.13,
+      "risk_level": "High",
+      "rev_at_risk": 234190.6,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "129132",
+      "territory": "Ahmed Enterprise",
+      "avg_gap": 0.9,
+      "current_gap": 51,
+      "multiplier": 58.29,
+      "risk_level": "High",
+      "rev_at_risk": 234054.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "82438",
+      "territory": "Hira Enterprise",
+      "avg_gap": 1.5,
+      "current_gap": 85,
+      "multiplier": 55.69,
+      "risk_level": "High",
+      "rev_at_risk": 233910.3,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "190252",
+      "territory": "Brothers International",
+      "avg_gap": 0.8,
+      "current_gap": 62,
+      "multiplier": 74.65,
+      "risk_level": "High",
+      "rev_at_risk": 232767.8,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "237193",
+      "territory": "Jaman Traders",
+      "avg_gap": 1.7,
+      "current_gap": 18,
+      "multiplier": 10.35,
+      "risk_level": "High",
+      "rev_at_risk": 232724.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "281910",
+      "territory": "Ayesha Siddika Enterprise",
+      "avg_gap": 0.6,
+      "current_gap": 5,
+      "multiplier": 9.05,
+      "risk_level": "High",
+      "rev_at_risk": 232631.0,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "172637",
+      "territory": "Md. Shajahan Traders",
+      "avg_gap": 0.2,
+      "current_gap": 1,
+      "multiplier": 4.59,
+      "risk_level": "High",
+      "rev_at_risk": 232363.1,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "173084",
+      "territory": "Niloy Enterprise",
+      "avg_gap": 0.8,
+      "current_gap": 13,
+      "multiplier": 16.98,
+      "risk_level": "High",
+      "rev_at_risk": 231921.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "1694",
+      "territory": "S K Enterprise",
+      "avg_gap": 0.3,
+      "current_gap": 2,
+      "multiplier": 7.11,
+      "risk_level": "High",
+      "rev_at_risk": 231858.2,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "260512",
+      "territory": "Karnafuly Trading",
+      "avg_gap": 0.1,
+      "current_gap": 77,
+      "multiplier": 704.0,
+      "risk_level": "High",
+      "rev_at_risk": 231446.4,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "163214",
+      "territory": "Onnopurna Store",
+      "avg_gap": 0.1,
+      "current_gap": 28,
+      "multiplier": 308.0,
+      "risk_level": "High",
+      "rev_at_risk": 230853.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "215258",
+      "territory": "Sahariar Traders",
+      "avg_gap": 1.1,
+      "current_gap": 85,
+      "multiplier": 75.89,
+      "risk_level": "High",
+      "rev_at_risk": 230619.0,
+      "segment": "At-Risk"
+    },
+    {
+      "outlet": "100495",
+      "territory": "Sahin Store",
+      "avg_gap": 4.5,
+      "current_gap": 37,
+      "multiplier": 8.17,
+      "risk_level": "High",
+      "rev_at_risk": 230610.9,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "184213",
+      "territory": "Asmot Ali Traders",
+      "avg_gap": 0.7,
+      "current_gap": 16,
+      "multiplier": 23.24,
+      "risk_level": "High",
+      "rev_at_risk": 229637.4,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "8817",
+      "territory": "Sailas Enterprise",
+      "avg_gap": 4.1,
+      "current_gap": 19,
+      "multiplier": 4.59,
+      "risk_level": "High",
+      "rev_at_risk": 228967.5,
+      "segment": "Champions"
+    },
+    {
+      "outlet": "160135",
+      "territory": "Tayyeba Store",
+      "avg_gap": 1.6,
+      "current_gap": 7,
+      "multiplier": 4.38,
+      "risk_level": "High",
+      "rev_at_risk": 228647.4,
+      "segment": "Champions"
+    }
+  ],
+  "silent_bleed_summary": {
+    "total_count": 18392,
+    "total_lost": 442609415.1,
+    "by_territory": [
+      {
+        "territory": "Pita Mata General store",
+        "count": 68,
+        "lost": 7691375.5
+      },
+      {
+        "territory": "Tobarak Molla Store",
+        "count": 99,
+        "lost": 7316899.5
+      },
+      {
+        "territory": "Sahin Store",
+        "count": 72,
+        "lost": 6507657.4
+      },
+      {
+        "territory": "Liza Trading",
+        "count": 20,
+        "lost": 6208159.2
+      },
+      {
+        "territory": "Partho Traders",
+        "count": 5,
+        "lost": 5480038.6
+      },
+      {
+        "territory": "Sumon Enterprise",
+        "count": 25,
+        "lost": 5414161.8
+      },
+      {
+        "territory": "D. S. Enterprise",
+        "count": 101,
+        "lost": 5207331.5
+      },
+      {
+        "territory": "Jannat Enterprise DHKS",
+        "count": 162,
+        "lost": 4801685.0
+      },
+      {
+        "territory": "Chowdhury Enterprise",
+        "count": 14,
+        "lost": 4760471.1
+      },
+      {
+        "territory": "Bulbul Traders",
+        "count": 16,
+        "lost": 4403314.3
+      },
+      {
+        "territory": "Makkha Enterprise",
+        "count": 8,
+        "lost": 4262499.9
+      },
+      {
+        "territory": "Shahen Shah Enterprise",
+        "count": 21,
+        "lost": 3998172.8
+      }
+    ]
+  },
+  "silent_bleed": [
+    {
+      "outlet": "256216",
+      "territory": "Partho Traders",
+      "hist_aov": 286432.0,
+      "rec_aov": 5990.8,
+      "drop_pct": 97.9,
+      "lost_rev": 5328382.2
+    },
+    {
+      "outlet": "116863",
+      "territory": "D. S. Enterprise",
+      "hist_aov": 72206.0,
+      "rec_aov": 409.8,
+      "drop_pct": 99.4,
+      "lost_rev": 3805198.6
+    },
+    {
+      "outlet": "9767",
+      "territory": "Chowdhury Enterprise",
+      "hist_aov": 81125.0,
+      "rec_aov": 1058.1,
+      "drop_pct": 98.7,
+      "lost_rev": 3603010.4
+    },
+    {
+      "outlet": "140002",
+      "territory": "Makkha Enterprise",
+      "hist_aov": 85200.0,
+      "rec_aov": 10166.9,
+      "drop_pct": 88.1,
+      "lost_rev": 3226421.6
+    },
+    {
+      "outlet": "235614",
+      "territory": "Tobarak Molla Store",
+      "hist_aov": 112500.0,
+      "rec_aov": 459.8,
+      "drop_pct": 99.6,
+      "lost_rev": 2464885.0
+    },
+    {
+      "outlet": "155065",
+      "territory": "Mizi Enterprise",
+      "hist_aov": 99688.9,
+      "rec_aov": 37914.3,
+      "drop_pct": 62.0,
+      "lost_rev": 2162111.1
+    },
+    {
+      "outlet": "271712",
+      "territory": "Jalal Trade International",
+      "hist_aov": 56800.0,
+      "rec_aov": 1676.8,
+      "drop_pct": 97.0,
+      "lost_rev": 2039557.0
+    },
+    {
+      "outlet": "236866",
+      "territory": "Liza Trading",
+      "hist_aov": 248500.0,
+      "rec_aov": 10618.1,
+      "drop_pct": 95.7,
+      "lost_rev": 1903055.0
+    },
+    {
+      "outlet": "105858",
+      "territory": "Nesar Ahamed & Brothers",
+      "hist_aov": 250200.0,
+      "rec_aov": 58494.4,
+      "drop_pct": 76.6,
+      "lost_rev": 1725350.0
+    },
+    {
+      "outlet": "229444",
+      "territory": "Liza Trading",
+      "hist_aov": 70360.0,
+      "rec_aov": 3832.7,
+      "drop_pct": 94.6,
+      "lost_rev": 1663183.0
+    },
+    {
+      "outlet": "181298",
+      "territory": "Sumon Enterprise",
+      "hist_aov": 82000.0,
+      "rec_aov": 4370.7,
+      "drop_pct": 94.7,
+      "lost_rev": 1474956.0
+    },
+    {
+      "outlet": "32434",
+      "territory": "Abul Store",
+      "hist_aov": 30846.7,
+      "rec_aov": 1909.8,
+      "drop_pct": 93.8,
+      "lost_rev": 1446841.5
+    },
+    {
+      "outlet": "75507",
+      "territory": "Abedia Store",
+      "hist_aov": 26533.3,
+      "rec_aov": 5811.4,
+      "drop_pct": 78.1,
+      "lost_rev": 1181149.5
+    },
+    {
+      "outlet": "237193",
+      "territory": "Jaman Traders",
+      "hist_aov": 38411.0,
+      "rec_aov": 3963.1,
+      "drop_pct": 89.7,
+      "lost_rev": 1171228.0
+    },
+    {
+      "outlet": "270976",
+      "territory": "Nabila Enterprise",
+      "hist_aov": 8964.4,
+      "rec_aov": 2593.5,
+      "drop_pct": 71.1,
+      "lost_rev": 1114913.8
+    },
+    {
+      "outlet": "264396",
+      "territory": "Mostafa Traders",
+      "hist_aov": 48730.0,
+      "rec_aov": 959.4,
+      "drop_pct": 98.0,
+      "lost_rev": 1098724.8
+    },
+    {
+      "outlet": "279920",
+      "territory": "Bulbul Traders",
+      "hist_aov": 26328.0,
+      "rec_aov": 1404.0,
+      "drop_pct": 94.7,
+      "lost_rev": 1096657.0
+    },
+    {
+      "outlet": "24443",
+      "territory": "Shahen Shah Enterprise",
+      "hist_aov": 165750.0,
+      "rec_aov": 1010.3,
+      "drop_pct": 99.4,
+      "lost_rev": 988438.0
+    },
+    {
+      "outlet": "31635",
+      "territory": "Babul Store",
+      "hist_aov": 13221.8,
+      "rec_aov": 4305.1,
+      "drop_pct": 67.4,
+      "lost_rev": 971922.0
+    },
+    {
+      "outlet": "84935",
+      "territory": "Royal Brothers",
+      "hist_aov": 44326.6,
+      "rec_aov": 7215.9,
+      "drop_pct": 83.7,
+      "lost_rev": 964876.9
+    },
+    {
+      "outlet": "170298",
+      "territory": "Talukder Enterprise",
+      "hist_aov": 30955.4,
+      "rec_aov": 2607.4,
+      "drop_pct": 91.6,
+      "lost_rev": 963831.1
+    },
+    {
+      "outlet": "260481",
+      "territory": "Meghna Enterprise",
+      "hist_aov": 14200.0,
+      "rec_aov": 505.1,
+      "drop_pct": 96.4,
+      "lost_rev": 944948.2
+    },
+    {
+      "outlet": "88388",
+      "territory": "Ahmmed Enterprise",
+      "hist_aov": 41100.0,
+      "rec_aov": 2131.5,
+      "drop_pct": 94.8,
+      "lost_rev": 935244.0
+    },
+    {
+      "outlet": "238441",
+      "territory": "Liza Trading",
+      "hist_aov": 40085.0,
+      "rec_aov": 4390.0,
+      "drop_pct": 89.0,
+      "lost_rev": 928071.0
+    },
+    {
+      "outlet": "75944",
+      "territory": "Maa Traders",
+      "hist_aov": 13293.8,
+      "rec_aov": 1391.2,
+      "drop_pct": 89.5,
+      "lost_rev": 916499.6
+    },
+    {
+      "outlet": "254628",
+      "territory": "Halim Store",
+      "hist_aov": 28660.0,
+      "rec_aov": 8568.6,
+      "drop_pct": 70.1,
+      "lost_rev": 904112.0
+    },
+    {
+      "outlet": "35845",
+      "territory": "Rumpa Enterprise",
+      "hist_aov": 70651.2,
+      "rec_aov": 31457.9,
+      "drop_pct": 55.5,
+      "lost_rev": 901447.8
+    },
+    {
+      "outlet": "279397",
+      "territory": "M S Enterprise",
+      "hist_aov": 181862.5,
+      "rec_aov": 2764.0,
+      "drop_pct": 98.5,
+      "lost_rev": 895492.5
+    },
+    {
+      "outlet": "174037",
+      "territory": "Bengol Trading",
+      "hist_aov": 28000.0,
+      "rec_aov": 9410.2,
+      "drop_pct": 66.4,
+      "lost_rev": 892310.0
+    },
+    {
+      "outlet": "271258",
+      "territory": "Abu Zafar Traders",
+      "hist_aov": 99636.1,
+      "rec_aov": 32635.4,
+      "drop_pct": 67.2,
+      "lost_rev": 871009.4
+    },
+    {
+      "outlet": "131159",
+      "territory": "Tobarak Molla Store",
+      "hist_aov": 31182.5,
+      "rec_aov": 2267.0,
+      "drop_pct": 92.7,
+      "lost_rev": 867466.0
+    },
+    {
+      "outlet": "7198",
+      "territory": "Sailas Enterprise",
+      "hist_aov": 39396.0,
+      "rec_aov": 6424.5,
+      "drop_pct": 83.7,
+      "lost_rev": 857258.0
+    },
+    {
+      "outlet": "189039",
+      "territory": "Alif Traders HABC",
+      "hist_aov": 18261.7,
+      "rec_aov": 1842.1,
+      "drop_pct": 89.9,
+      "lost_rev": 853823.9
+    },
+    {
+      "outlet": "27091",
+      "territory": "Shahen Shah Enterprise",
+      "hist_aov": 41000.0,
+      "rec_aov": 8535.3,
+      "drop_pct": 79.2,
+      "lost_rev": 844082.0
+    },
+    {
+      "outlet": "262504",
+      "territory": "Unity Trading",
+      "hist_aov": 15330.2,
+      "rec_aov": 965.2,
+      "drop_pct": 93.7,
+      "lost_rev": 833167.9
+    },
+    {
+      "outlet": "125230",
+      "territory": "Zabed Enterprise",
+      "hist_aov": 26646.8,
+      "rec_aov": 7144.1,
+      "drop_pct": 73.2,
+      "lost_rev": 819115.1
+    },
+    {
+      "outlet": "98947",
+      "territory": "Sahariar Traders",
+      "hist_aov": 18566.1,
+      "rec_aov": 915.8,
+      "drop_pct": 95.1,
+      "lost_rev": 794263.9
+    },
+    {
+      "outlet": "189318",
+      "territory": "AI Trading",
+      "hist_aov": 13940.0,
+      "rec_aov": 1357.0,
+      "drop_pct": 90.3,
+      "lost_rev": 780145.4
+    },
+    {
+      "outlet": "94255",
+      "territory": "Chowdhury Traders",
+      "hist_aov": 51200.7,
+      "rec_aov": 2905.8,
+      "drop_pct": 94.3,
+      "lost_rev": 772719.4
+    },
+    {
+      "outlet": "166270",
+      "territory": "Pita Mata General store",
+      "hist_aov": 21637.5,
+      "rec_aov": 4678.7,
+      "drop_pct": 78.4,
+      "lost_rev": 763149.4
+    },
+    {
+      "outlet": "71970",
+      "territory": "Amin Store",
+      "hist_aov": 24814.7,
+      "rec_aov": 11251.7,
+      "drop_pct": 54.7,
+      "lost_rev": 732399.4
+    },
+    {
+      "outlet": "137583",
+      "territory": "Amina Enterprise",
+      "hist_aov": 9099.4,
+      "rec_aov": 1403.7,
+      "drop_pct": 84.6,
+      "lost_rev": 731098.9
+    },
+    {
+      "outlet": "218045",
+      "territory": "Nandani Enterprise",
+      "hist_aov": 30627.0,
+      "rec_aov": 992.1,
+      "drop_pct": 96.8,
+      "lost_rev": 711238.0
+    },
+    {
+      "outlet": "149573",
+      "territory": "Haziganj Tradres",
+      "hist_aov": 11077.1,
+      "rec_aov": 2504.4,
+      "drop_pct": 77.4,
+      "lost_rev": 702961.7
+    },
+    {
+      "outlet": "42007",
+      "territory": "Mukaddes Store",
+      "hist_aov": 23316.7,
+      "rec_aov": 2692.1,
+      "drop_pct": 88.5,
+      "lost_rev": 701234.7
+    },
+    {
+      "outlet": "41898",
+      "territory": "Brothers International",
+      "hist_aov": 18688.4,
+      "rec_aov": 7640.2,
+      "drop_pct": 59.1,
+      "lost_rev": 696035.0
+    },
+    {
+      "outlet": "30031",
+      "territory": "Ayesha Traders",
+      "hist_aov": 11552.1,
+      "rec_aov": 3245.3,
+      "drop_pct": 71.9,
+      "lost_rev": 689462.2
+    },
+    {
+      "outlet": "279919",
+      "territory": "Bulbul Traders",
+      "hist_aov": 18532.0,
+      "rec_aov": 952.6,
+      "drop_pct": 94.9,
+      "lost_rev": 685597.0
+    },
+    {
+      "outlet": "150927",
+      "territory": "J. S. Traders",
+      "hist_aov": 7257.2,
+      "rec_aov": 3278.3,
+      "drop_pct": 54.8,
+      "lost_rev": 680385.2
+    },
+    {
+      "outlet": "116012",
+      "territory": "Lukman Store",
+      "hist_aov": 31750.0,
+      "rec_aov": 2416.4,
+      "drop_pct": 92.4,
+      "lost_rev": 674673.8
+    },
+    {
+      "outlet": "57387",
+      "territory": "Sahin Store",
+      "hist_aov": 16850.0,
+      "rec_aov": 2374.7,
+      "drop_pct": 85.9,
+      "lost_rev": 665865.4
+    },
+    {
+      "outlet": "78221",
+      "territory": "Sahin Store",
+      "hist_aov": 22750.0,
+      "rec_aov": 952.6,
+      "drop_pct": 95.8,
+      "lost_rev": 653921.0
+    },
+    {
+      "outlet": "86727",
+      "territory": "AlAmin Store KISC",
+      "hist_aov": 61312.8,
+      "rec_aov": 1934.4,
+      "drop_pct": 96.8,
+      "lost_rev": 653163.1
+    },
+    {
+      "outlet": "111421",
+      "territory": "Sharif Store",
+      "hist_aov": 82400.0,
+      "rec_aov": 994.0,
+      "drop_pct": 98.8,
+      "lost_rev": 651248.0
+    },
+    {
+      "outlet": "142192",
+      "territory": "Tobarak Molla Store",
+      "hist_aov": 24494.6,
+      "rec_aov": 3531.0,
+      "drop_pct": 85.6,
+      "lost_rev": 649872.1
+    },
+    {
+      "outlet": "183398",
+      "territory": "Alif Traders HABC",
+      "hist_aov": 22531.1,
+      "rec_aov": 2867.2,
+      "drop_pct": 87.3,
+      "lost_rev": 648910.1
+    },
+    {
+      "outlet": "208709",
+      "territory": "Monir General Store",
+      "hist_aov": 21000.0,
+      "rec_aov": 1688.4,
+      "drop_pct": 92.0,
+      "lost_rev": 637281.4
+    },
+    {
+      "outlet": "5658",
+      "territory": "Chowdhury Enterprise",
+      "hist_aov": 22500.0,
+      "rec_aov": 1545.9,
+      "drop_pct": 93.1,
+      "lost_rev": 628622.0
+    },
+    {
+      "outlet": "59558",
+      "territory": "Manha Traders BOGC",
+      "hist_aov": 29221.5,
+      "rec_aov": 9178.4,
+      "drop_pct": 68.6,
+      "lost_rev": 621337.5
+    },
+    {
+      "outlet": "204680",
+      "territory": "Shahen Shah Enterprise",
+      "hist_aov": 19564.8,
+      "rec_aov": 1356.6,
+      "drop_pct": 93.1,
+      "lost_rev": 619078.0
+    },
+    {
+      "outlet": "137564",
+      "territory": "Amina Enterprise",
+      "hist_aov": 6247.3,
+      "rec_aov": 2804.2,
+      "drop_pct": 55.1,
+      "lost_rev": 616308.2
+    },
+    {
+      "outlet": "229950",
+      "territory": "Rahmat and Sons",
+      "hist_aov": 18621.4,
+      "rec_aov": 5450.0,
+      "drop_pct": 70.7,
+      "lost_rev": 605883.7
+    },
+    {
+      "outlet": "175929",
+      "territory": "Alhaj Md. Jobier & Sons",
+      "hist_aov": 10442.0,
+      "rec_aov": 3514.4,
+      "drop_pct": 66.3,
+      "lost_rev": 602699.4
+    },
+    {
+      "outlet": "50899",
+      "territory": "Ahmmed Enterprise",
+      "hist_aov": 25153.6,
+      "rec_aov": 1432.9,
+      "drop_pct": 94.3,
+      "lost_rev": 593018.0
+    },
+    {
+      "outlet": "279884",
+      "territory": "Bulbul Traders",
+      "hist_aov": 24640.0,
+      "rec_aov": 994.6,
+      "drop_pct": 96.0,
+      "lost_rev": 591136.0
+    },
+    {
+      "outlet": "70841",
+      "territory": "Tasrif Enterprise",
+      "hist_aov": 84845.0,
+      "rec_aov": 1533.6,
+      "drop_pct": 98.2,
+      "lost_rev": 583180.0
+    },
+    {
+      "outlet": "201743",
+      "territory": "Shah Traders",
+      "hist_aov": 26794.5,
+      "rec_aov": 1501.6,
+      "drop_pct": 94.4,
+      "lost_rev": 581737.5
+    },
+    {
+      "outlet": "37743",
+      "territory": "Akkas Store",
+      "hist_aov": 44008.9,
+      "rec_aov": 19791.8,
+      "drop_pct": 55.0,
+      "lost_rev": 581209.3
+    },
+    {
+      "outlet": "261539",
+      "territory": "Meghna Enterprise-2",
+      "hist_aov": 17121.3,
+      "rec_aov": 7120.6,
+      "drop_pct": 58.4,
+      "lost_rev": 580042.9
+    },
+    {
+      "outlet": "114941",
+      "territory": "Sapon Store",
+      "hist_aov": 20469.9,
+      "rec_aov": 3902.1,
+      "drop_pct": 80.9,
+      "lost_rev": 579873.7
+    },
+    {
+      "outlet": "77774",
+      "territory": "Sattar Store",
+      "hist_aov": 20486.8,
+      "rec_aov": 1980.6,
+      "drop_pct": 90.3,
+      "lost_rev": 573694.0
+    },
+    {
+      "outlet": "51032",
+      "territory": "Mizan Telecom",
+      "hist_aov": 206000.0,
+      "rec_aov": 63000.0,
+      "drop_pct": 69.4,
+      "lost_rev": 572000.0
+    },
+    {
+      "outlet": "219775",
+      "territory": "Marjan Enterprise",
+      "hist_aov": 16277.5,
+      "rec_aov": 1853.8,
+      "drop_pct": 88.6,
+      "lost_rev": 562524.5
+    },
+    {
+      "outlet": "150434",
+      "territory": "Shaheen Enterprise",
+      "hist_aov": 12951.5,
+      "rec_aov": 4271.9,
+      "drop_pct": 67.0,
+      "lost_rev": 555494.0
+    },
+    {
+      "outlet": "279493",
+      "territory": "Bulbul Traders",
+      "hist_aov": 14436.9,
+      "rec_aov": 1846.6,
+      "drop_pct": 87.2,
+      "lost_rev": 553970.5
+    },
+    {
+      "outlet": "168611",
+      "territory": "Pita Mata General store",
+      "hist_aov": 22527.0,
+      "rec_aov": 2288.0,
+      "drop_pct": 89.8,
+      "lost_rev": 546453.4
+    },
+    {
+      "outlet": "40822",
+      "territory": "Suchitra Traders",
+      "hist_aov": 63340.0,
+      "rec_aov": 3951.6,
+      "drop_pct": 93.8,
+      "lost_rev": 534496.0
+    },
+    {
+      "outlet": "271846",
+      "territory": "Nabila Enterprise",
+      "hist_aov": 7750.6,
+      "rec_aov": 3751.1,
+      "drop_pct": 51.6,
+      "lost_rev": 523934.8
+    },
+    {
+      "outlet": "181679",
+      "territory": "AI Trading",
+      "hist_aov": 9666.7,
+      "rec_aov": 2015.2,
+      "drop_pct": 79.2,
+      "lost_rev": 520298.9
+    },
+    {
+      "outlet": "114595",
+      "territory": "K. M. Motors",
+      "hist_aov": 10239.9,
+      "rec_aov": 4806.4,
+      "drop_pct": 53.1,
+      "lost_rev": 516182.3
+    },
+    {
+      "outlet": "179199",
+      "territory": "Pita Mata General store",
+      "hist_aov": 15032.2,
+      "rec_aov": 809.3,
+      "drop_pct": 94.6,
+      "lost_rev": 512027.2
+    },
+    {
+      "outlet": "12741",
+      "territory": "Ma Baba Enterprise",
+      "hist_aov": 14055.9,
+      "rec_aov": 1985.9,
+      "drop_pct": 85.9,
+      "lost_rev": 506940.5
+    },
+    {
+      "outlet": "142115",
+      "territory": "Amina Enterprise",
+      "hist_aov": 7093.1,
+      "rec_aov": 3053.9,
+      "drop_pct": 56.9,
+      "lost_rev": 504901.7
+    },
+    {
+      "outlet": "74036",
+      "territory": "Sahin Store",
+      "hist_aov": 16433.3,
+      "rec_aov": 1696.8,
+      "drop_pct": 89.7,
+      "lost_rev": 501042.9
+    },
+    {
+      "outlet": "177345",
+      "territory": "Arun Traders",
+      "hist_aov": 70922.7,
+      "rec_aov": 827.4,
+      "drop_pct": 98.8,
+      "lost_rev": 490666.7
+    },
+    {
+      "outlet": "208948",
+      "territory": "Ayon Store",
+      "hist_aov": 9292.0,
+      "rec_aov": 2258.4,
+      "drop_pct": 75.7,
+      "lost_rev": 485316.8
+    },
+    {
+      "outlet": "42033",
+      "territory": "Mukaddes Store",
+      "hist_aov": 20125.0,
+      "rec_aov": 4646.1,
+      "drop_pct": 76.9,
+      "lost_rev": 479845.8
+    },
+    {
+      "outlet": "13612",
+      "territory": "Purabi Enterprise",
+      "hist_aov": 10720.4,
+      "rec_aov": 4257.3,
+      "drop_pct": 60.3,
+      "lost_rev": 478273.4
+    },
+    {
+      "outlet": "253206",
+      "territory": "Ma Store DHKS",
+      "hist_aov": 10613.4,
+      "rec_aov": 2710.7,
+      "drop_pct": 74.5,
+      "lost_rev": 474166.4
+    },
+    {
+      "outlet": "262186",
+      "territory": "R.D Global Trade",
+      "hist_aov": 25950.0,
+      "rec_aov": 2251.2,
+      "drop_pct": 91.3,
+      "lost_rev": 473977.0
+    },
+    {
+      "outlet": "202143",
+      "territory": "Shah Traders",
+      "hist_aov": 17263.3,
+      "rec_aov": 7969.9,
+      "drop_pct": 53.8,
+      "lost_rev": 473963.0
+    },
+    {
+      "outlet": "175766",
+      "territory": "Jalal Trade International",
+      "hist_aov": 15879.0,
+      "rec_aov": 1066.0,
+      "drop_pct": 93.3,
+      "lost_rev": 459202.0
+    },
+    {
+      "outlet": "75355",
+      "territory": "Arman Store",
+      "hist_aov": 10459.1,
+      "rec_aov": 4345.3,
+      "drop_pct": 58.5,
+      "lost_rev": 458531.7
+    },
+    {
+      "outlet": "241376",
+      "territory": "HR vareities Store",
+      "hist_aov": 57478.0,
+      "rec_aov": 592.4,
+      "drop_pct": 99.0,
+      "lost_rev": 455085.0
+    },
+    {
+      "outlet": "256293",
+      "territory": "Taifur Enterprise",
+      "hist_aov": 7388.3,
+      "rec_aov": 2034.5,
+      "drop_pct": 72.5,
+      "lost_rev": 455079.7
+    },
+    {
+      "outlet": "146922",
+      "territory": "Makkha Enterprise",
+      "hist_aov": 45780.8,
+      "rec_aov": 8036.2,
+      "drop_pct": 82.4,
+      "lost_rev": 452935.6
+    },
+    {
+      "outlet": "218702",
+      "territory": "Liza Trading",
+      "hist_aov": 74205.0,
+      "rec_aov": 18811.5,
+      "drop_pct": 74.6,
+      "lost_rev": 443148.0
+    },
+    {
+      "outlet": "43274",
+      "territory": "Sumon Enterprise",
+      "hist_aov": 32496.0,
+      "rec_aov": 2953.6,
+      "drop_pct": 90.9,
+      "lost_rev": 443136.0
+    },
+    {
+      "outlet": "18956",
+      "territory": "Shourov Trading",
+      "hist_aov": 38683.8,
+      "rec_aov": 11023.4,
+      "drop_pct": 71.5,
+      "lost_rev": 442565.0
+    },
+    {
+      "outlet": "233332",
+      "territory": "Chaity Saree Bitan",
+      "hist_aov": 12157.9,
+      "rec_aov": 584.6,
+      "drop_pct": 95.2,
+      "lost_rev": 439785.3
+    },
+    {
+      "outlet": "263904",
+      "territory": "Fozlu & Sons",
+      "hist_aov": 8458.4,
+      "rec_aov": 180.1,
+      "drop_pct": 97.9,
+      "lost_rev": 438752.2
+    },
+    {
+      "outlet": "42046",
+      "territory": "Rahim Traders",
+      "hist_aov": 25000.0,
+      "rec_aov": 3376.4,
+      "drop_pct": 86.5,
+      "lost_rev": 432472.5
+    },
+    {
+      "outlet": "166206",
+      "territory": "Pita Mata General store",
+      "hist_aov": 13772.0,
+      "rec_aov": 1454.8,
+      "drop_pct": 89.4,
+      "lost_rev": 431103.4
+    },
+    {
+      "outlet": "93696",
+      "territory": "Athoi Traders",
+      "hist_aov": 10448.6,
+      "rec_aov": 2316.0,
+      "drop_pct": 77.8,
+      "lost_rev": 431031.5
+    },
+    {
+      "outlet": "177262",
+      "territory": "Arun Traders",
+      "hist_aov": 70920.0,
+      "rec_aov": 17101.2,
+      "drop_pct": 75.9,
+      "lost_rev": 430550.0
+    },
+    {
+      "outlet": "186605",
+      "territory": "Heaven Distribution",
+      "hist_aov": 22382.9,
+      "rec_aov": 2129.1,
+      "drop_pct": 90.5,
+      "lost_rev": 425328.0
+    },
+    {
+      "outlet": "198050",
+      "territory": "K. M. Motors",
+      "hist_aov": 11065.0,
+      "rec_aov": 4726.6,
+      "drop_pct": 57.3,
+      "lost_rev": 424674.2
+    },
+    {
+      "outlet": "175865",
+      "territory": "Borhan Enterprise",
+      "hist_aov": 81020.0,
+      "rec_aov": 34256.1,
+      "drop_pct": 57.7,
+      "lost_rev": 420875.0
+    },
+    {
+      "outlet": "212398",
+      "territory": "Monir General Store",
+      "hist_aov": 7926.7,
+      "rec_aov": 1654.9,
+      "drop_pct": 79.1,
+      "lost_rev": 420209.1
+    },
+    {
+      "outlet": "109968",
+      "territory": "Sahariar Traders",
+      "hist_aov": 19974.7,
+      "rec_aov": 1067.5,
+      "drop_pct": 94.7,
+      "lost_rev": 415960.2
+    },
+    {
+      "outlet": "150979",
+      "territory": "Haziganj Tradres",
+      "hist_aov": 14778.2,
+      "rec_aov": 6126.0,
+      "drop_pct": 58.5,
+      "lost_rev": 415306.7
+    },
+    {
+      "outlet": "186266",
+      "territory": "Arun Traders",
+      "hist_aov": 60510.8,
+      "rec_aov": 28627.8,
+      "drop_pct": 52.7,
+      "lost_rev": 414479.0
+    },
+    {
+      "outlet": "139545",
+      "territory": "Ahmed Enterprise",
+      "hist_aov": 27200.0,
+      "rec_aov": 6592.3,
+      "drop_pct": 75.8,
+      "lost_rev": 412154.0
+    },
+    {
+      "outlet": "279888",
+      "territory": "Bulbul Traders",
+      "hist_aov": 12608.0,
+      "rec_aov": 922.6,
+      "drop_pct": 92.7,
+      "lost_rev": 408988.0
+    },
+    {
+      "outlet": "168719",
+      "territory": "Pita Mata General store",
+      "hist_aov": 24376.7,
+      "rec_aov": 1977.8,
+      "drop_pct": 91.9,
+      "lost_rev": 403180.4
+    },
+    {
+      "outlet": "10548",
+      "territory": "Jahir Traders",
+      "hist_aov": 93410.0,
+      "rec_aov": 13151.0,
+      "drop_pct": 85.9,
+      "lost_rev": 401295.0
+    },
+    {
+      "outlet": "123394",
+      "territory": "Sumon Enterprise",
+      "hist_aov": 23385.7,
+      "rec_aov": 2432.2,
+      "drop_pct": 89.6,
+      "lost_rev": 398116.6
+    },
+    {
+      "outlet": "270109",
+      "territory": "M R Traders 1",
+      "hist_aov": 17023.4,
+      "rec_aov": 2394.9,
+      "drop_pct": 85.9,
+      "lost_rev": 394968.1
+    },
+    {
+      "outlet": "68986",
+      "territory": "Manha Traders BOGC",
+      "hist_aov": 20635.9,
+      "rec_aov": 3511.7,
+      "drop_pct": 83.0,
+      "lost_rev": 393857.9
+    },
+    {
+      "outlet": "256923",
+      "territory": "Sajal Enterprise (Khulna)",
+      "hist_aov": 24023.1,
+      "rec_aov": 1078.5,
+      "drop_pct": 95.5,
+      "lost_rev": 390056.9
+    },
+    {
+      "outlet": "180798",
+      "territory": "Alif Traders HABC",
+      "hist_aov": 11913.8,
+      "rec_aov": 3267.0,
+      "drop_pct": 72.6,
+      "lost_rev": 389106.0
+    },
+    {
+      "outlet": "245748",
+      "territory": "Joni Enterprise",
+      "hist_aov": 9613.1,
+      "rec_aov": 3338.0,
+      "drop_pct": 65.3,
+      "lost_rev": 389058.6
+    },
+    {
+      "outlet": "62952",
+      "territory": "Sumi Store",
+      "hist_aov": 6736.7,
+      "rec_aov": 770.9,
+      "drop_pct": 88.6,
+      "lost_rev": 387772.3
+    },
+    {
+      "outlet": "170631",
+      "territory": "Talukder Enterprise",
+      "hist_aov": 17906.1,
+      "rec_aov": 8503.1,
+      "drop_pct": 52.5,
+      "lost_rev": 385521.0
+    },
+    {
+      "outlet": "210925",
+      "territory": "Sumon Enterprise",
+      "hist_aov": 39276.0,
+      "rec_aov": 16705.9,
+      "drop_pct": 57.5,
+      "lost_rev": 383692.0
+    },
+    {
+      "outlet": "29558",
+      "territory": "Suditi Departmental Store",
+      "hist_aov": 29088.0,
+      "rec_aov": 3613.3,
+      "drop_pct": 87.6,
+      "lost_rev": 382120.0
+    },
+    {
+      "outlet": "265057",
+      "territory": "Meghna Enterprise-3",
+      "hist_aov": 11198.7,
+      "rec_aov": 895.2,
+      "drop_pct": 92.0,
+      "lost_rev": 381230.2
+    },
+    {
+      "outlet": "51023",
+      "territory": "Gandheswari Vandar",
+      "hist_aov": 34985.8,
+      "rec_aov": 470.5,
+      "drop_pct": 98.7,
+      "lost_rev": 379668.2
+    },
+    {
+      "outlet": "263254",
+      "territory": "Alif Traders HABC",
+      "hist_aov": 10395.8,
+      "rec_aov": 3257.5,
+      "drop_pct": 68.7,
+      "lost_rev": 378327.8
+    },
+    {
+      "outlet": "75953",
+      "territory": "Heron Store",
+      "hist_aov": 22223.4,
+      "rec_aov": 5791.0,
+      "drop_pct": 73.9,
+      "lost_rev": 377943.8
+    },
+    {
+      "outlet": "197888",
+      "territory": "Rahmania Traders",
+      "hist_aov": 13078.4,
+      "rec_aov": 2934.0,
+      "drop_pct": 77.6,
+      "lost_rev": 375342.9
+    },
+    {
+      "outlet": "135186",
+      "territory": "Tobarak Molla Store",
+      "hist_aov": 17728.0,
+      "rec_aov": 1865.7,
+      "drop_pct": 89.5,
+      "lost_rev": 364834.0
+    },
+    {
+      "outlet": "105978",
+      "territory": "Sayam Store",
+      "hist_aov": 26780.0,
+      "rec_aov": 974.1,
+      "drop_pct": 96.4,
+      "lost_rev": 361283.0
+    },
+    {
+      "outlet": "1595",
+      "territory": "A R Enterprise",
+      "hist_aov": 6130.2,
+      "rec_aov": 1558.1,
+      "drop_pct": 74.6,
+      "lost_rev": 361196.2
+    },
+    {
+      "outlet": "180303",
+      "territory": "AlBarakah Enterprise",
+      "hist_aov": 26112.1,
+      "rec_aov": 3626.9,
+      "drop_pct": 86.1,
+      "lost_rev": 359763.0
+    },
+    {
+      "outlet": "25020",
+      "territory": "Shirin Enterprise",
+      "hist_aov": 62068.0,
+      "rec_aov": 26218.0,
+      "drop_pct": 57.8,
+      "lost_rev": 358500.0
+    },
+    {
+      "outlet": "149690",
+      "territory": "Brothers International",
+      "hist_aov": 17857.5,
+      "rec_aov": 5528.2,
+      "drop_pct": 69.0,
+      "lost_rev": 357548.6
+    },
+    {
+      "outlet": "66155",
+      "territory": "Vai Vai Traders-Dinajpur",
+      "hist_aov": 16800.0,
+      "rec_aov": 3649.6,
+      "drop_pct": 78.3,
+      "lost_rev": 355060.5
+    },
+    {
+      "outlet": "188022",
+      "territory": "Niloy Enterprise",
+      "hist_aov": 6069.6,
+      "rec_aov": 2266.4,
+      "drop_pct": 62.7,
+      "lost_rev": 353703.6
+    },
+    {
+      "outlet": "263796",
+      "territory": "R.D Global Trade",
+      "hist_aov": 34000.0,
+      "rec_aov": 1905.6,
+      "drop_pct": 94.4,
+      "lost_rev": 353038.0
+    },
+    {
+      "outlet": "264303",
+      "territory": "Anis Tea & Co.",
+      "hist_aov": 23183.6,
+      "rec_aov": 2470.5,
+      "drop_pct": 89.3,
+      "lost_rev": 352123.8
+    },
+    {
+      "outlet": "165682",
+      "territory": "Bismillah Enterprise CTGN",
+      "hist_aov": 58725.0,
+      "rec_aov": 8553.7,
+      "drop_pct": 85.4,
+      "lost_rev": 351199.0
+    },
+    {
+      "outlet": "49699",
+      "territory": "Mayer Doa Enterprise",
+      "hist_aov": 32000.0,
+      "rec_aov": 2854.0,
+      "drop_pct": 91.1,
+      "lost_rev": 349752.0
+    },
+    {
+      "outlet": "198326",
+      "territory": "Mizi Enterprise",
+      "hist_aov": 12772.5,
+      "rec_aov": 2977.4,
+      "drop_pct": 76.7,
+      "lost_rev": 342826.7
+    },
+    {
+      "outlet": "139791",
+      "territory": "Himel Enterprise",
+      "hist_aov": 10650.0,
+      "rec_aov": 5059.6,
+      "drop_pct": 52.5,
+      "lost_rev": 341013.0
+    },
+    {
+      "outlet": "238096",
+      "territory": "AF Meherima Enterprise",
+      "hist_aov": 28745.0,
+      "rec_aov": 439.6,
+      "drop_pct": 98.5,
+      "lost_rev": 339665.0
+    },
+    {
+      "outlet": "152808",
+      "territory": "Shaheen Enterprise",
+      "hist_aov": 8494.6,
+      "rec_aov": 3190.3,
+      "drop_pct": 62.4,
+      "lost_rev": 339477.6
+    },
+    {
+      "outlet": "235608",
+      "territory": "Tobarak Molla Store",
+      "hist_aov": 20085.7,
+      "rec_aov": 3925.4,
+      "drop_pct": 80.5,
+      "lost_rev": 339367.0
+    },
+    {
+      "outlet": "195149",
+      "territory": "Limon Store",
+      "hist_aov": 16465.0,
+      "rec_aov": 7779.6,
+      "drop_pct": 52.8,
+      "lost_rev": 338729.0
+    },
+    {
+      "outlet": "177555",
+      "territory": "Sajal Enterprise (Khulna)",
+      "hist_aov": 22142.1,
+      "rec_aov": 2265.6,
+      "drop_pct": 89.8,
+      "lost_rev": 337900.7
+    },
+    {
+      "outlet": "129784",
+      "territory": "Brothers International",
+      "hist_aov": 20362.5,
+      "rec_aov": 6862.6,
+      "drop_pct": 66.3,
+      "lost_rev": 337497.8
+    },
+    {
+      "outlet": "279887",
+      "territory": "Bulbul Traders",
+      "hist_aov": 12573.3,
+      "rec_aov": 1002.9,
+      "drop_pct": 92.0,
+      "lost_rev": 335543.7
+    },
+    {
+      "outlet": "168462",
+      "territory": "Pita Mata General store",
+      "hist_aov": 14899.7,
+      "rec_aov": 1484.1,
+      "drop_pct": 90.0,
+      "lost_rev": 335388.7
+    },
+    {
+      "outlet": "43341",
+      "territory": "Sumon Enterprise",
+      "hist_aov": 32100.0,
+      "rec_aov": 4255.3,
+      "drop_pct": 86.7,
+      "lost_rev": 334136.0
+    },
+    {
+      "outlet": "161230",
+      "territory": "Yashin & Minhaj Enterprise",
+      "hist_aov": 13530.8,
+      "rec_aov": 1647.0,
+      "drop_pct": 87.8,
+      "lost_rev": 332748.3
+    },
+    {
+      "outlet": "3782",
+      "territory": "Kalam Traders",
+      "hist_aov": 8381.4,
+      "rec_aov": 3209.8,
+      "drop_pct": 61.7,
+      "lost_rev": 330982.1
+    },
+    {
+      "outlet": "224419",
+      "territory": "New Rakib Enterprise",
+      "hist_aov": 21300.0,
+      "rec_aov": 691.1,
+      "drop_pct": 96.8,
+      "lost_rev": 329742.0
+    },
+    {
+      "outlet": "75502",
+      "territory": "Abedia Store",
+      "hist_aov": 23500.0,
+      "rec_aov": 7823.8,
+      "drop_pct": 66.7,
+      "lost_rev": 329200.5
+    },
+    {
+      "outlet": "213390",
+      "territory": "Sahariar Traders",
+      "hist_aov": 14273.2,
+      "rec_aov": 2941.2,
+      "drop_pct": 79.4,
+      "lost_rev": 328629.2
+    },
+    {
+      "outlet": "158915",
+      "territory": "Pita Mata General store",
+      "hist_aov": 11268.5,
+      "rec_aov": 1611.0,
+      "drop_pct": 85.7,
+      "lost_rev": 328357.3
+    },
+    {
+      "outlet": "186772",
+      "territory": "Asmot Ali Traders",
+      "hist_aov": 13883.1,
+      "rec_aov": 3937.7,
+      "drop_pct": 71.6,
+      "lost_rev": 328199.3
+    },
+    {
+      "outlet": "185265",
+      "territory": "Monir General Store",
+      "hist_aov": 14508.3,
+      "rec_aov": 1499.5,
+      "drop_pct": 89.7,
+      "lost_rev": 325220.7
+    },
+    {
+      "outlet": "130113",
+      "territory": "Saha Store",
+      "hist_aov": 33185.9,
+      "rec_aov": 8258.4,
+      "drop_pct": 75.1,
+      "lost_rev": 324057.1
+    },
+    {
+      "outlet": "232353",
+      "territory": "Salim Traders",
+      "hist_aov": 15748.1,
+      "rec_aov": 1057.9,
+      "drop_pct": 93.3,
+      "lost_rev": 323185.8
+    },
+    {
+      "outlet": "177711",
+      "territory": "Delower Hossain & Sons",
+      "hist_aov": 19663.8,
+      "rec_aov": 2712.3,
+      "drop_pct": 86.2,
+      "lost_rev": 322078.8
+    },
+    {
+      "outlet": "228542",
+      "territory": "Vai Vai Store",
+      "hist_aov": 67450.0,
+      "rec_aov": 13837.3,
+      "drop_pct": 79.5,
+      "lost_rev": 321676.0
+    },
+    {
+      "outlet": "79743",
+      "territory": "Sahin Store",
+      "hist_aov": 12226.7,
+      "rec_aov": 366.1,
+      "drop_pct": 97.0,
+      "lost_rev": 320236.2
+    },
+    {
+      "outlet": "46310",
+      "territory": "Borhan Enterprise",
+      "hist_aov": 205000.0,
+      "rec_aov": 99333.3,
+      "drop_pct": 51.5,
+      "lost_rev": 317000.0
+    },
+    {
+      "outlet": "88203",
+      "territory": "K. M. Motors",
+      "hist_aov": 8461.4,
+      "rec_aov": 2852.0,
+      "drop_pct": 66.3,
+      "lost_rev": 314126.2
+    },
+    {
+      "outlet": "71870",
+      "territory": "Sahin Store",
+      "hist_aov": 16466.7,
+      "rec_aov": 2880.1,
+      "drop_pct": 82.5,
+      "lost_rev": 312491.3
+    },
+    {
+      "outlet": "56287",
+      "territory": "Gandheswari Vandar",
+      "hist_aov": 35565.0,
+      "rec_aov": 870.4,
+      "drop_pct": 97.6,
+      "lost_rev": 312251.0
+    },
+    {
+      "outlet": "26217",
+      "territory": "Joy Store",
+      "hist_aov": 30750.0,
+      "rec_aov": 4927.1,
+      "drop_pct": 84.0,
+      "lost_rev": 309875.0
+    },
+    {
+      "outlet": "83763",
+      "territory": "Sahariar Traders",
+      "hist_aov": 5032.5,
+      "rec_aov": 1159.5,
+      "drop_pct": 77.0,
+      "lost_rev": 309835.8
+    },
+    {
+      "outlet": "131840",
+      "territory": "Lukman Store",
+      "hist_aov": 19885.7,
+      "rec_aov": 4398.9,
+      "drop_pct": 77.9,
+      "lost_rev": 309735.7
+    },
+    {
+      "outlet": "179262",
+      "territory": "Pita Mata General store",
+      "hist_aov": 11430.1,
+      "rec_aov": 1775.5,
+      "drop_pct": 84.5,
+      "lost_rev": 308947.9
+    },
+    {
+      "outlet": "22969",
+      "territory": "Abul Store",
+      "hist_aov": 16900.0,
+      "rec_aov": 2219.8,
+      "drop_pct": 86.9,
+      "lost_rev": 308284.8
+    },
+    {
+      "outlet": "249760",
+      "territory": "Bismillah Store DHKW",
+      "hist_aov": 7806.8,
+      "rec_aov": 2821.9,
+      "drop_pct": 63.9,
+      "lost_rev": 304074.8
+    },
+    {
+      "outlet": "71388",
+      "territory": "Sahin Store",
+      "hist_aov": 17312.3,
+      "rec_aov": 4879.9,
+      "drop_pct": 71.8,
+      "lost_rev": 298377.4
+    },
+    {
+      "outlet": "172762",
+      "territory": "Bhuiya Store",
+      "hist_aov": 27205.0,
+      "rec_aov": 10841.9,
+      "drop_pct": 60.1,
+      "lost_rev": 294535.0
+    },
+    {
+      "outlet": "261566",
+      "territory": "Meghna Enterprise-2",
+      "hist_aov": 14485.6,
+      "rec_aov": 3193.7,
+      "drop_pct": 78.0,
+      "lost_rev": 293588.0
+    },
+    {
+      "outlet": "239028",
+      "territory": "Ahmmed Enterprise",
+      "hist_aov": 12165.0,
+      "rec_aov": 880.9,
+      "drop_pct": 92.8,
+      "lost_rev": 293385.4
+    },
+    {
+      "outlet": "69163",
+      "territory": "Manha Traders BOGC",
+      "hist_aov": 7812.5,
+      "rec_aov": 1326.2,
+      "drop_pct": 83.0,
+      "lost_rev": 291884.5
+    },
+    {
+      "outlet": "96053",
+      "territory": "Bhai Bhai Store KHLC",
+      "hist_aov": 38038.8,
+      "rec_aov": 1610.0,
+      "drop_pct": 95.8,
+      "lost_rev": 291430.2
+    },
+    {
+      "outlet": "97908",
+      "territory": "Mishuk Enterprise",
+      "hist_aov": 10669.7,
+      "rec_aov": 350.2,
+      "drop_pct": 96.7,
+      "lost_rev": 288943.4
+    },
+    {
+      "outlet": "136750",
+      "territory": "Makkha Enterprise",
+      "hist_aov": 54625.0,
+      "rec_aov": 6615.0,
+      "drop_pct": 87.9,
+      "lost_rev": 288060.0
+    },
+    {
+      "outlet": "17683",
+      "territory": "Marjan Enterprise",
+      "hist_aov": 20160.0,
+      "rec_aov": 1143.5,
+      "drop_pct": 94.3,
+      "lost_rev": 285247.0
+    },
+    {
+      "outlet": "16368",
+      "territory": "Bismillah Motors",
+      "hist_aov": 8458.8,
+      "rec_aov": 1531.9,
+      "drop_pct": 81.9,
+      "lost_rev": 284005.2
+    },
+    {
+      "outlet": "68566",
+      "territory": "Rahela Enterprise",
+      "hist_aov": 30500.0,
+      "rec_aov": 2219.2,
+      "drop_pct": 92.7,
+      "lost_rev": 282808.0
+    },
+    {
+      "outlet": "137620",
+      "territory": "Amina Enterprise",
+      "hist_aov": 5259.6,
+      "rec_aov": 1409.7,
+      "drop_pct": 73.2,
+      "lost_rev": 281040.3
+    },
+    {
+      "outlet": "22959",
+      "territory": "M M Enterprise",
+      "hist_aov": 23723.5,
+      "rec_aov": 373.4,
+      "drop_pct": 98.4,
+      "lost_rev": 280201.0
+    },
+    {
+      "outlet": "159201",
+      "territory": "Pita Mata General store",
+      "hist_aov": 18525.8,
+      "rec_aov": 5228.0,
+      "drop_pct": 71.8,
+      "lost_rev": 279252.8
+    },
+    {
+      "outlet": "201395",
+      "territory": "Sumon Enterprise",
+      "hist_aov": 28987.8,
+      "rec_aov": 1223.6,
+      "drop_pct": 95.8,
+      "lost_rev": 277641.8
+    },
+    {
+      "outlet": "177944",
+      "territory": "Saiful & Brothers",
+      "hist_aov": 10408.0,
+      "rec_aov": 4261.5,
+      "drop_pct": 59.1,
+      "lost_rev": 276593.0
+    },
+    {
+      "outlet": "197844",
+      "territory": "Rahmania Traders",
+      "hist_aov": 9840.0,
+      "rec_aov": 995.3,
+      "drop_pct": 89.9,
+      "lost_rev": 274185.1
+    },
+    {
+      "outlet": "215134",
+      "territory": "Jaman Traders",
+      "hist_aov": 13506.8,
+      "rec_aov": 1616.1,
+      "drop_pct": 88.0,
+      "lost_rev": 273485.5
+    },
+    {
+      "outlet": "183478",
+      "territory": "Sonali Bazar",
+      "hist_aov": 2551.5,
+      "rec_aov": 741.9,
+      "drop_pct": 70.9,
+      "lost_rev": 273254.3
+    },
+    {
+      "outlet": "190732",
+      "territory": "Jannat Enterprise DHKS",
+      "hist_aov": 75000.0,
+      "rec_aov": 6800.0,
+      "drop_pct": 90.9,
+      "lost_rev": 272800.0
+    },
+    {
+      "outlet": "205285",
+      "territory": "New Rakib Enterprise",
+      "hist_aov": 25420.0,
+      "rec_aov": 677.8,
+      "drop_pct": 97.3,
+      "lost_rev": 272164.0
+    },
+    {
+      "outlet": "66899",
+      "territory": "Suchitra Traders",
+      "hist_aov": 31370.0,
+      "rec_aov": 1207.9,
+      "drop_pct": 96.1,
+      "lost_rev": 271459.0
+    },
+    {
+      "outlet": "170260",
+      "territory": "Talukder Enterprise",
+      "hist_aov": 10209.9,
+      "rec_aov": 1995.9,
+      "drop_pct": 80.5,
+      "lost_rev": 271060.1
+    },
+    {
+      "outlet": "37889",
+      "territory": "Mizan Telecom",
+      "hist_aov": 10791.5,
+      "rec_aov": 3286.0,
+      "drop_pct": 69.6,
+      "lost_rev": 270198.7
+    },
+    {
+      "outlet": "2405",
+      "territory": "Ma Enterpise",
+      "hist_aov": 23903.3,
+      "rec_aov": 5917.0,
+      "drop_pct": 75.2,
+      "lost_rev": 269795.0
+    },
+    {
+      "outlet": "262411",
+      "territory": "M.A.S. Distribution",
+      "hist_aov": 4424.4,
+      "rec_aov": 1726.9,
+      "drop_pct": 61.0,
+      "lost_rev": 269749.0
+    },
+    {
+      "outlet": "79083",
+      "territory": "Sahin Store",
+      "hist_aov": 15780.6,
+      "rec_aov": 828.6,
+      "drop_pct": 94.7,
+      "lost_rev": 269136.5
+    },
+    {
+      "outlet": "190162",
+      "territory": "New Rakib Enterprise",
+      "hist_aov": 147386.7,
+      "rec_aov": 57813.3,
+      "drop_pct": 60.8,
+      "lost_rev": 268720.0
+    },
+    {
+      "outlet": "207291",
+      "territory": "Nandani Enterprise",
+      "hist_aov": 14257.3,
+      "rec_aov": 5011.3,
+      "drop_pct": 64.9,
+      "lost_rev": 268132.3
+    },
+    {
+      "outlet": "143825",
+      "territory": "Nazmul Enterprise COMC",
+      "hist_aov": 11266.0,
+      "rec_aov": 4726.7,
+      "drop_pct": 58.0,
+      "lost_rev": 268110.5
+    },
+    {
+      "outlet": "223160",
+      "territory": "Mondal Traders",
+      "hist_aov": 8066.5,
+      "rec_aov": 2705.6,
+      "drop_pct": 66.5,
+      "lost_rev": 268044.3
+    },
+    {
+      "outlet": "253853",
+      "territory": "Halim Store",
+      "hist_aov": 9560.0,
+      "rec_aov": 631.2,
+      "drop_pct": 93.4,
+      "lost_rev": 267863.0
+    },
+    {
+      "outlet": "144224",
+      "territory": "Sanot Store",
+      "hist_aov": 10502.0,
+      "rec_aov": 603.7,
+      "drop_pct": 94.3,
+      "lost_rev": 267252.8
+    },
+    {
+      "outlet": "243500",
+      "territory": "Abir General Store",
+      "hist_aov": 45760.2,
+      "rec_aov": 1300.3,
+      "drop_pct": 97.2,
+      "lost_rev": 266759.2
+    },
+    {
+      "outlet": "43146",
+      "territory": "Sumon Enterprise",
+      "hist_aov": 26308.3,
+      "rec_aov": 2062.1,
+      "drop_pct": 92.2,
+      "lost_rev": 266708.7
+    },
+    {
+      "outlet": "90298",
+      "territory": "Sapon Store",
+      "hist_aov": 11198.3,
+      "rec_aov": 2950.8,
+      "drop_pct": 73.6,
+      "lost_rev": 263921.1
+    },
+    {
+      "outlet": "165782",
+      "territory": "Pita Mata General store",
+      "hist_aov": 22625.0,
+      "rec_aov": 6190.0,
+      "drop_pct": 72.6,
+      "lost_rev": 262960.0
+    },
+    {
+      "outlet": "137630",
+      "territory": "Tobarak Molla Store",
+      "hist_aov": 20070.9,
+      "rec_aov": 7552.6,
+      "drop_pct": 62.4,
+      "lost_rev": 262883.5
+    },
+    {
+      "outlet": "84635",
+      "territory": "Ritu Store",
+      "hist_aov": 10823.5,
+      "rec_aov": 1087.7,
+      "drop_pct": 90.0,
+      "lost_rev": 262866.9
+    },
+    {
+      "outlet": "132452",
+      "territory": "Sheikh Enterprise",
+      "hist_aov": 16842.8,
+      "rec_aov": 3010.8,
+      "drop_pct": 82.1,
+      "lost_rev": 262807.6
+    },
+    {
+      "outlet": "27066",
+      "territory": "Marjan Enterprise",
+      "hist_aov": 8272.5,
+      "rec_aov": 2049.5,
+      "drop_pct": 75.2,
+      "lost_rev": 261366.0
+    },
+    {
+      "outlet": "6019",
+      "territory": "S.M.Trading",
+      "hist_aov": 16400.0,
+      "rec_aov": 4000.6,
+      "drop_pct": 75.6,
+      "lost_rev": 260388.0
+    },
+    {
+      "outlet": "19008",
+      "territory": "AlAmin Store KISC",
+      "hist_aov": 11099.2,
+      "rec_aov": 2757.7,
+      "drop_pct": 75.2,
+      "lost_rev": 258586.2
+    },
+    {
+      "outlet": "133120",
+      "territory": "Abul & Sons",
+      "hist_aov": 17168.9,
+      "rec_aov": 1958.4,
+      "drop_pct": 88.6,
+      "lost_rev": 258580.1
+    },
+    {
+      "outlet": "178683",
+      "territory": "Pita Mata General store",
+      "hist_aov": 13506.4,
+      "rec_aov": 3969.7,
+      "drop_pct": 70.6,
+      "lost_rev": 257491.6
+    },
+    {
+      "outlet": "139728",
+      "territory": "Haziganj Tradres",
+      "hist_aov": 27760.0,
+      "rec_aov": 10656.0,
+      "drop_pct": 61.6,
+      "lost_rev": 256560.0
+    },
+    {
+      "outlet": "274713",
+      "territory": "Shaheen Traders",
+      "hist_aov": 19153.8,
+      "rec_aov": 9315.8,
+      "drop_pct": 51.4,
+      "lost_rev": 255787.5
+    },
+    {
+      "outlet": "217238",
+      "territory": "Zabed Enterprise",
+      "hist_aov": 11017.0,
+      "rec_aov": 4938.5,
+      "drop_pct": 55.2,
+      "lost_rev": 255297.4
+    },
+    {
+      "outlet": "235395",
+      "territory": "Sabit Enterprise",
+      "hist_aov": 8240.3,
+      "rec_aov": 504.8,
+      "drop_pct": 93.9,
+      "lost_rev": 255270.5
+    },
+    {
+      "outlet": "78193",
+      "territory": "Sahin Store",
+      "hist_aov": 20000.0,
+      "rec_aov": 380.2,
+      "drop_pct": 98.1,
+      "lost_rev": 255057.1
+    },
+    {
+      "outlet": "99526",
+      "territory": "K. M. Motors",
+      "hist_aov": 10260.6,
+      "rec_aov": 2768.0,
+      "drop_pct": 73.0,
+      "lost_rev": 254749.2
+    },
+    {
+      "outlet": "253462",
+      "territory": "Mamun Enterprise",
+      "hist_aov": 29110.9,
+      "rec_aov": 814.9,
+      "drop_pct": 97.2,
+      "lost_rev": 254664.1
+    },
+    {
+      "outlet": "176497",
+      "territory": "Jalal Trade International",
+      "hist_aov": 9888.5,
+      "rec_aov": 1514.9,
+      "drop_pct": 84.7,
+      "lost_rev": 251208.2
+    },
+    {
+      "outlet": "57837",
+      "territory": "Akhi Enterprise",
+      "hist_aov": 16575.0,
+      "rec_aov": 898.7,
+      "drop_pct": 94.6,
+      "lost_rev": 250821.0
+    },
+    {
+      "outlet": "275079",
+      "territory": "Rafsan Store",
+      "hist_aov": 6093.0,
+      "rec_aov": 1557.6,
+      "drop_pct": 74.4,
+      "lost_rev": 249446.2
+    },
+    {
+      "outlet": "65023",
+      "territory": "Sahin Store",
+      "hist_aov": 105065.0,
+      "rec_aov": 22180.0,
+      "drop_pct": 78.9,
+      "lost_rev": 248655.0
+    },
+    {
+      "outlet": "95421",
+      "territory": "Mobina Traders",
+      "hist_aov": 24019.0,
+      "rec_aov": 1547.5,
+      "drop_pct": 93.6,
+      "lost_rev": 247186.0
+    },
+    {
+      "outlet": "76151",
+      "territory": "Sahin Store",
+      "hist_aov": 9428.6,
+      "rec_aov": 304.3,
+      "drop_pct": 96.8,
+      "lost_rev": 246354.4
+    },
+    {
+      "outlet": "137684",
+      "territory": "Chowdhury Enterprise",
+      "hist_aov": 7366.7,
+      "rec_aov": 3397.1,
+      "drop_pct": 53.9,
+      "lost_rev": 246116.1
+    },
+    {
+      "outlet": "75828",
+      "territory": "Lukman Store",
+      "hist_aov": 19060.3,
+      "rec_aov": 329.4,
+      "drop_pct": 98.3,
+      "lost_rev": 243501.7
+    },
+    {
+      "outlet": "201345",
+      "territory": "Maa Traders",
+      "hist_aov": 13036.7,
+      "rec_aov": 874.9,
+      "drop_pct": 93.3,
+      "lost_rev": 243237.9
+    },
+    {
+      "outlet": "146634",
+      "territory": "Ahmed Enterprise",
+      "hist_aov": 22000.0,
+      "rec_aov": 4719.7,
+      "drop_pct": 78.5,
+      "lost_rev": 241924.0
+    },
+    {
+      "outlet": "235282",
+      "territory": "Mizan Traders KUST",
+      "hist_aov": 4446.9,
+      "rec_aov": 1181.8,
+      "drop_pct": 73.4,
+      "lost_rev": 241617.3
+    },
+    {
+      "outlet": "66682",
+      "territory": "Mawla Store",
+      "hist_aov": 29048.0,
+      "rec_aov": 11836.6,
+      "drop_pct": 59.3,
+      "lost_rev": 240959.0
+    },
+    {
+      "outlet": "272665",
+      "territory": "Rafnan Enterprise",
+      "hist_aov": 52054.0,
+      "rec_aov": 17714.3,
+      "drop_pct": 66.0,
+      "lost_rev": 240378.0
+    },
+    {
+      "outlet": "271621",
+      "territory": "Nabila Enterprise",
+      "hist_aov": 4490.3,
+      "rec_aov": 981.0,
+      "drop_pct": 78.2,
+      "lost_rev": 238635.0
+    },
+    {
+      "outlet": "175597",
+      "territory": "Abu Zafar Traders",
+      "hist_aov": 11846.0,
+      "rec_aov": 1971.6,
+      "drop_pct": 83.4,
+      "lost_rev": 236986.0
+    },
+    {
+      "outlet": "147936",
+      "territory": "Ahmed Enterprise",
+      "hist_aov": 13404.7,
+      "rec_aov": 6639.3,
+      "drop_pct": 50.5,
+      "lost_rev": 236787.1
+    },
+    {
+      "outlet": "147285",
+      "territory": "Jannat Enterprise DHKS",
+      "hist_aov": 15752.6,
+      "rec_aov": 1024.0,
+      "drop_pct": 93.5,
+      "lost_rev": 235657.6
+    },
+    {
+      "outlet": "95724",
+      "territory": "Nesar Ahamed & Brothers",
+      "hist_aov": 61757.5,
+      "rec_aov": 2855.0,
+      "drop_pct": 95.4,
+      "lost_rev": 235610.0
+    },
+    {
+      "outlet": "27285",
+      "territory": "Shahen Shah Enterprise",
+      "hist_aov": 24047.5,
+      "rec_aov": 5974.2,
+      "drop_pct": 75.2,
+      "lost_rev": 234952.5
+    },
+    {
+      "outlet": "135143",
+      "territory": "AI Trading",
+      "hist_aov": 16000.0,
+      "rec_aov": 4253.3,
+      "drop_pct": 73.4,
+      "lost_rev": 234934.8
+    },
+    {
+      "outlet": "217799",
+      "territory": "Shahin Confectionary & General Store",
+      "hist_aov": 20505.4,
+      "rec_aov": 1110.4,
+      "drop_pct": 94.6,
+      "lost_rev": 232739.8
+    },
+    {
+      "outlet": "208544",
+      "territory": "Liza Trading",
+      "hist_aov": 39120.0,
+      "rec_aov": 335.5,
+      "drop_pct": 99.1,
+      "lost_rev": 232707.2
+    },
+    {
+      "outlet": "44867",
+      "territory": "Maa Store",
+      "hist_aov": 21357.0,
+      "rec_aov": 9142.1,
+      "drop_pct": 57.2,
+      "lost_rev": 232083.0
+    },
+    {
+      "outlet": "52783",
+      "territory": "Sajim Traders",
+      "hist_aov": 7607.8,
+      "rec_aov": 3314.4,
+      "drop_pct": 56.4,
+      "lost_rev": 231842.1
+    },
+    {
+      "outlet": "125634",
+      "territory": "Khan Enterprise",
+      "hist_aov": 26396.0,
+      "rec_aov": 3230.1,
+      "drop_pct": 87.8,
+      "lost_rev": 231659.0
+    },
+    {
+      "outlet": "219685",
+      "territory": "Chaity Saree Bitan",
+      "hist_aov": 6684.7,
+      "rec_aov": 767.5,
+      "drop_pct": 88.5,
+      "lost_rev": 230773.0
+    },
+    {
+      "outlet": "101180",
+      "territory": "Sharif Store",
+      "hist_aov": 39081.2,
+      "rec_aov": 918.0,
+      "drop_pct": 97.7,
+      "lost_rev": 228979.5
+    },
+    {
+      "outlet": "70055",
+      "territory": "AB Traders",
+      "hist_aov": 8838.9,
+      "rec_aov": 1905.1,
+      "drop_pct": 78.4,
+      "lost_rev": 228814.2
+    },
+    {
+      "outlet": "171363",
+      "territory": "A Z Enterprise",
+      "hist_aov": 9626.8,
+      "rec_aov": 2252.3,
+      "drop_pct": 76.6,
+      "lost_rev": 228611.6
+    },
+    {
+      "outlet": "264340",
+      "territory": "Rafnan Enterprise",
+      "hist_aov": 14050.0,
+      "rec_aov": 4924.3,
+      "drop_pct": 65.0,
+      "lost_rev": 228142.8
+    },
+    {
+      "outlet": "256392",
+      "territory": "Sahariar Traders",
+      "hist_aov": 4066.8,
+      "rec_aov": 1419.1,
+      "drop_pct": 65.1,
+      "lost_rev": 227701.0
+    },
+    {
+      "outlet": "49202",
+      "territory": "Gandheswari Vandar",
+      "hist_aov": 226770.0,
+      "rec_aov": 800.0,
+      "drop_pct": 99.6,
+      "lost_rev": 225970.0
+    },
+    {
+      "outlet": "56992",
+      "territory": "Akhi Enterprise",
+      "hist_aov": 4385.6,
+      "rec_aov": 361.5,
+      "drop_pct": 91.8,
+      "lost_rev": 225348.9
+    },
+    {
+      "outlet": "49834",
+      "territory": "Mizan Traders KUST",
+      "hist_aov": 4156.8,
+      "rec_aov": 1683.2,
+      "drop_pct": 59.5,
+      "lost_rev": 225103.0
+    },
+    {
+      "outlet": "151009",
+      "territory": "Anny Traders",
+      "hist_aov": 21339.0,
+      "rec_aov": 875.5,
+      "drop_pct": 95.9,
+      "lost_rev": 225099.0
+    },
+    {
+      "outlet": "229062",
+      "territory": "Rahmat and Sons",
+      "hist_aov": 16377.9,
+      "rec_aov": 2368.6,
+      "drop_pct": 85.5,
+      "lost_rev": 224148.7
+    },
+    {
+      "outlet": "123768",
+      "territory": "Royal Brothers",
+      "hist_aov": 2994.1,
+      "rec_aov": 1191.4,
+      "drop_pct": 60.2,
+      "lost_rev": 223537.4
+    },
+    {
+      "outlet": "14095",
+      "territory": "Emon Store",
+      "hist_aov": 7234.9,
+      "rec_aov": 1195.8,
+      "drop_pct": 83.5,
+      "lost_rev": 223446.9
+    },
+    {
+      "outlet": "207984",
+      "territory": "Ritu Store",
+      "hist_aov": 10894.6,
+      "rec_aov": 4323.8,
+      "drop_pct": 60.3,
+      "lost_rev": 223406.8
+    },
+    {
+      "outlet": "183669",
+      "territory": "Rahmania Traders",
+      "hist_aov": 10852.9,
+      "rec_aov": 1141.6,
+      "drop_pct": 89.5,
+      "lost_rev": 223359.7
+    },
+    {
+      "outlet": "204433",
+      "territory": "Ayush Enterprise",
+      "hist_aov": 23900.0,
+      "rec_aov": 1614.0,
+      "drop_pct": 93.2,
+      "lost_rev": 222860.0
+    },
+    {
+      "outlet": "228633",
+      "territory": "Heaven Distribution",
+      "hist_aov": 24062.1,
+      "rec_aov": 1778.5,
+      "drop_pct": 92.6,
+      "lost_rev": 222836.4
+    },
+    {
+      "outlet": "42892",
+      "territory": "Mizan Telecom",
+      "hist_aov": 5019.4,
+      "rec_aov": 1883.0,
+      "drop_pct": 62.5,
+      "lost_rev": 222684.6
+    },
+    {
+      "outlet": "146964",
+      "territory": "Makkha Enterprise",
+      "hist_aov": 8180.0,
+      "rec_aov": 3445.6,
+      "drop_pct": 57.9,
+      "lost_rev": 222516.8
+    },
+    {
+      "outlet": "42528",
+      "territory": "Rupia Enterprise",
+      "hist_aov": 4921.6,
+      "rec_aov": 2117.4,
+      "drop_pct": 57.0,
+      "lost_rev": 221527.6
+    },
+    {
+      "outlet": "220123",
+      "territory": "Jannat Enterprise DHKS",
+      "hist_aov": 75000.0,
+      "rec_aov": 1228.0,
+      "drop_pct": 98.4,
+      "lost_rev": 221316.0
+    },
+    {
+      "outlet": "154532",
+      "territory": "Hani Enterprise",
+      "hist_aov": 2969.8,
+      "rec_aov": 835.9,
+      "drop_pct": 71.9,
+      "lost_rev": 219793.0
+    },
+    {
+      "outlet": "254497",
+      "territory": "Nihal Electric & Hardware",
+      "hist_aov": 74160.0,
+      "rec_aov": 1121.7,
+      "drop_pct": 98.5,
+      "lost_rev": 219115.0
+    },
+    {
+      "outlet": "188244",
+      "territory": "Alif Traders HABC",
+      "hist_aov": 7488.1,
+      "rec_aov": 2517.4,
+      "drop_pct": 66.4,
+      "lost_rev": 218711.5
+    },
+    {
+      "outlet": "108826",
+      "territory": "Muttakin Traders",
+      "hist_aov": 12398.0,
+      "rec_aov": 907.6,
+      "drop_pct": 92.7,
+      "lost_rev": 218318.0
+    },
+    {
+      "outlet": "207163",
+      "territory": "Nandani Enterprise",
+      "hist_aov": 10461.2,
+      "rec_aov": 4717.3,
+      "drop_pct": 54.9,
+      "lost_rev": 218270.0
+    },
+    {
+      "outlet": "72266",
+      "territory": "Joy Store",
+      "hist_aov": 10117.1,
+      "rec_aov": 4246.6,
+      "drop_pct": 58.0,
+      "lost_rev": 217209.1
+    },
+    {
+      "outlet": "164557",
+      "territory": "Pita Mata General store",
+      "hist_aov": 11770.0,
+      "rec_aov": 2340.4,
+      "drop_pct": 80.1,
+      "lost_rev": 216880.2
+    },
+    {
+      "outlet": "48765",
+      "territory": "Maisha Store",
+      "hist_aov": 38882.5,
+      "rec_aov": 2938.7,
+      "drop_pct": 92.4,
+      "lost_rev": 215663.0
+    },
+    {
+      "outlet": "41566",
+      "territory": "Shahen Shah Enterprise",
+      "hist_aov": 12901.4,
+      "rec_aov": 3938.8,
+      "drop_pct": 69.5,
+      "lost_rev": 215102.8
+    },
+    {
+      "outlet": "193036",
+      "territory": "Pita Mata General store",
+      "hist_aov": 14125.0,
+      "rec_aov": 3927.0,
+      "drop_pct": 72.2,
+      "lost_rev": 214157.4
+    },
+    {
+      "outlet": "181274",
+      "territory": "Sumon Enterprise",
+      "hist_aov": 14626.7,
+      "rec_aov": 2730.0,
+      "drop_pct": 81.3,
+      "lost_rev": 214140.0
+    },
+    {
+      "outlet": "35418",
+      "territory": "S S Enterprise",
+      "hist_aov": 20908.3,
+      "rec_aov": 8329.4,
+      "drop_pct": 60.2,
+      "lost_rev": 213841.7
+    },
+    {
+      "outlet": "89313",
+      "territory": "Aziz Enterprise",
+      "hist_aov": 14324.0,
+      "rec_aov": 1778.8,
+      "drop_pct": 87.6,
+      "lost_rev": 213268.0
+    },
+    {
+      "outlet": "56851",
+      "territory": "Abbas & Brothers",
+      "hist_aov": 16790.0,
+      "rec_aov": 510.8,
+      "drop_pct": 97.0,
+      "lost_rev": 211630.0
+    },
+    {
+      "outlet": "199065",
+      "territory": "Monir General Store",
+      "hist_aov": 10880.0,
+      "rec_aov": 1281.4,
+      "drop_pct": 88.2,
+      "lost_rev": 211170.0
+    },
+    {
+      "outlet": "122099",
+      "territory": "Ibrahim Enterprise",
+      "hist_aov": 18304.0,
+      "rec_aov": 4226.5,
+      "drop_pct": 76.9,
+      "lost_rev": 211162.0
+    },
+    {
+      "outlet": "95790",
+      "territory": "Alam Traders",
+      "hist_aov": 11184.0,
+      "rec_aov": 2743.7,
+      "drop_pct": 75.5,
+      "lost_rev": 211008.0
+    },
+    {
+      "outlet": "125197",
+      "territory": "Rekha Enterprise",
+      "hist_aov": 9804.0,
+      "rec_aov": 264.1,
+      "drop_pct": 97.3,
+      "lost_rev": 209878.0
+    },
+    {
+      "outlet": "262034",
+      "territory": "Meghna Enterprise",
+      "hist_aov": 6126.2,
+      "rec_aov": 2741.4,
+      "drop_pct": 55.3,
+      "lost_rev": 209858.6
+    },
+    {
+      "outlet": "224911",
+      "territory": "Sumon Enterprise",
+      "hist_aov": 16030.0,
+      "rec_aov": 2043.5,
+      "drop_pct": 87.3,
+      "lost_rev": 209798.0
+    },
+    {
+      "outlet": "134425",
+      "territory": "Kabir Store",
+      "hist_aov": 9839.6,
+      "rec_aov": 3852.1,
+      "drop_pct": 60.9,
+      "lost_rev": 209561.0
+    },
+    {
+      "outlet": "56300",
+      "territory": "AlAmin Store KISC",
+      "hist_aov": 14435.0,
+      "rec_aov": 1351.9,
+      "drop_pct": 90.6,
+      "lost_rev": 209329.6
+    },
+    {
+      "outlet": "85348",
+      "territory": "Heron Store",
+      "hist_aov": 30387.5,
+      "rec_aov": 744.3,
+      "drop_pct": 97.6,
+      "lost_rev": 207502.5
+    },
+    {
+      "outlet": "172324",
+      "territory": "Talukder Enterprise",
+      "hist_aov": 13484.4,
+      "rec_aov": 3138.8,
+      "drop_pct": 76.7,
+      "lost_rev": 206913.9
+    },
+    {
+      "outlet": "271090",
+      "territory": "Z&Z Corporation-2",
+      "hist_aov": 7743.4,
+      "rec_aov": 2935.1,
+      "drop_pct": 62.1,
+      "lost_rev": 206757.7
+    }
+  ],
+  "red_flag_summary": {
+    "total_count": 3286
+  },
+  "red_flags": [
+    {
+      "outlet": "122462",
+      "territory": "National Retail",
+      "visits": 27,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "59672",
+      "territory": "Ruqayyah Nur Traders",
+      "visits": 26,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "55519",
+      "territory": "Sanot Store",
+      "visits": 25,
+      "last_visit": "2026-08-20",
+      "historical_orders": 6
+    },
+    {
+      "outlet": "95730",
+      "territory": "National Retail",
+      "visits": 25,
+      "last_visit": "2026-08-20"
+    },
+    {
+      "outlet": "55119",
+      "territory": "National Retail",
+      "visits": 25,
+      "last_visit": "2026-08-20"
+    },
+    {
+      "outlet": "52619",
+      "territory": "Ruqayyah Nur Traders",
+      "visits": 23,
+      "last_visit": "2026-08-19",
+      "historical_orders": 6
+    },
+    {
+      "outlet": "103560",
+      "territory": "Ruqayyah Nur Traders",
+      "visits": 23,
+      "last_visit": "2026-08-19",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "61493",
+      "territory": "National Retail",
+      "visits": 23,
+      "last_visit": "2026-08-19"
+    },
+    {
+      "outlet": "103689",
+      "territory": "National Retail",
+      "visits": 23,
+      "last_visit": "2026-08-19"
+    },
+    {
+      "outlet": "123666",
+      "territory": "National Retail",
+      "visits": 23,
+      "last_visit": "2026-08-19"
+    },
+    {
+      "outlet": "67795",
+      "territory": "National Retail",
+      "visits": 23,
+      "last_visit": "2026-08-20"
+    },
+    {
+      "outlet": "67075",
+      "territory": "National Retail",
+      "visits": 23,
+      "last_visit": "2026-08-20"
+    },
+    {
+      "outlet": "98680",
+      "territory": "Abdull Maleq Traders",
+      "visits": 22,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "63604",
+      "territory": "National Retail",
+      "visits": 21,
+      "last_visit": "2026-08-19"
+    },
+    {
+      "outlet": "54355",
+      "territory": "National Retail",
+      "visits": 21,
+      "last_visit": "2026-08-20"
+    },
+    {
+      "outlet": "270477",
+      "territory": "National Retail",
+      "visits": 20,
+      "last_visit": "2026-08-20"
+    },
+    {
+      "outlet": "64767",
+      "territory": "Esmail Enterprise",
+      "visits": 19,
+      "last_visit": "2026-08-19",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "242321",
+      "territory": "Abdull Maleq Traders",
+      "visits": 18,
+      "last_visit": "2026-08-19",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "119608",
+      "territory": "National Retail",
+      "visits": 18,
+      "last_visit": "2026-08-20"
+    },
+    {
+      "outlet": "261671",
+      "territory": "Tanni General Store",
+      "visits": 16,
+      "last_visit": "2026-08-17",
+      "historical_orders": 8
+    },
+    {
+      "outlet": "261672",
+      "territory": "Tanni General Store",
+      "visits": 16,
+      "last_visit": "2026-08-17",
+      "historical_orders": 7
+    },
+    {
+      "outlet": "261676",
+      "territory": "Tanni General Store",
+      "visits": 16,
+      "last_visit": "2026-08-17",
+      "historical_orders": 8
+    },
+    {
+      "outlet": "261678",
+      "territory": "Tanni General Store",
+      "visits": 16,
+      "last_visit": "2026-08-17",
+      "historical_orders": 6
+    },
+    {
+      "outlet": "261679",
+      "territory": "Tanni General Store",
+      "visits": 16,
+      "last_visit": "2026-08-17",
+      "historical_orders": 8
+    },
+    {
+      "outlet": "261680",
+      "territory": "Tanni General Store",
+      "visits": 16,
+      "last_visit": "2026-08-17",
+      "historical_orders": 7
+    },
+    {
+      "outlet": "243477",
+      "territory": "Abdull Maleq Traders",
+      "visits": 16,
+      "last_visit": "2026-08-19",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "148336",
+      "territory": "National Retail",
+      "visits": 16,
+      "last_visit": "2026-08-11"
+    },
+    {
+      "outlet": "186491",
+      "territory": "National Retail",
+      "visits": 16,
+      "last_visit": "2026-08-11"
+    },
+    {
+      "outlet": "148351",
+      "territory": "National Retail",
+      "visits": 16,
+      "last_visit": "2026-08-08"
+    },
+    {
+      "outlet": "66487",
+      "territory": "National Retail",
+      "visits": 16,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "245773",
+      "territory": "Rana Traders",
+      "visits": 15,
+      "last_visit": "2026-08-22",
+      "historical_orders": 13
+    },
+    {
+      "outlet": "84627",
+      "territory": "Atiar Store",
+      "visits": 15,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "29883",
+      "territory": "Shahin Store",
+      "visits": 15,
+      "last_visit": "2026-08-22",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "66462",
+      "territory": "Babu Store",
+      "visits": 15,
+      "last_visit": "2026-08-22",
+      "historical_orders": 6
+    },
+    {
+      "outlet": "66763",
+      "territory": "Babu Store",
+      "visits": 15,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "66447",
+      "territory": "Babu Store",
+      "visits": 15,
+      "last_visit": "2026-08-22",
+      "historical_orders": 3
+    },
+    {
+      "outlet": "66076",
+      "territory": "Babu Store",
+      "visits": 15,
+      "last_visit": "2026-08-22",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "29933",
+      "territory": "Shahin Store",
+      "visits": 15,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "161493",
+      "territory": "Aleenas Distribution",
+      "visits": 15,
+      "last_visit": "2026-07-15",
+      "historical_orders": 21
+    },
+    {
+      "outlet": "248924",
+      "territory": "Tanni General Store",
+      "visits": 15,
+      "last_visit": "2026-08-16",
+      "historical_orders": 7
+    },
+    {
+      "outlet": "38619",
+      "territory": "Shahin Store",
+      "visits": 15,
+      "last_visit": "2026-08-18",
+      "historical_orders": 13
+    },
+    {
+      "outlet": "36455",
+      "territory": "Shahin Store",
+      "visits": 15,
+      "last_visit": "2026-08-18",
+      "historical_orders": 3
+    },
+    {
+      "outlet": "261339",
+      "territory": "Tanni General Store",
+      "visits": 15,
+      "last_visit": "2026-08-18",
+      "historical_orders": 7
+    },
+    {
+      "outlet": "155437",
+      "territory": "Aleenas Distribution",
+      "visits": 15,
+      "last_visit": "2026-07-18",
+      "historical_orders": 22
+    },
+    {
+      "outlet": "57658",
+      "territory": "Habiba Traders",
+      "visits": 15,
+      "last_visit": "2026-08-22",
+      "historical_orders": 3
+    },
+    {
+      "outlet": "48620",
+      "territory": "Shahin Store",
+      "visits": 15,
+      "last_visit": "2026-08-17",
+      "historical_orders": 4
+    },
+    {
+      "outlet": "176335",
+      "territory": "Ruqayyah Nur Traders",
+      "visits": 15,
+      "last_visit": "2026-08-19",
+      "historical_orders": 3
+    },
+    {
+      "outlet": "28200",
+      "territory": "Lovely Store",
+      "visits": 15,
+      "last_visit": "2026-08-22",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "195645",
+      "territory": "Shah Amanat Store",
+      "visits": 15,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "229086",
+      "territory": "Rozina Enterprise",
+      "visits": 15,
+      "last_visit": "2026-08-22",
+      "historical_orders": 4
+    },
+    {
+      "outlet": "117595",
+      "territory": "Habiba Traders",
+      "visits": 15,
+      "last_visit": "2026-08-22",
+      "historical_orders": 4
+    },
+    {
+      "outlet": "57553",
+      "territory": "National Retail",
+      "visits": 15,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "200595",
+      "territory": "National Retail",
+      "visits": 15,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "130284",
+      "territory": "National Retail",
+      "visits": 15,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "268332",
+      "territory": "National Retail",
+      "visits": 15,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "110173",
+      "territory": "National Retail",
+      "visits": 15,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "89187",
+      "territory": "National Retail",
+      "visits": 15,
+      "last_visit": "2026-08-23"
+    },
+    {
+      "outlet": "186206",
+      "territory": "National Retail",
+      "visits": 15,
+      "last_visit": "2026-08-09"
+    },
+    {
+      "outlet": "118083",
+      "territory": "Mobina Traders",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "274397",
+      "territory": "Kamal Store DHKC",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "157617",
+      "territory": "Anwar Traders",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "228098",
+      "territory": "Kamal Store DHKC",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 6
+    },
+    {
+      "outlet": "268328",
+      "territory": "M R Traders",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "68510",
+      "territory": "Babu Store",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "183775",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "26823",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "220820",
+      "territory": "Aleenas Distribution",
+      "visits": 14,
+      "last_visit": "2026-06-30",
+      "historical_orders": 11
+    },
+    {
+      "outlet": "161429",
+      "territory": "Aleenas Distribution",
+      "visits": 14,
+      "last_visit": "2026-06-30",
+      "historical_orders": 6
+    },
+    {
+      "outlet": "161475",
+      "territory": "Aleenas Distribution",
+      "visits": 14,
+      "last_visit": "2026-06-30",
+      "historical_orders": 4
+    },
+    {
+      "outlet": "27722",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "31052",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-23",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "164413",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-16",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "32808",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-16",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "155424",
+      "territory": "Aleenas Distribution",
+      "visits": 14,
+      "last_visit": "2026-07-18",
+      "historical_orders": 23
+    },
+    {
+      "outlet": "48710",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-17",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "147834",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-19",
+      "historical_orders": 3
+    },
+    {
+      "outlet": "147875",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-19",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "39857",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-19",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "125240",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-19",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "258434",
+      "territory": "Tanni General Store",
+      "visits": 14,
+      "last_visit": "2026-08-18",
+      "historical_orders": 8
+    },
+    {
+      "outlet": "258435",
+      "territory": "Tanni General Store",
+      "visits": 14,
+      "last_visit": "2026-08-18",
+      "historical_orders": 5
+    },
+    {
+      "outlet": "261599",
+      "territory": "Tanni General Store",
+      "visits": 14,
+      "last_visit": "2026-08-18",
+      "historical_orders": 5
+    },
+    {
+      "outlet": "148113",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-19",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "155502",
+      "territory": "Aleenas Distribution",
+      "visits": 14,
+      "last_visit": "2026-06-30",
+      "historical_orders": 13
+    },
+    {
+      "outlet": "155400",
+      "territory": "Aleenas Distribution",
+      "visits": 14,
+      "last_visit": "2026-06-25",
+      "historical_orders": 22
+    },
+    {
+      "outlet": "155462",
+      "territory": "Aleenas Distribution",
+      "visits": 14,
+      "last_visit": "2026-07-18",
+      "historical_orders": 20
+    },
+    {
+      "outlet": "40417",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-20",
+      "historical_orders": 6
+    },
+    {
+      "outlet": "40511",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-20",
+      "historical_orders": 3
+    },
+    {
+      "outlet": "41227",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-20",
+      "historical_orders": 6
+    },
+    {
+      "outlet": "195653",
+      "territory": "Kamal Store DHKC",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 3
+    },
+    {
+      "outlet": "68551",
+      "territory": "Babu Store",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "124998",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-19",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "125011",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-19",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "39447",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-19",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "261602",
+      "territory": "Tanni General Store",
+      "visits": 14,
+      "last_visit": "2026-08-18",
+      "historical_orders": 5
+    },
+    {
+      "outlet": "261607",
+      "territory": "Tanni General Store",
+      "visits": 14,
+      "last_visit": "2026-08-18",
+      "historical_orders": 4
+    },
+    {
+      "outlet": "41188",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-20",
+      "historical_orders": 5
+    },
+    {
+      "outlet": "85235",
+      "territory": "Al Amin Store BOGC",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 4
+    },
+    {
+      "outlet": "246986",
+      "territory": "Al Amin Store BOGC",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 3
+    },
+    {
+      "outlet": "29638",
+      "territory": "Mobina Traders",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "249176",
+      "territory": "Popular Distribution Mart",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 3
+    },
+    {
+      "outlet": "48670",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-17",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "275293",
+      "territory": "Tanni General Store",
+      "visits": 14,
+      "last_visit": "2026-08-18",
+      "historical_orders": 4
+    },
+    {
+      "outlet": "131313",
+      "territory": "Habiba Traders",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "131071",
+      "territory": "Habiba Traders",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 3
+    },
+    {
+      "outlet": "154327",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-20",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "40556",
+      "territory": "Shahin Store",
+      "visits": 14,
+      "last_visit": "2026-08-20",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "131447",
+      "territory": "Samia Enterprise",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "9590",
+      "territory": "Chowdhury Enterprise",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 9
+    },
+    {
+      "outlet": "10457",
+      "territory": "Safa Enterprise",
+      "visits": 14,
+      "last_visit": "2026-08-19",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "110175",
+      "territory": "Al Amin Store BOGC",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "83268",
+      "territory": "Al Amin Store BOGC",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "84179",
+      "territory": "Dewan Traders",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "43278",
+      "territory": "Gandheswari Vandar",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 3
+    },
+    {
+      "outlet": "84879",
+      "territory": "Liton Store",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "30069",
+      "territory": "Mobina Traders",
+      "visits": 14,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "194720",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "1839",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "9851",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "9806",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "195529",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "239343",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "239412",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "245934",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "245933",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "184493",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "82943",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "108807",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "83503",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "182162",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "84055",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "84125",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "182588",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "84413",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "245713",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "84652",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "220040",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "68486",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "183145",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "182990",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "245784",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "86466",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "268329",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "245786",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "66249",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "43978",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "245861",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "184199",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "86717",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "30044",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "230802",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "91075",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-16"
+    },
+    {
+      "outlet": "39507",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-19"
+    },
+    {
+      "outlet": "39731",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-19"
+    },
+    {
+      "outlet": "58190",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-22"
+    },
+    {
+      "outlet": "164844",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-16"
+    },
+    {
+      "outlet": "237426",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-18"
+    },
+    {
+      "outlet": "89208",
+      "territory": "National Retail",
+      "visits": 14,
+      "last_visit": "2026-08-23"
+    },
+    {
+      "outlet": "42196",
+      "territory": "Safa Enterprise",
+      "visits": 13,
+      "last_visit": "2026-08-22",
+      "historical_orders": 5
+    },
+    {
+      "outlet": "118019",
+      "territory": "Mobina Traders",
+      "visits": 13,
+      "last_visit": "2026-08-15",
+      "historical_orders": 4
+    },
+    {
+      "outlet": "213211",
+      "territory": "Sajib Traders",
+      "visits": 13,
+      "last_visit": "2026-08-22",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "168687",
+      "territory": "Babu Store",
+      "visits": 13,
+      "last_visit": "2026-08-22",
+      "historical_orders": 5
+    },
+    {
+      "outlet": "96828",
+      "territory": "Ashraf Enterprise",
+      "visits": 13,
+      "last_visit": "2026-07-21",
+      "historical_orders": 21
+    },
+    {
+      "outlet": "161762",
+      "territory": "Aleenas Distribution",
+      "visits": 13,
+      "last_visit": "2026-06-30",
+      "historical_orders": 18
+    },
+    {
+      "outlet": "161829",
+      "territory": "Aleenas Distribution",
+      "visits": 13,
+      "last_visit": "2026-06-30",
+      "historical_orders": 13
+    },
+    {
+      "outlet": "161721",
+      "territory": "Aleenas Distribution",
+      "visits": 13,
+      "last_visit": "2026-06-30",
+      "historical_orders": 4
+    },
+    {
+      "outlet": "161596",
+      "territory": "Aleenas Distribution",
+      "visits": 13,
+      "last_visit": "2026-06-30",
+      "historical_orders": 4
+    },
+    {
+      "outlet": "161514",
+      "territory": "Aleenas Distribution",
+      "visits": 13,
+      "last_visit": "2026-06-30",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "161540",
+      "territory": "Aleenas Distribution",
+      "visits": 13,
+      "last_visit": "2026-06-30",
+      "historical_orders": 3
+    },
+    {
+      "outlet": "161442",
+      "territory": "Aleenas Distribution",
+      "visits": 13,
+      "last_visit": "2026-06-30",
+      "historical_orders": 3
+    },
+    {
+      "outlet": "32450",
+      "territory": "Sajib Traders",
+      "visits": 13,
+      "last_visit": "2026-08-16",
+      "historical_orders": 4
+    },
+    {
+      "outlet": "31171",
+      "territory": "Shahin Store",
+      "visits": 13,
+      "last_visit": "2026-08-16",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "44540",
+      "territory": "Shahin Store",
+      "visits": 13,
+      "last_visit": "2026-08-16",
+      "historical_orders": 3
+    },
+    {
+      "outlet": "46361",
+      "territory": "Mobina Traders",
+      "visits": 13,
+      "last_visit": "2026-08-16",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "32827",
+      "territory": "Shahin Store",
+      "visits": 13,
+      "last_visit": "2026-08-16",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "232232",
+      "territory": "Rashel Store",
+      "visits": 13,
+      "last_visit": "2026-08-18",
+      "historical_orders": 8
+    },
+    {
+      "outlet": "44485",
+      "territory": "Shahin Store",
+      "visits": 13,
+      "last_visit": "2026-08-16",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "165414",
+      "territory": "Shahin Store",
+      "visits": 13,
+      "last_visit": "2026-08-16",
+      "historical_orders": 3
+    },
+    {
+      "outlet": "39038",
+      "territory": "Sajib Traders",
+      "visits": 13,
+      "last_visit": "2026-08-19",
+      "historical_orders": 8
+    },
+    {
+      "outlet": "47989",
+      "territory": "Shahin Store",
+      "visits": 13,
+      "last_visit": "2026-08-17",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "156030",
+      "territory": "Aleenas Distribution",
+      "visits": 13,
+      "last_visit": "2026-06-30",
+      "historical_orders": 23
+    },
+    {
+      "outlet": "218541",
+      "territory": "Aleenas Distribution",
+      "visits": 13,
+      "last_visit": "2026-06-25",
+      "historical_orders": 23
+    },
+    {
+      "outlet": "155831",
+      "territory": "Aleenas Distribution",
+      "visits": 13,
+      "last_visit": "2026-06-30",
+      "historical_orders": 16
+    },
+    {
+      "outlet": "156102",
+      "territory": "Aleenas Distribution",
+      "visits": 13,
+      "last_visit": "2026-06-30",
+      "historical_orders": 22
+    },
+    {
+      "outlet": "65655",
+      "territory": "Lubaba Enterprise",
+      "visits": 13,
+      "last_visit": "2026-08-18",
+      "historical_orders": 13
+    },
+    {
+      "outlet": "125164",
+      "territory": "Kowshik Enterprise",
+      "visits": 13,
+      "last_visit": "2026-08-19",
+      "historical_orders": 6
+    },
+    {
+      "outlet": "74759",
+      "territory": "Babu Store",
+      "visits": 13,
+      "last_visit": "2026-08-19",
+      "historical_orders": 4
+    },
+    {
+      "outlet": "261328",
+      "territory": "Tanni General Store",
+      "visits": 13,
+      "last_visit": "2026-08-18",
+      "historical_orders": 6
+    },
+    {
+      "outlet": "41690",
+      "territory": "Shahin Store",
+      "visits": 13,
+      "last_visit": "2026-08-20",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "154535",
+      "territory": "Shahin Store",
+      "visits": 13,
+      "last_visit": "2026-08-20",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "217903",
+      "territory": "Aleenas Distribution",
+      "visits": 13,
+      "last_visit": "2026-06-30",
+      "historical_orders": 34
+    },
+    {
+      "outlet": "154494",
+      "territory": "Shahin Store",
+      "visits": 13,
+      "last_visit": "2026-08-20",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "154522",
+      "territory": "Shahin Store",
+      "visits": 13,
+      "last_visit": "2026-08-20",
+      "historical_orders": 2
+    },
+    {
+      "outlet": "9532",
+      "territory": "Safa Enterprise",
+      "visits": 13,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "9725",
+      "territory": "Safa Enterprise",
+      "visits": 13,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "9800",
+      "territory": "Safa Enterprise",
+      "visits": 13,
+      "last_visit": "2026-08-22",
+      "historical_orders": 8
+    },
+    {
+      "outlet": "10340",
+      "territory": "Safa Enterprise",
+      "visits": 13,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "10238",
+      "territory": "Safa Enterprise",
+      "visits": 13,
+      "last_visit": "2026-08-22",
+      "historical_orders": 5
+    },
+    {
+      "outlet": "10223",
+      "territory": "Safa Enterprise",
+      "visits": 13,
+      "last_visit": "2026-08-22",
+      "historical_orders": 1
+    },
+    {
+      "outlet": "10480",
+      "territory": "Safa Enterprise",
+      "visits": 13,
+      "last_visit": "2026-08-22",
+      "historical_orders": 2
+    }
+  ]
+}

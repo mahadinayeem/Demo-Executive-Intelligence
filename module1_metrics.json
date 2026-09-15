@@ -1,0 +1,1082 @@
+{
+  "tot_reg": 282171,
+  "tot_active": 208831,
+  "active_rate": 74.01,
+  "tot_visited": 208718,
+  "visit_rate": 73.97,
+  "tot_unvisited": 73453,
+  "unvisited_rate": 26.03,
+  "visited_no_order": 6234,
+  "order_no_visit": 6347,
+  "tot_revenue_bdt": 4759178247.35,
+  "tot_revenue_crore": 475.92,
+  "tot_orders": 1681232,
+  "tot_visits_count": 1569940,
+  "tier_summary": [
+    {
+      "outlet_tier": "Tier 1: Platinum (>100k)",
+      "outlet_count": 7330,
+      "total_revenue": 1985025234.63,
+      "total_orders": 86133,
+      "total_visits": 72435
+    },
+    {
+      "outlet_tier": "Tier 2: Gold (30k-100k)",
+      "outlet_count": 24394,
+      "total_revenue": 1242009034.77,
+      "total_orders": 259423,
+      "total_visits": 219492
+    },
+    {
+      "outlet_tier": "Tier 3: Silver (10k-30k)",
+      "outlet_count": 59891,
+      "total_revenue": 1023797438.45,
+      "total_orders": 616364,
+      "total_visits": 533700
+    },
+    {
+      "outlet_tier": "Tier 4: Bronze (<10k)",
+      "outlet_count": 117216,
+      "total_revenue": 508346539.5,
+      "total_orders": 719312,
+      "total_visits": 721236
+    },
+    {
+      "outlet_tier": "Tier 5: Zero-Revenue / Dormant",
+      "outlet_count": 73340,
+      "total_revenue": 0.0,
+      "total_orders": 0,
+      "total_visits": 23077
+    }
+  ],
+  "top_20_territories": [
+    {
+      "territory_id": "18365",
+      "registered_outlets": 1,
+      "active_outlets": 1,
+      "visited_outlets": 1,
+      "unvisited_outlets": 0,
+      "total_visits": 70,
+      "total_orders": 91,
+      "total_revenue_bdt": 27829978.9,
+      "activation_rate_pct": 100.0,
+      "visit_coverage_pct": 100.0,
+      "revenue_per_active_outlet": 27829978.9
+    },
+    {
+      "territory_id": "17201",
+      "registered_outlets": 32,
+      "active_outlets": 31,
+      "visited_outlets": 31,
+      "unvisited_outlets": 1,
+      "total_visits": 329,
+      "total_orders": 434,
+      "total_revenue_bdt": 24356387.6,
+      "activation_rate_pct": 96.88,
+      "visit_coverage_pct": 96.88,
+      "revenue_per_active_outlet": 785689.92
+    },
+    {
+      "territory_id": "17224",
+      "registered_outlets": 77,
+      "active_outlets": 77,
+      "visited_outlets": 76,
+      "unvisited_outlets": 1,
+      "total_visits": 619,
+      "total_orders": 665,
+      "total_revenue_bdt": 22431143.6,
+      "activation_rate_pct": 100.0,
+      "visit_coverage_pct": 98.7,
+      "revenue_per_active_outlet": 291313.55
+    },
+    {
+      "territory_id": "17953",
+      "registered_outlets": 96,
+      "active_outlets": 94,
+      "visited_outlets": 94,
+      "unvisited_outlets": 2,
+      "total_visits": 1405,
+      "total_orders": 1759,
+      "total_revenue_bdt": 19552963.5,
+      "activation_rate_pct": 97.92,
+      "visit_coverage_pct": 97.92,
+      "revenue_per_active_outlet": 208010.25
+    },
+    {
+      "territory_id": "17498",
+      "registered_outlets": 68,
+      "active_outlets": 68,
+      "visited_outlets": 68,
+      "unvisited_outlets": 0,
+      "total_visits": 2541,
+      "total_orders": 2009,
+      "total_revenue_bdt": 13920345.2,
+      "activation_rate_pct": 100.0,
+      "visit_coverage_pct": 100.0,
+      "revenue_per_active_outlet": 204710.96
+    },
+    {
+      "territory_id": "18368",
+      "registered_outlets": 42,
+      "active_outlets": 42,
+      "visited_outlets": 42,
+      "unvisited_outlets": 0,
+      "total_visits": 663,
+      "total_orders": 799,
+      "total_revenue_bdt": 13387353.5,
+      "activation_rate_pct": 100.0,
+      "visit_coverage_pct": 100.0,
+      "revenue_per_active_outlet": 318746.51
+    },
+    {
+      "territory_id": "16728",
+      "registered_outlets": 51,
+      "active_outlets": 29,
+      "visited_outlets": 29,
+      "unvisited_outlets": 22,
+      "total_visits": 93,
+      "total_orders": 104,
+      "total_revenue_bdt": 11625942.4,
+      "activation_rate_pct": 56.86,
+      "visit_coverage_pct": 56.86,
+      "revenue_per_active_outlet": 400894.57
+    },
+    {
+      "territory_id": "18668",
+      "registered_outlets": 1,
+      "active_outlets": 1,
+      "visited_outlets": 1,
+      "unvisited_outlets": 0,
+      "total_visits": 1,
+      "total_orders": 14,
+      "total_revenue_bdt": 11597071.78,
+      "activation_rate_pct": 100.0,
+      "visit_coverage_pct": 100.0,
+      "revenue_per_active_outlet": 11597071.78
+    },
+    {
+      "territory_id": "18470",
+      "registered_outlets": 3,
+      "active_outlets": 2,
+      "visited_outlets": 2,
+      "unvisited_outlets": 1,
+      "total_visits": 61,
+      "total_orders": 101,
+      "total_revenue_bdt": 11457355.5,
+      "activation_rate_pct": 66.67,
+      "visit_coverage_pct": 66.67,
+      "revenue_per_active_outlet": 5728677.75
+    },
+    {
+      "territory_id": "18364",
+      "registered_outlets": 2,
+      "active_outlets": 2,
+      "visited_outlets": 2,
+      "unvisited_outlets": 0,
+      "total_visits": 57,
+      "total_orders": 94,
+      "total_revenue_bdt": 11364702.55,
+      "activation_rate_pct": 100.0,
+      "visit_coverage_pct": 100.0,
+      "revenue_per_active_outlet": 5682351.28
+    },
+    {
+      "territory_id": "18602",
+      "registered_outlets": 64,
+      "active_outlets": 39,
+      "visited_outlets": 34,
+      "unvisited_outlets": 30,
+      "total_visits": 66,
+      "total_orders": 123,
+      "total_revenue_bdt": 10802968.2,
+      "activation_rate_pct": 60.94,
+      "visit_coverage_pct": 53.12,
+      "revenue_per_active_outlet": 276999.18
+    },
+    {
+      "territory_id": "11333",
+      "registered_outlets": 6,
+      "active_outlets": 6,
+      "visited_outlets": 6,
+      "unvisited_outlets": 0,
+      "total_visits": 72,
+      "total_orders": 48,
+      "total_revenue_bdt": 10585733.6,
+      "activation_rate_pct": 100.0,
+      "visit_coverage_pct": 100.0,
+      "revenue_per_active_outlet": 1764288.93
+    },
+    {
+      "territory_id": "16883",
+      "registered_outlets": 84,
+      "active_outlets": 24,
+      "visited_outlets": 22,
+      "unvisited_outlets": 62,
+      "total_visits": 109,
+      "total_orders": 151,
+      "total_revenue_bdt": 10513331.5,
+      "activation_rate_pct": 28.57,
+      "visit_coverage_pct": 26.19,
+      "revenue_per_active_outlet": 438055.48
+    },
+    {
+      "territory_id": "18356",
+      "registered_outlets": 47,
+      "active_outlets": 1,
+      "visited_outlets": 1,
+      "unvisited_outlets": 46,
+      "total_visits": 71,
+      "total_orders": 91,
+      "total_revenue_bdt": 9954468.8,
+      "activation_rate_pct": 2.13,
+      "visit_coverage_pct": 2.13,
+      "revenue_per_active_outlet": 9954468.8
+    },
+    {
+      "territory_id": "16683",
+      "registered_outlets": 58,
+      "active_outlets": 12,
+      "visited_outlets": 12,
+      "unvisited_outlets": 46,
+      "total_visits": 89,
+      "total_orders": 128,
+      "total_revenue_bdt": 9716381.6,
+      "activation_rate_pct": 20.69,
+      "visit_coverage_pct": 20.69,
+      "revenue_per_active_outlet": 809698.47
+    },
+    {
+      "territory_id": "14022",
+      "registered_outlets": 71,
+      "active_outlets": 70,
+      "visited_outlets": 69,
+      "unvisited_outlets": 2,
+      "total_visits": 533,
+      "total_orders": 672,
+      "total_revenue_bdt": 9211093.299999999,
+      "activation_rate_pct": 98.59,
+      "visit_coverage_pct": 97.18,
+      "revenue_per_active_outlet": 131587.05
+    },
+    {
+      "territory_id": "17372",
+      "registered_outlets": 33,
+      "active_outlets": 30,
+      "visited_outlets": 30,
+      "unvisited_outlets": 3,
+      "total_visits": 744,
+      "total_orders": 777,
+      "total_revenue_bdt": 9115715.0,
+      "activation_rate_pct": 90.91,
+      "visit_coverage_pct": 90.91,
+      "revenue_per_active_outlet": 303857.17
+    },
+    {
+      "territory_id": "7415",
+      "registered_outlets": 97,
+      "active_outlets": 83,
+      "visited_outlets": 80,
+      "unvisited_outlets": 17,
+      "total_visits": 317,
+      "total_orders": 377,
+      "total_revenue_bdt": 8873171.6,
+      "activation_rate_pct": 85.57,
+      "visit_coverage_pct": 82.47,
+      "revenue_per_active_outlet": 106905.68
+    },
+    {
+      "territory_id": "17448",
+      "registered_outlets": 67,
+      "active_outlets": 63,
+      "visited_outlets": 60,
+      "unvisited_outlets": 7,
+      "total_visits": 182,
+      "total_orders": 214,
+      "total_revenue_bdt": 8683207.4,
+      "activation_rate_pct": 94.03,
+      "visit_coverage_pct": 89.55,
+      "revenue_per_active_outlet": 137828.69
+    },
+    {
+      "territory_id": "18363",
+      "registered_outlets": 12,
+      "active_outlets": 8,
+      "visited_outlets": 12,
+      "unvisited_outlets": 0,
+      "total_visits": 138,
+      "total_orders": 108,
+      "total_revenue_bdt": 8415779.5,
+      "activation_rate_pct": 66.67,
+      "visit_coverage_pct": 100.0,
+      "revenue_per_active_outlet": 1051972.44
+    }
+  ],
+  "underperforming_territories": [
+    {
+      "territory_id": "12274",
+      "registered_outlets": 79,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 79,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "15481",
+      "registered_outlets": 52,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 52,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "12937",
+      "registered_outlets": 54,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 54,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "17450",
+      "registered_outlets": 94,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 94,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "15823",
+      "registered_outlets": 51,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 51,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "16128",
+      "registered_outlets": 53,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 53,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "14769",
+      "registered_outlets": 62,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 62,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "8171",
+      "registered_outlets": 124,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 124,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "16797",
+      "registered_outlets": 51,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 51,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "16130",
+      "registered_outlets": 55,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 55,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "15289",
+      "registered_outlets": 55,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 55,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "10530",
+      "registered_outlets": 68,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 68,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "15207",
+      "registered_outlets": 56,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 56,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "15676",
+      "registered_outlets": 60,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 60,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "15206",
+      "registered_outlets": 67,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 67,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "13093",
+      "registered_outlets": 51,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 51,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "12938",
+      "registered_outlets": 54,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 54,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "12934",
+      "registered_outlets": 50,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 50,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "12936",
+      "registered_outlets": 53,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 53,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    },
+    {
+      "territory_id": "18357",
+      "registered_outlets": 54,
+      "active_outlets": 0,
+      "visited_outlets": 0,
+      "unvisited_outlets": 54,
+      "total_visits": 0,
+      "total_orders": 0,
+      "total_revenue_bdt": 0.0,
+      "activation_rate_pct": 0.0,
+      "visit_coverage_pct": 0.0,
+      "revenue_per_active_outlet": 0.0
+    }
+  ],
+  "top_micro_hubs_sample": [
+    {
+      "lat_grid": 23.725,
+      "long_grid": 90.422,
+      "territory_id": "18365",
+      "outlet_count": 1,
+      "hub_revenue": 27829978.9,
+      "hub_visits": 70,
+      "hub_orders": 91
+    },
+    {
+      "lat_grid": 23.752,
+      "long_grid": 90.394,
+      "territory_id": "17953",
+      "outlet_count": 81,
+      "hub_revenue": 17200724.9,
+      "hub_visits": 1247,
+      "hub_orders": 1590
+    },
+    {
+      "lat_grid": 23.883,
+      "long_grid": 90.402,
+      "territory_id": "17201",
+      "outlet_count": 19,
+      "hub_revenue": 15498280.8,
+      "hub_visits": 205,
+      "hub_orders": 270
+    },
+    {
+      "lat_grid": 22.323,
+      "long_grid": 91.811,
+      "territory_id": "18668",
+      "outlet_count": 1,
+      "hub_revenue": 11597071.78,
+      "hub_visits": 1,
+      "hub_orders": 14
+    },
+    {
+      "lat_grid": 23.488,
+      "long_grid": 91.004,
+      "territory_id": "16728",
+      "outlet_count": 33,
+      "hub_revenue": 10928373.1,
+      "hub_visits": 84,
+      "hub_orders": 94
+    },
+    {
+      "lat_grid": 24.756,
+      "long_grid": 90.409,
+      "territory_id": "18470",
+      "outlet_count": 1,
+      "hub_revenue": 10916185.5,
+      "hub_visits": 58,
+      "hub_orders": 97
+    },
+    {
+      "lat_grid": 23.722,
+      "long_grid": 90.414,
+      "territory_id": "17224",
+      "outlet_count": 46,
+      "hub_revenue": 10821476.2,
+      "hub_visits": 443,
+      "hub_orders": 485
+    },
+    {
+      "lat_grid": 25.018,
+      "long_grid": 90.015,
+      "territory_id": "11333",
+      "outlet_count": 6,
+      "hub_revenue": 10585733.6,
+      "hub_visits": 72,
+      "hub_orders": 48
+    },
+    {
+      "lat_grid": 23.758,
+      "long_grid": 90.39,
+      "territory_id": "18356",
+      "outlet_count": 1,
+      "hub_revenue": 9954468.8,
+      "hub_visits": 71,
+      "hub_orders": 91
+    },
+    {
+      "lat_grid": 23.727,
+      "long_grid": 90.412,
+      "territory_id": "18364",
+      "outlet_count": 1,
+      "hub_revenue": 9740199.9,
+      "hub_visits": 53,
+      "hub_orders": 82
+    },
+    {
+      "lat_grid": 23.721,
+      "long_grid": 90.414,
+      "territory_id": "17224",
+      "outlet_count": 17,
+      "hub_revenue": 9704847.4,
+      "hub_visits": 134,
+      "hub_orders": 135
+    },
+    {
+      "lat_grid": 23.479,
+      "long_grid": 91.124,
+      "territory_id": "16683",
+      "outlet_count": 2,
+      "hub_revenue": 8448007.2,
+      "hub_visits": 74,
+      "hub_orders": 115
+    },
+    {
+      "lat_grid": 23.755,
+      "long_grid": 90.383,
+      "territory_id": "18363",
+      "outlet_count": 3,
+      "hub_revenue": 7842795.0,
+      "hub_visits": 117,
+      "hub_orders": 98
+    },
+    {
+      "lat_grid": 23.716,
+      "long_grid": 90.398,
+      "territory_id": "17498",
+      "outlet_count": 27,
+      "hub_revenue": 7778589.3,
+      "hub_visits": 876,
+      "hub_orders": 713
+    },
+    {
+      "lat_grid": 23.798,
+      "long_grid": 90.351,
+      "territory_id": "12647",
+      "outlet_count": 25,
+      "hub_revenue": 6576391.5,
+      "hub_visits": 397,
+      "hub_orders": 360
+    },
+    {
+      "lat_grid": 23.725,
+      "long_grid": 90.422,
+      "territory_id": "18368",
+      "outlet_count": 1,
+      "hub_revenue": 6544442.0,
+      "hub_visits": 44,
+      "hub_orders": 42
+    },
+    {
+      "lat_grid": 23.221,
+      "long_grid": 90.647,
+      "territory_id": "16869",
+      "outlet_count": 5,
+      "hub_revenue": 6236472.8,
+      "hub_visits": 24,
+      "hub_orders": 26
+    },
+    {
+      "lat_grid": 26.024,
+      "long_grid": 88.469,
+      "territory_id": "14961",
+      "outlet_count": 7,
+      "hub_revenue": 6148227.6,
+      "hub_visits": 93,
+      "hub_orders": 109
+    },
+    {
+      "lat_grid": 24.889,
+      "long_grid": 91.873,
+      "territory_id": "10477",
+      "outlet_count": 21,
+      "hub_revenue": 6054749.05,
+      "hub_visits": 737,
+      "hub_orders": 851
+    },
+    {
+      "lat_grid": 25.088,
+      "long_grid": 90.191,
+      "territory_id": "14022",
+      "outlet_count": 19,
+      "hub_revenue": 6008991.1,
+      "hub_visits": 153,
+      "hub_orders": 193
+    }
+  ],
+  "high_visit_zero_order_sample": [
+    {
+      "dept_id": "122462",
+      "outlet_name": "মেসার্স গৌরী টেডার্স",
+      "outlet_code": "O1351750143070791",
+      "territory_id": "14396",
+      "total_visits": 27,
+      "address": "মনি চত্বর মাস্টার পাড়ার সঙ্গে মুখে",
+      "primary_sr_id": "135"
+    },
+    {
+      "dept_id": "55119",
+      "outlet_name": "সোহান স্টোর",
+      "outlet_code": "O1131747287222759",
+      "territory_id": "9635",
+      "total_visits": 25,
+      "address": "ঈশ্বরদী বাজার",
+      "primary_sr_id": "113"
+    },
+    {
+      "dept_id": "95730",
+      "outlet_name": "হৃদয় স্টোর",
+      "outlet_code": "O1131748241959686",
+      "territory_id": "9635",
+      "total_visits": 25,
+      "address": "ঈশ্বরদী বাজার",
+      "primary_sr_id": "113"
+    },
+    {
+      "dept_id": "61493",
+      "outlet_name": "হাসান স্টোর",
+      "outlet_code": "O1351747541523152",
+      "territory_id": "14397",
+      "total_visits": 23,
+      "address": "মুড়ি পট্টি",
+      "primary_sr_id": "135"
+    },
+    {
+      "dept_id": "67075",
+      "outlet_name": "সাফি স্টোর",
+      "outlet_code": "O9041747636277060",
+      "territory_id": "14934",
+      "total_visits": 23,
+      "address": "Rail Bazar Road, 5200, Dinajpur, Dinajpur District, Rangpur Division, Bangladesh",
+      "primary_sr_id": "904"
+    },
+    {
+      "dept_id": "67795",
+      "outlet_name": "সফিকুল স্টোর",
+      "outlet_code": "O9041747639854305",
+      "territory_id": "14934",
+      "total_visits": 23,
+      "address": "রেলবাজার রোড, দিনাজপুর, দিনাজপুর জেলা, রংপুর বিভাগ, Bangladesh",
+      "primary_sr_id": "904"
+    },
+    {
+      "dept_id": "103689",
+      "outlet_name": "মনির স্টোর",
+      "outlet_code": "O1351748407990562",
+      "territory_id": "14397",
+      "total_visits": 23,
+      "address": "সুখী মার্কেট সাহেব বাজার",
+      "primary_sr_id": "135"
+    },
+    {
+      "dept_id": "123666",
+      "outlet_name": "শাহ আলম এন্ড সন্স",
+      "outlet_code": "O1351750221421878",
+      "territory_id": "14397",
+      "total_visits": 23,
+      "address": "সুখী মার্কেট সাহেব বাজার মাংসে পট্টির পাশে",
+      "primary_sr_id": "135"
+    },
+    {
+      "dept_id": "54355",
+      "outlet_name": "ইকরা স্টোর",
+      "outlet_code": "O1351747282183410",
+      "territory_id": "14398",
+      "total_visits": 21,
+      "address": "আর ডি এ",
+      "primary_sr_id": "135"
+    },
+    {
+      "dept_id": "63604",
+      "outlet_name": "পিয়ারুল ইস্টোর",
+      "outlet_code": "O1351747552149007",
+      "territory_id": "14397",
+      "total_visits": 21,
+      "address": "মুড়ি পড়তে",
+      "primary_sr_id": "135"
+    },
+    {
+      "dept_id": "270477",
+      "outlet_name": "vai vai store",
+      "outlet_code": "O11341775145372102",
+      "territory_id": "18772",
+      "total_visits": 20,
+      "address": "Joymot Khan Road, Pagar, টঙ্গী, গাজীপুর জেলা, ঢাকা বিভাগ, Bangladesh",
+      "primary_sr_id": "1134"
+    },
+    {
+      "dept_id": "119608",
+      "outlet_name": "শরিফুল ষ্টোর",
+      "outlet_code": "O1351750048008190",
+      "territory_id": "14398",
+      "total_visits": 18,
+      "address": "আরডিএ ন্যাশনাল ব্যাংকের গলি",
+      "primary_sr_id": "135"
+    },
+    {
+      "dept_id": "66487",
+      "outlet_name": "হিয়া হিয়া",
+      "outlet_code": "O4951747633558468",
+      "territory_id": "14763",
+      "total_visits": 16,
+      "address": "Jhunagach Chapani, Nilphamari District, Rangpur Division, Bangladesh",
+      "primary_sr_id": "495"
+    },
+    {
+      "dept_id": "148336",
+      "outlet_name": "M/S Taher Store",
+      "outlet_code": "O10881750841020491",
+      "territory_id": "16811",
+      "total_visits": 16,
+      "address": "R140, Gridakalondiya, Chandpur District, Chittagong Division, Bangladesh",
+      "primary_sr_id": "1088"
+    },
+    {
+      "dept_id": "148351",
+      "outlet_name": "Arffat Store",
+      "outlet_code": "O10881750841164575",
+      "territory_id": "16811",
+      "total_visits": 16,
+      "address": "Gridakalondiya, Chandpur District, Chittagong Division, Bangladesh",
+      "primary_sr_id": "1088"
+    },
+    {
+      "dept_id": "186491",
+      "outlet_name": "Kawaser Store",
+      "outlet_code": "O10881751787067238",
+      "territory_id": "16811",
+      "total_visits": 16,
+      "address": "Gridakalondiya, Chandpur District, Chittagong Division, Bangladesh",
+      "primary_sr_id": "1088"
+    },
+    {
+      "dept_id": "57553",
+      "outlet_name": "ওসমান কফি হাউস",
+      "outlet_code": "O4901747454836575",
+      "territory_id": "14351",
+      "total_visits": 15,
+      "address": "মেডিকেল মোড়",
+      "primary_sr_id": "490"
+    },
+    {
+      "dept_id": "89187",
+      "outlet_name": "রাজ্জাক ফল ভান্ডার",
+      "outlet_code": "O8871748149800493",
+      "territory_id": "15221",
+      "total_visits": 15,
+      "address": "স্টেশন রোড রানীনগর",
+      "primary_sr_id": "887"
+    },
+    {
+      "dept_id": "110173",
+      "outlet_name": "নয়ন স্টোর",
+      "outlet_code": "O7101748681683549",
+      "territory_id": "13829",
+      "total_visits": 15,
+      "address": "BSCIC Main Road, 1750, Kaliakair, Gazipur District, Dhaka Division, Bangladesh",
+      "primary_sr_id": "710"
+    },
+    {
+      "dept_id": "130284",
+      "outlet_name": "ফারুক স্টোর",
+      "outlet_code": "O4901750485833880",
+      "territory_id": "14351",
+      "total_visits": 15,
+      "address": "স্টেশন বাজার",
+      "primary_sr_id": "490"
+    }
+  ],
+  "sr_journey_sample": [
+    {
+      "sr_id": "18",
+      "total_visits": 6329,
+      "unique_outlets": 901,
+      "avg_checkin_distance_m": 25.819021962395322,
+      "p90_checkin_distance_m": 61.27
+    },
+    {
+      "sr_id": "42",
+      "total_visits": 6031,
+      "unique_outlets": 550,
+      "avg_checkin_distance_m": 49.0330790913613,
+      "p90_checkin_distance_m": 136.03
+    },
+    {
+      "sr_id": "32",
+      "total_visits": 5730,
+      "unique_outlets": 365,
+      "avg_checkin_distance_m": 67.37178010471204,
+      "p90_checkin_distance_m": 145.13
+    },
+    {
+      "sr_id": "904",
+      "total_visits": 5491,
+      "unique_outlets": 438,
+      "avg_checkin_distance_m": 23.824541977781823,
+      "p90_checkin_distance_m": 49.27
+    },
+    {
+      "sr_id": "887",
+      "total_visits": 5481,
+      "unique_outlets": 449,
+      "avg_checkin_distance_m": 14.922625433315089,
+      "p90_checkin_distance_m": 30.16
+    },
+    {
+      "sr_id": "75",
+      "total_visits": 5446,
+      "unique_outlets": 499,
+      "avg_checkin_distance_m": 42.232249357326474,
+      "p90_checkin_distance_m": 107.06
+    },
+    {
+      "sr_id": "884",
+      "total_visits": 5434,
+      "unique_outlets": 430,
+      "avg_checkin_distance_m": 22.371133603238867,
+      "p90_checkin_distance_m": 42.81
+    },
+    {
+      "sr_id": "881",
+      "total_visits": 5355,
+      "unique_outlets": 333,
+      "avg_checkin_distance_m": 51.69239962651727,
+      "p90_checkin_distance_m": 134.73
+    },
+    {
+      "sr_id": "372",
+      "total_visits": 5302,
+      "unique_outlets": 508,
+      "avg_checkin_distance_m": 55.845731799321015,
+      "p90_checkin_distance_m": 136.09
+    },
+    {
+      "sr_id": "503",
+      "total_visits": 5018,
+      "unique_outlets": 450,
+      "avg_checkin_distance_m": 32.82544440015943,
+      "p90_checkin_distance_m": 90.36
+    },
+    {
+      "sr_id": "111",
+      "total_visits": 5006,
+      "unique_outlets": 366,
+      "avg_checkin_distance_m": 10.980065920894926,
+      "p90_checkin_distance_m": 18.64
+    },
+    {
+      "sr_id": "725",
+      "total_visits": 4995,
+      "unique_outlets": 424,
+      "avg_checkin_distance_m": 39.216572572572574,
+      "p90_checkin_distance_m": 96.73
+    },
+    {
+      "sr_id": "396",
+      "total_visits": 4930,
+      "unique_outlets": 454,
+      "avg_checkin_distance_m": 39.11174442190669,
+      "p90_checkin_distance_m": 106.55
+    },
+    {
+      "sr_id": "477",
+      "total_visits": 4920,
+      "unique_outlets": 394,
+      "avg_checkin_distance_m": 34.38097967479675,
+      "p90_checkin_distance_m": 87.01
+    },
+    {
+      "sr_id": "710",
+      "total_visits": 4874,
+      "unique_outlets": 410,
+      "avg_checkin_distance_m": 37.317045547804675,
+      "p90_checkin_distance_m": 88.97
+    },
+    {
+      "sr_id": "469",
+      "total_visits": 4848,
+      "unique_outlets": 403,
+      "avg_checkin_distance_m": 20.518003300330033,
+      "p90_checkin_distance_m": 43.72
+    },
+    {
+      "sr_id": "483",
+      "total_visits": 4839,
+      "unique_outlets": 419,
+      "avg_checkin_distance_m": 32.56384790245919,
+      "p90_checkin_distance_m": 87.8
+    },
+    {
+      "sr_id": "81",
+      "total_visits": 4835,
+      "unique_outlets": 412,
+      "avg_checkin_distance_m": 35.707873836608066,
+      "p90_checkin_distance_m": 91.08
+    },
+    {
+      "sr_id": "193",
+      "total_visits": 4823,
+      "unique_outlets": 405,
+      "avg_checkin_distance_m": 12.549954385237404,
+      "p90_checkin_distance_m": 21.29
+    },
+    {
+      "sr_id": "415",
+      "total_visits": 4780,
+      "unique_outlets": 441,
+      "avg_checkin_distance_m": 16.80023430962343,
+      "p90_checkin_distance_m": 39.45
+    }
+  ]
+}

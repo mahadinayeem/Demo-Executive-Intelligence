@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ispahani Tea Limited — C-Suite Executive Intelligence Portal</title>
+<meta name="description" content="Ispahani Tea Limited (ITL) C-Suite National Sales, Geospatial, AI Recommendation, Churn Prevention, Field Productivity & Predictive Intelligence Master Suite">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sidebar-w: 370px;
+  --bg: #f8fafc;
+  --bg-sidebar: #ffffff;
+  --card: #ffffff;
+  --card2: #f1f5f9;
+  --border: #e2e8f0;
+  --border2: #cbd5e1;
+  --text: #0f172a;
+  --text2: #334155;
+  --text3: #64748b;
+  --primary: #006a4e; /* Ispahani Signature Heritage Green */
+  --primary-dark: #004d38;
+  --primary-light: #e8f5e9;
+  --primary-subtle: rgba(0, 106, 78, 0.08);
+  --accent: #10b981;
+  --accent2: #2563eb;
+  --gold: #b45309;
+  --gold-bg: #fef3c7;
+  --rose: #e11d48;
+  --rose-bg: #ffe4e6;
+  --cyan: #0284c7;
+  --purple: #7c3aed;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 20px -2px rgba(0,0,0,0.07);
+  --shadow-lg: 0 12px 32px -4px rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] {
+  --bg: #070a13;
+  --bg-sidebar: #0d121f;
+  --card: #111827;
+  --card2: #192237;
+  --border: #1e293b;
+  --border2: #334155;
+  --text: #f8fafc;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --primary: #10b981;
+  --primary-dark: #059669;
+  --primary-light: rgba(16, 185, 129, 0.12);
+  --primary-subtle: rgba(16, 185, 129, 0.06);
+  --gold: #f59e0b;
+  --gold-bg: rgba(245, 158, 11, 0.12);
+  --rose: #f43f5e;
+  --rose-bg: rgba(244, 63, 94, 0.12);
+  --shadow-md: 0 8px 30px rgba(0,0,0,0.6);
+  --shadow-lg: 0 15px 40px rgba(0,0,0,0.8);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height: 100%; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
+
+/* ── BOOK-STYLE APPLICATION CONTAINER ── */
+.book-app {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* ── LEFT EXECUTIVE SIDEBAR (BOOK DIRECTORY) ── */
+.book-sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+}
+
+/* Sidebar Brand Header */
+.sidebar-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-sidebar);
+}
+.brand-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-logo-img {
+  height: 42px;
+  max-width: 120px;
+  object-fit: contain;
+}
+.brand-meta h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+.csuite-badge {
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  display: inline-block;
+  margin-top: 3px;
+}
+.audit-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--gold-bg);
+  color: var(--gold);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 8px;
+  border: 1px solid rgba(180, 83, 9, 0.2);
+}
+
+/* Scrollable Sidebar Content */
+.sidebar-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 14px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.sidebar-scroll::-webkit-scrollbar { width: 5px; }
+.sidebar-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* Section Labels */
+.section-lbl {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 10px 6px 6px;
+}
+
+/* ── TABLE OF CONTENTS (CHAPTERS) ── */
+.chapter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.chapter-card {
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+  user-select: none;
+}
+.chapter-card:hover {
+  background: var(--card2);
+  border-color: var(--border);
+}
+.chapter-card.active {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(0, 106, 78, 0.12);
+}
+.chapter-card.intro-card {
+  background: rgba(37, 99, 235, 0.05);
+  border: 1px dashed rgba(37, 99, 235, 0.3);
+  margin-bottom: 6px;
+}
+.chapter-card.intro-card.active {
+  background: rgba(37, 99, 235, 0.12);
+  border: 1px solid var(--accent2);
+}
+.chapter-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11.5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+  color: var(--text2);
+  flex-shrink: 0;
+}
+.chapter-card.active .chapter-num {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+.chapter-card.intro-card .chapter-num {
+  background: var(--accent2);
+  color: #ffffff;
+  border-color: var(--accent2);
+}
+.chapter-info {
+  flex: 1;
+  min-width: 0;
+}
+.chapter-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.chapter-card.active .chapter-title {
+  color: var(--primary);
+  font-weight: 800;
+}
+.chapter-card.intro-card.active .chapter-title {
+  color: var(--accent2);
+  font-weight: 800;
+}
+.chapter-sub {
+  font-size: 10.5px;
+  color: var(--text3);
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Macro KPI Widget */
+.sidebar-macro-kpi {
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 14px;
+}
+.macro-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.macro-lbl { font-size: 9.5px; text-transform: uppercase; color: var(--text3); font-weight: 700; }
+.macro-val { font-size: 15px; font-weight: 900; font-family: 'JetBrains Mono', monospace; color: var(--primary); }
+.macro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.macro-item-lbl { font-size: 9px; color: var(--text3); font-weight: 600; text-transform: uppercase; }
+.macro-item-val { font-size: 11.5px; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: var(--text); }
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-sidebar);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footer-btn-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.action-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 11.5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+}
+.action-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-subtle);
+}
+.action-btn.primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #ffffff;
+  border-color: transparent;
+  width: 100%;
+}
+.action-btn.primary:hover {
+  box-shadow: 0 4px 14px rgba(0, 106, 78, 0.35);
+  color: #ffffff;
+}
+
+/* ── RIGHT MAIN CANVAS (BOOK VIEWPORT) ── */
+.book-stage {
+  flex: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top Canvas Strip */
+.stage-topbar {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 9px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  z-index: 10;
+}
+.stage-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.stage-badge {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #ffffff;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  box-shadow: 0 2px 6px rgba(0, 106, 78, 0.25);
+}
+.stage-badge.blue {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+}
+.stage-question {
+  font-size: 12.5px;
+  color: var(--text2);
+}
+.stage-question strong { color: var(--text); }
+.stage-right { display: flex; align-items: center; gap: 10px; }
+.stage-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text2);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+}
+.stage-btn:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  background: var(--primary-subtle);
+}
+
+/* Iframe Stage Viewport */
+.stage-viewport {
+  flex: 1;
+  width: 100%;
+  height: calc(100vh - 49px);
+  position: relative;
+  background: var(--bg);
+}
+.module-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.module-iframe.active {
+  display: block;
+}
+
+/* ── MODALS (SHARING GUIDE) ── */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.modal-overlay.active { display: flex; }
+.modal-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  max-width: 840px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 32px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  animation: modalIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-close-icon {
+  position: absolute;
+  top: 22px; right: 22px;
+  background: var(--card2); border: 1px solid var(--border);
+  color: var(--text2); width: 34px; height: 34px;
+  border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 800; transition: all 0.2s;
+}
+.modal-close-icon:hover { background: var(--rose); color: #fff; border-color: var(--rose); }
+
+.share-step-box {
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.share-step-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.share-step-desc { font-size: 12.5px; color: var(--text2); line-height: 1.5; }
+.code-snippet {
+  background: #0f172a;
+  color: #38bdf8;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  margin-top: 6px;
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<div class="book-app">
+
+  <!-- ════════════════════ LEFT EXECUTIVE SIDEBAR (BOOK DIRECTORY) ════════════════════ -->
+  <aside class="book-sidebar">
+    
+    <!-- Header with Official Logo -->
+    <div class="sidebar-header">
+      <div class="brand-identity">
+        <img src="Ispahani-logo-sm.png" alt="Ispahani Tea Limited" class="brand-logo-img" onerror="this.style.display='none'">
+        <div class="brand-meta">
+          <h1>Ispahani Tea Limited</h1>
+          <span class="csuite-badge">C-Suite Master Portal</span>
+        </div>
+      </div>
+      <div>
+        <span class="audit-pill">📅 May 2026 – Aug 2026 Full Audit Cycle</span>
+      </div>
+    </div>
+
+    <!-- Scrollable Chapter Index & Insights -->
+    <div class="sidebar-scroll">
+      
+      <!-- Section 1: Executive Strategic Charter -->
+      <div class="section-lbl">
+        <span>Strategic Framework (ভূমিকা ও সনদ)</span>
+      </div>
+      
+      <div class="chapter-card intro-card active" id="tab-m0" onclick="switchModule(0)">
+        <div class="chapter-num">0</div>
+        <div class="chapter-info">
+          <div class="chapter-title">📘 Strategic Executive Charter</div>
+          <div class="chapter-sub">Check Introduction · Why, ROI & 30-60-90D Roadmap</div>
+        </div>
+      </div>
+
+      <!-- Section 2: Book Chapters / 6 Modules -->
+      <div class="section-lbl">
+        <span>Executive Chapters (৬টি মডিউল)</span>
+      </div>
+
+      <nav class="chapter-list">
+        
+        <div class="chapter-card" id="tab-m1" onclick="switchModule(1)">
+          <div class="chapter-num">1</div>
+          <div class="chapter-info">
+            <div class="chapter-title">Geospatial & Territory Intelligence</div>
+            <div class="chapter-sub">Geo-Intelligence Explorer™ · 3D Sales Height</div>
+          </div>
+        </div>
+
+        <div class="chapter-card" id="tab-m2" onclick="switchModule(2)">
+          <div class="chapter-num">2</div>
+          <div class="chapter-info">
+            <div class="chapter-title">Outlet Intelligence & SmartPitch AI™</div>
+            <div class="chapter-sub">SmartPitch AI™ · 9-Tier Segmentation</div>
+          </div>
+        </div>
+
+        <div class="chapter-card" id="tab-m3" onclick="switchModule(3)">
+          <div class="chapter-num">3</div>
+          <div class="chapter-info">
+            <div class="chapter-title">Customer Retention & Silent Bleed</div>
+            <div class="chapter-sub">Silent Bleed Engine™ · ৳44.3Cr Decay Recovery</div>
+          </div>
+        </div>
+
+        <div class="chapter-card" id="tab-m4" onclick="switchModule(4)">
+          <div class="chapter-num">4</div>
+          <div class="chapter-info">
+            <div class="chapter-title">Field Sales Productivity & Diagnostics</div>
+            <div class="chapter-sub">PerformancePulse™ · 6 ML Personas & Yield</div>
+          </div>
+        </div>
+
+        <div class="chapter-card" id="tab-m5" onclick="switchModule(5)">
+          <div class="chapter-num">5</div>
+          <div class="chapter-info">
+            <div class="chapter-title">Predictive Modeling & Smart KPIs</div>
+            <div class="chapter-sub">Smart KPI Architect™ · 8-Min Golden Rule</div>
+          </div>
+        </div>
+
+        <div class="chapter-card" id="tab-m6" onclick="switchModule(6)">
+          <div class="chapter-num">6</div>
+          <div class="chapter-info">
+            <div class="chapter-title">Executive Target Tracking & Governance</div>
+            <div class="chapter-sub">Growth Compass™ · Category Mix & Roadmap</div>
+          </div>
+        </div>
+
+      </nav>
+
+    </div>
+
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <button class="action-btn" style="width:100%" onclick="toggleTheme()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span id="themeBtnText">Dark Mode</span>
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- ════════════════════ RIGHT MAIN EXPANSIVE CANVAS (THE BOOK PAGES) ════════════════════ -->
+  <main class="book-stage">
+    
+    <!-- Top Context & Action Strip -->
+    <div class="stage-topbar">
+      <div class="stage-left">
+        <span class="stage-badge blue" id="stageBadge">CHAPTER 0 · STRATEGIC CHARTER</span>
+        <div class="stage-question" id="stageQuestion">
+          <strong>Strategic Overview:</strong> Comprehensive audit mandate, quantified commercial ROI, and 30-60-90 day execution roadmap.
+        </div>
+      </div>
+      <div class="stage-right">
+        <button class="stage-btn" onclick="openCurrentInNewTab()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          Standalone View
+        </button>
+      </div>
+    </div>
+
+    <!-- 7 Live Iframes Viewport (Intro + 6 Modules) -->
+    <div class="stage-viewport">
+      <iframe class="module-iframe active" id="frame-m0" src="introduction_module.html"></iframe>
+      <iframe class="module-iframe" id="frame-m1" src="ceo_national_map.html"></iframe>
+      <iframe class="module-iframe" id="frame-m2" src="module2_smartpitch.html"></iframe>
+      <iframe class="module-iframe" id="frame-m3" src="module3_retention.html"></iframe>
+      <iframe class="module-iframe" id="frame-m4" src="module4_performance.html"></iframe>
+      <iframe class="module-iframe" id="frame-m5" src="module5_kpi_architect.html"></iframe>
+      <iframe class="module-iframe" id="frame-m6" src="module6_growth_compass.html"></iframe>
+    </div>
+
+  </main>
+
+</div>
+
+<!-- ════════════════════ SHARING & DEPLOYMENT MODAL ════════════════════ -->
+<div class="modal-overlay" id="shareModal" onclick="closeModal('shareModal')">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <button class="modal-close-icon" onclick="closeModal('shareModal')">✕</button>
+    <div style="margin-bottom:16px">
+      <span class="csuite-badge">Seamless Executive Sharing</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:var(--text);margin-top:6px">
+        How to Share This Master Suite with the CEO
+      </h2>
+    </div>
+
+    <div class="share-step-box">
+      <div class="share-step-title">📦 Method 1: Instant Offline ZIP Package (সবচেয়ে সহজ অফলাইন পদ্ধতি)</div>
+      <div class="share-step-desc">
+        এই সম্পূর্ণ ফোল্ডারটিকে ZIP করে ইমেইল, গুগল ড্রাইভ বা পেনড্রাইভে দিয়ে দিন। অপর প্রান্তে যে কেউ আনজিপ করে <code>start_dashboard.bat</code> ফাইলে ডাবল ক্লিক করলেই সম্পূর্ণ ড্যাশবোর্ড অফলাইনে ওপেন হয়ে যাবে (কোনো ইনস্টলেশন ছাড়াই)।
+      </div>
+    </div>
+
+    <div class="share-step-box">
+      <div class="share-step-title">🌐 Method 2: Free 1-Click Cloud Live Web Link (Netlify / Tiiny.host)</div>
+      <div class="share-step-desc">
+        যদি সিইও-কে সরাসরি ব্রাউজার লিঙ্ক হিসেবে পাঠাতে চান:
+        <br>১. <a href="https://app.netlify.com/drop" target="_blank" style="color:var(--accent2);font-weight:700">Netlify Drop</a> বা <a href="https://tiiny.host" target="_blank" style="color:var(--accent2);font-weight:700">Tiiny.host</a> ওপেন করুন।
+        <br>২. এই প্রজেক্টের পুরো ফোল্ডারটি ড্র্যাগ অ্যান্ড ড্রপ করুন।
+        <br>৩. মাত্র ১০ সেকেন্ডে একটি লাইভ পাবলিক লিঙ্ক তৈরি হবে যা বিশ্বের যেকোনো প্রান্ত থেকে মোবাইলে ও ল্যাপটপে সরাসরি দেখা যাবে।
+      </div>
+    </div>
+
+    <div class="share-step-box">
+      <div class="share-step-title">⚡ Method 3: Instant Local Network Tunneling (Live Temporary Link)</div>
+      <div class="share-step-desc">
+        টার্মিনালে মাত্র ১টি কমান্ড দিয়ে আপনার লোকাল পিসি থেকে সিইও-র মোবাইলে লাইভ লিঙ্ক শেয়ার করতে পারেন:
+        <span class="code-snippet">npx localtunnel --port 8765</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentModule = 0;
+
+const moduleMeta = {
+  0: {
+    badge: 'CHAPTER 0 · STRATEGIC CHARTER',
+    badgeClass: 'blue',
+    question: '<strong>Strategic Overview:</strong> Comprehensive audit mandate, quantified commercial ROI, and 30-60-90 day execution roadmap.',
+    file: 'introduction_module.html'
+  },
+  1: {
+    badge: 'MODULE 1 · GEO-INTELLIGENCE EXPLORER™',
+    badgeClass: '',
+    question: '<strong>Strategic Objective:</strong> National market penetration, district revenue distribution, and high-visit zero-order blindspot detection.',
+    file: 'ceo_national_map.html'
+  },
+  2: {
+    badge: 'MODULE 2 · SMARTPITCH AI™ ENGINE',
+    badgeClass: '',
+    question: '<strong>Strategic Objective:</strong> Prescriptive AI cross-selling recommendations and 9-tier outlet segmentation to maximize basket size.',
+    file: 'module2_smartpitch.html'
+  },
+  3: {
+    badge: 'MODULE 3 · SILENT BLEED ENGINE™',
+    badgeClass: '',
+    question: '<strong>Strategic Objective:</strong> Early churn risk detection, order cadence decay, and silent-bleed recovery across 23,964 at-risk doors.',
+    file: 'module3_retention.html'
+  },
+  4: {
+    badge: 'MODULE 4 · PERFORMANCEPULSE ANALYZER™',
+    badgeClass: '',
+    question: '<strong>Strategic Objective:</strong> Field staff productivity diagnostics, visit duration conversion yield, 6 ML personas, and SR coaching sheets.',
+    file: 'module4_performance.html'
+  },
+  5: {
+    badge: 'MODULE 5 · SMART KPI ARCHITECT™',
+    badgeClass: '',
+    question: '<strong>Strategic Objective:</strong> ML behavioral driver ranking, the 8-minute golden visit rule, regional KPI calibration, and sales forecasting.',
+    file: 'module5_kpi_architect.html'
+  },
+  6: {
+    badge: 'MODULE 6 · GROWTH COMPASS DASHBOARD™',
+    badgeClass: '',
+    question: '<strong>Strategic Objective:</strong> Category revenue mix, retail reach, brand price-volume matrix, and C-level 30-60-90 day strategic execution roadmap.',
+    file: 'module6_growth_compass.html'
+  }
+};
+
+function switchModule(n) {
+  currentModule = n;
+  
+  // Update Chapter Active Classes
+  document.querySelectorAll('.chapter-card').forEach(c => {
+    c.classList.toggle('active', c.id === `tab-m${n}`);
+  });
+
+  // Update Frame Visibility
+  document.querySelectorAll('.module-iframe').forEach(f => {
+    f.classList.toggle('active', f.id === `frame-m${n}`);
+  });
+
+  // Update Topbar Badge and Question
+  const meta = moduleMeta[n];
+  if (meta) {
+    const b = document.getElementById('stageBadge');
+    b.textContent = meta.badge;
+    b.className = 'stage-badge ' + (meta.badgeClass || '');
+    document.getElementById('stageQuestion').innerHTML = meta.question;
+  }
+}
+
+function openCurrentInNewTab() {
+  const meta = moduleMeta[currentModule];
+  if (meta) window.open(meta.file, '_blank');
+}
+
+function openShareModal() {
+  document.getElementById('shareModal').classList.add('active');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+}
+
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  document.getElementById('themeBtnText').textContent = next === 'dark' ? 'Light Mode' : 'Dark Mode';
+
+  // Synchronize theme across all embedded iframes
+  document.querySelectorAll('.module-iframe').forEach(f => {
+    try {
+      if (f.contentDocument && f.contentDocument.documentElement) {
+        f.contentDocument.documentElement.setAttribute('data-theme', next);
+      }
+    } catch(e){}
+  });
+}
+
+// Global hotkeys (0-6 to switch chapters)
+window.addEventListener('keydown', e => {
+  const k = parseInt(e.key);
+  if (k >= 0 && k <= 6 && !e.ctrlKey && !e.altKey && !e.metaKey && e.target.tagName !== 'INPUT') {
+    switchModule(k);
+  }
+});
+</script>
+</body>
+</html>

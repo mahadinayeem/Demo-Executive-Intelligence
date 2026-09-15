@@ -1,0 +1,5 @@
+﻿Total rows sampled: 500000
+Top brands: [('Mirzapore Best Leaf', 117107), ('Mighty Chips', 92291), ('Mirzapore Tea Bag', 59048), ('Mirzapore BOP', 17806), ('Butterful', 17103), ('Bakery Fresh Sweet Toast', 16881), ('Bakery Fresh Cookies', 15705), ('Lexus', 14355), ('Mirzapore PD', 13833), ('Little Bite', 13355)]
+Top cats: [('Tea', 255917), ('Chips', 99769), ('Biscuits', 83854), ('Toasts', 20722), ('Cookies', 15705), ('Powder Drink', 11610), ('Rice', 8602), ('Dry Cake', 3672), ('Fried Dal', 58), ('Chanachur', 56)]
+Top SKUs: [('320027', 69741), ('310102', 33063), ('310104', 28899), ('310103', 26970), ('310022', 22517), ('320035', 21320), ('320259', 16881), ('310182', 16712), ('310021', 15116), ('321124', 13793)]
+Statuses: {'accepted': 433341, 'delivered': 66250, 'cancelled': 409}
