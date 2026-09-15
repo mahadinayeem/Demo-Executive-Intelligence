@@ -843,10 +843,10 @@ function renderChurn(){
   const domCount = vg > sg ? vg : sg;
   const domPct   = (vg+sg) > 0 ? pct(domCount, vg+sg) : '0%';
   document.getElementById('rootCauseInsight').innerHTML = (vg+sg) > 0 ?
-    `<strong>${domPct} of churned outlets are a ${dominant}.</strong> ` +
+    `<strong>${domPct} of at-risk drop-off outlets (${fc(domCount)} outlets) are caused by a ${dominant}.</strong> ` +
     (dominant==='Visit Gap'
-      ? `The field team is not visiting these outlets. This is a direct SR accountability issue — assign immediate re-coverage tasks.`
-      : `Field visits are happening but failing to retain. Investigate pricing, product fit, and SR pitch quality in these territories.`)
+      ? `The field team is not visiting these outlets. This is a direct SR routing and accountability issue — assign immediate re-coverage tasks.`
+      : `Field visits are happening (${fc(sg)} doors visited), but failing to convert into orders. Investigate competitor schemes, damaged stock resolution, and SR pitch quality in these territories.`)
     : `<strong>No full churn drop-offs (>120 days) observed during this 4-month audit window.</strong> Proactive retention is actively tracked via At-Risk (61-120D) and Silent Bleed pipelines.`;
 }
 

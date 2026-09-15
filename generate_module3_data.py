@@ -194,7 +194,7 @@ for buyer, o in outlets.items():
     s['freq'] += freq
     s['skus'] += sku_cnt
 
-    if segment == 'Lost':
+    if segment in ['At-Risk', 'Lost']:
         churned_buyers += 1
         lost_revenue += rev
         if o['churn_period_visits'] == 0:
