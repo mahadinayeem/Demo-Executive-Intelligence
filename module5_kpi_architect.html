@@ -848,11 +848,16 @@ function dlChart(cid) {
   }
 
   if (!csv) return;
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
   const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = fn;
+  const url = URL.createObjectURL(blob);
+  link.setAttribute("href", url);
+  link.setAttribute("download", fn);
+  link.style.display = 'none';
+  document.body.appendChild(link);
   link.click();
+  document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
 }
 
 function exportModule5CSVs() {
