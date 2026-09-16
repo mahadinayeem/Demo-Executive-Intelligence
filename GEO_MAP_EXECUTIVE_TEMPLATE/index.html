@@ -1192,8 +1192,8 @@ function buildThanaPanel(distName, divIdx) {
     updateKPIs();
     document.querySelectorAll('#thanaScroll .drow').forEach(r=>r.classList.remove('sel'));
     allRow.classList.add('sel');
+    clusterGrp.clearLayers();
     drawThanaPolygons(distName, divIdx);
-    renderMicroOutlets(divIdx, distName);
   };
   allRow.innerHTML = `<span class="drn">🌐 All Thanas</span><span class="drc">${distOutlets.length.toLocaleString()}</span>`;
   scroll.appendChild(allRow);
@@ -1232,9 +1232,9 @@ function drillDistrict(distName, divIdx, feat) {
   const dr = document.getElementById('dr_'+distName.replace(/\s+/g,'_'));
   if(dr) dr.classList.add('sel');
 
+  clusterGrp.clearLayers();
   buildThanaPanel(distName, divIdx);
   drawThanaPolygons(distName, divIdx);
-  setTimeout(() => renderMicroOutlets(divIdx, distName), 350);
 }
 
 /* ═══════════════ DRILL THANA / UPAZILA ═══════════════ */
@@ -1250,7 +1250,7 @@ function drillThana(thanaName, distName, divIdx, feat) {
   // Highlight selected thana polygon
   thanaPolyLayer.eachLayer(l => {
     if(l.feature && l.feature.properties && l.feature.properties.thana === thanaName){
-      l.setStyle({fillOpacity:0.25, color:'#fff', weight:3.5});
+      l.setStyle({fillOpacity:0.32, color:'#fff', weight:3.5});
       l.bringToFront();
     } else if(l.feature){
       l.setStyle({fillOpacity:0.08, color:'rgba(255,255,255,0.15)', weight:1});
@@ -1269,7 +1269,7 @@ function drillThana(thanaName, distName, divIdx, feat) {
     }
   }
 
-  setTimeout(() => renderMicroOutlets(divIdx, distName, thanaName), 250);
+  setTimeout(() => renderMicroOutlets(divIdx, distName, thanaName), 200);
 }
 
 /* ═══════════════ 3. RENDER MICRO OUTLETS (HIGH CONTRAST & DIRECT CLICK) ═══════════════ */
