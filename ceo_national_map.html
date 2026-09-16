@@ -693,6 +693,7 @@ function classifySubTier(status, score, rev, visits, orders, daysSince, avgRPV) 
 let map, clusterGrp, polyLayer, districtPolyLayer, thanaPolyLayer, heatLayer;
 let routeLayer, wsLayer, pillarLayer;
 let activeDivision = null, activeDistrict = null, activeThana = null;
+let selectedDivisions = [], selectedDistricts = [];
 let healthFilter = 'ALL', subTierFilter = 'ALL', heatOn = false, isDark = true;
 let pillarsOn = false, routesOn = false, wsOn = false;
 
@@ -787,18 +788,36 @@ function updateKPIs() {
   try {
     let tot=0, str=0, mod=0, wk=0, rev=0, vis=0, zVis=0, zRev=0;
     
-    if (!activeDivision) {
-      CEO_NATIONAL.divisions.forEach(x => {
-        tot += x.outlets; str += x.strong||0; mod += x.moderate||0; wk += x.weak||0;
-        rev += x.revenue||0; vis += x.visits||0;
-        zVis += x.zero_visits||0; zRev += x.zero_rev||0;
+    if (selectedDistricts && selectedDistricts.length > 0) {
+      selectedDistricts.forEach(sel => {
+        const divIdx = DIV_NAMES.indexOf(sel.div);
+        const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
+        const distOutlets = allOutlets.filter(o => o[5] && o[5].toLowerCase() === sel.name.toLowerCase() && (!activeThana || (o[16] && o[16].toLowerCase() === activeThana.toLowerCase())));
+        
+        tot += distOutlets.length;
+        distOutlets.forEach(o => {
+          if (o[7] === 'G') str++;
+          else if (o[7] === 'Y') mod++;
+          else if (o[7] === 'R') wk++;
+          rev += (o[8]||0);
+          vis += (o[9]||0);
+          if ((o[9]||0) === 0) zVis++;
+          if ((o[8]||0) === 0) zRev++;
+        });
+      });
+    } else if (selectedDivisions && selectedDivisions.length > 0) {
+      selectedDivisions.forEach(divName => {
+        const d = CEO_NATIONAL.divisions.find(x => x.name === divName) || {};
+        tot += d.outlets||0; str += d.strong||0; mod += d.moderate||0; wk += d.weak||0;
+        rev += d.revenue||0; vis += d.visits||0;
+        zVis += d.zero_visits||0; zRev += d.zero_rev||0;
       });
     } else if (activeDivision && !activeDistrict) {
       const d = CEO_NATIONAL.divisions.find(x => x.name === activeDivision) || {};
       tot = d.outlets||0; str = d.strong||0; mod = d.moderate||0; wk = d.weak||0;
       rev = d.revenue||0; vis = d.visits||0;
       zVis = d.zero_visits||0; zRev = d.zero_rev||0;
-    } else {
+    } else if (activeDistrict) {
       const divIdx = DIV_NAMES.indexOf(activeDivision);
       const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
       const distOutlets = allOutlets.filter(o => o[5] && o[5].toLowerCase() === activeDistrict.toLowerCase() && (!activeThana || (o[16] && o[16].toLowerCase() === activeThana.toLowerCase())));
@@ -812,6 +831,12 @@ function updateKPIs() {
         vis += (o[9]||0);
         if ((o[9]||0) === 0) zVis++;
         if ((o[8]||0) === 0) zRev++;
+      });
+    } else {
+      CEO_NATIONAL.divisions.forEach(x => {
+        tot += x.outlets; str += x.strong||0; mod += x.moderate||0; wk += x.weak||0;
+        rev += x.revenue||0; vis += x.visits||0;
+        zVis += x.zero_visits||0; zRev += x.zero_rev||0;
       });
     }
 
@@ -874,7 +899,7 @@ function drawDivisionPolygons() {
     poly.on('mouseout', e => {
       e.target.setStyle({fillOpacity:isDark?0.62:0.65, color:isDark?'rgba(255,255,255,0.35)':'rgba(255,255,255,0.75)', weight:2});
     });
-    poly.on('click', () => drillDivision(didx, dname));
+    poly.on('click', (e) => drillDivision(didx, dname, e.originalEvent));
 
     poly.bindTooltip(`
       <div style="font-family:'Outfit',sans-serif;min-width:160px;">
@@ -884,6 +909,7 @@ function drawDivisionPolygons() {
         <div style="font-size:12px;font-weight:600;">Strong Buyers: <b>${pct}%</b></div>
         <div style="font-size:11px;color:#c084fc;font-weight:700;">• 0-Visits: <b>${(divDat.zero_visits||0).toLocaleString()} (${Math.round(((divDat.zero_visits||0)/divDat.outlets)*100)}%)</b></div>
         <div style="font-size:11px;color:#fb7185;font-weight:700;">• 0-Revenue: <b>${(divDat.zero_rev||0).toLocaleString()} (${Math.round(((divDat.zero_rev||0)/divDat.outlets)*100)}%)</b></div>
+        <div style="font-size:10px;color:var(--blue);margin-top:4px;font-weight:700;">💡 Tip: Hold Ctrl to multi-select divisions</div>
       </div>`, {sticky:false, direction:'top', className:'div-tooltip', offset:[0,-6]});
 
     polyLayer.addLayer(poly);
@@ -896,10 +922,97 @@ function drawDivisionPolygons() {
         iconSize:[110,38], iconAnchor:[55,19]
       });
       const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
-      mk.on('click', () => drillDivision(didx, dname));
+      mk.on('click', (e) => drillDivision(didx, dname, e.originalEvent));
       polyLayer.addLayer(mk);
     }
   });
+}
+
+/* ═══════════════ MULTI-DIVISION DRAWING ═══════════════ */
+function drawMultiDivisionPolygons() {
+  polyLayer.clearLayers();
+  districtPolyLayer.clearLayers();
+  thanaPolyLayer.clearLayers();
+  clusterGrp.clearLayers();
+  pillarLayer.clearLayers();
+
+  let bounds = L.latLngBounds([]);
+
+  if (pillarsOn) {
+    const maxDivRev = Math.max(...CEO_NATIONAL.divisions.map(d => d.revenue||1));
+    selectedDivisions.forEach(dname => {
+      const d = CEO_NATIONAL.divisions.find(x => x.name === dname);
+      if (!d) return;
+      const center = DIV_CENTERS[d.name];
+      if (!center) return;
+      const rev = d.revenue || 0;
+      const heightPx = Math.max(25, Math.min(130, Math.round((rev / maxDivRev) * 115) + 20));
+      const revFormatted = rev >= 1e9 ? '৳'+(rev/1e9).toFixed(1)+'B' : '৳'+(rev/1e6).toFixed(0)+'M';
+      const color = DIV_COLORS[d.name] || '#3b82f6';
+
+      const pillarIcon = L.divIcon({
+        className: '',
+        html: `
+          <div class="pillar-3d-marker" style="height:${heightPx+30}px;color:${color};">
+            <div class="pillar-val" style="border-color:${color};background:#090d1a;">${d.name}: ${revFormatted}</div>
+            <div class="pillar-cap" style="background:${color};width:30px;height:14px;"></div>
+            <div class="pillar-stem" style="height:${heightPx}px;width:22px;"></div>
+            <div class="pillar-base" style="width:36px;height:12px;"></div>
+          </div>
+        `,
+        iconSize: [40, heightPx+30],
+        iconAnchor: [20, heightPx+22]
+      });
+
+      const pMk = L.marker(center, {icon: pillarIcon, interactive: true});
+      pMk.on('click', (e) => drillDivision(d.idx, d.name, e.originalEvent));
+      pillarLayer.addLayer(pMk);
+    });
+  }
+
+  BD_DIVISIONS_GEO.features.forEach(feat => {
+    const dname = feat.properties.name;
+    const isSelected = selectedDivisions.includes(dname);
+    const color = DIV_COLORS[dname] || '#64748b';
+    const didx = DIV_NAMES.indexOf(dname);
+    const divDat = CEO_NATIONAL.divisions.find(d => d.name === dname) || {};
+    let count = divDat.outlets || 0;
+
+    const poly = L.geoJSON(feat, {
+      interactive: true,
+      style: () => ({
+        fillColor: isSelected ? color : '#334155',
+        fillOpacity: isSelected ? (isDark ? 0.75 : 0.72) : 0.12,
+        color: isSelected ? '#ffffff' : (isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'),
+        weight: isSelected ? 3 : 1
+      })
+    });
+
+    if (isSelected) {
+      bounds.extend(poly.getBounds());
+    }
+
+    poly.on('click', (e) => drillDivision(didx, dname, e.originalEvent));
+    polyLayer.addLayer(poly);
+
+    if (isSelected && !pillarsOn) {
+      const center = DIV_CENTERS[dname];
+      if (center) {
+        const lbl = L.divIcon({
+          className:'',
+          html:`<div class="div-lbl" style="border:2px solid #fff;">${dname}<br><span style="font-size:11px;font-family:'JetBrains Mono';font-weight:700;">${count.toLocaleString()}</span></div>`,
+          iconSize:[110,38], iconAnchor:[55,19]
+        });
+        const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
+        mk.on('click', (e) => drillDivision(didx, dname, e.originalEvent));
+        polyLayer.addLayer(mk);
+      }
+    }
+  });
+
+  if (bounds.isValid()) {
+    map.fitBounds(bounds, {padding:[40,40], maxZoom:9});
+  }
 }
 
 /* ═══════════════ 2. DRAW DISTRICT POLYGONS ═══════════════ */
@@ -959,8 +1072,8 @@ function drawDistrictPolygons(divName, divIdx) {
         e.target.setStyle({fillOpacity:isDark?0.65:0.68, color:isDark?'rgba(255,255,255,0.40)':'rgba(255,255,255,0.85)', weight:2});
       }
     });
-    poly.on('click', () => {
-      drillDistrict(distName, divIdx, feat);
+    poly.on('click', (e) => {
+      drillDistrict(distName, divIdx, feat, e.originalEvent);
     });
 
     poly.bindTooltip(`
@@ -971,7 +1084,7 @@ function drawDistrictPolygons(divName, divIdx) {
         <div style="font-size:12px;font-weight:600;">Strong: <b>${pct}%</b></div>
         <div style="font-size:11px;color:#c084fc;font-weight:700;">• 0-Visits: <b>${(distDat.zero_visits||0).toLocaleString()} (${distDat.outlets?Math.round(((distDat.zero_visits||0)/distDat.outlets)*100):0}%)</b></div>
         <div style="font-size:11px;color:#fb7185;font-weight:700;">• 0-Revenue: <b>${(distDat.zero_rev||0).toLocaleString()} (${distDat.outlets?Math.round(((distDat.zero_rev||0)/distDat.outlets)*100):0}%)</b></div>
-        <div style="font-size:10px;color:var(--blue);margin-top:4px;font-weight:700;">👉 Click to explore Thanas &amp; Outlets</div>
+        <div style="font-size:10px;color:var(--blue);margin-top:4px;font-weight:700;">👉 Click to isolate • Hold Ctrl to multi-select</div>
       </div>`, {sticky:false, direction:'top', className:'div-tooltip', offset:[0,-6]});
 
     districtPolyLayer.addLayer(poly);
@@ -984,8 +1097,8 @@ function drawDistrictPolygons(divName, divIdx) {
         iconSize:[100,34], iconAnchor:[50,17]
       });
       const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
-      mk.on('click', () => {
-        drillDistrict(distName, divIdx, feat);
+      mk.on('click', (e) => {
+        drillDistrict(distName, divIdx, feat, e.originalEvent);
       });
       districtPolyLayer.addLayer(mk);
     }
@@ -996,10 +1109,78 @@ function drawDistrictPolygons(divName, divIdx) {
   }
 }
 
-/* ═══════════════ 2.5 DRAW THANA / UPAZILA POLYGONS ═══════════════ */
-function drawThanaPolygons(distName, divIdx) {
+/* ═══════════════ MULTI-DISTRICT DRAWING (CTRL + CLICK) ═══════════════ */
+function drawMultiDistrictPolygons(divName, divIdx) {
+  polyLayer.clearLayers();
+  districtPolyLayer.clearLayers();
   thanaPolyLayer.clearLayers();
+  clusterGrp.clearLayers();
   pillarLayer.clearLayers();
+
+  if(typeof BD_DISTRICTS_GEO === 'undefined' || !BD_DISTRICTS_GEO.features) return;
+
+  const distFeatures = BD_DISTRICTS_GEO.features.filter(f => f.properties.division === divName);
+  let colorIdx = 0;
+  let bounds = L.latLngBounds([]);
+
+  const selNames = selectedDistricts.map(d => d.name.toLowerCase());
+
+  distFeatures.forEach(feat => {
+    const distName = feat.properties.district;
+    const isSelected = selNames.includes(distName.toLowerCase());
+    const color = DISTRICT_PALETTE[colorIdx % DISTRICT_PALETTE.length];
+    colorIdx++;
+
+    const distDat = CEO_NATIONAL.districts.find(d => d.district.toLowerCase() === distName.toLowerCase() && d.div === divName) || {};
+    let count = distDat.outlets || 0;
+
+    const poly = L.geoJSON(feat, {
+      interactive: true,
+      style: () => ({
+        fillColor: isSelected ? color : '#334155',
+        fillOpacity: isSelected ? (isDark ? 0.78 : 0.72) : 0.10,
+        color: isSelected ? '#ffffff' : (isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'),
+        weight: isSelected ? 3.5 : 1
+      })
+    });
+
+    if (isSelected) {
+      bounds.extend(poly.getBounds());
+    }
+
+    poly.on('click', (e) => drillDistrict(distName, divIdx, feat, e.originalEvent));
+    districtPolyLayer.addLayer(poly);
+
+    if (isSelected && !pillarsOn) {
+      const center = poly.getBounds().getCenter();
+      const lbl = L.divIcon({
+        className:'',
+        html:`<div class="dist-lbl" style="border:2px solid #fff;box-shadow:0 0 16px ${color}88;">${distName}<br><span style="font-size:10px;font-family:'JetBrains Mono';font-weight:700;">${count.toLocaleString()}</span></div>`,
+        iconSize:[100,34], iconAnchor:[50,17]
+      });
+      const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
+      mk.on('click', (e) => drillDistrict(distName, divIdx, feat, e.originalEvent));
+      districtPolyLayer.addLayer(mk);
+    }
+  });
+
+  if (pillarsOn) {
+    renderDistrict3DPillars(divName, divIdx);
+  }
+
+  if (bounds.isValid()) {
+    map.fitBounds(bounds, {padding:[40,40], maxZoom:10});
+  }
+}
+
+/* ═══════════════ 2.5 DRAW THANA / UPAZILA POLYGONS (ISOLATED DISTRICT) ═══════════════ */
+function drawThanaPolygons(distName, divIdx) {
+  polyLayer.clearLayers();
+  districtPolyLayer.clearLayers();
+  thanaPolyLayer.clearLayers();
+  clusterGrp.clearLayers();
+  pillarLayer.clearLayers();
+  
   if(typeof BD_THANAS_GEO === 'undefined' || !BD_THANAS_GEO.features) return;
 
   if (pillarsOn) {
@@ -1092,7 +1273,7 @@ function buildDivSidebar() {
     el.className = 'dcard';
     el.setAttribute('data-d', d.name);
     el.id = 'dc'+d.idx;
-    el.onclick = () => drillDivision(d.idx, d.name);
+    el.onclick = (e) => drillDivision(d.idx, d.name, e);
     
     let count = d.outlets;
     if (healthFilter === 'G') count = d.strong||0;
@@ -1106,7 +1287,51 @@ function buildDivSidebar() {
 }
 
 /* ═══════════════ DRILL DIVISION ═══════════════ */
-function drillDivision(divIdx, divName) {
+function drillDivision(divIdx, divName, event) {
+  const isMulti = event && (event.ctrlKey || event.metaKey || event.shiftKey);
+
+  if (isMulti) {
+    activeDistrict = null;
+    activeThana = null;
+    selectedDistricts = [];
+
+    if (!selectedDivisions) selectedDivisions = [];
+    if (selectedDivisions.includes(divName)) {
+      selectedDivisions = selectedDivisions.filter(d => d !== divName);
+      if (selectedDivisions.length === 0) {
+        resetNational();
+        return;
+      }
+    } else {
+      selectedDivisions.push(divName);
+    }
+
+    activeDivision = selectedDivisions.length === 1 ? selectedDivisions[0] : null;
+
+    document.querySelectorAll('.dcard').forEach(c => {
+      const d = c.getAttribute('data-d');
+      if (selectedDivisions.includes(d)) c.classList.add('sel');
+      else c.classList.remove('sel');
+    });
+
+    if (selectedDivisions.length > 1) {
+      document.getElementById('distPanel').style.display = 'none';
+      document.getElementById('thanaPanel').style.display = 'none';
+      drawMultiDivisionPolygons();
+    } else {
+      const sDiv = selectedDivisions[0];
+      const sIdx = DIV_NAMES.indexOf(sDiv);
+      buildDistPanel(sDiv, sIdx);
+      drawDistrictPolygons(sDiv, sIdx);
+    }
+    updateBC();
+    updateKPIs();
+    return;
+  }
+
+  // Single division click
+  selectedDivisions = [divName];
+  selectedDistricts = [];
   activeDivision = divName;
   activeDistrict = null;
   activeThana = null;
@@ -1148,8 +1373,8 @@ function buildDistPanel(divName, divIdx) {
     const row = document.createElement('div');
     row.className = 'drow';
     row.id = 'dr_'+d.district.replace(/\s+/g,'_');
-    row.onclick = () => {
-      drillDistrict(d.district, divIdx);
+    row.onclick = (e) => {
+      drillDistrict(d.district, divIdx, null, e);
     };
     row.innerHTML = `<span class="drn">${d.district}</span><span class="drc">${count.toLocaleString()}</span>`;
     scroll.appendChild(row);
@@ -1221,8 +1446,57 @@ function buildThanaPanel(distName, divIdx) {
   });
 }
 
-/* ═══════════════ DRILL DISTRICT ═══════════════ */
-function drillDistrict(distName, divIdx, feat) {
+/* ═══════════════ DRILL DISTRICT (ISOLATE OR MULTI-SELECT) ═══════════════ */
+function drillDistrict(distName, divIdx, feat, event) {
+  const isMulti = event && (event.ctrlKey || event.metaKey || event.shiftKey);
+  const curDiv = activeDivision || (selectedDivisions && selectedDivisions[0]) || DIV_NAMES[divIdx] || 'Dhaka';
+
+  if (isMulti) {
+    activeThana = null;
+    if (!selectedDistricts) selectedDistricts = [];
+    
+    const existingIdx = selectedDistricts.findIndex(d => d.name.toLowerCase() === distName.toLowerCase());
+    if (existingIdx >= 0) {
+      selectedDistricts.splice(existingIdx, 1);
+    } else {
+      selectedDistricts.push({ name: distName, div: curDiv });
+    }
+
+    if (selectedDistricts.length === 0) {
+      activeDistrict = null;
+      document.querySelectorAll('#distScroll .drow').forEach(r=>r.classList.remove('sel'));
+      document.getElementById('thanaPanel').style.display = 'none';
+      drawDistrictPolygons(curDiv, divIdx);
+      updateBC();
+      updateKPIs();
+      return;
+    }
+
+    // Highlight all selected in distScroll
+    document.querySelectorAll('#distScroll .drow').forEach(r => {
+      const dName = r.querySelector('.drn')?.textContent?.trim()?.toLowerCase();
+      const isSel = selectedDistricts.some(s => s.name.toLowerCase() === dName);
+      if (isSel) r.classList.add('sel');
+      else r.classList.remove('sel');
+    });
+
+    if (selectedDistricts.length === 1) {
+      activeDistrict = selectedDistricts[0].name;
+      buildThanaPanel(activeDistrict, divIdx);
+      drawThanaPolygons(activeDistrict, divIdx);
+    } else {
+      activeDistrict = null;
+      document.getElementById('thanaPanel').style.display = 'none';
+      drawMultiDistrictPolygons(curDiv, divIdx);
+    }
+
+    updateBC();
+    updateKPIs();
+    return;
+  }
+
+  // Single District Click -> ISOLATE THIS DISTRICT ONLY!
+  selectedDistricts = [{ name: distName, div: curDiv }];
   activeDistrict = distName;
   activeThana = null;
   updateBC();
@@ -1963,6 +2237,7 @@ function downloadFilteredCSV() {
 /* ═══════════════ RESET TO NATIONAL ═══════════════ */
 function resetNational() {
   activeDivision=null; activeDistrict=null; activeThana=null;
+  selectedDivisions=[]; selectedDistricts=[];
   subTierFilter='ALL';
   document.querySelectorAll('.dcard').forEach(c=>c.classList.remove('sel'));
   document.getElementById('distPanel').style.display='none';
@@ -1992,14 +2267,21 @@ function resetNational() {
 function updateBC(){
   const bc=document.getElementById('bc');
   let h=`<span class="bcn" onclick="resetNational()">🇧🇩 Bangladesh</span>`;
-  if(activeDivision){
+  
+  if (selectedDivisions && selectedDivisions.length > 1) {
+    h+=`<span class="bcs">›</span><span class="bcn here" style="color:var(--blue);font-weight:800;">${selectedDivisions.length} Divisions Selected (${selectedDivisions.join(', ')})</span>`;
+  } else if(activeDivision){
     const i=DIV_NAMES.indexOf(activeDivision);
-    h+=`<span class="bcs">›</span><span class="bcn ${(!activeDistrict&&!activeThana)?'here':''}" onclick="drillDivision(${i},'${activeDivision}')">${activeDivision} Division</span>`;
+    h+=`<span class="bcs">›</span><span class="bcn ${(!activeDistrict&&!activeThana&&(!selectedDistricts||selectedDistricts.length<=1))?'here':''}" onclick="drillDivision(${i},'${activeDivision}')">${activeDivision} Division</span>`;
   }
-  if(activeDistrict){
+  
+  if (selectedDistricts && selectedDistricts.length > 1) {
+    h+=`<span class="bcs">›</span><span class="bcn here" style="color:var(--green);font-weight:800;">${selectedDistricts.length} Districts Selected (${selectedDistricts.map(d=>d.name).join(', ')})</span>`;
+  } else if(activeDistrict){
     const divIdx=DIV_NAMES.indexOf(activeDivision);
-    h+=`<span class="bcs">›</span><span class="bcn ${!activeThana?'here':''}" onclick="drillDistrict('${activeDistrict}',${divIdx})">${activeDistrict} District</span>`;
+    h+=`<span class="bcs">›</span><span class="bcn ${!activeThana?'here':''}" onclick="drillDistrict('${activeDistrict}',${divIdx})">${activeDistrict} District (Isolated)</span>`;
   }
+  
   if(activeThana){
     h+=`<span class="bcs">›</span><span class="bcn here">${activeThana} Thana</span>`;
   }
