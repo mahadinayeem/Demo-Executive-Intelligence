@@ -559,7 +559,7 @@ body {
       </div>
       <div class="metric-box">
         <div class="metric-lbl">Spatial Density Cells</div>
-        <div class="metric-val" id="valGrids">18,883</div>
+        <div class="metric-val" id="valGrids">97,947</div>
       </div>
       <div class="metric-box">
         <div class="metric-lbl">Top Commercial Hubs</div>
@@ -600,16 +600,16 @@ body {
     <!-- Top-Left Status Badge -->
     <div class="map-badge-top-left">
       <div class="pulse-dot-green"></div>
-      <div>ITL — চেক-ইন ম্যাপ বিশ্লেষণ | মে - আগস্ট ২০২৬ | মোট চেক-ইন: ১,৫৬৯,৯৪০</div>
+      <div>ITL — চেক-ইন ম্যাপ বিশ্লেষণ | মে - আগস্ট ২০২৬ | মোট চেক-ইন: ১,৫৬৯,৯০২ | গ্রিড: ৯৭,৯৪৭</div>
     </div>
 
     <!-- Top-Right Callout Card (Interactive Inspector) -->
     <div class="map-callout-top-right" id="inspectorCallout">
-      <div class="callout-title" id="calloutTitle">জৈন্তাপুর উপজেলা, সিলেট জেলা, সিলেট বিভাগ</div>
+      <div class="callout-title" id="calloutTitle">বগুড়া সদর, Bogura জেলা, Rajshahi বিভাগ</div>
       <div class="callout-sub">(৫০০ মিটার এলাকার মধ্যে মাইক্রো-ক্লাস্টার)</div>
       <div class="callout-stats">
-        <div>চেক-ইন সংখ্যা: <span id="calloutVisits" style="color:#dc2626;font-weight:700">৩৪২</span></div>
-        <div>অবস্থান: <span id="calloutCoords">25.1368, 92.1220</span></div>
+        <div>চেক-ইন সংখ্যা: <span id="calloutVisits" style="color:#dc2626;font-weight:700">২,১৫৮</span></div>
+        <div>অবস্থান: <span id="calloutCoords">24.8465, 89.3777</span></div>
       </div>
     </div>
 
@@ -679,17 +679,18 @@ function initMap() {
   const points = D.heat_points || [];
   if (points.length > 0 && typeof L.heatLayer === 'function') {
     heatLayer = L.heatLayer(points, {
-      radius: 26,
-      blur: 20,
+      radius: 18,
+      blur: 14,
       maxZoom: 9,
-      max: 0.8,
+      max: 0.6,
       minOpacity: 0.35,
       gradient: {
-        0.1: '#a7f3d0',
-        0.3: '#4ade80',
-        0.5: '#22c55e',
-        0.7: '#16a34a',
-        1.0: '#14532d'
+        0.1: '#bbf7d0',
+        0.25: '#4ade80',
+        0.45: '#22c55e',
+        0.65: '#16a34a',
+        0.85: '#15803d',
+        1.0: '#064e3b'
       }
     }).addTo(map);
   }
