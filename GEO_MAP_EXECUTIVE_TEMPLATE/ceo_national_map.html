@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 1 — Geospatial & Territory Intelligence | Geo-Intelligence Explorer™</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="https://unpkg.com/leaflet-heat@0.2.0/dist/leaflet-heat.js"></script>
+<script src="bd_geo.js"></script>
+<script src="bd_districts_geo.js"></script>
+<script src="bd_thanas_geo.js"></script>
+<script src="ceo_national.js"></script>
+<script src="ceo_outlets_D0.js"></script>
+<script src="ceo_outlets_D1.js"></script>
+<script src="ceo_outlets_D2.js"></script>
+<script src="ceo_outlets_D3.js"></script>
+<script src="ceo_outlets_D4.js"></script>
+<script src="ceo_outlets_D5.js"></script>
+<script src="ceo_outlets_D6.js"></script>
+<script src="ceo_outlets_D7.js"></script>
+<style>
+:root {
+  --font:'Outfit',sans-serif; --mono:'JetBrains Mono',monospace;
+  --bg0:#07090f; --bg1:#0c1020; --bg2:#111828; --bg3:#18213a;
+  --glass:rgba(8,12,24,0.92); --card:rgba(14,20,36,0.95);
+  --t1:#eef2ff; --t2:#8da4cc; --t3:#3d5070;
+  --bdr:rgba(255,255,255,0.07); --bdr2:rgba(255,255,255,0.14);
+  --blue:#3b82f6; --green:#00e676; --amber:#ffab00; --red:#ff1744; --purple:#8b5cf6;
+  --sh:0 8px 32px rgba(0,0,0,.55);
+  --map-bg:#0d1627;
+}
+[data-theme="light"] {
+  --bg0:#e8eef8; --bg1:#fff; --bg2:#f4f7ff; --bg3:#eaeefc;
+  --glass:rgba(255,255,255,0.94); --card:rgba(255,255,255,0.98);
+  --t1:#0f172a; --t2:#3d5280; --t3:#8ea5cc;
+  --bdr:rgba(0,0,0,0.07); --bdr2:rgba(0,0,0,0.14);
+  --blue:#2563eb; --green:#059669; --amber:#d97706; --red:#dc2626;
+  --sh:0 8px 32px rgba(0,0,0,.09);
+  --map-bg:#c8d8f0;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font);background:var(--bg0);color:var(--t1);-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
+
+/* ── HEADER ── */
+header{height:64px;flex-shrink:0;background:var(--glass);backdrop-filter:blur(24px);border-bottom:1px solid var(--bdr);display:flex;align-items:center;padding:0 18px;gap:14px;z-index:900;}
+.logo{width:40px;height:40px;background:linear-gradient(135deg,#3b82f6,#6366f1);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 0 18px rgba(59,130,246,.4);}
+.brand h1{font-size:14px;font-weight:800;color:var(--t1);}
+.brand p{font-size:9.5px;color:var(--t3);font-weight:500;letter-spacing:.3px;}
+.kpis{display:flex;gap:7px;flex:1;justify-content:center;}
+.kpi{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:5px 11px;display:flex;flex-direction:column;min-width:84px;cursor:pointer;transition:transform .15s;}
+.kpi:hover{transform:translateY(-1px);}
+.kl{font-size:8.5px;text-transform:uppercase;letter-spacing:.8px;font-weight:700;color:var(--t3);}
+.kv{font-size:14px;font-weight:800;font-family:var(--mono);color:var(--t1);}
+.kv.bl{color:var(--blue);} .kv.gr{color:var(--green);} .kv.am{color:var(--amber);} .kv.rd{color:var(--red);}
+.hdr-r{display:flex;gap:7px;flex-shrink:0;}
+.btn{background:var(--card);border:1px solid var(--bdr);color:var(--t1);padding:7px 13px;border-radius:9px;font-size:11.5px;font-weight:700;font-family:var(--font);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;white-space:nowrap;}
+.btn:hover{border-color:var(--blue);}
+.btn.on{background:var(--blue);border-color:var(--blue);color:#fff;}
+.btn-dl{background:linear-gradient(135deg,#10b981,#059669);border-color:#10b981;color:#fff;}
+.btn-dl:hover{opacity:0.9;box-shadow:0 0 14px rgba(16,185,129,.4);}
+
+/* ── LAYOUT ── */
+.wrap{display:flex;height:calc(100vh - 64px);}
+
+/* ── SIDEBAR ── */
+aside{width:360px;flex-shrink:0;background:var(--glass);backdrop-filter:blur(24px);border-right:1px solid var(--bdr);display:flex;flex-direction:column;overflow-y:auto;z-index:800;padding:12px;gap:12px;}
+aside::-webkit-scrollbar{width:4px;}
+aside::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px;}
+.sb{background:var(--bg1);border:1px solid var(--bdr);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:9px;}
+.sb-hd{display:flex;justify-content:space-between;align-items:center;}
+.sb-ttl{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.9px;color:var(--t2);}
+.rlnk{font-size:10px;font-weight:700;color:var(--blue);cursor:pointer;}
+.rlnk:hover{text-decoration:underline;}
+
+/* Divisions Grid */
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.dcard{background:var(--card);border:1px solid var(--bdr);border-left:3.5px solid transparent;border-radius:8px;padding:8px 10px;cursor:pointer;transition:all .2s;}
+.dcard:hover{transform:translateY(-1px);box-shadow:var(--sh);}
+.dcard[data-d="Dhaka"]     {border-left-color:#3b82f6;}
+.dcard[data-d="Chattogram"]{border-left-color:#10b981;}
+.dcard[data-d="Rajshahi"]  {border-left-color:#f59e0b;}
+.dcard[data-d="Khulna"]    {border-left-color:#ec4899;}
+.dcard[data-d="Barishal"]  {border-left-color:#8b5cf6;}
+.dcard[data-d="Sylhet"]    {border-left-color:#06b6d4;}
+.dcard[data-d="Rangpur"]   {border-left-color:#14b8a6;}
+.dcard[data-d="Mymensingh"]{border-left-color:#f97316;}
+.dcard[data-d="Dhaka"].sel     {background:rgba(59,130,246,.14);border-color:#3b82f6;box-shadow:0 0 16px rgba(59,130,246,.25);}
+.dcard[data-d="Chattogram"].sel{background:rgba(16,185,129,.14);border-color:#10b981;box-shadow:0 0 16px rgba(16,185,129,.25);}
+.dcard[data-d="Rajshahi"].sel  {background:rgba(245,158,11,.14);border-color:#f59e0b;box-shadow:0 0 16px rgba(245,158,11,.25);}
+.dcard[data-d="Khulna"].sel    {background:rgba(236,72,153,.14);border-color:#ec4899;box-shadow:0 0 16px rgba(236,72,153,.25);}
+.dcard[data-d="Barishal"].sel  {background:rgba(139,92,246,.14);border-color:#8b5cf6;box-shadow:0 0 16px rgba(139,92,246,.25);}
+.dcard[data-d="Sylhet"].sel    {background:rgba(6,182,212,.14); border-color:#06b6d4;box-shadow:0 0 16px rgba(6,182,212,.25);}
+.dcard[data-d="Rangpur"].sel   {background:rgba(20,184,166,.14);border-color:#14b8a6;box-shadow:0 0 16px rgba(20,184,166,.25);}
+.dcard[data-d="Mymensingh"].sel{background:rgba(249,115,22,.14);border-color:#f97316;box-shadow:0 0 16px rgba(249,115,22,.25);}
+.dn{font-size:12px;font-weight:800;color:var(--t1);}
+.dc{font-size:13px;font-weight:900;font-family:var(--mono);color:var(--t2);}
+.dm{font-size:9px;color:var(--t3);margin-top:3px;}
+
+/* Districts & Thanas */
+.dp{display:none;}
+.dscrl{max-height:150px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;}
+.drow{background:var(--card);border:1px solid var(--bdr);border-radius:7px;padding:6px 10px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all .15s;}
+.drow:hover{border-color:var(--blue);}
+.drow.sel{background:rgba(59,130,246,.15);border-color:var(--blue);}
+.drn{font-size:12px;font-weight:700;color:var(--t1);}
+.drc{font-size:11px;font-family:var(--mono);color:var(--t2);}
+
+.thana-lbl{
+  background:transparent;border:none;
+  font-family:'Outfit',sans-serif;
+  font-weight:800;font-size:10px;color:#fff;
+  text-shadow:0 1px 4px rgba(0,0,0,.95),0 0 10px rgba(0,0,0,.8);
+  text-align:center;pointer-events:none;line-height:1.2;white-space:nowrap;
+}
+[data-theme="light"] .thana-lbl{color:#111;text-shadow:0 1px 3px rgba(255,255,255,.9);}
+
+/* Filter & Sub-tier Pills */
+.fbrow{display:flex;gap:5px;margin-bottom:8px;}
+.fb{flex:1;padding:7px 3px;font-size:10px;font-weight:800;border-radius:6px;border:1px solid var(--bdr);background:var(--card);color:var(--t2);cursor:pointer;transition:all .2s;font-family:var(--font);}
+.fb.fa{border-color:var(--t3);color:var(--t1);background:var(--bg3);}
+.fb.fg{border-color:var(--green);color:var(--green);background:rgba(0,230,118,.18);font-weight:900;}
+.fb.fy{border-color:var(--amber);color:var(--amber);background:rgba(255,171,0,.18);font-weight:900;}
+.fb.fr{border-color:var(--red);color:var(--red);background:rgba(255,23,68,.18);font-weight:900;}
+
+/* Subtier Pill Box */
+.subtier-wrap{display:none;background:var(--bg2);border:1px solid var(--bdr2);border-radius:8px;padding:8px;margin-bottom:10px;flex-direction:column;gap:5px;}
+.subtier-title{font-size:8.5px;text-transform:uppercase;letter-spacing:1px;font-weight:800;color:var(--t3);margin-bottom:3px;}
+.subtier-btns{display:flex;gap:4px;}
+.st-btn{flex:1;padding:5px 2px;font-size:9.5px;font-weight:800;border-radius:5px;border:1px solid var(--bdr);background:var(--card);color:var(--t2);cursor:pointer;transition:all .15s;text-align:center;}
+.st-btn:hover{border-color:var(--blue);color:var(--t1);}
+.st-btn.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+.st-btn.g-act{background:#00e676;border-color:#00e676;color:#000;font-weight:900;}
+.st-btn.y-act{background:#ffab00;border-color:#ffab00;color:#000;font-weight:900;}
+.st-btn.r-act{background:#ff1744;border-color:#ff1744;color:#fff;font-weight:900;}
+
+.srchw{position:relative;}
+.srchic{position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--t3);pointer-events:none;}
+.srchinp{width:100%;background:var(--card);border:1px solid var(--bdr);border-radius:7px;padding:8px 10px 8px 30px;font-size:12px;color:var(--t1);font-family:var(--font);outline:none;transition:border .2s;}
+.srchinp:focus{border-color:var(--blue);}
+.srchinp::placeholder{color:var(--t3);}
+
+/* ── MAP ── */
+.mapw{flex:1;position:relative;overflow:hidden;background:var(--map-bg);}
+#map{width:100%;height:100%;}
+
+/* Hide leaflet tile layer — we use polygons only */
+.leaflet-tile-pane{display:none!important;}
+.leaflet-control-attribution{font-size:9px;opacity:.4;}
+
+/* Breadcrumb */
+.bc{position:absolute;top:14px;left:14px;z-index:500;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--bdr2);border-radius:100px;padding:8px 18px;display:flex;align-items:center;gap:8px;box-shadow:var(--sh);}
+.bcn{font-size:12px;font-weight:700;color:var(--t2);cursor:pointer;transition:color .15s;white-space:nowrap;}
+.bcn:hover{color:var(--t1);}
+.bcn.here{color:var(--blue);font-weight:800;cursor:default;}
+.bcs{color:var(--t3);font-size:10px;}
+
+/* Map buttons */
+.mapbtns{position:absolute;top:14px;right:14px;z-index:500;display:flex;gap:7px;}
+.mbtn{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--bdr2);color:var(--t1);padding:8px 14px;border-radius:9px;font-size:11px;font-weight:800;font-family:var(--font);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;box-shadow:var(--sh);}
+.mbtn:hover{border-color:var(--blue);}
+.mbtn.on{background:var(--blue);border-color:var(--blue);color:#fff;}
+
+/* Legend */
+.mleg{position:absolute;bottom:20px;left:14px;z-index:500;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--bdr2);border-radius:10px;padding:9px 14px;display:flex;gap:13px;box-shadow:var(--sh);}
+.lg{display:flex;align-items:center;gap:6px;cursor:pointer;}
+.lgd{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+.lgd.g{background:var(--green);box-shadow:0 0 10px rgba(0,230,118,.8);}
+.lgd.y{background:var(--amber);box-shadow:0 0 10px rgba(255,171,0,.8);}
+.lgd.r{background:var(--red);box-shadow:0 0 10px rgba(255,23,68,.8);}
+.lgl{font-size:10.5px;font-weight:700;color:var(--t2);}
+
+/* Custom Tooltips */
+.div-tooltip{
+  background: #090d1a!important;
+  border: 1px solid rgba(255,255,255,0.22)!important;
+  border-radius: 12px!important;
+  padding: 12px 16px!important;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.85)!important;
+  font-family: var(--font)!important;
+  color: #ffffff!important;
+  opacity: 1!important;
+}
+.div-tooltip::before{display:none!important;}
+
+.ws-tooltip-wrap {
+  min-width: 220px;
+  font-family: 'Outfit', sans-serif;
+}
+.ws-badge {
+  font-size: 11px;
+  font-weight: 900;
+  color: #ff2a85;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.ws-title {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.3;
+  margin-bottom: 6px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+.ws-stat {
+  font-size: 12px;
+  color: #cbd5e1;
+  margin: 3px 0;
+  font-weight: 600;
+}
+.ws-stat b {
+  color: #ffffff;
+  font-weight: 800;
+}
+.ws-opp {
+  font-size: 11.5px;
+  color: #fbbf24;
+  font-weight: 700;
+  margin-top: 6px;
+  padding-top: 5px;
+  border-top: 1px dashed rgba(255,255,255,0.15);
+}
+
+/* Modal (Full Detailed Outlet Profile Card) */
+.mveil{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);z-index:9999;display:none;align-items:center;justify-content:center;}
+.mveil.open{display:flex;}
+.mbox{background:var(--bg2);border:1px solid var(--bdr2);border-radius:20px;width:540px;max-width:94vw;box-shadow:0 24px 64px rgba(0,0,0,.7);overflow:hidden;animation:popIn .25s cubic-bezier(.16,1,.3,1);}
+@keyframes popIn{from{opacity:0;transform:scale(.93) translateY(12px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.mhd{padding:18px 22px;background:var(--bg3);border-bottom:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:flex-start;}
+.mht{font-size:17px;font-weight:800;color:var(--t1);}
+.mhs{font-size:11px;color:var(--t3);margin-top:3px;}
+.mcl{background:var(--card);border:1px solid var(--bdr);color:var(--t2);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
+.mcl:hover{background:rgba(239,68,68,.15);color:var(--red);border-color:var(--red);}
+.mbdy{padding:18px 22px;max-height:80vh;overflow-y:auto;}
+
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.sc{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:11px 13px;}
+.scl{font-size:9px;text-transform:uppercase;letter-spacing:.7px;font-weight:800;color:var(--t3);}
+.scv{font-size:19px;font-weight:900;font-family:var(--mono);color:var(--t1);margin-top:3px;}
+.scv.g{color:var(--green);} .scv.b{color:var(--blue);} .scv.a{color:var(--amber);}
+
+/* Why Box (Diagnosis) */
+.why-box{background:rgba(255,23,68,.1);border:1px solid rgba(255,23,68,.4);border-radius:10px;padding:12px 14px;margin-bottom:14px;display:flex;flex-direction:column;gap:4px;}
+.why-box.g-box{background:rgba(0,230,118,.1);border-color:rgba(0,230,118,.4);}
+.why-box.y-box{background:rgba(255,171,0,.1);border-color:rgba(255,171,0,.4);}
+.why-box.zv-box{background:rgba(168,85,247,.14);border-color:rgba(168,85,247,.5);}
+.why-box.zr-box{background:rgba(244,63,94,.14);border-color:rgba(244,63,94,.5);}
+.why-ttl{font-size:10px;text-transform:uppercase;letter-spacing:.9px;font-weight:900;display:flex;align-items:center;gap:5px;}
+.why-desc{font-size:12px;font-weight:600;color:var(--t1);line-height:1.4;}
+
+/* Monthly Trend Sparkline Bars */
+.trend-wrap{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:12px 14px;margin-bottom:14px;}
+.trend-title{font-size:9.5px;text-transform:uppercase;letter-spacing:.8px;font-weight:800;color:var(--t3);margin-bottom:8px;display:flex;justify-content:space-between;}
+.trend-bars{display:flex;gap:8px;align-items:flex-end;height:55px;padding-top:5px;}
+.tbar-col{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end;gap:4px;}
+.tbar{width:100%;border-radius:4px 4px 0 0;background:var(--blue);min-height:4px;transition:height .3s;}
+.tbar-lbl{font-size:8.5px;font-family:var(--mono);color:var(--t3);font-weight:600;}
+.tbar-val{font-size:8.5px;font-family:var(--mono);color:var(--t1);font-weight:700;}
+
+.irows{display:flex;flex-direction:column;}
+.irow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--bdr);font-size:12px;}
+.irow:last-child{border:none;}
+.irk{color:var(--t2);font-weight:500;}
+.irv{color:var(--t1);font-weight:800;text-align:right;}
+.badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:9.5px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;}
+.bG{background:rgba(0,230,118,.15);color:var(--green);border:1px solid var(--green);}
+.bY{background:rgba(255,171,0,.15);color:var(--amber);border:1px solid var(--amber);}
+.bR{background:rgba(255,23,68,.15);color:var(--red);border:1px solid var(--red);}
+
+/* High-Contrast Vibrant Marker Clusters */
+.custom-cluster {
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; font-family: var(--mono); font-weight: 900; font-size: 12px;
+  box-shadow: 0 0 14px rgba(0,0,0,0.6), inset 0 0 6px rgba(255,255,255,0.4);
+  border: 2px solid #ffffff; cursor: pointer; transition: transform .15s;
+}
+.custom-cluster:hover { transform: scale(1.15); }
+.cluster-g { background: #00e676; color: #000; box-shadow: 0 0 16px rgba(0,230,118,0.8); }
+.cluster-y { background: #ffab00; color: #000; box-shadow: 0 0 16px rgba(255,171,0,0.8); }
+.cluster-r { background: #ff1744; color: #fff; box-shadow: 0 0 16px rgba(255,23,68,0.8); }
+.cluster-mix { background: #3b82f6; color: #fff; box-shadow: 0 0 16px rgba(59,130,246,0.8); }
+
+/* Spiderfy connector lines */
+.leaflet-cluster-spider-leg { stroke: rgba(255,255,255,0.7)!important; stroke-width: 2px!important; stroke-dasharray: 3,3; }
+
+/* 3D Realistic Sales Pillar Marker */
+.pillar-3d-marker {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  pointer-events: auto;
+  cursor: pointer;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.9));
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pillar-3d-marker:hover { transform: scale(1.25) translateY(-8px); z-index: 99999!important; }
+.pillar-cap {
+  width: 22px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 14px currentColor, inset 0 0 4px rgba(255,255,255,0.8);
+  z-index: 3;
+  flex-shrink: 0;
+}
+.pillar-stem {
+  width: 16px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.6) 0%, currentColor 35%, rgba(0,0,0,0.65) 100%);
+  border-left: 1.5px solid rgba(255,255,255,0.8);
+  border-right: 1.5px solid rgba(0,0,0,0.7);
+  box-shadow: 0 0 18px currentColor;
+  margin-top: -5px;
+  z-index: 2;
+}
+.pillar-base {
+  width: 26px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.75);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.9);
+  margin-top: -5px;
+  z-index: 1;
+}
+.pillar-val {
+  position: absolute;
+  top: -20px;
+  font-size: 10px;
+  font-family: var(--mono);
+  font-weight: 900;
+  color: #ffffff;
+  background: #0b0f19;
+  border: 1.5px solid #ffffff;
+  padding: 2px 6px;
+  border-radius: 6px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+}
+.pillar-base {
+  width: 22px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.3);
+  margin-top: -4px;
+}
+.pillar-val {
+  position: absolute;
+  top: -16px;
+  font-size: 9px;
+  font-family: var(--mono);
+  font-weight: 900;
+  color: #fff;
+  background: rgba(0,0,0,0.85);
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 1px 4px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* SR Route Tracking & Sequence Pins */
+.sr-seq-badge {
+  background: #3b82f6;
+  color: #fff;
+  font-size: 9.5px;
+  font-family: var(--mono);
+  font-weight: 900;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 12px rgba(59,130,246,0.9);
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: pulsePin 2s infinite;
+}
+@keyframes pulsePin {
+  0% { box-shadow: 0 0 0 0 rgba(59,130,246,0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(59,130,246,0); }
+  100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
+}
+
+/* White-Space Opportunity Hub Marker */
+.whitespace-marker {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ec4899 20%, rgba(236,72,153,0.3) 70%, transparent 100%);
+  border: 2px dashed #ff2a85;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(236,72,153,0.9);
+  animation: spinWS 10s linear infinite;
+}
+@keyframes spinWS { 100% { transform: rotate(360deg); } }
+
+/* Labels on map */
+.div-lbl{
+  background:transparent;border:none;
+  font-family:'Outfit',sans-serif;
+  font-weight:900;font-size:13px;color:#fff;
+  text-shadow:0 1px 6px rgba(0,0,0,.95),0 0 16px rgba(0,0,0,.7);
+  text-align:center;pointer-events:none;line-height:1.3;white-space:nowrap;
+}
+[data-theme="light"] .div-lbl{color:#111;text-shadow:0 1px 4px rgba(255,255,255,.9);}
+
+.dist-lbl{
+  background:transparent;border:none;
+  font-family:'Outfit',sans-serif;
+  font-weight:800;font-size:11px;color:#fff;
+  text-shadow:0 1px 5px rgba(0,0,0,.95),0 0 12px rgba(0,0,0,.8);
+  text-align:center;pointer-events:none;line-height:1.2;white-space:nowrap;
+}
+[data-theme="light"] .dist-lbl{color:#111;text-shadow:0 1px 4px rgba(255,255,255,.9);}
+
+.kv.zv{color:#c084fc;} .kv.zr{color:#f43f5e;}
+.fb.fzv{border-color:#a855f7;color:#c084fc;background:rgba(168,85,247,.18);font-weight:900;}
+.fb.fzr{border-color:#f43f5e;color:#fb7185;background:rgba(244,63,94,.18);font-weight:900;}
+.st-btn.zv-act{background:#a855f7;border-color:#a855f7;color:#fff;font-weight:900;}
+.st-btn.zr-act{background:#f43f5e;border-color:#f43f5e;color:#fff;font-weight:900;}
+.cluster-zv{background:#a855f7;color:#fff;box-shadow:0 0 16px rgba(168,85,247,0.85);}
+.cluster-zr{background:#f43f5e;color:#fff;box-shadow:0 0 16px rgba(244,63,94,0.85);}
+.dcard[data-d="Dhaka"].sel-zv, .dcard.sel-zv{background:rgba(168,85,247,.16)!important;border-color:#a855f7!important;box-shadow:0 0 16px rgba(168,85,247,.3)!important;}
+.dcard[data-d="Dhaka"].sel-zr, .dcard.sel-zr{background:rgba(244,63,94,.16)!important;border-color:#f43f5e!important;box-shadow:0 0 16px rgba(244,63,94,.3)!important;}
+.fb-section-ttl{font-size:8.5px;text-transform:uppercase;letter-spacing:1px;font-weight:800;color:var(--t3);margin-top:6px;margin-bottom:4px;}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🇧🇩</div>
+  <div class="brand">
+    <h1>Bangladesh Outlet Intelligence</h1>
+    <p>CEO Analytics • 9-Tier Matrix • Division → District → Micro Outlets</p>
+  </div>
+  <div class="kpis" id="kpiRow">
+    <div class="kpi" onclick="setF('ALL')"><span class="kl">Total Outlets</span><span class="kv bl" id="kTotal">—</span></div>
+    <div class="kpi" onclick="setF('G')"><span class="kl">🟢 Strong</span><span class="kv gr" id="kStrong">—</span></div>
+    <div class="kpi" onclick="setF('Y')"><span class="kl">🟡 Moderate</span><span class="kv am" id="kMod">—</span></div>
+    <div class="kpi" onclick="setF('R')"><span class="kl">🔴 Weak</span><span class="kv rd" id="kWeak">—</span></div>
+    <div class="kpi" onclick="setF('ZV')" style="border-color:rgba(168,85,247,.3);"><span class="kl" style="color:#c084fc;">🚫 0-Visits (4M)</span><span class="kv zv" id="kZeroVis">—</span></div>
+    <div class="kpi" onclick="setF('ZR')" style="border-color:rgba(244,63,94,.3);"><span class="kl" style="color:#fb7185;">💸 0-Revenue (4M)</span><span class="kv zr" id="kZeroRev">—</span></div>
+    <div class="kpi"><span class="kl">4M Revenue</span><span class="kv" id="kRev">—</span></div>
+    <div class="kpi"><span class="kl">Field Visits</span><span class="kv" id="kVis">—</span></div>
+  </div>
+  <div class="hdr-r">
+    <button class="btn btn-dl" onclick="downloadFilteredCSV()">📥 Export Outlets (CSV)</button>
+    <button class="btn" id="exportViewBtn" style="background:#3b82f6;color:white;border:none;margin-right:6px;" onclick="exportView()">📷 Export Map Image</button>
+    <button class="btn" id="themeBtn" onclick="toggleTheme()">☀️ Light Mode</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <aside>
+    <div class="sb">
+      <div class="sb-hd">
+        <span class="sb-ttl">Divisions of Bangladesh</span>
+        <span class="rlnk" onclick="resetNational()">Reset ↺</span>
+      </div>
+      <div class="dgrid" id="divGrid"></div>
+    </div>
+
+    <div class="sb dp" id="distPanel">
+      <div class="sb-hd">
+        <span class="sb-ttl" id="distTitle">Districts</span>
+        <span style="font-size:9.5px;color:var(--t3);" id="distBadge"></span>
+      </div>
+      <div class="dscrl" id="distScroll"></div>
+    </div>
+
+    <div class="sb dp" id="thanaPanel">
+      <div class="sb-hd">
+        <span class="sb-ttl" id="thanaTitle">Thanas / Upazilas</span>
+        <span style="font-size:9.5px;color:var(--t3);" id="thanaBadge"></span>
+      </div>
+      <div class="dscrl" id="thanaScroll"></div>
+    </div>
+
+    <div class="sb">
+      <div class="sb-hd"><span class="sb-ttl">Diagnostic Health &amp; Operational Filter</span></div>
+      <div class="fb-section-ttl">Health Tiers</div>
+      <div class="fbrow">
+        <button class="fb fa" id="fbA" onclick="setF('ALL')">All (281K)</button>
+        <button class="fb" id="fbG" onclick="setF('G')">🟢 Strong</button>
+        <button class="fb" id="fbY" onclick="setF('Y')">🟡 Moderate</button>
+        <button class="fb" id="fbR" onclick="setF('R')">🔴 Weak</button>
+      </div>
+
+      <div class="fb-section-ttl">Operational Blind Spots (4-Month Window)</div>
+      <div class="fbrow">
+        <button class="fb" id="fbZV" onclick="setF('ZV')" style="display:flex;align-items:center;justify-content:center;gap:4px;">
+          <span>🚫 0-Visits</span> <span id="sbZVCount" style="font-size:8.5px;opacity:0.85;">(72.6k)</span>
+        </button>
+        <button class="fb" id="fbZR" onclick="setF('ZR')" style="display:flex;align-items:center;justify-content:center;gap:4px;">
+          <span>💸 0-Revenue</span> <span id="sbZRCount" style="font-size:8.5px;opacity:0.85;">(72.5k)</span>
+        </button>
+      </div>
+
+      <!-- Subtier Pill Box -->
+      <div class="subtier-wrap" id="subtierBox">
+        <div class="subtier-title" id="subtierTitle">Sub-level Breakdown</div>
+        <div class="subtier-btns" id="subtierBtns"></div>
+      </div>
+
+      <div class="srchw">
+        <span class="srchic">🔍</span>
+        <input class="srchinp" id="srch" type="text" placeholder="Search outlet name, ID, SR…" oninput="doSearch(this.value)">
+      </div>
+    </div>
+  </aside>
+
+  <div class="mapw">
+    <div class="bc" id="bc"><span class="bcn here">🇧🇩 Bangladesh National</span></div>
+    <div class="mapbtns">
+      <button class="mbtn" id="heatBtn" onclick="toggleHeat()">🔥 Heatmap</button>
+      <button class="mbtn" id="pillarBtn" onclick="toggle3DPillars()">📊 3D Sales Height</button>
+      <button class="mbtn" id="wsBtn" onclick="toggleWhiteSpace()">🎯 White-Space Hubs</button>
+      <button class="mbtn" onclick="resetNational()">↺ Reset View</button>
+    </div>
+    <div id="map"></div>
+    <div class="mleg" id="mainLegend">
+      <div class="lg" onclick="setF('G')"><div class="lgd g"></div><span class="lgl">🟢 Strong</span></div>
+      <div class="lg" onclick="setF('Y')"><div class="lgd y"></div><span class="lgl">🟡 Moderate</span></div>
+      <div class="lg" onclick="setF('R')"><div class="lgd r"></div><span class="lgl">🔴 Weak</span></div>
+      <div class="lg" onclick="setF('ZV')"><div class="lgd" style="background:#a855f7;box-shadow:0 0 10px rgba(168,85,247,.8);"></div><span class="lgl">🚫 0-Visits</span></div>
+      <div class="lg" onclick="setF('ZR')"><div class="lgd" style="background:#f43f5e;box-shadow:0 0 10px rgba(244,63,94,.8);"></div><span class="lgl">💸 0-Revenue</span></div>
+      <div class="lg" id="legWS" style="display:none;" onclick="toggleWhiteSpace()"><span style="font-size:13px;">🎯</span><span class="lgl" style="color:#ff2a85;">White-Space Opportunity</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal (Full Detailed Outlet Profile Card) -->
+<div class="mveil" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="mbox">
+    <div class="mhd">
+      <div><div class="mht" id="mName"></div><div class="mhs" id="mSub"></div></div>
+      <button class="mcl" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="mbdy">
+      <!-- Why Diagnosis Box -->
+      <div class="why-box" id="mWhyBox">
+        <div class="why-ttl" id="mWhyTitle">⚠️ ROOT CAUSE &amp; TIER ANALYSIS</div>
+        <div class="why-desc" id="mWhyDesc"></div>
+      </div>
+
+      <!-- Key Metrics -->
+      <div class="sgrid">
+        <div class="sc"><div class="scl">4-Month Revenue (৳ Amount)</div><div class="scv g" id="mRev"></div></div>
+        <div class="sc"><div class="scl">Total Field Visits</div><div class="scv b" id="mVis"></div></div>
+        <div class="sc"><div class="scl">Orders Placed</div><div class="scv" id="mOrd"></div></div>
+        <div class="sc"><div class="scl">Order Strike Rate</div><div class="scv a" id="mRate"></div></div>
+      </div>
+
+      <!-- Monthly Revenue Trend -->
+      <div class="trend-wrap">
+        <div class="trend-title"><span>Monthly Sales Trend (Last 4 Months)</span><span id="mTrendTotal"></span></div>
+        <div class="trend-bars" id="mTrendBars"></div>
+      </div>
+
+      <!-- Detailed Info Rows -->
+      <div class="irows">
+        <div class="irow"><span class="irk">Sub-Tier Category</span><span class="irv" id="mTierLevel"></span></div>
+        <div class="irow"><span class="irk">Health Score</span><span class="irv" id="mHealth"></span></div>
+        <div class="irow"><span class="irk">Assigned SR Name</span><span class="irv" id="mSR" style="color:var(--blue);font-size:13px;"></span></div>
+        <div class="irow"><span class="irk">Last Visit Date</span><span class="irv" id="mLV"></span></div>
+        <div class="irow"><span class="irk">Revenue Per Visit (RPV)</span><span class="irv" id="mRPV"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════ CONFIG ═══════════════ */
+const DIV_NAMES = ['Dhaka','Chattogram','Rajshahi','Khulna','Barishal','Sylhet','Rangpur','Mymensingh'];
+const DIV_COLORS = {
+  Dhaka:'#4f8ef7', Chattogram:'#22d3a0', Rajshahi:'#fbbf24',
+  Khulna:'#f472b6', Barishal:'#a78bfa', Sylhet:'#22d3ee',
+  Rangpur:'#2dd4bf', Mymensingh:'#fb923c'
+};
+
+const DISTRICT_PALETTE = [
+  '#3b82f6', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4',
+  '#14b8a6', '#f97316', '#6366f1', '#84cc16', '#e11d48', '#0ea5e9', '#d946ef'
+];
+
+const DIV_CENTERS = {
+  Dhaka:[23.9,90.35], Chattogram:[22.8,91.80], Rajshahi:[24.50,88.90],
+  Khulna:[22.90,89.50], Barishal:[22.55,90.40], Sylhet:[24.50,91.85],
+  Rangpur:[25.80,89.00], Mymensingh:[24.75,90.60]
+};
+
+/* ═══════════════ 9-TIER CLASSIFICATION ENGINE ═══════════════ */
+function classifySubTier(status, score, rev, visits, orders, daysSince, avgRPV) {
+  if (status === 'G') {
+    if (score >= 88 || rev >= 50000) {
+      return {
+        tier: 'G1',
+        name: 'Platinum Strong (Tier-1)',
+        color: '#00e676',
+        title: '🟢 PLATINUM STRONG BUYER',
+        desc: `Top-tier revenue generator (৳${(rev||0).toLocaleString()}) across ${orders||0} orders. Consistent active purchases with high ticket size (৳${(avgRPV||0).toLocaleString()} per visit).`
+      };
+    } else if (score >= 78 || rev >= 20000) {
+      return {
+        tier: 'G2',
+        name: 'Gold Strong (Tier-2)',
+        color: '#00e676',
+        title: '🟢 GOLD STRONG BUYER',
+        desc: `High regular purchases (৳${(rev||0).toLocaleString()}) and active SR contact with steady order conversion.`
+      };
+    } else {
+      return {
+        tier: 'G3',
+        name: 'Silver Strong (Tier-3)',
+        color: '#69f0ae',
+        title: '🟢 SILVER STRONG BUYER',
+        desc: `Healthy strong buyer with consistent transactions (৳${(rev||0).toLocaleString()}), emerging growth potential.`
+      };
+    }
+  } else if (status === 'Y') {
+    if (score >= 58 || rev >= 12000) {
+      return {
+        tier: 'Y1',
+        name: 'High Moderate (Growth Tier)',
+        color: '#ffab00',
+        title: '🟡 HIGH MODERATE (HIGH GROWTH POTENTIAL)',
+        desc: `Strong candidate to upgrade into Strong buyer. Generates ৳${(rev||0).toLocaleString()} with ${visits||0} visits. Increased visit frequency will convert to top tier.`
+      };
+    } else if (score >= 48 || (visits >= 4 && orders > 0)) {
+      return {
+        tier: 'Y2',
+        name: 'Core Moderate (Stable Tier)',
+        color: '#ffd740',
+        title: '🟡 CORE MODERATE (STEADY BUYER)',
+        desc: `Steady average order volume (৳${(rev||0).toLocaleString()}) with predictable transaction patterns.`
+      };
+    } else {
+      return {
+        tier: 'Y3',
+        name: 'Slipping Moderate (At-Risk)',
+        color: '#ffe57f',
+        title: '🟡 SLIPPING MODERATE (DROPPING RISK)',
+        desc: `⚠️ Revenue or visit frequency slipping (${daysSince} days since last visit). Needs proactive SR contact to prevent falling into Weak status.`
+      };
+    }
+  } else {
+    // Weak / Inactive
+    if (visits === 0 || daysSince >= 90) {
+      return {
+        tier: 'R1',
+        name: 'Critical / Zero Visit',
+        color: '#ff1744',
+        title: '🔴 CRITICAL INACTIVE (ZERO VISITS / DORMANT)',
+        desc: `🚨 Severe coverage gap — 0 SR visits in the last 4 months (or dormant > 90 days). High risk of outlet churn.`
+      };
+    } else if (visits >= 3 && orders === 0) {
+      return {
+        tier: 'R2',
+        name: 'High Visit Zero Order',
+        color: '#ff1744',
+        title: '🔴 HIGH VISITS BUT ZERO ORDERS (CONVERSION GAP)',
+        desc: `🚨 SR visited ${visits} times but generated 0 orders. Indicates potential stock, credit, pricing, or service delivery barrier.`
+      };
+    } else {
+      return {
+        tier: 'R3',
+        name: 'Low Volume / Dropping',
+        color: '#ff5252',
+        title: '🔴 LOW VOLUME / AT-RISK WEAK',
+        desc: `⚠️ Sub-benchmark order size (Only ৳${(rev||0).toLocaleString()}) or irregular order flow. Requires sales activation campaign.`
+      };
+    }
+  }
+}
+
+/* ═══════════════ STATE ═══════════════ */
+let map, clusterGrp, polyLayer, districtPolyLayer, thanaPolyLayer, heatLayer;
+let routeLayer, wsLayer, pillarLayer;
+let activeDivision = null, activeDistrict = null, activeThana = null;
+let healthFilter = 'ALL', subTierFilter = 'ALL', heatOn = false, isDark = true;
+let pillarsOn = false, routesOn = false, wsOn = false;
+
+/* ═══════════════ INIT ═══════════════ */
+window.addEventListener('DOMContentLoaded', () => {
+  updateKPIs();
+
+  map = L.map('map', {
+    center:[23.68, 90.35], zoom:7, minZoom:5, maxZoom:18,
+    zoomControl:false, preferCanvas:true
+  });
+  L.control.zoom({position:'bottomright'}).addTo(map);
+
+  polyLayer = L.layerGroup().addTo(map);
+  districtPolyLayer = L.layerGroup().addTo(map);
+  thanaPolyLayer = L.layerGroup().addTo(map);
+  routeLayer = L.layerGroup().addTo(map);
+  wsLayer = L.layerGroup().addTo(map);
+  pillarLayer = L.layerGroup().addTo(map);
+  
+  // Custom Dynamic Cluster Creator with Spiderfy & Direct Click
+  clusterGrp = L.markerClusterGroup({
+    chunkedLoading: true,
+    maxClusterRadius: 40,
+    spiderfyOnMaxZoom: true,
+    showCoverageOnHover: false,
+    zoomToBoundsOnClick: true,
+    spiderfyDistanceMultiplier: 2.2,
+    iconCreateFunction: function(cluster) {
+      const markers = cluster.getAllChildMarkers();
+      const count = markers.length;
+      
+      let cls = 'cluster-mix';
+      if (healthFilter === 'G') cls = 'cluster-g';
+      else if (healthFilter === 'Y') cls = 'cluster-y';
+      else if (healthFilter === 'R') cls = 'cluster-r';
+      else if (healthFilter === 'ZV') cls = 'cluster-zv';
+      else if (healthFilter === 'ZR') cls = 'cluster-zr';
+      else {
+        const gCnt = markers.filter(m => m.options.outletStatus === 'G').length;
+        const rCnt = markers.filter(m => m.options.outletStatus === 'R').length;
+        if (gCnt === count) cls = 'cluster-g';
+        else if (rCnt === count) cls = 'cluster-r';
+        else if (gCnt > rCnt) cls = 'cluster-g';
+        else if (rCnt > gCnt) cls = 'cluster-r';
+        else cls = 'cluster-y';
+      }
+
+      const size = count < 10 ? 32 : count < 50 ? 38 : 46;
+      return L.divIcon({
+        html: `<div class="custom-cluster ${cls}" style="width:${size}px;height:${size}px;">${count}</div>`,
+        className: '',
+        iconSize: [size, size]
+      });
+    }
+  });
+
+  map.addLayer(clusterGrp);
+
+  buildDivSidebar();
+  drawDivisionPolygons();
+});
+
+/* ═══════════════ HELPER: GET OUTLET MATCH ═══════════════ */
+function isOutletMatch(o) {
+  const [lat,lng,id,name,didx,dist,score,status,rev,visits,lastVisit,daysSince,srName,orders,avgRPV] = o;
+  
+  if (healthFilter === 'ZV') {
+    if ((visits || 0) > 0) return false;
+    if (subTierFilter === 'ZV_UNASSIGNED' && (srName && srName !== 'N/A')) return false;
+    if (subTierFilter === 'ZV_DORMANT' && (daysSince < 90 && daysSince !== 999)) return false;
+    return true;
+  }
+  
+  if (healthFilter === 'ZR') {
+    if ((rev || 0) > 0) return false;
+    if (subTierFilter === 'ZR_VISITED_NO_ORDER' && (visits || 0) === 0) return false;
+    if (subTierFilter === 'ZR_UNVISITED' && (visits || 0) > 0) return false;
+    return true;
+  }
+
+  if (healthFilter !== 'ALL' && status !== healthFilter) return false;
+  if (subTierFilter !== 'ALL') {
+    const st = classifySubTier(status, score, rev, visits, orders, daysSince, avgRPV);
+    if (st.tier !== subTierFilter) return false;
+  }
+  return true;
+}
+
+/* ═══════════════ UPDATE KPIS ═══════════════ */
+function updateKPIs() {
+  try {
+    let tot=0, str=0, mod=0, wk=0, rev=0, vis=0, zVis=0, zRev=0;
+    
+    if (!activeDivision) {
+      CEO_NATIONAL.divisions.forEach(x => {
+        tot += x.outlets; str += x.strong||0; mod += x.moderate||0; wk += x.weak||0;
+        rev += x.revenue||0; vis += x.visits||0;
+        zVis += x.zero_visits||0; zRev += x.zero_rev||0;
+      });
+    } else if (activeDivision && !activeDistrict) {
+      const d = CEO_NATIONAL.divisions.find(x => x.name === activeDivision) || {};
+      tot = d.outlets||0; str = d.strong||0; mod = d.moderate||0; wk = d.weak||0;
+      rev = d.revenue||0; vis = d.visits||0;
+      zVis = d.zero_visits||0; zRev = d.zero_rev||0;
+    } else {
+      const divIdx = DIV_NAMES.indexOf(activeDivision);
+      const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
+      const distOutlets = allOutlets.filter(o => o[5] && o[5].toLowerCase() === activeDistrict.toLowerCase() && (!activeThana || (o[16] && o[16].toLowerCase() === activeThana.toLowerCase())));
+      
+      tot = distOutlets.length;
+      distOutlets.forEach(o => {
+        if (o[7] === 'G') str++;
+        else if (o[7] === 'Y') mod++;
+        else if (o[7] === 'R') wk++;
+        rev += (o[8]||0);
+        vis += (o[9]||0);
+        if ((o[9]||0) === 0) zVis++;
+        if ((o[8]||0) === 0) zRev++;
+      });
+    }
+
+    let displayCount = tot;
+    if (healthFilter === 'G') displayCount = str;
+    else if (healthFilter === 'Y') displayCount = mod;
+    else if (healthFilter === 'R') displayCount = wk;
+
+    document.getElementById('kTotal').textContent  = displayCount.toLocaleString();
+    document.getElementById('kStrong').textContent = str.toLocaleString();
+    document.getElementById('kMod').textContent    = mod.toLocaleString();
+    document.getElementById('kWeak').textContent   = wk.toLocaleString();
+    document.getElementById('kRev').textContent    = rev > 1e9 ? '৳'+(rev/1e9).toFixed(1)+'B' : '৳'+(rev/1e6).toFixed(1)+'M';
+    document.getElementById('kVis').textContent    = (vis/1e6).toFixed(2)+'M';
+  } catch(e){}
+}
+
+/* ═══════════════ 1. DRAW DIVISION POLYGONS ═══════════════ */
+function drawDivisionPolygons() {
+  polyLayer.clearLayers();
+  districtPolyLayer.clearLayers();
+  thanaPolyLayer.clearLayers();
+  clusterGrp.clearLayers();
+
+  BD_DIVISIONS_GEO.features.forEach(feat => {
+    const dname  = feat.properties.name;
+    const color  = DIV_COLORS[dname] || '#64748b';
+    const didx   = DIV_NAMES.indexOf(dname);
+    const divDat = CEO_NATIONAL.divisions.find(d => d.name === dname) || {};
+    
+    let count = divDat.outlets || 0;
+    if (healthFilter === 'G') count = divDat.strong || 0;
+    else if (healthFilter === 'Y') count = divDat.moderate || 0;
+    else if (healthFilter === 'R') count = divDat.weak || 0;
+    else if (healthFilter === 'ZV') count = divDat.zero_visits || 0;
+    else if (healthFilter === 'ZR') count = divDat.zero_rev || 0;
+
+    const rev    = divDat.revenue || 0;
+    const pct    = divDat.outlets ? Math.round(((divDat.strong||0)/divDat.outlets)*100) : 0;
+
+    const poly = L.geoJSON(feat, {
+      interactive: true,
+      style: () => ({
+        fillColor: color,
+        fillOpacity: isDark ? 0.62 : 0.65,
+        color: isDark ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.75)',
+        weight: 2
+      })
+    });
+
+    poly.on('mouseover', e => {
+      e.target.setStyle({fillOpacity:0.85, color:'#fff', weight:3});
+      e.target.bringToFront();
+    });
+    poly.on('mouseout', e => {
+      e.target.setStyle({fillOpacity:isDark?0.62:0.65, color:isDark?'rgba(255,255,255,0.35)':'rgba(255,255,255,0.75)', weight:2});
+    });
+    poly.on('click', () => drillDivision(didx, dname));
+
+    poly.bindTooltip(`
+      <div style="font-family:'Outfit',sans-serif;min-width:160px;">
+        <div style="font-size:15px;font-weight:900;color:${color};margin-bottom:5px;">${dname} Division</div>
+        <div style="font-size:12px;font-weight:600;">${healthFilter==='ALL'?'Total':healthFilter==='G'?'Strong':healthFilter==='Y'?'Moderate':healthFilter==='ZV'?'🚫 0-Visits':healthFilter==='ZR'?'💸 0-Revenue':'Weak'} Outlets: <b>${count.toLocaleString()}</b></div>
+        <div style="font-size:12px;font-weight:600;">Revenue: <b>৳${(rev/1e9).toFixed(2)}B</b></div>
+        <div style="font-size:12px;font-weight:600;">Strong Buyers: <b>${pct}%</b></div>
+        <div style="font-size:11px;color:#c084fc;font-weight:700;">• 0-Visits: <b>${(divDat.zero_visits||0).toLocaleString()} (${Math.round(((divDat.zero_visits||0)/divDat.outlets)*100)}%)</b></div>
+        <div style="font-size:11px;color:#fb7185;font-weight:700;">• 0-Revenue: <b>${(divDat.zero_rev||0).toLocaleString()} (${Math.round(((divDat.zero_rev||0)/divDat.outlets)*100)}%)</b></div>
+      </div>`, {sticky:false, direction:'top', className:'div-tooltip', offset:[0,-6]});
+
+    polyLayer.addLayer(poly);
+
+    const center = DIV_CENTERS[dname];
+    if (center && didx >= 0) {
+      const lbl = L.divIcon({
+        className:'',
+        html:`<div class="div-lbl">${dname}<br><span style="font-size:11px;font-family:'JetBrains Mono';font-weight:700;opacity:.95;">${count.toLocaleString()}</span></div>`,
+        iconSize:[110,38], iconAnchor:[55,19]
+      });
+      const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
+      mk.on('click', () => drillDivision(didx, dname));
+      polyLayer.addLayer(mk);
+    }
+  });
+}
+
+/* ═══════════════ 2. DRAW DISTRICT POLYGONS ═══════════════ */
+function drawDistrictPolygons(divName, divIdx) {
+  polyLayer.clearLayers();
+  districtPolyLayer.clearLayers();
+  thanaPolyLayer.clearLayers();
+  clusterGrp.clearLayers();
+
+  if(typeof BD_DISTRICTS_GEO === 'undefined' || !BD_DISTRICTS_GEO.features) return;
+
+  const distFeatures = BD_DISTRICTS_GEO.features.filter(f => f.properties.division === divName);
+  let colorIdx = 0;
+  let bounds = L.latLngBounds([]);
+
+  distFeatures.forEach(feat => {
+    const distName = feat.properties.district;
+    const color = DISTRICT_PALETTE[colorIdx % DISTRICT_PALETTE.length];
+    colorIdx++;
+
+    const distDat = CEO_NATIONAL.districts.find(d => d.district.toLowerCase() === distName.toLowerCase() && d.div === divName) || {};
+    let count = distDat.outlets || 0;
+    if (healthFilter === 'G') count = distDat.strong || 0;
+    else if (healthFilter === 'Y') count = distDat.moderate || 0;
+    else if (healthFilter === 'R') count = distDat.weak || 0;
+    else if (healthFilter === 'ZV') count = distDat.zero_visits || 0;
+    else if (healthFilter === 'ZR') count = distDat.zero_rev || 0;
+
+    const rev = distDat.revenue || 0;
+    const pct = distDat.outlets ? Math.round(((distDat.strong||0)/distDat.outlets)*100) : 0;
+
+    const poly = L.geoJSON(feat, {
+      interactive: true,
+      style: () => ({
+        fillColor: color,
+        fillOpacity: isDark ? 0.65 : 0.68,
+        color: isDark ? 'rgba(255,255,255,0.40)' : 'rgba(255,255,255,0.85)',
+        weight: 2
+      })
+    });
+
+    bounds.extend(poly.getBounds());
+
+    poly.on('mouseover', e => {
+      if(!activeDistrict || activeDistrict !== distName) {
+        e.target.setStyle({fillOpacity:0.88, color:'#fff', weight:3.5});
+        e.target.bringToFront();
+      }
+    });
+    poly.on('mouseout', e => {
+      if(!activeDistrict || activeDistrict !== distName) {
+        e.target.setStyle({fillOpacity:isDark?0.65:0.68, color:isDark?'rgba(255,255,255,0.40)':'rgba(255,255,255,0.85)', weight:2});
+      }
+    });
+    poly.on('click', () => {
+      drillDistrict(distName, divIdx, feat);
+    });
+
+    poly.bindTooltip(`
+      <div style="font-family:'Outfit',sans-serif;min-width:150px;">
+        <div style="font-size:14px;font-weight:900;color:${color};margin-bottom:4px;">${distName} District</div>
+        <div style="font-size:12px;font-weight:600;">${healthFilter==='ALL'?'Total':healthFilter==='G'?'Strong':healthFilter==='Y'?'Moderate':healthFilter==='ZV'?'🚫 0-Visits':healthFilter==='ZR'?'💸 0-Revenue':'Weak'} Outlets: <b>${count.toLocaleString()}</b></div>
+        <div style="font-size:12px;font-weight:600;">Revenue: <b>৳${(rev/1e6).toFixed(1)}M</b></div>
+        <div style="font-size:12px;font-weight:600;">Strong: <b>${pct}%</b></div>
+        <div style="font-size:11px;color:#c084fc;font-weight:700;">• 0-Visits: <b>${(distDat.zero_visits||0).toLocaleString()} (${distDat.outlets?Math.round(((distDat.zero_visits||0)/distDat.outlets)*100):0}%)</b></div>
+        <div style="font-size:11px;color:#fb7185;font-weight:700;">• 0-Revenue: <b>${(distDat.zero_rev||0).toLocaleString()} (${distDat.outlets?Math.round(((distDat.zero_rev||0)/distDat.outlets)*100):0}%)</b></div>
+        <div style="font-size:10px;color:var(--blue);margin-top:4px;font-weight:700;">👉 Click to explore Thanas &amp; Outlets</div>
+      </div>`, {sticky:false, direction:'top', className:'div-tooltip', offset:[0,-6]});
+
+    districtPolyLayer.addLayer(poly);
+
+    const center = poly.getBounds().getCenter();
+    const lbl = L.divIcon({
+      className:'',
+      html:`<div class="dist-lbl">${distName}<br><span style="font-size:10px;font-family:'JetBrains Mono';font-weight:700;opacity:.95;">${count.toLocaleString()}</span></div>`,
+      iconSize:[100,34], iconAnchor:[50,17]
+    });
+    const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
+    mk.on('click', () => {
+      drillDistrict(distName, divIdx, feat);
+    });
+    districtPolyLayer.addLayer(mk);
+  });
+
+  if(bounds.isValid()){
+    map.fitBounds(bounds, {padding:[40,40], maxZoom:10});
+  }
+}
+
+/* ═══════════════ 2.5 DRAW THANA / UPAZILA POLYGONS ═══════════════ */
+function drawThanaPolygons(distName, divIdx) {
+  thanaPolyLayer.clearLayers();
+  if(typeof BD_THANAS_GEO === 'undefined' || !BD_THANAS_GEO.features) return;
+
+  const thanaFeatures = BD_THANAS_GEO.features.filter(f => 
+    f.properties.district && f.properties.district.toLowerCase() === distName.toLowerCase()
+  );
+
+  const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
+  const distOutlets = allOutlets.filter(o => o[5] && o[5].toLowerCase() === distName.toLowerCase());
+
+  let colorIdx = 0;
+  let bounds = L.latLngBounds([]);
+
+  thanaFeatures.forEach(feat => {
+    const tName = feat.properties.thana;
+    const color = DISTRICT_PALETTE[colorIdx % DISTRICT_PALETTE.length];
+    colorIdx++;
+
+    const tOutlets = distOutlets.filter(o => o[16] && o[16].toLowerCase() === tName.toLowerCase() && isOutletMatch(o));
+    const count = tOutlets.length;
+    let rev = 0;
+    tOutlets.forEach(o => rev += (o[8]||0));
+
+    const poly = L.geoJSON(feat, {
+      interactive: true,
+      style: () => ({
+        fillColor: color,
+        fillOpacity: isDark ? 0.55 : 0.58,
+        color: isDark ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.85)',
+        weight: 1.8
+      })
+    });
+
+    bounds.extend(poly.getBounds());
+
+    poly.on('mouseover', e => {
+      if(!activeThana || activeThana !== tName) {
+        e.target.setStyle({fillOpacity:0.82, color:'#fff', weight:3});
+        e.target.bringToFront();
+      }
+    });
+    poly.on('mouseout', e => {
+      if(!activeThana || activeThana !== tName) {
+        e.target.setStyle({fillOpacity:isDark?0.55:0.58, color:isDark?'rgba(255,255,255,0.45)':'rgba(255,255,255,0.85)', weight:1.8});
+      }
+    });
+    poly.on('click', () => {
+      drillThana(tName, distName, divIdx, feat);
+    });
+
+    poly.bindTooltip(`
+      <div style="font-family:'Outfit',sans-serif;min-width:140px;">
+        <div style="font-size:13.5px;font-weight:900;color:${color};margin-bottom:3px;">${tName} Thana</div>
+        <div style="font-size:11.5px;font-weight:600;">${healthFilter==='ALL'?'Total':healthFilter==='G'?'Strong':healthFilter==='Y'?'Moderate':healthFilter==='ZV'?'🚫 0-Visits':healthFilter==='ZR'?'💸 0-Revenue':'Weak'} Outlets: <b>${count.toLocaleString()}</b></div>
+        <div style="font-size:11.5px;font-weight:600;">Revenue: <b>৳${rev >= 1e6 ? (rev/1e6).toFixed(1)+'M' : Math.round(rev/1000)+'k'}</b></div>
+        <div style="font-size:10px;color:var(--blue);margin-top:4px;font-weight:700;">👉 Click to isolate micro-outlets</div>
+      </div>`, {sticky:false, direction:'top', className:'div-tooltip', offset:[0,-6]});
+
+    thanaPolyLayer.addLayer(poly);
+
+    const center = poly.getBounds().getCenter();
+    const lbl = L.divIcon({
+      className:'',
+      html:`<div class="thana-lbl">${tName}<br><span style="font-size:9.5px;font-family:'JetBrains Mono';font-weight:700;opacity:.95;">${count.toLocaleString()}</span></div>`,
+      iconSize:[90,30], iconAnchor:[45,15]
+    });
+    const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
+    mk.on('click', () => {
+      drillThana(tName, distName, divIdx, feat);
+    });
+    thanaPolyLayer.addLayer(mk);
+  });
+
+  if(bounds.isValid()){
+    map.fitBounds(bounds, {padding:[40,40], maxZoom:12});
+  }
+}
+
+/* ═══════════════ SIDEBAR DIVISION CARDS ═══════════════ */
+function buildDivSidebar() {
+  const g = document.getElementById('divGrid');
+  g.innerHTML = '';
+  CEO_NATIONAL.divisions.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'dcard';
+    el.setAttribute('data-d', d.name);
+    el.id = 'dc'+d.idx;
+    el.onclick = () => drillDivision(d.idx, d.name);
+    
+    let count = d.outlets;
+    if (healthFilter === 'G') count = d.strong||0;
+    else if (healthFilter === 'Y') count = d.moderate||0;
+    else if (healthFilter === 'R') count = d.weak||0;
+
+    const pct = d.outlets ? Math.round(((d.strong||0)/d.outlets)*100) : 0;
+    el.innerHTML = `<div class="dn">${d.name}</div><div class="dc">${count.toLocaleString()}</div><div class="dm">${pct}% Strong • ৳${((d.revenue||0)/1e9).toFixed(1)}B</div>`;
+    g.appendChild(el);
+  });
+}
+
+/* ═══════════════ DRILL DIVISION ═══════════════ */
+function drillDivision(divIdx, divName) {
+  activeDivision = divName;
+  activeDistrict = null;
+  activeThana = null;
+
+  document.querySelectorAll('.dcard').forEach(c => c.classList.remove('sel'));
+  const dc = document.getElementById('dc'+divIdx);
+  if(dc) dc.classList.add('sel');
+
+  document.getElementById('thanaPanel').style.display = 'none';
+  buildDistPanel(divName, divIdx);
+  updateBC();
+  updateKPIs();
+  drawDistrictPolygons(divName, divIdx);
+}
+
+/* ═══════════════ DISTRICT PANEL ═══════════════ */
+function buildDistPanel(divName, divIdx) {
+  const panel  = document.getElementById('distPanel');
+  const scroll = document.getElementById('distScroll');
+  document.getElementById('distTitle').textContent = divName+' Districts';
+  panel.style.display = 'block';
+
+  const dists = CEO_NATIONAL.districts.filter(d=>d.div===divName);
+  document.getElementById('distBadge').textContent = dists.length+' Districts';
+  scroll.innerHTML = '';
+
+  dists.sort((a,b)=> {
+    let ca = healthFilter==='G'?a.strong:healthFilter==='Y'?a.moderate:healthFilter==='R'?a.weak:healthFilter==='ZV'?a.zero_visits:healthFilter==='ZR'?a.zero_rev:a.outlets;
+    let cb = healthFilter==='G'?b.strong:healthFilter==='Y'?b.moderate:healthFilter==='R'?b.weak:healthFilter==='ZV'?b.zero_visits:healthFilter==='ZR'?b.zero_rev:b.outlets;
+    return cb - ca;
+  }).forEach(d=>{
+    let count = d.outlets;
+    if (healthFilter === 'G') count = d.strong||0;
+    else if (healthFilter === 'Y') count = d.moderate||0;
+    else if (healthFilter === 'R') count = d.weak||0;
+    else if (healthFilter === 'ZV') count = d.zero_visits||0;
+    else if (healthFilter === 'ZR') count = d.zero_rev||0;
+
+    const row = document.createElement('div');
+    row.className = 'drow';
+    row.id = 'dr_'+d.district.replace(/\s+/g,'_');
+    row.onclick = () => {
+      drillDistrict(d.district, divIdx);
+    };
+    row.innerHTML = `<span class="drn">${d.district}</span><span class="drc">${count.toLocaleString()}</span>`;
+    scroll.appendChild(row);
+  });
+}
+
+/* ═══════════════ THANA / UPAZILA PANEL ═══════════════ */
+function buildThanaPanel(distName, divIdx) {
+  const panel  = document.getElementById('thanaPanel');
+  const scroll = document.getElementById('thanaScroll');
+  document.getElementById('thanaTitle').textContent = distName+' Thanas';
+  panel.style.display = 'block';
+
+  const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
+  const distOutlets = allOutlets.filter(o => o[5] && o[5].toLowerCase() === distName.toLowerCase());
+
+  // Aggregate Thana Outlet Counts
+  const thanaMap = {};
+  distOutlets.forEach(o => {
+    const t = o[16] || 'Other';
+    if (!thanaMap[t]) thanaMap[t] = { name: t, outlets: 0, strong: 0, moderate: 0, weak: 0, zero_visits: 0, zero_rev: 0 };
+    thanaMap[t].outlets++;
+    if (o[7] === 'G') thanaMap[t].strong++;
+    else if (o[7] === 'Y') thanaMap[t].moderate++;
+    else if (o[7] === 'R') thanaMap[t].weak++;
+    if ((o[9]||0) === 0) thanaMap[t].zero_visits++;
+    if ((o[8]||0) === 0) thanaMap[t].zero_rev++;
+  });
+
+  const thanaList = Object.values(thanaMap);
+  document.getElementById('thanaBadge').textContent = thanaList.length+' Thanas';
+  scroll.innerHTML = '';
+
+  // "All Thanas" option to reset Thana filter
+  const allRow = document.createElement('div');
+  allRow.className = 'drow' + (!activeThana ? ' sel' : '');
+  allRow.onclick = () => {
+    activeThana = null;
+    updateBC();
+    updateKPIs();
+    document.querySelectorAll('#thanaScroll .drow').forEach(r=>r.classList.remove('sel'));
+    allRow.classList.add('sel');
+    drawThanaPolygons(distName, divIdx);
+    renderMicroOutlets(divIdx, distName);
+  };
+  allRow.innerHTML = `<span class="drn">🌐 All Thanas</span><span class="drc">${distOutlets.length.toLocaleString()}</span>`;
+  scroll.appendChild(allRow);
+
+  thanaList.sort((a,b)=> {
+    let ca = healthFilter==='G'?a.strong:healthFilter==='Y'?a.moderate:healthFilter==='R'?a.weak:healthFilter==='ZV'?a.zero_visits:healthFilter==='ZR'?a.zero_rev:a.outlets;
+    let cb = healthFilter==='G'?b.strong:healthFilter==='Y'?b.moderate:healthFilter==='R'?b.weak:healthFilter==='ZV'?b.zero_visits:healthFilter==='ZR'?b.zero_rev:b.outlets;
+    return cb - ca;
+  }).forEach(t=>{
+    let count = t.outlets;
+    if (healthFilter === 'G') count = t.strong||0;
+    else if (healthFilter === 'Y') count = t.moderate||0;
+    else if (healthFilter === 'R') count = t.weak||0;
+    else if (healthFilter === 'ZV') count = t.zero_visits||0;
+    else if (healthFilter === 'ZR') count = t.zero_rev||0;
+
+    const row = document.createElement('div');
+    row.className = 'drow' + (activeThana === t.name ? ' sel' : '');
+    row.id = 'tr_'+t.name.replace(/\s+/g,'_');
+    row.onclick = () => {
+      drillThana(t.name, distName, divIdx);
+    };
+    row.innerHTML = `<span class="drn">${t.name}</span><span class="drc">${count.toLocaleString()}</span>`;
+    scroll.appendChild(row);
+  });
+}
+
+/* ═══════════════ DRILL DISTRICT ═══════════════ */
+function drillDistrict(distName, divIdx, feat) {
+  activeDistrict = distName;
+  activeThana = null;
+  updateBC();
+  updateKPIs();
+
+  document.querySelectorAll('#distScroll .drow').forEach(r=>r.classList.remove('sel'));
+  const dr = document.getElementById('dr_'+distName.replace(/\s+/g,'_'));
+  if(dr) dr.classList.add('sel');
+
+  buildThanaPanel(distName, divIdx);
+  drawThanaPolygons(distName, divIdx);
+  setTimeout(() => renderMicroOutlets(divIdx, distName), 350);
+}
+
+/* ═══════════════ DRILL THANA / UPAZILA ═══════════════ */
+function drillThana(thanaName, distName, divIdx, feat) {
+  activeThana = thanaName;
+  updateBC();
+  updateKPIs();
+
+  document.querySelectorAll('#thanaScroll .drow').forEach(r=>r.classList.remove('sel'));
+  const tr = document.getElementById('tr_'+thanaName.replace(/\s+/g,'_'));
+  if(tr) tr.classList.add('sel');
+
+  // Highlight selected thana polygon
+  thanaPolyLayer.eachLayer(l => {
+    if(l.feature && l.feature.properties && l.feature.properties.thana === thanaName){
+      l.setStyle({fillOpacity:0.25, color:'#fff', weight:3.5});
+      l.bringToFront();
+    } else if(l.feature){
+      l.setStyle({fillOpacity:0.08, color:'rgba(255,255,255,0.15)', weight:1});
+    }
+  });
+
+  if(feat){
+    map.fitBounds(L.geoJSON(feat).getBounds(), {padding:[50,50], maxZoom:14});
+  } else if (typeof BD_THANAS_GEO !== 'undefined' && BD_THANAS_GEO.features) {
+    const matchFeat = BD_THANAS_GEO.features.find(f => 
+      f.properties.thana && f.properties.thana.toLowerCase() === thanaName.toLowerCase() &&
+      f.properties.district && f.properties.district.toLowerCase() === distName.toLowerCase()
+    );
+    if(matchFeat){
+      map.fitBounds(L.geoJSON(matchFeat).getBounds(), {padding:[50,50], maxZoom:14});
+    }
+  }
+
+  setTimeout(() => renderMicroOutlets(divIdx, distName, thanaName), 250);
+}
+
+/* ═══════════════ 3. RENDER MICRO OUTLETS (HIGH CONTRAST & DIRECT CLICK) ═══════════════ */
+function renderMicroOutlets(divIdx, distName, thanaName) {
+  clusterGrp.clearLayers();
+  pillarLayer.clearLayers();
+  routeLayer.clearLayers();
+  wsLayer.clearLayers();
+  if(heatLayer){ map.removeLayer(heatLayer); heatLayer=null; }
+
+  const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
+  const filterThana = thanaName || activeThana;
+  
+  // STRICT FILTERING: District & Optional Thana match
+  const outlets = allOutlets.filter(o => {
+    if (!o[5] || o[5].toLowerCase() !== distName.toLowerCase()) return false;
+    if (filterThana && (!o[16] || o[16].toLowerCase() !== filterThana.toLowerCase())) return false;
+    return isOutletMatch(o);
+  });
+  const markers=[], hPts=[], pMarkers=[];
+
+  // Find max revenue in this district for scaling 3D pillar height
+  let maxRevInDist = 1;
+  outlets.forEach(o => { if (o[8] > maxRevInDist) maxRevInDist = o[8]; });
+
+  outlets.forEach(o => {
+    const [lat,lng,id,name,didx,dist,score,status,rev,visits,lastVisit,daysSince,srName,orders,avgRPV,trend]=o;
+    const st = classifySubTier(status, score, rev, visits, orders, daysSince, avgRPV);
+
+    let mk;
+    if (pillarsOn) {
+      // 3D Sales Height Pillar Marker
+      const heightPx = Math.max(14, Math.min(85, Math.round(((rev||0) / maxRevInDist) * 75) + 12));
+      const revShort = (rev||0) >= 1e6 ? '৳'+((rev||0)/1e6).toFixed(1)+'M' : (rev||0) >= 1000 ? '৳'+Math.round((rev||0)/1000)+'k' : '৳'+(rev||0);
+      const pillarIcon = L.divIcon({
+        className: '',
+        html: `
+          <div class="pillar-3d-marker" style="height:${heightPx+22}px;color:${st.color};">
+            <div class="pillar-val">${revShort}</div>
+            <div class="pillar-cap" style="background:${st.color};"></div>
+            <div class="pillar-stem" style="height:${heightPx}px;"></div>
+            <div class="pillar-base"></div>
+          </div>
+        `,
+        iconSize: [28, heightPx+22],
+        iconAnchor: [14, heightPx+16]
+      });
+      mk = L.marker([lat,lng], {icon: pillarIcon, interactive: true, outletStatus: status});
+    } else {
+      // Neon vibrant solid colors with white border & drop glow
+      let pinColor = st.color;
+      if (healthFilter === 'ZV') pinColor = '#a855f7';
+      else if (healthFilter === 'ZR') pinColor = '#f43f5e';
+
+      mk = L.circleMarker([lat,lng],{
+        radius: 9,
+        fillColor: pinColor,
+        color: '#ffffff',
+        weight: 2.5,
+        opacity: 1.0,
+        fillOpacity: 0.95,
+        outletStatus: status,
+        interactive: true
+      });
+    }
+
+    // Tooltip for quick hover
+    mk.bindTooltip(`
+      <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;">
+        <span style="color:${st.color};font-weight:900;">● ${st.name}</span><br>
+        <b>${name}</b> (#${id})<br>
+        Revenue: ৳${(rev||0).toLocaleString()} • ${visits} Visits
+      </div>`, {direction:'top', offset:[0,-8]});
+
+    // Direct click handler with full event stop to ensure modal opens without map zoom/back
+    mk.on('click', function(e) {
+      if (e.originalEvent) {
+        e.originalEvent.stopPropagation();
+        e.originalEvent.preventDefault();
+      }
+      L.DomEvent.stopPropagation(e);
+      L.DomEvent.preventDefault(e);
+      showModal(o);
+    });
+
+    markers.push(mk);
+    if(heatOn) hPts.push([lat,lng, rev>0?1:0.4]);
+  });
+
+  // Clustered loading for smooth 60fps rendering without browser freezing
+  clusterGrp.addLayers(markers);
+
+  if(heatOn && hPts.length) heatLayer = L.heatLayer(hPts,{radius:25,blur:15,maxZoom:15}).addTo(map);
+
+  // Render SR Routes & Journey Paths if enabled
+  if (routesOn) {
+    renderSRRoutePaths(outlets);
+  }
+
+  // Render White Space Opportunity Hubs if enabled
+  if (wsOn) {
+    renderWhiteSpaceHubs(divIdx, distName, outlets);
+  }
+}
+
+/* ═══════════════ MODULE 1: SR GPS ROUTE & JOURNEY PATH TRACKING ═══════════════ */
+function renderSRRoutePaths(outlets) {
+  routeLayer.clearLayers();
+  
+  // Group visited outlets by SR Name
+  const srGroups = {};
+  outlets.forEach(o => {
+    const sr = o[12];
+    if (sr && sr !== 'N/A' && o[9] > 0) {
+      if (!srGroups[sr]) srGroups[sr] = [];
+      srGroups[sr].push(o);
+    }
+  });
+
+  const srColors = ['#3b82f6', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4', '#f97316'];
+  let cIdx = 0;
+
+  Object.keys(srGroups).forEach(sr => {
+    const pts = srGroups[sr];
+    if (pts.length < 2) return;
+
+    // Sort by last visit date or simulated sequence
+    pts.sort((a,b) => (a[11]||0) - (b[11]||0));
+    const pathCoords = pts.map(p => [p[0], p[1]]);
+    const color = srColors[cIdx % srColors.length];
+    cIdx++;
+
+    // Draw GPS Polyline Route
+    const polyline = L.polyline(pathCoords, {
+      color: color,
+      weight: 3.5,
+      opacity: 0.85,
+      dashArray: '8, 6',
+      lineJoin: 'round'
+    });
+    
+    polyline.bindTooltip(`
+      <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;">
+        <span style="color:${color};font-weight:900;">🚶 SR Route: ${sr}</span><br>
+        Covered Outlets: <b>${pts.length}</b><br>
+        Route Inefficiencies &amp; Sequence Path
+      </div>`, {sticky: true});
+    
+    routeLayer.addLayer(polyline);
+
+    // Sequence markers along the path
+    pts.forEach((p, seq) => {
+      const seqIcon = L.divIcon({
+        className: '',
+        html: `<div class="sr-seq-badge" style="background:${color};">${seq+1}</div>`,
+        iconSize: [22, 22],
+        iconAnchor: [11, 11]
+      });
+      const sMk = L.marker([p[0], p[1]], {icon: seqIcon, interactive: true});
+      sMk.bindTooltip(`
+        <div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;">
+          <b>Stop #${seq+1}</b>: ${p[3]}<br>
+          SR: <span style="color:${color};font-weight:900;">${sr}</span><br>
+          Revenue: ৳${(p[8]||0).toLocaleString()}
+        </div>`, {direction:'top', offset:[0,-10]});
+      sMk.on('click', (e) => {
+        L.DomEvent.stopPropagation(e);
+        showModal(p);
+      });
+      routeLayer.addLayer(sMk);
+    });
+  });
+}
+
+/* ═══════════════ MODULE 1: WHITE-SPACE EXPANSION OPPORTUNITY HUBS ═══════════════ */
+function renderWhiteSpaceHubs(divIdx, distName, outlets) {
+  wsLayer.clearLayers();
+  
+  // Calculate spatial bounding box and find clusters with low brand density
+  if (!outlets || outlets.length === 0) return;
+
+  const lats = outlets.map(o => o[0]);
+  const lngs = outlets.map(o => o[1]);
+  const minLat = Math.min(...lats), maxLat = Math.max(...lats);
+  const minLng = Math.min(...lngs), maxLng = Math.max(...lngs);
+
+  // Generate strategic unserved micro-hubs in peripheral high-density retail corridors
+  const numHubs = 4;
+  const hubs = [
+    { name: `${distName} East Commercial Zone`, lat: minLat + (maxLat - minLat)*0.78, lng: minLng + (maxLng - minLng)*0.82, pop: '35K Est. Retail Density', opp: 'High Demand • 0 Competitor Dominance', estVal: '৳4.2M/mo Potential' },
+    { name: `${distName} North Bypass Market`, lat: minLat + (maxLat - minLat)*0.85, lng: minLng + (maxLng - minLng)*0.25, pop: '22K Est. Retail Density', opp: 'New Wholesale Hub • Underserved', estVal: '৳2.8M/mo Potential' },
+    { name: `${distName} South Industrial Belt`, lat: minLat + (maxLat - minLat)*0.18, lng: minLng + (maxLng - minLng)*0.70, pop: '40K Est. Retail Density', opp: 'Rapid FMCG Consumption Growth', estVal: '৳5.5M/mo Potential' },
+    { name: `${distName} Central Extension Hub`, lat: minLat + (maxLat - minLat)*0.45, lng: minLng + (maxLng - minLng)*0.15, pop: '18K Est. Retail Density', opp: 'High Footfall • Route Gap', estVal: '৳3.1M/mo Potential' }
+  ];
+
+  hubs.forEach(h => {
+    const wsIcon = L.divIcon({
+      className: '',
+      html: `<div class="whitespace-marker">🎯</div>`,
+      iconSize: [28, 28],
+      iconAnchor: [14, 14]
+    });
+    const wsMk = L.marker([h.lat, h.lng], {icon: wsIcon, interactive: true});
+    wsMk.bindTooltip(`
+      <div style="font-family:'Outfit',sans-serif;min-width:180px;">
+        <div style="font-size:13px;font-weight:900;color:#ff2a85;margin-bottom:3px;">🎯 WHITE-SPACE EXPANSION HUB</div>
+        <div style="font-size:12px;font-weight:800;color:var(--t1);">${h.name}</div>
+        <div style="font-size:11px;color:var(--t2);margin-top:2px;">• Potential: <b>${h.estVal}</b></div>
+        <div style="font-size:11px;color:var(--t2);">• Retail Density: <b>${h.pop}</b></div>
+        <div style="font-size:10.5px;color:var(--amber);margin-top:4px;font-weight:700;">${h.opp}</div>
+      </div>`, {sticky: false, direction:'top', offset:[0,-10]});
+    
+    // Pulse circle area
+    const pulseCircle = L.circle([h.lat, h.lng], {
+      radius: 650,
+      color: '#ff2a85',
+      fillColor: '#ff2a85',
+      fillOpacity: 0.15,
+      weight: 1.5,
+      dashArray: '4,4'
+    });
+
+    wsLayer.addLayer(pulseCircle);
+    wsLayer.addLayer(wsMk);
+  });
+}
+
+/* ═══════════════ MODULE 1: NATIONWIDE WHITE-SPACE EXPANSION HUBS ═══════════════ */
+const NATIONWIDE_WHITE_SPACES = [
+  { name: 'Cumilla-Brahmanbaria Industrial Corridor', div: 'Chattogram', lat: 23.58, lng: 91.15, pop: '4,200 Unreached Potential Stores', opp: 'High Population Density • FMCG Supply Gap', estVal: '৳18.5M/mo Potential' },
+  { name: 'Chandpur Meghna Riverine Trading Port', div: 'Chattogram', lat: 23.23, lng: 90.66, pop: '1,800 Unreached Potential Stores', opp: 'Wholesale Riverine Hub • Underserved', estVal: '৳9.2M/mo Potential' },
+  { name: 'Habiganj-Moulvibazar Tea Belt Corridor', div: 'Sylhet', lat: 24.38, lng: 91.52, pop: '2,400 Unreached Potential Stores', opp: 'High Local Demand • Weak Outlet Coverage', estVal: '৳12.0M/mo Potential' },
+  { name: 'Rajbari-Faridpur Expressway Hub', div: 'Dhaka', lat: 23.65, lng: 89.75, pop: '2,100 Unreached Potential Stores', opp: 'New Transportation Corridor • Route Gap', estVal: '৳11.8M/mo Potential' },
+  { name: 'Kurigram-Lalmonirhat Northern Border Belt', div: 'Rangpur', lat: 25.82, lng: 89.55, pop: '2,900 Unreached Potential Stores', opp: 'High Footfall Rural Market • 0 Brand Monopoly', estVal: '৳14.6M/mo Potential' },
+  { name: 'Netrokona Haor Fringe Wholesale Market', div: 'Mymensingh', lat: 24.88, lng: 90.73, pop: '1,950 Unreached Potential Stores', opp: 'Seasonal Cash Flow Hub • Coverage Gap', estVal: '৳8.4M/mo Potential' },
+  { name: 'Jashore-Narail Agro-Processing Belt', div: 'Khulna', lat: 23.16, lng: 89.35, pop: '2,600 Unreached Potential Stores', opp: 'Rapid FMCG Consumption Growth', estVal: '৳13.5M/mo Potential' },
+  { name: 'Bhola Island Coastal Commercial Corridor', div: 'Barishal', lat: 22.68, lng: 90.65, pop: '1,400 Unreached Potential Stores', opp: 'Isolated High-Margin Market', estVal: '৳7.2M/mo Potential' }
+];
+
+/* ═══════════════ MODULE 1: NATIONWIDE 3D SALES HEIGHT PILLARS ═══════════════ */
+function renderNationwide3DPillars() {
+  pillarLayer.clearLayers();
+  const maxDivRev = Math.max(...CEO_NATIONAL.divisions.map(d => d.revenue||1));
+
+  CEO_NATIONAL.divisions.forEach(d => {
+    const center = DIV_CENTERS[d.name];
+    if (!center) return;
+    const rev = d.revenue || 0;
+    const heightPx = Math.max(25, Math.min(130, Math.round((rev / maxDivRev) * 115) + 20));
+    const revFormatted = rev >= 1e9 ? '৳'+(rev/1e9).toFixed(1)+'B' : '৳'+(rev/1e6).toFixed(0)+'M';
+    const color = DIV_COLORS[d.name] || '#3b82f6';
+
+    const pillarIcon = L.divIcon({
+      className: '',
+      html: `
+        <div class="pillar-3d-marker" style="height:${heightPx+30}px;color:${color};">
+          <div class="pillar-val" style="border-color:${color};background:#090d1a;">${d.name}: ${revFormatted}</div>
+          <div class="pillar-cap" style="background:${color};width:30px;height:14px;"></div>
+          <div class="pillar-stem" style="height:${heightPx}px;width:22px;"></div>
+          <div class="pillar-base" style="width:36px;height:12px;"></div>
+        </div>
+      `,
+      iconSize: [40, heightPx+30],
+      iconAnchor: [20, heightPx+22]
+    });
+
+    const pMk = L.marker(center, {icon: pillarIcon, interactive: true});
+    pMk.bindTooltip(`
+      <div class="ws-tooltip-wrap">
+        <div class="ws-badge" style="color:${color};">📊 3D DIVISION REVENUE PILLAR</div>
+        <div class="ws-title">${d.name} Division</div>
+        <div class="ws-stat">• 4-Month Revenue: <b style="color:var(--green);">${revFormatted}</b></div>
+        <div class="ws-stat">• Total Outlets: <b>${d.outlets.toLocaleString()}</b></div>
+        <div class="ws-stat">• Active SR Strength: <b>${Math.round(d.outlets/180)} SRs</b></div>
+        <div class="ws-opp">👉 Click to drill down into ${d.name} Districts</div>
+      </div>`, {sticky: false, direction:'top', offset:[0,-14]});
+    
+    pMk.on('click', (e) => {
+      L.DomEvent.stopPropagation(e);
+      drillDivision(d.idx, d.name);
+    });
+    pillarLayer.addLayer(pMk);
+  });
+}
+
+/* ═══════════════ MODULE 1: NATIONWIDE SR CORRIDORS ═══════════════ */
+const NATIONWIDE_SR_CORRIDORS = [
+  { name: 'Dhaka-Gazipur-Mymensingh FMCG Supply Trunk', coords: [[23.81,90.41],[23.99,90.42],[24.35,90.43],[24.74,90.40]], srs: '142 Active SR Beats', rev: '৳560M/mo Flow' },
+  { name: 'Chattogram-Feni-Cumilla Highway Commercial Axis', coords: [[22.35,91.78],[22.78,91.60],[23.01,91.40],[23.46,91.18]], srs: '98 Active SR Beats', rev: '৳380M/mo Flow' },
+  { name: 'Dhaka-Tangail-Sirajganj-Bogura Northern Route', coords: [[23.81,90.41],[24.25,89.92],[24.45,89.71],[24.84,89.37]], srs: '86 Active SR Beats', rev: '৳310M/mo Flow' },
+  { name: 'Dhaka-Padma-Faridpur-Jashore Southern Arterial', coords: [[23.81,90.41],[23.50,90.20],[23.60,89.84],[23.16,89.21]], srs: '74 Active SR Beats', rev: '৳240M/mo Flow' },
+  { name: 'Sylhet-Habiganj-Brahmanbaria Eastern Distribution Hub', coords: [[24.89,91.86],[24.38,91.41],[23.95,91.11]], srs: '52 Active SR Beats', rev: '৳190M/mo Flow' }
+];
+
+function renderNationwideSRRoutes() {
+  routeLayer.clearLayers();
+  const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6'];
+
+  NATIONWIDE_SR_CORRIDORS.forEach((c, idx) => {
+    const color = colors[idx % colors.length];
+    const polyline = L.polyline(c.coords, {
+      color: color,
+      weight: 5,
+      opacity: 0.9,
+      dashArray: '10, 8',
+      lineJoin: 'round'
+    });
+
+    polyline.bindTooltip(`
+      <div class="ws-tooltip-wrap">
+        <div class="ws-badge" style="color:${color};">🚶 NATIONAL SR LOGISTICS &amp; FIELD ARTERY</div>
+        <div class="ws-title">${c.name}</div>
+        <div class="ws-stat">• Field Strength: <b style="color:#ffffff;">${c.srs}</b></div>
+        <div class="ws-stat">• Monthly Commercial Volume: <b style="color:var(--green);">${c.rev}</b></div>
+        <div class="ws-opp">⚡ High-frequency distribution artery with real-time tracking</div>
+      </div>`, {sticky: true});
+
+    routeLayer.addLayer(polyline);
+
+    // Sequence Node Points
+    c.coords.forEach((coord, i) => {
+      const pinIcon = L.divIcon({
+        className: '',
+        html: `<div class="sr-seq-badge" style="background:${color};width:26px;height:26px;font-size:11px;">H${i+1}</div>`,
+        iconSize: [26, 26],
+        iconAnchor: [13, 13]
+      });
+      const p = L.marker(coord, {icon: pinIcon});
+      routeLayer.addLayer(p);
+    });
+  });
+}
+
+function renderNationwideWhiteSpaceHubs() {
+  wsLayer.clearLayers();
+  NATIONWIDE_WHITE_SPACES.forEach(h => {
+    const wsIcon = L.divIcon({
+      className: '',
+      html: `<div class="whitespace-marker" style="width:36px;height:36px;font-size:17px;">🎯</div>`,
+      iconSize: [36, 36],
+      iconAnchor: [18, 18]
+    });
+    const wsMk = L.marker([h.lat, h.lng], {icon: wsIcon, interactive: true});
+    wsMk.bindTooltip(`
+      <div class="ws-tooltip-wrap">
+        <div class="ws-badge">🎯 NATIONAL WHITE-SPACE EXPANSION HUB</div>
+        <div class="ws-title">${h.name} (${h.div})</div>
+        <div class="ws-stat">• Revenue Potential: <b style="color:var(--green);">${h.estVal}</b></div>
+        <div class="ws-stat">• Unreached Stores: <b>${h.pop}</b></div>
+        <div class="ws-opp">${h.opp}</div>
+      </div>`, {sticky: false, direction:'top', offset:[0,-14]});
+
+    const pulseCircle = L.circle([h.lat, h.lng], {
+      radius: 16000,
+      color: '#ff2a85',
+      fillColor: '#ff2a85',
+      fillOpacity: 0.18,
+      weight: 2.5,
+      dashArray: '6,6'
+    });
+
+    wsLayer.addLayer(pulseCircle);
+    wsLayer.addLayer(wsMk);
+  });
+}
+
+/* ═══════════════ TOGGLE MODULE 1 CONTROLS ═══════════════ */
+function toggle3DPillars() {
+  pillarsOn = !pillarsOn;
+  document.getElementById('pillarBtn').classList.toggle('on', pillarsOn);
+  
+  if (activeDistrict && activeDivision) {
+    renderMicroOutlets(DIV_NAMES.indexOf(activeDivision), activeDistrict);
+  } else {
+    // DIRECT NATIONWIDE ALL-OVER-COUNTRY 3D SALES HEIGHT PILLARS
+    if (pillarsOn) {
+      renderNationwide3DPillars();
+    } else {
+      pillarLayer.clearLayers();
+    }
+  }
+}
+
+function toggleWhiteSpace() {
+  wsOn = !wsOn;
+  document.getElementById('wsBtn').classList.toggle('on', wsOn);
+  document.getElementById('legWS').style.display = wsOn ? 'flex' : 'none';
+  
+  if (activeDistrict && activeDivision) {
+    renderMicroOutlets(DIV_NAMES.indexOf(activeDivision), activeDistrict);
+  } else {
+    // DIRECT ALL OVER BANGLADESH NATIONWIDE WHITE-SPACE HUBS
+    if (wsOn) {
+      renderNationwideWhiteSpaceHubs();
+    } else {
+      wsLayer.clearLayers();
+    }
+  }
+}
+
+/* ═══════════════ OUTLET MODAL WITH 9-TIER DIAGNOSTICS & TREND ═══════════════ */
+function showModal(o) {
+  if (!o) return;
+  const [lat,lng,id,name,didx,dist,score,status,rev,visits,lastVisit,daysSince,srName,orders,avgRPV,trend,thana]=o;
+  const st = classifySubTier(status, score, rev, visits, orders, daysSince, avgRPV);
+
+  document.getElementById('mName').textContent = name||'Unnamed Outlet';
+  document.getElementById('mSub').textContent  = `${thana ? thana+' Thana, ' : ''}${dist} District, ${DIV_NAMES[didx]} • Outlet Code / ID #${id}`;
+  document.getElementById('mRev').textContent  = '৳'+(rev||0).toLocaleString();
+  document.getElementById('mVis').textContent  = (visits||0)+' Visits';
+  document.getElementById('mOrd').textContent  = (orders||0)+' Orders';
+  const rate = visits>0?Math.round(((orders||0)/visits)*100):(orders>0?100:0);
+  document.getElementById('mRate').textContent = rate+'%';
+  
+  document.getElementById('mHealth').innerHTML = `<span class="badge b${status}">${status==='G'?'Strong':status==='Y'?'Moderate':'Weak'} (Score: ${score})</span>`;
+  document.getElementById('mTierLevel').innerHTML = `<span style="color:${st.color};font-weight:900;">${st.name}</span>`;
+  document.getElementById('mSR').textContent   = srName && srName!=='N/A' ? srName : 'Unassigned / No SR Contact';
+  document.getElementById('mLV').textContent   = lastVisit?`${lastVisit} (${daysSince}d ago)`:'No recent visit in 4 months';
+  document.getElementById('mRPV').textContent  = '৳'+(avgRPV||0).toLocaleString();
+
+  // Root Cause Diagnosis Box
+  const wb = document.getElementById('mWhyBox');
+  if ((visits||0) === 0) {
+    wb.className = 'why-box zv-box';
+    document.getElementById('mWhyTitle').innerHTML = '🚫 ZERO-VISIT COVERAGE GAP (0 VISITS IN 4 MONTHS)';
+    document.getElementById('mWhyDesc').textContent = `🚨 Zero field visits recorded across the entire 4-month analysis period. Assigned SR: ${srName || 'None'}. Outlet is at extreme dormancy risk. Recommended Action: Verify beat schedule and re-assign SR immediately.`;
+  } else if ((rev||0) === 0) {
+    wb.className = 'why-box zr-box';
+    document.getElementById('mWhyTitle').innerHTML = '💸 ZERO-REVENUE CONVERSION FAILURE (৳0 SALES)';
+    document.getElementById('mWhyDesc').textContent = `⚠️ Field SR visited ${visits} times but generated ৳0 Revenue and 0 Orders. Root cause indicator: Price resistance, uncompetitive trade margin, credit barrier, or stock delivery failure.`;
+  } else {
+    wb.className = 'why-box ' + (status==='G'?'g-box':status==='Y'?'y-box':'');
+    document.getElementById('mWhyTitle').textContent = st.title;
+    document.getElementById('mWhyDesc').textContent = st.desc;
+  }
+
+  // Render Monthly Trend Bars
+  const tBars = document.getElementById('mTrendBars');
+  tBars.innerHTML = '';
+  const monthlyData = trend && trend.length === 4 ? trend : [0, 0, 0, rev||0];
+  const maxM = Math.max(...monthlyData, 1);
+  const mNames = ['Month -3', 'Month -2', 'Month -1', 'Current M'];
+
+  let totalTrend = 0;
+  monthlyData.forEach((val, idx) => {
+    totalTrend += val;
+    const pct = Math.max(8, Math.round((val / maxM) * 100));
+    const col = document.createElement('div');
+    col.className = 'tbar-col';
+    col.innerHTML = `
+      <div class="tbar-val">৳${val >= 1000 ? (val/1000).toFixed(1)+'k' : val}</div>
+      <div class="tbar" style="height:${pct}%;background:${st.color};"></div>
+      <div class="tbar-lbl">${mNames[idx]}</div>
+    `;
+    tBars.appendChild(col);
+  });
+  document.getElementById('mTrendTotal').textContent = `Total: ৳${totalTrend.toLocaleString()}`;
+
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(){ document.getElementById('modal').classList.remove('open'); }
+
+/* ═══════════════ SUB-TIER BUTTON BUILDER ═══════════════ */
+function buildSubTierControls(f) {
+  const box = document.getElementById('subtierBox');
+  const title = document.getElementById('subtierTitle');
+  const btns = document.getElementById('subtierBtns');
+
+  if (f === 'ALL') {
+    box.style.display = 'none';
+    subTierFilter = 'ALL';
+    return;
+  }
+
+  box.style.display = 'flex';
+  btns.innerHTML = '';
+
+  let tiers = [];
+  if (f === 'G') {
+    title.textContent = '🟢 Strong Sub-Tiers';
+    tiers = [
+      {id:'ALL', name:'All Strong', cls:'g-act'},
+      {id:'G1', name:'Platinum (Tier 1)', cls:'g-act'},
+      {id:'G2', name:'Gold (Tier 2)', cls:'g-act'},
+      {id:'G3', name:'Silver (Tier 3)', cls:'g-act'}
+    ];
+  } else if (f === 'Y') {
+    title.textContent = '🟡 Moderate Sub-Tiers';
+    tiers = [
+      {id:'ALL', name:'All Moderate', cls:'y-act'},
+      {id:'Y1', name:'High Mod (Growth)', cls:'y-act'},
+      {id:'Y2', name:'Core Mod (Steady)', cls:'y-act'},
+      {id:'Y3', name:'Slipping (At-Risk)', cls:'y-act'}
+    ];
+  } else if (f === 'R') {
+    title.textContent = '🔴 Weak Sub-Tiers';
+    tiers = [
+      {id:'ALL', name:'All Weak', cls:'r-act'},
+      {id:'R1', name:'Critical (0 Visit)', cls:'r-act'},
+      {id:'R2', name:'High Visit 0 Order', cls:'r-act'},
+      {id:'R3', name:'Low / Dropping', cls:'r-act'}
+    ];
+  }
+
+  tiers.forEach(t => {
+    const btn = document.createElement('div');
+    btn.className = 'st-btn' + (subTierFilter === t.id ? ' ' + t.cls : '');
+    btn.textContent = t.name;
+    btn.onclick = () => {
+      subTierFilter = t.id;
+      document.querySelectorAll('.st-btn').forEach(b => b.className = 'st-btn');
+      btn.className = 'st-btn ' + t.cls;
+      if(activeDistrict && activeDivision){
+        renderMicroOutlets(DIV_NAMES.indexOf(activeDivision), activeDistrict);
+      }
+    };
+    btns.appendChild(btn);
+  });
+}
+
+  /* ═══════════════ EXPORT VIEW AS IMAGE ═══════════════ */
+  async function exportView() {
+    const btn = document.getElementById('exportViewBtn');
+    const origText = btn.innerHTML;
+    btn.innerHTML = '⏳ Exporting...';
+    btn.style.pointerEvents = 'none';
+
+    try {
+      if (!window.html2canvas) {
+        await new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+          script.onload = resolve;
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+      }
+      
+      const canvas = await html2canvas(document.body, {
+        useCORS: true,
+        scale: 2,
+        backgroundColor: isDark ? '#0f172a' : '#f8fafc',
+        ignoreElements: (el) => el.id === 'exportViewBtn' || el.id === 'themeBtn' || el.classList && el.classList.contains('leaflet-control-zoom')
+      });
+      
+      const link = document.createElement('a');
+      link.download = `CEO_Dashboard_Map_${Date.now()}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    } catch(err) {
+      console.error(err);
+      alert('Failed to export view. See console.');
+    } finally {
+      btn.innerHTML = origText;
+      btn.style.pointerEvents = 'auto';
+    }
+  }
+
+/* ═══════════════ EXPORT FILTERED CSV ═══════════════ */
+function downloadFilteredCSV() {
+  let exportData = [];
+  let targetDivs = activeDivision ? [DIV_NAMES.indexOf(activeDivision)] : [0,1,2,3,4,5,6,7];
+
+  targetDivs.forEach(didx => {
+    const arr = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[didx] : null) || [];
+    arr.forEach(o => {
+      const [lat,lng,id,name,d_idx,dist,score,status,rev,visits,lastVisit,daysSince,srName,orders,avgRPV,trend,thana] = o;
+      if (activeDistrict && dist.toLowerCase() !== activeDistrict.toLowerCase()) return;
+      if (activeThana && (!thana || thana.toLowerCase() !== activeThana.toLowerCase())) return;
+      if (!isOutletMatch(o)) return;
+
+      const st = classifySubTier(status, score, rev, visits, orders, daysSince, avgRPV);
+      let gapType = 'Active Performer';
+      if ((visits||0) === 0) gapType = '0-Visit Blind Spot (No SR Visits in 4M)';
+      else if ((rev||0) === 0) gapType = '0-Revenue Conversion Barrier (Visited But 0 Sales)';
+      else if (status === 'R') gapType = 'At-Risk Weak Buyer';
+
+      exportData.push({
+        'Outlet_ID': id,
+        'Outlet_Name': name,
+        'Division': DIV_NAMES[didx],
+        'District': dist,
+        'Thana_Upazila': thana || 'N/A',
+        'Primary_Health': status === 'G' ? 'Strong' : status === 'Y' ? 'Moderate' : 'Weak',
+        'Sub_Tier': st.name,
+        'Is_Zero_Visits_4M': (visits||0) === 0 ? 'YES' : 'NO',
+        'Is_Zero_Revenue_4M': (rev||0) === 0 ? 'YES' : 'NO',
+        'Field_Gap_Diagnosis': gapType,
+        'Health_Score': score,
+        'Diagnosis_Why_Reason': st.desc.replace(/,/g, ';'),
+        '4M_Revenue_BDT': rev,
+        'Orders_Count': orders,
+        'Visits_Count': visits,
+        'Last_Visit_Date': lastVisit || 'None',
+        'Days_Since_Last_Visit': daysSince,
+        'Assigned_SR': srName,
+        'Revenue_Per_Visit': avgRPV,
+        'Month_Minus_3_Revenue': trend && trend[0] ? trend[0] : 0,
+        'Month_Minus_2_Revenue': trend && trend[1] ? trend[1] : 0,
+        'Month_Minus_1_Revenue': trend && trend[2] ? trend[2] : 0,
+        'Current_Month_Revenue': trend && trend[3] ? trend[3] : 0,
+        'Latitude': lat,
+        'Longitude': lng
+      });
+    });
+  });
+
+  if (exportData.length === 0) {
+    alert('No outlets match the selected filter!');
+    return;
+  }
+
+  const headers = Object.keys(exportData[0]).join(',');
+  const rows = exportData.map(row => Object.values(row).map(v => `"${v}"`).join(','));
+  const csvContent = [headers, ...rows].join('\n');
+  const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  const filename = `Outlets_${activeDivision||'BD'}_${activeDistrict||'All'}_${activeThana||'All'}_${healthFilter}_${subTierFilter}_${new Date().toISOString().slice(0,10)}.csv`;
+  link.setAttribute('href', url);
+  link.setAttribute('download', filename);
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+/* ═══════════════ RESET TO NATIONAL ═══════════════ */
+function resetNational() {
+  activeDivision=null; activeDistrict=null; activeThana=null;
+  subTierFilter='ALL';
+  document.querySelectorAll('.dcard').forEach(c=>c.classList.remove('sel'));
+  document.getElementById('distPanel').style.display='none';
+  document.getElementById('thanaPanel').style.display='none';
+  document.getElementById('subtierBox').style.display='none';
+  if(heatLayer){map.removeLayer(heatLayer);heatLayer=null;}
+  heatOn=false;
+  pillarsOn=false;
+  wsOn=false;
+  document.getElementById('heatBtn').classList.remove('on');
+  document.getElementById('pillarBtn').classList.remove('on');
+  document.getElementById('wsBtn').classList.remove('on');
+  document.getElementById('legWS').style.display='none';
+  clusterGrp.clearLayers();
+  pillarLayer.clearLayers();
+  wsLayer.clearLayers();
+  districtPolyLayer.clearLayers();
+  thanaPolyLayer.clearLayers();
+  map.flyTo([23.68,90.35],7,{duration:1});
+  buildDivSidebar();
+  setTimeout(drawDivisionPolygons,600);
+  updateBC();
+  updateKPIs();
+}
+
+/* ═══════════════ BREADCRUMB ═══════════════ */
+function updateBC(){
+  const bc=document.getElementById('bc');
+  let h=`<span class="bcn" onclick="resetNational()">🇧🇩 Bangladesh</span>`;
+  if(activeDivision){
+    const i=DIV_NAMES.indexOf(activeDivision);
+    h+=`<span class="bcs">›</span><span class="bcn ${(!activeDistrict&&!activeThana)?'here':''}" onclick="drillDivision(${i},'${activeDivision}')">${activeDivision} Division</span>`;
+  }
+  if(activeDistrict){
+    const divIdx=DIV_NAMES.indexOf(activeDivision);
+    h+=`<span class="bcs">›</span><span class="bcn ${!activeThana?'here':''}" onclick="drillDistrict('${activeDistrict}',${divIdx})">${activeDistrict} District</span>`;
+  }
+  if(activeThana){
+    h+=`<span class="bcs">›</span><span class="bcn here">${activeThana} Thana</span>`;
+  }
+  bc.innerHTML=h;
+}
+
+/* ═══════════════ FILTER ═══════════════ */
+function setF(f){
+  healthFilter=f;
+  subTierFilter='ALL';
+  ['fbA','fbG','fbY','fbR','fbZV','fbZR'].forEach(id=>{ 
+    const el = document.getElementById(id);
+    if(el) el.className='fb'; 
+  });
+  const m={
+    ALL:['fbA','fa'],
+    G:['fbG','fg'],
+    Y:['fbY','fy'],
+    R:['fbR','fr'],
+    ZV:['fbZV','fzv'],
+    ZR:['fbZR','fzr']
+  };
+  if (m[f] && document.getElementById(m[f][0])) {
+    document.getElementById(m[f][0]).classList.add(m[f][1]);
+  }
+
+  buildSubTierControls(f);
+  updateKPIs();
+  buildDivSidebar();
+
+  if(!activeDivision){
+    drawDivisionPolygons();
+  } else if(activeDivision && !activeDistrict){
+    buildDistPanel(activeDivision, DIV_NAMES.indexOf(activeDivision));
+    drawDistrictPolygons(activeDivision, DIV_NAMES.indexOf(activeDivision));
+  } else if(activeDistrict && activeDivision){
+    buildThanaPanel(activeDistrict, DIV_NAMES.indexOf(activeDivision));
+    if (!activeThana) {
+      drawThanaPolygons(activeDistrict, DIV_NAMES.indexOf(activeDivision));
+    }
+    renderMicroOutlets(DIV_NAMES.indexOf(activeDivision), activeDistrict, activeThana);
+  }
+}
+
+/* ═══════════════ HEATMAP ═══════════════ */
+function toggleHeat(){
+  heatOn=!heatOn;
+  document.getElementById('heatBtn').classList.toggle('on',heatOn);
+  if(activeDistrict && activeDivision) renderMicroOutlets(DIV_NAMES.indexOf(activeDivision), activeDistrict);
+}
+
+/* ═══════════════ SEARCH ═══════════════ */
+function doSearch(term){
+  if(!term||term.length<2||!activeDivision) return;
+  term=term.toLowerCase();
+  const divIdx=DIV_NAMES.indexOf(activeDivision);
+  const outlets=(typeof CEO_OUTLETS!=='undefined'?CEO_OUTLETS[divIdx]:null)||[];
+  const match=outlets.find(o=>
+    (o[3]||'').toLowerCase().includes(term)||
+    String(o[2]).includes(term)||
+    (o[12]||'').toLowerCase().includes(term)
+  );
+  if(match){ map.flyTo([match[0],match[1]],16,{duration:.8}); showModal(match); }
+}
+
+/* ═══════════════ THEME ═══════════════ */
+function toggleTheme(){
+  isDark=!isDark;
+  document.documentElement.setAttribute('data-theme',isDark?'dark':'light');
+  document.getElementById('themeBtn').textContent=isDark?'☀️ Light Mode':'🌙 Dark Mode';
+  if(!activeDivision){
+    drawDivisionPolygons();
+  } else if(activeDivision && !activeDistrict){
+    drawDistrictPolygons(activeDivision, DIV_NAMES.indexOf(activeDivision));
+  }
+}
+</script>
+</body>
+</html>

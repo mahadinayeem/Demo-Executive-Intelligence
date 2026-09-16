@@ -1,0 +1,10 @@
+outlet_id,outlet_name,latitude,longitude,division,district,thana,revenue,visits,orders,last_visit_date,days_since_last_visit,sr_name,trend_m1,trend_m2,trend_m3,trend_m4
+OUT-1001,M/S Bismillah General Store,23.8103,90.4125,Dhaka,Dhaka,Mirpur,65400.0,24,18,2026-08-28,3,Md. Rafiqul Islam,14000.0,16500.0,17200.0,17700.0
+OUT-1002,Al-Madina Departmental Store,23.7925,90.4078,Dhaka,Dhaka,Gulshan,125000.0,32,26,2026-08-30,1,Md. Tariqul Islam,28000.0,31000.0,32500.0,33500.0
+OUT-1003,Janata Confectionery,22.3569,91.7832,Chattogram,Chattogram,Kotwali,42000.0,16,12,2026-08-25,6,Abdur Rahman,9500.0,10500.0,11000.0,11000.0
+OUT-1004,Bhai Bhai Store (Blind Spot Sample),24.3745,88.6042,Rajshahi,Rajshahi,Boalia,0.0,0,0,,120,Unassigned,0.0,0.0,0.0,0.0
+OUT-1005,New Sunrise Enterprise (Zero Rev Barrier),22.8456,89.5403,Khulna,Khulna,Sonadanga,0.0,14,0,2026-08-22,9,Kamal Hossain,0.0,0.0,0.0,0.0
+OUT-1006,Sufia Grocery Store,24.8949,91.8687,Sylhet,Sylhet,Sylhet Sadar,18500.0,8,6,2026-08-15,16,Jamil Ahmed,4000.0,4500.0,5000.0,5000.0
+OUT-1007,Mayer Doa Store,22.7010,90.3535,Barishal,Barishal,Barishal Sadar,28900.0,12,9,2026-08-20,11,Shahin Alam,6500.0,7200.0,7500.0,7700.0
+OUT-1008,Rangpur Mega Confectionery,25.7439,89.2752,Rangpur,Rangpur,Rangpur Sadar,53200.0,20,15,2026-08-29,2,Mizanur Rahman,12000.0,13200.0,13800.0,14200.0
+OUT-1009,Brahmaputra Food Corner,24.7471,90.4203,Mymensingh,Mymensingh,Kotwali,31200.0,14,10,2026-08-26,5,Ashraful Haque,7000.0,7800.0,8100.0,8300.0

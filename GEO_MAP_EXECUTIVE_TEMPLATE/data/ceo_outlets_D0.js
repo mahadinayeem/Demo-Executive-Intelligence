@@ -1,0 +1,2 @@
+if (typeof CEO_OUTLETS === "undefined") window.CEO_OUTLETS = [];
+window.CEO_OUTLETS[0] = [[23.8103, 90.4125, "OUT-1001", "M/S Bismillah General Store", 0, "Dhaka", 100, "G", 65400.0, 24, "2026-08-28", 3, "Md. Rafiqul Islam", 18, 2725.0, [14000.0, 16500.0, 17200.0, 17700.0], "Mirpur"], [23.7925, 90.4078, "OUT-1002", "Al-Madina Departmental Store", 0, "Dhaka", 100, "G", 125000.0, 32, "2026-08-30", 1, "Md. Tariqul Islam", 26, 3906.2, [28000.0, 31000.0, 32500.0, 33500.0], "Gulshan"]];
