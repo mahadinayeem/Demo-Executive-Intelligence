@@ -835,6 +835,11 @@ function drawDivisionPolygons() {
   districtPolyLayer.clearLayers();
   thanaPolyLayer.clearLayers();
   clusterGrp.clearLayers();
+  pillarLayer.clearLayers();
+
+  if (pillarsOn) {
+    renderNationwide3DPillars();
+  }
 
   BD_DIVISIONS_GEO.features.forEach(feat => {
     const dname  = feat.properties.name;
@@ -884,7 +889,7 @@ function drawDivisionPolygons() {
     polyLayer.addLayer(poly);
 
     const center = DIV_CENTERS[dname];
-    if (center && didx >= 0) {
+    if (center && didx >= 0 && !pillarsOn) {
       const lbl = L.divIcon({
         className:'',
         html:`<div class="div-lbl">${dname}<br><span style="font-size:11px;font-family:'JetBrains Mono';font-weight:700;opacity:.95;">${count.toLocaleString()}</span></div>`,
@@ -903,12 +908,17 @@ function drawDistrictPolygons(divName, divIdx) {
   districtPolyLayer.clearLayers();
   thanaPolyLayer.clearLayers();
   clusterGrp.clearLayers();
+  pillarLayer.clearLayers();
 
   if(typeof BD_DISTRICTS_GEO === 'undefined' || !BD_DISTRICTS_GEO.features) return;
 
   const distFeatures = BD_DISTRICTS_GEO.features.filter(f => f.properties.division === divName);
   let colorIdx = 0;
   let bounds = L.latLngBounds([]);
+
+  if (pillarsOn) {
+    renderDistrict3DPillars(divName, divIdx);
+  }
 
   distFeatures.forEach(feat => {
     const distName = feat.properties.district;
@@ -966,17 +976,19 @@ function drawDistrictPolygons(divName, divIdx) {
 
     districtPolyLayer.addLayer(poly);
 
-    const center = poly.getBounds().getCenter();
-    const lbl = L.divIcon({
-      className:'',
-      html:`<div class="dist-lbl">${distName}<br><span style="font-size:10px;font-family:'JetBrains Mono';font-weight:700;opacity:.95;">${count.toLocaleString()}</span></div>`,
-      iconSize:[100,34], iconAnchor:[50,17]
-    });
-    const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
-    mk.on('click', () => {
-      drillDistrict(distName, divIdx, feat);
-    });
-    districtPolyLayer.addLayer(mk);
+    if (!pillarsOn) {
+      const center = poly.getBounds().getCenter();
+      const lbl = L.divIcon({
+        className:'',
+        html:`<div class="dist-lbl">${distName}<br><span style="font-size:10px;font-family:'JetBrains Mono';font-weight:700;opacity:.95;">${count.toLocaleString()}</span></div>`,
+        iconSize:[100,34], iconAnchor:[50,17]
+      });
+      const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
+      mk.on('click', () => {
+        drillDistrict(distName, divIdx, feat);
+      });
+      districtPolyLayer.addLayer(mk);
+    }
   });
 
   if(bounds.isValid()){
@@ -987,7 +999,12 @@ function drawDistrictPolygons(divName, divIdx) {
 /* ═══════════════ 2.5 DRAW THANA / UPAZILA POLYGONS ═══════════════ */
 function drawThanaPolygons(distName, divIdx) {
   thanaPolyLayer.clearLayers();
+  pillarLayer.clearLayers();
   if(typeof BD_THANAS_GEO === 'undefined' || !BD_THANAS_GEO.features) return;
+
+  if (pillarsOn) {
+    renderThana3DPillars(distName, divIdx);
+  }
 
   const thanaFeatures = BD_THANAS_GEO.features.filter(f => 
     f.properties.district && f.properties.district.toLowerCase() === distName.toLowerCase()
@@ -1046,17 +1063,19 @@ function drawThanaPolygons(distName, divIdx) {
 
     thanaPolyLayer.addLayer(poly);
 
-    const center = poly.getBounds().getCenter();
-    const lbl = L.divIcon({
-      className:'',
-      html:`<div class="thana-lbl">${tName}<br><span style="font-size:9.5px;font-family:'JetBrains Mono';font-weight:700;opacity:.95;">${count.toLocaleString()}</span></div>`,
-      iconSize:[90,30], iconAnchor:[45,15]
-    });
-    const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
-    mk.on('click', () => {
-      drillThana(tName, distName, divIdx, feat);
-    });
-    thanaPolyLayer.addLayer(mk);
+    if (!pillarsOn) {
+      const center = poly.getBounds().getCenter();
+      const lbl = L.divIcon({
+        className:'',
+        html:`<div class="thana-lbl">${tName}<br><span style="font-size:9.5px;font-family:'JetBrains Mono';font-weight:700;opacity:.95;">${count.toLocaleString()}</span></div>`,
+        iconSize:[90,30], iconAnchor:[45,15]
+      });
+      const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
+      mk.on('click', () => {
+        drillThana(tName, distName, divIdx, feat);
+      });
+      thanaPolyLayer.addLayer(mk);
+    }
   });
 
   if(bounds.isValid()){
@@ -1536,84 +1555,134 @@ function renderNationwide3DPillars() {
   });
 }
 
-/* ═══════════════ MODULE 1: NATIONWIDE SR CORRIDORS ═══════════════ */
-const NATIONWIDE_SR_CORRIDORS = [
-  { name: 'Dhaka-Gazipur-Mymensingh FMCG Supply Trunk', coords: [[23.81,90.41],[23.99,90.42],[24.35,90.43],[24.74,90.40]], srs: '142 Active SR Beats', rev: '৳560M/mo Flow' },
-  { name: 'Chattogram-Feni-Cumilla Highway Commercial Axis', coords: [[22.35,91.78],[22.78,91.60],[23.01,91.40],[23.46,91.18]], srs: '98 Active SR Beats', rev: '৳380M/mo Flow' },
-  { name: 'Dhaka-Tangail-Sirajganj-Bogura Northern Route', coords: [[23.81,90.41],[24.25,89.92],[24.45,89.71],[24.84,89.37]], srs: '86 Active SR Beats', rev: '৳310M/mo Flow' },
-  { name: 'Dhaka-Padma-Faridpur-Jashore Southern Arterial', coords: [[23.81,90.41],[23.50,90.20],[23.60,89.84],[23.16,89.21]], srs: '74 Active SR Beats', rev: '৳240M/mo Flow' },
-  { name: 'Sylhet-Habiganj-Brahmanbaria Eastern Distribution Hub', coords: [[24.89,91.86],[24.38,91.41],[23.95,91.11]], srs: '52 Active SR Beats', rev: '৳190M/mo Flow' }
-];
+/* ═══════════════ MODULE 1: DISTRICT 3D SALES HEIGHT PILLARS ═══════════════ */
+function renderDistrict3DPillars(divName, divIdx) {
+  pillarLayer.clearLayers();
+  if (!divName || typeof BD_DISTRICTS_GEO === 'undefined' || !BD_DISTRICTS_GEO.features) return;
 
-function renderNationwideSRRoutes() {
-  routeLayer.clearLayers();
-  const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6'];
+  const distFeatures = BD_DISTRICTS_GEO.features.filter(f => f.properties.division === divName);
+  const divDists = CEO_NATIONAL.districts.filter(d => d.div === divName);
+  const maxDistRev = Math.max(...divDists.map(d => d.revenue || 1), 1);
 
-  NATIONWIDE_SR_CORRIDORS.forEach((c, idx) => {
-    const color = colors[idx % colors.length];
-    const polyline = L.polyline(c.coords, {
-      color: color,
-      weight: 5,
-      opacity: 0.9,
-      dashArray: '10, 8',
-      lineJoin: 'round'
+  let colorIdx = 0;
+  distFeatures.forEach(feat => {
+    const distName = feat.properties.district;
+    const color = DISTRICT_PALETTE[colorIdx % DISTRICT_PALETTE.length];
+    colorIdx++;
+
+    const distDat = CEO_NATIONAL.districts.find(d => d.district.toLowerCase() === distName.toLowerCase() && d.div === divName) || {};
+    const rev = distDat.revenue || 0;
+    const count = distDat.outlets || 0;
+    const pct = distDat.outlets ? Math.round(((distDat.strong||0)/distDat.outlets)*100) : 0;
+
+    const heightPx = Math.max(26, Math.min(125, Math.round((rev / maxDistRev) * 105) + 20));
+    const revFormatted = rev >= 1e9 ? '৳'+(rev/1e9).toFixed(2)+'B' : (rev >= 1e6 ? '৳'+(rev/1e6).toFixed(1)+'M' : '৳'+Math.round(rev/1000)+'k');
+
+    const poly = L.geoJSON(feat);
+    const center = poly.getBounds().getCenter();
+
+    const pillarIcon = L.divIcon({
+      className: '',
+      html: `
+        <div class="pillar-3d-marker" style="height:${heightPx+30}px;color:${color};">
+          <div class="pillar-val" style="border-color:${color};background:#090d1a;">${distName}: ${revFormatted}</div>
+          <div class="pillar-cap" style="background:${color};width:28px;height:13px;"></div>
+          <div class="pillar-stem" style="height:${heightPx}px;width:20px;"></div>
+          <div class="pillar-base" style="width:34px;height:11px;"></div>
+        </div>
+      `,
+      iconSize: [36, heightPx+30],
+      iconAnchor: [18, heightPx+22]
     });
 
-    polyline.bindTooltip(`
+    const pMk = L.marker(center, {icon: pillarIcon, interactive: true, pane: 'markerPane'});
+    pMk.bindTooltip(`
       <div class="ws-tooltip-wrap">
-        <div class="ws-badge" style="color:${color};">🚶 NATIONAL SR LOGISTICS &amp; FIELD ARTERY</div>
-        <div class="ws-title">${c.name}</div>
-        <div class="ws-stat">• Field Strength: <b style="color:#ffffff;">${c.srs}</b></div>
-        <div class="ws-stat">• Monthly Commercial Volume: <b style="color:var(--green);">${c.rev}</b></div>
-        <div class="ws-opp">⚡ High-frequency distribution artery with real-time tracking</div>
-      </div>`, {sticky: true});
+        <div class="ws-badge" style="color:${color};">📊 3D DISTRICT REVENUE PILLAR</div>
+        <div class="ws-title">${distName} District</div>
+        <div class="ws-stat">• 4-Month Revenue: <b style="color:var(--green);">${revFormatted}</b></div>
+        <div class="ws-stat">• Total Outlets: <b>${count.toLocaleString()}</b></div>
+        <div class="ws-stat">• Strong Buyers: <b>${pct}%</b></div>
+        <div class="ws-opp">👉 Click to explore Thanas &amp; Outlets</div>
+      </div>`, {sticky: false, direction: 'top', offset: [0, -14]});
 
-    routeLayer.addLayer(polyline);
-
-    // Sequence Node Points
-    c.coords.forEach((coord, i) => {
-      const pinIcon = L.divIcon({
-        className: '',
-        html: `<div class="sr-seq-badge" style="background:${color};width:26px;height:26px;font-size:11px;">H${i+1}</div>`,
-        iconSize: [26, 26],
-        iconAnchor: [13, 13]
-      });
-      const p = L.marker(coord, {icon: pinIcon});
-      routeLayer.addLayer(p);
+    pMk.on('click', (e) => {
+      L.DomEvent.stopPropagation(e);
+      drillDistrict(distName, divIdx, feat);
     });
+
+    pillarLayer.addLayer(pMk);
   });
 }
 
-function renderNationwideWhiteSpaceHubs() {
-  wsLayer.clearLayers();
-  NATIONWIDE_WHITE_SPACES.forEach(h => {
-    const wsIcon = L.divIcon({
+/* ═══════════════ MODULE 1: THANA 3D SALES HEIGHT PILLARS ═══════════════ */
+function renderThana3DPillars(distName, divIdx) {
+  pillarLayer.clearLayers();
+  if (!distName || typeof BD_THANAS_GEO === 'undefined' || !BD_THANAS_GEO.features) return;
+
+  const thanaFeatures = BD_THANAS_GEO.features.filter(f => 
+    f.properties.district && f.properties.district.toLowerCase() === distName.toLowerCase()
+  );
+
+  const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
+  const distOutlets = allOutlets.filter(o => o[5] && o[5].toLowerCase() === distName.toLowerCase());
+
+  const thanaRevs = {};
+  thanaFeatures.forEach(feat => {
+    const tName = feat.properties.thana;
+    const tOutlets = distOutlets.filter(o => o[16] && o[16].toLowerCase() === tName.toLowerCase() && isOutletMatch(o));
+    let rev = 0;
+    tOutlets.forEach(o => rev += (o[8]||0));
+    thanaRevs[tName] = { rev, count: tOutlets.length, feat };
+  });
+
+  const maxThanaRev = Math.max(...Object.values(thanaRevs).map(t => t.rev || 1), 1);
+
+  let colorIdx = 0;
+  thanaFeatures.forEach(feat => {
+    const tName = feat.properties.thana;
+    const info = thanaRevs[tName] || { rev: 0, count: 0 };
+    const color = DISTRICT_PALETTE[colorIdx % DISTRICT_PALETTE.length];
+    colorIdx++;
+
+    const rev = info.rev;
+    const count = info.count;
+    const heightPx = Math.max(22, Math.min(110, Math.round((rev / maxThanaRev) * 90) + 18));
+    const revFormatted = rev >= 1e6 ? '৳'+(rev/1e6).toFixed(1)+'M' : (rev >= 1000 ? '৳'+Math.round(rev/1000)+'k' : '৳'+rev);
+
+    const poly = L.geoJSON(feat);
+    const center = poly.getBounds().getCenter();
+
+    const pillarIcon = L.divIcon({
       className: '',
-      html: `<div class="whitespace-marker" style="width:36px;height:36px;font-size:17px;">🎯</div>`,
-      iconSize: [36, 36],
-      iconAnchor: [18, 18]
+      html: `
+        <div class="pillar-3d-marker" style="height:${heightPx+28}px;color:${color};">
+          <div class="pillar-val" style="border-color:${color};background:#090d1a;">${tName}: ${revFormatted}</div>
+          <div class="pillar-cap" style="background:${color};width:24px;height:12px;"></div>
+          <div class="pillar-stem" style="height:${heightPx}px;width:18px;"></div>
+          <div class="pillar-base" style="width:28px;height:9px;"></div>
+        </div>
+      `,
+      iconSize: [32, heightPx+28],
+      iconAnchor: [16, heightPx+20]
     });
-    const wsMk = L.marker([h.lat, h.lng], {icon: wsIcon, interactive: true});
-    wsMk.bindTooltip(`
+
+    const pMk = L.marker(center, {icon: pillarIcon, interactive: true, pane: 'markerPane'});
+    pMk.bindTooltip(`
       <div class="ws-tooltip-wrap">
-        <div class="ws-badge">🎯 NATIONAL WHITE-SPACE EXPANSION HUB</div>
-        <div class="ws-title">${h.name} (${h.div})</div>
-        <div class="ws-stat">• Revenue Potential: <b style="color:var(--green);">${h.estVal}</b></div>
-        <div class="ws-stat">• Unreached Stores: <b>${h.pop}</b></div>
-        <div class="ws-opp">${h.opp}</div>
-      </div>`, {sticky: false, direction:'top', offset:[0,-14]});
+        <div class="ws-badge" style="color:${color};">📊 3D THANA REVENUE PILLAR</div>
+        <div class="ws-title">${tName} Thana</div>
+        <div class="ws-stat">• Revenue: <b style="color:var(--green);">${revFormatted}</b></div>
+        <div class="ws-stat">• Outlets: <b>${count.toLocaleString()}</b></div>
+        <div class="ws-opp">👉 Click to isolate micro-outlets</div>
+      </div>`, {sticky: false, direction: 'top', offset: [0, -14]});
 
-    const pulseCircle = L.circle([h.lat, h.lng], {
-      radius: 16000,
-      color: '#ff2a85',
-      fillColor: '#ff2a85',
-      fillOpacity: 0.18,
-      weight: 2.5,
-      dashArray: '6,6'
+    pMk.on('click', (e) => {
+      L.DomEvent.stopPropagation(e);
+      drillThana(tName, distName, divIdx, feat);
     });
 
-    wsLayer.addLayer(pulseCircle);
-    wsLayer.addLayer(wsMk);
+    pillarLayer.addLayer(pMk);
   });
 }
 
@@ -1622,8 +1691,20 @@ function toggle3DPillars() {
   pillarsOn = !pillarsOn;
   document.getElementById('pillarBtn').classList.toggle('on', pillarsOn);
   
-  if (activeDistrict && activeDivision) {
-    renderMicroOutlets(DIV_NAMES.indexOf(activeDivision), activeDistrict);
+  if (activeThana && activeDistrict && activeDivision) {
+    renderMicroOutlets(DIV_NAMES.indexOf(activeDivision), activeDistrict, activeThana);
+  } else if (activeDistrict && activeDivision) {
+    if (pillarsOn) {
+      renderThana3DPillars(activeDistrict, DIV_NAMES.indexOf(activeDivision));
+    } else {
+      pillarLayer.clearLayers();
+    }
+  } else if (activeDivision) {
+    if (pillarsOn) {
+      renderDistrict3DPillars(activeDivision, DIV_NAMES.indexOf(activeDivision));
+    } else {
+      pillarLayer.clearLayers();
+    }
   } else {
     // DIRECT NATIONWIDE ALL-OVER-COUNTRY 3D SALES HEIGHT PILLARS
     if (pillarsOn) {
