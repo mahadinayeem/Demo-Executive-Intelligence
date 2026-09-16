@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nationwide Retail Footprint: Comprehensive Outlet Network (Cluster Map) — ITL Executive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="https://unpkg.com/leaflet-heat@0.2.0/dist/leaflet-heat.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<!-- Data Sources -->
+<script src="bd_geo.js"></script>
+<script src="bd_districts_geo.js"></script>
+<script src="ceo_national.js"></script>
+<script src="ceo_outlets_D0.js"></script>
+<script src="ceo_outlets_D1.js"></script>
+<script src="ceo_outlets_D2.js"></script>
+<script src="ceo_outlets_D3.js"></script>
+<script src="ceo_outlets_D4.js"></script>
+<script src="ceo_outlets_D5.js"></script>
+<script src="ceo_outlets_D6.js"></script>
+<script src="ceo_outlets_D7.js"></script>
+<script src="itl_visit_heatmap_data.js"></script>
+
+<style>
+:root {
+  --font: 'Outfit', sans-serif;
+  --font-bn: 'Hind Siliguri', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --bg-page: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-sub: #f1f5f9;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-sub: #64748b;
+  --border: #e2e8f0;
+  --primary-blue: #0284c7;
+  --primary-navy: #0f172a;
+  --accent-red: #dc2626;
+  --accent-green: #10b981;
+  --accent-amber: #d97706;
+  --accent-purple: #8b5cf6;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-lg: 0 10px 30px -5px rgba(0,0,0,0.08);
+}
+
+[data-theme="dark"] {
+  --bg-page: #0b0f19;
+  --bg-card: #111827;
+  --bg-card-sub: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #cbd5e1;
+  --text-sub: #94a3b8;
+  --border: #334155;
+  --primary-blue: #38bdf8;
+  --primary-navy: #f8fafc;
+  --shadow-lg: 0 10px 30px -5px rgba(0,0,0,0.5);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font);
+  background: var(--bg-page);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── HEADER ── */
+.pres-header {
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--border);
+  padding: 12px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  z-index: 1000;
+  flex-shrink: 0;
+}
+
+.header-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1e3a8a;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+[data-theme="dark"] .header-title { color: #60a5fa; }
+
+.header-title-bar {
+  width: 48px;
+  height: 4px;
+  background: #0284c7;
+  border-radius: 2px;
+  margin-top: 2px;
+}
+
+.brand-logos {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sokrio-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.sokrio-logo {
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #0284c7;
+  text-transform: uppercase;
+}
+.sokrio-sub {
+  font-size: 10px;
+  color: var(--text-sub);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-link-btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: var(--bg-card-sub);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.nav-link-btn:hover {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+
+.theme-toggle-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-card-sub);
+  color: var(--text-main);
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* ── MAIN CONTENT SPLIT ── */
+.pres-container {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 68px);
+  overflow: hidden;
+}
+
+/* ── LEFT COMMENTARY & METRICS PANEL ── */
+.left-panel {
+  width: 480px;
+  background: var(--bg-card);
+  border-right: 2px solid var(--border);
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.03);
+  z-index: 900;
+  flex-shrink: 0;
+}
+
+.slide-subtitle {
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.narrative-card {
+  background: var(--bg-card-sub);
+  border-left: 4.5px solid #0284c7;
+  border-radius: 0 12px 12px 0;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: var(--shadow-sm);
+}
+
+.narrative-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0284c7;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.narrative-body {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.narrative-warning {
+  background: #fffbeb;
+  border-left: 4.5px solid #d97706;
+  border-radius: 0 12px 12px 0;
+  padding: 12px 16px;
+  color: #92400e;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+[data-theme="dark"] .narrative-warning {
+  background: #451a03;
+  color: #fde68a;
+}
+
+/* KPI CARDS */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.kpi-card {
+  background: var(--bg-card-sub);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.kpi-label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-sub);
+  font-weight: 700;
+}
+
+.kpi-value {
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+.kpi-value.blue { color: #0284c7; }
+.kpi-value.green { color: #10b981; }
+.kpi-value.purple { color: #8b5cf6; }
+
+/* DIVISION QUICK FILTERS */
+.division-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-sub);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.division-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.div-btn {
+  background: var(--bg-card-sub);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+}
+.div-btn:hover {
+  border-color: #0284c7;
+  transform: translateY(-1px);
+}
+.div-btn.active {
+  background: #0284c7;
+  color: #fff;
+  border-color: #0284c7;
+}
+.div-btn.active .div-count {
+  color: #e0f2fe;
+}
+
+.div-name {
+  font-size: 12px;
+  font-weight: 700;
+}
+.div-count {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-sub);
+  font-weight: 600;
+}
+
+/* CLUSTER INTENSITY SCALE */
+.cluster-scale-card {
+  background: var(--bg-card-sub);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.scale-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11.5px;
+}
+.scale-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+}
+.dot-badge {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+/* ACTIONS */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+.action-btn.primary {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff;
+}
+.action-btn.secondary {
+  background: var(--bg-card-sub);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+}
+.action-btn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+/* ── RIGHT MAP PANEL ── */
+.right-panel {
+  flex: 1;
+  position: relative;
+  background: #f1f5f9;
+}
+#map {
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+/* FLOATING HEADER PILL (MATCHING PPTX EXACTLY) */
+.map-floating-header {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-left: 5px solid #0284c7;
+  border-radius: 12px;
+  padding: 10px 24px;
+  box-shadow: 0 10px 25px -3px rgba(0,0,0,0.12);
+  text-align: center;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+[data-theme="dark"] .map-floating-header {
+  background: rgba(17, 24, 39, 0.95);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.map-floating-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+[data-theme="dark"] .map-floating-title { color: #f8fafc; }
+
+.map-floating-sub {
+  font-family: var(--font-bn);
+  font-size: 13px;
+  font-weight: 600;
+  color: #0284c7;
+}
+
+/* FLOATING TOP-RIGHT CALLOUT */
+.map-callout-card {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: auto;
+}
+[data-theme="dark"] .map-callout-card {
+  background: rgba(17, 24, 39, 0.95);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.callout-header {
+  font-size: 13px;
+  font-weight: 800;
+  color: #0284c7;
+}
+.callout-body {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* FLOATING CONTROLS BAR */
+.map-controls-bar {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+  padding: 6px 10px;
+  display: flex;
+  gap: 8px;
+  box-shadow: 0 10px 25px -3px rgba(0,0,0,0.12);
+}
+[data-theme="dark"] .map-controls-bar {
+  background: rgba(17, 24, 39, 0.95);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.layer-btn {
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.layer-btn:hover {
+  background: var(--bg-card-sub);
+}
+.layer-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+}
+
+/* CUSTOM MARKER CLUSTER STYLES (MATCHING PPTX COLORS) */
+.custom-cluster-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-family: var(--mono);
+  font-weight: 800;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+  border: 2px solid #ffffff;
+}
+.custom-cluster-badge:hover {
+  transform: scale(1.12);
+  z-index: 9999;
+}
+
+.c-micro   { background: radial-gradient(circle, #8b5cf6, #6d28d9); }
+.c-med     { background: radial-gradient(circle, #0284c7, #0369a1); }
+.c-large   { background: radial-gradient(circle, #d97706, #b45309); }
+.c-hub     { background: radial-gradient(circle, #ea580c, #c2410c); }
+.c-super   { background: radial-gradient(circle, #dc2626, #991b1b); box-shadow: 0 0 20px rgba(220,38,38,0.6); }
+
+/* POPUP CARDS MATCHING SLIDE 8 */
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  padding: 0;
+  overflow: hidden;
+}
+.leaflet-popup-content {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.outlet-popup-card {
+  padding: 14px 16px;
+  min-width: 250px;
+  font-family: var(--font);
+}
+.outlet-popup-header {
+  font-family: var(--font-bn);
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 6px;
+}
+.status-pill {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.status-pill.active { background: #dcfce7; color: #166534; }
+.status-pill.inactive { background: #fee2e2; color: #991b1b; }
+
+.outlet-detail-row {
+  font-size: 12px;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+</style>
+</head>
+<body>
+
+<!-- ── EXECUTIVE HEADER ── -->
+<header class="pres-header">
+  <div class="header-title-wrap">
+    <div class="header-title">
+      <span>📍 Nationwide Retail Footprint: Comprehensive Outlet Network</span>
+    </div>
+    <div class="header-title-bar"></div>
+  </div>
+
+  <div class="brand-logos">
+    <div class="header-actions">
+      <a href="itl_geographic_visit_distribution.html" class="nav-link-btn">🟢 Visit Heatmap (Slide 4)</a>
+      <a href="ceo_national_map.html" class="nav-link-btn">🏛️ CEO National Explorer</a>
+      <a href="index.html" class="nav-link-btn">📊 Executive Suite</a>
+      <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">🌙 Dark</button>
+    </div>
+
+    <div class="sokrio-brand">
+      <div class="sokrio-logo">SOKRIO</div>
+      <div class="sokrio-sub">Executive Analytics</div>
+    </div>
+  </div>
+</header>
+
+<!-- ── MAIN CONTENT CONTAINER ── -->
+<div class="pres-container">
+
+  <!-- ── LEFT SLIDE COMMENTARY PANEL ── -->
+  <aside class="left-panel">
+    
+    <div class="slide-subtitle">
+      A master spatial clustering & micro-level visualization mapping all <strong>281,341</strong> registered outlets across 8 divisions of Bangladesh.
+    </div>
+
+    <!-- PPTX Slide 3 Content Point 1 -->
+    <div class="narrative-card">
+      <div class="narrative-title">
+        <span>🌐 Comprehensive Outlet Network</span>
+      </div>
+      <div class="narrative-body">
+        A master visualization mapping all <strong>281,341 ITL registered outlets</strong> across the country, structured hierarchically from national clusters to district and union retail points.
+      </div>
+    </div>
+
+    <!-- PPTX Slide 3 Content Point 2 -->
+    <div class="narrative-card" style="border-left-color: #10b981;">
+      <div class="narrative-title" style="color: #10b981;">
+        <span>🔍 Micro-Level Visibility</span>
+      </div>
+      <div class="narrative-body">
+        Provides a complete geographical overview of our retail footprint down to individual street-level shop locations with verified GPS coordinates.
+      </div>
+    </div>
+
+    <!-- PPTX Slide 3 Content Point 3 -->
+    <div class="narrative-warning">
+      <span>❖ But this is not where our primary focus lies</span>
+    </div>
+
+    <!-- KPI Summary Metrics -->
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-label">Total Outlets</div>
+        <div class="kpi-value blue">281.3K</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Active Ratio</div>
+        <div class="kpi-value green">74.2%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Total Visits</div>
+        <div class="kpi-value purple">1.57M</div>
+      </div>
+    </div>
+
+    <!-- Division Quick Filter -->
+    <div class="division-section">
+      <div class="section-label">
+        <span>Filter By Division</span>
+        <span id="activeDivisionLabel" style="color:#0284c7;font-weight:700">All Bangladesh</span>
+      </div>
+      <div class="division-grid">
+        <button class="div-btn active" onclick="filterDivision('all', this)">
+          <span class="div-name">All BD</span>
+          <span class="div-count">281.3K</span>
+        </button>
+        <button class="div-btn" onclick="filterDivision('Dhaka', this)">
+          <span class="div-name">Dhaka</span>
+          <span class="div-count">84.0K</span>
+        </button>
+        <button class="div-btn" onclick="filterDivision('Chattogram', this)">
+          <span class="div-name">Chattogram</span>
+          <span class="div-count">54.1K</span>
+        </button>
+        <button class="div-btn" onclick="filterDivision('Rajshahi', this)">
+          <span class="div-name">Rajshahi</span>
+          <span class="div-count">32.0K</span>
+        </button>
+        <button class="div-btn" onclick="filterDivision('Khulna', this)">
+          <span class="div-name">Khulna</span>
+          <span class="div-count">28.1K</span>
+        </button>
+        <button class="div-btn" onclick="filterDivision('Rangpur', this)">
+          <span class="div-name">Rangpur</span>
+          <span class="div-count">26.5K</span>
+        </button>
+        <button class="div-btn" onclick="filterDivision('Mymensingh', this)">
+          <span class="div-name">Mymensingh</span>
+          <span class="div-count">22.5K</span>
+        </button>
+        <button class="div-btn" onclick="filterDivision('Sylhet', this)">
+          <span class="div-name">Sylhet</span>
+          <span class="div-count">18.8K</span>
+        </button>
+        <button class="div-btn" onclick="filterDivision('Barishal', this)">
+          <span class="div-name">Barishal</span>
+          <span class="div-count">15.3K</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Cluster Intensity Legend -->
+    <div class="cluster-scale-card">
+      <div class="scale-row">
+        <span class="scale-pill"><span class="dot-badge" style="background:#dc2626"></span> Supercluster (10,000+)</span>
+        <span style="font-family:var(--mono);color:var(--text-sub)">Dhaka Core</span>
+      </div>
+      <div class="scale-row">
+        <span class="scale-pill"><span class="dot-badge" style="background:#ea580c"></span> Major Hub (2.5K - 10K)</span>
+        <span style="font-family:var(--mono);color:var(--text-sub)">Dist. Centers</span>
+      </div>
+      <div class="scale-row">
+        <span class="scale-pill"><span class="dot-badge" style="background:#d97706"></span> Regional (500 - 2.5K)</span>
+        <span style="font-family:var(--mono);color:var(--text-sub)">Thana Hubs</span>
+      </div>
+      <div class="scale-row">
+        <span class="scale-pill"><span class="dot-badge" style="background:#0284c7"></span> Medium (50 - 500)</span>
+        <span style="font-family:var(--mono);color:var(--text-sub)">Rural Bazars</span>
+      </div>
+      <div class="scale-row">
+        <span class="scale-pill"><span class="dot-badge" style="background:#8b5cf6"></span> Micro (< 50)</span>
+        <span style="font-family:var(--mono);color:var(--text-sub)">Street Points</span>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="action-buttons">
+      <button class="action-btn primary" onclick="exportMapImage()">
+        <span>📸 Export Map Image</span>
+      </button>
+      <button class="action-btn secondary" onclick="downloadClusterSummary()">
+        <span>📥 Download Data</span>
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- ── RIGHT MAP PANEL ── -->
+  <main class="right-panel" id="mapExportArea">
+    
+    <!-- Floating Map Header Pill (Exact Replica of Slide 3) -->
+    <div class="map-floating-header">
+      <div class="map-floating-title">
+        <span>📍 ITL — All Outlets Micro-Map</span>
+      </div>
+      <div class="map-floating-sub">
+        সারা বাংলাদেশে মোট আউটলেট: <strong id="headerOutletCount">২৮১,৩৪১</strong>
+      </div>
+    </div>
+
+    <!-- Floating Top-Right Callout Inspector -->
+    <div class="map-callout-card" id="clusterCallout">
+      <div class="callout-header" id="calloutHead">🔍 Interactive Cluster Inspector</div>
+      <div class="callout-body" id="calloutDesc">
+        Click on any cluster bubble to unpack into micro-clusters or street-level retail shop markers with contact details.
+      </div>
+    </div>
+
+    <!-- Main Leaflet Map -->
+    <div id="map"></div>
+
+    <!-- Floating Map Control Bar -->
+    <div class="map-controls-bar">
+      <button class="layer-btn active" id="btnAllCluster" onclick="setClusterMode('all')">📍 All Outlets Cluster</button>
+      <button class="layer-btn" id="btnDensityCluster" onclick="setClusterMode('density')">🟢 Visit Density Hubs</button>
+      <button class="layer-btn" id="btnTopHubs" onclick="setClusterMode('hubs')">🔴 Top 300 Hubs</button>
+      <button class="layer-btn" id="btnReset" onclick="resetMapView()">🔄 Reset Zoom</button>
+    </div>
+
+  </main>
+
+</div>
+
+<script>
+let map = null;
+let clusterGroup = null;
+let currentDivision = 'all';
+let currentMode = 'all';
+
+const DIV_BOUNDS = {
+  'Dhaka': [[23.1, 89.6], [24.5, 91.1]],
+  'Chattogram': [[20.7, 91.2], [24.3, 92.7]],
+  'Rajshahi': [[23.8, 88.0], [25.3, 89.8]],
+  'Khulna': [[21.5, 88.8], [24.2, 89.9]],
+  'Barishal': [[21.7, 89.8], [23.1, 90.9]],
+  'Sylhet': [[23.9, 91.0], [25.2, 92.5]],
+  'Rangpur': [[25.0, 88.0], [26.4, 89.8]],
+  'Mymensingh': [[24.2, 89.6], [25.3, 91.0]]
+};
+
+window.addEventListener('DOMContentLoaded', () => {
+  initMap();
+  loadClusters();
+});
+
+function initMap() {
+  map = L.map('map', {
+    center: [23.85, 90.35],
+    zoom: 7.4,
+    minZoom: 6.8,
+    maxZoom: 18,
+    zoomControl: true,
+    attributionControl: false
+  });
+
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const tileUrl = isDark 
+    ? 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}'
+    : 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}';
+
+  L.tileLayer(tileUrl, {
+    maxZoom: 18,
+    subdomains: ['server', 'services'],
+    errorTileUrl: 'https://tile.openstreetmap.org/0/0/0.png'
+  }).addTo(map);
+
+  // Add BD Geo Boundary
+  if (typeof BD_GEO !== 'undefined') {
+    L.geoJSON(BD_GEO, {
+      style: {
+        color: isDark ? 'rgba(56, 189, 248, 0.4)' : 'rgba(2, 132, 199, 0.35)',
+        weight: 1.5,
+        fillColor: 'transparent',
+        fillOpacity: 0
+      }
+    }).addTo(map);
+  }
+}
+
+function loadClusters() {
+  if (clusterGroup) {
+    map.removeLayer(clusterGroup);
+  }
+
+  // Create customized MarkerClusterGroup with slide-matched badges
+  clusterGroup = L.markerClusterGroup({
+    showCoverageOnHover: false,
+    maxClusterRadius: 45,
+    spiderfyOnMaxZoom: true,
+    chunkedLoading: true,
+    chunkProgress: updateLoadingProgress,
+    iconCreateFunction: function(cluster) {
+      const count = cluster.getChildCount();
+      let cClass = 'c-micro';
+      let size = 32;
+
+      if (count >= 10000) {
+        cClass = 'c-super';
+        size = 52;
+      } else if (count >= 2500) {
+        cClass = 'c-hub';
+        size = 46;
+      } else if (count >= 500) {
+        cClass = 'c-large';
+        size = 40;
+      } else if (count >= 50) {
+        cClass = 'c-med';
+        size = 36;
+      }
+
+      return L.divIcon({
+        html: `<div class="custom-cluster-badge ${cClass}" style="width:${size}px;height:${size}px;line-height:${size}px;">${formatClusterNumber(count)}</div>`,
+        className: 'custom-cluster-icon',
+        iconSize: [size, size]
+      });
+    }
+  });
+
+  const markers = [];
+
+  if (currentMode === 'all') {
+    // Load from CEO_OUTLETS across divisions
+    const divIndices = (currentDivision === 'all') 
+      ? [0, 1, 2, 3, 4, 5, 6, 7] 
+      : [getDivIndex(currentDivision)];
+
+    divIndices.forEach(idx => {
+      const list = (window.CEO_OUTLETS && window.CEO_OUTLETS[idx]) ? window.CEO_OUTLETS[idx] : [];
+      list.forEach(o => {
+        // o = [lat, lng, code, name, revenue, district, visit_count, category, ...]
+        const lat = o[0];
+        const lng = o[1];
+        if (!lat || !lng) return;
+
+        const name = o[3] || 'Retail Outlet';
+        const district = o[5] || '';
+        const thana = o[16] || '';
+        const visits = o[6] || 0;
+        const rev = o[8] || 0;
+        const active = visits > 0;
+
+        const m = L.circleMarker([lat, lng], {
+          radius: 5,
+          fillColor: active ? '#10b981' : '#dc2626',
+          color: '#ffffff',
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 0.9
+        });
+
+        m.bindPopup(`
+          <div class="outlet-popup-card">
+            <div class="outlet-popup-header">
+              <span>${name}</span>
+              <span class="status-pill ${active ? 'active' : 'inactive'}">${active ? 'Active' : 'Zero Visits'}</span>
+            </div>
+            <div class="outlet-detail-row">📍 <strong>ঠিকানা:</strong> ${thana ? thana + ', ' : ''}${district}</div>
+            <div class="outlet-detail-row">🔄 <strong>ভিজিট সংখ্যা:</strong> ${visits} বার</div>
+            <div class="outlet-detail-row">💰 <strong>মোট সেলস:</strong> ৳${rev.toLocaleString()}</div>
+          </div>
+        `);
+
+        markers.push(m);
+      });
+    });
+
+  } else if (currentMode === 'density') {
+    // Heat points / density clusters
+    const pts = (window.ITL_VISIT_MAP_DATA && window.ITL_VISIT_MAP_DATA.heat_points) ? window.ITL_VISIT_MAP_DATA.heat_points : [];
+    pts.forEach(p => {
+      const m = L.circleMarker([p[0], p[1]], {
+        radius: 4,
+        fillColor: '#0284c7',
+        color: '#fff',
+        weight: 1,
+        fillOpacity: 0.8
+      });
+      markers.push(m);
+    });
+
+  } else if (currentMode === 'hubs') {
+    // Top 300 hubs
+    const hubs = (window.ITL_VISIT_MAP_DATA && window.ITL_VISIT_MAP_DATA.top_300_hubs) ? window.ITL_VISIT_MAP_DATA.top_300_hubs : [];
+    hubs.forEach(h => {
+      const m = L.circleMarker([h.lat, h.lng], {
+        radius: 7,
+        fillColor: '#dc2626',
+        color: '#fff',
+        weight: 2,
+        fillOpacity: 0.95
+      });
+      m.bindPopup(`
+        <div class="outlet-popup-card">
+          <div class="outlet-popup-header" style="color:#dc2626">
+            <span>#${h.rank} ${h.thana} Hub</span>
+            <span class="status-pill active">Top Hub</span>
+          </div>
+          <div class="outlet-detail-row">📍 <strong>জেলা:</strong> ${h.district}, ${h.division}</div>
+          <div class="outlet-detail-row">🔄 <strong>চেক-ইন:</strong> ${h.visits.toLocaleString()} বার</div>
+        </div>
+      `);
+      markers.push(m);
+    });
+  }
+
+  clusterGroup.addLayers(markers);
+  map.addLayer(clusterGroup);
+}
+
+function updateLoadingProgress(processed, total, elapsed) {
+  if (elapsed > 1000) {
+    document.getElementById('calloutDesc').innerText = `Loading cluster nodes: ${Math.round((processed/total)*100)}%`;
+  }
+}
+
+function formatClusterNumber(num) {
+  if (num >= 1000000) return (num/1000000).toFixed(1) + 'M';
+  if (num >= 1000) return (num/1000).toFixed(num >= 10000 ? 0 : 1) + 'k';
+  return num;
+}
+
+function getDivIndex(name) {
+  const names = ['Dhaka', 'Chattogram', 'Rajshahi', 'Khulna', 'Barishal', 'Sylhet', 'Rangpur', 'Mymensingh'];
+  return names.indexOf(name);
+}
+
+function filterDivision(divName, btn) {
+  currentDivision = divName;
+  document.querySelectorAll('.div-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.getElementById('activeDivisionLabel').innerText = (divName === 'all') ? 'All Bangladesh' : divName + ' Division';
+
+  if (divName !== 'all' && DIV_BOUNDS[divName]) {
+    map.fitBounds(DIV_BOUNDS[divName], { padding: [40, 40] });
+  } else {
+    map.setView([23.85, 90.35], 7.4);
+  }
+
+  loadClusters();
+}
+
+function setClusterMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.layer-btn').forEach(b => b.classList.remove('active'));
+  if (mode === 'all') document.getElementById('btnAllCluster').classList.add('active');
+  if (mode === 'density') document.getElementById('btnDensityCluster').classList.add('active');
+  if (mode === 'hubs') document.getElementById('btnTopHubs').classList.add('active');
+
+  loadClusters();
+}
+
+function resetMapView() {
+  map.setView([23.85, 90.35], 7.4);
+  filterDivision('all', document.querySelector('.div-btn'));
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').innerText = next === 'dark' ? '☀️ Light' : '🌙 Dark';
+  initMap();
+  loadClusters();
+}
+
+function exportMapImage() {
+  const el = document.getElementById('mapExportArea');
+  html2canvas(el, { useCORS: true, allowTaint: true }).then(canvas => {
+    const a = document.createElement('a');
+    a.download = 'ITL_Nationwide_Retail_Cluster_Map.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  });
+}
+
+function downloadClusterSummary() {
+  const divData = (window.CEO_NATIONAL && window.CEO_NATIONAL.divisions) ? window.CEO_NATIONAL.divisions : [];
+  let csv = 'Division,Total Outlets,Active Outlets,Zero Visits,Total Visits,Revenue (BDT)\n';
+  divData.forEach(d => {
+    csv += `"${d.name}",${d.outlets},${d.strong+d.moderate},${d.zero_visits},${d.visits},${d.revenue}\n`;
+  });
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.download = 'ITL_Retail_Clusters_By_Division.csv';
+  a.href = url;
+  a.click();
+}
+</script>
+
+</body>
+</html>

@@ -7,7 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script src="https://unpkg.com/leaflet-heat@0.2.0/dist/leaflet-heat.js"></script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script src="bd_geo.js"></script>
@@ -619,6 +622,7 @@ body {
     <!-- Floating Map Control Bar -->
     <div class="map-controls-bar">
       <button class="layer-btn active" id="btnCombined" onclick="setMode('combined')">🌐 Combined Overview</button>
+      <button class="layer-btn" id="btnCluster" onclick="setMode('cluster')">📍 Cluster Map</button>
       <button class="layer-btn" id="btnHeat" onclick="setMode('heat')">🟢 Heatmap Only</button>
       <button class="layer-btn" id="btnHubs" onclick="setMode('hubs')">🔴 Top 300 Hubs Only</button>
     </div>
@@ -631,6 +635,7 @@ body {
 let map = null;
 let heatLayer = null;
 let hubMarkersLayer = L.layerGroup();
+let clusterLayer = null;
 let currentMode = 'combined';
 
 const D = window.ITL_VISIT_MAP_DATA || { heat_points: [], top_300_hubs: [] };
@@ -718,9 +723,45 @@ function initMap() {
 
   hubMarkersLayer.addTo(map);
 
-  // Set default inspector to Jaintapur sample (or Top #1 hub)
+  // 4. Build Dynamic Marker Cluster Layer (Cluster Map Engine)
+  if (typeof L.markerClusterGroup === 'function') {
+    clusterLayer = L.markerClusterGroup({
+      showCoverageOnHover: false,
+      maxClusterRadius: 40,
+      spiderfyOnMaxZoom: true,
+      iconCreateFunction: function(cluster) {
+        const count = cluster.getChildCount();
+        let cClass = 'custom-cluster-small';
+        let size = 32;
+        if (count >= 30) { cClass = 'custom-cluster-large'; size = 42; }
+        else if (count >= 10) { cClass = 'custom-cluster-med'; size = 36; }
+        return L.divIcon({
+          html: `<div class="${cClass}" style="width:${size}px;height:${size}px;line-height:${size}px;text-align:center">${count}</div>`,
+          className: 'cluster-icon-wrap',
+          iconSize: [size, size]
+        });
+      }
+    });
+
+    hubs.forEach(h => {
+      const m = L.marker([h.lat, h.lng]);
+      m.bindPopup(`
+        <div style="font-family:'Outfit',sans-serif;font-size:12px;padding:4px">
+          <div style="font-weight:800;color:#0284c7">#${h.rank} ${h.thana}</div>
+          <div style="color:#64748b;font-size:11px">${h.district}, ${h.division}</div>
+          <div style="margin-top:6px;font-weight:700;color:#ef4444">চেক-ইন: ${Number(h.visits).toLocaleString()}</div>
+          <div style="font-size:10px;color:#94a3b8;font-family:monospace">${h.lat.toFixed(4)}, ${h.lng.toFixed(4)}</div>
+        </div>
+      `);
+      m.on('mouseover', () => updateCallout(h));
+      m.on('click', () => updateCallout(h));
+      clusterLayer.addLayer(m);
+    });
+  }
+
+  // Set default inspector to Bogura sample (or Top #1 hub)
   if (hubs.length > 0) {
-    const sampleHub = hubs.find(x => x.thana.includes('জৈন্তাপুর')) || hubs[0];
+    const sampleHub = hubs.find(x => x.thana.includes('বগুড়া')) || hubs[0];
     updateCallout(sampleHub);
   }
 }
@@ -737,16 +778,24 @@ function setMode(mode) {
 
   if (mode === 'combined') {
     document.getElementById('btnCombined').classList.add('active');
-    if (!map.hasLayer(heatLayer)) map.addLayer(heatLayer);
-    if (!map.hasLayer(hubMarkersLayer)) map.addLayer(hubMarkersLayer);
+    if (heatLayer && !map.hasLayer(heatLayer)) map.addLayer(heatLayer);
+    if (hubMarkersLayer && !map.hasLayer(hubMarkersLayer)) map.addLayer(hubMarkersLayer);
+    if (clusterLayer && map.hasLayer(clusterLayer)) map.removeLayer(clusterLayer);
+  } else if (mode === 'cluster') {
+    document.getElementById('btnCluster').classList.add('active');
+    if (heatLayer && map.hasLayer(heatLayer)) map.removeLayer(heatLayer);
+    if (hubMarkersLayer && map.hasLayer(hubMarkersLayer)) map.removeLayer(hubMarkersLayer);
+    if (clusterLayer && !map.hasLayer(clusterLayer)) map.addLayer(clusterLayer);
   } else if (mode === 'heat') {
     document.getElementById('btnHeat').classList.add('active');
-    if (!map.hasLayer(heatLayer)) map.addLayer(heatLayer);
-    if (map.hasLayer(hubMarkersLayer)) map.removeLayer(hubMarkersLayer);
+    if (heatLayer && !map.hasLayer(heatLayer)) map.addLayer(heatLayer);
+    if (hubMarkersLayer && map.hasLayer(hubMarkersLayer)) map.removeLayer(hubMarkersLayer);
+    if (clusterLayer && map.hasLayer(clusterLayer)) map.removeLayer(clusterLayer);
   } else if (mode === 'hubs') {
     document.getElementById('btnHubs').classList.add('active');
-    if (map.hasLayer(heatLayer)) map.removeLayer(heatLayer);
-    if (!map.hasLayer(hubMarkersLayer)) map.addLayer(hubMarkersLayer);
+    if (heatLayer && map.hasLayer(heatLayer)) map.removeLayer(heatLayer);
+    if (hubMarkersLayer && !map.hasLayer(hubMarkersLayer)) map.addLayer(hubMarkersLayer);
+    if (clusterLayer && map.hasLayer(clusterLayer)) map.removeLayer(clusterLayer);
   }
 }
 
