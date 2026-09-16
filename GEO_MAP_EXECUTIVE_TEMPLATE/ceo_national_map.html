@@ -2017,8 +2017,9 @@ function showModal(o) {
   document.getElementById('mRev').textContent  = '৳'+(rev||0).toLocaleString();
   document.getElementById('mVis').textContent  = (visits||0)+' Visits';
   document.getElementById('mOrd').textContent  = (orders||0)+' Orders';
-  const rate = visits>0?Math.round(((orders||0)/visits)*100):(orders>0?100:0);
-  document.getElementById('mRate').textContent = rate+'%';
+  const strikePct = visits>0 ? Math.min(100, Math.round(((orders||0)/visits)*100)) : (orders>0?100:0);
+  const orderRatio = visits > 0 ? ((orders||0) / visits).toFixed(1) : (orders||0);
+  document.getElementById('mRate').innerHTML = `${strikePct}% <span style="font-size:11px;font-weight:600;opacity:0.85;display:block;margin-top:2px;">(${orderRatio} Orders/Visit)</span>`;
   
   document.getElementById('mHealth').innerHTML = `<span class="badge b${status}">${status==='G'?'Strong':status==='Y'?'Moderate':'Weak'} (Score: ${score})</span>`;
   document.getElementById('mTierLevel').innerHTML = `<span style="color:${st.color};font-weight:900;">${st.name}</span>`;
