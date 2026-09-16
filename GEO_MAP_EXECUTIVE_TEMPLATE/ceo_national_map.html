@@ -786,7 +786,7 @@ function isOutletMatch(o) {
 /* ═══════════════ UPDATE KPIS ═══════════════ */
 function updateKPIs() {
   try {
-    let tot=0, str=0, mod=0, wk=0, rev=0, vis=0, zVis=0, zRev=0;
+    let tot=0, str=0, mod=0, wk=0, rev=0, vis=0, zVis=0, zRev=0, subMatched=0;
     
     if (selectedDistricts && selectedDistricts.length > 0) {
       selectedDistricts.forEach(sel => {
@@ -803,20 +803,53 @@ function updateKPIs() {
           vis += (o[9]||0);
           if ((o[9]||0) === 0) zVis++;
           if ((o[8]||0) === 0) zRev++;
+          if (isOutletMatch(o)) subMatched++;
         });
       });
     } else if (selectedDivisions && selectedDivisions.length > 0) {
       selectedDivisions.forEach(divName => {
-        const d = CEO_NATIONAL.divisions.find(x => x.name === divName) || {};
-        tot += d.outlets||0; str += d.strong||0; mod += d.moderate||0; wk += d.weak||0;
-        rev += d.revenue||0; vis += d.visits||0;
-        zVis += d.zero_visits||0; zRev += d.zero_rev||0;
+        const divIdx = DIV_NAMES.indexOf(divName);
+        const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
+        if (allOutlets.length > 0) {
+          tot += allOutlets.length;
+          allOutlets.forEach(o => {
+            if (o[7] === 'G') str++;
+            else if (o[7] === 'Y') mod++;
+            else if (o[7] === 'R') wk++;
+            rev += (o[8]||0);
+            vis += (o[9]||0);
+            if ((o[9]||0) === 0) zVis++;
+            if ((o[8]||0) === 0) zRev++;
+            if (isOutletMatch(o)) subMatched++;
+          });
+        } else {
+          const d = CEO_NATIONAL.divisions.find(x => x.name === divName) || {};
+          tot += d.outlets||0; str += d.strong||0; mod += d.moderate||0; wk += d.weak||0;
+          rev += d.revenue||0; vis += d.visits||0;
+          zVis += d.zero_visits||0; zRev += d.zero_rev||0;
+        }
       });
     } else if (activeDivision && !activeDistrict) {
-      const d = CEO_NATIONAL.divisions.find(x => x.name === activeDivision) || {};
-      tot = d.outlets||0; str = d.strong||0; mod = d.moderate||0; wk = d.weak||0;
-      rev = d.revenue||0; vis = d.visits||0;
-      zVis = d.zero_visits||0; zRev = d.zero_rev||0;
+      const divIdx = DIV_NAMES.indexOf(activeDivision);
+      const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
+      if (allOutlets.length > 0) {
+        tot = allOutlets.length;
+        allOutlets.forEach(o => {
+          if (o[7] === 'G') str++;
+          else if (o[7] === 'Y') mod++;
+          else if (o[7] === 'R') wk++;
+          rev += (o[8]||0);
+          vis += (o[9]||0);
+          if ((o[9]||0) === 0) zVis++;
+          if ((o[8]||0) === 0) zRev++;
+          if (isOutletMatch(o)) subMatched++;
+        });
+      } else {
+        const d = CEO_NATIONAL.divisions.find(x => x.name === activeDivision) || {};
+        tot = d.outlets||0; str = d.strong||0; mod = d.moderate||0; wk = d.weak||0;
+        rev = d.revenue||0; vis = d.visits||0;
+        zVis = d.zero_visits||0; zRev = d.zero_rev||0;
+      }
     } else if (activeDistrict) {
       const divIdx = DIV_NAMES.indexOf(activeDivision);
       const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
@@ -831,19 +864,41 @@ function updateKPIs() {
         vis += (o[9]||0);
         if ((o[9]||0) === 0) zVis++;
         if ((o[8]||0) === 0) zRev++;
+        if (isOutletMatch(o)) subMatched++;
       });
     } else {
-      CEO_NATIONAL.divisions.forEach(x => {
-        tot += x.outlets; str += x.strong||0; mod += x.moderate||0; wk += x.weak||0;
-        rev += x.revenue||0; vis += x.visits||0;
-        zVis += x.zero_visits||0; zRev += x.zero_rev||0;
-      });
+      if (subTierFilter !== 'ALL' && typeof CEO_OUTLETS !== 'undefined') {
+        tot = 0; str = 0; mod = 0; wk = 0; rev = 0; vis = 0;
+        for (let didx = 0; didx < 8; didx++) {
+          const arr = CEO_OUTLETS[didx] || [];
+          tot += arr.length;
+          arr.forEach(o => {
+            if (o[7] === 'G') str++;
+            else if (o[7] === 'Y') mod++;
+            else if (o[7] === 'R') wk++;
+            rev += (o[8]||0);
+            vis += (o[9]||0);
+            if ((o[9]||0) === 0) zVis++;
+            if ((o[8]||0) === 0) zRev++;
+            if (isOutletMatch(o)) subMatched++;
+          });
+        }
+      } else {
+        CEO_NATIONAL.divisions.forEach(x => {
+          tot += x.outlets; str += x.strong||0; mod += x.moderate||0; wk += x.weak||0;
+          rev += x.revenue||0; vis += x.visits||0;
+          zVis += x.zero_visits||0; zRev += x.zero_rev||0;
+        });
+      }
     }
 
     let displayCount = tot;
-    if (healthFilter === 'G') displayCount = str;
+    if (subTierFilter !== 'ALL') displayCount = subMatched;
+    else if (healthFilter === 'G') displayCount = str;
     else if (healthFilter === 'Y') displayCount = mod;
     else if (healthFilter === 'R') displayCount = wk;
+    else if (healthFilter === 'ZV') displayCount = zVis;
+    else if (healthFilter === 'ZR') displayCount = zRev;
 
     document.getElementById('kTotal').textContent  = displayCount.toLocaleString();
     document.getElementById('kStrong').textContent = str.toLocaleString();
@@ -878,6 +933,10 @@ function drawDivisionPolygons() {
     else if (healthFilter === 'R') count = divDat.weak || 0;
     else if (healthFilter === 'ZV') count = divDat.zero_visits || 0;
     else if (healthFilter === 'ZR') count = divDat.zero_rev || 0;
+
+    if (subTierFilter !== 'ALL' && typeof CEO_OUTLETS !== 'undefined' && CEO_OUTLETS[didx]) {
+      count = CEO_OUTLETS[didx].filter(o => isOutletMatch(o)).length;
+    }
 
     const rev    = divDat.revenue || 0;
     const pct    = divDat.outlets ? Math.round(((divDat.strong||0)/divDat.outlets)*100) : 0;
@@ -1045,6 +1104,10 @@ function drawDistrictPolygons(divName, divIdx) {
     else if (healthFilter === 'R') count = distDat.weak || 0;
     else if (healthFilter === 'ZV') count = distDat.zero_visits || 0;
     else if (healthFilter === 'ZR') count = distDat.zero_rev || 0;
+
+    if (subTierFilter !== 'ALL' && typeof CEO_OUTLETS !== 'undefined' && CEO_OUTLETS[divIdx]) {
+      count = CEO_OUTLETS[divIdx].filter(o => o[5] && o[5].toLowerCase() === distName.toLowerCase() && isOutletMatch(o)).length;
+    }
 
     const rev = distDat.revenue || 0;
     const pct = distDat.outlets ? Math.round(((distDat.strong||0)/distDat.outlets)*100) : 0;
@@ -1279,6 +1342,12 @@ function buildDivSidebar() {
     if (healthFilter === 'G') count = d.strong||0;
     else if (healthFilter === 'Y') count = d.moderate||0;
     else if (healthFilter === 'R') count = d.weak||0;
+    else if (healthFilter === 'ZV') count = d.zero_visits||0;
+    else if (healthFilter === 'ZR') count = d.zero_rev||0;
+
+    if (subTierFilter !== 'ALL' && typeof CEO_OUTLETS !== 'undefined' && CEO_OUTLETS[d.idx]) {
+      count = CEO_OUTLETS[d.idx].filter(o => isOutletMatch(o)).length;
+    }
 
     const pct = d.outlets ? Math.round(((d.strong||0)/d.outlets)*100) : 0;
     el.innerHTML = `<div class="dn">${d.name}</div><div class="dc">${count.toLocaleString()}</div><div class="dm">${pct}% Strong • ৳${((d.revenue||0)/1e9).toFixed(1)}B</div>`;
@@ -1369,6 +1438,10 @@ function buildDistPanel(divName, divIdx) {
     else if (healthFilter === 'R') count = d.weak||0;
     else if (healthFilter === 'ZV') count = d.zero_visits||0;
     else if (healthFilter === 'ZR') count = d.zero_rev||0;
+
+    if (subTierFilter !== 'ALL' && typeof CEO_OUTLETS !== 'undefined' && CEO_OUTLETS[divIdx]) {
+      count = CEO_OUTLETS[divIdx].filter(o => o[5] && o[5].toLowerCase() === d.district.toLowerCase() && isOutletMatch(o)).length;
+    }
 
     const row = document.createElement('div');
     row.className = 'drow';
@@ -2109,6 +2182,20 @@ function buildSubTierControls(f) {
       {id:'R2', name:'High Visit 0 Order', cls:'r-act'},
       {id:'R3', name:'Low / Dropping', cls:'r-act'}
     ];
+  } else if (f === 'ZV') {
+    title.textContent = '🚫 0-Visits Sub-Tiers';
+    tiers = [
+      {id:'ALL', name:'All 0-Visits', cls:'r-act'},
+      {id:'ZV_UNASSIGNED', name:'Unassigned SR', cls:'r-act'},
+      {id:'ZV_DORMANT', name:'Dormant (>90d)', cls:'r-act'}
+    ];
+  } else if (f === 'ZR') {
+    title.textContent = '💸 0-Revenue Sub-Tiers';
+    tiers = [
+      {id:'ALL', name:'All 0-Revenue', cls:'r-act'},
+      {id:'ZR_VISITED_NO_ORDER', name:'Visited No Order', cls:'r-act'},
+      {id:'ZR_UNVISITED', name:'Unvisited 0-Rev', cls:'r-act'}
+    ];
   }
 
   tiers.forEach(t => {
@@ -2119,8 +2206,21 @@ function buildSubTierControls(f) {
       subTierFilter = t.id;
       document.querySelectorAll('.st-btn').forEach(b => b.className = 'st-btn');
       btn.className = 'st-btn ' + t.cls;
-      if(activeDistrict && activeDivision){
-        renderMicroOutlets(DIV_NAMES.indexOf(activeDivision), activeDistrict);
+      
+      updateKPIs();
+      buildDivSidebar();
+
+      if(!activeDivision){
+        drawDivisionPolygons();
+      } else if(activeDivision && !activeDistrict){
+        buildDistPanel(activeDivision, DIV_NAMES.indexOf(activeDivision));
+        drawDistrictPolygons(activeDivision, DIV_NAMES.indexOf(activeDivision));
+      } else if(activeDistrict && activeDivision){
+        buildThanaPanel(activeDistrict, DIV_NAMES.indexOf(activeDivision));
+        if (!activeThana) {
+          drawThanaPolygons(activeDistrict, DIV_NAMES.indexOf(activeDivision));
+        }
+        renderMicroOutlets(DIV_NAMES.indexOf(activeDivision), activeDistrict, activeThana);
       }
     };
     btns.appendChild(btn);
