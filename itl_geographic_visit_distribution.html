@@ -10,6 +10,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-heat@0.2.0/dist/leaflet-heat.js"></script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="bd_geo.js"></script>
 <script src="itl_visit_heatmap_data.js"></script>
 
 <style>
@@ -662,41 +663,56 @@ function initMap() {
     errorTileUrl: 'https://tile.openstreetmap.org/0/0/0.png'
   }).addTo(map);
 
-  // 1. Build Green/Emerald Heatmap Gradient matching the slide exactly
-  const points = D.heat_points || [];
-  heatLayer = L.heatLayer(points, {
-    radius: 22,
-    blur: 18,
-    maxZoom: 10,
-    max: 0.65,
-    minOpacity: 0.25,
-    gradient: {
-      0.15: '#86efac',
-      0.35: '#4ade80',
-      0.55: '#22c55e',
-      0.75: '#16a34a',
-      1.00: '#15803d'
-    }
-  }).addTo(map);
+  // 1. Add Bangladesh Division / District boundary overlay
+  if (typeof BD_GEO !== 'undefined') {
+    L.geoJSON(BD_GEO, {
+      style: {
+        color: isDark ? 'rgba(255,255,255,0.2)' : 'rgba(15,23,42,0.2)',
+        weight: 1.2,
+        fillColor: 'transparent',
+        fillOpacity: 0
+      }
+    }).addTo(map);
+  }
 
-  // 2. Build Top 300 Red Marker Layer
+  // 2. Build Green/Emerald Heatmap Gradient matching the slide exactly
+  const points = D.heat_points || [];
+  if (points.length > 0 && typeof L.heatLayer === 'function') {
+    heatLayer = L.heatLayer(points, {
+      radius: 26,
+      blur: 20,
+      maxZoom: 9,
+      max: 0.8,
+      minOpacity: 0.35,
+      gradient: {
+        0.1: '#a7f3d0',
+        0.3: '#4ade80',
+        0.5: '#22c55e',
+        0.7: '#16a34a',
+        1.0: '#14532d'
+      }
+    }).addTo(map);
+  }
+
+  // 3. Build Top 300 Red Marker Layer (Ultra-reliable circle markers)
   const hubs = D.top_300_hubs || [];
   hubs.forEach((h, idx) => {
-    const icon = L.divIcon({
-      className: 'custom-hub-icon',
-      html: `<div class="red-hub-marker" title="#${h.rank} ${h.thana} (${h.visits} visits)"></div>`,
-      iconSize: [12, 12],
-      iconAnchor: [6, 6]
+    const cm = L.circleMarker([h.lat, h.lng], {
+      radius: idx < 10 ? 7 : 5,
+      fillColor: '#ef4444',
+      color: '#ffffff',
+      weight: 1.5,
+      opacity: 1,
+      fillOpacity: 0.95
     });
 
-    const m = L.marker([h.lat, h.lng], { icon: icon });
-    m.on('mouseover', () => updateCallout(h));
-    m.on('click', () => {
+    cm.on('mouseover', () => updateCallout(h));
+    cm.on('click', () => {
       updateCallout(h);
       map.setView([h.lat, h.lng], Math.max(map.getZoom(), 11));
     });
 
-    hubMarkersLayer.addLayer(m);
+    hubMarkersLayer.addLayer(cm);
   });
 
   hubMarkersLayer.addTo(map);
