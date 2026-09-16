@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geographic Visit Distribution Overview (Map Analysis) — ITL Executive Presentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-heat@0.2.0/dist/leaflet-heat.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="bd_boundary.json"></script>
+<script src="itl_visit_heatmap_data.js"></script>
+
+<style>
+:root {
+  --font: 'Outfit', sans-serif;
+  --font-bn: 'Hind Siliguri', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --bg-page: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-sub: #f1f5f9;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-sub: #64748b;
+  --border: #e2e8f0;
+  --primary-blue: #0284c7;
+  --primary-navy: #0f172a;
+  --accent-red: #dc2626;
+  --accent-green: #10b981;
+  --accent-amber: #d97706;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-lg: 0 10px 30px -5px rgba(0,0,0,0.08);
+}
+
+[data-theme="dark"] {
+  --bg-page: #0b0f19;
+  --bg-card: #111827;
+  --bg-card-sub: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #cbd5e1;
+  --text-sub: #94a3b8;
+  --border: #334155;
+  --primary-blue: #38bdf8;
+  --primary-navy: #f8fafc;
+  --shadow-lg: 0 10px 30px -5px rgba(0,0,0,0.5);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font);
+  background: var(--bg-page);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+.pres-header {
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--border);
+  padding: 16px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  z-index: 1000;
+}
+
+.header-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1e3a8a;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+[data-theme="dark"] .header-title { color: #60a5fa; }
+
+.header-title-bar {
+  width: 48px;
+  height: 4px;
+  background: #0284c7;
+  border-radius: 2px;
+  margin-top: 2px;
+}
+
+.brand-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.sokrio-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.sokrio-logo {
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #0284c7;
+  text-transform: uppercase;
+}
+.sokrio-sub {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-sub);
+  letter-spacing: 1px;
+}
+
+/* ── MAIN LAYOUT (SPLIT SCREEN SLIDE) ── */
+.slide-container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  height: calc(100vh - 78px);
+  background: var(--bg-page);
+  overflow: hidden;
+}
+
+/* ── LEFT COMMENTARY PANEL ── */
+.left-panel {
+  background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  padding: 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  box-shadow: var(--shadow-sm);
+}
+
+.intro-lead {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.point-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--bg-card-sub);
+  border-left: 4px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.point-card.green {
+  border-left-color: #10b981;
+}
+.point-card.red {
+  border-left-color: #ef4444;
+}
+
+.point-icon {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  margin-top: 2px;
+}
+
+.point-content h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.point-content p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* Turn point callout */
+.turning-point-card {
+  margin-top: 6px;
+  padding: 16px 18px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+[data-theme="dark"] .turning-point-card {
+  background: #450a0a;
+  border-color: #7f1d1d;
+}
+
+.turning-point-header {
+  font-size: 15px;
+  font-weight: 800;
+  color: #dc2626;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+[data-theme="dark"] .turning-point-header { color: #f87171; }
+
+.turning-point-desc {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #991b1b;
+}
+[data-theme="dark"] .turning-point-desc { color: #fca5a5; }
+
+/* Metrics Summary Grid */
+.metrics-strip {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.metric-box {
+  background: var(--bg-card-sub);
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.metric-lbl {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-sub);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-val {
+  font-size: 18px;
+  font-weight: 800;
+  font-family: var(--mono);
+  color: var(--primary-blue);
+  margin-top: 2px;
+}
+
+/* Action Button Row */
+.action-row {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font);
+}
+.btn:hover { background: var(--bg-card-sub); }
+.btn.primary {
+  background: #0284c7;
+  color: #ffffff;
+  border: none;
+}
+.btn.primary:hover { background: #0369a1; }
+
+/* ── RIGHT MAP PANEL ── */
+.right-panel {
+  position: relative;
+  background: #0f172a;
+  overflow: hidden;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  background: #e2e8f0;
+}
+[data-theme="dark"] #map { background: #090d16; }
+
+/* ── SLIDE BADGES ON MAP ── */
+
+/* Top Left Meta Badge */
+.map-badge-top-left {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 800;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 8px 16px;
+  border-radius: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+  backdrop-filter: blur(8px);
+}
+[data-theme="dark"] .map-badge-top-left {
+  background: rgba(15, 23, 42, 0.94);
+  border-color: rgba(255,255,255,0.15);
+  color: #f8fafc;
+}
+.pulse-dot-green {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #10b981;
+}
+
+/* Top Right Interactive Callout (Matching exact slide style) */
+.map-callout-top-right {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 800;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-left: 4px solid #dc2626;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  width: 320px;
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+[data-theme="dark"] .map-callout-top-right {
+  background: rgba(15, 23, 42, 0.96);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.callout-title {
+  font-family: var(--font-bn);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #dc2626;
+  margin-bottom: 2px;
+}
+[data-theme="dark"] .callout-title { color: #f87171; }
+
+.callout-sub {
+  font-size: 11px;
+  color: var(--text-sub);
+  margin-bottom: 6px;
+}
+
+.callout-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  padding-top: 6px;
+  border-top: 1px dashed var(--border);
+}
+.callout-stats span { font-family: var(--mono); }
+
+/* Floating Map Controls */
+.map-controls-bar {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 800;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 40px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(8px);
+}
+[data-theme="dark"] .map-controls-bar {
+  background: rgba(17, 24, 39, 0.94);
+  border-color: #374151;
+}
+
+.layer-btn {
+  padding: 6px 14px;
+  font-size: 11.5px;
+  font-weight: 700;
+  border-radius: 20px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.layer-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+/* Custom Red Cluster Pin */
+.red-hub-marker {
+  width: 10px;
+  height: 10px;
+  background: #ef4444;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.8), 0 0 12px rgba(239, 68, 68, 0.5);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.red-hub-marker:hover {
+  transform: scale(1.6);
+  background: #ff0000;
+  z-index: 1000 !important;
+}
+
+/* Top 300 List Drawer in Left Panel */
+.hubs-list-wrap {
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.hubs-list-header {
+  background: var(--bg-card-sub);
+  padding: 8px 12px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.hubs-table-scroll {
+  max-height: 160px;
+  overflow-y: auto;
+  font-size: 11px;
+}
+.hubs-table-scroll table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.hubs-table-scroll th {
+  position: sticky;
+  top: 0;
+  background: var(--bg-card);
+  padding: 6px 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-sub);
+  font-weight: 700;
+}
+.hubs-table-scroll td {
+  padding: 5px 8px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.hubs-table-scroll tr:hover td {
+  background: var(--bg-card-sub);
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="pres-header">
+  <div class="header-title-wrap">
+    <div class="header-title">
+      Geographic Visit Distribution Overview (Map Analysis)
+    </div>
+    <div class="header-title-bar"></div>
+  </div>
+  <div class="brand-logos">
+    <button class="btn" onclick="toggleTheme()" id="themeBtn" style="padding:6px 12px">🌓 Theme</button>
+    <div class="sokrio-brand">
+      <div class="sokrio-logo">SOKRIO</div>
+      <div class="sokrio-sub">Executive Map Engine</div>
+    </div>
+  </div>
+</header>
+
+<!-- ── SLIDE CONTAINER ── -->
+<div class="slide-container">
+  
+  <!-- ── LEFT PANEL ── -->
+  <aside class="left-panel">
+    <p class="intro-lead">
+      Let us begin by reviewing a map to understand how visit activity is distributed across different areas.
+    </p>
+
+    <!-- Point 1 -->
+    <div class="point-card green">
+      <svg class="point-icon" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+        <polyline points="9 11 12 14 22 4"/>
+      </svg>
+      <div class="point-content">
+        <h4>Widespread Operational Footprint</h4>
+        <p>The green areas represent our extensive nationwide visit coverage; with activity most intensely concentrated along the central belt.</p>
+      </div>
+    </div>
+
+    <!-- Point 2 -->
+    <div class="point-card red">
+      <svg class="point-icon" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+        <polyline points="9 11 12 14 22 4"/>
+      </svg>
+      <div class="point-content">
+        <h4>High-Density Micro-Locations</h4>
+        <p>The red markers highlight our top 300 most visited areas, driven primarily by major regional hubs like Dhaka, Chattogram, and Sylhet.</p>
+      </div>
+    </div>
+
+    <!-- Point 3: Turning Point -->
+    <div class="turning-point-card">
+      <div class="turning-point-header">
+        <span>❖</span> But this is not where our primary focus lies
+      </div>
+      <p class="turning-point-desc">
+        High field visit activity does not automatically mean high revenue. Our core audit focuses on uncovering <strong>0-Visit Blind Spots</strong> and <strong>0-Revenue Conversion Barriers</strong> across these territories.
+      </p>
+    </div>
+
+    <!-- Key Metrics Strip -->
+    <div class="metrics-strip">
+      <div class="metric-box">
+        <div class="metric-lbl">Total Field Visits</div>
+        <div class="metric-val" id="valVisits">1,569,902</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-lbl">Spatial Density Cells</div>
+        <div class="metric-val" id="valGrids">18,883</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-lbl">Top Commercial Hubs</div>
+        <div class="metric-val" style="color:var(--accent-red)">300 Hubs</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-lbl">Division Footprint</div>
+        <div class="metric-val" style="color:var(--accent-green)">8 / 8 (100%)</div>
+      </div>
+    </div>
+
+    <!-- Top 300 Hubs Quick List -->
+    <div class="hubs-list-wrap">
+      <div class="hubs-list-header" onclick="toggleHubsList()">
+        <span>📍 Top 300 Most Visited Hubs Roster</span>
+        <span id="hubsListToggle">▼</span>
+      </div>
+      <div class="hubs-table-scroll" id="hubsTableWrap">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Location / Area</th><th>District</th><th>Visits</th></tr>
+          </thead>
+          <tbody id="tblHubsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-row">
+      <button class="btn primary" onclick="exportTopHubsCSV()">📥 Export Top 300 Hubs (Excel)</button>
+      <button class="btn" onclick="exportMapScreenshot()">📷 Export Map (PNG)</button>
+    </div>
+  </aside>
+
+  <!-- ── RIGHT MAP PANEL ── -->
+  <main class="right-panel" id="mapExportArea">
+    
+    <!-- Top-Left Status Badge -->
+    <div class="map-badge-top-left">
+      <div class="pulse-dot-green"></div>
+      <div>ITL — চেক-ইন ম্যাপ বিশ্লেষণ | মে - আগস্ট ২০২৬ | মোট চেক-ইন: ১,৫৬৯,৯৪০</div>
+    </div>
+
+    <!-- Top-Right Callout Card (Interactive Inspector) -->
+    <div class="map-callout-top-right" id="inspectorCallout">
+      <div class="callout-title" id="calloutTitle">জৈন্তাপুর উপজেলা, সিলেট জেলা, সিলেট বিভাগ</div>
+      <div class="callout-sub">(৫০০ মিটার এলাকার মধ্যে মাইক্রো-ক্লাস্টার)</div>
+      <div class="callout-stats">
+        <div>চেক-ইন সংখ্যা: <span id="calloutVisits" style="color:#dc2626;font-weight:700">৩৪২</span></div>
+        <div>অবস্থান: <span id="calloutCoords">25.1368, 92.1220</span></div>
+      </div>
+    </div>
+
+    <!-- Main Leaflet Map -->
+    <div id="map"></div>
+
+    <!-- Floating Map Control Bar -->
+    <div class="map-controls-bar">
+      <button class="layer-btn active" id="btnCombined" onclick="setMode('combined')">🌐 Combined Overview</button>
+      <button class="layer-btn" id="btnHeat" onclick="setMode('heat')">🟢 Heatmap Only</button>
+      <button class="layer-btn" id="btnHubs" onclick="setMode('hubs')">🔴 Top 300 Hubs Only</button>
+    </div>
+
+  </main>
+
+</div>
+
+<script>
+let map = null;
+let heatLayer = null;
+let hubMarkersLayer = L.layerGroup();
+let currentMode = 'combined';
+
+const D = window.ITL_VISIT_MAP_DATA || { heat_points: [], top_300_hubs: [] };
+
+window.addEventListener('DOMContentLoaded', () => {
+  initMap();
+  initHubsTable();
+});
+
+function initMap() {
+  // Center of Bangladesh
+  map = L.map('map', {
+    center: [23.85, 90.35],
+    zoom: 7.4,
+    minZoom: 6.8,
+    maxZoom: 14,
+    zoomControl: true,
+    attributionControl: false
+  });
+
+  // Clean, modern minimal base tiles
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const tileUrl = isDark 
+    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+    : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+
+  L.tileLayer(tileUrl, { maxZoom: 19 }).addTo(map);
+
+  // 1. Build Green/Emerald Heatmap Gradient matching the slide exactly
+  const points = D.heat_points || [];
+  heatLayer = L.heatLayer(points, {
+    radius: 18,
+    blur: 16,
+    maxZoom: 11,
+    max: 0.85,
+    gradient: {
+      0.15: '#bbf7d0',
+      0.35: '#4ade80',
+      0.60: '#22c55e',
+      0.80: '#15803d',
+      1.00: '#14532d'
+    }
+  }).addTo(map);
+
+  // 2. Build Top 300 Red Marker Layer
+  const hubs = D.top_300_hubs || [];
+  hubs.forEach((h, idx) => {
+    const icon = L.divIcon({
+      className: 'custom-hub-icon',
+      html: `<div class="red-hub-marker" title="#${h.rank} ${h.thana} (${h.visits} visits)"></div>`,
+      iconSize: [12, 12],
+      iconAnchor: [6, 6]
+    });
+
+    const m = L.marker([h.lat, h.lng], { icon: icon });
+    m.on('mouseover', () => updateCallout(h));
+    m.on('click', () => {
+      updateCallout(h);
+      map.setView([h.lat, h.lng], Math.max(map.getZoom(), 11));
+    });
+
+    hubMarkersLayer.addLayer(m);
+  });
+
+  hubMarkersLayer.addTo(map);
+
+  // Set default inspector to Jaintapur sample (or Top #1 hub)
+  if (hubs.length > 0) {
+    const sampleHub = hubs.find(x => x.thana.includes('জৈন্তাপুর')) || hubs[0];
+    updateCallout(sampleHub);
+  }
+}
+
+function updateCallout(h) {
+  document.getElementById('calloutTitle').textContent = h.label_bn || `${h.thana}, ${h.district} জেলা, ${h.division} বিভাগ`;
+  document.getElementById('calloutVisits').textContent = Number(h.visits).toLocaleString();
+  document.getElementById('calloutCoords').textContent = `${h.lat.toFixed(4)}, ${h.lng.toFixed(4)}`;
+}
+
+function setMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.layer-btn').forEach(b => b.classList.remove('active'));
+
+  if (mode === 'combined') {
+    document.getElementById('btnCombined').classList.add('active');
+    if (!map.hasLayer(heatLayer)) map.addLayer(heatLayer);
+    if (!map.hasLayer(hubMarkersLayer)) map.addLayer(hubMarkersLayer);
+  } else if (mode === 'heat') {
+    document.getElementById('btnHeat').classList.add('active');
+    if (!map.hasLayer(heatLayer)) map.addLayer(heatLayer);
+    if (map.hasLayer(hubMarkersLayer)) map.removeLayer(hubMarkersLayer);
+  } else if (mode === 'hubs') {
+    document.getElementById('btnHubs').classList.add('active');
+    if (map.hasLayer(heatLayer)) map.removeLayer(heatLayer);
+    if (!map.hasLayer(hubMarkersLayer)) map.addLayer(hubMarkersLayer);
+  }
+}
+
+function initHubsTable() {
+  const tbody = document.getElementById('tblHubsBody');
+  const hubs = D.top_300_hubs || [];
+  tbody.innerHTML = hubs.slice(0, 100).map(h => `
+    <tr onclick="focusHub(${h.lat}, ${h.lng}, ${h.rank})">
+      <td style="font-weight:700;color:var(--accent-red)">#${h.rank}</td>
+      <td style="font-weight:600">${h.thana}</td>
+      <td>${h.district}</td>
+      <td style="font-family:var(--mono);font-weight:700;color:var(--primary-blue)">${Number(h.visits).toLocaleString()}</td>
+    </tr>
+  `).join('');
+}
+
+function focusHub(lat, lng, rank) {
+  const h = (D.top_300_hubs || []).find(x => x.rank === rank);
+  if (h) updateCallout(h);
+  map.setView([lat, lng], 11, { animate: true });
+}
+
+function toggleHubsList() {
+  const el = document.getElementById('hubsTableWrap');
+  const toggle = document.getElementById('hubsListToggle');
+  if (el.style.display === 'none') {
+    el.style.display = 'block';
+    toggle.textContent = '▼';
+  } else {
+    el.style.display = 'none';
+    toggle.textContent = '▶';
+  }
+}
+
+function exportTopHubsCSV() {
+  const hubs = D.top_300_hubs || [];
+  let csv = "Rank,Thana_Upazila,District,Division,Total_Visits,Latitude,Longitude\n";
+  hubs.forEach(h => {
+    csv += `${h.rank},"${h.thana}","${h.district}","${h.division}",${h.visits},${h.lat},${h.lng}\n`;
+  });
+
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.setAttribute("href", url);
+  link.setAttribute("download", "ITL_Top_300_High_Density_Visit_Hubs.csv");
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+function exportMapScreenshot() {
+  const mapEl = document.getElementById('mapExportArea');
+  html2canvas(mapEl, { useCORS: true }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = `ITL_Geographic_Visit_Distribution_Map_${Date.now()}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+}
+
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  if (map) {
+    map.remove();
+    initMap();
+  }
+}
+</script>
+</body>
+</html>
