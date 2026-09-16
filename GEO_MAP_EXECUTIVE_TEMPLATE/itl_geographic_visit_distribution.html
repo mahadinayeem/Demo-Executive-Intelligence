@@ -10,7 +10,6 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-heat@0.2.0/dist/leaflet-heat.js"></script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-<script src="bd_boundary.json"></script>
 <script src="itl_visit_heatmap_data.js"></script>
 
 <style>
@@ -651,27 +650,32 @@ function initMap() {
     attributionControl: false
   });
 
-  // Clean, modern minimal base tiles
+  // Clean, modern minimal base tiles (No watermark)
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   const tileUrl = isDark 
-    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-    : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+    ? 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}'
+    : 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}';
 
-  L.tileLayer(tileUrl, { maxZoom: 19 }).addTo(map);
+  L.tileLayer(tileUrl, {
+    maxZoom: 16,
+    subdomains: ['server', 'services'],
+    errorTileUrl: 'https://tile.openstreetmap.org/0/0/0.png'
+  }).addTo(map);
 
   // 1. Build Green/Emerald Heatmap Gradient matching the slide exactly
   const points = D.heat_points || [];
   heatLayer = L.heatLayer(points, {
-    radius: 18,
-    blur: 16,
-    maxZoom: 11,
-    max: 0.85,
+    radius: 22,
+    blur: 18,
+    maxZoom: 10,
+    max: 0.65,
+    minOpacity: 0.25,
     gradient: {
-      0.15: '#bbf7d0',
+      0.15: '#86efac',
       0.35: '#4ade80',
-      0.60: '#22c55e',
-      0.80: '#15803d',
-      1.00: '#14532d'
+      0.55: '#22c55e',
+      0.75: '#16a34a',
+      1.00: '#15803d'
     }
   }).addTo(map);
 
