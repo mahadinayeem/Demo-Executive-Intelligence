@@ -287,9 +287,15 @@ tr:hover td{background:var(--card2)}
             <div class="donut-center-lbl" id="rfmCenterLbl">Active Only</div>
           </div>
         </div>
-        <div class="insight emerald">
-          <h4>How to read this</h4>
-          <p>Each slice = % of active retail outlets in that RFM tier. Larger Loyal Base + Champions = healthier retention. A growing At-Risk slice = immediate revenue threat.</p>
+        <div class="insight emerald" style="margin-top:14px">
+          <h4>📋 Segment Definitions &amp; Qualification Criteria (শর্তাবলি)</h4>
+          <div style="display:grid;grid-template-columns:1fr;gap:6px;margin-top:8px;font-size:11.5px;color:var(--text2);line-height:1.5">
+            <div>🏆 <strong>Champions:</strong> শেষ অর্ডার ≤ ৩০ দিন (আগস্ট) + ১০+ টি অর্ডার + &gt; ৳ ৫০,০০০ রেভিনিউ</div>
+            <div>💎 <strong>Loyal Base:</strong> শেষ অর্ডার ≤ ৩০ দিন (আগস্ট) + ৪+ টি অর্ডার (নিয়মিত রিপিট ক্রেতা)</div>
+            <div>🌱 <strong>Potential:</strong> শেষ অর্ডার ≤ ৩০ দিন (আগস্ট) + ১–৩ টি অর্ডার (নতুন/বিকাশমান অ্যাকাউন্ট)</div>
+            <div>⚠️ <strong>At-Risk:</strong> শেষ অর্ডার ৩১–৬০ দিন আগে (জুলাইয়ে অর্ডার ছিল, গত ৩০ দিন কোনো অর্ডার নেই)</div>
+            <div>💀 <strong>Lost (Churned):</strong> শেষ অর্ডার &gt; ৬০ দিন আগে (গত ২ মাস বা ৬০+ দিন ধরে সম্পূর্ণ বন্ধ)</div>
+          </div>
         </div>
       </div>
       <div class="card">
@@ -763,11 +769,19 @@ function renderRFM(){
       'At-Risk':'Manager-level win-back call within 48 hrs.',
       Lost:'Root cause review: Visit Gap vs Service Gap.'
     };
+    const criteria = {
+      Champions: 'Recency ≤30D · Freq ≥10 · Rev >৳50k',
+      'Loyal Base': 'Recency ≤30D · Freq ≥4 Orders',
+      Potential: 'Recency ≤30D · Freq 1–3 Orders',
+      'At-Risk': 'Recency 31–60D (1 Month Silent)',
+      Lost: 'Recency >60D (2+ Months Silent / Churned)'
+    };
     return `<div class="profile-card" style="border-top:3px solid ${c}">
       <div class="profile-header">
         <div class="profile-icon" style="background:${c}22">${icons[l]}</div>
         <div><div class="profile-name">${l}</div><div class="profile-sub">${fc(s.count)} Outlets · ${s.rev_pct}% Revenue</div></div>
       </div>
+      <div class="profile-stat"><span class="profile-stat-lbl">Qualification Rule</span><span class="profile-stat-val" style="color:${c};font-size:10.5px">${criteria[l]}</span></div>
       <div class="profile-stat"><span class="profile-stat-lbl">Revenue Contribution</span><span class="profile-stat-val">BDT ${fmt(s.revenue)}</span></div>
       <div class="profile-stat"><span class="profile-stat-lbl">Avg Order Value (AOV)</span><span class="profile-stat-val">BDT ${fc(Math.round(s.aov))}</span></div>
       <div class="profile-stat"><span class="profile-stat-lbl">Avg Orders / Outlet</span><span class="profile-stat-val">${s.freq}</span></div>
