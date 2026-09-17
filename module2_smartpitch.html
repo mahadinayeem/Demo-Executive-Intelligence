@@ -1564,61 +1564,73 @@ function chartDL(chartId) {
   let filename = `ITL_${chartId}_data.csv`;
   
   if (chartId === 'skuWaterfall' || chartId === 'paretoLine') {
-    csv = "Rank,SKU,Name,Brand,Category,Revenue,Revenue_Share_Pct,Cumulative_Pct,Orders,Buyers\n";
-    D.pareto.sku.forEach(s => {
+    csv = "Rank,SKU,Name,Brand,Category,Revenue_BDT,Revenue_Share_Pct,Cumulative_Pct,Orders,Buyers\n";
+    const skus = D.pareto?.sku || [];
+    skus.forEach(s => {
       csv += `${s.rank},"${s.sku}","${s.name}","${s.brand}","${s.category}",${s.revenue},${s.revenue_share_pct},${s.cumulative_pct},${s.order_count},${s.buyer_count}\n`;
     });
   } else if (chartId === 'catDonut') {
-    csv = "Category,Revenue,Share_Pct\n";
-    D.pareto.categories.forEach(c => {
-      csv += `"${c.category}",${c.revenue},${c.share_pct}\n`;
+    csv = "Category,Revenue_BDT,Share_Pct,Cumulative_Pct\n";
+    const cats = D.pareto?.category || D.pareto?.categories || [];
+    cats.forEach(c => {
+      csv += `"${c.category}",${c.revenue},${c.share_pct},${c.cumulative_pct||''}\n`;
     });
   } else if (chartId === 'concentration') {
-    csv = "Concentration_Bucket,Revenue,Share_Pct\n";
-    csv += `"Top 1 SKU",${D.pareto.concentration.top_1_rev},${D.pareto.concentration.top_1_pct}\n`;
-    csv += `"Top 3 SKUs",${D.pareto.concentration.top_3_rev},${D.pareto.concentration.top_3_pct}\n`;
-    csv += `"Top 5 SKUs",${D.pareto.concentration.top_5_rev},${D.pareto.concentration.top_5_pct}\n`;
-    csv += `"Top 10 SKUs",${D.pareto.concentration.top_10_rev},${D.pareto.concentration.top_10_pct}\n`;
-    csv += `"Top 20 SKUs",${D.pareto.concentration.top_20_rev},${D.pareto.concentration.top_20_pct}\n`;
+    csv = "Concentration_Bucket,Revenue_Share_Pct\n";
+    const conc = D.pareto?.concentration || {};
+    csv += `"Top 1 SKU",${conc.top1||0}%\n`;
+    csv += `"Top 3 SKUs",${conc.top3||0}%\n`;
+    csv += `"Top 5 SKUs",${conc.top5||0}%\n`;
+    csv += `"Top 10 SKUs",${conc.top10||0}%\n`;
+    csv += `"Top 20 SKUs",${conc.top20||0}%\n`;
   } else if (chartId === 'brandBar') {
-    csv = "Brand,Revenue,Share_Pct\n";
-    D.pareto.brands.forEach(b => {
-      csv += `"${b.brand}",${b.revenue},${b.share_pct}\n`;
+    csv = "Brand,Revenue_BDT,Share_Pct,Cumulative_Pct\n";
+    const brands = D.pareto?.brand || D.pareto?.brands || [];
+    brands.forEach(b => {
+      csv += `"${b.brand}",${b.revenue},${b.share_pct},${b.cumulative_pct||''}\n`;
     });
   } else if (chartId === 'topPairs') {
-    csv = "Rank,Trigger_SKU,Pitch_SKU,Support_Pct,Confidence_Trigger_to_Pitch_Pct,Confidence_Pitch_to_Trigger_Pct,Co_Purchase_Count,Lift\n";
-    D.basket.top_pairs.forEach((p, i) => {
-      csv += `${i+1},"${p.name_a}","${p.name_b}",${p.support},${p.confidence_ab},${p.confidence_ba},${p.co_count},${p.lift}\n`;
+    csv = "Rank,Trigger_SKU,Trigger_Name,Pitch_SKU,Pitch_Name,Support_Pct,Confidence_Trigger_to_Pitch_Pct,Confidence_Pitch_to_Trigger_Pct,Co_Purchase_Count,Lift\n";
+    const pairs = D.basket?.top_pairs || [];
+    pairs.forEach((p, i) => {
+      csv += `${i+1},"${p.sku_a||''}","${p.name_a||''}",${p.sku_b||''},"${p.name_b||''}",${p.support||0},${p.confidence_ab||0},${p.confidence_ba||0},${p.co_count||0},${p.lift||0}\n`;
     });
   } else if (chartId === 'basketDist') {
     csv = "Basket_Size_SKUs,Order_Count,Pct_of_Orders\n";
-    D.basket.distribution.forEach(d => {
+    const dist = D.basket?.basket_distribution || D.basket?.distribution || [];
+    dist.forEach(d => {
       csv += `"${d.size}",${d.orders},${d.pct}\n`;
     });
   } else if (chartId === 'liftMatrix') {
-    csv = "Trigger_SKU,Pitch_SKU,Support_Pct,Confidence_Pct,Lift\n";
-    D.basket.matrix_pairs.forEach(p => {
-      csv += `"${p.name_a}","${p.name_b}",${p.support},${p.confidence_ab},${p.lift}\n`;
+    csv = "Trigger_SKU,Trigger_Name,Pitch_SKU,Pitch_Name,Support_Pct,Confidence_Pct,Lift\n";
+    const pairs = D.basket?.top_pairs || D.basket?.matrix_pairs || [];
+    pairs.forEach(p => {
+      csv += `"${p.sku_a||''}","${p.name_a||''}","${p.sku_b||''}","${p.name_b||''}",${p.support||0},${p.confidence_ab||0},${p.lift||0}\n`;
     });
   } else if (chartId === 'tierCount' || chartId === 'tierRev' || chartId === 'tierTable') {
-    csv = "Tier,Outlets,Revenue,Revenue_Share_Pct,Avg_Revenue_Per_Outlet\n";
-    D.tiers.forEach(t => {
+    csv = "Tier,Outlets,Revenue_BDT,Revenue_Share_Pct,Avg_Revenue_Per_Outlet\n";
+    const tiers = D.tiers || [];
+    tiers.forEach(t => {
       csv += `"${t.tier}",${t.outlet_count},${t.revenue},${t.revenue_share},${t.avg_revenue}\n`;
     });
   } else if (chartId === 'uplift' || chartId === 'scenario') {
-    csv = "Tier,Current_Avg_Rev,Target_Avg_Rev,Outlets,Potential_Uplift_BDT\n";
-    D.simulation.forEach(s => {
-      csv += `"${s.tier}",${s.current_avg},${s.target_avg},${s.outlets},${s.uplift}\n`;
-    });
+    csv = "Scenario_Metric,Value\n";
+    if (D.simulation) {
+      csv += `"Bronze Outlets",${D.simulation.bronze_to_silver?.outlets||0}\n`;
+      csv += `"Bronze to Silver Uplift BDT",${D.simulation.bronze_to_silver?.uplift_total||0}\n`;
+      csv += `"Silver Outlets",${D.simulation.silver_to_gold?.outlets||0}\n`;
+      csv += `"Silver to Gold Uplift BDT",${D.simulation.silver_to_gold?.uplift_total||0}\n`;
+      csv += `"Total Upsell Opportunity BDT",${D.simulation.uplift_if_upsold||0}\n`;
+    }
   } else if (chartId === 'penetration') {
-    const catNames = D.penetration_gaps.categories || [];
-    csv = "Territory,Total_Revenue," + catNames.join(",") + "\n";
-    const penData = D.penetration_gaps.data || [];
+    const catNames = D.penetration_gaps?.categories || [];
+    csv = "Territory,Total_Revenue_BDT," + catNames.join(",") + "\n";
+    const penData = D.penetration_gaps?.data || [];
     penData.forEach(t => {
       csv += `"${t.territory}",${t.rev},${t.cats.join(",")}\n`;
     });
   } else if (chartId === 'monthlyTrend' || chartId === 'momGrowth' || chartId === 'rollingAvg') {
-    csv = "Month,Revenue,MoM_Growth_Pct,Rolling_3M_Avg\n";
+    csv = "Month,Revenue_BDT,MoM_Growth_Pct,Rolling_3M_Avg\n";
     const mt = D.monthly_trend || [];
     mt.forEach((t, i) => {
       if(t.month && t.month.length >= 7) {

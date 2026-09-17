@@ -1,12 +1,9 @@
 """
 =============================================================================
-ITL GEOGRAPHIC VISIT DISTRIBUTION & HEATMAP GENERATOR
+ITL 1.57M FIELD VISIT HIGH-DENSITY HEATMAP & HUB GENERATOR
 =============================================================================
-Builds a faithful, executive-ready interactive map view matching the slide:
-- Widespread Operational Footprint (Green Heatmap)
-- High-Density Micro-Locations (Top 300 Red Marker Clusters)
-- Callout info card in Bengali & English
-- Export to High-Res PNG / Export to Excel
+Processes all 1,569,902 GPS check-ins from itl_checkings.csv.
+Builds ultra-dense spatial visit points with rich opacity weighting.
 =============================================================================
 """
 
@@ -20,9 +17,7 @@ from datetime import datetime
 csv.field_size_limit(2147483647)
 sys.stdout.reconfigure(encoding='utf-8')
 
-print("[1/4] Reading District/Thana centroids for nearest lookup...")
-
-# Sample reference coordinates for Bangladesh major thanas/districts
+print("[1/4] Loading Reference Centroids...")
 DISTRICT_CENTROIDS = [
     (23.8103, 90.4125, "ঢাকা", "Dhaka", "Dhaka"),
     (23.9999, 90.4203, "গাজীপুর সদর", "Gazipur", "Dhaka"),
@@ -87,12 +82,9 @@ def get_nearest_location(lat, lng):
             best_loc = (thana, dist, div)
     return best_loc
 
-print("[2/4] Reading and spatial aggregating 1.57M visits from itl_checkings.csv...")
-
+print("[2/4] Reading ALL 1,569,902 visits from itl_checkings.csv...")
 grid_density = defaultdict(int)
 total_visits_counted = 0
-min_date = "2026-05-01"
-max_date = "2026-08-31"
 
 with open('itl_checkings.csv', 'r', encoding='utf-8-sig', errors='replace') as f:
     reader = csv.DictReader(f)
@@ -103,24 +95,27 @@ with open('itl_checkings.csv', 'r', encoding='utf-8-sig', errors='replace') as f
         except:
             continue
         if 20.5 <= lat <= 26.7 and 88.0 <= lng <= 92.7:
-            # 0.015 degree resolution (~1.5 km cell)
-            glat = round(lat, 2)
-            glng = round(lng, 2)
+            # 0.008 degree grid cell (~800m) for continuous lush coverage
+            glat = round(lat, 3)
+            glng = round(lng, 3)
             grid_density[(glat, glng)] += 1
             total_visits_counted += 1
 
-print(f"Total Valid Visits Aggregated: {total_visits_counted:,}")
-print(f"Total Continuous Heatmap Grid Points: {len(grid_density):,}")
+print(f"Total Valid Visits Processed: {total_visits_counted:,}")
+print(f"Total Ultra-Dense Grid Cells: {len(grid_density):,}")
 
-# Build heatmap points array: [lat, lng, normalized_intensity]
+# Build heatmap points: [lat, lng, weight]
 max_density = max(grid_density.values()) if grid_density else 1
+log_max = math.log1p(max_density)
+
 heat_points = []
 for (lat, lng), count in grid_density.items():
-    # Log scale intensity for smooth visual spread like the presentation slide
-    intensity = round(math.log1p(count) / math.log1p(max_density), 3)
-    heat_points.append([lat, lng, intensity])
+    # Weight between 0.35 (base presence) to 1.0 (high traffic corridor)
+    w = 0.35 + 0.65 * (math.log1p(count) / log_max)
+    heat_points.append([lat, lng, round(w, 3)])
 
 print("[3/4] Extracting Top 300 High-Density Micro-Locations...")
+# Sort by visit counts
 top_300 = sorted(grid_density.items(), key=lambda x: x[1], reverse=True)[:300]
 
 hubs_data = []
@@ -139,9 +134,7 @@ for rank, ((lat, lng), count) in enumerate(top_300, 1):
     })
 
 print(f"Top Hub #1: {hubs_data[0]['label_bn']} -> {hubs_data[0]['visits']:,} visits")
-print(f"Top Hub #300: {hubs_data[-1]['label_bn']} -> {hubs_data[-1]['visits']:,} visits")
 
-# Save payload to js
 payload = {
     'meta': {
         'company': 'Ispahani Tea Limited',
@@ -159,4 +152,4 @@ payload = {
 with open('itl_visit_heatmap_data.js', 'w', encoding='utf-8') as f:
     f.write('window.ITL_VISIT_MAP_DATA = ' + json.dumps(payload, ensure_ascii=False) + ';\n')
 
-print("[4/4] Written: itl_visit_heatmap_data.js successfully!")
+print(f"[4/4] Written {len(heat_points):,} points to itl_visit_heatmap_data.js successfully!")
