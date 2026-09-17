@@ -1626,6 +1626,14 @@ function renderTrendCharts() {
   });
 }
 
+function renderChartsForTab(id) {
+  if (id === 'pareto') renderParetoCharts();
+  else if (id === 'basket') renderBasketCharts();
+  else if (id === 'tiers') renderTierCharts();
+  else if (id === 'simulation') renderSimCharts();
+  else if (id === 'trend') renderTrendCharts();
+}
+
 // ──────────────────────────────────────────────────────
 // PENETRATION GAPS (MOCK DATA)
 // ──────────────────────────────────────────────────────
