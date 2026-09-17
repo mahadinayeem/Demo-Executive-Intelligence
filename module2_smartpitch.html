@@ -716,14 +716,11 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 
 <script>
 // ──────────────────────────────────────────────────────
-// DATA CHECK
-// ──────────────────────────────────────────────────────
-if (typeof MODULE2_DATA === 'undefined') {
+const D = window.MODULE2_DATA || null;
+if (!D) {
   document.getElementById('loading').innerHTML = '<div style="text-align:center"><div style="font-size:40px;margin-bottom:12px">❌</div><p style="color:#f43f5e;font-size:14px">module2_data.js not found.<br>Run build_module2.py first.</p></div>';
   throw new Error('MODULE2_DATA not defined');
 }
-
-const D = MODULE2_DATA;
 const fmt = (n, dec=0) => {
   if(n >= 1e9) return (n/1e9).toFixed(dec||1)+'B';
   if(n >= 1e6) return (n/1e6).toFixed(dec||1)+'M';
