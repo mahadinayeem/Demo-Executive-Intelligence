@@ -412,14 +412,42 @@ churn_risk_summary = {
     'by_territory': churn_risk_terr_list
 }
 
+# Silent bleed severity distribution (across all 28k+ silent_bleed_outlets)
+bleed_severity_buckets = {'50-60%': 0, '60-70%': 0, '70-80%': 0, '80-90%': 0, '90%+': 0}
+for b in silent_bleed_outlets:
+    d = b['drop_pct']
+    if d < 60: bleed_severity_buckets['50-60%'] += 1
+    elif d < 70: bleed_severity_buckets['60-70%'] += 1
+    elif d < 80: bleed_severity_buckets['70-80%'] += 1
+    elif d < 90: bleed_severity_buckets['80-90%'] += 1
+    else: bleed_severity_buckets['90%+'] += 1
+
 silent_bleed_summary = {
     'total_count': len(silent_bleed_outlets),
     'total_lost': round(total_silent_bleed_lost, 1),
+    'severity_buckets': bleed_severity_buckets,
     'by_territory': silent_bleed_terr_list
 }
 
+# Red flag visit distribution & territory breakdown (across all red_flags)
+red_flag_visit_buckets = {'6-10': 0, '11-20': 0, '21-30': 0, '31-50': 0, '50+': 0}
+red_flag_terr_map = defaultdict(int)
+for f in red_flags:
+    v = f['visits']
+    if v <= 10: red_flag_visit_buckets['6–10'] += 1
+    elif v <= 20: red_flag_visit_buckets['11–20'] += 1
+    elif v <= 30: red_flag_visit_buckets['21–30'] += 1
+    elif v <= 50: red_flag_visit_buckets['31–50'] += 1
+    else: red_flag_visit_buckets['50+'] += 1
+    t = f['territory'] or 'National Retail'
+    red_flag_terr_map[t] += 1
+
+red_flag_terr_list = [{'territory': t, 'count': c} for t, c in sorted(red_flag_terr_map.items(), key=lambda x: -x[1])[:12]]
+
 red_flag_summary = {
-    'total_count': len(red_flags)
+    'total_count': len(red_flags),
+    'visit_buckets': red_flag_visit_buckets,
+    'by_territory': red_flag_terr_list
 }
 
 output_data = {

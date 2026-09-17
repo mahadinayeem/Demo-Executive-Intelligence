@@ -8736,6 +8736,13 @@
   "silent_bleed_summary": {
     "total_count": 28151,
     "total_lost": 247227251.1,
+    "severity_buckets": {
+      "50-60%": 7983,
+      "60-70%": 7175,
+      "70-80%": 5928,
+      "80-90%": 4399,
+      "90%+": 2666
+    },
     "by_territory": [
       {
         "territory": "Sahin Store",
@@ -16004,7 +16011,64 @@
     }
   ],
   "red_flag_summary": {
-    "total_count": 9009
+    "total_count": 9009,
+    "visit_buckets": {
+      "6-10": 6882,
+      "11-20": 2085,
+      "21-30": 42,
+      "31-50": 0,
+      "50+": 0
+    },
+    "by_territory": [
+      {
+        "territory": "National Retail",
+        "count": 1567
+      },
+      {
+        "territory": "Babu Store",
+        "count": 210
+      },
+      {
+        "territory": "Vai Vai Satata Store",
+        "count": 191
+      },
+      {
+        "territory": "Mobina Traders",
+        "count": 188
+      },
+      {
+        "territory": "Aleenas Distribution",
+        "count": 132
+      },
+      {
+        "territory": "Nure Mohammadia Store",
+        "count": 125
+      },
+      {
+        "territory": "Vai Vai Store",
+        "count": 121
+      },
+      {
+        "territory": "Tanni General Store",
+        "count": 98
+      },
+      {
+        "territory": "Al Amin Store BOGC",
+        "count": 98
+      },
+      {
+        "territory": "Tobarak Molla Store",
+        "count": 96
+      },
+      {
+        "territory": "Safa Enterprise",
+        "count": 87
+      },
+      {
+        "territory": "Nirala Traders",
+        "count": 86
+      }
+    ]
   },
   "red_flags": [
     {

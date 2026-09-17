@@ -1000,16 +1000,8 @@ function renderBleed(){
   document.getElementById('bleedTotal').innerText = fc(SB.total_count);
   document.getElementById('bleedLost').innerText  = 'BDT '+fmt(SB.total_lost);
 
-  // Severity chart — group by drop % ranges
-  const buckets = {'50–60%':0,'60–70%':0,'70–80%':0,'80–90%':0,'90%+':0};
-  (D.silent_bleed||[]).forEach(b=>{
-    const d = b.drop_pct;
-    if(d<60) buckets['50–60%']++;
-    else if(d<70) buckets['60–70%']++;
-    else if(d<80) buckets['70–80%']++;
-    else if(d<90) buckets['80–90%']++;
-    else buckets['90%+']++;
-  });
+  // Severity chart — full national distribution
+  const buckets = SB.severity_buckets || {'50–60%':0,'60–70%':0,'70–80%':0,'80–90%':0,'90%+':0};
 
   dc('bleedSeverity');
   C['bleedSeverity'] = new Chart(document.getElementById('chartBleedSeverity'),{
@@ -1105,16 +1097,8 @@ function renderFlags(){
   const RF = D.red_flag_summary;
   document.getElementById('flagTotal').innerText = fc(RF.total_count);
 
-  // Visit bucket distribution (from top 100 sample)
-  const buckets = {'6–10':0,'11–20':0,'21–30':0,'31–50':0,'50+':0};
-  (D.red_flags||[]).forEach(f=>{
-    const v=f.visits;
-    if(v<=10) buckets['6–10']++;
-    else if(v<=20) buckets['11–20']++;
-    else if(v<=30) buckets['21–30']++;
-    else if(v<=50) buckets['31–50']++;
-    else buckets['50+']++;
-  });
+  // Visit bucket distribution — full national distribution
+  const buckets = RF.visit_buckets || {'6–10':0,'11–20':0,'21–30':0,'31–50':0,'50+':0};
 
   dc('flagVisits');
   C['flagVisits'] = new Chart(document.getElementById('chartFlagVisits'),{
@@ -1145,10 +1129,8 @@ function renderFlags(){
     }
   });
 
-  // Territory distribution
-  const terrMap = {};
-  (D.red_flags||[]).forEach(f=>{ const t=f.territory||'Unknown'; terrMap[t]=(terrMap[t]||0)+1; });
-  const terrArr = Object.entries(terrMap).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  // Territory distribution — full national breakdown
+  const terrArr = (RF.by_territory && RF.by_territory.length) ? RF.by_territory.map(t=>[t.territory, t.count]) : [];
 
   dc('flagTerritory');
   C['flagTerritory'] = new Chart(document.getElementById('chartFlagTerritory'),{
