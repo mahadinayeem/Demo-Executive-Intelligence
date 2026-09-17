@@ -689,6 +689,20 @@ function renderRFM(){
   C['rfmDonut'] = new Chart(document.getElementById('chartRFMDonut'),{
     type:'doughnut',
     data:{ labels, datasets:[{data:counts, backgroundColor:colors, borderWidth:2, borderColor:'rgba(6,9,18,.8)'}]},
+    plugins: [{
+      id: 'donutCenterAlign',
+      afterDraw: function(chart) {
+        const meta = chart.getDatasetMeta(0);
+        if (meta && meta.data && meta.data[0]) {
+          const el = document.getElementById('rfmCenter');
+          if (el) {
+            el.style.left = meta.data[0].x + 'px';
+            el.style.top = meta.data[0].y + 'px';
+            el.style.transform = 'translate(-50%, -50%)';
+          }
+        }
+      }
+    }],
     options:{
       responsive:true, maintainAspectRatio:false, cutout:'62%',
       plugins:{

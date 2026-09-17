@@ -12,8 +12,8 @@ print("=== MODULE 3 DATA BUILDER (RETAIL SPOTLIGHT™) ===")
 print("=" * 60)
 
 # ─── CONFIGURATION ───────────────────────────────────────────────────────────
-ACTIVE_DAYS         = 60     # Last 60 days = Active
-AT_RISK_DAYS        = 120    # 61-120 days = At-Risk
+ACTIVE_DAYS         = 30     # Last 30 days = Active
+AT_RISK_DAYS        = 60     # 31-60 days = At-Risk (Silent for 1 month)
 OUTLIER_THRESHOLD   = 500000 # Max single order line amount (filters >5 Lakh outliers)
 SILENT_BLEED_THRESHOLD = 0.50  # >50% AOV drop
 RED_FLAG_VISIT_COUNT   = 5     # >5 visits with 0 orders
