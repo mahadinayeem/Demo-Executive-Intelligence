@@ -268,10 +268,10 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
       </div>
       <div class="card">
         <div class="card-header">
-          <div class="card-title">Top 10 Territories by Field Productivity</div>
+          <div class="card-title">Top 10 Distributor / DB Points by Field Productivity</div>
           <button class="chart-dl" onclick="dlChart('terrProd')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
         </div>
-        <p class="card-sub">Revenue and conversion performance ranked by Territory name.</p>
+        <p class="card-sub">Revenue and conversion performance ranked by Distributor / DB Point.</p>
         <div class="chart-wrap"><canvas id="chartTerrProd"></canvas></div>
       </div>
     </div>
@@ -366,8 +366,8 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
         <button class="chart-dl" onclick="dlChart('srRankingsTable')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
       </div>
       <div class="filter-bar">
-        <label>Filter Territory:</label>
-        <select class="filter-select" id="selTerr" onchange="filterSRTable()"><option value="">All Territories</option></select>
+        <label>Filter Distributor Point:</label>
+        <select class="filter-select" id="selTerr" onchange="filterSRTable()"><option value="">All Distributor Points</option></select>
         <label style="margin-left:10px">Filter Persona:</label>
         <select class="filter-select" id="selPersona" onchange="filterSRTable()"><option value="">All Personas</option></select>
         <label style="margin-left:10px">Search SR:</label>
@@ -378,7 +378,7 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
         <table>
           <thead>
             <tr>
-              <th>Rank</th><th>SR Name</th><th>Code</th><th>Territory</th><th>Persona</th><th>Revenue (BDT)</th><th>Rev Share</th><th>Orders</th><th>AOV</th><th>Visits</th><th>Visits/Day</th><th>Conv Rate</th><th>Strike Rate</th><th>Coaching Action</th>
+              <th>Rank</th><th>SR Name</th><th>Code</th><th>Distributor / DB Point</th><th>Persona</th><th>Revenue (BDT)</th><th>Rev Share</th><th>Orders</th><th>AOV</th><th>Visits</th><th>Visits/Day</th><th>Conv Rate</th><th>Strike Rate</th><th>Coaching Action</th>
             </tr>
           </thead>
           <tbody id="tblSRBody"></tbody>
@@ -477,7 +477,7 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
         <table>
           <thead>
             <tr>
-              <th>Rank</th><th>SR Name</th><th>Code</th><th>Territory</th><th>Total Visits</th><th>Total Orders</th><th>Revenue (BDT)</th><th>Visits / Day</th><th>Conversion %</th><th>Diagnostic Root Cause</th><th>Action</th>
+              <th>Rank</th><th>SR Name</th><th>Code</th><th>Distributor / DB Point</th><th>Total Visits</th><th>Total Orders</th><th>Revenue (BDT)</th><th>Visits / Day</th><th>Conversion %</th><th>Diagnostic Root Cause</th><th>Action</th>
             </tr>
           </thead>
           <tbody id="tblRedBody"></tbody>
@@ -976,7 +976,7 @@ function renderCoachingCard(srId) {
             <span class="badge" style="background:${s.persona_color}22;color:${s.persona_color}">${s.persona}</span>
             <span class="badge purple">Rank #${s.rank}</span>
           </div>
-          <div style="font-size:12px;color:var(--text3)">SR Code: <span class="mono" style="color:var(--text2)">${s.code || '--'}</span> | Territory: <strong style="color:var(--text)">${s.territory}</strong></div>
+          <div style="font-size:12px;color:var(--text3)">SR Code: <span class="mono" style="color:var(--text2)">${s.code || '--'}</span> | Distributor Point: <strong style="color:var(--text)">${s.territory}</strong></div>
         </div>
         <div style="text-align:right">
           <div style="font-size:11px;color:var(--text3);text-transform:uppercase">Total Revenue</div>
@@ -1020,7 +1020,7 @@ function openCoachModal(srId) {
           <span class="badge" style="background:${s.persona_color}22;color:${s.persona_color}">${s.persona}</span>
           <span class="badge purple">Rank #${s.rank}</span>
         </div>
-        <div style="font-size:12px;color:var(--text3)">SR Code: <span class="mono" style="color:var(--text2)">${s.code || '--'}</span> | Territory: <strong style="color:var(--text)">${s.territory}</strong></div>
+        <div style="font-size:12px;color:var(--text3)">SR Code: <span class="mono" style="color:var(--text2)">${s.code || '--'}</span> | Distributor Point: <strong style="color:var(--text)">${s.territory}</strong></div>
       </div>
       <div style="text-align:right">
         <div style="font-size:11px;color:var(--text3);text-transform:uppercase">Total Revenue</div>
@@ -1091,12 +1091,13 @@ function dlChart(cid) {
 
   if (cid === 'personaDist') {
     fn = 'Module4_SR_Operational_Personas_Personnel_Roster.csv';
-    csv = "Rank,SR_ID,SR_Name,SR_Code,Territory,Persona_Segment,Delivered_Revenue_BDT,Revenue_Share_Pct,Orders_Count,Total_Visits,Visits_Per_Day,Conversion_Rate_Pct,Strike_Rate_Pct,AOV_BDT,Diagnostic,Prescriptive_Intervention\n";
+    csv = "Rank,SR_ID,SR_Name,SR_Code,Distributor_Point,Persona_Segment,Delivered_Revenue_BDT,Revenue_Share_Pct,Orders_Count,Total_Visits,Visits_Per_Day,Conversion_Rate_Pct,Strike_Rate_Pct,AOV_BDT,Diagnostic,Prescriptive_Intervention\n";
     (D.sr_rankings || []).forEach(s => {
       csv += `${s.rank},"${s.id}","${s.name}","${s.code || ''}","${s.territory}","${s.persona}",${s.revenue},${s.rev_share_pct},${s.orders},${s.visits},${s.visits_per_day},${s.conversion_rate},${s.strike_rate},${s.aov},"${(s.diagnosis || '').replace(/"/g, '""')}","${(s.intervention || '').replace(/"/g, '""')}"\n`;
     });
   } else if (cid === 'terrProd') {
-    csv = "Territory,SR_Count,Revenue_BDT,Total_Visits,Total_Orders,Conversion_Rate_Pct,Red_Flag_SRs\n";
+    fn = 'Module4_Top_Distributor_Points_Productivity.csv';
+    csv = "Distributor_Point,SR_Count,Revenue_BDT,Total_Visits,Total_Orders,Conversion_Rate_Pct,Red_Flag_SRs\n";
     (D.territories || []).forEach(t => {
       csv += `"${t.territory}",${t.sr_count},${t.revenue_bdt},${t.total_visits},${t.total_orders},${t.conversion_rate_pct},${t.red_flag_srs}\n`;
     });
@@ -1111,7 +1112,7 @@ function dlChart(cid) {
       csv += `${l.day_lag},"${l.day_label}",${l.order_count},${l.pct_of_conversions},${l.cumul_pct}\n`;
     });
   } else if (cid === 'srParetoCurve' || cid === 'srRankingsTable' || cid === 'quadrantMatrix') {
-    csv = "Rank,SR_ID,SR_Name,SR_Code,Territory,Persona,Quadrant,Revenue_BDT,Revenue_Share_Pct,Orders,AOV_BDT,Total_Visits,Visits_Per_Day,Conversion_Rate_Pct,Strike_Rate_Pct,Diagnosis,Intervention\n";
+    csv = "Rank,SR_ID,SR_Name,SR_Code,Distributor_Point,Persona,Quadrant,Revenue_BDT,Revenue_Share_Pct,Orders,AOV_BDT,Total_Visits,Visits_Per_Day,Conversion_Rate_Pct,Strike_Rate_Pct,Diagnosis,Intervention\n";
     (D.sr_rankings || []).forEach(s => {
       csv += `${s.rank},"${s.id}","${s.name}","${s.code}","${s.territory}","${s.persona}","${s.quadrant}",${s.revenue},${s.rev_share_pct},${s.orders},${s.aov},${s.visits},${s.visits_per_day},${s.conversion_rate},${s.strike_rate},"${s.diagnosis||''}","${s.intervention||''}"\n`;
     });
@@ -1122,7 +1123,7 @@ function dlChart(cid) {
     csv += `"Top 20% SRs",${pc.top_20pct_srs?.count},${pc.top_20pct_srs?.revenue},${pc.top_20pct_srs?.share_pct}\n`;
     csv += `"Top 30% SRs",${pc.top_30pct_srs?.count},${pc.top_30pct_srs?.revenue},${pc.top_30pct_srs?.share_pct}\n`;
   } else if (cid === 'redFlagTable') {
-    csv = "Rank,SR_ID,SR_Name,SR_Code,Territory,Total_Visits,Total_Orders,Revenue_BDT,Visits_Per_Day,Conversion_Rate_Pct,Red_Flag_Reason,Intervention\n";
+    csv = "Rank,SR_ID,SR_Name,SR_Code,Distributor_Point,Total_Visits,Total_Orders,Revenue_BDT,Visits_Per_Day,Conversion_Rate_Pct,Red_Flag_Reason,Intervention\n";
     (D.red_flags || []).forEach(r => {
       csv += `${r.rank},"${r.id}","${r.name}","${r.code}","${r.territory}",${r.visits},${r.orders},${r.revenue},${r.visits_per_day},${r.conversion_rate},"${r.red_flag_reason}","${r.intervention||''}"\n`;
     });

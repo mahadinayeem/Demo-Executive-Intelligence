@@ -431,13 +431,13 @@ territory_summary.sort(key=lambda x: x['revenue_bdt'], reverse=True)
 print("\n[Exporting detailed CSVs]...")
 with open(r'e:\ITL FINAL ADV ANALYSIS\module4_sr_performance_ranking.csv', 'w', newline='', encoding='utf-8-sig') as f:
     w = csv.writer(f)
-    w.writerow(['Rank','SR_ID','SR_Name','SR_Code','Territory','Persona','Quadrant','Revenue_BDT','Revenue_Share_Pct','Orders','AOV_BDT','Total_Visits','Visits_Per_Day','Conversion_Rate_Pct','Strike_Rate_Pct','Working_Days','Avg_Visit_Duration_Mins','Is_Red_Flag','Red_Flag_Reason'])
+    w.writerow(['Rank','SR_ID','SR_Name','SR_Code','Distributor_Point','Persona','Quadrant','Revenue_BDT','Revenue_Share_Pct','Orders','AOV_BDT','Total_Visits','Visits_Per_Day','Conversion_Rate_Pct','Strike_Rate_Pct','Working_Days','Avg_Visit_Duration_Mins','Is_Red_Flag','Red_Flag_Reason'])
     for p in sr_profiles:
         w.writerow([p['rank'], p['id'], p['name'], p['code'], p['territory'], p['persona'], p['quadrant'], p['revenue'], p['rev_share_pct'], p['orders'], p['aov'], p['visits'], p['visits_per_day'], p['conversion_rate'], p['strike_rate'], p['working_days'], p['avg_duration_mins'], 'YES' if p['is_red_flag'] else 'NO', p['red_flag_reason']])
 
 with open(r'e:\ITL FINAL ADV ANALYSIS\module4_red_flag_employees.csv', 'w', newline='', encoding='utf-8-sig') as f:
     w = csv.writer(f)
-    w.writerow(['Rank','SR_ID','SR_Name','SR_Code','Territory','Total_Visits','Total_Orders','Revenue_BDT','Visits_Per_Day','Conversion_Rate_Pct','Red_Flag_Reason'])
+    w.writerow(['Rank','SR_ID','SR_Name','SR_Code','Distributor_Point','Total_Visits','Total_Orders','Revenue_BDT','Visits_Per_Day','Conversion_Rate_Pct','Red_Flag_Reason'])
     for p in red_flag_list:
         w.writerow([p['rank'], p['id'], p['name'], p['code'], p['territory'], p['visits'], p['orders'], p['revenue'], p['visits_per_day'], p['conversion_rate'], p['red_flag_reason']])
 
