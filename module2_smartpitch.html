@@ -162,24 +162,42 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .tier-sub{font-size:11px;color:var(--text3);margin-top:6px}
 .tier-rev{font-size:13px;font-weight:600;margin-top:8px}
 
-/* ── PAIR CARD ── */
+/* ── PAIR & TRIPLET CARDS ── */
 .pair-list{display:flex;flex-direction:column;gap:10px}
 .pair-card{
   background:var(--card2);border:1px solid var(--border);border-radius:12px;
   padding:14px 16px;display:flex;align-items:center;gap:12px;transition:all .2s;cursor:default;
 }
-.pair-card:hover{border-color:var(--accent);transform:translateX(2px)}
-.pair-rank{font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--text3);width:20px;text-align:right}
+.pair-card:hover{border-color:var(--accent);transform:translateX(2px);box-shadow:0 4px 16px rgba(79,142,247,.08)}
+.pair-rank{font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--text3);width:22px;text-align:center;background:rgba(255,255,255,.05);padding:2px 4px;border-radius:4px}
 .pair-names{flex:1;min-width:0}
-.pair-a{font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pair-b{font-size:11px;color:var(--text3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pair-a{font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:6px}
+.pair-b{font-size:11px;color:var(--text2);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:6px}
+.pair-c{font-size:11px;color:var(--gold);margin-top:3px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:6px}
+.pair-cat-pill{font-size:9px;font-weight:600;padding:1px 6px;border-radius:4px;background:rgba(79,142,247,.12);color:#60a5fa}
+.pair-cat-pill.tea{background:rgba(16,185,129,.15);color:#34d399}
+.pair-cat-pill.biscuits{background:rgba(245,158,11,.15);color:#fbbf24}
+.pair-cat-pill.chips{background:rgba(244,63,94,.15);color:#fb7185}
+.pair-cat-pill.rice{background:rgba(168,85,247,.15);color:#c084fc}
 .pair-lift{
   background:linear-gradient(135deg,var(--accent2),var(--accent));
-  color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:8px;white-space:nowrap;
+  color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:8px;white-space:nowrap;text-align:center;
 }
-.pair-metrics{display:flex;gap:8px;flex-wrap:wrap}
+.pair-metrics{display:flex;gap:6px;flex-wrap:wrap;margin-right:8px}
 .pair-metric{background:var(--bg3);padding:3px 8px;border-radius:6px;font-size:10px;color:var(--text2);white-space:nowrap}
-.pair-connect{font-size:16px;color:var(--text3);padding:0 2px}
+.pair-metric.highlight{background:rgba(79,142,247,.15);color:#93c5fd;font-weight:600}
+.pair-connect{font-size:14px;color:var(--gold);font-weight:700;margin:0 4px}
+.basket-mode-btn{
+  background:transparent;border:none;color:var(--text3);font-size:11px;font-weight:600;
+  padding:5px 12px;border-radius:6px;cursor:pointer;transition:all .2s;
+}
+.basket-mode-btn.active{background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(79,142,247,.3)}
+.basket-filter-btn{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text2);
+  font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;cursor:pointer;transition:all .2s;
+}
+.basket-filter-btn:hover{background:rgba(255,255,255,.08);color:var(--text)}
+.basket-filter-btn.active{background:rgba(79,142,247,.18);border-color:var(--accent);color:#93c5fd;font-weight:700}
 
 /* ── SMARTPITCH ── */
 .pitch-rule{
@@ -465,14 +483,38 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
   </div>
 
   <div class="grid-2-1">
-    <!-- Top Pairs List -->
+    <!-- Advanced Association Mining (Pairs A->B & Triplets A+B->C) -->
     <div class="chart-card reveal">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-        <h3 style="margin-bottom:0">Top 15 Product Pairs by Lift <span class="badge">ASSOCIATION MINING</span></h3>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:10px">
+        <div>
+          <h3 style="margin-bottom:2px" id="basketSectionTitle">Market Basket Association Rules <span class="badge" id="basketMiningBadge">PAIRS (A → B)</span></h3>
+          <p class="subtitle" style="margin-bottom:0"><strong>Meaning:</strong> Discovers high-frequency co-purchases & high-lift combinations across 1.68M orders.</p>
+        </div>
         <button class="chart-dl" onclick="chartDL('topPairs')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
       </div>
-      <p class="subtitle"><strong>Meaning:</strong> Identifies which products are frequently bought together. <strong>How it's calculated:</strong> Lift measures how much more likely items are bought together compared to by chance (Lift &gt; 1 is good).</p>
-      <div class="pair-list" id="pairList" style="margin-top:16px"></div>
+
+      <!-- Interactive Controls Bar -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:14px;padding:10px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px">
+        <!-- Mode Switcher -->
+        <div style="display:flex;align-items:center;gap:4px;background:rgba(0,0,0,0.35);padding:3px;border-radius:8px">
+          <button id="btnBasketPairs" class="basket-mode-btn active" onclick="setBasketMode('pairs')">🔗 Pairs (A → B)</button>
+          <button id="btnBasketTriplets" class="basket-mode-btn" onclick="setBasketMode('triplets')">⚡ 3-Item Triplet (A + B → C)</button>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+          <button id="btnBasketVol" class="basket-filter-btn active" onclick="setBasketFilter('volume')">🔥 Top Volume (Co-Buys)</button>
+          <button id="btnBasketLift" class="basket-filter-btn" onclick="setBasketFilter('lift')">⚡ Highest Lift</button>
+          <button id="btnBasketTea" class="basket-filter-btn" onclick="setBasketFilter('tea')">☕ Tea Combos</button>
+        </div>
+
+        <!-- Search box -->
+        <div style="position:relative;flex:1;min-width:160px;max-width:240px">
+          <input type="text" id="basketSearchInput" placeholder="🔍 Search product..." oninput="filterBasketList()" style="width:100%;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.12);padding:6px 12px;border-radius:6px;color:#fff;font-size:11px;outline:none">
+        </div>
+      </div>
+
+      <div class="pair-list" id="pairList" style="margin-top:16px;max-height:540px;overflow-y:auto;padding-right:4px"></div>
     </div>
     <!-- Basket Size Distribution -->
     <div class="chart-card reveal">
@@ -769,9 +811,136 @@ function buildPareto() {
 // ──────────────────────────────────────────────────────
 // BASKET SECTION
 // ──────────────────────────────────────────────────────
+// ──────────────────────────────────────────────────────
+// BASKET SECTION (Interactive Association Mining Engine)
+// ──────────────────────────────────────────────────────
+let currentBasketMode = 'pairs';     // 'pairs' | 'triplets'
+let currentBasketFilter = 'volume';   // 'volume' | 'lift' | 'tea'
+let currentBasketSearch = '';
+
+function getCatClass(cat) {
+  if (!cat) return '';
+  const c = cat.toLowerCase();
+  if (c.includes('tea')) return 'tea';
+  if (c.includes('biscuit') || c.includes('bakery')) return 'biscuits';
+  if (c.includes('chip') || c.includes('snack')) return 'chips';
+  if (c.includes('rice')) return 'rice';
+  return '';
+}
+
+function setBasketMode(mode) {
+  currentBasketMode = mode;
+  document.getElementById('btnBasketPairs').classList.toggle('active', mode === 'pairs');
+  document.getElementById('btnBasketTriplets').classList.toggle('active', mode === 'triplets');
+  
+  const badge = document.getElementById('basketMiningBadge');
+  if (badge) {
+    badge.textContent = mode === 'pairs' ? 'PAIRS (A → B)' : 'TRIPLETS (A + B → C)';
+  }
+  renderBasketList();
+}
+
+function setBasketFilter(filter) {
+  currentBasketFilter = filter;
+  document.getElementById('btnBasketVol').classList.toggle('active', filter === 'volume');
+  document.getElementById('btnBasketLift').classList.toggle('active', filter === 'lift');
+  document.getElementById('btnBasketTea').classList.toggle('active', filter === 'tea');
+  renderBasketList();
+}
+
+function filterBasketList() {
+  currentBasketSearch = (document.getElementById('basketSearchInput')?.value || '').toLowerCase().trim();
+  renderBasketList();
+}
+
+function getActiveBasketData() {
+  const b = D.basket || {};
+  let data = [];
+  if (currentBasketMode === 'pairs') {
+    if (currentBasketFilter === 'volume') data = b.pairs_by_volume || b.top_pairs || [];
+    else if (currentBasketFilter === 'lift') data = b.pairs_by_lift || b.top_pairs || [];
+    else if (currentBasketFilter === 'tea') data = b.tea_pairs || [];
+  } else {
+    if (currentBasketFilter === 'volume') data = b.triplets_by_volume || [];
+    else if (currentBasketFilter === 'lift') data = b.triplets_by_lift || [];
+    else if (currentBasketFilter === 'tea') data = b.tea_triplets || [];
+  }
+
+  if (currentBasketSearch) {
+    data = data.filter(item => {
+      const txt = `${item.name_a} ${item.brand_a} ${item.cat_a} ${item.name_b} ${item.brand_b} ${item.cat_b} ${item.name_c||''} ${item.brand_c||''} ${item.cat_c||''}`.toLowerCase();
+      return txt.includes(currentBasketSearch);
+    });
+  }
+  return data;
+}
+
+function renderBasketList() {
+  const pairList = document.getElementById('pairList');
+  if (!pairList) return;
+
+  const data = getActiveBasketData();
+  const COLORS = ['#f43f5e','#f97316','#f59e0b','#4f8ef7','#10b981','#8b5cf6','#06b6d4'];
+
+  if (!data || data.length === 0) {
+    pairList.innerHTML = `<div style="text-align:center;padding:32px;color:var(--text3);font-size:12px">No matching association rules found for "<strong>${currentBasketSearch}</strong>"</div>`;
+    return;
+  }
+
+  if (currentBasketMode === 'pairs') {
+    pairList.innerHTML = data.slice(0, 25).map((p, i) => `
+      <div class="pair-card">
+        <span class="pair-rank">#${i+1}</span>
+        <div class="pair-names">
+          <div class="pair-a">
+            <span style="color:#60a5fa">📦 Trigger (A):</span> <strong>${p.name_a}</strong>
+            <span class="pair-cat-pill ${getCatClass(p.cat_a)}">${p.cat_a||'General'}</span>
+          </div>
+          <div class="pair-b">
+            <span style="color:#34d399">🛒 Pitch (B):</span> <strong>${p.name_b}</strong>
+            <span class="pair-cat-pill ${getCatClass(p.cat_b)}">${p.cat_b||'General'}</span>
+          </div>
+        </div>
+        <div class="pair-metrics">
+          <span class="pair-metric highlight">Conf A→B: ${p.confidence_ab}%</span>
+          <span class="pair-metric">Co-Buys: <strong>${p.co_count.toLocaleString()}</strong> orders</span>
+          <span class="pair-metric">Supp: ${p.support}%</span>
+        </div>
+        <div class="pair-lift" style="background:linear-gradient(135deg,${COLORS[i%COLORS.length]},${COLORS[(i+2)%COLORS.length]})">
+          Lift ${typeof p.lift === 'number' ? (p.lift >= 100 ? p.lift.toFixed(1) : p.lift.toFixed(2)) : p.lift}×
+        </div>
+      </div>
+    `).join('');
+  } else {
+    // Triplets (A + B -> C)
+    pairList.innerHTML = data.slice(0, 25).map((t, i) => `
+      <div class="pair-card" style="border-left:3px solid var(--gold)">
+        <span class="pair-rank">#${i+1}</span>
+        <div class="pair-names">
+          <div class="pair-a">
+            <span style="color:#60a5fa">📦 Basket (A + B):</span> <strong>${t.name_a}</strong> <span class="pair-connect">+</span> <strong>${t.name_b}</strong>
+          </div>
+          <div class="pair-c">
+            <span style="color:var(--gold)">⚡ Recommend (C):</span> <strong>${t.name_c}</strong>
+            <span class="pair-cat-pill ${getCatClass(t.cat_c)}">${t.cat_c||'General'}</span>
+          </div>
+        </div>
+        <div class="pair-metrics">
+          <span class="pair-metric highlight">Conf (A+B→C): ${t.confidence}%</span>
+          <span class="pair-metric">Triplet Orders: <strong>${t.co_count.toLocaleString()}</strong></span>
+          <span class="pair-metric">Base (A+B): ${t.pair_count?.toLocaleString() || '—'}</span>
+        </div>
+        <div class="pair-lift" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">
+          Lift ${typeof t.lift === 'number' ? (t.lift >= 100 ? t.lift.toFixed(1) : t.lift.toFixed(2)) : t.lift}×
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
 function buildBasket() {
   const s = D.summary;
-  const topPairs = D.basket.top_pairs;
+  const topPairs = D.basket.top_pairs || D.basket.pairs_by_volume || [];
   const topPair = topPairs[0];
 
   document.getElementById('kpi-pairs').textContent = fmt(s.unique_pairs_analyzed);
@@ -787,27 +956,7 @@ function buildBasket() {
   const avgBasket = totalOrders > 0 ? (totalWeighted/totalOrders).toFixed(2) : '—';
   document.getElementById('kpi-avgbasket').textContent = avgBasket + ' SKUs';
 
-  // Pair list
-  const pairList = document.getElementById('pairList');
-  const COLORS = ['#f43f5e','#f97316','#f59e0b','#4f8ef7','#10b981','#8b5cf6','#06b6d4'];
-  pairList.innerHTML = topPairs.slice(0,15).map((p,i) => `
-    <div class="pair-card">
-      <span class="pair-rank">${i+1}</span>
-      <div class="pair-names">
-        <div class="pair-a">📦 ${p.name_a}</div>
-        <span class="pair-connect">→</span>
-        <div class="pair-b">🛒 ${p.name_b}</div>
-      </div>
-      <div class="pair-metrics">
-        <span class="pair-metric">Conf A→B: ${p.confidence_ab}%</span>
-        <span class="pair-metric">Supp: ${p.support}%</span>
-        <span class="pair-metric">Co-buy: ${p.co_count.toLocaleString()}</span>
-      </div>
-      <div class="pair-lift" style="background:linear-gradient(135deg,${COLORS[i%COLORS.length]},${COLORS[(i+2)%COLORS.length]})">
-        Lift ${p.lift}×
-      </div>
-    </div>
-  `).join('');
+  renderBasketList();
 }
 
 // ──────────────────────────────────────────────────────
@@ -1590,11 +1739,20 @@ function chartDL(chartId) {
       csv += `"${b.brand}",${b.revenue},${b.share_pct},${b.cumulative_pct||''}\n`;
     });
   } else if (chartId === 'topPairs') {
-    csv = "Rank,Trigger_SKU,Trigger_Name,Pitch_SKU,Pitch_Name,Support_Pct,Confidence_Trigger_to_Pitch_Pct,Confidence_Pitch_to_Trigger_Pct,Co_Purchase_Count,Lift\n";
-    const pairs = D.basket?.top_pairs || [];
-    pairs.forEach((p, i) => {
-      csv += `${i+1},"${p.sku_a||''}","${p.name_a||''}",${p.sku_b||''},"${p.name_b||''}",${p.support||0},${p.confidence_ab||0},${p.confidence_ba||0},${p.co_count||0},${p.lift||0}\n`;
-    });
+    const data = typeof getActiveBasketData === 'function' ? getActiveBasketData() : (D.basket?.pairs_by_volume || D.basket?.top_pairs || []);
+    if (currentBasketMode === 'triplets') {
+      csv = "Rank,Trigger_SKU_A,Trigger_Name_A,Trigger_SKU_B,Trigger_Name_B,Pitch_SKU_C,Pitch_Name_C,Confidence_AB_to_C_Pct,Triplet_Co_Orders,Base_AB_Orders,Support_Pct,Lift\n";
+      data.forEach((t, i) => {
+        csv += `${i+1},"${t.sku_a||''}","${t.name_a||''}","${t.sku_b||''}","${t.name_b||''}","${t.sku_c||''}","${t.name_c||''}",${t.confidence||0},${t.co_count||0},${t.pair_count||0},${t.support||0},${t.lift||0}\n`;
+      });
+      filename = `ITL_MarketBasket_Triplets_${currentBasketFilter}.csv`;
+    } else {
+      csv = "Rank,Trigger_SKU_A,Trigger_Name_A,Pitch_SKU_B,Pitch_Name_B,Category_A,Category_B,Confidence_A_to_B_Pct,Confidence_B_to_A_Pct,Co_Purchase_Orders,Support_Pct,Lift\n";
+      data.forEach((p, i) => {
+        csv += `${i+1},"${p.sku_a||''}","${p.name_a||''}","${p.sku_b||''}","${p.name_b||''}","${p.cat_a||''}","${p.cat_b||''}",${p.confidence_ab||0},${p.confidence_ba||0},${p.co_count||0},${p.support||0},${p.lift||0}\n`;
+      });
+      filename = `ITL_MarketBasket_Pairs_${currentBasketFilter}.csv`;
+    }
   } else if (chartId === 'basketDist') {
     csv = "Basket_Size_SKUs,Order_Count,Pct_of_Orders\n";
     const dist = D.basket?.basket_distribution || D.basket?.distribution || [];
