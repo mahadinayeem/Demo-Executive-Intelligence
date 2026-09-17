@@ -2339,7 +2339,21 @@ function downloadFilteredCSV() {
 function resetNational() {
   activeDivision=null; activeDistrict=null; activeThana=null;
   selectedDivisions=[]; selectedDistricts=[];
+  healthFilter='ALL';
   subTierFilter='ALL';
+
+  // Reset Search Input
+  const srch = document.getElementById('srch');
+  if(srch) srch.value = '';
+
+  // Reset Filter Buttons to 'All (281K)'
+  ['fbA','fbG','fbY','fbR','fbZV','fbZR'].forEach(id=>{ 
+    const el = document.getElementById(id);
+    if(el) el.className='fb'; 
+  });
+  const fbA = document.getElementById('fbA');
+  if(fbA) fbA.classList.add('fa');
+
   document.querySelectorAll('.dcard').forEach(c=>c.classList.remove('sel'));
   document.getElementById('distPanel').style.display='none';
   document.getElementById('thanaPanel').style.display='none';
