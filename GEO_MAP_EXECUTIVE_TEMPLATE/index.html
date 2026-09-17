@@ -289,6 +289,33 @@ aside::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px;}
 /* Spiderfy connector lines */
 .leaflet-cluster-spider-leg { stroke: rgba(255,255,255,0.7)!important; stroke-width: 2px!important; stroke-dasharray: 3,3; }
 
+/* White-Space Expansion Opportunity Marker & Pulse */
+.whitespace-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: radial-gradient(circle, #ff2a85 0%, #b5179e 70%, #7209b7 100%);
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  font-size: 14px;
+  box-shadow: 0 0 20px rgba(255, 42, 133, 0.9), inset 0 0 6px rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  animation: wsPulse 2s infinite ease-in-out;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.whitespace-marker:hover {
+  transform: scale(1.35) rotate(15deg);
+  box-shadow: 0 0 28px rgba(255, 42, 133, 1), 0 0 10px #fff;
+  z-index: 99999 !important;
+}
+@keyframes wsPulse {
+  0% { transform: scale(1); box-shadow: 0 0 14px rgba(255,42,133,0.8); }
+  50% { transform: scale(1.15); box-shadow: 0 0 26px rgba(255,42,133,1); }
+  100% { transform: scale(1); box-shadow: 0 0 14px rgba(255,42,133,0.8); }
+}
+
 /* 3D Realistic Sales Pillar Marker */
 .pillar-3d-marker {
   position: relative;
@@ -920,6 +947,9 @@ function drawDivisionPolygons() {
   if (pillarsOn) {
     renderNationwide3DPillars();
   }
+  if (wsOn) {
+    renderNationwideWhiteSpaceHubs();
+  }
 
   BD_DIVISIONS_GEO.features.forEach(feat => {
     const dname  = feat.properties.name;
@@ -996,6 +1026,10 @@ function drawMultiDivisionPolygons() {
   pillarLayer.clearLayers();
 
   let bounds = L.latLngBounds([]);
+
+  if (wsOn) {
+    renderMultiDivisionWhiteSpaceHubs();
+  }
 
   if (pillarsOn) {
     const maxDivRev = Math.max(...CEO_NATIONAL.divisions.map(d => d.revenue||1));
@@ -1090,6 +1124,9 @@ function drawDistrictPolygons(divName, divIdx) {
 
   if (pillarsOn) {
     renderDistrict3DPillars(divName, divIdx);
+  }
+  if (wsOn) {
+    renderDivisionWhiteSpaceHubs(divName, divIdx);
   }
 
   distFeatures.forEach(feat => {
@@ -1248,6 +1285,9 @@ function drawThanaPolygons(distName, divIdx) {
 
   if (pillarsOn) {
     renderThana3DPillars(distName, divIdx);
+  }
+  if (wsOn) {
+    renderDistrictWhiteSpaceHubs(distName, divIdx);
   }
 
   const thanaFeatures = BD_THANAS_GEO.features.filter(f => 
@@ -1718,7 +1758,11 @@ function renderMicroOutlets(divIdx, distName, thanaName) {
 
   // Render White Space Opportunity Hubs if enabled
   if (wsOn) {
-    renderWhiteSpaceHubs(divIdx, distName, outlets);
+    if (filterThana) {
+      renderThanaWhiteSpaceHubs(filterThana, distName, divIdx, outlets);
+    } else {
+      renderDistrictWhiteSpaceHubs(distName, divIdx);
+    }
   }
 }
 
@@ -1792,51 +1836,53 @@ function renderSRRoutePaths(outlets) {
 }
 
 /* ═══════════════ MODULE 1: WHITE-SPACE EXPANSION OPPORTUNITY HUBS ═══════════════ */
-function renderWhiteSpaceHubs(divIdx, distName, outlets) {
+const NATIONWIDE_WHITE_SPACES = [
+  { name: 'Rajbari-Faridpur Expressway Corridor', div: 'Dhaka', didx: 0, lat: 23.65, lng: 89.75, pop: '3,800 Unserved Potential Outlets', opp: 'New Transportation Corridor • Severe Supply Gap', estVal: '৳14.8M/mo Potential' },
+  { name: 'Cumilla-Brahmanbaria Industrial Belt', div: 'Chattogram', didx: 1, lat: 23.58, lng: 91.15, pop: '4,200 Unserved Potential Outlets', opp: 'Dense Rural Footfall • 0 Direct Brand Monopoly', estVal: '৳18.5M/mo Potential' },
+  { name: 'Bogura-Naogaon Agro-Highway Trade Hub', div: 'Rajshahi', didx: 2, lat: 24.80, lng: 89.15, pop: '3,100 Unserved Potential Outlets', opp: 'Rapid FMCG Consumption Growth • Beat Deficit', estVal: '৳12.6M/mo Potential' },
+  { name: 'Jashore-Narail Agro-Processing Corridor', div: 'Khulna', didx: 3, lat: 23.16, lng: 89.35, pop: '2,900 Unserved Potential Outlets', opp: 'Wholesale Market Intersection • High Volume', estVal: '৳13.5M/mo Potential' },
+  { name: 'Bhola Island Coastal Commercial Corridor', div: 'Barishal', didx: 4, lat: 22.68, lng: 90.65, pop: '1,900 Unserved Potential Outlets', opp: 'Isolated High-Margin Market • Low SR Frequency', estVal: '৳8.2M/mo Potential' },
+  { name: 'Habiganj-Moulvibazar Tea & Agro Belt', div: 'Sylhet', didx: 5, lat: 24.38, lng: 91.52, pop: '2,600 Unserved Potential Outlets', opp: 'High Local Brand Loyalty • Weak Route Beat', estVal: '৳11.9M/mo Potential' },
+  { name: 'Kurigram-Lalmonirhat Northern Border Belt', div: 'Rangpur', didx: 6, lat: 25.82, lng: 89.55, pop: '3,400 Unserved Potential Outlets', opp: 'High Footfall Rural Market • Expansion Priority', estVal: '৳15.2M/mo Potential' },
+  { name: 'Netrokona-Sherpur Haor Fringe Wholesale Hub', div: 'Mymensingh', didx: 7, lat: 24.88, lng: 90.73, pop: '2,200 Unserved Potential Outlets', opp: 'Seasonal Cash Flow Hub • Beat Blind Spot', estVal: '৳9.4M/mo Potential' }
+];
+
+function createWSIcon() {
+  return L.divIcon({
+    className: '',
+    html: `<div class="whitespace-marker">🎯</div>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16]
+  });
+}
+
+function renderNationwideWhiteSpaceHubs() {
   wsLayer.clearLayers();
-  
-  // Calculate spatial bounding box and find clusters with low brand density
-  if (!outlets || outlets.length === 0) return;
-
-  const lats = outlets.map(o => o[0]);
-  const lngs = outlets.map(o => o[1]);
-  const minLat = Math.min(...lats), maxLat = Math.max(...lats);
-  const minLng = Math.min(...lngs), maxLng = Math.max(...lngs);
-
-  // Generate strategic unserved micro-hubs in peripheral high-density retail corridors
-  const numHubs = 4;
-  const hubs = [
-    { name: `${distName} East Commercial Zone`, lat: minLat + (maxLat - minLat)*0.78, lng: minLng + (maxLng - minLng)*0.82, pop: '35K Est. Retail Density', opp: 'High Demand • 0 Competitor Dominance', estVal: '৳4.2M/mo Potential' },
-    { name: `${distName} North Bypass Market`, lat: minLat + (maxLat - minLat)*0.85, lng: minLng + (maxLng - minLng)*0.25, pop: '22K Est. Retail Density', opp: 'New Wholesale Hub • Underserved', estVal: '৳2.8M/mo Potential' },
-    { name: `${distName} South Industrial Belt`, lat: minLat + (maxLat - minLat)*0.18, lng: minLng + (maxLng - minLng)*0.70, pop: '40K Est. Retail Density', opp: 'Rapid FMCG Consumption Growth', estVal: '৳5.5M/mo Potential' },
-    { name: `${distName} Central Extension Hub`, lat: minLat + (maxLat - minLat)*0.45, lng: minLng + (maxLng - minLng)*0.15, pop: '18K Est. Retail Density', opp: 'High Footfall • Route Gap', estVal: '৳3.1M/mo Potential' }
-  ];
-
-  hubs.forEach(h => {
-    const wsIcon = L.divIcon({
-      className: '',
-      html: `<div class="whitespace-marker">🎯</div>`,
-      iconSize: [28, 28],
-      iconAnchor: [14, 14]
-    });
-    const wsMk = L.marker([h.lat, h.lng], {icon: wsIcon, interactive: true});
+  NATIONWIDE_WHITE_SPACES.forEach(h => {
+    const wsMk = L.marker([h.lat, h.lng], {icon: createWSIcon(), interactive: true, pane: 'markerPane'});
     wsMk.bindTooltip(`
-      <div style="font-family:'Outfit',sans-serif;min-width:180px;">
-        <div style="font-size:13px;font-weight:900;color:#ff2a85;margin-bottom:3px;">🎯 WHITE-SPACE EXPANSION HUB</div>
-        <div style="font-size:12px;font-weight:800;color:var(--t1);">${h.name}</div>
-        <div style="font-size:11px;color:var(--t2);margin-top:2px;">• Potential: <b>${h.estVal}</b></div>
-        <div style="font-size:11px;color:var(--t2);">• Retail Density: <b>${h.pop}</b></div>
-        <div style="font-size:10.5px;color:var(--amber);margin-top:4px;font-weight:700;">${h.opp}</div>
-      </div>`, {sticky: false, direction:'top', offset:[0,-10]});
+      <div class="ws-tooltip-wrap">
+        <div class="ws-badge">🎯 NATIONWIDE EXPANSION OPPORTUNITY</div>
+        <div class="ws-title">${h.name}</div>
+        <div class="ws-stat">• Division: <b style="color:var(--blue);">${h.div}</b></div>
+        <div class="ws-stat">• Potential Revenue: <b style="color:var(--green);">${h.estVal}</b></div>
+        <div class="ws-stat">• Retail Store Density: <b>${h.pop}</b></div>
+        <div class="ws-opp">⚡ Opportunity: ${h.opp}</div>
+        <div style="font-size:10px;color:var(--blue);margin-top:4px;font-weight:700;">👉 Click to explore ${h.div} Division</div>
+      </div>`, {sticky: false, direction:'top', offset:[0,-14]});
     
-    // Pulse circle area
+    wsMk.on('click', (e) => {
+      L.DomEvent.stopPropagation(e);
+      drillDivision(h.didx, h.div);
+    });
+
     const pulseCircle = L.circle([h.lat, h.lng], {
-      radius: 650,
+      radius: 12000,
       color: '#ff2a85',
       fillColor: '#ff2a85',
-      fillOpacity: 0.15,
-      weight: 1.5,
-      dashArray: '4,4'
+      fillOpacity: 0.18,
+      weight: 2,
+      dashArray: '6, 6'
     });
 
     wsLayer.addLayer(pulseCircle);
@@ -1844,17 +1890,191 @@ function renderWhiteSpaceHubs(divIdx, distName, outlets) {
   });
 }
 
-/* ═══════════════ MODULE 1: NATIONWIDE WHITE-SPACE EXPANSION HUBS ═══════════════ */
-const NATIONWIDE_WHITE_SPACES = [
-  { name: 'Cumilla-Brahmanbaria Industrial Corridor', div: 'Chattogram', lat: 23.58, lng: 91.15, pop: '4,200 Unreached Potential Stores', opp: 'High Population Density • FMCG Supply Gap', estVal: '৳18.5M/mo Potential' },
-  { name: 'Chandpur Meghna Riverine Trading Port', div: 'Chattogram', lat: 23.23, lng: 90.66, pop: '1,800 Unreached Potential Stores', opp: 'Wholesale Riverine Hub • Underserved', estVal: '৳9.2M/mo Potential' },
-  { name: 'Habiganj-Moulvibazar Tea Belt Corridor', div: 'Sylhet', lat: 24.38, lng: 91.52, pop: '2,400 Unreached Potential Stores', opp: 'High Local Demand • Weak Outlet Coverage', estVal: '৳12.0M/mo Potential' },
-  { name: 'Rajbari-Faridpur Expressway Hub', div: 'Dhaka', lat: 23.65, lng: 89.75, pop: '2,100 Unreached Potential Stores', opp: 'New Transportation Corridor • Route Gap', estVal: '৳11.8M/mo Potential' },
-  { name: 'Kurigram-Lalmonirhat Northern Border Belt', div: 'Rangpur', lat: 25.82, lng: 89.55, pop: '2,900 Unreached Potential Stores', opp: 'High Footfall Rural Market • 0 Brand Monopoly', estVal: '৳14.6M/mo Potential' },
-  { name: 'Netrokona Haor Fringe Wholesale Market', div: 'Mymensingh', lat: 24.88, lng: 90.73, pop: '1,950 Unreached Potential Stores', opp: 'Seasonal Cash Flow Hub • Coverage Gap', estVal: '৳8.4M/mo Potential' },
-  { name: 'Jashore-Narail Agro-Processing Belt', div: 'Khulna', lat: 23.16, lng: 89.35, pop: '2,600 Unreached Potential Stores', opp: 'Rapid FMCG Consumption Growth', estVal: '৳13.5M/mo Potential' },
-  { name: 'Bhola Island Coastal Commercial Corridor', div: 'Barishal', lat: 22.68, lng: 90.65, pop: '1,400 Unreached Potential Stores', opp: 'Isolated High-Margin Market', estVal: '৳7.2M/mo Potential' }
-];
+function renderMultiDivisionWhiteSpaceHubs() {
+  wsLayer.clearLayers();
+  if (!selectedDivisions || selectedDivisions.length === 0) return;
+  const hubs = NATIONWIDE_WHITE_SPACES.filter(h => selectedDivisions.includes(h.div));
+  hubs.forEach(h => {
+    const wsMk = L.marker([h.lat, h.lng], {icon: createWSIcon(), interactive: true, pane: 'markerPane'});
+    wsMk.bindTooltip(`
+      <div class="ws-tooltip-wrap">
+        <div class="ws-badge">🎯 EXPANSION OPPORTUNITY</div>
+        <div class="ws-title">${h.name}</div>
+        <div class="ws-stat">• Division: <b style="color:var(--blue);">${h.div}</b></div>
+        <div class="ws-stat">• Potential Value: <b style="color:var(--green);">${h.estVal}</b></div>
+        <div class="ws-stat">• Store Density: <b>${h.pop}</b></div>
+        <div class="ws-opp">⚡ ${h.opp}</div>
+      </div>`, {sticky: false, direction:'top', offset:[0,-14]});
+    
+    wsMk.on('click', (e) => {
+      L.DomEvent.stopPropagation(e);
+      drillDivision(h.didx, h.div);
+    });
+
+    const pulseCircle = L.circle([h.lat, h.lng], {
+      radius: 10000,
+      color: '#ff2a85',
+      fillColor: '#ff2a85',
+      fillOpacity: 0.18,
+      weight: 2,
+      dashArray: '6, 6'
+    });
+
+    wsLayer.addLayer(pulseCircle);
+    wsLayer.addLayer(wsMk);
+  });
+}
+
+function renderDivisionWhiteSpaceHubs(divName, divIdx) {
+  wsLayer.clearLayers();
+  if (typeof BD_DISTRICTS_GEO === 'undefined' || !BD_DISTRICTS_GEO.features) return;
+  const distFeatures = BD_DISTRICTS_GEO.features.filter(f => f.properties.division === divName);
+  
+  distFeatures.forEach((feat, idx) => {
+    const dName = feat.properties.district;
+    const poly = L.geoJSON(feat);
+    const center = poly.getBounds().getCenter();
+    const offsetLat = center.lat + (idx % 2 === 0 ? 0.035 : -0.035);
+    const offsetLng = center.lng + (idx % 3 === 0 ? 0.045 : -0.045);
+
+    const wsMk = L.marker([offsetLat, offsetLng], {icon: createWSIcon(), interactive: true, pane: 'markerPane'});
+    wsMk.bindTooltip(`
+      <div class="ws-tooltip-wrap">
+        <div class="ws-badge">🎯 DIVISIONAL EXPANSION HUB</div>
+        <div class="ws-title">${dName} Commercial Growth Corridor</div>
+        <div class="ws-stat">• District: <b style="color:var(--blue);">${dName}</b></div>
+        <div class="ws-stat">• Revenue Potential: <b style="color:var(--green);">৳${(3.5 + (idx*0.8)).toFixed(1)}M/mo</b></div>
+        <div class="ws-stat">• Target Stores: <b>${850 + (idx*120)} Unserved Shops</b></div>
+        <div class="ws-opp">⚡ High Footfall Bypass Market • Priority Beat Extension</div>
+        <div style="font-size:10px;color:var(--blue);margin-top:4px;font-weight:700;">👉 Click to isolate ${dName} District</div>
+      </div>`, {sticky: false, direction:'top', offset:[0,-14]});
+    
+    wsMk.on('click', (e) => {
+      L.DomEvent.stopPropagation(e);
+      drillDistrict(dName, divIdx, feat);
+    });
+
+    const pulseCircle = L.circle([offsetLat, offsetLng], {
+      radius: 4500,
+      color: '#ff2a85',
+      fillColor: '#ff2a85',
+      fillOpacity: 0.16,
+      weight: 1.8,
+      dashArray: '5, 5'
+    });
+
+    wsLayer.addLayer(pulseCircle);
+    wsLayer.addLayer(wsMk);
+  });
+}
+
+function renderDistrictWhiteSpaceHubs(distName, divIdx) {
+  wsLayer.clearLayers();
+  const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
+  const outlets = allOutlets.filter(o => o[5] && o[5].toLowerCase() === distName.toLowerCase());
+
+  let minLat=23.0, maxLat=24.0, minLng=89.0, maxLng=90.0;
+  if (outlets.length > 0) {
+    const lats = outlets.map(o => o[0]);
+    const lngs = outlets.map(o => o[1]);
+    minLat = Math.min(...lats); maxLat = Math.max(...lats);
+    minLng = Math.min(...lngs); maxLng = Math.max(...lngs);
+  } else if (typeof BD_DISTRICTS_GEO !== 'undefined' && BD_DISTRICTS_GEO.features) {
+    const feat = BD_DISTRICTS_GEO.features.find(f => f.properties.district && f.properties.district.toLowerCase() === distName.toLowerCase());
+    if (feat) {
+      const b = L.geoJSON(feat).getBounds();
+      minLat = b.getSouth(); maxLat = b.getNorth();
+      minLng = b.getWest(); maxLng = b.getEast();
+    }
+  }
+
+  const dLat = (maxLat - minLat) || 0.2;
+  const dLng = (maxLng - minLng) || 0.2;
+
+  const hubs = [
+    { name: `${distName} East Commercial Zone`, lat: minLat + dLat*0.75, lng: minLng + dLng*0.80, pop: '35K Est. Retail Density', opp: 'High Demand • 0 Competitor Dominance', estVal: '৳4.2M/mo Potential' },
+    { name: `${distName} North Bypass Market`, lat: minLat + dLat*0.85, lng: minLng + dLng*0.25, pop: '22K Est. Retail Density', opp: 'New Wholesale Hub • Underserved', estVal: '৳2.8M/mo Potential' },
+    { name: `${distName} South Industrial Belt`, lat: minLat + dLat*0.20, lng: minLng + dLng*0.70, pop: '40K Est. Retail Density', opp: 'Rapid FMCG Consumption Growth', estVal: '৳5.5M/mo Potential' },
+    { name: `${distName} Central Extension Hub`, lat: minLat + dLat*0.48, lng: minLng + dLng*0.35, pop: '18K Est. Retail Density', opp: 'High Footfall • Route Blind Spot', estVal: '৳3.1M/mo Potential' }
+  ];
+
+  hubs.forEach(h => {
+    const wsMk = L.marker([h.lat, h.lng], {icon: createWSIcon(), interactive: true, pane: 'markerPane'});
+    wsMk.bindTooltip(`
+      <div class="ws-tooltip-wrap">
+        <div class="ws-badge">🎯 DISTRICT WHITE-SPACE HUB</div>
+        <div class="ws-title">${h.name}</div>
+        <div class="ws-stat">• Potential Revenue: <b style="color:var(--green);">${h.estVal}</b></div>
+        <div class="ws-stat">• Market Density: <b>${h.pop}</b></div>
+        <div class="ws-opp">⚡ ${h.opp}</div>
+      </div>`, {sticky: false, direction:'top', offset:[0,-12]});
+    
+    const pulseCircle = L.circle([h.lat, h.lng], {
+      radius: 1200,
+      color: '#ff2a85',
+      fillColor: '#ff2a85',
+      fillOpacity: 0.16,
+      weight: 1.5,
+      dashArray: '4, 4'
+    });
+
+    wsLayer.addLayer(pulseCircle);
+    wsLayer.addLayer(wsMk);
+  });
+}
+
+function renderThanaWhiteSpaceHubs(thanaName, distName, divIdx, outlets) {
+  wsLayer.clearLayers();
+  const tOutlets = (outlets || []).filter(o => o[16] && o[16].toLowerCase() === thanaName.toLowerCase());
+  
+  let minLat=23.0, maxLat=24.0, minLng=89.0, maxLng=90.0;
+  if (tOutlets.length > 0) {
+    const lats = tOutlets.map(o => o[0]);
+    const lngs = tOutlets.map(o => o[1]);
+    minLat = Math.min(...lats); maxLat = Math.max(...lats);
+    minLng = Math.min(...lngs); maxLng = Math.max(...lngs);
+  } else if (typeof BD_THANAS_GEO !== 'undefined' && BD_THANAS_GEO.features) {
+    const feat = BD_THANAS_GEO.features.find(f => f.properties.thana && f.properties.thana.toLowerCase() === thanaName.toLowerCase());
+    if (feat) {
+      const b = L.geoJSON(feat).getBounds();
+      minLat = b.getSouth(); maxLat = b.getNorth();
+      minLng = b.getWest(); maxLng = b.getEast();
+    }
+  }
+
+  const dLat = (maxLat - minLat) || 0.06;
+  const dLng = (maxLng - minLng) || 0.06;
+
+  const microHubs = [
+    { name: `${thanaName} Central Bazaar Expansion Node`, lat: minLat + dLat*0.50, lng: minLng + dLng*0.50, pop: '220 Unreached Stores', estVal: '৳950K/mo', opp: 'Core Market Infill • High Daily Footfall' },
+    { name: `${thanaName} Highway Junction Point`, lat: minLat + dLat*0.75, lng: minLng + dLng*0.72, pop: '140 Unreached Stores', estVal: '৳680K/mo', opp: 'Inter-district Transit Hub • Fast Turnaround' },
+    { name: `${thanaName} Riverine / Rural Growth Hat`, lat: minLat + dLat*0.25, lng: minLng + dLng*0.30, pop: '180 Unreached Stores', estVal: '৳780K/mo', opp: 'Weekly Haat Gathering • Bulk Cash Sales' }
+  ];
+
+  microHubs.forEach(h => {
+    const wsMk = L.marker([h.lat, h.lng], {icon: createWSIcon(), interactive: true, pane: 'markerPane'});
+    wsMk.bindTooltip(`
+      <div class="ws-tooltip-wrap">
+        <div class="ws-badge">🎯 THANA MICRO-EXPANSION HUB</div>
+        <div class="ws-title">${h.name}</div>
+        <div class="ws-stat">• Potential Value: <b style="color:var(--green);">${h.estVal}</b></div>
+        <div class="ws-stat">• Unserved Outlets: <b>${h.pop}</b></div>
+        <div class="ws-opp">⚡ ${h.opp}</div>
+      </div>`, {sticky: false, direction:'top', offset:[0,-10]});
+
+    const pulseCircle = L.circle([h.lat, h.lng], {
+      radius: 400,
+      color: '#ff2a85',
+      fillColor: '#ff2a85',
+      fillOpacity: 0.18,
+      weight: 1.5,
+      dashArray: '3, 3'
+    });
+
+    wsLayer.addLayer(pulseCircle);
+    wsLayer.addLayer(wsMk);
+  });
+}
 
 /* ═══════════════ MODULE 1: NATIONWIDE 3D SALES HEIGHT PILLARS ═══════════════ */
 function renderNationwide3DPillars() {
@@ -2067,12 +2287,23 @@ function toggleWhiteSpace() {
   document.getElementById('wsBtn').classList.toggle('on', wsOn);
   document.getElementById('legWS').style.display = wsOn ? 'flex' : 'none';
   
-  if (activeDistrict && activeDivision) {
-    renderMicroOutlets(DIV_NAMES.indexOf(activeDivision), activeDistrict);
+  if (activeThana && activeDistrict && activeDivision) {
+    renderMicroOutlets(DIV_NAMES.indexOf(activeDivision), activeDistrict, activeThana);
+  } else if (activeDistrict && activeDivision) {
+    if (!activeThana) {
+      if (wsOn) renderDistrictWhiteSpaceHubs(activeDistrict, DIV_NAMES.indexOf(activeDivision));
+      else wsLayer.clearLayers();
+    } else {
+      renderMicroOutlets(DIV_NAMES.indexOf(activeDivision), activeDistrict, activeThana);
+    }
+  } else if (activeDivision) {
+    if (wsOn) renderDivisionWhiteSpaceHubs(activeDivision, DIV_NAMES.indexOf(activeDivision));
+    else wsLayer.clearLayers();
   } else {
-    // DIRECT ALL OVER BANGLADESH NATIONWIDE WHITE-SPACE HUBS
+    // Nationwide or Multi-Division
     if (wsOn) {
-      renderNationwideWhiteSpaceHubs();
+      if (selectedDivisions && selectedDivisions.length > 1) renderMultiDivisionWhiteSpaceHubs();
+      else renderNationwideWhiteSpaceHubs();
     } else {
       wsLayer.clearLayers();
     }
