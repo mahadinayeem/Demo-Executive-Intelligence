@@ -452,19 +452,27 @@ function initDriversTab() {
       datasets: [{
         data: feats.map(f => f.importance_pct),
         backgroundColor: ['#06b6d4', '#f59e0b', '#10b981', '#8b5cf6', '#3b82f6', '#64748b'],
-        borderRadius: 4
+        borderRadius: 5
       }]
     },
     options: {
       indexAxis: 'y',
       responsive: true, maintainAspectRatio: false,
+      layout: { padding: { right: 45 } },
       plugins: {
         legend: { display: false },
-        datalabels: { anchor: 'end', align: 'right', color: '#f0f4ff', font: { weight: 'bold', size: 11 }, formatter: v => v + '%' }
+        datalabels: {
+          anchor: 'end',
+          align: 'right',
+          offset: 6,
+          color: '#000000',
+          font: { weight: '800', size: 12 },
+          formatter: v => v + '%'
+        }
       },
       scales: {
-        x: { min: 0, max: 40, ticks: { color: '#8899bb', callback: v => v+'%' }, grid: { color: 'rgba(255,255,255,.05)' } },
-        y: { ticks: { color: '#8899bb', font: { size: 11 } }, grid: { display: false } }
+        x: { min: 0, max: 42, ticks: { color: '#1e293b', font: { size: 10.5, weight: '600' }, callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.06)' } },
+        y: { ticks: { color: '#1e293b', font: { size: 11, weight: '600' } }, grid: { display: false } }
       }
     },
     plugins: [ChartDataLabels]
@@ -478,18 +486,26 @@ function initDriversTab() {
       datasets: [{
         data: feats.map(f => f.elasticity),
         backgroundColor: '#10b981',
-        borderRadius: 4
+        borderRadius: 5
       }]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 32 } },
       plugins: {
         legend: { display: false },
-        datalabels: { anchor: 'end', align: 'top', color: '#10b981', font: { weight: 'bold', size: 11 }, formatter: v => v.toFixed(2) + 'x' }
+        datalabels: {
+          anchor: 'end',
+          align: 'top',
+          offset: 4,
+          color: '#000000',
+          font: { weight: '800', size: 11.5 },
+          formatter: v => v.toFixed(2) + 'x'
+        }
       },
       scales: {
-        x: { ticks: { color: '#8899bb', font: { size: 10 } }, grid: { display: false } },
-        y: { min: 0, max: 2.2, ticks: { color: '#8899bb', callback: v => v+'x' }, grid: { color: 'rgba(255,255,255,.05)' } }
+        x: { ticks: { color: '#1e293b', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
+        y: { min: 0, max: 2.3, ticks: { color: '#1e293b', font: { size: 10, weight: '600' }, callback: v => v+'x' }, grid: { color: 'rgba(0,0,0,0.06)' } }
       }
     },
     plugins: [ChartDataLabels]
@@ -523,18 +539,36 @@ function initPDPTab() {
         data: dur.map(d => d.rev_index),
         borderColor: '#f59e0b',
         backgroundColor: 'rgba(245,158,11,.15)',
-        tension: 0.3, fill: true, pointRadius: 5, pointBackgroundColor: '#f59e0b'
+        tension: 0.3, fill: true,
+        pointRadius: 6,
+        pointHoverRadius: 8,
+        pointBackgroundColor: '#f59e0b',
+        pointBorderColor: '#ffffff',
+        pointBorderWidth: 2
       }]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 38, left: 15, right: 15 } },
       plugins: {
         legend: { display: false },
-        datalabels: { anchor: 'top', color: '#f59e0b', font: { weight: 'bold', size: 11 }, formatter: (v, ctx) => dur[ctx.dataIndex].marginal_uplift }
+        datalabels: {
+          anchor: 'end',
+          align: 'top',
+          offset: 8,
+          color: '#000000',
+          backgroundColor: '#ffffff',
+          borderColor: '#f59e0b',
+          borderWidth: 1.5,
+          borderRadius: 5,
+          padding: { top: 2, bottom: 2, left: 6, right: 6 },
+          font: { weight: '800', size: 10.5 },
+          formatter: (v, ctx) => dur[ctx.dataIndex].marginal_uplift
+        }
       },
       scales: {
-        x: { ticks: { color: '#8899bb' }, grid: { display: false } },
-        y: { ticks: { color: '#8899bb' }, grid: { color: 'rgba(255,255,255,.05)' } }
+        x: { ticks: { color: '#1e293b', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
+        y: { ticks: { color: '#1e293b', font: { size: 10, weight: '600' } }, grid: { color: 'rgba(0,0,0,0.06)' } }
       }
     },
     plugins: [ChartDataLabels]
@@ -551,18 +585,36 @@ function initPDPTab() {
         data: strk.map(d => d.rev_index),
         borderColor: '#06b6d4',
         backgroundColor: 'rgba(6,182,212,.15)',
-        tension: 0.3, fill: true, pointRadius: 4, pointBackgroundColor: '#06b6d4'
+        tension: 0.3, fill: true,
+        pointRadius: 6,
+        pointHoverRadius: 8,
+        pointBackgroundColor: '#06b6d4',
+        pointBorderColor: '#ffffff',
+        pointBorderWidth: 2
       }]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 38, left: 15, right: 15 } },
       plugins: {
         legend: { display: false },
-        datalabels: { anchor: 'top', color: '#06b6d4', font: { size: 10 }, formatter: v => v }
+        datalabels: {
+          anchor: 'end',
+          align: 'top',
+          offset: 8,
+          color: '#000000',
+          backgroundColor: '#ffffff',
+          borderColor: '#06b6d4',
+          borderWidth: 1.5,
+          borderRadius: 5,
+          padding: { top: 2, bottom: 2, left: 6, right: 6 },
+          font: { weight: '800', size: 10.5 },
+          formatter: v => v
+        }
       },
       scales: {
-        x: { ticks: { color: '#8899bb' }, grid: { display: false } },
-        y: { ticks: { color: '#8899bb' }, grid: { color: 'rgba(255,255,255,.05)' } }
+        x: { ticks: { color: '#1e293b', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
+        y: { ticks: { color: '#1e293b', font: { size: 10, weight: '600' } }, grid: { color: 'rgba(0,0,0,0.06)' } }
       }
     },
     plugins: [ChartDataLabels]
@@ -579,18 +631,36 @@ function initPDPTab() {
         data: sku.map(d => d.rev_index),
         borderColor: '#10b981',
         backgroundColor: 'rgba(16,185,129,.15)',
-        tension: 0.3, fill: true, pointRadius: 4, pointBackgroundColor: '#10b981'
+        tension: 0.3, fill: true,
+        pointRadius: 6,
+        pointHoverRadius: 8,
+        pointBackgroundColor: '#10b981',
+        pointBorderColor: '#ffffff',
+        pointBorderWidth: 2
       }]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 38, left: 15, right: 15 } },
       plugins: {
         legend: { display: false },
-        datalabels: { anchor: 'top', color: '#10b981', font: { size: 10 }, formatter: v => v }
+        datalabels: {
+          anchor: 'end',
+          align: 'top',
+          offset: 8,
+          color: '#000000',
+          backgroundColor: '#ffffff',
+          borderColor: '#10b981',
+          borderWidth: 1.5,
+          borderRadius: 5,
+          padding: { top: 2, bottom: 2, left: 6, right: 6 },
+          font: { weight: '800', size: 10.5 },
+          formatter: v => v
+        }
       },
       scales: {
-        x: { ticks: { color: '#8899bb' }, grid: { display: false } },
-        y: { ticks: { color: '#8899bb' }, grid: { color: 'rgba(255,255,255,.05)' } }
+        x: { ticks: { color: '#1e293b', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
+        y: { ticks: { color: '#1e293b', font: { size: 10, weight: '600' } }, grid: { color: 'rgba(0,0,0,0.06)' } }
       }
     },
     plugins: [ChartDataLabels]
@@ -629,13 +699,21 @@ function initRegionalTab() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 32 } },
       plugins: {
-        legend: { position: 'top', labels: { color: '#8899bb', boxWidth: 12 } },
-        datalabels: { anchor: 'end', align: 'top', color: '#f0f4ff', font: { size: 10 }, formatter: v => v }
+        legend: { position: 'top', labels: { color: '#1e293b', boxWidth: 12, font: { size: 11, weight: '600' } } },
+        datalabels: {
+          anchor: 'end',
+          align: 'top',
+          offset: 4,
+          color: '#000000',
+          font: { weight: '800', size: 11 },
+          formatter: v => v
+        }
       },
       scales: {
-        x: { ticks: { color: '#8899bb' }, grid: { display: false } },
-        y: { ticks: { color: '#8899bb' }, grid: { color: 'rgba(255,255,255,.05)' } }
+        x: { ticks: { color: '#1e293b', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
+        y: { ticks: { color: '#1e293b', font: { size: 10, weight: '600' } }, grid: { color: 'rgba(0,0,0,0.06)' } }
       }
     },
     plugins: [ChartDataLabels]
@@ -655,13 +733,21 @@ function initRegionalTab() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 32 } },
       plugins: {
         legend: { display: false },
-        datalabels: { anchor: 'end', align: 'top', color: '#f0f4ff', font: { weight: 'bold', size: 12 }, formatter: v => '+' + v + '%' }
+        datalabels: {
+          anchor: 'end',
+          align: 'top',
+          offset: 4,
+          color: '#000000',
+          font: { weight: '800', size: 12 },
+          formatter: v => '+' + v + '%'
+        }
       },
       scales: {
-        x: { ticks: { color: '#8899bb' }, grid: { display: false } },
-        y: { min: 0, max: 40, ticks: { color: '#8899bb', callback: v => v+'%' }, grid: { color: 'rgba(255,255,255,.05)' } }
+        x: { ticks: { color: '#1e293b', font: { size: 11, weight: '600' } }, grid: { display: false } },
+        y: { min: 0, max: 40, ticks: { color: '#1e293b', font: { size: 10, weight: '600' }, callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.06)' } }
       }
     },
     plugins: [ChartDataLabels]
