@@ -801,7 +801,7 @@ function renderChurn(){
   C['churnFunnel'] = new Chart(document.getElementById('chartFunnel'),{
     type:'bar',
     data:{
-      labels:['Total Profiled','Active (L60D)','At-Risk (61-120D)','Churned (>120D)'],
+      labels:['Total Profiled','Active (L30D)','At-Risk (31-60D)','Churned (>60D)'],
       datasets:[{
         label:'Outlets',
         data:[totalAll, active, atRisk, lost],
