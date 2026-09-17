@@ -6,6 +6,7 @@
 <title>Module 2 — Outlet Intelligence & SmartPitch AI™ Engine</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <script src="module2_data.js"></script>
 <style>
@@ -482,62 +483,64 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
     </div>
   </div>
 
-  <div class="grid-2-1">
-    <!-- Advanced Association Mining (Pairs A->B & Triplets A+B->C) -->
-    <div class="chart-card reveal">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:10px">
-        <div>
-          <h3 style="margin-bottom:2px" id="basketSectionTitle">Market Basket Association Rules <span class="badge" id="basketMiningBadge">PAIRS (A → B)</span></h3>
-          <p class="subtitle" style="margin-bottom:0"><strong>Meaning:</strong> Discovers high-frequency co-purchases & high-lift combinations across 1.68M orders.</p>
-        </div>
-        <button class="chart-dl" onclick="chartDL('topPairs')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+  <!-- Full-Width Advanced Association Mining (Pairs A->B & Triplets A+B->C) -->
+  <div class="chart-card reveal mb-20">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:10px">
+      <div>
+        <h3 style="margin-bottom:2px" id="basketSectionTitle">Market Basket Association Rules <span class="badge" id="basketMiningBadge">PAIRS (A → B)</span></h3>
+        <p class="subtitle" style="margin-bottom:0"><strong>Meaning:</strong> Discovers high-frequency co-purchases & high-lift predictive combinations across 1.68M transactions.</p>
       </div>
-
-      <!-- Interactive Controls Bar -->
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:14px;padding:10px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px">
-        <!-- Mode Switcher -->
-        <div style="display:flex;align-items:center;gap:4px;background:rgba(0,0,0,0.35);padding:3px;border-radius:8px">
-          <button id="btnBasketPairs" class="basket-mode-btn active" onclick="setBasketMode('pairs')">🔗 Pairs (A → B)</button>
-          <button id="btnBasketTriplets" class="basket-mode-btn" onclick="setBasketMode('triplets')">⚡ 3-Item Triplet (A + B → C)</button>
-        </div>
-
-        <!-- Filter Buttons -->
-        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-          <button id="btnBasketVol" class="basket-filter-btn active" onclick="setBasketFilter('volume')">🔥 Top Volume (Co-Buys)</button>
-          <button id="btnBasketLift" class="basket-filter-btn" onclick="setBasketFilter('lift')">⚡ Highest Lift</button>
-          <button id="btnBasketTea" class="basket-filter-btn" onclick="setBasketFilter('tea')">☕ Tea Combos</button>
-        </div>
-
-        <!-- Search box -->
-        <div style="position:relative;flex:1;min-width:160px;max-width:240px">
-          <input type="text" id="basketSearchInput" placeholder="🔍 Search product..." oninput="filterBasketList()" style="width:100%;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.12);padding:6px 12px;border-radius:6px;color:#fff;font-size:11px;outline:none">
-        </div>
-      </div>
-
-      <div class="pair-list" id="pairList" style="margin-top:16px;max-height:540px;overflow-y:auto;padding-right:4px"></div>
+      <button class="chart-dl" onclick="chartDL('topPairs')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel (Multi-Sheet .xlsx)</button>
     </div>
+
+    <!-- Interactive Controls Bar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:14px;padding:12px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px">
+      <!-- Mode Switcher -->
+      <div style="display:flex;align-items:center;gap:4px;background:rgba(0,0,0,0.35);padding:4px;border-radius:8px">
+        <button id="btnBasketPairs" class="basket-mode-btn active" onclick="setBasketMode('pairs')">🔗 Pairs (A → B)</button>
+        <button id="btnBasketTriplets" class="basket-mode-btn" onclick="setBasketMode('triplets')">⚡ 3-Item Triplet (A + B → C)</button>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <button id="btnBasketVol" class="basket-filter-btn active" onclick="setBasketFilter('volume')">🔥 Top Volume (Co-Buys)</button>
+        <button id="btnBasketLift" class="basket-filter-btn" onclick="setBasketFilter('lift')">⚡ Highest Lift</button>
+        <button id="btnBasketTea" class="basket-filter-btn" onclick="setBasketFilter('tea')">☕ Tea Combos</button>
+      </div>
+
+      <!-- Search box -->
+      <div style="position:relative;flex:1;min-width:180px;max-width:280px">
+        <input type="text" id="basketSearchInput" placeholder="🔍 Search product or brand..." oninput="filterBasketList()" style="width:100%;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.12);padding:7px 12px;border-radius:8px;color:#fff;font-size:12px;outline:none">
+      </div>
+    </div>
+
+    <div class="pair-list" id="pairList" style="margin-top:16px;max-height:560px;overflow-y:auto;padding-right:4px"></div>
+  </div>
+
+  <!-- 2-Column Grid for Basket Distribution & Heatmap underneath Association Rules -->
+  <div class="grid-2">
     <!-- Basket Size Distribution -->
     <div class="chart-card reveal">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-        <h3 style="margin-bottom:0">Basket Size Distribution</h3>
+        <h3 style="margin-bottom:0">Basket Size Distribution <span class="badge">HISTOGRAM</span></h3>
         <button class="chart-dl" onclick="chartDL('basketDist')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
       </div>
-      <p class="subtitle"><strong>Meaning:</strong> Shows customer basket sizes. <strong>How it's calculated:</strong> The distribution of unique items (SKUs) across all invoices.</p>
-      <div class="chart-wrap" style="height:260px">
+      <p class="subtitle"><strong>Meaning:</strong> Distribution of unique items (SKUs) across all retail invoices.</p>
+      <div class="chart-wrap" style="height:280px">
         <canvas id="chartBasketDist"></canvas>
       </div>
     </div>
-  </div>
 
-  <!-- Lift Matrix Heatmap -->
-  <div class="chart-card reveal" style="margin-top:20px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-      <h3 style="margin-bottom:0">Co-Purchase Confidence Matrix <span class="badge">HEATMAP</span></h3>
-      <button class="chart-dl" onclick="chartDL('liftMatrix')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
-    </div>
-    <p class="subtitle"><strong>Meaning:</strong> Predicts cross-sell success. <strong>How it's calculated:</strong> If a customer buys Product A, what is the % probability they will also buy Product B?</p>
-    <div class="chart-wrap" style="height:320px">
-      <canvas id="chartLiftHeatmap"></canvas>
+    <!-- Lift Matrix Heatmap -->
+    <div class="chart-card reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h3 style="margin-bottom:0">Co-Purchase Confidence Matrix <span class="badge">HEATMAP</span></h3>
+        <button class="chart-dl" onclick="chartDL('liftMatrix')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+      </div>
+      <p class="subtitle"><strong>Meaning:</strong> Predicts % probability of buying Pitch SKU given Trigger SKU.</p>
+      <div class="chart-wrap" style="height:280px">
+        <canvas id="chartLiftHeatmap"></canvas>
+      </div>
     </div>
   </div>
 </section>
@@ -1736,6 +1739,75 @@ function chartDL(chartId) {
       csv += `"${b.brand}",${b.revenue},${b.share_pct},${b.cumulative_pct||''}\n`;
     });
   } else if (chartId === 'topPairs') {
+    if (typeof XLSX !== 'undefined') {
+      const wb = XLSX.utils.book_new();
+      
+      // 1. Sheet: Pairs (A -> B)
+      const pairsData = (D.basket?.pairs_by_volume || D.basket?.top_pairs || []).map((p, i) => ({
+        "Rank": i + 1,
+        "Trigger SKU (A)": p.sku_a || '',
+        "Trigger Product (A)": p.name_a || '',
+        "Category (A)": p.cat_a || '',
+        "Pitch SKU (B)": p.sku_b || '',
+        "Pitch Product (B)": p.name_b || '',
+        "Category (B)": p.cat_b || '',
+        "Co-Purchase Orders": p.co_count || 0,
+        "Confidence A->B (%)": p.confidence_ab || 0,
+        "Confidence B->A (%)": p.confidence_ba || 0,
+        "Support (%)": p.support || 0,
+        "Lift Multiplier": p.lift || 0
+      }));
+      const wsPairs = XLSX.utils.json_to_sheet(pairsData);
+      XLSX.utils.book_append_sheet(wb, wsPairs, "Pairs (A to B)");
+
+      // 2. Sheet: Triplets (A + B -> C)
+      const tripletsData = (D.basket?.triplets_by_volume || []).map((t, i) => ({
+        "Rank": i + 1,
+        "Trigger SKU A": t.sku_a || '',
+        "Trigger Product A": t.name_a || '',
+        "Trigger SKU B": t.sku_b || '',
+        "Trigger Product B": t.name_b || '',
+        "Pitch SKU C": t.sku_c || '',
+        "Recommended Pitch Product C": t.name_c || '',
+        "Category C": t.cat_c || '',
+        "Triplet Orders (A+B+C)": t.co_count || 0,
+        "Base Orders (A+B)": t.pair_count || 0,
+        "Confidence (A+B -> C) %": t.confidence || 0,
+        "Support (%)": t.support || 0,
+        "Lift Multiplier": t.lift || 0
+      }));
+      const wsTriplets = XLSX.utils.json_to_sheet(tripletsData);
+      XLSX.utils.book_append_sheet(wb, wsTriplets, "Triplets (AB to C)");
+
+      // 3. Sheet: Tea Combinations
+      const teaData = (D.basket?.tea_pairs || []).map((p, i) => ({
+        "Rank": i + 1,
+        "Trigger SKU (A)": p.sku_a || '',
+        "Trigger Product (A)": p.name_a || '',
+        "Pitch SKU (B)": p.sku_b || '',
+        "Pitch Product (B)": p.name_b || '',
+        "Co-Purchase Orders": p.co_count || 0,
+        "Confidence A->B (%)": p.confidence_ab || 0,
+        "Support (%)": p.support || 0,
+        "Lift Multiplier": p.lift || 0
+      }));
+      const wsTea = XLSX.utils.json_to_sheet(teaData);
+      XLSX.utils.book_append_sheet(wb, wsTea, "Tea Combinations");
+
+      // 4. Sheet: Basket Distribution
+      const distData = (D.basket?.basket_distribution || []).map(d => ({
+        "Basket Size (Unique SKUs)": d.size,
+        "Order Count": d.count || d.orders || 0,
+        "Percentage of Orders (%)": d.pct || 0
+      }));
+      const wsDist = XLSX.utils.json_to_sheet(distData);
+      XLSX.utils.book_append_sheet(wb, wsDist, "Basket Size Distribution");
+
+      XLSX.writeFile(wb, "ITL_Market_Basket_Association_Rules.xlsx");
+      return;
+    }
+
+    // Fallback to CSV
     const data = typeof getActiveBasketData === 'function' ? getActiveBasketData() : (D.basket?.pairs_by_volume || D.basket?.top_pairs || []);
     if (currentBasketMode === 'triplets') {
       csv = "Rank,Trigger_SKU_A,Trigger_Name_A,Trigger_SKU_B,Trigger_Name_B,Pitch_SKU_C,Pitch_Name_C,Confidence_AB_to_C_Pct,Triplet_Co_Orders,Base_AB_Orders,Support_Pct,Lift\n";
