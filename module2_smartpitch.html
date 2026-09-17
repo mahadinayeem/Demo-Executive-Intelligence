@@ -326,7 +326,6 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
     <div class="nav-tab active" onclick="switchTab('pareto')" id="tab-pareto"><span class="dot"></span>Pareto &amp; Revenue</div>
     <div class="nav-tab" onclick="switchTab('basket')" id="tab-basket"><span class="dot"></span>Market Basket</div>
     <div class="nav-tab" onclick="switchTab('tiers')" id="tab-tiers"><span class="dot"></span>Outlet Tiers</div>
-    <div class="nav-tab" onclick="switchTab('smartpitch')" id="tab-smartpitch"><span class="dot"></span>SmartPitch Rules</div>
     <div class="nav-tab" onclick="switchTab('simulation')" id="tab-simulation"><span class="dot"></span>Financial Sim</div>
     <div class="nav-tab" onclick="switchTab('penetration')" id="tab-penetration"><span class="dot"></span>Penetration Gaps</div>
     <div class="nav-tab" onclick="switchTab('trend')" id="tab-trend"><span class="dot"></span>Monthly Trend</div>
@@ -594,20 +593,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
   </div>
 </section>
 
-<!-- ════════════════════ SMARTPITCH ════════════════════ -->
-<section class="section" id="sec-smartpitch">
-  <div class="insight-box">
-    <span class="insight-icon">🤖</span>
-    <div class="insight-text">
-      <strong>SmartPitch Advisor™ Rule Engine</strong><br>
-      Data-driven cross-sell triggers derived from Market Basket Analysis. Each rule identifies a 
-      <strong>trigger SKU</strong> (what the outlet already buys) and a <strong>pitch SKU</strong> (what to recommend next).
-      Rules are ranked by Lift — a measure of how much more likely stores are to buy the pair vs. by chance.
-    </div>
-  </div>
-  <div class="sec-title">Cross-Sell Rules — Sorted by Lift Score</div>
-  <div id="pitchRules"></div>
-</section>
+
 
 <!-- ════════════════════ SIMULATION ════════════════════ -->
 <section class="section" id="sec-simulation">
@@ -1077,34 +1063,7 @@ function buildTiers() {
   `).join('');
 }
 
-// ──────────────────────────────────────────────────────
-// SMARTPITCH SECTION
-// ──────────────────────────────────────────────────────
-function buildSmartPitch() {
-  const rules = D.smartpitch;
-  const container = document.getElementById('pitchRules');
-  container.innerHTML = rules.map((r,i) => `
-    <div class="pitch-rule reveal">
-      <div class="pitch-trigger">
-        <div>
-          <div class="pitch-label">TRIGGER (Already Buying)</div>
-          <div class="pitch-sku-name">📦 ${r.trigger_name}</div>
-        </div>
-        <span class="pitch-arrow">→</span>
-        <div>
-          <div class="pitch-label">PITCH (Cross-Sell)</div>
-          <div class="pitch-sku-name">🎯 ${r.pitch_name}</div>
-        </div>
-      </div>
-      <div class="pitch-rationale">${r.rationale}</div>
-      <div class="pitch-metrics">
-        <span class="pitch-badge conf">Confidence: ${r.confidence}%</span>
-        <span class="pitch-badge lift">Lift: ${r.lift}×</span>
-        <span class="pitch-badge count">Co-purchases: ${r.co_count.toLocaleString()}</span>
-      </div>
-    </div>
-  `).join('');
-}
+
 
 // ──────────────────────────────────────────────────────
 // SIMULATION SECTION
@@ -1764,11 +1723,7 @@ function exportDataCSV() {
     D.tiers.forEach(t => {
       csv += `"${t.tier}",${t.outlet_count},${t.revenue},${t.revenue_share},${t.avg_revenue}\n`;
     });
-  } else if (activeTab === 'smartpitch') {
-    csv = "Trigger_SKU,Pitch_SKU,Confidence_Pct,Lift,Co_Purchases,Rationale\n";
-    D.smartpitch.forEach(r => {
-      csv += `"${r.trigger_name}","${r.pitch_name}",${r.confidence},${r.lift},${r.co_count},"${r.rationale}"\n`;
-    });
+
   } else if (activeTab === 'simulation') {
     csv = "Scenario,Outlets_Targeted,Uplift_Pct,Uplift_Revenue_BDT\n";
     const sv2 = D.simulation_v2;
@@ -2017,7 +1972,6 @@ window.addEventListener('load', () => {
   buildPareto();
   buildBasket();
   buildTiers();
-  buildSmartPitch();
   buildSimulation();
   buildPenetration();
   setTimeout(() => {
