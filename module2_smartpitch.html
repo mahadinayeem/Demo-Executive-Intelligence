@@ -715,6 +715,45 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
   </div>
 </section>
 
+<!-- Tier Outlets Export Modal -->
+<div id="tierExportModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(6px)">
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;max-width:580px;width:92%;padding:26px;box-shadow:0 25px 60px rgba(0,0,0,0.6);position:relative">
+    <button onclick="closeTierExportModal()" style="position:absolute;right:18px;top:18px;background:rgba(255,255,255,0.06);border:none;color:var(--text2);font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center">&times;</button>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+      <div style="font-size:28px">🏢</div>
+      <div>
+        <h3 style="margin:0;font-size:18px;color:var(--text)">Export Outlet Tiers &amp; Customer Lists</h3>
+        <p style="color:var(--text2);font-size:12px;margin:2px 0 0 0">Select a specific tier or download all 208,870 outlets</p>
+      </div>
+    </div>
+    <div style="margin:14px 0 18px 0;padding:10px 14px;background:rgba(79,142,247,0.08);border:1px solid rgba(79,142,247,0.2);border-radius:10px;font-size:12px;color:var(--text2)">
+      📊 <strong>Included columns in each file:</strong> Outlet Code, Outlet Name, Owner Name, Phone Number, Address, Territory, Tier, Total Revenue (BDT), Total Orders, Unique SKUs Bought, Avg Order Value (BDT).
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button class="btn" style="background:linear-gradient(135deg,rgba(220,220,220,0.18),rgba(150,150,150,0.08));border:1px solid rgba(220,220,220,0.4);color:#fff;padding:12px 16px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="exportTierOutlets('Platinum')">
+        <span>💎 <strong>Platinum Outlets</strong> (52,218 Outlets · Top 25% Revenue)</span>
+        <span style="font-size:11px;background:rgba(255,255,255,0.15);padding:4px 10px;border-radius:6px;font-weight:700">CSV 📥</span>
+      </button>
+      <button class="btn" style="background:linear-gradient(135deg,rgba(245,158,11,0.18),rgba(217,119,6,0.08));border:1px solid rgba(245,158,11,0.4);color:#fbbf24;padding:12px 16px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="exportTierOutlets('Gold')">
+        <span>🥇 <strong>Gold Outlets</strong> (52,218 Outlets · 50% - 75% Quartile)</span>
+        <span style="font-size:11px;background:rgba(245,158,11,0.2);padding:4px 10px;border-radius:6px;font-weight:700">CSV 📥</span>
+      </button>
+      <button class="btn" style="background:linear-gradient(135deg,rgba(148,163,184,0.18),rgba(100,116,139,0.08));border:1px solid rgba(148,163,184,0.4);color:#94a3b8;padding:12px 16px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="exportTierOutlets('Silver')">
+        <span>🥈 <strong>Silver Outlets</strong> (52,217 Outlets · 25% - 50% Quartile)</span>
+        <span style="font-size:11px;background:rgba(148,163,184,0.2);padding:4px 10px;border-radius:6px;font-weight:700">CSV 📥</span>
+      </button>
+      <button class="btn" style="background:linear-gradient(135deg,rgba(205,124,42,0.18),rgba(146,64,14,0.08));border:1px solid rgba(205,124,42,0.4);color:#fdba74;padding:12px 16px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="exportTierOutlets('Bronze')">
+        <span>🥉 <strong>Bronze Outlets</strong> (52,217 Outlets · Bottom 25% Quartile)</span>
+        <span style="font-size:11px;background:rgba(205,124,42,0.2);padding:4px 10px;border-radius:6px;font-weight:700">CSV 📥</span>
+      </button>
+      <button class="btn" style="background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;border:none;padding:12px 16px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;margin-top:6px;font-weight:700" onclick="exportAllOutlets()">
+        <span>📁 <strong>Download All Outlets Combined (208,870 Outlets)</strong></span>
+        <span style="font-size:11px;background:rgba(0,0,0,0.25);padding:4px 10px;border-radius:6px">FULL CSV 📥</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 </main>
 
 <script>
@@ -962,6 +1001,38 @@ function buildBasket() {
 // ──────────────────────────────────────────────────────
 // TIERS SECTION
 // ──────────────────────────────────────────────────────
+function openTierExportModal() {
+  const m = document.getElementById('tierExportModal');
+  if (m) m.style.display = 'flex';
+}
+
+function closeTierExportModal() {
+  const m = document.getElementById('tierExportModal');
+  if (m) m.style.display = 'none';
+}
+
+function exportTierOutlets(tier) {
+  const filename = `itl_outlets_${tier.toLowerCase()}_tier.csv`;
+  const link = document.createElement('a');
+  link.href = filename;
+  link.download = filename;
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function exportAllOutlets() {
+  const filename = `itl_all_outlets_by_tier.csv`;
+  const link = document.createElement('a');
+  link.href = filename;
+  link.download = filename;
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
 function buildTiers() {
   const tiers = D.tiers;
   const tierGrid = document.getElementById('tierGrid');
@@ -970,7 +1041,7 @@ function buildTiers() {
   const maxRev = Math.max(...tiers.map(t=>t.revenue));
 
   tierGrid.innerHTML = tiers.map(t => `
-    <div class="tier-card ${tierColors[t.tier]}">
+    <div class="tier-card ${tierColors[t.tier]}" style="cursor:pointer;transition:transform 0.2s, box-shadow 0.2s" onclick="exportTierOutlets('${t.tier}')" title="Click to download ${t.tier} Tier Outlets (CSV)" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
       <div class="tier-label">${tierEmoji[t.tier]} ${t.tier}</div>
       <div class="tier-val">${t.outlet_count.toLocaleString()}</div>
       <div class="tier-sub">Outlets</div>
@@ -979,6 +1050,7 @@ function buildTiers() {
       </div>
       <div class="tier-sub">${t.revenue_share.toFixed(1)}% of total revenue</div>
       <div class="tier-sub">Avg: ${fmtBDT(t.avg_revenue)}/outlet</div>
+      <div style="margin-top:10px;font-size:10px;font-weight:700;background:rgba(255,255,255,0.12);padding:3px 8px;border-radius:6px;display:inline-block">📥 Download ${t.tier} Outlets</div>
     </div>
   `).join('');
 
@@ -991,7 +1063,7 @@ function buildTiers() {
       <td class="mono">${fmt(t.revenue,2)}</td>
       <td class="mono" style="color:${t.revenue_share>40?'#f43f5e':t.revenue_share>20?'#f59e0b':'#10b981'}">${t.revenue_share.toFixed(1)}%</td>
       <td class="mono">${fmt(t.avg_revenue,2)}</td>
-      <td style="width:200px">
+      <td style="width:180px">
         <div class="bar-wrap">
           <div class="bar-bg">
             <div class="bar-fill" style="width:${(t.revenue/maxRev*100).toFixed(1)}%;background:linear-gradient(90deg,#4f8ef7,#7c3aed)"></div>
@@ -999,7 +1071,7 @@ function buildTiers() {
         </div>
       </td>
       <td>
-        <button class="btn" style="padding:4px 8px;font-size:11px" onclick="exportTierOutlets('${t.tier}')">📥 Download List</button>
+        <button class="btn" style="background:rgba(79,142,247,0.15);border:1px solid rgba(79,142,247,0.3);color:#60a5fa;padding:5px 10px;font-size:11px;font-weight:600;border-radius:6px;cursor:pointer" onclick="exportTierOutlets('${t.tier}')">📥 Download ${t.tier} (CSV)</button>
       </td>
     </tr>
   `).join('');
@@ -1879,11 +1951,8 @@ function chartDL(chartId) {
       csv += `"${p.sku_a||''}","${p.name_a||''}","${p.sku_b||''}","${p.name_b||''}",${p.support||0},${p.confidence_ab||0},${p.lift||0}\n`;
     });
   } else if (chartId === 'tierCount' || chartId === 'tierRev' || chartId === 'tierTable') {
-    csv = "Tier,Outlets,Revenue_BDT,Revenue_Share_Pct,Avg_Revenue_Per_Outlet\n";
-    const tiers = D.tiers || [];
-    tiers.forEach(t => {
-      csv += `"${t.tier}",${t.outlet_count},${t.revenue},${t.revenue_share},${t.avg_revenue}\n`;
-    });
+    openTierExportModal();
+    return;
   } else if (chartId === 'uplift' || chartId === 'scenario') {
     csv = "Scenario_Metric,Value\n";
     if (D.simulation) {
