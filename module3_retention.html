@@ -363,8 +363,8 @@ tr:hover td{background:var(--card2)}
         </div>
       </div>
       <div class="card">
-        <h3>Revenue at Risk by Territory <span class="badge gold">Geo Breakdown</span> <button class="chart-dl" onclick="chartDL('risk-territory')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
-        <p class="card-desc">Which territories have the highest concentration of at-risk revenue? Prioritize these for SR outreach.</p>
+        <h3>Revenue at Risk by Distributor Point <span class="badge gold">DB Breakdown</span> <button class="chart-dl" onclick="chartDL('risk-territory')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">Which distributor agencies / DB points have the highest concentration of at-risk revenue? Prioritize these for SR outreach.</p>
         <div class="chart-wrap">
           <canvas id="chartRiskTerritory"></canvas>
         </div>
@@ -391,7 +391,7 @@ tr:hover td{background:var(--card2)}
       <div class="tbl-wrap">
         <table>
           <thead><tr>
-            <th>Outlet / Retailer</th><th>Territory</th><th>Avg Gap (Days)</th>
+            <th>Outlet / Retailer</th><th>Distributor / DB Point</th><th>Avg Gap (Days)</th>
             <th>Current Silence</th><th>Gap Multiplier</th><th>Risk Level</th><th>Rev at Risk</th>
           </tr></thead>
           <tbody id="riskTbody"></tbody>
@@ -424,8 +424,8 @@ tr:hover td{background:var(--card2)}
         </div>
       </div>
       <div class="card">
-        <h3>Lost Revenue by Territory <span class="badge gold">Geo Exposure</span> <button class="chart-dl" onclick="chartDL('bleed-territory')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
-        <p class="card-desc">Territories with the highest accumulated wallet-share loss. These need immediate cross-sell re-engagement (see Module 2 Basket Analysis).</p>
+        <h3>Lost Revenue by Distributor Point <span class="badge gold">DB Exposure</span> <button class="chart-dl" onclick="chartDL('bleed-territory')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">Distributor agencies / DB points with the highest accumulated wallet-share loss. These need immediate cross-sell re-engagement.</p>
         <div class="chart-wrap">
           <canvas id="chartBleedTerritory"></canvas>
         </div>
@@ -453,7 +453,7 @@ tr:hover td{background:var(--card2)}
       <div class="tbl-wrap">
         <table>
           <thead><tr>
-            <th>Outlet / Retailer</th><th>Territory</th><th>Historical AOV</th><th>Recent AOV</th><th>AOV Drop %</th><th>Wallet Lost</th>
+            <th>Outlet / Retailer</th><th>Distributor / DB Point</th><th>Historical AOV</th><th>Recent AOV</th><th>AOV Drop %</th><th>Wallet Lost</th>
           </tr></thead>
           <tbody id="bleedTbody"></tbody>
         </table>
@@ -506,7 +506,7 @@ tr:hover td{background:var(--card2)}
       </div>
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>Outlet / Retailer</th><th>Territory</th><th>Total Visits</th><th>Last Visit</th><th>Hist. Orders</th></tr></thead>
+          <thead><tr><th>Outlet / Retailer</th><th>Distributor / DB Point</th><th>Total Visits</th><th>Last Visit</th><th>Hist. Orders</th></tr></thead>
           <tbody id="flagTbody"></tbody>
         </table>
       </div>
