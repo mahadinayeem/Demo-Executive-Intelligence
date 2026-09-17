@@ -115,6 +115,32 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
 .badge.purple{background:rgba(139,92,246,.15);color:var(--accent2)}
 .badge.rose{background:rgba(244,63,94,.15);color:var(--rose)}
 
+/* ── EXECUTIVE NOTE CALLOUTS ── */
+.exec-note {
+  background: rgba(6,182,212,0.06);
+  border-left: 4px solid var(--cyan);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--text2);
+}
+.exec-note.gold { background: rgba(245,158,11,0.06); border-left-color: var(--gold); }
+.exec-note.emerald { background: rgba(16,185,129,0.06); border-left-color: var(--emerald); }
+.exec-note.purple { background: rgba(139,92,246,0.06); border-left-color: var(--accent2); }
+.exec-note.orange { background: rgba(249,115,22,0.06); border-left-color: var(--orange); }
+.exec-note-title {
+  display: flex; align-items: center; gap: 6px;
+  font-weight: 700; color: var(--text); font-size: 12px; margin-bottom: 4px;
+}
+.exec-note ul { margin: 4px 0 0 16px; padding: 0; }
+.exec-note li { margin-bottom: 3px; }
+.exec-note strong { color: var(--text); font-weight: 700; }
+[data-theme="light"] .exec-note { background: #f1f5f9; color: #334155; }
+[data-theme="light"] .exec-note strong { color: #0f172a; }
+[data-theme="light"] .exec-note-title { color: #0f172a; }
+
 /* ── DOWNLOAD BUTTONS ── */
 .chart-dl{
   background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);color:var(--cyan);
@@ -190,6 +216,12 @@ input[type=range]::-webkit-slider-thumb{
 
   <!-- ════════════════════ TAB 1: ML FEATURE IMPORTANCE ════════════════════ -->
   <div class="tab-content active" id="sec-drivers">
+    
+    <div class="exec-note cyan">
+      <div class="exec-note-title">💡 মেশিন লার্নিং সেলস ড্রাইভার সারাংশ (ML Drivers Executive Summary)</div>
+      ঐতিহাসিক সেলস ও ফিল্ড কল ডেটা বিশ্লেষণ করে ML মডেল (R² = ০.৮৮৪) নিশ্চিত করেছে—শুধু দৌড়াদৌড়ি বা কলের সংখ্যা বাড়ানোর চেয়ে <strong>Strike Rate (৩৪.২%)</strong> ও <strong>SKU Breadth (২৪.৮%)</strong> নিশ্চিত করা সেলসে সবচেয়ে বেশি রেভিনিউ তৈরি করে।
+    </div>
+
     <div class="kpi-grid">
       <div class="kpi-card" style="--card-accent:var(--cyan)">
         <div class="kpi-lbl">#1 Revenue Driver</div>
@@ -219,15 +251,32 @@ input[type=range]::-webkit-slider-thumb{
           <div class="card-title">ML Behavioral Drivers Importance Ranking (%)</div>
           <button class="chart-dl" onclick="dlChart('featureImportance')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
         </div>
-        <p class="card-sub">Relative weight of field behaviors determining total revenue output.</p>
+        <div class="exec-note cyan">
+          <div class="exec-note-title">📊 চার্ট নোট: ML Behavioral Drivers Importance (%)</div>
+          <strong>কী বিশ্লেষণ করে:</strong> মোট বিক্রয় বৃদ্ধির পেছনে ফিল্ডের কোন আচরণটি কতটা গুরুত্বপূর্ণ (Relative Weight)।
+          <ul>
+            <li><strong>#১ চালিকাশক্তি (Strike Rate - ৩৪.২%):</strong> দোকানে গিয়ে কার্যকর অর্ডার নেওয়া সবচেয়ে বড় ড্রাইভার।</li>
+            <li><strong>#২ চালিকাশক্তি (SKU Breadth - ২৪.৮%):</strong> প্রতি মেমোতে ১টির বেশি ক্যাটাগরি/SKU বিক্রি করা।</li>
+            <li><strong>#৩ চালিকাশক্তি (Visit Duration - ১৮.৫%):</strong> পর্যাপ্ত সময় দিয়ে রিটেইলারকে কনভিন্স করা।</li>
+          </ul>
+        </div>
         <div class="chart-wrap"><canvas id="chartFeatureImportance"></canvas></div>
       </div>
+      
       <div class="card">
         <div class="card-header">
           <div class="card-title">Revenue Elasticity Coefficients (1% KPI Improvement Yield)</div>
           <button class="chart-dl" onclick="dlChart('elasticity')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
         </div>
-        <p class="card-sub">Multiplier effect: Percentage revenue expansion gained per 1.0% increase in KPI.</p>
+        <div class="exec-note gold">
+          <div class="exec-note-title">⚡ চার্ট নোট: Revenue Elasticity Multiplier (১% উন্নতির ফল)</div>
+          <strong>কী বিশ্লেষণ করে:</strong> ফিল্ডে যেকোনো KPI মাত্র ১% বাড়ালে মোট রেভিনিউ কত শতাংশ বাড়ে (Multiplier Effect)।
+          <ul>
+            <li><strong>Strike Rate: +১.৮৫% রেভিনিউ</strong> (১% কনভার্সন বাড়লে ১.৮৫% বিক্রয় বৃদ্ধি পায়)।</li>
+            <li><strong>SKU Breadth: +১.৬২% রেভিনিউ</strong> (মেমোতে অতিরিক্ত SKU যোগ করলে রেভিনিউ দ্রুত বাড়ে)।</li>
+            <li><strong>Visit Duration: +১.৩৪% রেভিনিউ</strong> (দোকানে কোয়ালিটি সময় দেওয়ার ফল)।</li>
+          </ul>
+        </div>
         <div class="chart-wrap"><canvas id="chartElasticity"></canvas></div>
       </div>
     </div>
@@ -236,6 +285,10 @@ input[type=range]::-webkit-slider-thumb{
       <div class="card-header">
         <div class="card-title">Field Behavioral Drivers Architecture & Levers</div>
         <button class="chart-dl" onclick="dlChart('featureImportance')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+      </div>
+      <div class="exec-note emerald">
+        <div class="exec-note-title">📋 টেবিল নোট: Field Behavioral Drivers Architecture</div>
+        <strong>ব্যবহার:</strong> প্রতিটি ফিল্ড প্যারামিটারের গুরুত্ব, রেভিনিউ মাল্টিপ্লায়ার এবং ফিল্ড টিমের জন্য সরাসরি কার্যকর অ্যাকশন প্ল্যান (Operational Action Mechanism) নিচে বিস্তারিত দেওয়া হলো।
       </div>
       <div class="tbl-wrap">
         <table>
@@ -252,14 +305,22 @@ input[type=range]::-webkit-slider-thumb{
 
   <!-- ════════════════════ TAB 2: PARTIAL DEPENDENCE PLOTS (PDP) ════════════════════ -->
   <div class="tab-content" id="sec-pdp">
+    
     <div class="card">
       <div class="card-header">
         <div class="card-title">Visit Duration Non-Linear Response Curve (PDP)</div>
         <button class="chart-dl" onclick="dlChart('pdpDuration')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
       </div>
-      <p class="card-sub">
-        <strong style="color:var(--gold)">Key Tipping Point: 7–10 Minutes.</strong> Visits &lt;3 mins yield near-zero depth. Beyond 8 minutes, order revenue jumps by +69%, while visits &gt;18 mins plateau.
-      </p>
+      <div class="exec-note gold">
+        <div class="exec-note-title">⏱️ চার্ট নোট: Visit Duration Non-Linear Response Curve (PDP) — সুইট স্পট ও টিপিং পয়েন্ট বিশ্লেষণ</div>
+        <strong>সহজ ভাষায় কী বোঝানো হয়েছে:</strong> একজন সেলস অফিসার (SR) দোকানে কতক্ষণ সময় কাটালে সেলস সর্বোচ্চ হয়, তার বাস্তব নন-লিনিয়ার রেসপন্স কার্ভ (Partial Dependence Plot)।
+        <ul>
+          <li><strong>🔴 ০–৩ মিনিট (Under-invested / অপচয়):</strong> দোকানে ৩ মিনিটের কম থাকলে রিটেইলারের সাথে কোনো কার্যকর আলোচনা হয় না; কোনো গভীর সেলস বাড়ে না (Flat Line)।</li>
+          <li><strong>🟢 ৮–১২ মিনিট (🎯 Optimal Sweet Spot):</strong> সবচেয়ে লাভজনক সময়! এই সময়ে রিটেইলার স্টক চেক, নতুন SKU পিচ ও সেলস কনভার্সন সম্ভব হয়—ফলে <strong>অর্ডার রেভিনিউ +৬৯% পর্যন্ত লাফিয়ে বাড়ে</strong>।</li>
+          <li><strong>🟡 ১৮+ মিনিট (Diminishing Returns / Plateau):</strong> ১৮ মিনিটের বেশি আড্ডা দিলে নতুন কোনো সেলস বাড়ে না, বরং পরবর্তী দোকানের সময় নষ্ট হয়।</li>
+          <li><strong>🚀 ফিল্ড অ্যাকশন:</strong> প্রতিটি কল যেন গড়ে <strong>৮–১২ মিনিট</strong> হয়, এসআর-দের সেই স্ট্যান্ডার্ড SOP নিশ্চিত করুন।</li>
+        </ul>
+      </div>
       <div class="chart-wrap" style="height:360px"><canvas id="chartPDPDuration"></canvas></div>
     </div>
 
@@ -269,15 +330,30 @@ input[type=range]::-webkit-slider-thumb{
           <div class="card-title">Strike Rate (%) Inflection Curve</div>
           <button class="chart-dl" onclick="dlChart('pdpStrike')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
         </div>
-        <p class="card-sub"><strong style="color:var(--cyan)">Critical Threshold: 55% Strike Rate.</strong> Crossing 55% unlocks exponential team revenue yield.</p>
+        <div class="exec-note cyan">
+          <div class="exec-note-title">🎯 চার্ট নোট: Strike Rate (%) Inflection Curve</div>
+          <strong>সহজ ভাষায় কী বোঝানো হয়েছে:</strong> প্রতিদিনের মোট ভিজিটের মধ্যে সফল অর্ডারের হার (Conversion Rate) বাড়লে রেভিনিউ কেমন বাড়ে।
+          <ul>
+            <li><strong>ক্রিটিক্যাল থ্রেশহোল্ড (৫৫%):</strong> স্ট্রাইক রেট ৫৫% পার হওয়ার সাথে সাথে টিম রেভিনিউ সূচকীয় হারে (Exponential Curve) ছুটতে শুরু করে।</li>
+            <li><strong>অ্যাকশন:</strong> আন্ডারপারফর্মারদের স্ট্রাইক রেট ৫৫%+ এ নিয়ে আসতে স্কিল ট্রেনিং দিন।</li>
+          </ul>
+        </div>
         <div class="chart-wrap"><canvas id="chartPDPStrike"></canvas></div>
       </div>
+
       <div class="card">
         <div class="card-header">
           <div class="card-title">SKU Breadth / Memo Multiplier Curve</div>
           <button class="chart-dl" onclick="dlChart('pdpSKU')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
         </div>
-        <p class="card-sub"><strong style="color:var(--emerald)">Multiplier Threshold: 3.5 SKUs.</strong> Moving from 2 to 3.5 SKUs per memo doubles retailer lifetime value.</p>
+        <div class="exec-note emerald">
+          <div class="exec-note-title">📦 চার্ট নোট: SKU Breadth / Memo Multiplier Curve</div>
+          <strong>সহজ ভাষায় কী বোঝানো হয়েছে:</strong> একটি মেমোতে কতগুলো আলাদা প্রোডাক্ট লাইন/SKU কাটলে বিক্রয় দ্বিগুণ হয়।
+          <ul>
+            <li><strong>মাল্টিপ্লায়ার থ্রেশহোল্ড (৩.৫+ SKU):</strong> মেমোতে ২টির জায়গায় গড়ে ৩.৫টি SKU কাটতে পারলে রিটেইলারের লাইফটাইম সেলস ভ্যালু সরাসরি দ্বিগুণ (2x) হয়ে যায়।</li>
+            <li><strong>অ্যাকশন:</strong> সিঙ্গেল-ব্র্যান্ড অর্ডারের জায়গায় ক্রস-সেলিং ও বাস্কেট বিল্ডিং পুশ করুন।</li>
+          </ul>
+        </div>
         <div class="chart-wrap"><canvas id="chartPDPSKU"></canvas></div>
       </div>
     </div>
@@ -285,12 +361,21 @@ input[type=range]::-webkit-slider-thumb{
 
   <!-- ════════════════════ TAB 3: REGIONAL DYNAMIC KPI CALIBRATION ════════════════════ -->
   <div class="tab-content" id="sec-regional">
+    
     <div class="card">
       <div class="card-header">
         <div class="card-title">Differentiated Regional KPI Architecture (Metro vs Semi-Urban vs Rural)</div>
         <button class="chart-dl" onclick="dlChart('regionalKPI')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
       </div>
-      <p class="card-sub">Eliminates "one-size-fits-all" quotas by calibrating realistic field targets based on travel friction and retail density.</p>
+      <div class="exec-note purple">
+        <div class="exec-note-title">🗺️ সেকশন নোট: Regional Dynamic KPI Calibration (বাস্তবসম্মত আঞ্চলিক টার্গেট)</div>
+        <strong>সহজ ভাষায় কী বোঝানো হয়েছে:</strong> সারা দেশকে এক পাল্লায় মেপে "One-Size-Fits-All" টার্গেট না দিয়ে ভৌগোলিক বাস্তবতা ও যাতায়াত দূরত্বের ওপর ভিত্তি করে টার্গেট নির্ধারণ:
+        <ul>
+          <li><strong>Metro (ঢাকা/চট্টগ্রাম):</strong> উচ্চ ঘনবসতি—বেশি কল (৩৬ VPD), কম ভিজিট সময় (৮ মিনিট) এবং বড় মেমো সাইজ (AOV: ৳১,৯৮০)।</li>
+          <li><strong>Semi-Urban:</strong> মাঝারি দূরত্ব—কল ২৮ VPD ও স্ট্রাইক রেট ৬৪% টার্গেট।</li>
+          <li><strong>Rural:</strong> দূরবর্তী অঞ্চল—যাতায়াত বেশি হওয়ায় কল কম (২২ VPD), কিন্তু প্রতি কলে সময় দিয়ে স্ট্রাইক রেট (৭২%) ও বাস্কেট সাইজ বাড়িয়ে সেলস বৃদ্ধি।</li>
+        </ul>
+      </div>
       <div class="tbl-wrap">
         <table>
           <thead>
@@ -309,12 +394,21 @@ input[type=range]::-webkit-slider-thumb{
           <div class="card-title">Call Productivity & Strike Rate Targets by Archetype</div>
           <button class="chart-dl" onclick="dlChart('regionalKPI')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
         </div>
+        <div class="exec-note cyan">
+          <div class="exec-note-title">📊 চার্ট নোট: আঞ্চলিক কল ও স্ট্রাইক রেট টার্গেট</div>
+          মেট্রোতে কলের সংখ্যা বেশি হলেও রুরাল এলাকায় প্রতি কলের মান ও স্ট্রাইক রেট বেশি রাখার যৌক্তিক বিন্যাস।
+        </div>
         <div class="chart-wrap"><canvas id="chartRegionalKPIs"></canvas></div>
       </div>
+      
       <div class="card">
         <div class="card-header">
           <div class="card-title">Revenue Growth Potential by Regional Tier (%)</div>
           <button class="chart-dl" onclick="dlChart('regionalKPI')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <div class="exec-note orange">
+          <div class="exec-note-title">📈 চার্ট নোট: অঞ্চলে লুকিয়ে থাকা প্রবৃদ্ধির সুযোগ</div>
+          মেট্রোতে সেলস বেশি হলেও গ্রোথ পটেনশিয়াল সবচেয়ে বেশি লুকিয়ে আছে <strong>Rural (+২১.৩%)</strong> ও <strong>Semi-Urban (+১৯.১%)</strong> অঞ্চলে।
         </div>
         <div class="chart-wrap"><canvas id="chartRegionalGrowth"></canvas></div>
       </div>
@@ -323,9 +417,16 @@ input[type=range]::-webkit-slider-thumb{
 
   <!-- ════════════════════ TAB 4: KPI UPLIFT SCENARIO SIMULATOR ════════════════════ -->
   <div class="tab-content" id="sec-simulator">
+    
     <div class="sim-panel">
-      <h3 style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:16px">Interactive What-If KPI Revenue Simulator</h3>
-      <p style="font-size:12px;color:var(--text2);margin-bottom:20px">Adjust target KPI improvement percentages to simulate total monetary revenue gains across the field force.</p>
+      <h3 style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:12px">Interactive What-If KPI Revenue Simulator</h3>
+      <div class="exec-note emerald">
+        <div class="exec-note-title">🎛️ লাইভ সিমুলেটর নোট: Interactive What-If KPI Revenue Simulator</div>
+        <strong>কীভাবে কাজ করে:</strong> ফিল্ড টিমের স্ট্রাইক রেট, এসকেইউ সংখ্যা বা ভিজিট টাইম ৫%, ১০% বা ১৫% বাড়ালে পুরো কোম্পানি বছরে মোট কত কোটি টাকা অতিরিক্ত সেলস পাবে তা সাথে সাথে হিসাব করে।
+        <ul>
+          <li><strong>ব্যবহার পদ্ধতি:</strong> নিচের স্লাইডারগুলো ডানে-বামে টেনে সাথে সাথে প্রজেক্টেড রেভিনিউ প্রবৃদ্ধি দেখুন।</li>
+        </ul>
+      </div>
       
       <div class="sim-grid">
         <div class="slider-group">
@@ -363,6 +464,10 @@ input[type=range]::-webkit-slider-thumb{
         <div class="card-title">Standard KPI Improvement Tiers Benchmark (+5%, +10%, +15%)</div>
         <button class="chart-dl" onclick="dlChart('simScenarios')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
       </div>
+      <div class="exec-note cyan">
+        <div class="exec-note-title">📊 টেবিল নোট: Standard KPI Improvement Tiers Benchmark</div>
+        <strong>কী প্রকাশ করে:</strong> প্রতিটি KPI ডায়মেনশনে ৫%, ১০% ও ১৫% উন্নতি আনতে পারলে বার্ষিক কত টাকা অতিরিক্ত নেট সেলস আসবে এবং তা অর্জনের জন্য ম্যানেজমেন্টকে কী কৌশল নিতে হবে।
+      </div>
       <div class="tbl-wrap">
         <table>
           <thead>
@@ -378,12 +483,20 @@ input[type=range]::-webkit-slider-thumb{
 
   <!-- ════════════════════ TAB 5: PREDICTIVE SALES FORECASTING ════════════════════ -->
   <div class="tab-content" id="sec-forecast">
+    
     <div class="card">
       <div class="card-header">
         <div class="card-title">Monthly Revenue Trajectory & 6-Month Predictive Forecast (with 80% & 95% Confidence Intervals)</div>
         <button class="chart-dl" onclick="dlChart('salesForecast')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
       </div>
-      <p class="card-sub">Statistical time-series forecasting incorporating seasonal multipliers and confidence boundary spreads.</p>
+      <div class="exec-note purple">
+        <div class="exec-note-title">🔮 চার্ট নোট: 6-Month Predictive Sales Forecast with Confidence Bands</div>
+        <strong>সহজ ভাষায় কী বোঝানো হয়েছে:</strong> ঐতিহাসিক সেলস ট্রেন্ড, সিজনাল ডিমান্ড ও টাইম-সিরিজ মডেলের ওপর ভিত্তি করে আগামী ৬ মাসের বিক্রয় পূর্বাভাস:
+        <ul>
+          <li><strong>সলিড লাইন (Projected Revenue):</strong> সম্ভাব্য স্বাভাবিক মাসিক সেলস গতিধারা (+১৮.৪% বার্ষিক প্রবৃদ্ধি)।</li>
+          <li><strong>হালকা শেড ব্যান্ড (৮০% ও ৯৫% Confidence Bands):</strong> প্রতিকূল বাজার পরিস্থিতি বা সর্বোচ্চ অনুকূল পরিবেশের সম্ভাব্য রেঞ্জ (Risk Margin)।</li>
+        </ul>
+      </div>
       <div class="chart-wrap" style="height:420px"><canvas id="chartForecast"></canvas></div>
     </div>
 
@@ -391,6 +504,10 @@ input[type=range]::-webkit-slider-thumb{
       <div class="card-header">
         <div class="card-title">Forecast Data Table & Projected Confidence Bands</div>
         <button class="chart-dl" onclick="dlChart('salesForecast')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+      </div>
+      <div class="exec-note gold">
+        <div class="exec-note-title">📑 টেবিল নোট: Forecast Trajectory & Confidence Limits Data</div>
+        <strong>ব্যবহার:</strong> ফিন্যান্স, সাপ্লাই চেইন ও প্রোডাকশন প্ল্যানিংয়ের জন্য আগামী ৬ মাসের আপার ও লোয়ার সীমানা নির্ধারণের সুনির্দিষ্ট টাকার পরিমাণ।
       </div>
       <div class="tbl-wrap">
         <table>
