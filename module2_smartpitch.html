@@ -1336,35 +1336,71 @@ function renderBasketCharts() {
 
   // ── Confidence Matrix ──
   destroyChart('chartLiftHeatmap');
-  const topP = D.basket.top_pairs.slice(0,12);
+  const topP = (D.basket?.pairs_by_volume || D.basket?.top_pairs || []).slice(0, 10);
+  
+  function getShortPairLabel(p, i) {
+    let a = (p.name_a || '').replace(/Parbon|Pitstop|Mirzapore|Biscuit|Special|Flex Pack|NonStapl/gi, '').replace(/\s+/g, ' ').trim();
+    let b = (p.name_b || '').replace(/Parbon|Pitstop|Mirzapore|Biscuit|Special|Flex Pack|NonStapl/gi, '').replace(/\s+/g, ' ').trim();
+    if (!a) a = (p.name_a || '').substring(0, 12);
+    if (!b) b = (p.name_b || '').substring(0, 12);
+    return `#${i+1} ${a.substring(0,14)} ↔ ${b.substring(0,14)}`;
+  }
+
   chartInstances['chartLiftHeatmap'] = new Chart(document.getElementById('chartLiftHeatmap'), {
     type: 'bar',
     data: {
-      labels: topP.map((p,i) => `#${i+1} ${p.name_a.substring(0,12)}`),
+      labels: topP.map((p, i) => getShortPairLabel(p, i)),
       datasets: [
         {
-          label: 'Conf A→B (%)',
+          label: 'Conf A → B (%)',
           data: topP.map(p => p.confidence_ab),
-          backgroundColor: 'rgba(79,142,247,0.75)',
-          borderRadius: 3
+          backgroundColor: 'rgba(79,142,247,0.85)',
+          borderColor: '#4f8ef7',
+          borderWidth: 1,
+          borderRadius: 4
         },
         {
-          label: 'Conf B→A (%)',
+          label: 'Conf B → A (%)',
           data: topP.map(p => p.confidence_ba),
-          backgroundColor: 'rgba(16,185,129,0.7)',
-          borderRadius: 3
+          backgroundColor: 'rgba(16,185,129,0.85)',
+          borderColor: '#10b981',
+          borderWidth: 1,
+          borderRadius: 4
         }
       ]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: {
-        legend:{labels:{color:'#8899bb',font:{size:11}}},
-        tooltip:{...CHART_DEFAULTS.plugins.tooltip}
+        legend: { labels:{color:'#8899bb', font:{size:11}} },
+        tooltip: {
+          ...CHART_DEFAULTS.plugins.tooltip,
+          callbacks: {
+            title: ctx => {
+              const idx = ctx[0].dataIndex;
+              const p = topP[idx];
+              return `Pair #${idx+1}: ${p.name_a} ↔ ${p.name_b}`;
+            },
+            label: ctx => {
+              const idx = ctx.dataIndex;
+              const p = topP[idx];
+              if (ctx.datasetIndex === 0) {
+                return `Conf (A → B): ${p.confidence_ab}% (${p.name_a.substring(0,16)} → ${p.name_b.substring(0,16)})`;
+              } else {
+                return `Conf (B → A): ${p.confidence_ba}% (${p.name_b.substring(0,16)} → ${p.name_a.substring(0,16)})`;
+              }
+            },
+            afterBody: ctx => {
+              const idx = ctx[0].dataIndex;
+              const p = topP[idx];
+              return `Co-Purchases: ${p.co_count.toLocaleString()} orders | Lift: ${p.lift}×`;
+            }
+          }
+        }
       },
       scales: {
-        x:{ticks:{color:'#5a6a88',font:{size:9},maxRotation:30},grid:{display:false}},
-        y:{ticks:{color:'#5a6a88',callback:v=>v+'%'},grid:{color:'rgba(30,45,69,.3)'}}
+        x: { ticks:{color:'#8899bb', font:{size:9.5, weight:'600'}, maxRotation:28}, grid:{display:false} },
+        y: { min:0, max:100, ticks:{color:'#5a6a88', callback:v=>v+'%'}, grid:{color:'rgba(30,45,69,.3)'} }
       }
     }
   });
