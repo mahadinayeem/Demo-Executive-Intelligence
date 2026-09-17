@@ -479,8 +479,8 @@ tr:hover td{background:var(--card2)}
         </div>
       </div>
       <div class="card">
-        <h3>Red Flags by Territory <span class="badge violet">Field Accountability</span> <button class="chart-dl" onclick="chartDL('flag-territory')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
-        <p class="card-desc">Which territories have the worst visit-to-conversion failure rate?</p>
+        <h3>Red Flags by Distributor Point <span class="badge violet">Field Accountability</span> <button class="chart-dl" onclick="chartDL('flag-territory')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">Distributor agencies / territory points with the highest concentration of zero-order outlets (>5 visits, 0 conversions).</p>
         <div class="chart-wrap">
           <canvas id="chartFlagTerritory"></canvas>
         </div>
@@ -1001,7 +1001,7 @@ function renderBleed(){
   document.getElementById('bleedLost').innerText  = 'BDT '+fmt(SB.total_lost);
 
   // Severity chart — full national distribution
-  const buckets = SB.severity_buckets || {'50–60%':0,'60–70%':0,'70–80%':0,'80–90%':0,'90%+':0};
+  const buckets = SB.severity_buckets || {'50-60%':0,'60-70%':0,'70-80%':0,'80-90%':0,'90%+':0};
 
   dc('bleedSeverity');
   C['bleedSeverity'] = new Chart(document.getElementById('chartBleedSeverity'),{
@@ -1017,17 +1017,18 @@ function renderBleed(){
     },
     options:{
       responsive:true, maintainAspectRatio:false,
+      layout:{padding:{top:25}},
       plugins:{
         legend:{display:false},
         tooltip:{...TT, callbacks:{label:ctx=>`${fc(ctx.raw)} Outlets`}},
         datalabels:{
-          anchor:'end', align:'top', color:'#f59e0b',
+          anchor:'end', align:'top', offset:2, color:'#f59e0b',
           font:{size:11,weight:'700'},
           formatter:v=>fc(v)
         }
       },
       scales:{
-        y:{ticks:{color:'#5a6a88',callback:v=>fc(v)}, grid:{color:'rgba(30,45,69,.3)'}},
+        y:{suggestedMax:9500, ticks:{color:'#5a6a88',callback:v=>fc(v)}, grid:{color:'rgba(30,45,69,.3)'}},
         x:{grid:{display:false}, ticks:{color:'#8899bb'}, title:{display:true,text:'AOV Drop Severity',color:'#5a6a88'}}
       }
     }
@@ -1098,7 +1099,7 @@ function renderFlags(){
   document.getElementById('flagTotal').innerText = fc(RF.total_count);
 
   // Visit bucket distribution — full national distribution
-  const buckets = RF.visit_buckets || {'6–10':0,'11–20':0,'21–30':0,'31–50':0,'50+':0};
+  const buckets = RF.visit_buckets || {'6-10':0,'11-20':0,'21-30':0,'31-50':0,'50+':0};
 
   dc('flagVisits');
   C['flagVisits'] = new Chart(document.getElementById('chartFlagVisits'),{
@@ -1114,23 +1115,26 @@ function renderFlags(){
     },
     options:{
       responsive:true, maintainAspectRatio:false,
+      layout:{padding:{top:25}},
       plugins:{
         legend:{display:false},
         tooltip:{...TT, callbacks:{label:ctx=>`${fc(ctx.raw)} Outlets`}},
         datalabels:{
-          anchor:'end', align:'top', color:'#8b5cf6',
+          anchor:'end', align:'top', offset:2, color:'#8b5cf6',
           font:{size:11,weight:'700'}, formatter:v=>fc(v)
         }
       },
       scales:{
-        y:{ticks:{color:'#5a6a88'}, grid:{color:'rgba(30,45,69,.3)'}},
+        y:{suggestedMax:8200, ticks:{color:'#5a6a88'}, grid:{color:'rgba(30,45,69,.3)'}},
         x:{grid:{display:false}, ticks:{color:'#8899bb'}, title:{display:true,text:'Visit Count Bucket',color:'#5a6a88'}}
       }
     }
   });
 
   // Territory distribution — full national breakdown
-  const terrArr = (RF.by_territory && RF.by_territory.length) ? RF.by_territory.map(t=>[t.territory, t.count]) : [];
+  const terrArr = (RF.by_territory && RF.by_territory.length) ? RF.by_territory.map(t=>[
+    t.territory === 'National Retail' ? 'General / Unassigned' : t.territory, t.count
+  ]) : [];
 
   dc('flagTerritory');
   C['flagTerritory'] = new Chart(document.getElementById('chartFlagTerritory'),{
