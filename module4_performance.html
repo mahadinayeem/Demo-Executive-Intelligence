@@ -227,10 +227,9 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
     <div class="nav-tab" id="tab-duration" onclick="showTab('duration')"><span class="dot" style="color:var(--emerald)"></span>1. Visit Duration Impact</div>
     <div class="nav-tab" id="tab-latency" onclick="showTab('latency')"><span class="dot" style="color:var(--cyan)"></span>2. Conversion Latency (7-Day Rule)</div>
     <div class="nav-tab" id="tab-pareto" onclick="showTab('pareto')"><span class="dot" style="color:var(--gold)"></span>3. SR Pareto & Rankings</div>
-    <div class="nav-tab" id="tab-personas" onclick="showTab('personas')"><span class="dot" style="color:var(--accent2)"></span>5. ML Personas</div>
-    <div class="nav-tab" id="tab-matrix" onclick="showTab('matrix')"><span class="dot" style="color:#06b6d4"></span>6. 3D Quadrant Matrix</div>
-    <div class="nav-tab" id="tab-coaching" onclick="showTab('coaching')"><span class="dot" style="color:#10b981"></span>7. SR Coaching Sheets</div>
     <div class="nav-tab" id="tab-redflags" onclick="showTab('redflags')"><span class="dot" style="color:var(--rose)"></span>4. Red Flag Diagnostics</div>
+    <div class="nav-tab" id="tab-personas" onclick="showTab('personas')"><span class="dot" style="color:var(--accent2)"></span>5. ML Personas</div>
+    <div class="nav-tab" id="tab-coaching" onclick="showTab('coaching')"><span class="dot" style="color:#10b981"></span>6. SR Coaching Sheets</div>
   </div>
 </div>
 
@@ -432,45 +431,7 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
     </div>
   </div>
 
-  <!-- ════════════════════ TAB 6: MULTI-DIMENSIONAL QUADRANT MATRIX ════════════════════ -->
-  <div class="tab-content" id="sec-matrix">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Multi-Dimensional SR Quadrant Matrix (Call Productivity vs Strike Rate vs Drop Size)</div>
-        <button class="chart-dl" onclick="dlChart('quadrantMatrix')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
-      </div>
-      <p class="card-sub">
-        <strong>X-Axis:</strong> Daily Call Productivity (Visits/Day) | <strong>Y-Axis:</strong> Strike Rate (% of visited outlets that order) | <strong>Bubble Size:</strong> Average Drop Size (AOV BDT) | <strong>Color:</strong> Training Intervention Category
-      </p>
-      <div class="chart-wrap" style="height:480px"><canvas id="chartQuadrantMatrix"></canvas></div>
-    </div>
-
-    <div class="g2">
-      <div class="card">
-        <div class="card-title" style="margin-bottom:12px;color:var(--accent)">Quadrant Training Interventions Matrix</div>
-        <div style="font-size:12px;line-height:1.7;color:var(--text2)">
-          <div style="padding:8px 0;border-bottom:1px solid var(--border)">
-            <strong style="color:var(--gold)">• Closing & Objection Handling Gap (High Calls, Low Strike):</strong> Rep visits enough shops but fails to close orders. Requires product pitch & objection handling training.
-          </div>
-          <div style="padding:8px 0;border-bottom:1px solid var(--border)">
-            <strong style="color:var(--cyan)">• Route Discipline & Work Rate Deficit (Low Calls, High Strike):</strong> Rep converts well when visiting, but visits too few shops. Needs PJP route planning & call discipline.
-          </div>
-          <div style="padding:8px 0;border-bottom:1px solid var(--border)">
-            <strong style="color:var(--orange)">• Basket Size Underperformance (High Strike, Low AOV):</strong> Rep secures orders easily but ticket size is small. Needs multi-SKU and trade scheme upselling coaching.
-          </div>
-          <div style="padding:8px 0">
-            <strong style="color:var(--rose)">• Full Pipeline Shadowing (Low Calls, Low Strike):</strong> Struggles across both activity and closing. Requires 14-day joint field shadowing with a senior mentor.
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title" style="margin-bottom:12px;color:var(--emerald)">Training Interventions Distribution</div>
-        <div class="chart-wrap" style="height:220px"><canvas id="chartInterventionDist"></canvas></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════════════ TAB 7: INDIVIDUAL SR COACHING SHEETS ════════════════════ -->
+  <!-- ════════════════════ TAB 6: INDIVIDUAL SR COACHING SHEETS ════════════════════ -->
   <div class="tab-content" id="sec-coaching">
     <div class="card">
       <div class="card-header">
@@ -536,7 +497,6 @@ window.addEventListener('DOMContentLoaded', () => {
   initLatencyTab();
   initParetoTab();
   initPersonaTab();
-  initQuadrantMatrixTab();
   initCoachingTab();
   initRedFlagsTab();
 });
@@ -1061,101 +1021,6 @@ function initPersonaTab() {
       </tr>
     `;
   }).join('');
-}
-
-function initQuadrantMatrixTab() {
-  const srs = (D.sr_rankings || []).slice(0, 200);
-
-  const colors = {
-    'Closing Gap': '#f59e0b',
-    'Route Gap': '#06b6d4',
-    'Drop Size Gap': '#f97316',
-    'Full Pipeline Gap': '#ef4444',
-    'Activity Audit': '#dc2626',
-    'Growth Track': '#10b981',
-    'Dormant': '#64748b'
-  };
-
-  const matrixData = srs.map(s => ({
-    x: s.visits_per_day,
-    y: s.strike_rate || (s.outlets_visited ? (s.outlets_ordered/s.outlets_visited*100) : 0),
-    r: Math.max(4, Math.min(16, (s.aov || 1000) / 400)),
-    sr: s
-  }));
-
-  charts.quadrantMatrix = new Chart(document.getElementById('chartQuadrantMatrix'), {
-    type: 'bubble',
-    data: {
-      datasets: [{
-        label: 'Sales Representatives',
-        data: matrixData,
-        backgroundColor: matrixData.map(d => (colors[d.sr.gap_type] || '#3b82f6') + '88'),
-        borderColor: matrixData.map(d => colors[d.sr.gap_type] || '#3b82f6')
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        datalabels: { display: false },
-        tooltip: {
-          callbacks: {
-            label: ctx => {
-              const d = ctx.raw.sr;
-              return `${d.name} (${d.territory}) | Calls/Day: ${d.visits_per_day} | Strike Rate: ${d.strike_rate}% | Drop Size: ৳${fmt(d.aov)} | Diagnosis: ${d.diagnosis || d.persona}`;
-            }
-          }
-        }
-      },
-      scales: {
-        x: { title: { display: true, text: 'Call Productivity (Visits / Working Day)', color: '#8899bb' }, ticks: { color: '#8899bb' }, grid: { color: 'rgba(255,255,255,.05)' } },
-        y: { title: { display: true, text: 'Strike Rate (% Outlets Converting)', color: '#8899bb' }, min: 0, max: 105, ticks: { color: '#8899bb', callback: v => v+'%' }, grid: { color: 'rgba(255,255,255,.05)' } }
-      }
-    }
-  });
-
-  // Interventions distribution bar
-  const gapCounts = {};
-  srs.forEach(s => { const g = s.gap_type || 'Growth Track'; gapCounts[g] = (gapCounts[g] || 0) + 1; });
-  const gLabels = Object.keys(gapCounts);
-  const gData = Object.values(gapCounts);
-  const maxGap = Math.max(...gData, 10);
-
-  charts.interventionDist = new Chart(document.getElementById('chartInterventionDist'), {
-    type: 'bar',
-    data: {
-      labels: gLabels,
-      datasets: [{ data: gData, backgroundColor: gLabels.map(l => colors[l] || '#3b82f6'), borderRadius: 4 }]
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true, maintainAspectRatio: false,
-      layout: { padding: { right: 40 } },
-      plugins: {
-        legend: { display: false },
-        datalabels: {
-          anchor: 'end',
-          align: 'right',
-          offset: 6,
-          color: '#000000',
-          font: { weight: '800', size: 11 },
-          formatter: v => fmt(v)
-        }
-      },
-      scales: {
-        x: {
-          suggestedMax: maxGap * 1.2,
-          ticks: { color: '#1e293b', font: { size: 10, weight: '600' } },
-          grid: { display: false }
-        },
-        y: {
-          ticks: { color: '#1e293b', font: { size: 11, weight: '600' } },
-          grid: { color: 'rgba(0,0,0,0.06)' }
-        }
-      }
-    },
-    plugins: [ChartDataLabels]
-  });
 }
 
 function initCoachingTab() {
