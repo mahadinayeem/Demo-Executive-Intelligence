@@ -391,7 +391,7 @@ tr:hover td{background:var(--card2)}
       <div class="tbl-wrap">
         <table>
           <thead><tr>
-            <th>Outlet ID</th><th>Territory</th><th>Avg Gap (Days)</th>
+            <th>Outlet / Retailer</th><th>Territory</th><th>Avg Gap (Days)</th>
             <th>Current Silence</th><th>Gap Multiplier</th><th>Risk Level</th><th>Rev at Risk</th>
           </tr></thead>
           <tbody id="riskTbody"></tbody>
@@ -453,7 +453,7 @@ tr:hover td{background:var(--card2)}
       <div class="tbl-wrap">
         <table>
           <thead><tr>
-            <th>Outlet ID</th><th>Territory</th><th>Historical AOV</th><th>Recent AOV</th><th>AOV Drop %</th><th>Wallet Lost</th>
+            <th>Outlet / Retailer</th><th>Territory</th><th>Historical AOV</th><th>Recent AOV</th><th>AOV Drop %</th><th>Wallet Lost</th>
           </tr></thead>
           <tbody id="bleedTbody"></tbody>
         </table>
@@ -506,7 +506,7 @@ tr:hover td{background:var(--card2)}
       </div>
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>Outlet ID</th><th>Territory</th><th>Total Visits</th><th>Last Visit</th><th>Hist. Orders</th></tr></thead>
+          <thead><tr><th>Outlet / Retailer</th><th>Territory</th><th>Total Visits</th><th>Last Visit</th><th>Hist. Orders</th></tr></thead>
           <tbody id="flagTbody"></tbody>
         </table>
       </div>
@@ -981,7 +981,10 @@ function filterRisk(){
   });
   document.getElementById('riskCount').innerText = `Showing ${data.length} outlets`;
   document.getElementById('riskTbody').innerHTML = data.map(r=>`<tr>
-    <td class="hl mono">${r.outlet}</td>
+    <td class="hl mono">
+      <div style="font-weight:600;color:var(--t1);font-family:var(--font);font-size:13px;">${r.name || r.outlet}</div>
+      <div style="font-size:11px;color:var(--t3);margin-top:2px;">ID: ${r.outlet}${r.owner ? ' · ' + r.owner : ''}${r.phone ? ' · ' + r.phone : ''}</div>
+    </td>
     <td>${r.territory||'—'}</td>
     <td class="mono">${r.avg_gap} days</td>
     <td class="mono">${r.current_gap} days</td>
@@ -1085,7 +1088,10 @@ function filterBleed(){
   });
   document.getElementById('bleedCount').innerText = `Showing ${data.length} outlets`;
   document.getElementById('bleedTbody').innerHTML = data.map(b=>`<tr>
-    <td class="hl mono">${b.outlet}</td>
+    <td class="hl mono">
+      <div style="font-weight:600;color:var(--t1);font-family:var(--font);font-size:13px;">${b.name || b.outlet}</div>
+      <div style="font-size:11px;color:var(--t3);margin-top:2px;">ID: ${b.outlet}${b.owner ? ' · ' + b.owner : ''}${b.phone ? ' · ' + b.phone : ''}</div>
+    </td>
     <td>${b.territory||'—'}</td>
     <td class="mono">BDT ${fc(Math.round(b.hist_aov))}</td>
     <td class="mono" style="color:var(--rose)">BDT ${fc(Math.round(b.rec_aov))}</td>
@@ -1182,12 +1188,15 @@ function filterFlags(){
   const search = (document.getElementById('fFlagSearch')?.value||'').toLowerCase();
   const data = (D.red_flags||[]).filter(f=>{
     if(f.visits < minVisits) return false;
-    if(search && !String(f.outlet).toLowerCase().includes(search)) return false;
+    if(search && !String(f.outlet).toLowerCase().includes(search) && !String(f.name||'').toLowerCase().includes(search)) return false;
     return true;
   });
   document.getElementById('flagCount').innerText = `Showing ${data.length} outlets`;
   document.getElementById('flagTbody').innerHTML = data.map(f=>`<tr>
-    <td class="hl mono">${f.outlet}</td>
+    <td class="hl mono">
+      <div style="font-weight:600;color:var(--t1);font-family:var(--font);font-size:13px;">${f.name || f.outlet}</div>
+      <div style="font-size:11px;color:var(--t3);margin-top:2px;">ID: ${f.outlet}${f.owner ? ' · ' + f.owner : ''}${f.phone ? ' · ' + f.phone : ''}</div>
+    </td>
     <td>${f.territory||'—'}</td>
     <td class="mono" style="color:var(--violet)">${fc(f.visits)}</td>
     <td class="mono">${f.last_visit||'—'}</td>
@@ -1230,29 +1239,38 @@ function downloadCSV(type){
       if(minRev && r.rev_at_risk<minRev) return false;
       return true;
     });
-    headers = ['Outlet_ID','Territory','Avg_Gap_Days','Current_Gap_Days','Multiplier','Risk_Level','Rev_at_Risk'];
-    rows = data.map(r=>[r.outlet, r.territory||'', r.avg_gap, r.current_gap, r.multiplier, r.risk_level, r.rev_at_risk]);
-    filename = 'module3_churn_risk_filtered.csv';
+    headers = ['Outlet_ID','Outlet_Name','Owner_Name','Phone_Number','Address','Territory','Risk_Level','RFM_Segment','Current_Silence_Days','Avg_Cycle_Days','Gap_Multiplier','Revenue_At_Risk_BDT'];
+    rows = data.map(r=>[
+      r.outlet, r.name||'', r.owner||'', r.phone||'', r.address||'',
+      r.territory||'', r.risk_level, r.segment||'', r.current_gap, r.avg_gap, r.multiplier, r.rev_at_risk
+    ]);
+    filename = 'ITL_Churn_Risk_Outlets_Filtered.csv';
   } else if(type==='bleed'){
     const minDrop = parseFloat(document.getElementById('fBleedDrop')?.value)||0;
     const minLost = parseFloat(document.getElementById('fBleedMinLost')?.value)||0;
     const data = (D.silent_bleed||[]).filter(b=> b.drop_pct>=minDrop && (!minLost||b.lost_rev>=minLost));
-    headers = ['Outlet_ID','Territory','Historical_AOV','Recent_AOV','AOV_Drop_Pct','Wallet_Lost_BDT'];
-    rows = data.map(b=>[b.outlet, b.territory||'', b.hist_aov, b.rec_aov, b.drop_pct, b.lost_rev]);
-    filename = 'module3_silent_bleed_filtered.csv';
+    headers = ['Outlet_ID','Outlet_Name','Owner_Name','Phone_Number','Address','Territory','Historical_AOV_BDT','Recent_AOV_BDT','AOV_Drop_Pct','Wallet_Lost_BDT'];
+    rows = data.map(b=>[
+      b.outlet, b.name||'', b.owner||'', b.phone||'', b.address||'',
+      b.territory||'', b.hist_aov, b.rec_aov, b.drop_pct, b.lost_rev
+    ]);
+    filename = 'ITL_Silent_Bleed_Outlets_Filtered.csv';
   } else if(type==='flags'){
     const minVisits = parseInt(document.getElementById('fFlagMinVisits')?.value)||5;
     const search = (document.getElementById('fFlagSearch')?.value||'').toLowerCase();
-    const data = (D.red_flags||[]).filter(f=> f.visits>=minVisits && (!search||String(f.outlet).toLowerCase().includes(search)));
-    headers = ['Outlet_ID','Territory','Total_Visits','Last_Visit','Historical_Orders'];
-    rows = data.map(f=>[f.outlet, f.territory||'', f.visits, f.last_visit||'', f.historical_orders||0]);
-    filename = 'module3_red_flags_filtered.csv';
+    const data = (D.red_flags||[]).filter(f=> f.visits>=minVisits && (!search||String(f.outlet).toLowerCase().includes(search)||String(f.name||'').toLowerCase().includes(search)));
+    headers = ['Outlet_ID','Outlet_Name','Owner_Name','Phone_Number','Address','Territory','Total_Visits','Last_Visit_Date','Historical_Orders'];
+    rows = data.map(f=>[
+      f.outlet, f.name||'', f.owner||'', f.phone||'', f.address||'',
+      f.territory||'', f.visits, f.last_visit||'', f.historical_orders||0
+    ]);
+    filename = 'ITL_Red_Flags_Outlets_Filtered.csv';
   } else {
     // Export all three
     downloadCSV('risk'); downloadCSV('bleed'); downloadCSV('flags'); return;
   }
 
-  const csvContent = [headers, ...rows].map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
+  const csvContent = [headers, ...rows].map(r=>r.map(v=>`"${(v!==undefined&&v!==null?v:'')}"`).join(',')).join('\n');
   const blob = new Blob(['\uFEFF' + csvContent], {type:'text/csv;charset=utf-8;'});
   const url  = URL.createObjectURL(blob);
   const a    = document.createElement('a');
@@ -1294,9 +1312,9 @@ function chartDL(chartId){
     headers = ['Stage','Outlet_Count','Lost_Revenue_BDT'];
     rows = [
       ['Total Profiled', Object.values(segs).reduce((a,s)=>a+s.count,0), ''],
-      ['Active (Last 60 Days)', active, ''],
-      ['At-Risk (61-120 Days)', segs['At-Risk'].count, segs['At-Risk'].revenue],
-      ['Churned (>120 Days)', segs['Lost'].count, D.kpis.lost_revenue]
+      ['Active (Last 30 Days)', active, ''],
+      ['At-Risk (31-60 Days)', segs['At-Risk'].count, segs['At-Risk'].revenue],
+      ['Churned (>60 Days)', segs['Lost'].count, D.kpis.lost_revenue]
     ];
     filename = 'Churn_DropOff_Funnel.csv';
 
@@ -1309,12 +1327,14 @@ function chartDL(chartId){
     filename = 'Churn_Root_Cause_Analysis.csv';
 
   } else if(chartId === 'risk-dist'){
-    headers = ['Risk_Level','Outlet_Count','Revenue_at_Risk_BDT','Description'];
-    rows = [
-      ['High Risk (2.5x+ gap)', S.high_count, S.high_rev, 'Order gap exceeds 2.5x their historical normal — immediate action required'],
-      ['Medium Risk (2.0-2.5x gap)', S.medium_count, S.total_rev - S.high_rev, 'Order gap is 2-2.5x their normal — monitor and follow up within 7 days']
-    ];
-    filename = 'Churn_Risk_Distribution.csv';
+    // Directly download the complete Churn Risk Outlets dataset with full Outlet Name, Owner, Phone, Address, Territory, Risk Level
+    const link = document.createElement('a');
+    link.href = 'module3_churn_risk.csv';
+    link.download = 'ITL_Churn_Risk_Outlets_Full_Details.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    return;
 
   } else if(chartId === 'risk-territory'){
     headers = ['Territory','At_Risk_Outlets','Revenue_at_Risk_BDT'];
@@ -1322,15 +1342,14 @@ function chartDL(chartId){
     filename = 'Churn_Risk_by_Territory.csv';
 
   } else if(chartId === 'bleed-severity'){
-    const buckets = [['50-60% Drop',0],['60-70% Drop',0],['70-80% Drop',0],['80-90% Drop',0],['90%+ Drop',0]];
-    (D.silent_bleed||[]).forEach(b=>{
-      const d=b.drop_pct;
-      if(d<60)buckets[0][1]++; else if(d<70)buckets[1][1]++;
-      else if(d<80)buckets[2][1]++; else if(d<90)buckets[3][1]++; else buckets[4][1]++;
-    });
-    headers = ['AOV_Drop_Severity','Outlet_Count'];
-    rows = buckets;
-    filename = 'Silent_Bleed_Severity_Distribution.csv';
+    // Directly download the complete Silent Bleed Outlets dataset with full Outlet Name, Owner, Phone, Address
+    const link = document.createElement('a');
+    link.href = 'module3_silent_bleed.csv';
+    link.download = 'ITL_Silent_Bleed_Outlets_Full_Details.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    return;
 
   } else if(chartId === 'bleed-territory'){
     headers = ['Territory','Bleeding_Outlets','Wallet_Share_Lost_BDT'];
@@ -1338,26 +1357,23 @@ function chartDL(chartId){
     filename = 'Silent_Bleed_by_Territory.csv';
 
   } else if(chartId === 'flag-visits'){
-    const buckets = [['6-10 visits',0],['11-20 visits',0],['21-30 visits',0],['31-50 visits',0],['50+ visits',0]];
-    (D.red_flags||[]).forEach(f=>{
-      const v=f.visits;
-      if(v<=10)buckets[0][1]++; else if(v<=20)buckets[1][1]++;
-      else if(v<=30)buckets[2][1]++; else if(v<=50)buckets[3][1]++; else buckets[4][1]++;
-    });
-    headers = ['Visit_Count_Bucket','Red_Flag_Outlets'];
-    rows = buckets;
-    filename = 'Red_Flag_Visit_Distribution.csv';
+    // Directly download the complete Red Flags Outlets dataset with full Outlet Name, Owner, Phone, Address
+    const link = document.createElement('a');
+    link.href = 'module3_red_flags.csv';
+    link.download = 'ITL_Red_Flags_Outlets_Full_Details.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    return;
 
   } else if(chartId === 'flag-territory'){
-    const terrMap = {};
-    (D.red_flags||[]).forEach(f=>{ const t=f.territory||'Unknown'; terrMap[t]=(terrMap[t]||0)+1; });
     headers = ['Territory','Red_Flag_Outlet_Count'];
     rows = Object.entries(terrMap).sort((a,b)=>b[1]-a[1]).map(([t,c])=>[t,c]);
     filename = 'Red_Flag_by_Territory.csv';
   }
 
   if(!rows.length){ alert('No data available for this chart.'); return; }
-  const csv = [headers, ...rows].map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
+  const csv = [headers, ...rows].map(r=>r.map(v=>`"${(v!==undefined&&v!==null?v:'')}"`).join(',')).join('\n');
   const blob = new Blob(['\uFEFF' + csv], {type:'text/csv;charset=utf-8;'});
   const url  = URL.createObjectURL(blob);
   const a    = document.createElement('a');

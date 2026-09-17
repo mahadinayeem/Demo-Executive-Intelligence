@@ -43,8 +43,23 @@ def is_valid_month(date_str):
     except:
         return False
 
-# ─── 1. BUILD TERRITORY ID → NAME MAP ───────────────────────────────────────
-print("\n[1/4] Building territory lookup map...")
+# ─── 1. BUILD TERRITORY & OUTLET MASTER MAP ─────────────────────────────────
+print("\n[1/4] Building territory & outlet master lookup maps...")
+dept_map = {}
+with open(r'e:\ITL FINAL ADV ANALYSIS\itl_dept.csv', 'r', encoding='utf-8-sig', errors='replace') as f:
+    reader = csv.DictReader(f)
+    for r in reader:
+        c = (r.get('code') or '').strip()
+        i = (r.get('id') or '').strip()
+        name = (r.get('name') or '').strip()
+        owner = (r.get('owner_name') or '').strip()
+        phone = (r.get('phone_no') or '').strip()
+        addr = (r.get('address') or '').strip()
+        record = {'name': name, 'owner': owner, 'phone': phone, 'address': addr}
+        if c: dept_map[c] = record
+        if i and i not in dept_map: dept_map[i] = record
+print(f"  Outlets mapped from dept master: {len(dept_map):,}")
+
 territory_name_map = {}
 with open(r'e:\ITL FINAL ADV ANALYSIS\itl_orders.csv', 'r', encoding='utf-8-sig', errors='replace') as f:
     reader = csv.DictReader(f)
@@ -207,12 +222,19 @@ for buyer, o in outlets.items():
     sku_cnt = len(o['skus_set'])
     terr = o.get('territory') or 'National Retail'
 
+    dept = dept_map.get(buyer, {})
+    outlet_name = dept.get('name', '') or f"Outlet {buyer}"
+    owner_name  = dept.get('owner', '')
+    phone_no    = dept.get('phone', '')
+    addr_str    = dept.get('address', '')
+
     # ── Red Flag: never ordered, but visited a lot ──────────────────────────
     if freq == 0:
         if o['total_visits'] > RED_FLAG_VISIT_COUNT:
             red_flags.append({
-                'outlet': buyer, 'territory': terr,
-                'visits': o['total_visits'], 'last_visit': o['last_visit_date']
+                'outlet': buyer, 'name': outlet_name, 'owner': owner_name, 'phone': phone_no, 'address': addr_str,
+                'territory': terr, 'visits': o['total_visits'], 'last_visit': o['last_visit_date'],
+                'historical_orders': 0
             })
         continue
 
@@ -245,6 +267,12 @@ for buyer, o in outlets.items():
         else:
             churn_service_gap += 1 # Visited but still churned → Service Gap
 
+    dept = dept_map.get(buyer, {})
+    outlet_name = dept.get('name', '') or f"Outlet {buyer}"
+    owner_name  = dept.get('owner', '')
+    phone_no    = dept.get('phone', '')
+    addr_str    = dept.get('address', '')
+
     # ── Silent Bleed Analysis ────────────────────────────────────────────────
     if segment in ['Champions', 'Loyal Base', 'Potential'] and o['historical_orders'] > 0 and o['recent_orders'] > 0:
         hist_aov = o['historical_revenue'] / o['historical_orders']
@@ -253,7 +281,7 @@ for buyer, o in outlets.items():
             bleed = (hist_aov - rec_aov) * o['recent_orders']
             total_silent_bleed_lost += bleed
             silent_bleed_outlets.append({
-                'outlet': buyer, 'territory': terr,
+                'outlet': buyer, 'name': outlet_name, 'owner': owner_name, 'phone': phone_no, 'address': addr_str, 'territory': terr,
                 'hist_aov': round(hist_aov, 1), 'rec_aov': round(rec_aov, 1),
                 'drop_pct': round((1 - rec_aov / hist_aov) * 100, 1),
                 'lost_rev': round(bleed, 1)
@@ -272,7 +300,7 @@ for buyer, o in outlets.items():
                 risk_rev = round(min(rev, aov * expected_frequency), 1)
                 total_risk_revenue += risk_rev
                 churn_risk_outlets.append({
-                    'outlet': buyer, 'territory': terr,
+                    'outlet': buyer, 'name': outlet_name, 'owner': owner_name, 'phone': phone_no, 'address': addr_str, 'territory': terr,
                     'avg_gap': round(avg_gap, 1), 'current_gap': recency_days,
                     'multiplier': round(recency_days / avg_gap, 2),
                     'risk_level': risk_level, 'rev_at_risk': risk_rev,
@@ -282,7 +310,7 @@ for buyer, o in outlets.items():
     # ── Red Flag: placed orders before but now >5 visits with 0 recent orders ─
     if o['recent_orders'] == 0 and o['total_visits'] > RED_FLAG_VISIT_COUNT and freq > 0:
         red_flags.append({
-            'outlet': buyer, 'territory': terr,
+            'outlet': buyer, 'name': outlet_name, 'owner': owner_name, 'phone': phone_no, 'address': addr_str, 'territory': terr,
             'visits': o['total_visits'], 'last_visit': o['last_visit_date'],
             'historical_orders': freq
         })
@@ -417,6 +445,39 @@ with open(r'e:\ITL FINAL ADV ANALYSIS\module3_data.json', 'w', encoding='utf-8')
 
 with open(r'e:\ITL FINAL ADV ANALYSIS\module3_data.js', 'w', encoding='utf-8') as f:
     f.write('window.MODULE3_DATA = ' + json.dumps(output_data, ensure_ascii=False) + ';')
+
+# Write complete CSV exports for Module 3
+with open(r'e:\ITL FINAL ADV ANALYSIS\module3_churn_risk.csv', 'w', encoding='utf-8-sig', newline='') as f:
+    writer = csv.DictWriter(f, fieldnames=['Outlet_ID', 'Outlet_Name', 'Owner_Name', 'Phone_Number', 'Address', 'Territory', 'RFM_Segment', 'Avg_Cycle_Days', 'Current_Gap_Days', 'Multiplier', 'Risk_Level', 'Revenue_At_Risk_BDT'])
+    writer.writeheader()
+    for r in churn_risk_outlets:
+        writer.writerow({
+            'Outlet_ID': r['outlet'], 'Outlet_Name': r.get('name',''), 'Owner_Name': r.get('owner',''),
+            'Phone_Number': r.get('phone',''), 'Address': r.get('address',''), 'Territory': r['territory'],
+            'RFM_Segment': r['segment'], 'Avg_Cycle_Days': r['avg_gap'], 'Current_Gap_Days': r['current_gap'],
+            'Multiplier': r['multiplier'], 'Risk_Level': r['risk_level'], 'Revenue_At_Risk_BDT': r['rev_at_risk']
+        })
+
+with open(r'e:\ITL FINAL ADV ANALYSIS\module3_silent_bleed.csv', 'w', encoding='utf-8-sig', newline='') as f:
+    writer = csv.DictWriter(f, fieldnames=['Outlet_ID', 'Outlet_Name', 'Owner_Name', 'Phone_Number', 'Address', 'Territory', 'Historical_AOV_BDT', 'Recent_AOV_BDT', 'AOV_Drop_Pct', 'Wallet_Lost_BDT'])
+    writer.writeheader()
+    for b in silent_bleed_outlets:
+        writer.writerow({
+            'Outlet_ID': b['outlet'], 'Outlet_Name': b.get('name',''), 'Owner_Name': b.get('owner',''),
+            'Phone_Number': b.get('phone',''), 'Address': b.get('address',''), 'Territory': b['territory'],
+            'Historical_AOV_BDT': b['hist_aov'], 'Recent_AOV_BDT': b['rec_aov'],
+            'AOV_Drop_Pct': b['drop_pct'], 'Wallet_Lost_BDT': b['lost_rev']
+        })
+
+with open(r'e:\ITL FINAL ADV ANALYSIS\module3_red_flags.csv', 'w', encoding='utf-8-sig', newline='') as f:
+    writer = csv.DictWriter(f, fieldnames=['Outlet_ID', 'Outlet_Name', 'Owner_Name', 'Phone_Number', 'Address', 'Territory', 'Total_Visits', 'Last_Visit_Date', 'Historical_Orders'])
+    writer.writeheader()
+    for rf in red_flags:
+        writer.writerow({
+            'Outlet_ID': rf['outlet'], 'Outlet_Name': rf.get('name',''), 'Owner_Name': rf.get('owner',''),
+            'Phone_Number': rf.get('phone',''), 'Address': rf.get('address',''), 'Territory': rf['territory'],
+            'Total_Visits': rf['visits'], 'Last_Visit_Date': rf['last_visit'], 'Historical_Orders': rf['historical_orders']
+        })
 
 print("\n✓ SUCCESS: Module 3 data pipeline regenerated without outliers!")
 print(f"  → Total Outlets: {total_outlets_count:,} | Active Outlets: {active_outlets_count:,}")
