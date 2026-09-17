@@ -790,9 +790,25 @@ function renderRFM(){
         <h5 style="color:${c}">Commercial Action</h5>
         <p>${playbook[l]}</p>
       </div>
+      <button class="dl-btn" style="margin-top:14px;width:100%;justify-content:center;padding:9px 12px;background:${c}15;color:${c};border:1px solid ${c}40;border-radius:8px;font-weight:700;font-size:11.5px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.2s" onclick="exportRFMSegmentOutlets('${l}')" onmouseover="this.style.background='${c}30'" onmouseout="this.style.background='${c}15'">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Download ${l} Outlets (CSV)
+      </button>
     </div>`;
   }).join('');
   document.getElementById('profileGrid').innerHTML = profileHTML;
+}
+
+function exportRFMSegmentOutlets(segment) {
+  const fileKey = segment.toLowerCase().replace(/\s+/g, '_').replace(/-/g, '_');
+  const filename = `itl_rfm_${fileKey}_outlets.csv`;
+  const link = document.createElement('a');
+  link.href = filename;
+  link.download = filename;
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 // ── CHURN ─────────────────────────────────────────────────────────────────────
