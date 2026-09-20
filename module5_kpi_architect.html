@@ -823,14 +823,14 @@ function initDriversTab() {
           anchor: 'end',
           align: 'right',
           offset: 6,
-          color: '#000000',
-          font: { weight: '800', size: 12 },
+          color: '#1e293b',
+          font: { weight: '600', size: 10.5 },
           formatter: v => v + '%'
         }
       },
       scales: {
-        x: { min: 0, max: 42, ticks: { color: '#1e293b', font: { size: 10.5, weight: '600' }, callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.06)' } },
-        y: { ticks: { color: '#1e293b', font: { size: 11, weight: '600' } }, grid: { display: false } }
+        x: { min: 0, max: 42, ticks: { color: '#64748b', font: { size: 10 }, callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.06)' } },
+        y: { ticks: { color: '#334155', font: { size: 10.5, weight: '600' } }, grid: { display: false } }
       }
     },
     plugins: [ChartDataLabels]
@@ -856,14 +856,14 @@ function initDriversTab() {
           anchor: 'end',
           align: 'top',
           offset: 4,
-          color: '#000000',
-          font: { weight: '800', size: 11.5 },
+          color: '#1e293b',
+          font: { weight: '600', size: 10.5 },
           formatter: v => v.toFixed(2) + 'x'
         }
       },
       scales: {
-        x: { ticks: { color: '#1e293b', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
-        y: { min: 0, max: 2.3, ticks: { color: '#1e293b', font: { size: 10, weight: '600' }, callback: v => v+'x' }, grid: { color: 'rgba(0,0,0,0.06)' } }
+        x: { ticks: { color: '#334155', font: { size: 10, weight: '600' } }, grid: { display: false } },
+        y: { min: 0, max: 2.3, ticks: { color: '#64748b', font: { size: 9.5 }, callback: v => v+'x' }, grid: { color: 'rgba(0,0,0,0.06)' } }
       }
     },
     plugins: [ChartDataLabels]
@@ -898,8 +898,8 @@ function initPDPTab() {
         borderColor: '#f59e0b',
         backgroundColor: 'rgba(245,158,11,.15)',
         tension: 0.3, fill: true,
-        pointRadius: 6,
-        pointHoverRadius: 8,
+        pointRadius: 5,
+        pointHoverRadius: 7,
         pointBackgroundColor: '#f59e0b',
         pointBorderColor: '#ffffff',
         pointBorderWidth: 2
@@ -907,26 +907,26 @@ function initPDPTab() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      layout: { padding: { top: 38, left: 15, right: 15 } },
+      layout: { padding: { top: 35, left: 15, right: 15 } },
       plugins: {
         legend: { display: false },
         datalabels: {
           anchor: 'end',
           align: 'top',
-          offset: 8,
-          color: '#000000',
-          backgroundColor: '#ffffff',
+          offset: 6,
+          color: '#b45309',
+          backgroundColor: '#fffbeb',
           borderColor: '#f59e0b',
-          borderWidth: 1.5,
-          borderRadius: 5,
-          padding: { top: 2, bottom: 2, left: 6, right: 6 },
-          font: { weight: '800', size: 10.5 },
+          borderWidth: 1,
+          borderRadius: 4,
+          padding: { top: 1, bottom: 1, left: 4, right: 4 },
+          font: { weight: '600', size: 9.5 },
           formatter: (v, ctx) => dur[ctx.dataIndex].marginal_uplift
         }
       },
       scales: {
-        x: { ticks: { color: '#1e293b', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
-        y: { ticks: { color: '#1e293b', font: { size: 10, weight: '600' } }, grid: { color: 'rgba(0,0,0,0.06)' } }
+        x: { ticks: { color: '#334155', font: { size: 10, weight: '600' } }, grid: { display: false } },
+        y: { ticks: { color: '#64748b', font: { size: 9.5 } }, grid: { color: 'rgba(0,0,0,0.06)' } }
       }
     },
     plugins: [ChartDataLabels]
@@ -944,8 +944,8 @@ function initPDPTab() {
         borderColor: '#06b6d4',
         backgroundColor: 'rgba(6,182,212,.15)',
         tension: 0.3, fill: true,
-        pointRadius: 6,
-        pointHoverRadius: 8,
+        pointRadius: 5,
+        pointHoverRadius: 7,
         pointBackgroundColor: '#06b6d4',
         pointBorderColor: '#ffffff',
         pointBorderWidth: 2
@@ -953,26 +953,26 @@ function initPDPTab() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      layout: { padding: { top: 38, left: 15, right: 15 } },
+      layout: { padding: { top: 35, left: 15, right: 15 } },
       plugins: {
         legend: { display: false },
         datalabels: {
           anchor: 'end',
           align: 'top',
-          offset: 8,
-          color: '#000000',
-          backgroundColor: '#ffffff',
+          offset: 6,
+          color: '#0e7490',
+          backgroundColor: '#ecfeff',
           borderColor: '#06b6d4',
-          borderWidth: 1.5,
-          borderRadius: 5,
-          padding: { top: 2, bottom: 2, left: 6, right: 6 },
-          font: { weight: '800', size: 10.5 },
+          borderWidth: 1,
+          borderRadius: 4,
+          padding: { top: 1, bottom: 1, left: 4, right: 4 },
+          font: { weight: '600', size: 9.5 },
           formatter: v => v
         }
       },
       scales: {
-        x: { ticks: { color: '#1e293b', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
-        y: { ticks: { color: '#1e293b', font: { size: 10, weight: '600' } }, grid: { color: 'rgba(0,0,0,0.06)' } }
+        x: { ticks: { color: '#334155', font: { size: 10, weight: '600' } }, grid: { display: false } },
+        y: { ticks: { color: '#64748b', font: { size: 9.5 } }, grid: { color: 'rgba(0,0,0,0.06)' } }
       }
     },
     plugins: [ChartDataLabels]
@@ -990,8 +990,8 @@ function initPDPTab() {
         borderColor: '#10b981',
         backgroundColor: 'rgba(16,185,129,.15)',
         tension: 0.3, fill: true,
-        pointRadius: 6,
-        pointHoverRadius: 8,
+        pointRadius: 5,
+        pointHoverRadius: 7,
         pointBackgroundColor: '#10b981',
         pointBorderColor: '#ffffff',
         pointBorderWidth: 2
@@ -999,26 +999,26 @@ function initPDPTab() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      layout: { padding: { top: 38, left: 15, right: 15 } },
+      layout: { padding: { top: 35, left: 15, right: 15 } },
       plugins: {
         legend: { display: false },
         datalabels: {
           anchor: 'end',
           align: 'top',
-          offset: 8,
-          color: '#000000',
-          backgroundColor: '#ffffff',
+          offset: 6,
+          color: '#047857',
+          backgroundColor: '#ecfdf5',
           borderColor: '#10b981',
-          borderWidth: 1.5,
-          borderRadius: 5,
-          padding: { top: 2, bottom: 2, left: 6, right: 6 },
-          font: { weight: '800', size: 10.5 },
+          borderWidth: 1,
+          borderRadius: 4,
+          padding: { top: 1, bottom: 1, left: 4, right: 4 },
+          font: { weight: '600', size: 9.5 },
           formatter: v => v
         }
       },
       scales: {
-        x: { ticks: { color: '#1e293b', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
-        y: { ticks: { color: '#1e293b', font: { size: 10, weight: '600' } }, grid: { color: 'rgba(0,0,0,0.06)' } }
+        x: { ticks: { color: '#334155', font: { size: 10, weight: '600' } }, grid: { display: false } },
+        y: { ticks: { color: '#64748b', font: { size: 9.5 } }, grid: { color: 'rgba(0,0,0,0.06)' } }
       }
     },
     plugins: [ChartDataLabels]
@@ -1059,19 +1059,19 @@ function initRegionalTab() {
       responsive: true, maintainAspectRatio: false,
       layout: { padding: { top: 32 } },
       plugins: {
-        legend: { position: 'top', labels: { color: '#1e293b', boxWidth: 12, font: { size: 11, weight: '600' } } },
+        legend: { position: 'top', labels: { color: '#334155', boxWidth: 12, font: { size: 10.5, weight: '600' } } },
         datalabels: {
           anchor: 'end',
           align: 'top',
           offset: 4,
-          color: '#000000',
-          font: { weight: '800', size: 11 },
+          color: '#1e293b',
+          font: { weight: '600', size: 10 },
           formatter: v => v
         }
       },
       scales: {
-        x: { ticks: { color: '#1e293b', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
-        y: { ticks: { color: '#1e293b', font: { size: 10, weight: '600' } }, grid: { color: 'rgba(0,0,0,0.06)' } }
+        x: { ticks: { color: '#334155', font: { size: 10, weight: '600' } }, grid: { display: false } },
+        y: { ticks: { color: '#64748b', font: { size: 9.5 } }, grid: { color: 'rgba(0,0,0,0.06)' } }
       }
     },
     plugins: [ChartDataLabels]
@@ -1098,14 +1098,14 @@ function initRegionalTab() {
           anchor: 'end',
           align: 'top',
           offset: 4,
-          color: '#000000',
-          font: { weight: '800', size: 12 },
+          color: '#1e293b',
+          font: { weight: '600', size: 10.5 },
           formatter: v => '+' + v + '%'
         }
       },
       scales: {
-        x: { ticks: { color: '#1e293b', font: { size: 11, weight: '600' } }, grid: { display: false } },
-        y: { min: 0, max: 40, ticks: { color: '#1e293b', font: { size: 10, weight: '600' }, callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.06)' } }
+        x: { ticks: { color: '#334155', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
+        y: { min: 0, max: 40, ticks: { color: '#64748b', font: { size: 9.5 }, callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.06)' } }
       }
     },
     plugins: [ChartDataLabels]
