@@ -41,7 +41,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   position: relative;
 }
 .hero-inner { max-width: 1400px; margin: 0 auto; }
-.hero-badge-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+.hero-badge-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 12px; }
+.hero-badge-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .badge-corp {
   background: var(--primary); color: #fff; font-size: 11px; font-weight: 800;
   padding: 4px 12px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.8px;
@@ -67,6 +68,68 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   max-width: 1100px;
 }
 
+/* Language Switcher Buttons */
+.lang-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+.lang-toggle-btn:hover {
+  background: var(--card);
+  border-color: var(--primary);
+}
+.lang-pill {
+  padding: 1px 4px;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+.lang-pill.active {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.master-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--card);
+  border: 1.5px solid var(--border2);
+  border-radius: 24px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: all 0.2s;
+}
+.master-lang-btn:hover {
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+.master-pill {
+  padding: 2px 7px;
+  border-radius: 14px;
+  transition: all 0.2s;
+}
+.master-pill.active {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.note-en { display: block; }
+.note-bn { display: none; }
+
 /* Main Container */
 .content-wrap { max-width: 1400px; margin: 32px auto 0; padding: 0 40px; }
 
@@ -89,10 +152,16 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   border-color: var(--primary);
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
+.card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
 .card-icon-badge {
   width: 44px; height: 44px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 20px; margin-bottom: 16px;
+  font-size: 20px;
 }
 .bg-green { background: var(--primary-light); color: var(--primary); }
 .bg-blue { background: rgba(37,99,235,0.12); color: var(--accent2); }
@@ -136,12 +205,19 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .stat-lbl { font-size: 11px; text-transform: uppercase; color: var(--text3); font-weight: 700; margin-top: 4px; letter-spacing: 0.5px; }
 
 /* Modules Directory Matrix */
+.matrix-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
 .matrix-title {
   font-family: 'Outfit', sans-serif;
   font-size: 22px;
   font-weight: 900;
   color: var(--text);
-  margin-bottom: 16px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -184,16 +260,33 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 <header class="hero-header">
   <div class="hero-inner">
     <div class="hero-badge-row">
-      <span class="badge-corp">Executive Strategic Charter</span>
-      <span class="badge-audit">📅 May 2026 – August 2026 Full Operational Cycle</span>
-      <span style="font-size:12px;color:var(--text3);font-weight:600">Ispahani Tea Limited</span>
+      <div class="hero-badge-left">
+        <span class="badge-corp">Executive Strategic Charter</span>
+        <span class="badge-audit">📅 May 2026 – August 2026 Full Operational Cycle</span>
+        <span style="font-size:12px;color:var(--text3);font-weight:600">Ispahani Tea Limited</span>
+      </div>
+      <button class="master-lang-btn" onclick="toggleGlobalLang()" title="Toggle entire introduction page language">
+        <span>Language:</span>
+        <span class="master-pill active" data-lang="en">English</span>
+        <span style="opacity:0.35">|</span>
+        <span class="master-pill" data-lang="bn">বাংলা</span>
+      </button>
     </div>
+
     <h1 class="hero-title">
       Commercial Intelligence & <span>Revenue Governance Master Suite</span>
     </h1>
-    <p class="hero-desc">
-      This enterprise analytics platform consolidates <strong>3,508,543 delivered secondary sales orders</strong> and <strong>1,569,940 GPS-verified field check-ins</strong> across all 8 administrative divisions and 64 districts of Bangladesh. Designed exclusively for C-Level leadership, this portal translates granular transactional data into high-conviction strategic interventions.
-    </p>
+
+    <div class="note-en">
+      <p class="hero-desc">
+        This enterprise analytics platform consolidates <strong>3,508,543 delivered secondary sales orders</strong> and <strong>1,569,940 GPS-verified field check-ins</strong> across all 8 administrative divisions and 64 districts of Bangladesh. Designed exclusively for C-Level leadership, this portal translates granular transactional data into high-conviction strategic interventions.
+      </p>
+    </div>
+    <div class="note-bn" style="display:none;">
+      <p class="hero-desc">
+        এই এন্টারপ্রাইজ অ্যানালিটিক্স প্ল্যাটফর্মে সমগ্র বাংলাদেশের ৮টি প্রশাসনিক বিভাগ ও ৬৪টি জেলার <strong>৩৫,০৮,৫৪৩টি ডেলিভার্ড সেকেন্ডারি সেলস অর্ডার</strong> এবং <strong>১৫,৬৯,৯৪০টি জিপিএস-ভেরিফাইড ফিল্ড চেক-ইন</strong> নিখুঁতভাবে একত্রিত করা হয়েছে। সি-লেভেল লিডারশিপের জন্য বিশেষভাবে তৈরিকৃত এই পোর্টালটি মাঠপর্যায়ের গ্রাউন্ড-ট্রুথ ডেটাকে সুনির্দিষ্ট ব্যবসায়িক সিদ্ধান্তে রূপান্তর করে।
+      </p>
+    </div>
   </div>
 </header>
 
@@ -224,43 +317,109 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
     
     <!-- Card 1: Executive Mandate -->
     <div class="charter-card">
-      <div class="card-icon-badge bg-green">🎯</div>
-      <h3 class="card-heading">1. Why We Engineered This (উদ্দেশ্য)</h3>
-      <div class="card-body-text">
-        ঐতিহ্যবাহী সেলস ড্যাশবোর্ডে শুধুমাত্র এগ্রিগেট সেলস ফিগার দেখা যায়, কিন্তু মাঠপর্যায়ের প্রকৃত সমস্যাগুলো আড়ালে থেকে যায়। এই মাস্টার স্যুট তৈরির মূল উদ্দেশ্য:
-        <ul>
-          <li><strong>ব্লাইন্ডস্পট চিহ্নিতকরণ:</strong> ১৫.৭ লাখ ভিজিটের মধ্যে কোথায় বারবার ভিজিট হওয়া সত্ত্বেও শূন্য অর্ডার আসছে তা শনাক্ত করা।</li>
-          <li><strong>রেভিনিউ লিকেজ রোধ:</strong> রিটেইলার লেভেলে অর্ডার সাইজের ৫০%+ পতন (Silent Bleed) ট্র্যাক করে ক্যাশ ফ্লো সুরক্ষিত রাখা।</li>
-          <li><strong>আউটলায়ার ফিল্টারিং:</strong> ৫ লাখ টাকার অস্বাভাবিক বুকিং বাদ দিয়ে খাঁটি গ্রাউন্ড-ট্রুথ ডেটা সিইও-র টেবিলে উপস্থাপন করা।</li>
-        </ul>
+      <div class="card-top-row">
+        <div class="card-icon-badge bg-green">🎯</div>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+
+      <div class="note-en">
+        <h3 class="card-heading">1. Why We Engineered This</h3>
+        <div class="card-body-text">
+          Traditional sales dashboards often show aggregate volume figures, masking critical ground-level execution bottlenecks. This master suite was engineered to:
+          <ul>
+            <li><strong>Identify Operational Blindspots:</strong> Pinpoint exact routes where repetitive visits generate zero orders across 1.57M visits.</li>
+            <li><strong>Stem Revenue Leakage:</strong> Proactively halt outlet-level order decay (>50% drop) and protect cash flow from silent bleed.</li>
+            <li><strong>Filter Outliers & Noise:</strong> Exclude artificial multi-lakh memo distortions to deliver pristine, audited truth to the CEO's desk.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note-bn" style="display:none;">
+        <h3 class="card-heading">১. এই প্ল্যাটফর্মের মূল উদ্দেশ্য</h3>
+        <div class="card-body-text">
+          ঐতিহ্যবাহী সেলস ড্যাশবোর্ডে শুধুমাত্র এগ্রিগেট সেলস ফিগার দেখা যায়, কিন্তু মাঠপর্যায়ের প্রকৃত সমস্যাগুলো আড়ালে থেকে যায়। এই মাস্টার স্যুট তৈরির মূল উদ্দেশ্য:
+          <ul>
+            <li><strong>ব্লাইন্ডস্পট চিহ্নিতকরণ:</strong> ১৫.৭ লাখ ভিজিটের মধ্যে কোথায় বারবার ভিজিট হওয়া সত্ত্বেও শূন্য অর্ডার আসছে তা শনাক্ত করা।</li>
+            <li><strong>রেভিনিউ লিকেজ রোধ:</strong> রিটেইলার লেভেলে অর্ডার সাইজের ৫০%+ পতন (Silent Bleed) ট্র্যাক করে ক্যাশ ফ্লো সুরক্ষিত রাখা।</li>
+            <li><strong>আউটলায়ার ফিল্টারিং:</strong> ৫ লাখ টাকার অস্বাভাবিক বুকিং বাদ দিয়ে খাঁটি গ্রাউন্ড-ট্রুথ ডেটা সিইও-র টেবিলে উপস্থাপন করা।</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <!-- Card 2: Commercial Utility & ROI -->
     <div class="charter-card">
-      <div class="card-icon-badge bg-blue">💎</div>
-      <h3 class="card-heading">2. Strategic Utility & ROI (বাস্তব উপকারিতা)</h3>
-      <div class="card-body-text">
-        এই অ্যানালিটিক্যাল আর্কিটেকচার সরাসরি কোম্পানির রাজস্ব এবং ফিল্ড ফোর্স কার্যকারিতায় যুগান্তকারী প্রভাব বিস্তার করে:
-        <ul>
-          <li><strong>৳ ৪৪.৩৪ কোটি ক্যাপিটাল প্রটেকশন:</strong> ২৩,৯৬৪ টি সাইলেন্ট ব্লিড আউটলেটের অ্যাকাউন্ট ক্ষয় রোধ ও উইন-ব্যাক অ্যাকশন।</li>
-          <li><strong>৮ মিনিটের গোল্ডেন ভিজিট রুল:</strong> মেশিন লার্নিং বিশ্লেষণ প্রমাণ করেছে— ৩ মিনিটের কম অগভীর ভিজিটের তুলনায় ৮+ মিনিটের কোয়ালিটি ভিজিটে কনভার্সন <strong>+৩৫% বৃদ্ধি</strong> পায়।</li>
-          <li><strong>স্মার্টপিচ ক্রস-সেলিং:</strong> রিটেইল টায়ার অনুযায়ী নির্দিষ্ট SKU বাস্কেট প্রস্তাব করে AOV ১২-১৮% সম্প্রসারণ।</li>
-        </ul>
+      <div class="card-top-row">
+        <div class="card-icon-badge bg-blue">💎</div>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+
+      <div class="note-en">
+        <h3 class="card-heading">2. Strategic Utility & ROI</h3>
+        <div class="card-body-text">
+          This analytical architecture directly accelerates top-line growth, gross margin yield, and field execution rigor:
+          <ul>
+            <li><strong>Protect BDT 44.34 Cr in Capital:</strong> Rescue 23,964 silent bleed retail accounts with targeted win-back protocols and dynamic pricing.</li>
+            <li><strong>Enforce 8-Minute Golden Visit Rule:</strong> Machine learning confirms visits &ge; 8 mins increase memo conversion probability by <strong>+35%</strong> over shallow (&lt;3 min) visits.</li>
+            <li><strong>SmartPitch AI Cross-Selling:</strong> Dynamically prescribe tailored 3-SKU cross-sell baskets to expand Average Order Value (AOV) by 12–18%.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note-bn" style="display:none;">
+        <h3 class="card-heading">২. ব্যবসায়িক উপযোগিতা ও আরওআই (ROI)</h3>
+        <div class="card-body-text">
+          এই অ্যানালিটিক্যাল আর্কিটেকচার সরাসরি কোম্পানির রাজস্ব এবং ফিল্ড ফোর্স কার্যকারিতায় যুগান্তকারী প্রভাব বিস্তার করে:
+          <ul>
+            <li><strong>৳ ৪৪.৩৪ কোটি ক্যাপিটাল প্রটেকশন:</strong> ২৩,৯৬৪ টি সাইলেন্ট ব্লিড আউটলেটের অ্যাকাউন্ট ক্ষয় রোধ ও উইন-ব্যাক অ্যাকশন।</li>
+            <li><strong>৮ মিনিটের গোল্ডেন ভিজিট রুল:</strong> মেশিন লার্নিং বিশ্লেষণ প্রমাণ করেছে— ৩ মিনিটের কম অগভীর ভিজিটের তুলনায় ৮+ মিনিটের কোয়ালিটি ভিজিটে কনভার্সন <strong>+৩৫% বৃদ্ধি</strong> পায়।</li>
+            <li><strong>স্মার্টপিচ ক্রস-সেলিং:</strong> রিটেইল টায়ার অনুযায়ী নির্দিষ্ট SKU বাস্কেট প্রস্তাব করে AOV ১২-১৮% সম্প্রসারণ।</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <!-- Card 3: Actionable Capabilities -->
     <div class="charter-card">
-      <div class="card-icon-badge bg-gold">🚀</div>
-      <h3 class="card-heading">3. Actionable Capabilities (এটি ফলো করে কী অর্জন সম্ভব)</h3>
-      <div class="card-body-text">
-        সি-লেভেল ম্যানেজমেন্ট এই ড্যাশবোর্ড অনুসরণ করে নিচের সুনির্দিষ্ট ফলাফলগুলো বাস্তবায়ন করতে পারবে:
-        <ul>
-          <li><strong>১৫–২০% বার্ষিক রাজস্ব প্রবৃদ্ধি:</strong> টেরিটরিভিত্তিক সেলস ফোর্স রি-ডিস্ট্রিবিউশন এবং দুর্বল রুটের অপটিমাইজেশন।</li>
-          <li><strong>স্বয়ংক্রিয় SR পারফরম্যান্স কোচিং:</strong> ৯৬৬ জন সেলস প্রতিনিধির মধ্যে টপ পারফর্মারদের কৌশল অন্য পারসোনায় রেপ্লিকেট করা।</li>
-          <li><strong>ডায়নামিক রিজিওনাল কেপিআই:</strong> মেট্রো, সেমি-আরবান এবং রুরাল টেরিটরির জন্য বাস্তবসম্মত ও পৃথক টার্গেট নির্ধারণ।</li>
-        </ul>
+      <div class="card-top-row">
+        <div class="card-icon-badge bg-gold">🚀</div>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+
+      <div class="note-en">
+        <h3 class="card-heading">3. Actionable Capabilities</h3>
+        <div class="card-body-text">
+          Senior executives can deploy this intelligence platform to achieve measurable commercial breakthroughs:
+          <ul>
+            <li><strong>15–20% Annualized Revenue Growth:</strong> Optimize territory sales force re-distribution and eliminate redundant beats.</li>
+            <li><strong>Algorithmic Field Coaching:</strong> Systematically replicate top-performing SR behaviors across underperforming personnel clusters.</li>
+            <li><strong>Dynamic Regional KPI Calibration:</strong> Replace static quotas with calibrated targets tailored for Metro, Semi-Urban, and Rural archetypes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note-bn" style="display:none;">
+        <h3 class="card-heading">৩. কৌশলগত বাস্তবায়নের সক্ষমতা</h3>
+        <div class="card-body-text">
+          সি-লেভেল ম্যানেজমেন্ট এই ড্যাশবোর্ড অনুসরণ করে নিচের সুনির্দিষ্ট ফলাফলগুলো বাস্তবায়ন করতে পারবে:
+          <ul>
+            <li><strong>১৫–২০% বার্ষিক রাজস্ব প্রবৃদ্ধি:</strong> টেরিটরিভিত্তিক সেলস ফোর্স রি-ডিস্ট্রিবিউশন এবং দুর্বল রুটের অপটিমাইজেশন।</li>
+            <li><strong>স্বয়ংক্রিয় SR পারফরম্যান্স কোচিং:</strong> ৯৬৬ জন সেলস প্রতিনিধির মধ্যে টপ পারফর্মারদের কৌশল অন্য পারসোনায় রেপ্লিকেট করা।</li>
+            <li><strong>ডায়নামিক রিজিওনাল কেপিআই:</strong> মেট্রো, সেমি-আরবান এবং রুরাল টেরিটরির জন্য বাস্তবসম্মত ও পৃথক টার্গেট নির্ধারণ।</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -268,115 +427,221 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 
   <!-- ════════════════════ 30-60-90 DAY STRATEGIC ROADMAP ════════════════════ -->
   <div class="charter-card" style="margin-bottom:36px">
-    <div class="card-icon-badge bg-rose">🧭</div>
-    <h3 class="card-heading">4. C-Level 30-60-90 Day Strategic Execution Directive (বাস্তবায়ন রোডম্যাপ)</h3>
-    <div class="grid-3" style="margin-top:16px;margin-bottom:0">
-      
-      <div style="background:var(--card2);padding:18px;border-radius:12px;border:1px solid var(--border)">
-        <div style="font-size:11px;font-weight:800;color:var(--rose);text-transform:uppercase;margin-bottom:4px">Days 1 – 30 · Rapid Recovery</div>
-        <h4 style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:8px">Stop Silent Bleed & Eliminate Zero-Order Visits</h4>
-        <p style="font-size:12px;color:var(--text2);line-height:1.5">
-          • শীর্ষ ৫,০০০ সাইলেন্ট ব্লিড আউটলেটে টেরিটরি ম্যানেজারদের মাধ্যমে সরাসরি উইন-ব্যাক কল ও ডিসকাউন্ট রিভিউ।<br>
-          • ৫ বারের বেশি ভিজিট হওয়া অথচ শূন্য অর্ডারের ৩,২৮৬ টি রেড-ফ্ল্যাগ আউটলেটে রুট রি-অ্যালোকেশন।
-        </p>
+    <div class="card-top-row">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="card-icon-badge bg-rose">🧭</div>
+        <div>
+          <div class="note-en"><h3 class="card-heading" style="margin-bottom:0">4. C-Level 30-60-90 Day Strategic Execution Directive</h3></div>
+          <div class="note-bn" style="display:none;"><h3 class="card-heading" style="margin-bottom:0">৪. সি-লেভেল ৩০-৬০-৯০ দিনের স্ট্র্যাটেজিক এক্সিকিউশন রোডম্যাপ</h3></div>
+        </div>
       </div>
+      <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+        <span class="lang-pill active" data-lang="en">EN</span>
+        <span style="opacity:0.35">|</span>
+        <span class="lang-pill" data-lang="bn">বাংলা</span>
+      </button>
+    </div>
 
-      <div style="background:var(--card2);padding:18px;border-radius:12px;border:1px solid var(--border)">
-        <div style="font-size:11px;font-weight:800;color:var(--gold);text-transform:uppercase;margin-bottom:4px">Days 31 – 60 · Sales Force Quality</div>
-        <h4 style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:8px">Enforce 8-Min Golden Visit & SmartPitch Cross-Sell</h4>
-        <p style="font-size:12px;color:var(--text2);line-height:1.5">
-          • সেলস রিপ্রেজেন্টেটিভদের অ্যাপে ৮ মিনিটের ন্যূনতম কার্যকর সময়সীমা নিশ্চিত করা।<br>
-          • আউটলেটের ক্যাটাগরি ও ৯-টায়ার প্রোফাইল অনুযায়ী স্বয়ংক্রিয় ৩-SKU ক্রস-সেলিং পিচ ম্যান্ডেটরি করা।
-        </p>
+    <div class="note-en">
+      <div class="grid-3" style="margin-top:16px;margin-bottom:0">
+        <div style="background:var(--card2);padding:18px;border-radius:12px;border:1px solid var(--border)">
+          <div style="font-size:11px;font-weight:800;color:var(--rose);text-transform:uppercase;margin-bottom:4px">Days 1 – 30 · Rapid Recovery</div>
+          <h4 style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:8px">Stop Silent Bleed & Eliminate Zero-Order Visits</h4>
+          <p style="font-size:12px;color:var(--text2);line-height:1.5">
+            • Immediate executive win-back calls & credit terms review on Top 5,000 silent bleed outlets.<br>
+            • Reallocate rep beats away from 3,286 persistent zero-order red-flag outlets.
+          </p>
+        </div>
+
+        <div style="background:var(--card2);padding:18px;border-radius:12px;border:1px solid var(--border)">
+          <div style="font-size:11px;font-weight:800;color:var(--gold);text-transform:uppercase;margin-bottom:4px">Days 31 – 60 · Sales Force Quality</div>
+          <h4 style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:8px">Enforce 8-Min Golden Visit & SmartPitch Cross-Sell</h4>
+          <p style="font-size:12px;color:var(--text2);line-height:1.5">
+            • Enforce minimum 8-min consultative check-in duration on sales representative mobile apps.<br>
+            • Mandate automated 3-SKU cross-sell prompts matched to store category and tier profile.
+          </p>
+        </div>
+
+        <div style="background:var(--card2);padding:18px;border-radius:12px;border:1px solid var(--border)">
+          <div style="font-size:11px;font-weight:800;color:var(--primary);text-transform:uppercase;margin-bottom:4px">Days 61 – 90 · Structural Governance</div>
+          <h4 style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:8px">Dynamic Regional KPI Calibration & Scale</h4>
+          <p style="font-size:12px;color:var(--text2);line-height:1.5">
+            • Institutionalize differentiated KPI quotas between Metro and Rural regional clusters.<br>
+            • Align inventory buffer and S&OP planning with the 6-month predictive sales forecast.
+          </p>
+        </div>
       </div>
+    </div>
 
-      <div style="background:var(--card2);padding:18px;border-radius:12px;border:1px solid var(--border)">
-        <div style="font-size:11px;font-weight:800;color:var(--primary);text-transform:uppercase;margin-bottom:4px">Days 61 – 90 · Structural Governance</div>
-        <h4 style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:8px">Dynamic Regional KPI Calibration & Scale</h4>
-        <p style="font-size:12px;color:var(--text2);line-height:1.5">
-          • মেট্রো বনাম রুরাল টেরিটরির জন্য বাস্তবসম্মত ডায়নামিক টার্গেট সেট করা।<br>
-          • ৬ মাসের প্রেডিক্টিভ সেলস ফোরকাস্টিং মডেল অনুযায়ী ইনভেন্টরি ও সাপ্লাই চেইন প্ল্যানিং সিঙ্ক করা।
-        </p>
+    <div class="note-bn" style="display:none;">
+      <div class="grid-3" style="margin-top:16px;margin-bottom:0">
+        <div style="background:var(--card2);padding:18px;border-radius:12px;border:1px solid var(--border)">
+          <div style="font-size:11px;font-weight:800;color:var(--rose);text-transform:uppercase;margin-bottom:4px">১ম – ৩০তম দিন · দ্রুত রিকভারি</div>
+          <h4 style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:8px">সাইলেন্ট ব্লিড রোধ ও জিরো-অর্ডার আউটলেট বাতিল</h4>
+          <p style="font-size:12px;color:var(--text2);line-height:1.5">
+            • শীর্ষ ৫,০০০ সাইলেন্ট ব্লিড আউটলেটে টেরিটরি ম্যানেজারদের মাধ্যমে সরাসরি উইন-ব্যাক কল ও ডিসকাউন্ট রিভিউ।<br>
+            • ৫ বারের বেশি ভিজিট হওয়া অথচ শূন্য অর্ডারের ৩,২৮৬ টি রেড-ফ্ল্যাগ আউটলেটে রুট রি-অ্যালোকেশন।
+          </p>
+        </div>
+
+        <div style="background:var(--card2);padding:18px;border-radius:12px;border:1px solid var(--border)">
+          <div style="font-size:11px;font-weight:800;color:var(--gold);text-transform:uppercase;margin-bottom:4px">৩১তম – ৬০তম দিন · ফিল্ড কোয়ালিটি</div>
+          <h4 style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:8px">৮ মিনিটের গোল্ডেন ভিজিট ও স্মার্টপিচ বাস্তবায়ন</h4>
+          <p style="font-size:12px;color:var(--text2);line-height:1.5">
+            • সেলস রিপ্রেজেন্টেটিভদের অ্যাপে ৮ মিনিটের ন্যূনতম কার্যকর সময়সীমা নিশ্চিত করা।<br>
+            • আউটলেটের ক্যাটাগরি ও ৯-টায়ার প্রোফাইল অনুযায়ী স্বয়ংক্রিয় ৩-SKU ক্রস-সেলিং পিচ ম্যান্ডেটরি করা।
+          </p>
+        </div>
+
+        <div style="background:var(--card2);padding:18px;border-radius:12px;border:1px solid var(--border)">
+          <div style="font-size:11px;font-weight:800;color:var(--primary);text-transform:uppercase;margin-bottom:4px">৬১তম – ৯০তম দিন · কাঠামোগত গভর্ন্যান্স</div>
+          <h4 style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:8px">আঞ্চলিক ডায়নামিক কেপিআই ও স্কেলিং</h4>
+          <p style="font-size:12px;color:var(--text2);line-height:1.5">
+            • মেট্রো বনাম রুরাল টেরিটরির জন্য বাস্তবসম্মত ডায়নামিক টার্গেট সেট করা।<br>
+            • ৬ মাসের প্রেডিক্টিভ সেলস ফোরকাস্টিং মডেল অনুযায়ী ইনভেন্টরি ও সাপ্লাই চেইন প্ল্যানিং সিঙ্ক করা।
+          </p>
+        </div>
       </div>
-
     </div>
   </div>
 
   <!-- ════════════════════ 6 MODULES MATRIX ════════════════════ -->
-  <div class="matrix-title">
-    <span>📂 The 6 Core Strategic Modules (মডিউল পরিচিতি ও মূল ফিচার)</span>
+  <div class="matrix-header-row">
+    <div class="matrix-title">
+      <span>📂 The 6 Core Strategic Modules</span>
+    </div>
   </div>
 
   <div class="modules-matrix">
     
+    <!-- Chapter 1 -->
     <div class="mod-box">
       <div>
         <div class="mod-box-header">
           <span class="mod-tag">Chapter 1</span>
-          <span style="font-size:18px">🗺️</span>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
         </div>
         <h4>Geospatial & Territory Intelligence</h4>
-        <p>Geo-Intelligence Explorer™ — ৬৪ জেলার সেলস ঘনত্ব, ৩ডি সেলস হাইট, স্পাইডারফাই ক্লাস্টারিং এবং জিরো-সেলস ব্লাইন্ডস্পট চিহ্নিতকরণ।</p>
+        <div class="note-en">
+          <p>Geo-Intelligence Explorer™ — 64-District sales density heatmap, 3D sales height, spiderfier clustering, and zero-sales blindspot detection.</p>
+        </div>
+        <div class="note-bn" style="display:none;">
+          <p>Geo-Intelligence Explorer™ — ৬৪ জেলার সেলস ঘনত্ব, ৩ডি সেলস হাইট, স্পাইডারফাই ক্লাস্টারিং এবং জিরো-সেলস ব্লাইন্ডস্পট চিহ্নিতকরণ।</p>
+        </div>
       </div>
       <div class="mod-kpi-bar">281K+ Mapped Doors · 64 Districts Profiled</div>
     </div>
 
+    <!-- Chapter 2 -->
     <div class="mod-box">
       <div>
         <div class="mod-box-header">
           <span class="mod-tag">Chapter 2</span>
-          <span style="font-size:18px">🎯</span>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
         </div>
         <h4>Outlet Intelligence & SmartPitch AI™</h4>
-        <p>SmartPitch AI™ Engine — ৯-টায়ার রিটেইলার সেগমেন্টেশন, আউটলেট ভ্যালু প্রোফাইলিং এবং অ্যাসোসিয়েশন রুল মাইনিং-ভিত্তিক ক্রস-সেলিং বাস্কেট।</p>
+        <div class="note-en">
+          <p>SmartPitch AI™ Engine — 9-tier retail store segmentation, outlet value profiling, and association rule mining cross-sell baskets.</p>
+        </div>
+        <div class="note-bn" style="display:none;">
+          <p>SmartPitch AI™ Engine — ৯-টায়ার রিটেইলার সেগমেন্টেশন, আউটলেট ভ্যালু প্রোফাইলিং এবং অ্যাসোসিয়েশন রুল মাইনিং-ভিত্তিক ক্রস-সেলিং বাস্কেট।</p>
+        </div>
       </div>
       <div class="mod-kpi-bar">9 Retail Tiers · Cross-Sell SKU Recommender</div>
     </div>
 
+    <!-- Chapter 3 -->
     <div class="mod-box">
       <div>
         <div class="mod-box-header">
           <span class="mod-tag">Chapter 3</span>
-          <span style="font-size:18px">🛡️</span>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
         </div>
         <h4>Customer Retention & Silent Bleed</h4>
-        <p>Silent Bleed Engine™ — ২৮,১৫১ টি আউটলেটের AOV ক্ষয় রোধ, ২০,৪৬৫ টি চার্ন আউটলেটের উইন-ব্যাক এবং Visit Gap বনাম Service Gap রুট-কজ অ্যানালাইসিস।</p>
+        <div class="note-en">
+          <p>Silent Bleed Engine™ — AOV decay mitigation across 28,151 outlets, 20,465 churned account recovery, and Visit Gap vs Service Gap root-cause analysis.</p>
+        </div>
+        <div class="note-bn" style="display:none;">
+          <p>Silent Bleed Engine™ — ২৮,১৫১ টি আউটলেটের AOV ক্ষয় রোধ, ২০,৪৬৫ টি চার্ন আউটলেটের উইন-ব্যাক এবং Visit Gap বনাম Service Gap রুট-কজ অ্যানালাইসিস।</p>
+        </div>
       </div>
       <div class="mod-kpi-bar">৳ 24.72 Cr Bleed · ৳ 22.67 Cr Churn Drop-Off</div>
     </div>
 
+    <!-- Chapter 4 -->
     <div class="mod-box">
       <div>
         <div class="mod-box-header">
           <span class="mod-tag">Chapter 4</span>
-          <span style="font-size:18px">⚡</span>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
         </div>
         <h4>Field Sales Productivity & Diagnostics</h4>
-        <p>PerformancePulse Analyzer™ — ৯৬৬ জন SR-এর ৬টি মেশিন লার্নিং পারসোনা, কনভার্সন ল্যাটেন্সি কার্ভ, কোয়াড্র্যান্ট ম্যাট্রিক্স এবং কোচিং শিট।</p>
+        <div class="note-en">
+          <p>PerformancePulse Analyzer™ — 6 ML behavioral personas for 966 SRs, conversion latency curves, strategic quadrant matrix, and coaching diagnostics.</p>
+        </div>
+        <div class="note-bn" style="display:none;">
+          <p>PerformancePulse Analyzer™ — ৯৬৬ জন SR-এর ৬টি মেশিন লার্নিং পারসোনা, কনভার্সন ল্যাটেন্সি কার্ভ, কোয়াড্র্যান্ট ম্যাট্রিক্স এবং কোচিং শিট।</p>
+        </div>
       </div>
       <div class="mod-kpi-bar">966 Active SRs · 6 ML Personas · Full Audit CSV</div>
     </div>
 
+    <!-- Chapter 5 -->
     <div class="mod-box">
       <div>
         <div class="mod-box-header">
           <span class="mod-tag">Chapter 5</span>
-          <span style="font-size:18px">🧠</span>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
         </div>
         <h4>Predictive Modeling & Smart KPIs</h4>
-        <p>Smart KPI Architect™ — সেলস ড্রাইভার র্যাংকিং, ৮-মিনিট ভিজিট ডিপেন্ডেন্স প্লট, আঞ্চলিক ডায়নামিক টার্গেট এবং ৬ মাসের রাজস্ব পূর্বাভাস।</p>
+        <div class="note-en">
+          <p>Smart KPI Architect™ — ML sales driver importance ranking, 8-minute visit dependency curve, regional KPI calibration, and 6-month revenue forecasting.</p>
+        </div>
+        <div class="note-bn" style="display:none;">
+          <p>Smart KPI Architect™ — সেলস ড্রাইভার র্যাংকিং, ৮-মিনিট ভিজিট ডিপেন্ডেন্স প্লট, আঞ্চলিক ডায়নামিক টার্গেট এবং ৬ মাসের রাজস্ব পূর্বাভাস।</p>
+        </div>
       </div>
       <div class="mod-kpi-bar">8-Min Golden Visit Rule · 6-Month Forecast</div>
     </div>
 
+    <!-- Chapter 6 -->
     <div class="mod-box">
       <div>
         <div class="mod-box-header">
           <span class="mod-tag">Chapter 6</span>
-          <span style="font-size:18px">🧭</span>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
         </div>
         <h4>Executive Target Tracking & Governance</h4>
-        <p>Growth Compass Dashboard™ — ক্যাটাগরি ও টেরিটরি ডেলিভার্ড রেভিনিউ, রিটেইল ডোর রিচ, ভ্যালু বনাম ভলিউম ম্যাট্রিক্স এবং এক্সিকিউশন রোডম্যাপ।</p>
+        <div class="note-en">
+          <p>Growth Compass Dashboard™ — Category & territory delivered revenue, retail door penetration, distributor point benchmarking, and executive roadmap.</p>
+        </div>
+        <div class="note-bn" style="display:none;">
+          <p>Growth Compass Dashboard™ — ক্যাটাগরি ও টেরিটরি ডেলিভার্ড রেভিনিউ, রিটেইল ডোর রিচ, ডিস্ট্রিবিউটর পয়েন্ট পারফরম্যান্স এবং এক্সিকিউশন রোডম্যাপ।</p>
+        </div>
       </div>
       <div class="mod-kpi-bar">Category Mix · 208K Doors Reach · C-Level Roadmap</div>
     </div>
@@ -386,9 +651,57 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 </div>
 
 <script>
+let currentGlobalLang = 'en';
+
 function toggleTheme() {
   const cur = document.documentElement.getAttribute('data-theme');
   document.documentElement.setAttribute('data-theme', cur === 'light' ? 'dark' : 'light');
+}
+
+function toggleNoteLang(btn) {
+  const card = btn.closest('.charter-card, .mod-box, .hero-inner, .exec-note');
+  if (!card) return;
+  const enBlock = card.querySelector('.note-en');
+  const bnBlock = card.querySelector('.note-bn');
+  const pills = btn.querySelectorAll('.lang-pill');
+  
+  if (enBlock && bnBlock) {
+    const isEn = enBlock.style.display !== 'none';
+    if (isEn) {
+      enBlock.style.display = 'none';
+      bnBlock.style.display = 'block';
+      pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === 'bn'));
+    } else {
+      enBlock.style.display = 'block';
+      bnBlock.style.display = 'none';
+      pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === 'en'));
+    }
+  }
+}
+
+function toggleGlobalLang() {
+  currentGlobalLang = currentGlobalLang === 'en' ? 'bn' : 'en';
+  
+  document.querySelectorAll('.charter-card, .mod-box, .hero-inner').forEach(card => {
+    const enBlock = card.querySelector('.note-en');
+    const bnBlock = card.querySelector('.note-bn');
+    const pills = card.querySelectorAll('.lang-pill');
+    if (enBlock && bnBlock) {
+      if (currentGlobalLang === 'bn') {
+        enBlock.style.display = 'none';
+        bnBlock.style.display = 'block';
+        pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === 'bn'));
+      } else {
+        enBlock.style.display = 'block';
+        bnBlock.style.display = 'none';
+        pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === 'en'));
+      }
+    }
+  });
+
+  document.querySelectorAll('.master-pill').forEach(p => {
+    p.classList.toggle('active', p.getAttribute('data-lang') === currentGlobalLang);
+  });
 }
 </script>
 </body>
