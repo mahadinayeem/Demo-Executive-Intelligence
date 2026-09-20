@@ -598,9 +598,17 @@ html, body { height: 100%; font-family: 'Plus Jakarta Sans', sans-serif; backgro
         </div>
       </div>
       <div class="stage-right">
-        <button class="stage-btn" onclick="openCurrentInNewTab()">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-          Standalone View
+        <button class="stage-btn" id="globalLangBtn" onclick="toggleGlobalAppLang()" title="Toggle English / Bengali globally across all modules">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span id="globalLangText">বাংলা</span>
+        </button>
+        <button class="stage-btn" onclick="openCurrentInNewTab()" title="Open active module in full browser tab">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+          Fullscreen
+        </button>
+        <button class="stage-btn" onclick="openShareModal()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></svg>
+          Share with CEO
         </button>
       </div>
     </div>
@@ -743,20 +751,41 @@ function closeModal(id) {
 }
 
 function toggleTheme() {
-  const cur = document.documentElement.getAttribute('data-theme');
-  const next = cur === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  document.getElementById('themeBtnText').textContent = next === 'dark' ? 'Light Mode' : 'Dark Mode';
-
-  // Synchronize theme across all embedded iframes
+  // Enforce clean crisp Light Mode as primary executive standard
+  document.documentElement.setAttribute('data-theme', 'light');
   document.querySelectorAll('.module-iframe').forEach(f => {
     try {
       if (f.contentDocument && f.contentDocument.documentElement) {
-        f.contentDocument.documentElement.setAttribute('data-theme', next);
+        f.contentDocument.documentElement.setAttribute('data-theme', 'light');
       }
     } catch(e){}
   });
 }
+
+let appLang = localStorage.getItem('itl_lang') || 'en';
+
+function applyGlobalAppLang(lang) {
+  appLang = lang;
+  localStorage.setItem('itl_lang', lang);
+  const btnText = document.getElementById('globalLangText');
+  if (btnText) btnText.textContent = lang === 'en' ? 'বাংলা' : 'English';
+  
+  // Broadcast to all iframes
+  document.querySelectorAll('.module-iframe').forEach(f => {
+    try {
+      f.contentWindow.postMessage({ type: 'SET_LANG', lang: lang }, '*');
+    } catch(e){}
+  });
+}
+
+function toggleGlobalAppLang() {
+  applyGlobalAppLang(appLang === 'en' ? 'bn' : 'en');
+}
+
+// Initialize on page load
+window.addEventListener('DOMContentLoaded', () => {
+  applyGlobalAppLang(appLang);
+});
 
 // Global hotkeys (0-6 to switch chapters)
 window.addEventListener('keydown', e => {

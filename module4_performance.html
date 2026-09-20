@@ -539,8 +539,8 @@ function initOverviewTab() {
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: {
-        legend: { position: 'bottom', labels: { color: '#1e293b', boxWidth: 12, font: { size: 11, weight: '600' } } },
-        datalabels: { color: '#ffffff', font: { weight: '800', size: 12 }, formatter: v => fmt(v) }
+        legend: { position: 'bottom', labels: { color: '#334155', boxWidth: 12, font: { size: 10.5, weight: '600' } } },
+        datalabels: { color: '#ffffff', font: { weight: '600', size: 11 }, formatter: v => fmt(v) }
       }
     },
     plugins: [ChartDataLabels]
@@ -569,16 +569,16 @@ function initOverviewTab() {
           anchor: 'end',
           align: 'top',
           offset: 4,
-          color: '#000000',
-          font: { weight: '800', size: 11 },
+          color: '#1e293b',
+          font: { weight: '600', size: 10 },
           formatter: v => (v/1e6).toFixed(1)+'M'
         }
       },
       scales: {
-        x: { ticks: { color: '#1e293b', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
+        x: { ticks: { color: '#334155', font: { size: 10, weight: '600' } }, grid: { display: false } },
         y: {
           suggestedMax: maxRev * 1.18,
-          ticks: { color: '#1e293b', font: { size: 10, weight: '600' }, callback: v => (v/1e6)+'M' },
+          ticks: { color: '#64748b', font: { size: 9.5 }, callback: v => (v/1e6)+'M' },
           grid: { color: 'rgba(0,0,0,0.06)' }
         }
       }
@@ -615,16 +615,16 @@ function initDurationTab() {
           anchor: 'end',
           align: 'top',
           offset: 5,
-          color: '#000000',
-          font: { weight: '800', size: 12.5 },
+          color: '#1e293b',
+          font: { weight: '600', size: 11 },
           formatter: v => v + '%'
         }
       },
       scales: {
-        x: { ticks: { color: '#1e293b', font: { size: 11, weight: '600' } }, grid: { display: false } },
+        x: { ticks: { color: '#334155', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
         y: {
           suggestedMax: Math.ceil(maxConv * 1.25),
-          ticks: { color: '#1e293b', font: { size: 10, weight: '600' }, callback: v => v+'%' },
+          ticks: { color: '#64748b', font: { size: 9.5 }, callback: v => v+'%' },
           grid: { color: 'rgba(0,0,0,0.06)' }
         }
       }
@@ -642,8 +642,8 @@ function initDurationTab() {
         borderColor: '#10b981',
         backgroundColor: 'rgba(16,185,129,0.12)',
         tension: 0.35, fill: true,
-        pointRadius: 6,
-        pointHoverRadius: 8,
+        pointRadius: 5,
+        pointHoverRadius: 7,
         pointBackgroundColor: '#10b981',
         pointBorderColor: '#ffffff',
         pointBorderWidth: 2
@@ -657,22 +657,22 @@ function initDurationTab() {
         datalabels: {
           anchor: 'end',
           align: 'top',
-          offset: 8,
-          color: '#000000',
-          backgroundColor: '#ffffff',
+          offset: 6,
+          color: '#047857',
+          backgroundColor: '#ecfdf5',
           borderColor: '#10b981',
-          borderWidth: 1.5,
-          borderRadius: 6,
-          padding: { top: 3, bottom: 3, left: 8, right: 8 },
-          font: { weight: '800', size: 11.5 },
-          formatter: v => '৳ ' + fmt(v)
+          borderWidth: 1,
+          borderRadius: 4,
+          padding: { top: 1, bottom: 1, left: 6, right: 6 },
+          font: { weight: '600', size: 10 },
+          formatter: v => '৳' + fmt(v)
         }
       },
       scales: {
-        x: { ticks: { color: '#1e293b', font: { size: 11, weight: '600' } }, grid: { display: false } },
+        x: { ticks: { color: '#334155', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
         y: {
           suggestedMax: Math.ceil(maxAov * 1.22),
-          ticks: { color: '#1e293b', font: { size: 10, weight: '600' }, callback: v => '৳' + fmt(v) },
+          ticks: { color: '#64748b', font: { size: 9.5 }, callback: v => '৳' + fmt(v) },
           grid: { color: 'rgba(0,0,0,0.06)' }
         }
       }
@@ -722,16 +722,16 @@ function initLatencyTab() {
           anchor: 'end',
           align: 'top',
           offset: 4,
-          color: '#000000',
-          font: { weight: '800', size: 11 },
+          color: '#1e293b',
+          font: { weight: '600', size: 10 },
           formatter: v => fmt(v)
         }
       },
       scales: {
-        x: { ticks: { color: '#1e293b', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
+        x: { ticks: { color: '#334155', font: { size: 10, weight: '600' } }, grid: { display: false } },
         y: {
           suggestedMax: maxLag * 1.18,
-          ticks: { color: '#1e293b', font: { size: 10, weight: '600' } },
+          ticks: { color: '#64748b', font: { size: 9.5 } },
           grid: { color: 'rgba(0,0,0,0.06)' }
         }
       }
@@ -750,8 +750,8 @@ function initLatencyTab() {
         borderColor: '#8b5cf6',
         backgroundColor: 'rgba(139,92,246,.15)',
         tension: 0.3, fill: true,
-        pointRadius: 6,
-        pointHoverRadius: 8,
+        pointRadius: 5,
+        pointHoverRadius: 7,
         pointBackgroundColor: '#8b5cf6',
         pointBorderColor: '#ffffff',
         pointBorderWidth: 2
@@ -765,20 +765,20 @@ function initLatencyTab() {
         datalabels: {
           anchor: 'end',
           align: 'top',
-          offset: 8,
-          color: '#000000',
-          backgroundColor: '#ffffff',
+          offset: 6,
+          color: '#6d28d9',
+          backgroundColor: '#f5f3ff',
           borderColor: '#8b5cf6',
-          borderWidth: 1.5,
-          borderRadius: 6,
-          padding: { top: 3, bottom: 3, left: 8, right: 8 },
-          font: { weight: '800', size: 11 },
+          borderWidth: 1,
+          borderRadius: 4,
+          padding: { top: 1, bottom: 1, left: 6, right: 6 },
+          font: { weight: '600', size: 10 },
           formatter: v => v + '%'
         }
       },
       scales: {
-        x: { ticks: { color: '#1e293b', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
-        y: { min: 0, max: 120, ticks: { color: '#1e293b', font: { size: 10, weight: '600' }, callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.06)' } }
+        x: { ticks: { color: '#334155', font: { size: 10, weight: '600' } }, grid: { display: false } },
+        y: { min: 0, max: 120, ticks: { color: '#64748b', font: { size: 9.5 }, callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.06)' } }
       }
     },
     plugins: [ChartDataLabels]
@@ -805,8 +805,8 @@ function initParetoTab() {
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false }, datalabels: { display: false } },
       scales: {
-        x: { ticks: { color: '#1e293b', font: { size: 9 }, maxTicksLimit: 15 }, grid: { display: false } },
-        y: { min: 0, max: 100, ticks: { color: '#1e293b', font: { size: 10, weight: '600' }, callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.06)' } }
+        x: { ticks: { color: '#64748b', font: { size: 9 }, maxTicksLimit: 15 }, grid: { display: false } },
+        y: { min: 0, max: 100, ticks: { color: '#64748b', font: { size: 9.5 }, callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.06)' } }
       }
     }
   });
@@ -832,14 +832,14 @@ function initParetoTab() {
           anchor: 'end',
           align: 'top',
           offset: 4,
-          color: '#000000',
-          font: { weight: '800', size: 12 },
+          color: '#1e293b',
+          font: { weight: '600', size: 10.5 },
           formatter: v => v + '%'
         }
       },
       scales: {
-        x: { ticks: { color: '#1e293b', font: { size: 11, weight: '600' } }, grid: { display: false } },
-        y: { min: 0, max: 115, ticks: { color: '#1e293b', font: { size: 10, weight: '600' }, callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.06)' } }
+        x: { ticks: { color: '#334155', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
+        y: { min: 0, max: 115, ticks: { color: '#64748b', font: { size: 9.5 }, callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.06)' } }
       }
     },
     plugins: [ChartDataLabels]
@@ -1217,13 +1217,55 @@ function exportModule4CSVs() {
 }
 
 function toggleTheme() {
-  const cur = document.documentElement.getAttribute('data-theme');
-  const next = cur === 'light' ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', next);
+  document.documentElement.setAttribute('data-theme', 'light');
   Object.values(charts).forEach(c => {
     if (c && typeof c.update === 'function') c.update();
   });
 }
+
+function toggleNoteLang(btn) {
+  const card = btn.closest('.card, .kpi-card, .exec-note, .persona-card');
+  if (!card) return;
+  const enBlock = card.querySelector('.note-en');
+  const bnBlock = card.querySelector('.note-bn');
+  const pills = btn.querySelectorAll('.lang-pill');
+  
+  if (enBlock && bnBlock) {
+    const isEn = enBlock.style.display !== 'none';
+    if (isEn) {
+      enBlock.style.display = 'none';
+      bnBlock.style.display = 'block';
+      pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === 'bn'));
+    } else {
+      enBlock.style.display = 'block';
+      bnBlock.style.display = 'none';
+      pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === 'en'));
+    }
+  }
+}
+
+function toggleGlobalLang(forcedLang) {
+  const lang = forcedLang || (localStorage.getItem('itl_lang') === 'bn' ? 'en' : 'bn');
+  localStorage.setItem('itl_lang', lang);
+  document.querySelectorAll('.note-en').forEach(el => el.style.display = lang === 'bn' ? 'none' : 'block');
+  document.querySelectorAll('.note-bn').forEach(el => el.style.display = lang === 'bn' ? 'block' : 'none');
+  document.querySelectorAll('.lang-pill').forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === lang));
+}
+
+// Listen for global language switch from parent
+window.addEventListener('message', e => {
+  if (e.data && e.data.type === 'SET_LANG') {
+    toggleGlobalLang(e.data.lang);
+  }
+});
+
+// Initialize on page load
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('itl_lang');
+  if (saved && saved !== 'en') {
+    toggleGlobalLang(saved);
+  }
+});
 </script>
 </body>
 </html>

@@ -1981,6 +1981,26 @@ window.addEventListener('load', () => {
     loading.style.opacity = '0';
     setTimeout(() => loading.style.display='none', 500);
   }, 300);
+
+  const saved = localStorage.getItem('itl_lang');
+  if (saved && saved !== 'en') {
+    toggleGlobalLang(saved);
+  }
+});
+
+function toggleGlobalLang(forcedLang) {
+  const lang = forcedLang || (localStorage.getItem('itl_lang') === 'bn' ? 'en' : 'bn');
+  localStorage.setItem('itl_lang', lang);
+  document.querySelectorAll('.note-en').forEach(el => el.style.display = lang === 'bn' ? 'none' : 'block');
+  document.querySelectorAll('.note-bn').forEach(el => el.style.display = lang === 'bn' ? 'block' : 'none');
+  document.querySelectorAll('.lang-pill').forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === lang));
+}
+
+// Listen for global language switch from parent
+window.addEventListener('message', e => {
+  if (e.data && e.data.type === 'SET_LANG') {
+    toggleGlobalLang(e.data.lang);
+  }
 });
 </script>
 </body>
