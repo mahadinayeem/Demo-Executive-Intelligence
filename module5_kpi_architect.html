@@ -115,7 +115,7 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
 .badge.purple{background:rgba(139,92,246,.15);color:var(--accent2)}
 .badge.rose{background:rgba(244,63,94,.15);color:var(--rose)}
 
-/* ── EXECUTIVE NOTE CALLOUTS ── */
+/* ── EXECUTIVE NOTE CALLOUTS & BILINGUAL TOGGLE ── */
 .exec-note {
   background: rgba(6,182,212,0.06);
   border-left: 4px solid var(--cyan);
@@ -125,21 +125,58 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
   font-size: 11.5px;
   line-height: 1.6;
   color: var(--text2);
+  position: relative;
 }
 .exec-note.gold { background: rgba(245,158,11,0.06); border-left-color: var(--gold); }
 .exec-note.emerald { background: rgba(16,185,129,0.06); border-left-color: var(--emerald); }
 .exec-note.purple { background: rgba(139,92,246,0.06); border-left-color: var(--accent2); }
 .exec-note.orange { background: rgba(249,115,22,0.06); border-left-color: var(--orange); }
+
+.exec-note-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  margin-bottom: 6px;
+}
 .exec-note-title {
   display: flex; align-items: center; gap: 6px;
-  font-weight: 700; color: var(--text); font-size: 12px; margin-bottom: 4px;
+  font-weight: 700; color: var(--text); font-size: 12px;
 }
+.lang-toggle-btn {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text2);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s;
+  user-select: none;
+}
+.lang-toggle-btn:hover {
+  border-color: var(--cyan);
+  color: var(--text);
+}
+.lang-toggle-btn .lang-pill {
+  padding: 1px 4px;
+  border-radius: 8px;
+  transition: all 0.15s;
+}
+.lang-toggle-btn .lang-pill.active {
+  background: var(--cyan);
+  color: #060912;
+}
+
 .exec-note ul { margin: 4px 0 0 16px; padding: 0; }
 .exec-note li { margin-bottom: 3px; }
 .exec-note strong { color: var(--text); font-weight: 700; }
 [data-theme="light"] .exec-note { background: #f1f5f9; color: #334155; }
 [data-theme="light"] .exec-note strong { color: #0f172a; }
 [data-theme="light"] .exec-note-title { color: #0f172a; }
+[data-theme="light"] .lang-toggle-btn { background: #e2e8f0; border-color: #cbd5e1; color: #475569; }
+[data-theme="light"] .lang-toggle-btn .lang-pill.active { background: #0284c7; color: #ffffff; }
 
 /* ── DOWNLOAD BUTTONS ── */
 .chart-dl{
@@ -218,8 +255,20 @@ input[type=range]::-webkit-slider-thumb{
   <div class="tab-content active" id="sec-drivers">
     
     <div class="exec-note cyan">
-      <div class="exec-note-title">💡 Executive Summary: Machine Learning Sales Drivers</div>
-      Analyzing historical sales and field call data, the ML model (R² = 0.884) demonstrates that rather than superficial call rushing, maximizing <strong>Strike Rate (34.2%)</strong> and <strong>SKU Breadth / Basket Depth (24.8%)</strong> delivers the highest incremental revenue yield.
+      <div class="exec-note-header">
+        <div class="exec-note-title">💡 Machine Learning Sales Drivers Executive Summary</div>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+      <div class="note-en">
+        Analyzing historical sales and field call data, the ML model (R² = 0.884) demonstrates that rather than superficial call rushing, maximizing <strong>Strike Rate (34.2%)</strong> and <strong>SKU Breadth / Basket Depth (24.8%)</strong> delivers the highest incremental revenue yield.
+      </div>
+      <div class="note-bn" style="display:none;">
+        ঐতিহাসিক সেলস ও ফিল্ড কল ডেটা বিশ্লেষণ করে ML মডেল (R² = ০.৮৮৪) নিশ্চিত করেছে—শুধু দৌড়াদৌড়ি বা কলের সংখ্যা বাড়ানোর চেয়ে <strong>Strike Rate (৩৪.২%)</strong> ও <strong>SKU Breadth (২৪.৮%)</strong> নিশ্চিত করা সেলসে সবচেয়ে বেশি রেভিনিউ তৈরি করে।
+      </div>
     </div>
 
     <div class="kpi-grid">
@@ -252,13 +301,30 @@ input[type=range]::-webkit-slider-thumb{
           <button class="chart-dl" onclick="dlChart('featureImportance')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
         </div>
         <div class="exec-note cyan">
-          <div class="exec-note-title">📊 Chart Note: ML Behavioral Drivers Importance (%)</div>
-          <strong>Metric Overview:</strong> Relative statistical weight of each field behavior determining total sales output.
-          <ul>
-            <li><strong>#1 Driver (Strike Rate - 34.2%):</strong> Converting field visits into confirmed orders is the highest-leverage behavior.</li>
-            <li><strong>#2 Driver (SKU Breadth - 24.8%):</strong> Multi-category cross-selling across product lines per memo.</li>
-            <li><strong>#3 Driver (Visit Duration - 18.5%):</strong> Investing quality face-to-face pitch time with the retailer.</li>
-          </ul>
+          <div class="exec-note-header">
+            <div class="exec-note-title">📊 ML Behavioral Drivers Importance (%)</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            <strong>Metric Overview:</strong> Relative statistical weight of each field behavior determining total sales output.
+            <ul>
+              <li><strong>#1 Driver (Strike Rate - 34.2%):</strong> Converting field visits into confirmed orders is the highest-leverage behavior.</li>
+              <li><strong>#2 Driver (SKU Breadth - 24.8%):</strong> Multi-category cross-selling across product lines per memo.</li>
+              <li><strong>#3 Driver (Visit Duration - 18.5%):</strong> Investing quality face-to-face pitch time with the retailer.</li>
+            </ul>
+          </div>
+          <div class="note-bn" style="display:none;">
+            <strong>কী বিশ্লেষণ করে:</strong> মোট বিক্রয় বৃদ্ধির পেছনে ফিল্ডের কোন আচরণটি কতটা গুরুত্বপূর্ণ (Relative Weight)।
+            <ul>
+              <li><strong>#১ চালিকাশক্তি (Strike Rate - ৩৪.২%):</strong> দোকানে গিয়ে কার্যকর অর্ডার নেওয়া সবচেয়ে বড় ড্রাইভার।</li>
+              <li><strong>#২ চালিকাশক্তি (SKU Breadth - ২৪.৮%):</strong> প্রতি মেমোতে ১টির বেশি ক্যাটাগরি/SKU বিক্রি করা।</li>
+              <li><strong>#৩ চালিকাশক্তি (Visit Duration - ১৮.৫%):</strong> পর্যাপ্ত সময় দিয়ে রিটেইলারকে কনভিন্স করা।</li>
+            </ul>
+          </div>
         </div>
         <div class="chart-wrap"><canvas id="chartFeatureImportance"></canvas></div>
       </div>
@@ -269,13 +335,30 @@ input[type=range]::-webkit-slider-thumb{
           <button class="chart-dl" onclick="dlChart('elasticity')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
         </div>
         <div class="exec-note gold">
-          <div class="exec-note-title">⚡ Chart Note: Revenue Elasticity Multiplier (Yield per 1% Improvement)</div>
-          <strong>Metric Overview:</strong> Multiplier effect showing the percentage revenue expansion generated per 1.0% increase in each KPI.
-          <ul>
-            <li><strong>Strike Rate: +1.85% Revenue</strong> (A 1% conversion gain yields 1.85% net sales growth).</li>
-            <li><strong>SKU Breadth: +1.62% Revenue</strong> (Adding incremental SKUs per memo unlocks high leverage).</li>
-            <li><strong>Visit Duration: +1.34% Revenue</strong> (Direct revenue dividend of quality in-store time).</li>
-          </ul>
+          <div class="exec-note-header">
+            <div class="exec-note-title">⚡ Revenue Elasticity Multiplier (Yield per 1% Improvement)</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            <strong>Metric Overview:</strong> Multiplier effect showing the percentage revenue expansion generated per 1.0% increase in each KPI.
+            <ul>
+              <li><strong>Strike Rate: +1.85% Revenue</strong> (A 1% conversion gain yields 1.85% net sales growth).</li>
+              <li><strong>SKU Breadth: +1.62% Revenue</strong> (Adding incremental SKUs per memo unlocks high leverage).</li>
+              <li><strong>Visit Duration: +1.34% Revenue</strong> (Direct revenue dividend of quality in-store time).</li>
+            </ul>
+          </div>
+          <div class="note-bn" style="display:none;">
+            <strong>কী বিশ্লেষণ করে:</strong> ফিল্ডে যেকোনো KPI মাত্র ১% বাড়ালে মোট রেভিনিউ কত শতাংশ বাড়ে (Multiplier Effect)।
+            <ul>
+              <li><strong>Strike Rate: +১.৮৫% রেভিনিউ</strong> (১% কনভার্সন বাড়লে ১.৮৫% বিক্রয় বৃদ্ধি পায়)।</li>
+              <li><strong>SKU Breadth: +১.৬২% রেভিনিউ</strong> (মেমোতে অতিরিক্ত SKU যোগ করলে রেভিনিউ দ্রুত বাড়ে)।</li>
+              <li><strong>Visit Duration: +১.৩৪% রেভিনিউ</strong> (দোকানে কোয়ালিটি সময় দেওয়ার ফল)।</li>
+            </ul>
+          </div>
         </div>
         <div class="chart-wrap"><canvas id="chartElasticity"></canvas></div>
       </div>
@@ -287,8 +370,20 @@ input[type=range]::-webkit-slider-thumb{
         <button class="chart-dl" onclick="dlChart('featureImportance')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
       </div>
       <div class="exec-note emerald">
-        <div class="exec-note-title">📋 Table Note: Field Behavioral Drivers Architecture</div>
-        <strong>Application:</strong> Direct operational mapping of driver importance, revenue elasticity, and strategic execution mechanisms for field force management.
+        <div class="exec-note-header">
+          <div class="exec-note-title">📋 Field Behavioral Drivers Architecture</div>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
+        </div>
+        <div class="note-en">
+          <strong>Application:</strong> Direct operational mapping of driver importance, revenue elasticity, and strategic execution mechanisms for field force management.
+        </div>
+        <div class="note-bn" style="display:none;">
+          <strong>ব্যবহার:</strong> প্রতিটি ফিল্ড প্যারামিটারের গুরুত্ব, রেভিনিউ মাল্টিপ্লায়ার এবং ফিল্ড টিমের জন্য সরাসরি কার্যকর অ্যাকশন প্ল্যান (Operational Action Mechanism) নিচে বিস্তারিত দেওয়া হলো।
+        </div>
       </div>
       <div class="tbl-wrap">
         <table>
@@ -312,14 +407,32 @@ input[type=range]::-webkit-slider-thumb{
         <button class="chart-dl" onclick="dlChart('pdpDuration')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
       </div>
       <div class="exec-note gold">
-        <div class="exec-note-title">⏱️ Chart Note: Visit Duration Non-Linear Response Curve (PDP) — Sweet Spot & Tipping Points</div>
-        <strong>Metric Overview:</strong> Empirical Partial Dependence Plot modeling incremental order value against time spent inside each outlet.
-        <ul>
-          <li><strong>🔴 0–3 Minutes (Under-invested / Wasteful):</strong> Visits under 3 minutes produce near-zero pitch depth; revenue curve remains flat.</li>
-          <li><strong>🟢 8–12 Minutes (🎯 Optimal Sweet Spot):</strong> Maximum revenue velocity! Allows thorough inventory checks, new SKU pitching, and relationship building — driving an average <strong>+69% surge in order size</strong>.</li>
-          <li><strong>🟡 18+ Minutes (Diminishing Returns / Plateau):</strong> Calls exceeding 18 minutes yield zero incremental order value while cannibalizing subsequent beat visits.</li>
-          <li><strong>🚀 Actionable SOP:</strong> Mandate an operational standard of <strong>8–12 minutes per visit</strong> across all sales beats.</li>
-        </ul>
+        <div class="exec-note-header">
+          <div class="exec-note-title">⏱️ Visit Duration Non-Linear Response Curve (PDP) — Sweet Spot & Tipping Points</div>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
+        </div>
+        <div class="note-en">
+          <strong>Metric Overview:</strong> Empirical Partial Dependence Plot modeling incremental order value against time spent inside each outlet.
+          <ul>
+            <li><strong>🔴 0–3 Minutes (Under-invested / Wasteful):</strong> Visits under 3 minutes produce near-zero pitch depth; revenue curve remains flat.</li>
+            <li><strong>🟢 8–12 Minutes (🎯 Optimal Sweet Spot):</strong> Maximum revenue velocity! Allows thorough inventory checks, new SKU pitching, and relationship building — driving an average <strong>+69% surge in order size</strong>.</li>
+            <li><strong>🟡 18+ Minutes (Diminishing Returns / Plateau):</strong> Calls exceeding 18 minutes yield zero incremental order value while cannibalizing subsequent beat visits.</li>
+            <li><strong>🚀 Actionable SOP:</strong> Mandate an operational standard of <strong>8–12 minutes per visit</strong> across all sales beats.</li>
+          </ul>
+        </div>
+        <div class="note-bn" style="display:none;">
+          <strong>সহজ ভাষায় কী বোঝানো হয়েছে:</strong> একজন সেলস অফিসার (SR) দোকানে কতক্ষণ সময় কাটালে সেলস সর্বোচ্চ হয়, তার বাস্তব নন-লিনিয়ার রেসপন্স কার্ভ (Partial Dependence Plot)।
+          <ul>
+            <li><strong>🔴 ০–৩ মিনিট (Under-invested / অপচয়):</strong> দোকানে ৩ মিনিটের কম থাকলে রিটেইলারের সাথে কোনো কার্যকর আলোচনা হয় না; কোনো গভীর সেলস বাড়ে না (Flat Line)।</li>
+            <li><strong>🟢 ৮–১২ মিনিট (🎯 Optimal Sweet Spot):</strong> সবচেয়ে লাভজনক সময়! এই সময়ে রিটেইলার স্টক চেক, নতুন SKU পিচ ও সেলস কনভার্সন সম্ভব হয়—ফলে <strong>অর্ডার রেভিনিউ +৬৯% পর্যন্ত লাফিয়ে বাড়ে</strong>।</li>
+            <li><strong>🟡 ১৮+ মিনিট (Diminishing Returns / Plateau):</strong> ১৮ মিনিটের বেশি আড্ডা দিলে নতুন কোনো সেলস বাড়ে না, বরং পরবর্তী দোকানের সময় নষ্ট হয়।</li>
+            <li><strong>🚀 ফিল্ড অ্যাকশন:</strong> প্রতিটি কল যেন গড়ে <strong>৮–১২ মিনিট</strong> হয়, এসআর-দের সেই স্ট্যান্ডার্ড SOP নিশ্চিত করুন।</li>
+          </ul>
+        </div>
       </div>
       <div class="chart-wrap" style="height:360px"><canvas id="chartPDPDuration"></canvas></div>
     </div>
@@ -331,12 +444,28 @@ input[type=range]::-webkit-slider-thumb{
           <button class="chart-dl" onclick="dlChart('pdpStrike')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
         </div>
         <div class="exec-note cyan">
-          <div class="exec-note-title">🎯 Chart Note: Strike Rate (%) Inflection Curve</div>
-          <strong>Metric Overview:</strong> Demonstrates the non-linear relationship between conversion efficiency and team sales volume.
-          <ul>
-            <li><strong>Critical Threshold (55% Strike Rate):</strong> Crossing 55% unlocks exponential revenue acceleration across field territories.</li>
-            <li><strong>Field Action:</strong> Prioritize objection-handling and pitch-closing training for SRs operating below 55%.</li>
-          </ul>
+          <div class="exec-note-header">
+            <div class="exec-note-title">🎯 Strike Rate (%) Inflection Curve</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            <strong>Metric Overview:</strong> Demonstrates the non-linear relationship between conversion efficiency and team sales volume.
+            <ul>
+              <li><strong>Critical Threshold (55% Strike Rate):</strong> Crossing 55% unlocks exponential revenue acceleration across field territories.</li>
+              <li><strong>Field Action:</strong> Prioritize objection-handling and pitch-closing training for SRs operating below 55%.</li>
+            </ul>
+          </div>
+          <div class="note-bn" style="display:none;">
+            <strong>সহজ ভাষায় কী বোঝানো হয়েছে:</strong> প্রতিদিনের মোট ভিজিটের মধ্যে সফল অর্ডারের হার (Conversion Rate) বাড়লে রেভিনিউ কেমন বাড়ে।
+            <ul>
+              <li><strong>ক্রিটিক্যাল থ্রেশহোল্ড (৫৫%):</strong> স্ট্রাইক রেট ৫৫% পার হওয়ার সাথে সাথে টিম রেভিনিউ সূচকীয় হারে (Exponential Curve) ছুটতে শুরু করে।</li>
+              <li><strong>অ্যাকশন:</strong> আন্ডারপারফর্মারদের স্ট্রাইক রেট ৫৫%+ এ নিয়ে আসতে স্কিল ট্রেনিং দিন।</li>
+            </ul>
+          </div>
         </div>
         <div class="chart-wrap"><canvas id="chartPDPStrike"></canvas></div>
       </div>
@@ -347,12 +476,28 @@ input[type=range]::-webkit-slider-thumb{
           <button class="chart-dl" onclick="dlChart('pdpSKU')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
         </div>
         <div class="exec-note emerald">
-          <div class="exec-note-title">📦 Chart Note: SKU Breadth / Memo Multiplier Curve</div>
-          <strong>Metric Overview:</strong> Models retail lifetime value expansion as order line complexity increases.
-          <ul>
-            <li><strong>Multiplier Threshold (3.5+ SKUs):</strong> Moving from 2 to 3.5+ distinct SKUs per memo doubles average retailer lifetime value.</li>
-            <li><strong>Field Action:</strong> Enforce cross-category bundling and SmartPitch recommendation prompts in the SFA app.</li>
-          </ul>
+          <div class="exec-note-header">
+            <div class="exec-note-title">📦 SKU Breadth / Memo Multiplier Curve</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            <strong>Metric Overview:</strong> Models retail lifetime value expansion as order line complexity increases.
+            <ul>
+              <li><strong>Multiplier Threshold (3.5+ SKUs):</strong> Moving from 2 to 3.5+ distinct SKUs per memo doubles average retailer lifetime value.</li>
+              <li><strong>Field Action:</strong> Enforce cross-category bundling and SmartPitch recommendation prompts in the SFA app.</li>
+            </ul>
+          </div>
+          <div class="note-bn" style="display:none;">
+            <strong>সহজ ভাষায় কী বোঝানো হয়েছে:</strong> একটি মেমোতে কতগুলো আলাদা প্রোডাক্ট লাইন/SKU কাটলে বিক্রয় দ্বিগুণ হয়।
+            <ul>
+              <li><strong>মাল্টিপ্লায়ার থ্রেশহোল্ড (৩.৫+ SKU):</strong> মেমোতে ২টির জায়গায় গড়ে ৩.৫টি SKU কাটতে পারলে রিটেইলারের লাইফটাইম সেলস ভ্যালু সরাসরি দ্বিগুণ (2x) হয়ে যায়।</li>
+              <li><strong>অ্যাকশন:</strong> সিঙ্গেল-ব্র্যান্ড অর্ডারের জায়গায় ক্রস-সেলিং ও বাস্কেট বিল্ডিং পুশ করুন।</li>
+            </ul>
+          </div>
         </div>
         <div class="chart-wrap"><canvas id="chartPDPSKU"></canvas></div>
       </div>
@@ -368,13 +513,30 @@ input[type=range]::-webkit-slider-thumb{
         <button class="chart-dl" onclick="dlChart('regionalKPI')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
       </div>
       <div class="exec-note purple">
-        <div class="exec-note-title">🗺️ Section Note: Differentiated Regional KPI Calibration</div>
-        <strong>Metric Overview:</strong> Eliminates "one-size-fits-all" quotas by calibrating realistic field targets aligned with geographic density and travel transit friction:
-        <ul>
-          <li><strong>Metro (Dhaka / Chittagong):</strong> High density & traffic — Higher daily calls (36 VPD), focused duration (8 mins), and larger memo size (AOV: ৳1,980).</li>
-          <li><strong>Semi-Urban:</strong> Balanced transit — Target 28 VPD, 10 min duration, and 64% strike rate.</li>
-          <li><strong>Rural:</strong> Extended travel distance — Lower call volume (22 VPD), but higher in-store quality time to achieve 72% strike rate and multi-SKU basket building.</li>
-        </ul>
+        <div class="exec-note-header">
+          <div class="exec-note-title">🗺️ Differentiated Regional KPI Calibration</div>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
+        </div>
+        <div class="note-en">
+          <strong>Metric Overview:</strong> Eliminates "one-size-fits-all" quotas by calibrating realistic field targets aligned with geographic density and travel transit friction:
+          <ul>
+            <li><strong>Metro (Dhaka / Chittagong):</strong> High density & traffic — Higher daily calls (36 VPD), focused duration (8 mins), and larger memo size (AOV: ৳1,980).</li>
+            <li><strong>Semi-Urban:</strong> Balanced transit — Target 28 VPD, 10 min duration, and 64% strike rate.</li>
+            <li><strong>Rural:</strong> Extended travel distance — Lower call volume (22 VPD), but higher in-store quality time to achieve 72% strike rate and multi-SKU basket building.</li>
+          </ul>
+        </div>
+        <div class="note-bn" style="display:none;">
+          <strong>সহজ ভাষায় কী বোঝানো হয়েছে:</strong> সারা দেশকে এক পাল্লায় মেপে "One-Size-Fits-All" টার্গেট না দিয়ে ভৌগোলিক বাস্তবতা ও যাতায়াত দূরত্বের ওপর ভিত্তি করে টার্গেট নির্ধারণ:
+          <ul>
+            <li><strong>Metro (ঢাকা/চট্টগ্রাম):</strong> উচ্চ ঘনবসতি—বেশি কল (৩৬ VPD), কম ভিজিট সময় (৮ মিনিট) এবং বড় মেমো সাইজ (AOV: ৳১,৯৮০)।</li>
+            <li><strong>Semi-Urban:</strong> মাঝারি দূরত্ব—কল ২৮ VPD ও স্ট্রাইক রেট ৬৪% টার্গেট।</li>
+            <li><strong>Rural:</strong> দূরবর্তী অঞ্চল—যাতায়াত বেশি হওয়ায় কল কম (২২ VPD), কিন্তু প্রতি কলে সময় দিয়ে স্ট্রাইক রেট (৭২%) ও বাস্কেট সাইজ বাড়িয়ে সেলস বৃদ্ধি।</li>
+          </ul>
+        </div>
       </div>
       <div class="tbl-wrap">
         <table>
@@ -395,8 +557,20 @@ input[type=range]::-webkit-slider-thumb{
           <button class="chart-dl" onclick="dlChart('regionalKPI')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
         </div>
         <div class="exec-note cyan">
-          <div class="exec-note-title">📊 Chart Note: Regional Call Productivity & Strike Targets</div>
-          Calibrated distribution balancing high-density call throughput in Metro vs high-conversion quality visits in Rural beats.
+          <div class="exec-note-header">
+            <div class="exec-note-title">📊 Regional Call Productivity & Strike Targets</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            Calibrated distribution balancing high-density call throughput in Metro vs high-conversion quality visits in Rural beats.
+          </div>
+          <div class="note-bn" style="display:none;">
+            মেট্রোতে কলের সংখ্যা বেশি হলেও রুরাল এলাকায় প্রতি কলের মান ও স্ট্রাইক রেট বেশি রাখার যৌক্তিক বিন্যাস।
+          </div>
         </div>
         <div class="chart-wrap"><canvas id="chartRegionalKPIs"></canvas></div>
       </div>
@@ -407,8 +581,20 @@ input[type=range]::-webkit-slider-thumb{
           <button class="chart-dl" onclick="dlChart('regionalKPI')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
         </div>
         <div class="exec-note orange">
-          <div class="exec-note-title">📈 Chart Note: Untapped Regional Revenue Growth Potential (%)</div>
-          While Metro drives baseline volume, highest percentage growth headroom resides in <strong>Rural (+21.3%)</strong> and <strong>Semi-Urban (+19.1%)</strong> tiers under calibrated KPI execution.
+          <div class="exec-note-header">
+            <div class="exec-note-title">📈 Untapped Regional Revenue Growth Potential (%)</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            While Metro drives baseline volume, highest percentage growth headroom resides in <strong>Rural (+21.3%)</strong> and <strong>Semi-Urban (+19.1%)</strong> tiers under calibrated KPI execution.
+          </div>
+          <div class="note-bn" style="display:none;">
+            মেট্রোতে সেলস বেশি হলেও গ্রোথ পটেনশিয়াল সবচেয়ে বেশি লুকিয়ে আছে <strong>Rural (+২১.৩%)</strong> ও <strong>Semi-Urban (+১৯.১%)</strong> অঞ্চলে।
+          </div>
         </div>
         <div class="chart-wrap"><canvas id="chartRegionalGrowth"></canvas></div>
       </div>
@@ -421,11 +607,26 @@ input[type=range]::-webkit-slider-thumb{
     <div class="sim-panel">
       <h3 style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:12px">Interactive What-If KPI Revenue Simulator</h3>
       <div class="exec-note emerald">
-        <div class="exec-note-title">🎛️ Simulator Note: Interactive What-If KPI Revenue Calculator</div>
-        <strong>Functionality:</strong> Simulates net incremental enterprise revenue (in BDT) unlocked by dialing targeted percentage gains across Strike Rate, SKU Breadth, Visit Duration, and Call Velocity.
-        <ul>
-          <li><strong>Instructions:</strong> Adjust sliders to dynamically evaluate annual revenue scenarios and download custom Excel models.</li>
-        </ul>
+        <div class="exec-note-header">
+          <div class="exec-note-title">🎛️ Interactive What-If KPI Revenue Calculator</div>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
+        </div>
+        <div class="note-en">
+          <strong>Functionality:</strong> Simulates net incremental enterprise revenue (in BDT) unlocked by dialing targeted percentage gains across Strike Rate, SKU Breadth, Visit Duration, and Call Velocity.
+          <ul>
+            <li><strong>Instructions:</strong> Adjust sliders to dynamically evaluate annual revenue scenarios and download custom Excel models.</li>
+          </ul>
+        </div>
+        <div class="note-bn" style="display:none;">
+          <strong>কীভাবে কাজ করে:</strong> ফিল্ড টিমের স্ট্রাইক রেট, এসকেইউ সংখ্যা বা ভিজিট টাইম ৫%, ১০% বা ১৫% বাড়ালে পুরো কোম্পানি বছরে মোট কত কোটি টাকা অতিরিক্ত সেলস পাবে তা সাথে সাথে হিসাব করে।
+          <ul>
+            <li><strong>ব্যবহার পদ্ধতি:</strong> নিচের স্লাইডারগুলো ডানে-বামে টেনে সাথে সাথে প্রজেক্টেড রেভিনিউ প্রবৃদ্ধি দেখুন।</li>
+          </ul>
+        </div>
       </div>
       
       <div class="sim-grid">
@@ -465,8 +666,20 @@ input[type=range]::-webkit-slider-thumb{
         <button class="chart-dl" onclick="dlChart('simScenarios')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
       </div>
       <div class="exec-note cyan">
-        <div class="exec-note-title">📊 Table Note: Standard KPI Improvement Tiers Benchmark (+5%, +10%, +15%)</div>
-        Quantifies enterprise monetary gain and strategic management levers for standard 5%, 10%, and 15% operational improvement horizons.
+        <div class="exec-note-header">
+          <div class="exec-note-title">📊 Standard KPI Improvement Tiers Benchmark (+5%, +10%, +15%)</div>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
+        </div>
+        <div class="note-en">
+          Quantifies enterprise monetary gain and strategic management levers for standard 5%, 10%, and 15% operational improvement horizons.
+        </div>
+        <div class="note-bn" style="display:none;">
+          প্রতিটি KPI ডায়মেনশনে ৫%, ১০% ও ১৫% উন্নতি আনতে পারলে বার্ষিক কত টাকা অতিরিক্ত নেট সেলস আসবে এবং তা অর্জনের জন্য ম্যানেজমেন্টকে কী কৌশল নিতে হবে।
+        </div>
       </div>
       <div class="tbl-wrap">
         <table>
@@ -490,12 +703,28 @@ input[type=range]::-webkit-slider-thumb{
         <button class="chart-dl" onclick="dlChart('salesForecast')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
       </div>
       <div class="exec-note purple">
-        <div class="exec-note-title">🔮 Chart Note: 6-Month Predictive Sales Forecast & Confidence Bands</div>
-        <strong>Metric Overview:</strong> Time-series econometric forecasting incorporating empirical seasonality patterns and delivery multipliers:
-        <ul>
-          <li><strong>Solid Trajectory (Projected Revenue):</strong> Baseline expected monthly revenue trajectory (+18.4% annualized forecast).</li>
-          <li><strong>Shaded Confidence Bands (80% & 95% CI):</strong> Statistical upper and lower bounds for enterprise risk buffering and supply planning.</li>
-        </ul>
+        <div class="exec-note-header">
+          <div class="exec-note-title">🔮 6-Month Predictive Sales Forecast & Confidence Bands</div>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
+        </div>
+        <div class="note-en">
+          <strong>Metric Overview:</strong> Time-series econometric forecasting incorporating empirical seasonality patterns and delivery multipliers:
+          <ul>
+            <li><strong>Solid Trajectory (Projected Revenue):</strong> Baseline expected monthly revenue trajectory (+18.4% annualized forecast).</li>
+            <li><strong>Shaded Confidence Bands (80% & 95% CI):</strong> Statistical upper and lower bounds for enterprise risk buffering and supply planning.</li>
+          </ul>
+        </div>
+        <div class="note-bn" style="display:none;">
+          <strong>সহজ ভাষায় কী বোঝানো হয়েছে:</strong> ঐতিহাসিক সেলস ট্রেন্ড, সিজনাল ডিমান্ড ও টাইম-সিরিজ মডেলের ওপর ভিত্তি করে আগামী ৬ মাসের বিক্রয় পূর্বাভাস:
+          <ul>
+            <li><strong>সলিড লাইন (Projected Revenue):</strong> সম্ভাব্য স্বাভাবিক মাসিক সেলস গতিধারা (+১৮.৪% বার্ষিক প্রবৃদ্ধি)।</li>
+            <li><strong>হালকা শেড ব্যান্ড (৮০% ও ৯৫% Confidence Bands):</strong> প্রতিকূল বাজার পরিস্থিতি বা সর্বোচ্চ অনুকূল পরিবেশের সম্ভাব্য রেঞ্জ (Risk Margin)।</li>
+          </ul>
+        </div>
       </div>
       <div class="chart-wrap" style="height:420px"><canvas id="chartForecast"></canvas></div>
     </div>
@@ -506,8 +735,20 @@ input[type=range]::-webkit-slider-thumb{
         <button class="chart-dl" onclick="dlChart('salesForecast')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
       </div>
       <div class="exec-note gold">
-        <div class="exec-note-title">📑 Table Note: Forecast Trajectory & Confidence Limits Data</div>
-        Financial and S&OP planning reference establishing empirical monthly projection targets and risk bounds in BDT.
+        <div class="exec-note-header">
+          <div class="exec-note-title">📑 Forecast Trajectory & Confidence Limits Data</div>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
+        </div>
+        <div class="note-en">
+          Financial and S&OP planning reference establishing empirical monthly projection targets and risk bounds in BDT.
+        </div>
+        <div class="note-bn" style="display:none;">
+          ফিন্যান্স, সাপ্লাই চেইন ও প্রোডাকশন প্ল্যানিংয়ের জন্য আগামী ৬ মাসের আপার ও লোয়ার সীমানা নির্ধারণের সুনির্দিষ্ট টাকার পরিমাণ।
+        </div>
       </div>
       <div class="tbl-wrap">
         <table>
@@ -1072,6 +1313,27 @@ function exportModule5CSVs() {
 function toggleTheme() {
   const cur = document.documentElement.getAttribute('data-theme');
   document.documentElement.setAttribute('data-theme', cur === 'light' ? 'dark' : 'light');
+}
+
+function toggleNoteLang(btn) {
+  const note = btn.closest('.exec-note');
+  if (!note) return;
+  const enBlock = note.querySelector('.note-en');
+  const bnBlock = note.querySelector('.note-bn');
+  const pills = btn.querySelectorAll('.lang-pill');
+  
+  if (enBlock && bnBlock) {
+    const isEn = enBlock.style.display !== 'none';
+    if (isEn) {
+      enBlock.style.display = 'none';
+      bnBlock.style.display = 'block';
+      pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === 'bn'));
+    } else {
+      enBlock.style.display = 'block';
+      bnBlock.style.display = 'none';
+      pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === 'en'));
+    }
+  }
 }
 </script>
 </body>

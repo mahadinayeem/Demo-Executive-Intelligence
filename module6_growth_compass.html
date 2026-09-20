@@ -115,7 +115,7 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
 .badge.cyan{background:rgba(6,182,212,.15);color:var(--cyan)}
 .badge.purple{background:rgba(139,92,246,.15);color:var(--accent2)}
 
-/* ── EXECUTIVE NOTE CALLOUTS ── */
+/* ── EXECUTIVE NOTE CALLOUTS & BILINGUAL TOGGLE ── */
 .exec-note {
   background: rgba(16,185,129,0.06);
   border-left: 4px solid var(--emerald);
@@ -125,21 +125,57 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
   font-size: 11.5px;
   line-height: 1.6;
   color: var(--text2);
+  position: relative;
 }
 .exec-note.cyan { background: rgba(6,182,212,0.06); border-left-color: var(--cyan); }
 .exec-note.gold { background: rgba(245,158,11,0.06); border-left-color: var(--gold); }
 .exec-note.purple { background: rgba(139,92,246,0.06); border-left-color: var(--accent2); }
 .exec-note.rose { background: rgba(244,63,94,0.06); border-left-color: var(--rose); }
+
+.exec-note-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  margin-bottom: 6px;
+}
 .exec-note-title {
   display: flex; align-items: center; gap: 6px;
-  font-weight: 700; color: var(--text); font-size: 12px; margin-bottom: 4px;
+  font-weight: 700; color: var(--text); font-size: 12px;
 }
+.lang-toggle-btn {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text2);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s;
+  user-select: none;
+}
+.lang-toggle-btn:hover {
+  border-color: var(--emerald);
+  color: var(--text);
+}
+.lang-toggle-btn .lang-pill {
+  padding: 1px 4px;
+  border-radius: 8px;
+  transition: all 0.15s;
+}
+.lang-toggle-btn .lang-pill.active {
+  background: var(--emerald);
+  color: #ffffff;
+}
+
 .exec-note ul { margin: 4px 0 0 16px; padding: 0; }
 .exec-note li { margin-bottom: 3px; }
 .exec-note strong { color: var(--text); font-weight: 700; }
 [data-theme="light"] .exec-note { background: #f1f5f9; color: #334155; }
 [data-theme="light"] .exec-note strong { color: #0f172a; }
 [data-theme="light"] .exec-note-title { color: #0f172a; }
+[data-theme="light"] .lang-toggle-btn { background: #e2e8f0; border-color: #cbd5e1; color: #475569; }
 
 /* ── DOWNLOAD BUTTONS ── */
 .chart-dl{
@@ -209,8 +245,20 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
   <div class="tab-content active" id="sec-categories">
     
     <div class="exec-note emerald">
-      <div class="exec-note-title">💡 Executive Summary: Category & Portfolio Distribution</div>
-      National delivered sales and portfolio mix performance analysis — identifies revenue contribution by FMCG category, active retail door penetration, and category expansion opportunities.
+      <div class="exec-note-header">
+        <div class="exec-note-title">💡 Category & Portfolio Distribution Executive Summary</div>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+      <div class="note-en">
+        National delivered sales and portfolio mix performance analysis — identifies revenue contribution by FMCG category, active retail door penetration, and category expansion opportunities.
+      </div>
+      <div class="note-bn" style="display:none;">
+        জাতীয় পর্যায়ে মোট ডেলিভার্ড সেলস এবং ব্র্যান্ড পোর্টফোলিও পারফরম্যান্স বিশ্লেষণ—কোন ক্যাটাগরি সর্বোচ্চ রেভিনিউ তৈরি করছে এবং কোন ক্যাটাগরির রিটেইল ডোর পেনিট্রেশন আরও বাড়ানোর সুযোগ রয়েছে তা নিচে দেখানো হলো।
+      </div>
     </div>
 
     <div class="kpi-grid">
@@ -243,8 +291,20 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
           <button class="chart-dl" onclick="dlChart('categoryPerformance')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
         </div>
         <div class="exec-note emerald">
-          <div class="exec-note-title">📊 Chart Note: Category Revenue Contribution & Market Share (%)</div>
-          <strong>Metric Overview:</strong> Net delivered sales volume and revenue share percentage across FMCG categories.
+          <div class="exec-note-header">
+            <div class="exec-note-title">📊 Category Revenue Contribution & Market Share (%)</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            <strong>Metric Overview:</strong> Net delivered sales volume and revenue share percentage across FMCG categories.
+          </div>
+          <div class="note-bn" style="display:none;">
+            <strong>কী বোঝাচ্ছে:</strong> প্রতিটি প্রোডাক্ট ক্যাটাগরি জাতীয় রেভিনিউতে কত টাকা এবং কত শতাংশ অবদান রাখছে।
+          </div>
         </div>
         <div class="chart-wrap"><canvas id="chartCatTarget"></canvas></div>
       </div>
@@ -255,8 +315,20 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
           <button class="chart-dl" onclick="dlChart('categoryPerformance')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
         </div>
         <div class="exec-note cyan">
-          <div class="exec-note-title">🚪 Chart Note: Retail Store Penetration & Active SKU Breadth</div>
-          <strong>Metric Overview:</strong> Number of unique retail doors reached (Bars) vs active product lines / SKUs sold (Line).
+          <div class="exec-note-header">
+            <div class="exec-note-title">🚪 Retail Store Penetration & Active SKU Breadth</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            <strong>Metric Overview:</strong> Number of unique retail doors reached (Bars) vs active product lines / SKUs sold (Line).
+          </div>
+          <div class="note-bn" style="display:none;">
+            <strong>কী বোঝাচ্ছে:</strong> কোন ক্যাটাগরি কত হাজার দোকানে পৌঁছেছে (বার চার্ট) এবং তাতে কতগুলো সক্রিয় SKU রয়েছে (লাইন চার্ট)।
+          </div>
         </div>
         <div class="chart-wrap"><canvas id="chartCatAch"></canvas></div>
       </div>
@@ -268,8 +340,20 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
         <button class="chart-dl" onclick="dlChart('categoryPerformance')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
       </div>
       <div class="exec-note gold">
-        <div class="exec-note-title">📋 Table Note: Category Metrics & Average Order Value (AOV)</div>
-        Comprehensive breakdown of delivered sales value, total memos, verified retail coverage, and Average Order Value (AOV) per category.
+        <div class="exec-note-header">
+          <div class="exec-note-title">📋 Category Metrics & Average Order Value (AOV)</div>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
+        </div>
+        <div class="note-en">
+          Comprehensive breakdown of delivered sales value, total memos, verified retail coverage, and Average Order Value (AOV) per category.
+        </div>
+        <div class="note-bn" style="display:none;">
+          প্রতিটি ক্যাটাগরির মোট রেভিনিউ, মেমো সংখ্যা, দোকান কভারেজ এবং মেমো প্রতি গড় সেলস (AOV) ডেটা।
+        </div>
       </div>
       <div class="tbl-wrap">
         <table>
@@ -288,8 +372,20 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
   <div class="tab-content" id="sec-territories">
     
     <div class="exec-note cyan">
-      <div class="exec-note-title">🏢 Distributor / DB Point Performance Overview</div>
-      National analysis across Top 50 Distributor / DB Points — evaluates revenue contribution, assigned Sales Representative (SR) force, and retail door coverage.
+      <div class="exec-note-header">
+        <div class="exec-note-title">🏢 Distributor / DB Point Performance Overview</div>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+      <div class="note-en">
+        National analysis across Top 50 Distributor / DB Points — evaluates revenue contribution, assigned Sales Representative (SR) force, and retail door coverage.
+      </div>
+      <div class="note-bn" style="display:none;">
+        জাতীয় পর্যায়ে শীর্ষ ৫০টি ডিস্ট্রিবিউটর / ডিবি পয়েন্টের রেভিনিউ কন্ট্রিবিউশন, সেলস অফিসার (SR) সংখ্যা এবং রিটেইল ডোর কভারেজ বিশ্লেষণ।
+      </div>
     </div>
 
     <div class="card">
@@ -298,8 +394,20 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
         <button class="chart-dl" onclick="dlChart('territoryPerformance')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
       </div>
       <div class="exec-note cyan">
-        <div class="exec-note-title">📊 Chart Note: Top 15 Distributor / DB Points Ranking</div>
-        Green bars represent total delivered revenue (BDT); gold line represents verified retail door reach.
+        <div class="exec-note-header">
+          <div class="exec-note-title">📊 Top 15 Distributor / DB Points Ranking</div>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
+        </div>
+        <div class="note-en">
+          Green bars represent total delivered revenue (BDT); gold line represents verified retail door reach.
+        </div>
+        <div class="note-bn" style="display:none;">
+          সবুজ বার নির্দেশ করছে মোট ডেলিভার্ড রেভিনিউ (BDT) এবং হলুদ লাইন নির্দেশ করছে কার্যকর রিটেইল ডোর কভারেজ।
+        </div>
       </div>
       <div class="chart-wrap" style="height:360px"><canvas id="chartTerritoryTarget"></canvas></div>
     </div>
@@ -310,8 +418,20 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
         <button class="chart-dl" onclick="dlChart('territoryPerformance')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
       </div>
       <div class="exec-note gold">
-        <div class="exec-note-title">📋 Table Note: DB Point SR Productivity (Avg Revenue / SR)</div>
-        Evaluates Sales Representative efficiency and revenue generated per active field officer across distributor points.
+        <div class="exec-note-header">
+          <div class="exec-note-title">📋 DB Point SR Productivity (Avg Revenue / SR)</div>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
+        </div>
+        <div class="note-en">
+          Evaluates Sales Representative efficiency and revenue generated per active field officer across distributor points.
+        </div>
+        <div class="note-bn" style="display:none;">
+          প্রতিটি ডিস্ট্রিবিউটর পয়েন্টে নিয়োজিত এসআর সংখ্যা এবং এসআর প্রতি গড় রেভিনিউ বিশ্লেষণ।
+        </div>
       </div>
       <div class="tbl-wrap">
         <table>
@@ -336,13 +456,30 @@ tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
     </div>
 
     <div class="exec-note purple">
-      <div class="exec-note-title">🚀 Strategic Directive Note: 30-60-90 Day Execution Roadmap</div>
-      <strong>Implementation Blueprint:</strong>
-      <ul>
-        <li><strong>Phase 1 (Day 1–30):</strong> Enforce 8–12 minute visit duration SOP and high-velocity conversion discipline.</li>
-        <li><strong>Phase 2 (Day 31–60):</strong> Target underperforming SR upskilling and route PJP density optimization.</li>
-        <li><strong>Phase 3 (Day 61–90):</strong> Deploy real-time anomaly detection and cross-category basket expansion governance.</li>
-      </ul>
+      <div class="exec-note-header">
+        <div class="exec-note-title">🚀 Strategic Directive: 30-60-90 Day Execution Roadmap</div>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+      <div class="note-en">
+        <strong>Implementation Blueprint:</strong>
+        <ul>
+          <li><strong>Phase 1 (Day 1–30):</strong> Enforce 8–12 minute visit duration SOP and high-velocity conversion discipline.</li>
+          <li><strong>Phase 2 (Day 31–60):</strong> Target underperforming SR upskilling and route PJP density optimization.</li>
+          <li><strong>Phase 3 (Day 61–90):</strong> Deploy real-time anomaly detection and cross-category basket expansion governance.</li>
+        </ul>
+      </div>
+      <div class="note-bn" style="display:none;">
+        <strong>বাস্তবায়ন কৌশল:</strong>
+        <ul>
+          <li><strong>Phase 1 (Day 1–30):</strong> এসআর কল কোয়ালিটি ও ৮–১২ মিনিট ভিজিট ডিউরেশন নিশ্চিতকরণ এসওপি।</li>
+          <li><strong>Phase 2 (Day 31–60):</strong> আন্ডারপারফর্মারদের ট্রেনিং ও রুটে পিজেপি (PJP) অপ্টিমাইজেশন।</li>
+          <li><strong>Phase 3 (Day 61–90):</strong> রিয়েল-টাইম অ্যানোমালি ডিটেকশন ও পোর্টফোলিও বাস্কেট ট্রান্সফরমেশন।</li>
+        </ul>
+      </div>
     </div>
 
     <div class="roadmap-grid" id="roadmapContainer"></div>
@@ -687,6 +824,27 @@ function exportModule6CSVs() {
 function toggleTheme() {
   const cur = document.documentElement.getAttribute('data-theme');
   document.documentElement.setAttribute('data-theme', cur === 'light' ? 'dark' : 'light');
+}
+
+function toggleNoteLang(btn) {
+  const note = btn.closest('.exec-note');
+  if (!note) return;
+  const enBlock = note.querySelector('.note-en');
+  const bnBlock = note.querySelector('.note-bn');
+  const pills = btn.querySelectorAll('.lang-pill');
+  
+  if (enBlock && bnBlock) {
+    const isEn = enBlock.style.display !== 'none';
+    if (isEn) {
+      enBlock.style.display = 'none';
+      bnBlock.style.display = 'block';
+      pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === 'bn'));
+    } else {
+      enBlock.style.display = 'block';
+      bnBlock.style.display = 'none';
+      pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === 'en'));
+    }
+  }
 }
 </script>
 </body>
