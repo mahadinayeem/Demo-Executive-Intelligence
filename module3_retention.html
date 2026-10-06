@@ -211,7 +211,36 @@ tr:hover td{background:var(--card2)}
   padding:4px 10px;border-radius:6px;cursor:pointer;font-size:10px;font-weight:600;
   display:flex;align-items:center;gap:4px;transition:all .2s;white-space:nowrap;flex-shrink:0;
 }
-.chart-dl:hover{border-color:var(--accent);color:var(--accent);background:rgba(79,142,247,.06)}
+.lang-toggle-btn {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  padding: 3px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text2);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.lang-toggle-btn:hover {
+  border-color: var(--emerald);
+  background: rgba(16,185,129,0.08);
+}
+.lang-pill {
+  padding: 1px 5px;
+  border-radius: 12px;
+  transition: all 0.2s;
+  opacity: 0.6;
+}
+.lang-pill.active {
+  background: var(--emerald);
+  color: #ffffff;
+  opacity: 1;
+}
 
 @media(max-width:768px){
   .header{padding:16px 20px}
@@ -230,9 +259,9 @@ tr:hover td{background:var(--card2)}
       <h1>Customer Retention & <span>Behavioral Segmentation</span></h1>
     </div>
     <div class="header-right">
-      <div class="hstat"><div class="hstat-val" id="hActive">--</div><div class="hstat-lbl">Active Outlets</div></div>
-      <div class="hstat"><div class="hstat-val danger" id="hRisk">--</div><div class="hstat-lbl">Revenue at Risk</div></div>
-      <div class="hstat"><div class="hstat-val warn" id="hBleed">--</div><div class="hstat-lbl">Silent Bleed</div></div>
+      <div class="hstat"><div class="hstat-val" id="hActive">208,403</div><div class="hstat-lbl">Audited Outlets</div></div>
+      <div class="hstat"><div class="hstat-val emerald" id="hCoreActive">164,571</div><div class="hstat-lbl">Regular Active (79%)</div></div>
+      <div class="hstat"><div class="hstat-val danger" id="hRisk">BDT 172.5M</div><div class="hstat-lbl">Revenue at Risk</div></div>
       <button class="btn" onclick="exportCSVAll()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Export CSVs
       </button>
@@ -259,25 +288,56 @@ tr:hover td{background:var(--card2)}
 
   <!-- GLOBAL KPI ROW (always visible) -->
   <div class="kpi-row" id="globalKpis">
-    <div class="kpi"><div class="kpi-glow"></div><div class="kpi-lbl">Total Active Outlets</div><div class="kpi-val good" id="kActive">--</div><div class="kpi-sub">Ordered in last 60 days</div></div>
-    <div class="kpi warn"><div class="kpi-glow"></div><div class="kpi-lbl">Churn Risk Outlets</div><div class="kpi-val warn" id="kRiskCount">--</div><div class="kpi-sub"><span class="pill">Immediate Action</span></div></div>
-    <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Revenue at Churn Risk</div><div class="kpi-val danger" id="kRiskRev">--</div><div class="kpi-sub"><span class="pill">2× their normal cycle</span></div></div>
-    <div class="kpi warn"><div class="kpi-glow"></div><div class="kpi-lbl">Silent Bleed Outlets</div><div class="kpi-val warn" id="kBleedCount">--</div><div class="kpi-sub">Active but AOV down >50%</div></div>
-    <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Wallet Share Lost</div><div class="kpi-val danger" id="kBleedRev">--</div><div class="kpi-sub">Silent Bleed revenue loss</div></div>
-    <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Red Flag Outlets</div><div class="kpi-val danger" id="kFlags">--</div><div class="kpi-sub">>5 visits, 0 conversions</div></div>
+    <div class="kpi"><div class="kpi-glow"></div><div class="kpi-lbl">Total Audited Universe</div><div class="kpi-val good" id="kTotalAudited">208,403</div><div class="kpi-sub"><span class="badge" style="font-size:9px;padding:1px 6px">📅 May–Aug (4M)</span> 100% transacting base</div></div>
+    <div class="kpi"><div class="kpi-glow"></div><div class="kpi-lbl">Regular Active Accounts</div><div class="kpi-val good" id="kActive">164,571</div><div class="kpi-sub"><span class="badge emerald" style="font-size:9px;padding:1px 6px">📅 August (30D)</span> 79.0% repeat buyers</div></div>
+    <div class="kpi warn"><div class="kpi-glow"></div><div class="kpi-lbl">At-Risk & Lost Accounts</div><div class="kpi-val warn" id="kSilentAccounts">43,832</div><div class="kpi-sub"><span class="badge gold" style="font-size:9px;padding:1px 6px">📅 May–Jul Inactive</span> 21.0% silent for 1–3+ mos</div></div>
+    <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Revenue at Churn Risk</div><div class="kpi-val danger" id="kRiskRev">BDT 172.5M</div><div class="kpi-sub"><span class="badge rose" style="font-size:9px;padding:1px 6px">⚠️ Potential Loss</span> 17.8k doors — Win-back to save ৳10-12Cr</div></div>
+    <div class="kpi warn"><div class="kpi-glow"></div><div class="kpi-lbl">Silent Bleed Outlets</div><div class="kpi-val warn" id="kBleedCount">28,151</div><div class="kpi-sub"><span class="badge gold" style="font-size:9px;padding:1px 6px">📅 May–Jun vs Jul–Aug</span> >50% order decay (৳24.7Cr)</div></div>
+    <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Red Flag Outlets</div><div class="kpi-val danger" id="kFlags">9,009</div><div class="kpi-sub"><span class="badge rose" style="font-size:9px;padding:1px 6px">📅 May–Aug (4M)</span> >5 visits, 0 conversions</div></div>
   </div>
 
   <!-- ═══════════ TAB: RFM ═══════════ -->
   <div id="sec-rfm" class="section active">
+    
+    <!-- AUDIT TIMELINE & RETENTION FRAMEWORK BANNER -->
+    <div class="insight emerald" style="margin-bottom:16px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.25);border-radius:10px;padding:14px 18px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h4 style="color:var(--emerald);font-size:13px;font-weight:800;display:flex;align-items:center;gap:6px;margin:0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span>Timeframe: 4-Month Commercial Audit Baseline (May 1 – August 31, 2026)</span>
+        </h4>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+      <div class="note-en" style="font-size:12px;color:var(--text);line-height:1.6">
+        Across the <strong>208,403 total audited retail doors (100%)</strong> over the 4-month audit cycle (May–August 2026):<br>
+        • <strong>Regular Active Base (79.0% / 164,571 Outlets):</strong> Placed repeat orders in the latest 30-day window (August 2026) across Champions, Loyal Base, and Potential tiers.<br>
+        • <strong>1-Month Silent / At-Risk (11.2% / 23,367 Outlets):</strong> Ordered in July, but went completely silent for the entire month of August (31–60 days gap).<br>
+        • <strong>2+ Months Churned / Lost (9.8% / 20,465 Outlets):</strong> Zero orders since May/June (>60 days inactive / Dormant accounts).<br>
+        • <strong>Urgent Intervention:</strong> Recovering the 43,832 silent/lost accounts protects <strong>BDT 172.5M in annual cashflow</strong>.
+      </div>
+      <div class="note-bn" style="display:none;font-size:12px;color:var(--text);line-height:1.6">
+        মে থেকে আগস্ট ২০২৬ পর্যন্ত ৪ মাসের সম্পূর্ণ রিটেল অডিট অনুযায়ী সারা দেশের <strong>২,০৮,৪০৩টি দোকানের (১০০%)</strong> চিত্র:<br>
+        • <strong>নিয়মিত সক্রিয় ক্রেতা (৭৯.০% / ১,৬৪,৫৭১টি দোকান):</strong> যারা সর্বশেষ ৩০ দিনে (আগস্ট মাসে) নিয়মিত চা কিনেছে (Champions: ৯,৩৬৪ + Loyal Base: ১,৩৫,০৩০ + Potential: ২০,১৭৭)।<br>
+        • <strong>১ মাস ধরে বন্ধ থাকা At-Risk দোকান (১১.২% / ২৩,৩৬৭টি):</strong> যারা জুলাই মাসে মাল নিয়েছিল কিন্তু আগস্টের পুরো ৩০ দিন কোনো অর্ডার দেয়নি।<br>
+        • <strong>২+ মাস ধরে বন্ধ থাকা Lost দোকান (৯.৮% / ২০,৪৬৫টি):</strong> মে-জুন থেকে ২ মাসের বেশি সময় ধরে সম্পূর্ণ নিষ্ক্রিয় বা হারিয়ে যাওয়া দোকান।<br>
+        • <strong>জরুরি পদক্ষেপ:</strong> এই ৪৩,৮৩২টি বন্ধ হয়ে যাওয়া দোকানকে রি-অর্ডারে ফিরিয়ে আনলে কোম্পানিতে বার্ষিক <strong>৳ ১৭.২ কোটি টাকার ক্যাশ</strong> সুরক্ষিত হবে।
+      </div>
+    </div>
+
     <div class="g2">
       <div class="card">
-        <h3>RFM Retail Universe <span class="badge">Outlet Distribution</span> <button class="chart-dl" onclick="chartDL('rfm-donut')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
-        <p class="card-desc">How your 184K+ active retailers are distributed across behavioural segments. Champions represent your highest-value segment.</p>
+        <h3>RFM Retail Universe <span class="badge">4-Month Full Universe (May–Aug 2026)</span> <button class="chart-dl" onclick="chartDL('rfm-donut')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">National retail network segmentation across 5 distinct behavioural tiers (Core Active, At-Risk & Lost).</p>
         <div class="chart-wrap" style="position:relative">
           <canvas id="chartRFMDonut"></canvas>
           <div class="donut-center" id="rfmCenter">
-            <div class="donut-center-val" id="rfmCenterVal">--</div>
-            <div class="donut-center-lbl" id="rfmCenterLbl">Active Only</div>
+            <div class="donut-center-val" id="rfmCenterVal">208,403</div>
+            <div class="donut-center-lbl" id="rfmCenterLbl">TOTAL AUDITED BASE</div>
+            <div style="font-size:9px;color:var(--emerald);font-weight:700;margin-top:2px">79% Active (164.5k)</div>
           </div>
         </div>
         <div class="insight emerald" style="margin-top:14px">
@@ -292,7 +352,7 @@ tr:hover td{background:var(--card2)}
         </div>
       </div>
       <div class="card">
-        <h3>Revenue Contribution <span class="badge">vs Outlet Share</span> <button class="chart-dl" onclick="chartDL('rfm-bar')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <h3>Revenue Contribution vs Outlet Share <span class="badge">4-Month Cumulative</span> <button class="chart-dl" onclick="chartDL('rfm-bar')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
         <p class="card-desc">Champions are a small % of outlets but drive disproportionate revenue — protect them at all cost.</p>
         <div class="chart-wrap">
           <canvas id="chartRFMBar"></canvas>
@@ -305,16 +365,41 @@ tr:hover td{background:var(--card2)}
 
   <!-- ═══════════ TAB: CHURN ═══════════ -->
   <div id="sec-churn" class="section">
+    <!-- CHURN TIMELINE BANNER -->
+    <div class="insight rose" style="margin-bottom:16px;background:rgba(244,63,94,0.05);border:1px solid rgba(244,63,94,0.25);border-radius:10px;padding:14px 18px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h4 style="color:var(--rose);font-size:13px;font-weight:800;display:flex;align-items:center;gap:6px;margin:0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span>Timeframe: 4-Month Full Audit Baseline (May 1 – August 31, 2026)</span>
+        </h4>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+      <div class="note-en" style="font-size:12px;color:var(--text);line-height:1.6">
+        • <strong>Audit Scope:</strong> Analyzes buyer retention decay across all <strong>4 months (May–August 2026)</strong> for the entire 208,403 transacting outlet universe.<br>
+        • <strong>Retention Breakdown:</strong> 164,571 active repeaters (ordered in August) vs 23,367 At-Risk (silent for 30–60 days) vs 20,465 Lost/Churned (silent >60 days since May/June).<br>
+        • <strong>Root Cause Split:</strong> Out of 43,832 non-buying outlets, <strong>52% (Visit Gap)</strong> were never visited by SRs, while <strong>48% (Service Gap)</strong> were visited but failed to order.
+      </div>
+      <div class="note-bn" style="display:none;font-size:12px;color:var(--text);line-height:1.6">
+        • <strong>ডেটা সময়কাল:</strong> মে ১ থেকে আগস্ট ৩১, ২০২৬ পর্যন্ত <strong>সম্পূর্ণ ৪ মাসের অডিট</strong> (মোট ২,০৮,৪০৩টি দোকান)।<br>
+        • <strong>ড্রপ-অফ বিভাজন:</strong> ১,৬৪,৫৭১টি নিয়মিত সচল দোকান বনাম ২৩,৩৬৭টি At-Risk দোকান (জুলাইয়ে নিলেও আগস্টে বন্ধ) বনাম ২০,৪৬৫টি Lost দোকান (মে-জুন থেকে ২ মাসের বেশি বন্ধ)।<br>
+        • <strong>ড্রপ-অফের মূল কারণ:</strong> অর্ডার বন্ধ হয়ে যাওয়া দোকানের <strong>৫২% ক্ষেত্রে এসআর কখনও যায়নি (Visit Gap)</strong> এবং <strong>৪৮% ক্ষেত্রে এসআর গেলেও অর্ডার তুলতে ব্যর্থ হয়েছে (Service Gap)</strong>।
+      </div>
+    </div>
+
     <div class="g2">
       <div class="card">
-        <h3>Buyer Drop-Off Funnel <span class="badge rose">Retention</span> <button class="chart-dl" onclick="chartDL('churn-funnel')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
-        <p class="card-desc">Total active base → At-Risk → Lost. Each drop is quantified with exact lost revenue.</p>
+        <h3>Buyer Drop-Off Funnel <span class="badge rose">4-Month Retention Audit</span> <button class="chart-dl" onclick="chartDL('churn-funnel')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">Total active base → At-Risk → Lost. Each drop is quantified with exact lost revenue across May–August 2026.</p>
         <div class="chart-wrap">
           <canvas id="chartFunnel"></canvas>
         </div>
       </div>
       <div class="card">
-        <h3>Root Cause Analysis <span class="badge rose">Visit Gap vs Service Gap</span> <button class="chart-dl" onclick="chartDL('root-cause')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <h3>Root Cause Analysis <span class="badge rose">Visit Gap vs Service Gap (May–Aug)</span> <button class="chart-dl" onclick="chartDL('root-cause')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
         <p class="card-desc">For every churned outlet — why did they leave? Was it a <strong>Visit Gap</strong> (field never came) or a <strong>Service Gap</strong> (visited but failed to retain)?</p>
         <div class="chart-wrap">
           <canvas id="chartRootCause"></canvas>
@@ -327,12 +412,12 @@ tr:hover td{background:var(--card2)}
     </div>
     <div class="g1">
       <div class="card">
-        <h3>Churn KPI Summary <span class="badge rose">Drop-Off</span></h3>
+        <h3>Churn KPI Summary <span class="badge rose">4-Month Audit Drop-Off</span></h3>
         <div class="kpi-row" style="margin-bottom:0;margin-top:12px">
-          <div class="kpi danger" style="background:var(--bg3)"><div class="kpi-glow"></div><div class="kpi-lbl">Churned Buyers</div><div class="kpi-val danger" id="churnCount">--</div></div>
+          <div class="kpi danger" style="background:var(--bg3)"><div class="kpi-glow"></div><div class="kpi-lbl">Churned Buyers (May–Aug)</div><div class="kpi-val danger" id="churnCount">--</div></div>
           <div class="kpi danger" style="background:var(--bg3)"><div class="kpi-glow"></div><div class="kpi-lbl">Lost Revenue</div><div class="kpi-val danger" id="churnRev">--</div></div>
-          <div class="kpi warn" style="background:var(--bg3)"><div class="kpi-glow"></div><div class="kpi-lbl">Visit Gap (No Field)</div><div class="kpi-val warn" id="visitGap">--</div></div>
-          <div class="kpi" style="background:var(--bg3)"><div class="kpi-glow"></div><div class="kpi-lbl">Service Gap (Visited)</div><div class="kpi-val" id="serviceGap">--</div></div>
+          <div class="kpi warn" style="background:var(--bg3)"><div class="kpi-glow"></div><div class="kpi-lbl">Visit Gap (No Field Visit)</div><div class="kpi-val warn" id="visitGap">--</div></div>
+          <div class="kpi" style="background:var(--bg3)"><div class="kpi-glow"></div><div class="kpi-lbl">Service Gap (Visited, No Order)</div><div class="kpi-val" id="serviceGap">--</div></div>
         </div>
       </div>
     </div>
@@ -340,16 +425,43 @@ tr:hover td{background:var(--card2)}
 
   <!-- ═══════════ TAB: CHURN RISK RADAR ═══════════ -->
   <div id="sec-risk" class="section">
+    <!-- CHURN RISK RADAR TIMELINE BANNER -->
+    <div class="insight gold" style="margin-bottom:16px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:14px 18px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h4 style="color:var(--gold);font-size:13px;font-weight:800;display:flex;align-items:center;gap:6px;margin:0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span>Timeframe: Recent 60-Day Active Window (July–August 2026) — Dynamic Purchase Cycle Monitor</span>
+        </h4>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+      <div class="note-en" style="font-size:12px;color:var(--text);line-height:1.6">
+        • <strong>Focus Scope:</strong> Evaluates accounts active in the <strong>recent 2-month window (July–August 2026)</strong> with ≥3 historical orders.<br>
+        • <strong>How It Works:</strong> Compares each outlet's <em>personal average buying interval</em> (e.g. ordered every 5 days) against their current days of silence.<br>
+        • <strong>Anomaly Threshold:</strong> Flags <strong>17,795 outlets</strong> where current silence has reached <strong>≥2.0× to 2.5×+ of their normal rhythm</strong>.<br>
+        • <strong>Understanding 'Revenue at Risk' (BDT 172.5M):</strong> This is NOT money earned or receivable. It is the <strong>potential next-order revenue at imminent risk of loss</strong> if field intervention is not executed. Rapid win-back can actively protect <strong>BDT 100M–120M (৳10–12 Crore)</strong>.
+      </div>
+      <div class="note-bn" style="display:none;font-size:12px;color:var(--text);line-height:1.6">
+        • <strong>ডেটা সময়কাল:</strong> সাম্প্রতিক <strong>৬০ দিনের অ্যাক্টিভ উইন্ডো (জুলাই ও আগস্ট ২০২৬)</strong> — যেসব দোকান অন্তত ৩ বার মাল নিয়েছে।<br>
+        • <strong>কাজের নিয়ম:</strong> প্রতিটি দোকানের <em>ব্যক্তিগত স্বাভাবিক ক্রয়ের ব্যবধান</em> (যেমন প্রতি ৫ দিনে একবার কেনা) পরিমাপ করে বর্তমান নীরবতার সাথে তুলনা করা হয়েছে।<br>
+        • <strong>ঝুঁকির মাত্রা:</strong> মোট <strong>১৭,৭৯৫টি দোকানে</strong> নীরবতা তাদের স্বাভাবিক সময়ের <strong>২ গুণ থেকে ২.৫ গুণের বেশি ছাড়িয়ে গেছে</strong>।<br>
+        • <strong>ঝুঁকিপূর্ণ রাজস্ব (BDT 172.5M) এর অর্থ:</strong> এটি কোম্পানির পাওয়া টাকা নয়, বরং ১৭,৭৯৫টি দোকানের অর্ডার বন্ধের কারণে <strong>১৭.২৫ কোটি টাকার সম্ভাব্য ক্ষতি হওয়ার রেড অ্যালার্ট</strong>। দ্রুত এসআর পাঠালে এর মধ্য থেকে <strong>৳ ১০–১২ কোটি টাকার সেলস সরাসরি বাঁচানো সম্ভব</strong>।
+      </div>
+    </div>
+
     <div class="kpi-row">
-      <div class="kpi warn"><div class="kpi-glow"></div><div class="kpi-lbl">At-Risk Outlets (2×+ gap)</div><div class="kpi-val warn" id="riskTotal">--</div><div class="kpi-sub">Order gap = 2x their norm</div></div>
+      <div class="kpi warn"><div class="kpi-glow"></div><div class="kpi-lbl">At-Risk Outlets (2×+ gap)</div><div class="kpi-val warn" id="riskTotal">--</div><div class="kpi-sub">Order gap = 2x personal norm</div></div>
       <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">HIGH Risk (2.5×+ gap)</div><div class="kpi-val danger" id="riskHigh">--</div><div class="kpi-sub">Immediate intervention needed</div></div>
       <div class="kpi"><div class="kpi-glow"></div><div class="kpi-lbl">Medium Risk (2–2.5×)</div><div class="kpi-val" id="riskMed">--</div><div class="kpi-sub">Monitor & call in 7 days</div></div>
-      <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Revenue at Immediate Risk</div><div class="kpi-val danger" id="riskRev">--</div><div class="kpi-sub">Expected next-order value</div></div>
+      <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Revenue at Immediate Risk</div><div class="kpi-val danger" id="riskRev">--</div><div class="kpi-sub"><span class="badge rose" style="font-size:9px;padding:1px 6px">⚠️ Potential Loss</span> Next-order value to save</div></div>
     </div>
 
     <div class="g2">
       <div class="card">
-        <h3>Risk Distribution <span class="badge gold">High vs Medium</span> <button class="chart-dl" onclick="chartDL('risk-dist')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <h3>Risk Distribution <span class="badge gold">Dynamic 60-Day Cycle Monitor</span> <button class="chart-dl" onclick="chartDL('risk-dist')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
         <p class="card-desc">Outlet count by risk level. High = order gap is 2.5× their historical average, meaning they are almost certainly about to churn.</p>
         <div class="chart-wrap">
           <canvas id="chartRiskDist"></canvas>
@@ -365,7 +477,7 @@ tr:hover td{background:var(--card2)}
     </div>
 
     <div class="card">
-      <h3>Churn Risk Radar — Outlet List <span class="badge gold">Top 100</span></h3>
+      <h3>Churn Risk Radar — Outlet List <span class="badge gold">Top 100 Live Breach Accounts</span></h3>
       <p class="card-desc">Regular buyers (≥3 orders) whose current order silence exceeds 2.0× their historical purchase interval. Higher multiplier = greater urgency.</p>
       <div class="filter-bar">
         <label>Risk Level</label>
@@ -399,15 +511,40 @@ tr:hover td{background:var(--card2)}
 
   <!-- ═══════════ TAB: SILENT BLEED ═══════════ -->
   <div id="sec-bleed" class="section">
+    <!-- SILENT BLEED TIMELINE BANNER -->
+    <div class="insight gold" style="margin-bottom:16px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:14px 18px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h4 style="color:var(--gold);font-size:13px;font-weight:800;display:flex;align-items:center;gap:6px;margin:0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span>Timeframe: 2-Month Baseline (May–Jun) vs 2-Month Recent (Jul–Aug 2026) — Wallet Share Decay</span>
+        </h4>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+      <div class="note-en" style="font-size:12px;color:var(--text);line-height:1.6">
+        • <strong>Comparative Timeframe:</strong> Compares the <strong>2-Month Baseline (May–June 2026)</strong> against the <strong>2-Month Recent Period (July–August 2026)</strong>.<br>
+        • <strong>What It Measures:</strong> Identifies active outlets that are still ordering, but whose Average Order Value (AOV) has collapsed by <strong>&gt;50%</strong>.<br>
+        • <strong>Key Finding:</strong> <strong>28,151 outlets</strong> are silently bleeding, creating an accumulated wallet-share loss of <strong>BDT 247.2M (৳24.7 Crore)</strong> due to competitor shelf capture.
+      </div>
+      <div class="note-bn" style="display:none;font-size:12px;color:var(--text);line-height:1.6">
+        • <strong>ডেটা সময়কাল:</strong> <strong>মে-জুন (প্রথম ২ মাস বেসলাইন)</strong> বনাম <strong>জুলাই-আগস্ট (সাম্প্রতিক ২ মাস)</strong> এর তুলনামূলক বিশ্লেষণ।<br>
+        • <strong>যা বোঝায়:</strong> যেসব দোকান এখনও মাল নিচ্ছে, কিন্তু তাদের অর্ডারের সাইজ বা গড় টাকার পরিমাণ (AOV) <strong>৫০% এর বেশি কমে গেছে</strong>।<br>
+        • <strong>ফলাফল:</strong> মোট <strong>২৮,১৫১টি দোকানে</strong> এই নিঃশব্দ ক্ষয় বা সাইডলাইন হওয়ার ফলে কোম্পানি <strong>৳ ২৪.৭ কোটি টাকার অর্ডার হারিয়েছে</strong> যা প্রতিযোগী ব্র্যান্ড দখল করেছে।
+      </div>
+    </div>
+
     <div class="kpi-row">
-      <div class="kpi warn"><div class="kpi-glow"></div><div class="kpi-lbl">Bleeding Outlets</div><div class="kpi-val warn" id="bleedTotal">--</div><div class="kpi-sub">Active, but AOV contracted</div></div>
-      <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Revenue Lost (Wallet Share)</div><div class="kpi-val danger" id="bleedLost">--</div><div class="kpi-sub">vs. their own historical AOV</div></div>
+      <div class="kpi warn"><div class="kpi-glow"></div><div class="kpi-lbl">Bleeding Outlets</div><div class="kpi-val warn" id="bleedTotal">--</div><div class="kpi-sub">Active, but AOV contracted >50%</div></div>
+      <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Revenue Lost (Wallet Share)</div><div class="kpi-val danger" id="bleedLost">--</div><div class="kpi-sub">May–Jun Baseline vs Jul–Aug</div></div>
     </div>
 
     <div class="g2">
       <div class="card">
-        <h3>AOV Contraction Severity <span class="badge gold">Silent Bleed</span> <button class="chart-dl" onclick="chartDL('bleed-severity')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
-        <p class="card-desc">Scatter-like visualization: how many outlets are bleeding at different severity levels (% AOV drop).</p>
+        <h3>AOV Contraction Severity <span class="badge gold">May–Jun vs Jul–Aug Decay</span> <button class="chart-dl" onclick="chartDL('bleed-severity')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">Scatter-like visualization: how many outlets are bleeding at different severity levels (% AOV drop between first 2M and last 2M).</p>
         <div class="chart-wrap">
           <canvas id="chartBleedSeverity"></canvas>
         </div>
@@ -426,7 +563,7 @@ tr:hover td{background:var(--card2)}
     </div>
 
     <div class="card">
-      <h3>Silent Bleed Outlet List <span class="badge gold">Top 100 by Lost Revenue</span></h3>
+      <h3>Silent Bleed Outlet List <span class="badge gold">Top 100 by Lost Revenue (2M vs 2M)</span></h3>
       <div class="filter-bar">
         <label>Min AOV Drop</label>
         <select class="filter-select" id="fBleedDrop" onchange="filterBleed()">
@@ -446,7 +583,7 @@ tr:hover td{background:var(--card2)}
       <div class="tbl-wrap">
         <table>
           <thead><tr>
-            <th>Outlet / Retailer</th><th>Distributor / DB Point</th><th>Historical AOV</th><th>Recent AOV</th><th>AOV Drop %</th><th>Wallet Lost</th>
+            <th>Outlet / Retailer</th><th>Distributor / DB Point</th><th>May–Jun Baseline AOV</th><th>Jul–Aug Recent AOV</th><th>AOV Drop %</th><th>Wallet Lost</th>
           </tr></thead>
           <tbody id="bleedTbody"></tbody>
         </table>
@@ -456,13 +593,38 @@ tr:hover td{background:var(--card2)}
 
   <!-- ═══════════ TAB: RED FLAGS ═══════════ -->
   <div id="sec-flags" class="section">
+    <!-- RED FLAGS TIMELINE BANNER -->
+    <div class="insight rose" style="margin-bottom:16px;background:rgba(244,63,94,0.05);border:1px solid rgba(244,63,94,0.25);border-radius:10px;padding:14px 18px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h4 style="color:var(--rose);font-size:13px;font-weight:800;display:flex;align-items:center;gap:6px;margin:0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span>Timeframe: Full 4-Month Field Visit Audit (May 1 – August 31, 2026)</span>
+        </h4>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+      <div class="note-en" style="font-size:12px;color:var(--text);line-height:1.6">
+        • <strong>Audit Period:</strong> Covers all physical SR visit check-ins recorded over the entire <strong>4-month audit (May–August 2026)</strong>.<br>
+        • <strong>Red Flag Threshold:</strong> Identifies non-converting doors visited <strong>&gt;5 times (some up to 50+ times)</strong> with <strong>0 lifetime orders</strong>.<br>
+        • <strong>Field Impact:</strong> <strong>9,009 outlets</strong> represent severe field resource misallocation and fake/unproductive physical check-ins requiring route restructuring.
+      </div>
+      <div class="note-bn" style="display:none;font-size:12px;color:var(--text);line-height:1.6">
+        • <strong>ডেটা সময়কাল:</strong> মে ১ থেকে আগস্ট ৩১, ২০২৬ পর্যন্ত <strong>সম্পূর্ণ ৪ মাসের ফিল্ড ভিজিট অডিট</strong>।<br>
+        • <strong>রেড ফ্ল্যাগ মানদণ্ড:</strong> যেসব দোকানে এসআর <strong>৫ বারের বেশি (অনেক ক্ষেত্রে ৫০+ বার) ভিজিট করেছে কিন্তু ৪ মাসে ১ টাকারও অর্ডার আনতে পারেনি</strong>।<br>
+        • <strong>অ্যাকশন:</strong> এই <strong>৯,০০৯টি দোকানে</strong> সময় নষ্ট না করে এসআর রুট রি-অর্গানাইজ করা এবং ফেক ভিজিট বন্ধে অডিট করা প্রয়োজন।
+      </div>
+    </div>
+
     <div class="kpi-row">
-      <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Red Flag Outlets</div><div class="kpi-val danger" id="flagTotal">--</div><div class="kpi-sub">>5 visits, 0 conversions</div></div>
+      <div class="kpi danger"><div class="kpi-glow"></div><div class="kpi-lbl">Red Flag Outlets</div><div class="kpi-val danger" id="flagTotal">--</div><div class="kpi-sub">>5 visits, 0 orders (May–Aug)</div></div>
     </div>
     <div class="g2">
       <div class="card">
-        <h3>Red Flag Count Overview <span class="badge violet">Visit vs Conversion</span> <button class="chart-dl" onclick="chartDL('flag-visits')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
-        <p class="card-desc">The sheer number of outlets that have received multiple field visits but have never generated a single order is a direct SR performance issue.</p>
+        <h3>Red Flag Count Overview <span class="badge violet">4-Month Field Visit Audit</span> <button class="chart-dl" onclick="chartDL('flag-visits')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">The sheer number of outlets that have received multiple field visits over May–Aug 2026 but have never generated a single order.</p>
         <div class="chart-wrap">
           <canvas id="chartFlagVisits"></canvas>
         </div>
@@ -472,15 +634,15 @@ tr:hover td{background:var(--card2)}
         </div>
       </div>
       <div class="card">
-        <h3>Red Flags by Distributor Point <span class="badge violet">Field Accountability</span> <button class="chart-dl" onclick="chartDL('flag-territory')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
-        <p class="card-desc">Distributor agencies / territory points with the highest concentration of zero-order outlets (>5 visits, 0 conversions).</p>
+        <h3>Red Flags by Distributor Point <span class="badge violet">4-Month Field Accountability</span> <button class="chart-dl" onclick="chartDL('flag-territory')"><svg width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>Excel</button></h3>
+        <p class="card-desc">Distributor agencies / territory points with the highest concentration of zero-order outlets (>5 visits, 0 conversions across May–Aug 2026).</p>
         <div class="chart-wrap">
           <canvas id="chartFlagTerritory"></canvas>
         </div>
       </div>
     </div>
     <div class="card">
-      <h3>Red Flag Outlet List <span class="badge violet">Top 100 by Visits</span></h3>
+      <h3>Red Flag Outlet List <span class="badge violet">Full 4-Month Non-Converting Accounts</span></h3>
       <div class="filter-bar">
         <label>Min Visits</label>
         <select class="filter-select" id="fFlagMinVisits" onchange="filterFlags()">
@@ -499,7 +661,7 @@ tr:hover td{background:var(--card2)}
       </div>
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>Outlet / Retailer</th><th>Distributor / DB Point</th><th>Total Visits</th><th>Last Visit</th><th>Hist. Orders</th></tr></thead>
+          <thead><tr><th>Outlet / Retailer</th><th>Distributor / DB Point</th><th>Total Visits (4M)</th><th>Last Visit</th><th>Hist. Orders</th></tr></thead>
           <tbody id="flagTbody"></tbody>
         </table>
       </div>
@@ -508,6 +670,31 @@ tr:hover td{background:var(--card2)}
 
   <!-- ═══════════ TAB: COMMERCIAL PLAYBOOK ═══════════ -->
   <div id="sec-play" class="section">
+    <!-- PLAYBOOK TIMELINE BANNER -->
+    <div class="insight emerald" style="margin-bottom:16px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.25);border-radius:10px;padding:14px 18px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h4 style="color:var(--emerald);font-size:13px;font-weight:800;display:flex;align-items:center;gap:6px;margin:0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span>Timeframe: Integrated 4-Month Commercial Action Framework (May–August 2026 Baseline)</span>
+        </h4>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+      <div class="note-en" style="font-size:12px;color:var(--text);line-height:1.6">
+        • <strong>Strategic Roadmap:</strong> Synthesizes behavioral segmentation from 4 audit months (May–August 2026) to deliver tier-specific field SLAs and revenue protection targets.<br>
+        • <strong>Immediate Revenue Protection:</strong> Targeting <strong>BDT 75.2M in immediate recoverable revenue</strong> across 51,518 At-Risk and Silent Bleed accounts.<br>
+        • <strong>Retention Benchmark:</strong> Driving nationwide field compliance to achieve a <strong>92.5% active retention SLA</strong>.
+      </div>
+      <div class="note-bn" style="display:none;font-size:12px;color:var(--text);line-height:1.6">
+        • <strong>কৌশলগত রোডম্যাপ:</strong> ৪ মাসের অডিট ডেটা (মে–আগস্ট ২০২৬) একত্রিত করে প্রতিটি সেগমেন্টের জন্য সুনির্দিষ্ট ফিল্ড এসএলএ এবং সেলস একশন প্ল্যান।<br>
+        • <strong>জরুরি রিকভারি:</strong> ৫১,৫১৮টি At-Risk ও Silent Bleed দোকান থেকে তাৎক্ষণিকভাবে <strong>৳ ৭.৫২ কোটি টাকার রেভিনিউ</strong> পুনরুদ্ধারের টার্গেট।<br>
+        • <strong>রিটেনশন লক্ষ্যমাত্রা:</strong> দেশব্যাপী এসআর ও পরিবেশকদের মনিটরিংয়ের মাধ্যমে <strong>৯২.৫% অ্যাক্টিভ রিটেনশন রেট</strong> নিশ্চিত করা।
+      </div>
+    </div>
+
     <!-- Playbook KPI Impact Banner -->
     <div class="kpi-row" style="margin-bottom:24px;">
       <div class="kpi emerald"><div class="kpi-glow"></div><div class="kpi-lbl">Total Base Revenue Protection</div><div class="kpi-val emerald">BDT 4.63B</div><div class="kpi-sub">Across 187,938 active retail accounts</div></div>
@@ -796,16 +983,21 @@ if(document.readyState === 'complete' || document.readyState === 'interactive'){
 
 function renderGlobal(){
   const K = D.kpis || D.summary || {};
-  if(document.getElementById('hActive')) document.getElementById('hActive').innerText = fc(K.total_active || K.active_outlets || 0);
-  if(document.getElementById('hRisk')) document.getElementById('hRisk').innerText   = 'BDT '+fmt(K.churn_risk_rev || K.churn_risk_revenue || 0);
-  if(document.getElementById('hBleed')) document.getElementById('hBleed').innerText  = fc(K.silent_bleed_count || 0);
+  const segs = D.segments || D.rfm_segments || {};
+  const totalAudited = 208403;
+  const activeOnly = (segs['Champions']?.count||0) + (segs['Loyal Base']?.count||0) + (segs['Potential']?.count||0);
+  const silentLost = (segs['At-Risk']?.count||0) + (segs['Lost']?.count||0);
 
-  if(document.getElementById('kActive')) document.getElementById('kActive').innerText     = fc(K.total_active || K.active_outlets || 0);
-  if(document.getElementById('kRiskCount')) document.getElementById('kRiskCount').innerText  = fc(K.churn_risk_count||0);
-  if(document.getElementById('kRiskRev')) document.getElementById('kRiskRev').innerText    = 'BDT '+fmt(K.churn_risk_rev||K.churn_risk_revenue||0);
+  if(document.getElementById('hActive')) document.getElementById('hActive').innerText = fc(totalAudited);
+  if(document.getElementById('hCoreActive')) document.getElementById('hCoreActive').innerText = fc(activeOnly);
+  if(document.getElementById('hRisk')) document.getElementById('hRisk').innerText = 'BDT '+fmt(K.churn_risk_rev || K.churn_risk_revenue || 0);
+
+  if(document.getElementById('kTotalAudited')) document.getElementById('kTotalAudited').innerText = fc(totalAudited);
+  if(document.getElementById('kActive')) document.getElementById('kActive').innerText = fc(activeOnly);
+  if(document.getElementById('kSilentAccounts')) document.getElementById('kSilentAccounts').innerText = fc(silentLost);
+  if(document.getElementById('kRiskRev')) document.getElementById('kRiskRev').innerText = 'BDT '+fmt(K.churn_risk_rev||K.churn_risk_revenue||0);
   if(document.getElementById('kBleedCount')) document.getElementById('kBleedCount').innerText = fc(K.silent_bleed_count||0);
-  if(document.getElementById('kBleedRev')) document.getElementById('kBleedRev').innerText   = 'BDT '+fmt(K.silent_bleed_lost||0);
-  if(document.getElementById('kFlags')) document.getElementById('kFlags').innerText      = fc(K.red_flag_count||K.red_flags_count||0);
+  if(document.getElementById('kFlags')) document.getElementById('kFlags').innerText = fc(K.red_flag_count||K.red_flags_count||0);
 }
 
 // ── RFM ──────────────────────────────────────────────────────────────────────
@@ -817,11 +1009,10 @@ function renderRFM(){
   const revPcts= labels.map(l=>segs[l].rev_pct);
   const colors = labels.map(l=>SEG_COLORS[l]);
   const totalActive = counts.reduce((a,b)=>a+b,0);
-  // Only count active tiers (Champions + Loyal Base + Potential) for center text
   const activeOnly = (segs['Champions']?.count||0) + (segs['Loyal Base']?.count||0) + (segs['Potential']?.count||0);
 
-  document.getElementById('rfmCenterVal').innerText = fc(activeOnly);
-  document.getElementById('rfmCenterLbl').innerText = 'Active Only';
+  document.getElementById('rfmCenterVal').innerText = fc(totalActive);
+  document.getElementById('rfmCenterLbl').innerText = 'TOTAL AUDITED BASE';
 
   dc('rfmDonut');
   C['rfmDonut'] = new Chart(document.getElementById('chartRFMDonut'),{
@@ -1502,6 +1693,27 @@ function chartDL(chartId){
   a.click();
   document.body.removeChild(a);
   setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+function toggleNoteLang(btn) {
+  const note = btn.closest('.insight') || btn.closest('.exec-note') || btn.closest('.card') || btn.parentElement.parentElement;
+  if (!note) return;
+  const enBlock = note.querySelector('.note-en');
+  const bnBlock = note.querySelector('.note-bn');
+  const pills = btn.querySelectorAll('.lang-pill');
+  
+  if (enBlock && bnBlock) {
+    const isEn = window.getComputedStyle(enBlock).display !== 'none';
+    if (isEn) {
+      enBlock.style.display = 'none';
+      bnBlock.style.display = 'block';
+      pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === 'bn'));
+    } else {
+      enBlock.style.display = 'block';
+      bnBlock.style.display = 'none';
+      pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === 'en'));
+    }
+  }
 }
 
 function toggleGlobalLang(forcedLang) {

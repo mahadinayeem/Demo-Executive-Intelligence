@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 5 — Causal Econometric Modeling & Smart KPI Architecture | Smart KPI Architect™</title>
+<meta name="description" content="Smart KPI Architect™ — Pure Controllable Independent Inputs, 2-Stage Causal SEM, Partial Dependence (PDP) Tipping Points, Stratified Archetypes & Revenue Forecasting">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="module5_data.js?v=20261006_causal_v9"></script>
+<style>
+:root {
+  --bg:#f8fafc; --bg2:#ffffff; --bg3:#f1f5f9;
+  --card:#ffffff; --card2:#f8fafc;
+  --border:#e2e8f0; --border2:#cbd5e1;
+  --text:#0f172a; --text2:#334155; --text3:#64748b;
+  --accent:#3b82f6; --accent2:#8b5cf6;
+  --gold:#b45309; --emerald:#10b981; --rose:#e11d48;
+  --cyan:#0284c7; --orange:#ea580c;
+}
+
+[data-theme="dark"] {
+  --bg:#060912; --bg2:#0c1222; --bg3:#141e36;
+  --card:#0f172a; --card2:#1e293b;
+  --border:#1e293b; --border2:#334155;
+  --text:#f8fafc; --text2:#cbd5e1; --text3:#94a3b8;
+  --accent:#3b82f6; --accent2:#a855f7;
+  --gold:#f59e0b; --emerald:#10b981; --rose:#f43f5e;
+  --cyan:#06b6d4; --orange:#f97316;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* ── HEADER ── */
+.header{
+  background:linear-gradient(135deg,#ffffff 0%,#f8fafc 50%,#ffffff 100%);
+  border-bottom:1px solid var(--border);
+  padding:18px 40px; position:sticky; top:0; z-index:100;
+}
+[data-theme="dark"] .header {
+  background:linear-gradient(135deg,#0c1222 0%,#0f172a 50%,#0c1222 100%);
+}
+.header-inner{max-width:1700px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.module-badge{
+  background:linear-gradient(135deg,#0284c7,#2563eb);
+  color:#fff;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 12px;border-radius:20px;margin-bottom:6px;display:inline-block;
+}
+.header h1{font-size:clamp(16px,2vw,22px);font-weight:800;color:var(--text);line-height:1.2}
+.header h1 span{color:var(--cyan)}
+.header-right{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hstat{text-align:center;padding:0 16px;border-right:1px solid var(--border)}
+.hstat:last-of-type{border-right:none}
+.hstat-val{font-size:20px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--cyan)}
+.hstat-val.gold{color:var(--gold)}
+.hstat-val.emerald{color:var(--emerald)}
+.hstat-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.8px;margin-top:2px}
+.btn{
+  background:var(--card);border:1px solid var(--border2);color:var(--text);
+  padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;font-size:12px;
+  display:flex;align-items:center;gap:7px;transition:all .2s;white-space:nowrap;
+}
+.btn:hover{background:var(--card2);border-color:var(--accent);color:var(--accent)}
+
+/* ── CAUSAL FRAMEWORK BANNER ── */
+.causal-banner {
+  background: linear-gradient(135deg, rgba(2,132,199,0.06) 0%, rgba(16,185,129,0.06) 100%);
+  border: 1px solid rgba(2,132,199,0.2);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+.causal-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-bottom: 12px;
+}
+.causal-title {
+  font-size: 13px; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px;
+}
+.causal-steps {
+  display: grid; grid-template-columns: 1.2fr 0.1fr 1fr 0.1fr 0.9fr; gap: 10px; align-items: center;
+}
+.causal-box {
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px;
+}
+.causal-box-title {
+  font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;
+}
+.causal-box ul { font-size: 11px; color: var(--text2); margin-left: 14px; line-height: 1.5; }
+.causal-arrow {
+  text-align: center; font-size: 20px; font-weight: 800; color: var(--cyan);
+}
+
+/* ── NAV ── */
+.nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 40px;position:sticky;top:79px;z-index:90}
+.nav-inner{max-width:1700px;margin:0 auto;display:flex;gap:4px;overflow-x:auto}
+.nav-tab{
+  padding:14px 18px;font-size:12.5px;font-weight:600;color:var(--text2);cursor:pointer;
+  border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;
+  display:flex;align-items:center;gap:8px;
+}
+.nav-tab:hover{color:var(--text)}
+.nav-tab.active{color:var(--cyan);border-bottom-color:var(--cyan);background:rgba(2,132,199,.06)}
+.nav-tab .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+
+/* ── MAIN ── */
+.main{max-width:1700px;margin:0 auto;padding:24px 40px}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* ── KPI CARDS ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-bottom:24px}
+.kpi-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:20px;position:relative;overflow:hidden;
+}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--card-accent,var(--cyan))}
+.kpi-lbl{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.kpi-val{font-size:24px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--text);margin-bottom:4px}
+.kpi-sub{font-size:11px;color:var(--text2);line-height:1.4}
+
+/* ── GRIDS & CARDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-bottom:20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:20px}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.card-title{font-size:14px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px}
+.card-sub{font-size:11px;color:var(--text3);margin-bottom:14px;line-height:1.5}
+.chart-wrap{position:relative;width:100%;height:320px}
+
+/* ── TABLE ── */
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{background:var(--bg3);color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.6px;font-size:10px;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}
+td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(2,132,199,.03);color:var(--text)}
+.mono{font-family:'JetBrains Mono',monospace;font-weight:500}
+.tbl-wrap{overflow-x:auto;max-height:480px}
+.tbl-wrap::-webkit-scrollbar{width:5px;height:5px}
+.tbl-wrap::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ── BADGES & ACCENTS ── */
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700}
+.badge.cyan{background:rgba(2,132,199,.12);color:var(--cyan)}
+.badge.gold{background:rgba(180,83,9,.12);color:var(--gold)}
+.badge.emerald{background:rgba(16,185,129,.12);color:var(--emerald)}
+.badge.purple{background:rgba(139,92,246,.12);color:var(--accent2)}
+.badge.rose{background:rgba(225,29,72,.12);color:var(--rose)}
+.badge.orange{background:rgba(234,88,12,.12);color:var(--orange)}
+
+/* ── EXECUTIVE NOTE CALLOUTS & BILINGUAL TOGGLE ── */
+.exec-note {
+  background: rgba(2,132,199,0.06);
+  border-left: 4px solid var(--cyan);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--text2);
+}
+.exec-note.gold { background: rgba(180,83,9,0.06); border-left-color: var(--gold); }
+.exec-note.emerald { background: rgba(16,185,129,0.06); border-left-color: var(--emerald); }
+.exec-note.purple { background: rgba(139,92,246,0.06); border-left-color: var(--accent2); }
+.exec-note.orange { background: rgba(234,88,12,0.06); border-left-color: var(--orange); }
+
+.exec-note-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  margin-bottom: 6px;
+}
+.exec-note-title {
+  display: flex; align-items: center; gap: 6px;
+  font-weight: 700; color: var(--text); font-size: 12px;
+}
+.lang-toggle-btn {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text2);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s;
+  user-select: none;
+}
+.lang-toggle-btn:hover { border-color: var(--cyan); color: var(--text); }
+.lang-toggle-btn .lang-pill { padding: 1px 4px; border-radius: 8px; }
+.lang-toggle-btn .lang-pill.active { background: var(--cyan); color: #ffffff; }
+
+.exec-note ul { margin: 4px 0 0 16px; padding: 0; }
+.exec-note li { margin-bottom: 3px; }
+.exec-note strong { color: var(--text); font-weight: 700; }
+
+/* ── DOWNLOAD BUTTONS ── */
+.chart-dl{
+  background:rgba(2,132,199,.08);border:1px solid rgba(2,132,199,.2);color:var(--cyan);
+  padding:4px 10px;border-radius:6px;cursor:pointer;font-size:10px;font-weight:600;
+  display:inline-flex;align-items:center;gap:4px;transition:all .2s;white-space:nowrap;margin-left:auto;
+}
+.chart-dl:hover{background:var(--cyan);color:#ffffff}
+
+/* ── SIMULATOR SLIDERS ── */
+.sim-panel{
+  background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px;
+}
+.sim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-bottom:20px}
+.slider-group{display:flex;flex-direction:column;gap:8px}
+.slider-header{display:flex;justify-content:space-between;font-size:12px;font-weight:600}
+.slider-header span:last-child{color:var(--cyan);font-family:'JetBrains Mono',monospace;font-weight:700}
+input[type=range]{
+  -webkit-appearance:none;width:100%;height:6px;background:var(--border2);border-radius:3px;outline:none;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--cyan);cursor:pointer;box-shadow:0 0 8px rgba(2,132,199,.4);
+}
+.sim-result{
+  background:linear-gradient(135deg,rgba(2,132,199,.08),rgba(16,185,129,.08));
+  border:1px solid rgba(2,132,199,.25);border-radius:10px;padding:18px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.sim-res-val{font-size:28px;font-weight:900;font-family:'JetBrains Mono',monospace;color:var(--emerald)}
+
+@media(max-width:900px){
+  .header{padding:14px 20px}
+  .main{padding:16px 20px}
+  .causal-steps{grid-template-columns:1fr;gap:8px}
+  .causal-arrow{transform:rotate(90deg);padding:4px 0}
+  .g2,.g3{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div>
+      <span class="module-badge">Module 5 · Causal KPI Architect™</span>
+      <h1>Predictive Modeling & <span>Causal KPI Architecture</span></h1>
+    </div>
+    <div class="header-right">
+      <div class="hstat"><div class="hstat-val" id="hR2">0.884</div><div class="hstat-lbl">Causal Model R²</div></div>
+      <div class="hstat"><div class="hstat-val emerald" id="hGrowth">+18.4%</div><div class="hstat-lbl">Annualized Forecast</div></div>
+      <div class="hstat"><div class="hstat-val gold" id="hRev">৳ 4,625.3 Cr</div><div class="hstat-lbl">Analyzed Revenue</div></div>
+      <button class="btn" onclick="exportModule5CSVs()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Export CSVs
+      </button>
+      <button class="btn" onclick="toggleTheme()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-inner">
+    <div class="nav-tab active" id="tab-drivers" onclick="showTab('drivers')"><span class="dot" style="color:var(--cyan)"></span>1. Field Sales Drivers & Impact</div>
+    <div class="nav-tab" id="tab-pdp" onclick="showTab('pdp')"><span class="dot" style="color:var(--gold)"></span>2. In-Store Engagement & Timing Curves</div>
+    <div class="nav-tab" id="tab-regional" onclick="showTab('regional')"><span class="dot" style="color:var(--emerald)"></span>3. Regional Market Archetype Benchmarks</div>
+    <div class="nav-tab" id="tab-simulator" onclick="showTab('simulator')"><span class="dot" style="color:var(--orange)"></span>4. Revenue Growth Scenario Simulator</div>
+    <div class="nav-tab" id="tab-forecast" onclick="showTab('forecast')"><span class="dot" style="color:var(--accent2)"></span>5. Predictive Sales Forecasting</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ════════════════════ TAB 1: FIELD EXECUTION DRIVERS ════════════════════ -->
+  <div class="tab-content active" id="sec-drivers">
+    
+    <!-- FIELD EXECUTION FRAMEWORK BANNER -->
+    <div class="causal-banner">
+      <div class="causal-header">
+        <div class="causal-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          <span>Field Execution Framework: Daily Action ➔ Order Conversion ➔ Revenue Growth</span>
+        </div>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+      
+      <div class="note-en">
+        <div class="causal-steps">
+          <div class="causal-box" style="border-left:3px solid var(--cyan)">
+            <div class="causal-box-title" style="color:var(--cyan)">1. Daily Field Actions (What Management Enforces)</div>
+            <ul>
+              <li>⏱️ <strong>Shop Dwell Time:</strong> 8–10 mins quality engagement</li>
+              <li>📦 <strong>Pitch Depth:</strong> 3.5+ portfolio SKU lines offered</li>
+              <li>⏰ <strong>Time Window:</strong> 08:30–11:30 AM prime trading slot</li>
+              <li>🗺️ <strong>Route Transit:</strong> Compact cluster beat walking</li>
+              <li>📅 <strong>Beat Discipline:</strong> Consistent PJP cycle adherence</li>
+            </ul>
+          </div>
+          <div class="causal-arrow">➔</div>
+          <div class="causal-box" style="border-left:3px solid var(--gold)">
+            <div class="causal-box-title" style="color:var(--gold)">2. Retailer Conversion (What Happens in Store)</div>
+            <ul>
+              <li>🎯 <strong>Strike Rate Jumps:</strong> Conversion surges to 74%</li>
+              <li>🛒 <strong>Basket Depth:</strong> Multi-SKU memo size doubles</li>
+              <li>🤝 <strong>Rejection Plummets:</strong> Retailer resistance drops</li>
+            </ul>
+          </div>
+          <div class="causal-arrow">➔</div>
+          <div class="causal-box" style="border-left:3px solid var(--emerald)">
+            <div class="causal-box-title" style="color:var(--emerald)">3. Business Cashflow (What Hits Company P&L)</div>
+            <ul>
+              <li>💰 <strong>Revenue Expansion:</strong> +18.4% (৳85.2 Cr annualized)</li>
+              <li>📈 <strong>Gross Margin:</strong> Premium tea portfolio growth</li>
+              <li>👑 <strong>Customer Retention:</strong> Permanent loyal retail base</li>
+            </ul>
+          </div>
+        </div>
+        <div style="margin-top:14px;padding:12px 16px;background:rgba(2,132,199,0.04);border:1px solid rgba(2,132,199,0.15);border-radius:8px;font-size:11.5px;color:var(--text2);line-height:1.6">
+          <strong style="color:var(--text)">📌 Executive Strategic Insight & Ground Reality (How the +৳85.2 Cr is Unlocked):</strong>
+          <div style="margin-top:6px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px">
+            <div style="background:var(--card);padding:8px 12px;border-radius:6px;border:1px solid var(--border)">
+              <span style="color:var(--emerald);font-weight:700">⭐ Top 20% Elite SRs (193 Reps):</span>
+              <div style="font-size:11px;color:var(--text3);margin-top:2px">Already follow the 8–10 min dwell & 3.5+ SKU rule; operating at 74% Strike Rate.</div>
+            </div>
+            <div style="background:var(--card);padding:8px 12px;border-radius:6px;border:1px solid var(--border)">
+              <span style="color:var(--cyan);font-weight:700">🔄 Middle 50% Core SRs (482 Reps):</span>
+              <div style="font-size:11px;color:var(--text3);margin-top:2px">Average 5.2 min dwell & 2.1 SKUs; conversion at 52% Strike Rate.</div>
+            </div>
+            <div style="background:var(--card);padding:8px 12px;border-radius:6px;border:1px solid var(--border)">
+              <span style="color:var(--orange);font-weight:700">⚠️ Bottom 30% Rushed SRs (290 Reps):</span>
+              <div style="font-size:11px;color:var(--text3);margin-top:2px">Average <3.2 min rushed calls & 1.2 SKUs; high rejection (36% Strike Rate).</div>
+            </div>
+          </div>
+          <div style="margin-top:8px;font-size:11px;color:var(--text)">
+            <strong>🎯 The Growth Mechanism:</strong> Top stars do not need to double their work. If management enforces the Box 1 SOPs via SFA app to <strong>lift the lagging 80% (772 SRs) by just 10%–15% closer to the benchmark</strong>, total enterprise sales automatically expands by <strong>+18.4% (৳85.2 Crore annual cash)</strong>.
+          </div>
+        </div>
+      </div>
+
+      <div class="note-bn" style="display:none;">
+        <div class="causal-steps">
+          <div class="causal-box" style="border-left:3px solid var(--cyan)">
+            <div class="causal-box-title" style="color:var(--cyan)">১. মাঠের কাজ (কাল সকাল থেকে এসআর-দের যা করাবেন)</div>
+            <ul>
+              <li>⏱️ <strong>দোকানে সময়:</strong> তাড়াহুড়ো না করে ৮–১০ মিনিট থাকা</li>
+              <li>📦 <strong>প্রোডাক্ট পিচ:</strong> অন্তত ৩–৪টি বিভিন্ন সাইজ/আইটেম দেখানো</li>
+              <li>⏰ <strong>ভিজিট সময়:</strong> সকাল ০৮:৩০–১১:৩০ এর পিক সময়ে যাওয়া</li>
+              <li>🗺️ <strong>রুট ম্যাপ:</strong> এলোমেলো না ঘুরে এক গলির সব দোকান একবারে ধরা</li>
+              <li>📅 <strong>নিয়মনিষ্ঠা:</strong> নির্দিষ্ট বারে রুটিন মেনে নিয়মিত দোকানে পৌঁছানো</li>
+            </ul>
+          </div>
+          <div class="causal-arrow">➔</div>
+          <div class="causal-box" style="border-left:3px solid var(--gold)">
+            <div class="causal-box-title" style="color:var(--gold)">২. দোকানের রেজাল্ট (দোকানদারের আচরণের পরিবর্তন)</div>
+            <ul>
+              <li>🎯 <strong>অর্ডার কনভার্সন:</strong> ১০০ দোকানে গেলে ৭৪টি অর্ডার কনফার্ম হবে</li>
+              <li>🛒 <strong>মেমো বড় হওয়া:</strong> ১টি চায়ের জায়গায় ৩টি সাইজ বিক্রি হবে</li>
+              <li>🤝 <strong>রিজেকশন কমতি:</strong> দোকানদার এসআর-কে খালি হাতে ফেরাবে না</li>
+            </ul>
+          </div>
+          <div class="causal-arrow">➔</div>
+          <div class="causal-box" style="border-left:3px solid var(--emerald)">
+            <div class="causal-box-title" style="color:var(--emerald)">৩. কোম্পানির লাভ (ব্যাংক অ্যাকাউন্টে চূড়ান্ত টাকা)</div>
+            <ul>
+              <li>💰 <strong>নিট সেলস প্রবৃদ্ধি:</strong> বার্ষিক +৳৮৫.২ কোটি টাকার নতুন ক্যাশ</li>
+              <li>📈 <strong>প্রফিট মার্জিন:</strong> প্রিমিয়াম ব্লেন্ড বেশি বিক্রি হওয়ায় মার্জিন বৃদ্ধি</li>
+              <li>👑 <strong>স্থায়ী কাস্টমার:</strong> দোকানদার পার্মানেন্ট গ্রাহক হয়ে থাকবে</li>
+            </ul>
+          </div>
+        </div>
+        <div style="margin-top:14px;padding:12px 16px;background:rgba(2,132,199,0.04);border:1px solid rgba(2,132,199,0.15);border-radius:8px;font-size:11.5px;color:var(--text2);line-height:1.6">
+          <strong style="color:var(--text)">📌 মাঠের বাস্তব চিত্র ও প্রবৃদ্ধির রোডম্যাপ (৮৫.২ কোটি টাকা কীভাবে আসবে?):</strong>
+          <div style="margin-top:6px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px">
+            <div style="background:var(--card);padding:8px 12px;border-radius:6px;border:1px solid var(--border)">
+              <span style="color:var(--emerald);font-weight:700">⭐ সেরা ২০% এসআর (১৯৩ জন):</span>
+              <div style="font-size:11px;color:var(--text3);margin-top:2px">অলরেডি ৮-১০ মিনিট সময় ও ৩+ SKU পিচ করে ৭৪% স্ট্রাইক রেট অর্জন করছে।</div>
+            </div>
+            <div style="background:var(--card);padding:8px 12px;border-radius:6px;border:1px solid var(--border)">
+              <span style="color:var(--cyan);font-weight:700">🔄 মাঝারি ৫০% এসআর (৪৮২ জন):</span>
+              <div style="font-size:11px;color:var(--text3);margin-top:2px">গড়ে ৫.২ মিনিট থাকে ও ২.১টি SKU অফার করে ৫২% স্ট্রাইক রেট পাচ্ছে।</div>
+            </div>
+            <div style="background:var(--card);padding:8px 12px;border-radius:6px;border:1px solid var(--border)">
+              <span style="color:var(--orange);font-weight:700">⚠️ পেছনের ৩০% এসআর (২৯০ জন):</span>
+              <div style="font-size:11px;color:var(--text3);margin-top:2px">দোকানে ৩ মিনিটের কম দৌড়াদৌড়ি করে ৩৬% স্ট্রাইক রেটে রিজেকশন খাচ্ছে।</div>
+            </div>
+          </div>
+          <div style="margin-top:8px;font-size:11px;color:var(--text)">
+            <strong>🎯 প্রবৃদ্ধির আসল উৎস:</strong> টপ পারফর্মারদের দ্বিগুণ কাজ করার দরকার নেই। ম্যানেজমেন্ট অ্যাপের মাধ্যমে <strong>পেছনের ৮০% এসআর-দের কাজের মান মাত্র ১০%–১৫% বাড়ালেই</strong> পুরো কোম্পানির মোট সেলস সরাসরি <strong>+১৮.৪% বেড়ে বার্ষিক ৳৮৫.২ কোটি টাকা নতুন ক্যাশ</strong> এনে দেবে।
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="g2">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Field Sales Execution Drivers Importance Ranking (%)</div>
+          <button class="chart-dl" onclick="dlChart('featureImportance')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <div class="exec-note cyan">
+          <div class="exec-note-header">
+            <div class="exec-note-title">📊 Field Sales Drivers Importance Weight (%)</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            Relative statistical weight of field execution drivers directly controllable by field managers and SRs.
+          </div>
+          <div class="note-bn" style="display:none;">
+            মাঠপর্যায়ে ফিল্ড ম্যানেজার ও এসআর-দের সরাসরি নিয়ন্ত্রণাধীন এক্সিকিউশন প্যারামিটারসমূহের গুরুত্ব র্যাংকিং।
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="chartFeatureImportance"></canvas></div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Direct Revenue Elasticity Multipliers (1% Execution Gain Yield)</div>
+          <button class="chart-dl" onclick="dlChart('elasticity')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <div class="exec-note gold">
+          <div class="exec-note-header">
+            <div class="exec-note-title">⚡ Revenue Multiplier per 1% Field Improvement</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            Quantifies the percentage expansion in total BDT sales generated per 1.0% operational improvement in each execution lever.
+          </div>
+          <div class="note-bn" style="display:none;">
+            মাঠপর্যায়ে প্রতিটি এক্সিকিউশন প্যারামিটার মাত্র ১% বাড়ালে কোম্পানির মোট বিক্রয় কত শতাংশ বাড়ে তার মাল্টিপ্লায়ার সূচক।
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="chartElasticity"></canvas></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Field Sales Execution Drivers & Operational Mechanisms</div>
+        <button class="chart-dl" onclick="dlChart('featureImportance')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th><th>Field Execution Lever</th><th>Category</th><th>Importance %</th><th>Direct Revenue Elasticity</th><th>Operational Action Mechanism</th>
+            </tr>
+          </thead>
+          <tbody id="tblFeatureBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════ TAB 2: FIELD ENGAGEMENT & TIMING CURVES (PDP) ════════════════════ -->
+  <div class="tab-content" id="sec-pdp">
+    
+    <!-- CENTRAL GUIDELINE BANNER FOR ALL RESPONSE CURVES -->
+    <div class="exec-note purple" style="margin-bottom:16px;background:rgba(139,92,246,0.04);border:1px solid rgba(139,92,246,0.2)">
+      <div class="exec-note-header">
+        <div class="exec-note-title">💡 How to Read the Response Curves Below (কীভাবে নিচের চার্টগুলো বুঝবেন)</div>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+      <div class="note-en">
+        <strong>Marginal Step-by-Step Lift Principle:</strong> All percentages shown across these response curves represent <strong>marginal growth over the immediately preceding tier</strong> (not a flat sum). Each curve identifies the exact <em>inflection sweet spot</em> where field effort produces maximum commercial return before entering diminishing returns.
+      </div>
+      <div class="note-bn" style="display:none;">
+        <strong>ধাপওয়ারি বাড়তি প্রবৃদ্ধির নীতি (Step-by-Step Marginal Jump):</strong> নিচের সবকটি চার্টের শতকরা হারগুলো (+%, -%) কোনো সাধারণ যোগফল নয়; এগুলো হলো <strong>আগের ধাপের পারফরম্যান্সের ওপর অতিরিক্ত কতটুকু বিক্রি বা কনভার্সন বাড়ল</strong> তার পরিমাপ। এই কার্ভগুলো প্রতিটি কাজের সেই নিখুঁত <em>"সুইট স্পট বা টার্নিং পয়েন্ট"</em> চিহ্নিত করে যেখানে অল্প পরিশ্রমে সবচেয়ে বড় বাণিজ্যিক লাভ আসে।
+      </div>
+    </div>
+
+    <div class="g2">
+      <!-- Dwell Time PDP -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Shop Dwell Time Non-Linear Response Curve (0–25 Mins)</div>
+          <button class="chart-dl" onclick="dlChart('pdpDwell')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <div class="exec-note gold">
+          <div class="exec-note-header">
+            <div class="exec-note-title">⏱️ Dwell Time Sweet Spot & Tipping Points</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            Empirical curve proves that visits under 3 mins yield zero depth. <strong>8–10 mins is the golden inflection (+69% order surge)</strong> before plateauing above 18 mins.
+          </div>
+          <div class="note-bn" style="display:none;">
+            দোকানে ৩ মিনিটের কম থাকলে অর্ডার হয় না। <strong>৮–১০ মিনিট হলো গোল্ডেন সুইট স্পট (+৬৯% সেলস জাম্প)</strong>, আর ১৮ মিনিটের বেশি থাকলে অপচয় শুরু হয়।
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="chartPDPDwell"></canvas></div>
+      </div>
+
+      <!-- Time of Day PDP -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Time-of-Day Trading Window Productivity (8 AM – 6 PM)</div>
+          <button class="chart-dl" onclick="dlChart('pdpTime')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <div class="exec-note cyan">
+          <div class="exec-note-header">
+            <div class="exec-note-title">⏰ Hourly Trading Window Conversion Efficiency</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            <strong>Morning 08:30–11:30 AM</strong> delivers +70% higher conversion yield compared to the 02:00 PM afternoon slump when grocers are disengaged.
+          </div>
+          <div class="note-bn" style="display:none;">
+            <strong>সকাল ০৮:৩০–১১:৩০</strong> এর মধ্যে ভিজিট দিলে দুপুর ২:০০ টার অলস সময়ের চেয়ে <strong>+৭০% বেশি কনভার্সন ও সেলস ইল্ড</strong> আসে।
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="chartPDPTime"></canvas></div>
+      </div>
+    </div>
+
+    <div class="g2">
+      <!-- Pitch Depth PDP -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Pitch Depth (SKU Lines Offered) Response Curve</div>
+          <button class="chart-dl" onclick="dlChart('pdpPitch')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <div class="exec-note emerald">
+          <div class="exec-note-header">
+            <div class="exec-note-title">📦 Multi-SKU Presentation Multiplier Threshold</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            Moving from 1 to 2 SKUs yields +116% lift, while crossing into <strong>3.5+ pitched SKUs delivers an additional +133% surge</strong> (expanding memo size 5x). Gains plateau past 6+ SKUs (+6%) due to retailer working capital limits—making <strong>3.5–4 SKUs the optimal sweet spot</strong>.
+          </div>
+          <div class="note-bn" style="display:none;">
+            ১টির বদলে ২টি SKU দিলে বিক্রি বাড়ে +১১৬%; আর <strong>৩.৫+ SKU অফার উপস্থাপন করলে তার ওপর আরও +১৩৩% জাম্প</strong> করে (মেমো সাইজ ৫ গুণ বড় হয়)। ৫-৮টি আইটেমের পর সাধারণ দোকানের ক্যাশ লিমিটের কারণে প্রবৃদ্ধি কমে আসে (+৬%)—তাই ৩.৫ থেকে ৪টি প্রোডাক্ট পিচ করাই হলো গোল্ডেন সুইট স্পট।
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="chartPDPPitch"></canvas></div>
+      </div>
+
+      <!-- Transit Lag vs Capacity PDP -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Route Transit Lag vs Daily Call Capacity (Cluster Beat Density)</div>
+          <button class="chart-dl" onclick="dlChart('pdpTransit')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <div class="exec-note orange">
+          <div class="exec-note-header">
+            <div class="exec-note-title">🗺️ Transit Lag Drag on Daily Selling Time</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            Transit delays >8 mins drastically degrade call capacity from 42 to 16 calls/day, proving the necessity of compact cluster beats.
+          </div>
+          <div class="note-bn" style="display:none;">
+            দোকান টু দোকান ট্রানজিট ৮ মিনিটের বেশি হলে দৈনিক কার্যকর কল ৪২ থেকে কমে মাত্র ১৬-তে নেমে আসে, যা ক্লাস্টার বিটের অনিবার্যতা প্রমাণ করে।
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="chartPDPTransit"></canvas></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════ TAB 3: STRATIFIED REGIONAL ARCHETYPES ════════════════════ -->
+  <div class="tab-content" id="sec-regional">
+    
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Stratified Regional Archetype Benchmarks (Metro vs Semi-Urban vs Rural)</div>
+        <button class="chart-dl" onclick="dlChart('regionalKPI')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+      </div>
+      <div class="exec-note purple">
+        <div class="exec-note-header">
+          <div class="exec-note-title">🗺️ Contextual Benchmarks by Geographic Archetype</div>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
+        </div>
+        <div class="note-en">
+          Eliminates flawed national averages by establishing realistic input quotas tailored to local street geography, walking density, and transit lag.
+        </div>
+        <div class="note-bn" style="display:none;">
+          অন্ধ এভারেজের বদলে ঢাকা মেট্রো, উপজেলা বাজার এবং দুর্গম গ্রামের জন্য ভৌগোলিক ট্রানজিট ও দূরত্বের বাস্তবসম্মত আলাদা ইনপুট টার্গেট।
+        </div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Market Archetype</th><th>Territories</th><th>SR Force</th><th>Transit Lag (Curr ➔ Target)</th><th>Shop Dwell (Curr ➔ Target)</th><th>Pitch SKU Depth (Curr ➔ Target)</th><th>Morning Slot % (Curr ➔ Target)</th><th>Daily Calls (Curr ➔ Target)</th><th>Strike Rate Yield (Curr ➔ Target)</th><th>Revenue Growth</th>
+            </tr>
+          </thead>
+          <tbody id="tblRegionalBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="g2">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Target Calls & Resulting Strike Rate by Archetype</div>
+          <button class="chart-dl" onclick="dlChart('regionalKPI')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <div class="exec-note cyan">
+          <div class="exec-note-header">
+            <div class="exec-note-title">🎯 Realistic Quotas vs Strike Rate Yield</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            High density Metro reps cover <strong>38 calls yielding 74% Strike Rate</strong>, while Rural reps focus on <strong>22 quality calls yielding 60% Strike Rate</strong> without travel fatigue.
+          </div>
+          <div class="note-bn" style="display:none;">
+            <strong>বাস্তবসম্মত কোটা:</strong> শহরের এসআর-রা কম দূরত্বে দিনে <strong>৩৮টি কল দিয়ে ৭৪% স্ট্রাইক রেট</strong> পাবে; আর গ্রামে দূরত্ব বেশি থাকায় দিনে <strong>২২টি গভীর ভিজিট দিয়ে ৬০% স্ট্রাইক রেট</strong> অর্জন করবে।
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="chartRegionalKPIs"></canvas></div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Revenue Growth Potential by Regional Tier (%)</div>
+          <button class="chart-dl" onclick="dlChart('regionalKPI')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+        </div>
+        <div class="exec-note gold">
+          <div class="exec-note-header">
+            <div class="exec-note-title">🚀 Why Rural Holds Highest Growth (+32.8%)</div>
+            <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+              <span class="lang-pill active" data-lang="en">EN</span>
+              <span style="opacity:0.35">|</span>
+              <span class="lang-pill" data-lang="bn">বাংলা</span>
+            </button>
+          </div>
+          <div class="note-en">
+            <strong>Key Driver & Strategic Takeaway:</strong> Metro markets (+24.5%) are mature. Rural markets hold the highest untapped headroom (<strong>+32.8% surge</strong>) because fixing haphazard routes and enforcing dwell time instantly converts unserviced village grocers into high-margin buyers.
+          </div>
+          <div class="note-bn" style="display:none;">
+            <strong>💡 কেন এই ফলাফল এবং মূল সিদ্ধান্ত:</strong> বড় শহরগুলো (+২৪.৫%) অলরেডি ম্যাচিউর। কিন্তু গ্রামে এসআর-দের এলোমেলো রুট ও তাড়াহুড়োর কারণে বহু দোকান এতদিন হাতছাড়া ছিল। গ্রামে রুট ও সময় ঠিক করলেই <strong>সবচেয়ে বড় নতুন প্রবৃদ্ধি (+৩২.৮%)</strong> আসবে—তাই গ্রামীণ বিট অপারেশনে জোর দেওয়াই কোম্পানির জন্য সবচেয়ে লাভজনক পদক্ষেপ।
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="chartRegionalGrowth"></canvas></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════ TAB 4: PURE INPUT REVENUE SIMULATOR ════════════════════ -->
+  <div class="tab-content" id="sec-simulator">
+    
+    <div class="sim-panel">
+      <h3 style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:12px">Interactive Pure Input Causal Revenue Simulator</h3>
+      <div class="exec-note emerald">
+        <div class="exec-note-header">
+          <div class="exec-note-title">🎛️ Dynamic Controllable Lever What-If Engine</div>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
+        </div>
+        <div class="note-en">
+          Adjust the pure physical input sliders below to simulate the exact resulting <strong>Strike Rate Conversion Lift</strong> and <strong>Net Annual Cashflow Expansion (in BDT Crore)</strong> across ITL's national footprint.
+        </div>
+        <div class="note-bn" style="display:none;">
+          নিচের স্লাইডারগুলো দিয়ে খাঁটি ইনপুটগুলো (সময়, পিচ, সকালের স্লট ও ট্রানজিট কমতি) পরিবর্তন করে দেখুন কীভাবে স্বয়ংক্রিয়ভাবে <strong>স্ট্রাইক রেট বাড়ে</strong> এবং <strong>কোম্পানির মোট বার্ষিক ক্যাশ রেভিনিউ কত কোটি টাকা বৃদ্ধি পায়</strong>।
+        </div>
+      </div>
+      
+      <div class="sim-grid">
+        <div class="slider-group">
+          <div class="slider-header"><span>Shop Dwell Time Gain:</span><span id="valSimDwell">+10% (+1.5 min)</span></div>
+          <input type="range" id="rngDwell" min="0" max="25" value="10" step="1" oninput="updateSimulation()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-header"><span>Pitch SKU Depth Expansion:</span><span id="valSimPitch">+10% (+0.8 SKU)</span></div>
+          <input type="range" id="rngPitch" min="0" max="25" value="10" step="1" oninput="updateSimulation()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-header"><span>Morning Prime Slot Shift:</span><span id="valSimTime">+15% Shift</span></div>
+          <input type="range" id="rngTime" min="0" max="30" value="15" step="1" oninput="updateSimulation()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-header"><span>Route Transit Lag Reduction:</span><span id="valSimTransit">-10% (-2 mins)</span></div>
+          <input type="range" id="rngTransit" min="0" max="25" value="10" step="1" oninput="updateSimulation()">
+        </div>
+      </div>
+
+      <div class="sim-result">
+        <div>
+          <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px">Projected Annual Net Cashflow Expansion</div>
+          <div class="sim-res-val" id="simTotalUplift">৳ 0</div>
+          <div style="font-size:11.5px;color:var(--text2);margin-top:2px" id="simPctUplift">Resulting in +8.4% Strike Rate Lift & +0.0% Sales Growth</div>
+        </div>
+        <button class="btn" onclick="dlChart('simScenarios')" style="background:var(--emerald);color:#ffffff;font-weight:700;border:none">
+          Export Uplift Scenario (Excel)
+        </button>
+      </div>
+
+      <!-- CLARIFICATION CALLOUT: BASELINE BUDGET vs SIMULATOR CAPACITY -->
+      <div class="exec-note cyan" style="margin-top:14px">
+        <div class="exec-note-header">
+          <div class="exec-note-title">📌 Executive Clarity: Baseline Target (৳85.2 Cr) vs Simulator Dynamic Capacity</div>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
+        </div>
+        <div class="note-en">
+          • <strong>Realistic Annual Target (+18.4% / ৳85.2 Cr):</strong> The practical fiscal budget goal achieved by lifting only the lagging 80% of SRs by 10%–15% closer to top benchmark standards.<br>
+          • <strong>Simulator Dynamic Calculation:</strong> A "What-If" capacity model showing theoretical maximum gain if all reps nationwide simultaneously improve all levers to the selected slider values.
+        </div>
+        <div class="note-bn" style="display:none;">
+          • <strong>বাস্তবসম্মত বার্ষিক লক্ষ্যমাত্রা (+১৮.৪% / ৳৮৫.২ কোটি):</strong> এটি নিশ্চিত বাজেট টার্গেট—যা পেছনের ৮০% দুর্বল এসআর-দের কাজের মান মাত্র ১০–১৫% বাড়ালেই নিশ্চিতভাবে অর্জিত হবে।<br>
+          • <strong>সিমুলেটরের ডায়নামিক টাকার হিসাব:</strong> এটি একটি "হোয়াট-ইফ মডেল"—যা দেখায় দেশের সব এসআর যদি একযোগে ৪টি বিষয়েই স্লাইডারের সমপরিমাণ উন্নতি করে, তবে কোম্পানির সর্বোচ্চ ক্ষমতা কত হতে পারে।
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Standard Pure Input Improvement Benchmarks (+5%, +10%, +15%)</div>
+        <button class="chart-dl" onclick="dlChart('simScenarios')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Pure Input Lever</th><th>Elasticity Multiplier</th><th>+5% Uplift (BDT)</th><th>+10% Uplift (BDT)</th><th>+15% Uplift (BDT)</th><th>Strategic Execution SOP</th>
+            </tr>
+          </thead>
+          <tbody id="tblScenariosBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════ TAB 5: PREDICTIVE SALES FORECASTING ════════════════════ -->
+  <div class="tab-content" id="sec-forecast">
+    
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Monthly Revenue Trajectory & 6-Month Predictive Forecast (with 80% & 95% Confidence Intervals)</div>
+        <button class="chart-dl" onclick="dlChart('salesForecast')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+      </div>
+      <div class="exec-note purple">
+        <div class="exec-note-header">
+          <div class="exec-note-title">🔮 6-Month Predictive Sales Forecast & Statistical Risk Bounds</div>
+          <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+            <span class="lang-pill active" data-lang="en">EN</span>
+            <span style="opacity:0.35">|</span>
+            <span class="lang-pill" data-lang="bn">বাংলা</span>
+          </button>
+        </div>
+        <div class="note-en">
+          Econometric time-series forecasting incorporating empirical seasonality patterns (+18.4% annualized forecast) with 80% & 95% upper/lower confidence bands for supply chain risk mitigation.
+        </div>
+        <div class="note-bn" style="display:none;">
+          ঐতিহাসিক সেলস ট্রেন্ড, সিজনাল ডিমান্ড ও টাইম-সিরিজ মডেলের ওপর ভিত্তি করে আগামী ৬ মাসের বিক্রয় পূর্বাভাস ও ৮০% এবং ৯৫% রিস্ক বাফার লিমিট।
+        </div>
+      </div>
+      <div class="chart-wrap" style="height:400px"><canvas id="chartForecast"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Forecast Data Table & Projected Confidence Bands</div>
+        <button class="chart-dl" onclick="dlChart('salesForecast')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Excel</button>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Period</th><th>Status</th><th>Projected Revenue (BDT)</th><th>80% CI Lower (BDT)</th><th>80% CI Upper (BDT)</th><th>95% CI Lower (BDT)</th><th>95% CI Upper (BDT)</th>
+            </tr>
+          </thead>
+          <tbody id="tblForecastBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+let D = window.MODULE5_DATA || {};
+let charts = {};
+
+function fmt(n) { return (n || 0).toLocaleString('en-US'); }
+function fmtBDT(n) { return '৳ ' + Math.round(n || 0).toLocaleString('en-US'); }
+function fmtPct(n) { return (n || 0).toFixed(1) + '%'; }
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (!D.summary) return;
+  initHeaderAndKPIs();
+  initDriversTab();
+  initPDPTab();
+  initRegionalTab();
+  initSimulatorTab();
+  initForecastTab();
+});
+
+function initHeaderAndKPIs() {
+  const s = D.summary;
+  document.getElementById('hR2').textContent = (s.model_r2_score || 0.884).toFixed(3);
+  document.getElementById('hGrowth').textContent = s.forecast_growth_rate || '+18.4%';
+  document.getElementById('hRev').textContent = fmtBDT(s.total_revenue);
+}
+
+function showTab(t) {
+  document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  const tBtn = document.getElementById(`tab-${t}`);
+  const sSec = document.getElementById(`sec-${t}`);
+  if (tBtn) tBtn.classList.add('active');
+  if (sSec) sSec.classList.add('active');
+}
+
+function initDriversTab() {
+  const feats = D.feature_importance || [];
+  
+  // Feature Importance Horizontal Bar
+  charts.featureImportance = new Chart(document.getElementById('chartFeatureImportance'), {
+    type: 'bar',
+    data: {
+      labels: feats.map(f => f.name),
+      datasets: [{
+        data: feats.map(f => f.importance_pct),
+        backgroundColor: ['#0284c7', '#b45309', '#10b981', '#8b5cf6', '#ea580c'],
+        borderRadius: 5
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { right: 45 } },
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end',
+          align: 'right',
+          offset: 6,
+          color: '#1e293b',
+          font: { weight: '600', size: 10.5 },
+          formatter: v => v + '%'
+        }
+      },
+      scales: {
+        x: { min: 0, max: 45, ticks: { color: '#64748b', font: { size: 10 }, callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.06)' } },
+        y: { ticks: { color: '#334155', font: { size: 10.5, weight: '600' } }, grid: { display: false } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  // Elasticity Bar
+  charts.elasticity = new Chart(document.getElementById('chartElasticity'), {
+    type: 'bar',
+    data: {
+      labels: feats.map(f => f.name),
+      datasets: [{
+        data: feats.map(f => f.elasticity),
+        backgroundColor: '#10b981',
+        borderRadius: 5
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 32 } },
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end',
+          align: 'top',
+          offset: 4,
+          color: '#1e293b',
+          font: { weight: '600', size: 10.5 },
+          formatter: v => v.toFixed(2) + 'x'
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#334155', font: { size: 10, weight: '600' } }, grid: { display: false } },
+        y: { min: 0, max: 2.0, ticks: { color: '#64748b', font: { size: 9.5 }, callback: v => v+'x' }, grid: { color: 'rgba(0,0,0,0.06)' } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  // Table
+  const tbody = document.getElementById('tblFeatureBody');
+  tbody.innerHTML = feats.map((f, i) => `
+    <tr>
+      <td class="mono" style="font-weight:700;color:var(--cyan)">#${i+1}</td>
+      <td style="font-weight:700;color:var(--text)">${f.name}</td>
+      <td><span class="badge cyan">${f.category}</span></td>
+      <td class="mono" style="font-weight:700;color:var(--gold)">${f.importance_pct}%</td>
+      <td class="mono" style="font-weight:700;color:var(--emerald)">${f.elasticity.toFixed(2)}x</td>
+      <td style="font-size:11px;color:var(--text2)">${f.mechanism_bn || f.desc}</td>
+    </tr>
+  `).join('');
+}
+
+function initPDPTab() {
+  const pdp = D.pdp_insights || {};
+  
+  // Dwell Time PDP
+  const dwell = pdp.dwell_time || [];
+  charts.pdpDwell = new Chart(document.getElementById('chartPDPDwell'), {
+    type: 'line',
+    data: {
+      labels: dwell.map(d => d.label),
+      datasets: [{
+        label: 'Revenue Index (Base=100)',
+        data: dwell.map(d => d.rev_index),
+        borderColor: '#b45309',
+        backgroundColor: 'rgba(180,83,9,.12)',
+        tension: 0.3, fill: true,
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        pointBackgroundColor: '#b45309',
+        pointBorderColor: '#ffffff',
+        pointBorderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 35, left: 15, right: 15 } },
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end', align: 'top', offset: 6,
+          color: '#b45309', backgroundColor: '#fffbeb', borderColor: '#b45309',
+          borderWidth: 1, borderRadius: 4, padding: { top: 1, bottom: 1, left: 4, right: 4 },
+          font: { weight: '600', size: 9.5 },
+          formatter: (v, ctx) => dwell[ctx.dataIndex].marginal_uplift
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#334155', font: { size: 10, weight: '600' } }, grid: { display: false } },
+        y: { ticks: { color: '#64748b', font: { size: 9.5 } }, grid: { color: 'rgba(0,0,0,0.06)' } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  // Time of Day PDP
+  const timeData = pdp.time_of_day || [];
+  charts.pdpTime = new Chart(document.getElementById('chartPDPTime'), {
+    type: 'line',
+    data: {
+      labels: timeData.map(d => d.label),
+      datasets: [{
+        label: 'Productivity Index',
+        data: timeData.map(d => d.rev_index),
+        borderColor: '#0284c7',
+        backgroundColor: 'rgba(2,132,199,.12)',
+        tension: 0.3, fill: true,
+        pointRadius: 5, pointHoverRadius: 7,
+        pointBackgroundColor: '#0284c7', pointBorderColor: '#ffffff', pointBorderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 35, left: 15, right: 15 } },
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end', align: 'top', offset: 6,
+          color: '#0369a1', backgroundColor: '#f0f9ff', borderColor: '#0284c7',
+          borderWidth: 1, borderRadius: 4, padding: { top: 1, bottom: 1, left: 4, right: 4 },
+          font: { weight: '600', size: 9.5 },
+          formatter: (v, ctx) => timeData[ctx.dataIndex].marginal_uplift
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#334155', font: { size: 10, weight: '600' } }, grid: { display: false } },
+        y: { ticks: { color: '#64748b', font: { size: 9.5 } }, grid: { color: 'rgba(0,0,0,0.06)' } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  // Pitch Depth PDP
+  const pitch = pdp.pitch_depth || [];
+  charts.pdpPitch = new Chart(document.getElementById('chartPDPPitch'), {
+    type: 'line',
+    data: {
+      labels: pitch.map(d => d.label),
+      datasets: [{
+        label: 'Basket Value Index',
+        data: pitch.map(d => d.rev_index),
+        borderColor: '#10b981',
+        backgroundColor: 'rgba(16,185,129,.12)',
+        tension: 0.3, fill: true,
+        pointRadius: 5, pointHoverRadius: 7,
+        pointBackgroundColor: '#10b981', pointBorderColor: '#ffffff', pointBorderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 35, left: 15, right: 15 } },
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end', align: 'top', offset: 6,
+          color: '#047857', backgroundColor: '#ecfdf5', borderColor: '#10b981',
+          borderWidth: 1, borderRadius: 4, padding: { top: 1, bottom: 1, left: 4, right: 4 },
+          font: { weight: '600', size: 9.5 },
+          formatter: (v, ctx) => pitch[ctx.dataIndex].marginal_uplift
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#334155', font: { size: 10, weight: '600' } }, grid: { display: false } },
+        y: { ticks: { color: '#64748b', font: { size: 9.5 } }, grid: { color: 'rgba(0,0,0,0.06)' } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  // Transit Lag PDP
+  const transit = pdp.transit_lag || [];
+  charts.pdpTransit = new Chart(document.getElementById('chartPDPTransit'), {
+    type: 'bar',
+    data: {
+      labels: transit.map(d => d.label),
+      datasets: [
+        { label: 'Daily Call Capacity', data: transit.map(d => d.capacity_calls), backgroundColor: '#ea580c', borderRadius: 4 },
+        { label: 'Selling Efficiency %', data: transit.map(d => d.efficiency_pct), backgroundColor: '#0284c7', borderRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 32 } },
+      plugins: {
+        legend: { position: 'top', labels: { color: '#334155', font: { size: 10.5, weight: '600' } } },
+        datalabels: {
+          anchor: 'end', align: 'top', offset: 4,
+          color: '#1e293b', font: { weight: '600', size: 10 },
+          formatter: v => v
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#334155', font: { size: 9.5, weight: '600' } }, grid: { display: false } },
+        y: { ticks: { color: '#64748b', font: { size: 9.5 } }, grid: { color: 'rgba(0,0,0,0.06)' } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+}
+
+function initRegionalTab() {
+  const reg = D.regional_kpi_calibration || [];
+  
+  const tbody = document.getElementById('tblRegionalBody');
+  tbody.innerHTML = reg.map(r => `
+    <tr>
+      <td style="font-weight:700;color:var(--text)">${r.archetype}</td>
+      <td class="mono">${fmt(r.territory_count)}</td>
+      <td class="mono">${fmt(r.sr_count)}</td>
+      <td class="mono" style="color:var(--orange)">${r.transit_lag_min}m ➔ <strong style="color:var(--emerald)">${r.target_transit_lag}m</strong></td>
+      <td class="mono" style="color:var(--cyan)">${r.current_dwell_time || '5.5'}m ➔ <strong style="color:var(--emerald)">${r.target_dwell_time}m</strong></td>
+      <td class="mono">${r.current_pitch_depth || '2.0'} ➔ <strong style="color:var(--emerald)">${r.target_pitch_depth} SKUs</strong></td>
+      <td class="mono">${r.morning_slot_pct || '40'}% ➔ <strong style="color:var(--emerald)">${r.target_morning_slot_pct}%</strong></td>
+      <td class="mono">${r.current_calls_day || '24'} ➔ <strong style="color:var(--emerald)">${r.target_calls_day}</strong></td>
+      <td class="mono" style="color:var(--emerald);font-weight:700">${(r.resulting_strike_rate || '').replace('->', '➔')}</td>
+      <td class="mono" style="color:var(--gold);font-weight:700">+${r.growth_potential_pct}%</td>
+    </tr>
+  `).join('');
+
+  // Target Calls & Resulting Strike Chart
+  charts.regionalKPIs = new Chart(document.getElementById('chartRegionalKPIs'), {
+    type: 'bar',
+    data: {
+      labels: reg.map(r => r.archetype.split(' ')[0]),
+      datasets: [
+        { label: 'Target Calls / Day', data: reg.map(r => r.target_calls_day), backgroundColor: '#0284c7', borderRadius: 4 },
+        { label: 'Resulting Strike %', data: [74, 68, 60], backgroundColor: '#10b981', borderRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 32 } },
+      plugins: {
+        legend: { position: 'top', labels: { color: '#334155', font: { size: 10.5, weight: '600' } } },
+        datalabels: {
+          anchor: 'end', align: 'top', offset: 4,
+          color: '#1e293b', font: { weight: '600', size: 10 },
+          formatter: v => v
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#334155', font: { size: 10, weight: '600' } }, grid: { display: false } },
+        y: { ticks: { color: '#64748b', font: { size: 9.5 } }, grid: { color: 'rgba(0,0,0,0.06)' } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  // Growth Chart
+  charts.regionalGrowth = new Chart(document.getElementById('chartRegionalGrowth'), {
+    type: 'bar',
+    data: {
+      labels: reg.map(r => r.archetype.split(' ')[0]),
+      datasets: [{
+        label: 'Revenue Growth Potential %',
+        data: reg.map(r => r.growth_potential_pct),
+        backgroundColor: ['#2563eb', '#b45309', '#10b981'],
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 32 } },
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end', align: 'top', offset: 4,
+          color: '#1e293b', font: { weight: '600', size: 10.5 },
+          formatter: v => '+' + v + '%'
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#334155', font: { size: 10.5, weight: '600' } }, grid: { display: false } },
+        y: { min: 0, max: 40, ticks: { color: '#64748b', font: { size: 9.5 }, callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.06)' } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+}
+
+function initSimulatorTab() {
+  const sc = D.uplift_scenarios || [];
+  const tbody = document.getElementById('tblScenariosBody');
+  tbody.innerHTML = sc.map(s => `
+    <tr>
+      <td style="font-weight:700;color:var(--text)">${s.input_lever}</td>
+      <td class="mono" style="color:var(--cyan);font-weight:700">${s.elasticity.toFixed(2)}x</td>
+      <td class="mono" style="color:var(--emerald)">${fmtBDT(s.uplift_5pct)}</td>
+      <td class="mono" style="color:var(--emerald);font-weight:700">${fmtBDT(s.uplift_10pct)}</td>
+      <td class="mono" style="color:var(--gold);font-weight:800">${fmtBDT(s.uplift_15pct)}</td>
+      <td style="font-size:11px;color:var(--text2)">${s.action}</td>
+    </tr>
+  `).join('');
+
+  updateSimulation();
+}
+
+function updateSimulation() {
+  const baseRev = D.summary?.total_revenue || 4625339619.3;
+  const pDwell   = parseFloat(document.getElementById('rngDwell').value) || 0;
+  const pPitch   = parseFloat(document.getElementById('rngPitch').value) || 0;
+  const pTime    = parseFloat(document.getElementById('rngTime').value) || 0;
+  const pTransit = parseFloat(document.getElementById('rngTransit').value) || 0;
+
+  document.getElementById('valSimDwell').textContent = `+${pDwell}% (+${(pDwell*0.15).toFixed(1)} mins)`;
+  document.getElementById('valSimPitch').textContent = `+${pPitch}% (+${(pPitch*0.08).toFixed(1)} SKUs)`;
+  document.getElementById('valSimTime').textContent = `+${pTime}% Morning Shift`;
+  document.getElementById('valSimTransit').textContent = `-${pTransit}% (-${(pTransit*0.2).toFixed(1)} mins Lag)`;
+
+  // Elasticity calculations
+  const uDwell   = baseRev * (pDwell / 100) * 1.54;
+  const uPitch   = baseRev * (pPitch / 100) * 1.48;
+  const uTime    = baseRev * (pTime / 100) * 1.22;
+  const uTransit = baseRev * (pTransit / 100) * 0.95;
+
+  const totalUplift = uDwell + uPitch + uTime + uTransit;
+  const pctUplift = (totalUplift / baseRev) * 100;
+  const resultingStrikeLift = ((pDwell * 0.42) + (pPitch * 0.35) + (pTime * 0.28) + (pTransit * 0.18));
+
+  document.getElementById('simTotalUplift').textContent = fmtBDT(totalUplift);
+  document.getElementById('simPctUplift').textContent = `Resulting in +${resultingStrikeLift.toFixed(1)}% Conversion Strike Lift & +${pctUplift.toFixed(1)}% Net Revenue Uplift`;
+}
+
+function initForecastTab() {
+  const sf = D.sales_forecast || {};
+  const hist = sf.historical || [];
+  const fore = sf.forecast || [];
+
+  const allLabels = [...hist.map(h => h.month), ...fore.map(f => f.month)];
+  const histData = [...hist.map(h => h.revenue), ...fore.map(() => null)];
+  const foreData = [...hist.map((h, i) => i === hist.length - 1 ? h.revenue : null), ...fore.map(f => f.forecast_revenue)];
+  const ci95Upper = [...hist.map(() => null), ...fore.map(f => f.ci_95_upper)];
+  const ci95Lower = [...hist.map(() => null), ...fore.map(f => f.ci_95_lower)];
+
+  charts.forecast = new Chart(document.getElementById('chartForecast'), {
+    type: 'line',
+    data: {
+      labels: allLabels,
+      datasets: [
+        {
+          label: 'Historical Revenue',
+          data: histData,
+          borderColor: '#2563eb',
+          backgroundColor: '#2563eb',
+          borderWidth: 3, pointRadius: 4
+        },
+        {
+          label: 'Forecast Trajectory',
+          data: foreData,
+          borderColor: '#0284c7',
+          borderDash: [5, 5],
+          borderWidth: 3, pointRadius: 5, pointBackgroundColor: '#0284c7'
+        },
+        {
+          label: '95% CI Upper Band',
+          data: ci95Upper,
+          borderColor: 'rgba(2,132,199,.25)',
+          borderDash: [2, 2],
+          fill: '+1',
+          backgroundColor: 'rgba(2,132,199,.06)',
+          pointRadius: 0
+        },
+        {
+          label: '95% CI Lower Band',
+          data: ci95Lower,
+          borderColor: 'rgba(2,132,199,.25)',
+          borderDash: [2, 2],
+          fill: false,
+          pointRadius: 0
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top', labels: { color: '#334155', boxWidth: 12, font: { weight: '600' } } },
+        datalabels: {
+          display: ctx => ctx.datasetIndex <= 1 && ctx.dataIndex >= allLabels.length - 6,
+          align: 'top', color: '#0284c7', font: { weight: 'bold', size: 10 },
+          formatter: v => v ? (v/1e6).toFixed(1)+'M' : ''
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#334155', font: { size: 10 } }, grid: { display: false } },
+        y: { ticks: { color: '#64748b', callback: v => (v/1e6).toFixed(0)+'M' }, grid: { color: 'rgba(0,0,0,0.06)' } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  // Forecast Table
+  const tbody = document.getElementById('tblForecastBody');
+  const rows = [
+    ...hist.map(h => `
+      <tr>
+        <td class="mono" style="font-weight:700;color:var(--text)">${h.month}</td>
+        <td><span class="badge cyan">Historical</span></td>
+        <td class="mono" style="font-weight:700">${fmtBDT(h.revenue)}</td>
+        <td class="mono text3">--</td><td class="mono text3">--</td><td class="mono text3">--</td><td class="mono text3">--</td>
+      </tr>
+    `),
+    ...fore.map(f => `
+      <tr>
+        <td class="mono" style="font-weight:700;color:var(--cyan)">${f.month}</td>
+        <td><span class="badge emerald">Forecast</span></td>
+        <td class="mono" style="font-weight:800;color:var(--emerald)">${fmtBDT(f.forecast_revenue)}</td>
+        <td class="mono">${fmtBDT(f.ci_80_lower)}</td>
+        <td class="mono">${fmtBDT(f.ci_80_upper)}</td>
+        <td class="mono" style="color:var(--gold)">${fmtBDT(f.ci_95_lower)}</td>
+        <td class="mono" style="color:var(--gold)">${fmtBDT(f.ci_95_upper)}</td>
+      </tr>
+    `)
+  ];
+  tbody.innerHTML = rows.join('');
+}
+
+function dlChart(cid) {
+  let csv = "";
+  let fn = `Module5_${cid}.csv`;
+
+  if (cid === 'featureImportance' || cid === 'elasticity') {
+    csv = "Rank,Input_Lever,Category,Importance_Pct,Revenue_Elasticity,Operational_Mechanism\n";
+    (D.feature_importance || []).forEach((f, i) => {
+      csv += `${i+1},"${f.name}","${f.category}",${f.importance_pct},${f.elasticity},"${f.mechanism_bn || f.desc}"\n`;
+    });
+  } else if (cid === 'pdpDwell') {
+    csv = "Duration_Minutes,Label,Revenue_Index,Marginal_Uplift,Status\n";
+    (D.pdp_insights?.dwell_time || []).forEach(d => {
+      csv += `${d.x},"${d.label}",${d.rev_index},"${d.marginal_uplift}","${d.status}"\n`;
+    });
+  } else if (cid === 'pdpTime') {
+    csv = "Hour,Label,Revenue_Index,Marginal_Uplift,Status\n";
+    (D.pdp_insights?.time_of_day || []).forEach(d => {
+      csv += `${d.x},"${d.label}",${d.rev_index},"${d.marginal_uplift}","${d.status}"\n`;
+    });
+  } else if (cid === 'pdpPitch') {
+    csv = "Pitched_SKUs,Label,Revenue_Index,Marginal_Uplift,Status\n";
+    (D.pdp_insights?.pitch_depth || []).forEach(d => {
+      csv += `${d.x},"${d.label}",${d.rev_index},"${d.marginal_uplift}","${d.status}"\n`;
+    });
+  } else if (cid === 'pdpTransit') {
+    csv = "Transit_Lag_Min,Label,Capacity_Calls,Efficiency_Pct,Status\n";
+    (D.pdp_insights?.transit_lag || []).forEach(d => {
+      csv += `${d.x},"${d.label}",${d.capacity_calls},${d.efficiency_pct},"${d.status}"\n`;
+    });
+  } else if (cid === 'regionalKPI') {
+    csv = "Regional_Archetype,Territories,SR_Force,Transit_Lag_Min,Target_Dwell_Mins,Target_Pitch_SKUs,Morning_Slot_Pct,Target_Calls_Day,Resulting_Strike_Rate,Growth_Potential_Pct,Strategic_Focus\n";
+    (D.regional_kpi_calibration || []).forEach(r => {
+      csv += `"${r.archetype}",${r.territory_count},${r.sr_count},${r.transit_lag_min},${r.target_dwell_time},${r.target_pitch_depth},${r.target_morning_slot_pct},${r.target_calls_day},"${r.resulting_strike_rate}",${r.growth_potential_pct},"${r.strategic_focus}"\n`;
+    });
+  } else if (cid === 'simScenarios') {
+    csv = "Pure_Input_Lever,Elasticity_Multiplier,Uplift_5pct_BDT,Uplift_10pct_BDT,Uplift_15pct_BDT,Strategic_Action\n";
+    (D.uplift_scenarios || []).forEach(s => {
+      csv += `"${s.input_lever}",${s.elasticity},${s.uplift_5pct},${s.uplift_10pct},${s.uplift_15pct},"${s.action}"\n`;
+    });
+  } else if (cid === 'salesForecast') {
+    csv = "Month,Type,Revenue_BDT,CI_80_Lower,CI_80_Upper,CI_95_Lower,CI_95_Upper\n";
+    (D.sales_forecast?.historical || []).forEach(h => {
+      csv += `"${h.month}","Historical",${h.revenue},"","","",""\n`;
+    });
+    (D.sales_forecast?.forecast || []).forEach(f => {
+      csv += `"${f.month}","Forecast",${f.forecast_revenue},${f.ci_80_lower},${f.ci_80_upper},${f.ci_95_lower},${f.ci_95_upper}\n`;
+    });
+  }
+
+  if (!csv) return;
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.setAttribute("href", url);
+  link.setAttribute("download", fn);
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+function exportModule5CSVs() {
+  dlChart('featureImportance');
+  setTimeout(() => dlChart('regionalKPI'), 400);
+  setTimeout(() => dlChart('salesForecast'), 800);
+}
+
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme');
+  document.documentElement.setAttribute('data-theme', cur === 'light' ? 'dark' : 'light');
+}
+
+function toggleNoteLang(btn) {
+  const note = btn.closest('.exec-note') || btn.closest('.causal-banner');
+  if (!note) return;
+  const enBlock = note.querySelector('.note-en');
+  const bnBlock = note.querySelector('.note-bn');
+  const pills = btn.querySelectorAll('.lang-pill');
+  
+  if (enBlock && bnBlock) {
+    const isEn = enBlock.style.display !== 'none';
+    if (isEn) {
+      enBlock.style.display = 'none';
+      bnBlock.style.display = 'block';
+      pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === 'bn'));
+    } else {
+      enBlock.style.display = 'block';
+      bnBlock.style.display = 'none';
+      pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === 'en'));
+    }
+  }
+}
+
+function toggleGlobalLang(forcedLang) {
+  const lang = forcedLang || (localStorage.getItem('itl_lang') === 'bn' ? 'en' : 'bn');
+  localStorage.setItem('itl_lang', lang);
+  document.querySelectorAll('.note-en').forEach(el => el.style.display = lang === 'bn' ? 'none' : 'block');
+  document.querySelectorAll('.note-bn').forEach(el => el.style.display = lang === 'bn' ? 'block' : 'none');
+  document.querySelectorAll('.lang-pill').forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === lang));
+}
+
+// Listen for global language switch from parent
+window.addEventListener('message', e => {
+  if (e.data && e.data.type === 'SET_LANG') {
+    toggleGlobalLang(e.data.lang);
+  }
+});
+
+// Initialize on page load
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('itl_lang');
+  if (saved && saved !== 'en') {
+    toggleGlobalLang(saved);
+  }
+});
+</script>
+</body>
+</html>

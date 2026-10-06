@@ -15,18 +15,19 @@
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 <!-- Data Sources -->
-<script src="bd_geo.js"></script>
-<script src="bd_districts_geo.js"></script>
-<script src="ceo_national.js"></script>
-<script src="ceo_outlets_D0.js"></script>
-<script src="ceo_outlets_D1.js"></script>
-<script src="ceo_outlets_D2.js"></script>
-<script src="ceo_outlets_D3.js"></script>
-<script src="ceo_outlets_D4.js"></script>
-<script src="ceo_outlets_D5.js"></script>
-<script src="ceo_outlets_D6.js"></script>
-<script src="ceo_outlets_D7.js"></script>
-<script src="itl_visit_heatmap_data.js"></script>
+<script src="bd_mask.js?v=20261006_v5"></script>
+<script src="bd_geo.js?v=20261006_v5"></script>
+<script src="bd_districts_geo.js?v=20261006_v5"></script>
+<script src="ceo_national.js?v=20261006_v5"></script>
+<script src="ceo_outlets_D0.js?v=20261006_v5"></script>
+<script src="ceo_outlets_D1.js?v=20261006_v5"></script>
+<script src="ceo_outlets_D2.js?v=20261006_v5"></script>
+<script src="ceo_outlets_D3.js?v=20261006_v5"></script>
+<script src="ceo_outlets_D4.js?v=20261006_v5"></script>
+<script src="ceo_outlets_D5.js?v=20261006_v5"></script>
+<script src="ceo_outlets_D6.js?v=20261006_v5"></script>
+<script src="ceo_outlets_D7.js?v=20261006_v5"></script>
+<script src="itl_visit_heatmap_data.js?v=20261006_v5"></script>
 
 <style>
 :root {
@@ -925,15 +926,28 @@ function loadClusters() {
         const thana = o[16] || '';
         const visits = o[6] || 0;
         const rev = o[8] || 0;
-        const active = visits > 0;
+        const orders = o[13] || 0;
+        
+        let tierName = 'Ordered Outlet';
+        let dotColor = '#10b981'; // Green
+        if (rev > 0 || orders > 0) {
+          tierName = 'Ordered Outlet';
+          dotColor = '#10b981';
+        } else if (visits > 0) {
+          tierName = 'Visited (No Order)';
+          dotColor = '#f59e0b';
+        } else {
+          tierName = 'Untapped Outlet (0 Visits)';
+          dotColor = '#ef4444';
+        }
 
         const m = L.circleMarker([lat, lng], {
-          radius: 5,
-          fillColor: active ? '#10b981' : '#dc2626',
+          radius: 6,
+          fillColor: dotColor,
           color: '#ffffff',
-          weight: 1,
+          weight: 1.5,
           opacity: 1,
-          fillOpacity: 0.9
+          fillOpacity: 0.95
         });
 
         m.bindPopup(`

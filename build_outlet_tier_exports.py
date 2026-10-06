@@ -81,14 +81,15 @@ for buyer, rev in outlet_revenue.items():
 # Sort by revenue descending
 outlet_list.sort(key=lambda x: -x['revenue'])
 
-n_total = len(outlet_list)
-for i, o in enumerate(outlet_list):
-    pct = (n_total - i) / n_total
-    if pct >= 0.75:
+# Classify using Industry-Standard FMCG Business Criteria
+print("3. Classifying outlet tiers using FMCG Business Thresholds (>=50k, 15k-50k, 5k-15k, <5k)...")
+for o in outlet_list:
+    rev = o['revenue']
+    if rev >= 50000:
         o['tier'] = 'Platinum'
-    elif pct >= 0.50:
+    elif rev >= 15000:
         o['tier'] = 'Gold'
-    elif pct >= 0.25:
+    elif rev >= 5000:
         o['tier'] = 'Silver'
     else:
         o['tier'] = 'Bronze'
@@ -99,75 +100,96 @@ tier_groups = defaultdict(list)
 for o in outlet_list:
     tier_groups[o['tier']].append(o)
 
+tier_criteria_map = {
+    'Platinum': '4-Month Revenue >= BDT 50,000 (>=৳12.5k/mo)',
+    'Gold':     '4-Month Revenue BDT 15,000 - 50,000 (৳3.75k-12.5k/mo)',
+    'Silver':   '4-Month Revenue BDT 5,000 - 15,000 (৳1.25k-3.75k/mo)',
+    'Bronze':   '4-Month Revenue < BDT 5,000 (<৳1.25k/mo)'
+}
+
 for tier_name in ['Platinum', 'Gold', 'Silver', 'Bronze']:
-    filename = f"e:\\ITL FINAL ADV ANALYSIS\\itl_outlets_{tier_name.lower()}_tier.csv"
-    with open(filename, 'w', encoding='utf-8-sig', newline='') as f:
-        writer = csv.writer(f)
-        writer.writerow([
-            "Rank_In_Tier", "Outlet_Code", "Outlet_Name", "Owner_Name", "Phone_Number", 
-            "Address", "Territory", "Tier", "Total_Revenue_BDT", "Total_Orders", 
-            "Unique_SKUs_Bought", "Avg_Order_Value_BDT"
-        ])
-        for idx, o in enumerate(tier_groups[tier_name]):
-            writer.writerow([
-                idx + 1, o['code'], o['name'], o['owner'], o['phone'],
-                o['address'], o['territory'], o['tier'], o['revenue'], o['orders'],
-                o['sku_count'], o['avg_order_value']
-            ])
-    print(f"  Saved: {filename} ({len(tier_groups[tier_name]):,} outlets)")
+    for base_dir in [r'e:\ITL FINAL ADV ANALYSIS', r'd:\ITL FINAL ADV ANALYSIS', '.']:
+        try:
+            filename = f"{base_dir}\\itl_outlets_{tier_name.lower()}_tier.csv"
+            with open(filename, 'w', encoding='utf-8-sig', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow([
+                    "Rank_In_Tier", "Outlet_Code", "Outlet_Name", "Owner_Name", "Phone_Number", 
+                    "Address", "Territory", "Tier", "Tier_Criteria", "Total_Revenue_BDT", "Total_Orders", 
+                    "Unique_SKUs_Bought", "Avg_Order_Value_BDT"
+                ])
+                for idx, o in enumerate(tier_groups[tier_name]):
+                    writer.writerow([
+                        idx + 1, o['code'], o['name'], o['owner'], o['phone'],
+                        o['address'], o['territory'], o['tier'], tier_criteria_map[tier_name], o['revenue'], o['orders'],
+                        o['sku_count'], o['avg_order_value']
+                    ])
+            print(f"  Saved: {filename} ({len(tier_groups[tier_name]):,} outlets)")
+        except Exception as err:
+            pass
 
 # Combined all outlets CSV
-all_filename = r"e:\ITL FINAL ADV ANALYSIS\itl_all_outlets_by_tier.csv"
-with open(all_filename, 'w', encoding='utf-8-sig', newline='') as f:
-    writer = csv.writer(f)
-    writer.writerow([
-        "Overall_Rank", "Outlet_Code", "Outlet_Name", "Owner_Name", "Phone_Number", 
-        "Address", "Territory", "Tier", "Total_Revenue_BDT", "Total_Orders", 
-        "Unique_SKUs_Bought", "Avg_Order_Value_BDT"
-    ])
-    for idx, o in enumerate(outlet_list):
-        writer.writerow([
-            idx + 1, o['code'], o['name'], o['owner'], o['phone'],
-            o['address'], o['territory'], o['tier'], o['revenue'], o['orders'],
-            o['sku_count'], o['avg_order_value']
-        ])
-print(f"  Saved: {all_filename} ({len(outlet_list):,} outlets)")
+for base_dir in [r'e:\ITL FINAL ADV ANALYSIS', r'd:\ITL FINAL ADV ANALYSIS', '.']:
+    try:
+        all_filename = f"{base_dir}\\itl_all_outlets_by_tier.csv"
+        with open(all_filename, 'w', encoding='utf-8-sig', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "Overall_Rank", "Outlet_Code", "Outlet_Name", "Owner_Name", "Phone_Number", 
+                "Address", "Territory", "Tier", "Tier_Criteria", "Total_Revenue_BDT", "Total_Orders", 
+                "Unique_SKUs_Bought", "Avg_Order_Value_BDT"
+            ])
+            for idx, o in enumerate(outlet_list):
+                writer.writerow([
+                    idx + 1, o['code'], o['name'], o['owner'], o['phone'],
+                    o['address'], o['territory'], o['tier'], tier_criteria_map[o['tier']], o['revenue'], o['orders'],
+                    o['sku_count'], o['avg_order_value']
+                ])
+        print(f"  Saved: {all_filename} ({len(outlet_list):,} outlets)")
+    except Exception as err:
+        pass
 
 # 5. Update module2_data.json with tier samples and full tier stats
 print("5. Updating module2_data.json with sample top outlets for each tier...")
-with open(r'e:\ITL FINAL ADV ANALYSIS\module2_data.json', 'r', encoding='utf-8') as f:
-    m2 = json.load(f)
+for base_dir in [r'e:\ITL FINAL ADV ANALYSIS', r'd:\ITL FINAL ADV ANALYSIS', '.']:
+    try:
+        json_path = f"{base_dir}\\module2_data.json"
+        js_path = f"{base_dir}\\module2_data.js"
+        with open(json_path, 'r', encoding='utf-8') as f:
+            m2 = json.load(f)
 
-# Keep top 100 detailed outlets per tier for fast UI preview / direct browser download
-m2['tier_outlets_sample'] = {
-    'Platinum': tier_groups['Platinum'][:100],
-    'Gold': tier_groups['Gold'][:100],
-    'Silver': tier_groups['Silver'][:100],
-    'Bronze': tier_groups['Bronze'][:100]
-}
+        m2['tier_outlets_sample'] = {
+            'Platinum': tier_groups['Platinum'][:100],
+            'Gold': tier_groups['Gold'][:100],
+            'Silver': tier_groups['Silver'][:100],
+            'Bronze': tier_groups['Bronze'][:100]
+        }
 
-# Update tier summary with proper stats without huge raw string arrays
-tier_summary = []
-for t in ['Platinum', 'Gold', 'Silver', 'Bronze']:
-    grp = tier_groups[t]
-    t_rev = sum(x['revenue'] for x in grp)
-    tier_summary.append({
-        'tier': t,
-        'outlet_count': len(grp),
-        'revenue': round(t_rev, 2),
-        'revenue_share': round(t_rev / total_rev * 100, 2),
-        'avg_revenue': round(t_rev / len(grp), 2) if grp else 0,
-        'avg_orders': round(sum(x['orders'] for x in grp) / len(grp), 1) if grp else 0,
-        'avg_skus': round(sum(x['sku_count'] for x in grp) / len(grp), 1) if grp else 0,
-        'download_file': f"itl_outlets_{t.lower()}_tier.csv"
-    })
+        tier_summary = []
+        for t in ['Platinum', 'Gold', 'Silver', 'Bronze']:
+            grp = tier_groups[t]
+            t_rev = sum(x['revenue'] for x in grp)
+            tier_summary.append({
+                'tier': t,
+                'criteria': tier_criteria_map[t],
+                'outlet_count': len(grp),
+                'revenue': round(t_rev, 2),
+                'revenue_share': round(t_rev / total_rev * 100, 2),
+                'avg_revenue': round(t_rev / len(grp), 2) if grp else 0,
+                'avg_orders': round(sum(x['orders'] for x in grp) / len(grp), 1) if grp else 0,
+                'avg_skus': round(sum(x['sku_count'] for x in grp) / len(grp), 1) if grp else 0,
+                'download_file': f"itl_outlets_{t.lower()}_tier.csv"
+            })
 
-m2['tiers'] = tier_summary
+        m2['tiers'] = tier_summary
 
-with open(r'e:\ITL FINAL ADV ANALYSIS\module2_data.json', 'w', encoding='utf-8') as f:
-    json.dump(m2, f, ensure_ascii=False, indent=2)
+        with open(json_path, 'w', encoding='utf-8') as f:
+            json.dump(m2, f, ensure_ascii=False, indent=2)
 
-with open(r'e:\ITL FINAL ADV ANALYSIS\module2_data.js', 'w', encoding='utf-8') as f:
-    f.write('window.MODULE2_DATA = ' + json.dumps(m2, ensure_ascii=False) + ';\n')
+        with open(js_path, 'w', encoding='utf-8') as f:
+            f.write('window.MODULE2_DATA = ' + json.dumps(m2, ensure_ascii=False) + ';\n')
+        print(f"  Updated JSON/JS in: {base_dir}")
+    except Exception as err:
+        pass
 
 print("All tier exports and module2_data files updated successfully!")

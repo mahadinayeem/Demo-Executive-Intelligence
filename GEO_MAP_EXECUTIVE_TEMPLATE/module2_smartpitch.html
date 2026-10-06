@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 2 — Outlet Intelligence & SmartPitch AI™ Engine</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="module2_data.js?v=20261006_tiers_v5"></script>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg2: #ffffff;
+  --bg3: #f1f5f9;
+  --card: #ffffff;
+  --card2: #f8fafc;
+  --border: #e2e8f0;
+  --border2: #cbd5e1;
+  --text: #0f172a;
+  --text2: #334155;
+  --text3: #64748b;
+  --accent: #4f8ef7;
+  --accent2: #7c3aed;
+  --gold: #b45309;
+  --emerald: #10b981;
+  --rose: #e11d48;
+  --cyan: #0284c7;
+  --orange: #f97316;
+  --violet: #8b5cf6;
+
+  --plat: linear-gradient(135deg,#e8e8e8,#a8a8a8);
+  --goldg: linear-gradient(135deg,#f59e0b,#d97706);
+  --silverg: linear-gradient(135deg,#94a3b8,#64748b);
+  --bronzeg: linear-gradient(135deg,#cd7c2a,#92400e);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* ── HEADER ── */
+.header{
+  background:linear-gradient(135deg,#ffffff 0%,#f8fafc 50%,#ffffff 100%);
+  border-bottom:1px solid var(--border);
+  padding:28px 40px;
+  position:sticky;top:0;z-index:100;
+  backdrop-filter:blur(20px);
+}
+.header-inner{max-width:1600px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.module-badge{
+  background:linear-gradient(135deg,var(--accent2),var(--accent));
+  color:#fff;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 12px;border-radius:20px;margin-bottom:8px;display:inline-block;
+}
+.header h1{font-size:clamp(18px,2.5vw,26px);font-weight:800;color:var(--text);line-height:1.2}
+.header h1 span{color:var(--accent)}
+.header-stats{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.hstat{text-align:center}
+.hstat-val{font-size:22px;font-weight:800;color:var(--accent);font-family:'JetBrains Mono',monospace}
+.hstat-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px}
+
+/* ── NAV TABS ── */
+.nav{background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:89px;z-index:99}
+.nav-inner{max-width:1600px;margin:0 auto;display:flex;gap:0;overflow-x:auto}
+.nav-tab{
+  padding:14px 24px;font-size:13px;font-weight:600;color:var(--text3);cursor:pointer;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s;
+  display:flex;align-items:center;gap:8px;
+}
+.nav-tab:hover{color:var(--text2);background:rgba(79,142,247,.05)}
+.nav-tab.active{color:var(--accent);border-bottom-color:var(--accent);background:rgba(79,142,247,.08)}
+.nav-tab .dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.6}
+
+/* ── MAIN ── */
+.main{max-width:1600px;margin:0 auto;padding:32px 40px}
+.section{display:none}
+.section.active{display:block}
+
+/* ── KPI GRID ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:32px}
+.kpi-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:24px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s;cursor:default;
+}
+.kpi-card:hover{transform:translateY(-2px);border-color:var(--border2)}
+.kpi-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--grad,linear-gradient(90deg,var(--accent),var(--accent2)));
+}
+.kpi-icon{font-size:28px;margin-bottom:12px}
+.kpi-val{font-size:clamp(22px,2.5vw,30px);font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--text);line-height:1}
+.kpi-lbl{font-size:12px;color:var(--text3);margin-top:6px;text-transform:uppercase;letter-spacing:.8px}
+.kpi-sub{font-size:11px;color:var(--text2);margin-top:4px}
+
+/* ── GRID LAYOUTS ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:20px}
+.grid-1-2{display:grid;grid-template-columns:1fr 2fr;gap:20px;margin-bottom:20px}
+.grid-2-1{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:20px}
+@media(max-width:900px){.grid-2,.grid-3,.grid-1-2,.grid-2-1{grid-template-columns:1fr}}
+
+/* ── CHART CARD ── */
+.chart-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;
+}
+.chart-card h3{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.chart-card h3 .badge{
+  font-size:10px;background:rgba(79,142,247,.15);color:var(--accent);
+  padding:2px 8px;border-radius:10px;font-weight:600;
+}
+.chart-card .subtitle{font-size:11px;color:var(--text3);margin-bottom:20px}
+.chart-wrap{position:relative;width:100%}
+
+/* ── TABLE ── */
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table thead tr{background:var(--bg3)}
+.data-table th{padding:10px 14px;text-align:left;font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);border-bottom:1px solid var(--border)}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2);transition:background .15s}
+.data-table tr:hover td{background:rgba(79,142,247,.04)}
+.data-table td.highlight{color:var(--text);font-weight:600}
+.data-table td.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
+
+/* ── PROGRESS BAR ── */
+.bar-wrap{display:flex;align-items:center;gap:8px}
+.bar-bg{flex:1;background:var(--bg3);border-radius:4px;height:6px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width .6s ease}
+
+/* ── TIER CARDS ── */
+.tier-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+@media(max-width:900px){.tier-grid{grid-template-columns:1fr 1fr}}
+.tier-card{
+  border-radius:16px;padding:24px;text-align:center;position:relative;overflow:hidden;
+}
+.tier-card.plat{background:linear-gradient(135deg,rgba(220,220,220,.15),rgba(150,150,150,.08));border:1px solid rgba(200,200,200,.3)}
+.tier-card.gold{background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(217,119,6,.08));border:1px solid rgba(245,158,11,.3)}
+.tier-card.silver{background:linear-gradient(135deg,rgba(148,163,184,.15),rgba(100,116,139,.08));border:1px solid rgba(148,163,184,.3)}
+.tier-card.bronze{background:linear-gradient(135deg,rgba(205,124,42,.15),rgba(146,64,14,.08));border:1px solid rgba(205,124,42,.3)}
+.tier-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.tier-card.plat .tier-label{color:#d4d4d4}
+.tier-card.gold .tier-label{color:var(--gold)}
+.tier-card.silver .tier-label{color:#94a3b8}
+.tier-card.bronze .tier-label{color:#cd7c2a}
+.tier-val{font-size:28px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--text)}
+.tier-sub{font-size:11px;color:var(--text3);margin-top:6px}
+.tier-rev{font-size:13px;font-weight:600;margin-top:8px}
+
+/* ── PAIR & TRIPLET CARDS ── */
+.pair-list{display:flex;flex-direction:column;gap:10px}
+.pair-card{
+  background:var(--card2);border:1px solid var(--border);border-radius:12px;
+  padding:14px 16px;display:flex;align-items:center;gap:12px;transition:all .2s;cursor:default;
+}
+.pair-card:hover{border-color:var(--accent);transform:translateX(2px);box-shadow:0 4px 16px rgba(79,142,247,.08)}
+.pair-rank{font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--text3);width:22px;text-align:center;background:rgba(255,255,255,.05);padding:2px 4px;border-radius:4px}
+.pair-names{flex:1;min-width:0}
+.pair-a{font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:6px}
+.pair-b{font-size:11px;color:var(--text2);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:6px}
+.pair-c{font-size:11px;color:var(--gold);margin-top:3px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:6px}
+.pair-cat-pill{font-size:9px;font-weight:600;padding:1px 6px;border-radius:4px;background:rgba(79,142,247,.12);color:#60a5fa}
+.pair-cat-pill.tea{background:rgba(16,185,129,.15);color:#34d399}
+.pair-cat-pill.biscuits{background:rgba(245,158,11,.15);color:#fbbf24}
+.pair-cat-pill.chips{background:rgba(244,63,94,.15);color:#fb7185}
+.pair-cat-pill.rice{background:rgba(168,85,247,.15);color:#c084fc}
+.pair-lift{
+  background:linear-gradient(135deg,var(--accent2),var(--accent));
+  color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:8px;white-space:nowrap;text-align:center;
+}
+.pair-metrics{display:flex;gap:6px;flex-wrap:wrap;margin-right:8px}
+.pair-metric{background:var(--bg3);padding:3px 8px;border-radius:6px;font-size:10px;color:var(--text2);white-space:nowrap}
+.pair-metric.highlight{background:rgba(79,142,247,.15);color:#93c5fd;font-weight:600}
+.pair-connect{font-size:14px;color:var(--gold);font-weight:700;margin:0 4px}
+.basket-mode-btn{
+  background:transparent;border:none;color:var(--text3);font-size:11px;font-weight:600;
+  padding:5px 12px;border-radius:6px;cursor:pointer;transition:all .2s;
+}
+.basket-mode-btn.active{background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(79,142,247,.3)}
+.basket-filter-btn{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text2);
+  font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;cursor:pointer;transition:all .2s;
+}
+.basket-filter-btn:hover{background:rgba(255,255,255,.08);color:var(--text)}
+.basket-filter-btn.active{background:rgba(79,142,247,.18);border-color:var(--accent);color:#93c5fd;font-weight:700}
+
+/* ── SMARTPITCH ── */
+.pitch-rule{
+  background:var(--card2);border:1px solid var(--border);border-radius:14px;
+  padding:18px 20px;margin-bottom:12px;transition:all .2s;
+  position:relative;overflow:hidden;
+}
+.pitch-rule::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:linear-gradient(180deg,var(--accent),var(--accent2));
+}
+.pitch-rule:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(79,142,247,.1)}
+.pitch-trigger{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.pitch-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3)}
+.pitch-sku-name{font-size:13px;font-weight:700;color:var(--text)}
+.pitch-arrow{font-size:20px;color:var(--gold);padding:0 4px}
+.pitch-rationale{font-size:11px;color:var(--text3);margin-top:8px;line-height:1.5}
+.pitch-metrics{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.pitch-badge{
+  font-size:10px;font-weight:600;padding:3px 10px;border-radius:8px;
+}
+.pitch-badge.conf{background:rgba(16,185,129,.15);color:var(--emerald)}
+.pitch-badge.lift{background:rgba(79,142,247,.15);color:var(--accent)}
+.pitch-badge.count{background:rgba(245,158,11,.15);color:var(--gold)}
+
+/* ── SIMULATION ── */
+.sim-card{
+  background:linear-gradient(135deg,rgba(79,142,247,.1),rgba(124,58,237,.08));
+  border:1px solid rgba(79,142,247,.3);border-radius:16px;padding:28px;
+  margin-bottom:20px;
+}
+.sim-headline{font-size:13px;font-weight:700;color:var(--text2);margin-bottom:20px;text-transform:uppercase;letter-spacing:1px}
+.sim-big{font-size:clamp(30px,4vw,48px);font-weight:900;color:var(--text);font-family:'JetBrains Mono',monospace}
+.sim-unit{font-size:16px;color:var(--text3);font-weight:400}
+.sim-desc{font-size:13px;color:var(--text2);margin-top:8px;line-height:1.6}
+.sim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:20px}
+.sim-item{background:rgba(0,0,0,.2);border-radius:10px;padding:16px}
+.sim-item-val{font-size:20px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--accent)}
+.sim-item-lbl{font-size:11px;color:var(--text3);margin-top:4px}
+
+/* ── CONCENTRATION BAR ── */
+.conc-item{margin-bottom:12px}
+.conc-header{display:flex;justify-content:space-between;margin-bottom:4px;font-size:12px}
+.conc-name{color:var(--text2);font-weight:500}
+.conc-pct{color:var(--text);font-weight:700;font-family:'JetBrains Mono',monospace}
+.conc-bar{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden}
+.conc-fill{height:100%;border-radius:4px;transition:width 1s ease}
+
+/* ── LOADING ── */
+#loading{
+  position:fixed;inset:0;background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:1000;transition:opacity .5s;
+}
+.spinner{width:48px;height:48px;border:3px solid var(--border);border-top-color:var(--accent);
+  border-radius:50%;animation:spin 1s linear infinite;margin-bottom:16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+#loading p{color:var(--text3);font-size:13px}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ── WATERFALL SPECIFIC ── */
+.waterfall-legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.wf-leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text3)}
+.wf-leg-dot{width:10px;height:10px;border-radius:2px}
+
+/* ── INSIGHT BOX ── */
+.insight-box{
+  background:rgba(79,142,247,.06);border:1px solid rgba(79,142,247,.2);
+  border-radius:12px;padding:16px 20px;margin-bottom:20px;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.insight-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.insight-text{font-size:12px;color:var(--text2);line-height:1.7}
+.insight-text strong{color:var(--text)}
+
+/* ── SECTION TITLE ── */
+.sec-title{
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text3);margin-bottom:20px;display:flex;align-items:center;gap:10px;
+}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.mb-20{margin-bottom:20px}
+
+/* ── LANGUAGE TOGGLE BUTTON ── */
+.lang-toggle-btn {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  padding: 3px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text2);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.lang-toggle-btn:hover {
+  border-color: var(--emerald);
+  background: rgba(16,185,129,0.08);
+}
+.lang-pill {
+  padding: 1px 5px;
+  border-radius: 12px;
+  transition: all 0.2s;
+  opacity: 0.6;
+}
+.lang-pill.active {
+  background: var(--emerald);
+  color: #ffffff;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<div id="loading">
+  <div class="spinner"></div>
+  <p>Initializing SmartPitch Advisor™ Engine...</p>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div>
+      <div class="module-badge">MODULE 2 · SOKRIO TECHNOLOGIES</div>
+      <h1>Portfolio &amp; SKU Blueprint — <span>SmartPitch Advisor™</span></h1>
+    </div>
+    <div class="header-stats">
+      <div class="hstat"><div class="hstat-val" id="h-rev">—</div><div class="hstat-lbl">Total Revenue</div></div>
+      <div class="hstat"><div class="hstat-val" id="h-orders">—</div><div class="hstat-lbl">Orders</div></div>
+      <div class="hstat"><div class="hstat-val" id="h-skus">—</div><div class="hstat-lbl">Active SKUs</div></div>
+      <div class="hstat"><div class="hstat-val" id="h-outlets">—</div><div class="hstat-lbl">Outlets</div></div>
+      <button class="btn" id="themeToggleBtn" style="background:var(--card);color:var(--text);border:1px solid var(--border);padding:8px;border-radius:10px;font-size:16px;margin-left:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;width:36px;height:36px;" onclick="toggleTheme()" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'" title="Toggle Light/Dark Mode">
+        🌞
+      </button>
+      <button class="btn" style="background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;border:none;padding:10px 20px;border-radius:10px;font-weight:700;font-size:12px;margin-left:8px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 4px 14px rgba(16,185,129,0.3);transition:transform 0.2s;" onclick="exportDataCSV()" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+        📥 EXPORT TO EXCEL
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-tab active" onclick="switchTab('pareto')" id="tab-pareto"><span class="dot"></span>Pareto &amp; Revenue</div>
+    <div class="nav-tab" onclick="switchTab('basket')" id="tab-basket"><span class="dot"></span>Market Basket</div>
+    <div class="nav-tab" onclick="switchTab('tiers')" id="tab-tiers"><span class="dot"></span>Outlet Tiers</div>
+    <div class="nav-tab" onclick="switchTab('simulation')" id="tab-simulation"><span class="dot"></span>Financial Sim</div>
+    <div class="nav-tab" onclick="switchTab('penetration')" id="tab-penetration"><span class="dot"></span>Penetration Gaps</div>
+    <div class="nav-tab" onclick="switchTab('trend')" id="tab-trend"><span class="dot"></span>Monthly Trend</div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- ════════════════════ PARETO ════════════════════ -->
+<section class="section active" id="sec-pareto">
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--grad:linear-gradient(90deg,#4f8ef7,#7c3aed)">
+      <div class="kpi-icon">🏆</div>
+      <div class="kpi-val" id="kpi-top1">—</div>
+      <div class="kpi-lbl">Top 1 SKU Revenue Share</div>
+      <div class="kpi-sub">Single-SKU concentration risk</div>
+    </div>
+    <div class="kpi-card" style="--grad:linear-gradient(90deg,#f59e0b,#f97316)">
+      <div class="kpi-icon">🎯</div>
+      <div class="kpi-val" id="kpi-top5">—</div>
+      <div class="kpi-lbl">Top 5 SKUs Revenue Share</div>
+      <div class="kpi-sub">Pareto core portfolio</div>
+    </div>
+    <div class="kpi-card" style="--grad:linear-gradient(90deg,#10b981,#06b6d4)">
+      <div class="kpi-icon">📦</div>
+      <div class="kpi-val" id="kpi-totalskus">—</div>
+      <div class="kpi-lbl">Total Active SKUs</div>
+      <div class="kpi-sub">Portfolio breadth</div>
+    </div>
+    <div class="kpi-card" style="--grad:linear-gradient(90deg,#f43f5e,#7c3aed)">
+      <div class="kpi-icon">💰</div>
+      <div class="kpi-val" id="kpi-totalrev">—</div>
+      <div class="kpi-lbl">Total Revenue (BDT)</div>
+      <div class="kpi-sub">All non-cancelled orders</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <!-- SKU Waterfall -->
+    <div class="chart-card reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h3 style="margin-bottom:0">Top 20 SKU Revenue Waterfall <span class="badge">PARETO</span></h3>
+        <button class="chart-dl" onclick="chartDL('skuWaterfall')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+      </div>
+      <p class="subtitle"><strong>Meaning:</strong> Shows how much revenue each top product generates. <strong>How it's calculated:</strong> Total revenue generated by each SKU (non-cancelled orders).</p>
+      <div class="chart-wrap" style="height:380px">
+        <canvas id="chartSkuWaterfall"></canvas>
+      </div>
+    </div>
+    <!-- Category Donut -->
+    <div class="chart-card reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h3 style="margin-bottom:0">Revenue by Category <span class="badge">COMPOSITION</span></h3>
+        <button class="chart-dl" onclick="chartDL('catDonut')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+      </div>
+      <p class="subtitle"><strong>Meaning:</strong> Displays which product categories dominate your overall sales portfolio. <strong>How it's calculated:</strong> Total category revenue ÷ Total overall revenue.</p>
+      <div class="chart-wrap" style="height:380px">
+        <canvas id="chartCatDonut"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cumulative Pareto Line -->
+  <div class="chart-card reveal mb-20">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <h3 style="margin-bottom:0">SKU Pareto Curve — Cumulative Revenue Share <span class="badge">80/20 RULE</span></h3>
+      <button class="chart-dl" onclick="chartDL('paretoLine')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+    </div>
+    <p class="subtitle"><strong>Meaning:</strong> The Pareto (80/20) rule curve. <strong>How it's calculated:</strong> Revenue is sorted highest to lowest. The line shows when you hit 80% of total sales (e.g. if the line hits 80% at SKU #20, then 20 SKUs drive 80% of revenue).</p>
+    <div class="chart-wrap" style="height:300px">
+      <canvas id="chartParetoLine"></canvas>
+    </div>
+  </div>
+
+  <!-- Revenue Concentration bars -->
+  <div class="grid-2">
+    <div class="chart-card reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h3 style="margin-bottom:0">Revenue Concentration Risk</h3>
+        <button class="chart-dl" onclick="chartDL('concentration')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+      </div>
+      <p class="subtitle"><strong>Meaning:</strong> Identifies single-point-of-failure risk. <strong>How it's calculated:</strong> The % of total revenue coming from just the Top 1, Top 3, Top 5, etc. SKUs.</p>
+      <div id="concBars" style="margin-top:8px"></div>
+    </div>
+    <!-- Brand breakdown -->
+    <div class="chart-card reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h3 style="margin-bottom:0">Top Brands by Revenue <span class="badge">BRAND</span></h3>
+        <button class="chart-dl" onclick="chartDL('brandBar')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+      </div>
+      <p class="subtitle"><strong>Meaning:</strong> Shows which parent brands bring in the most money. <strong>How it's calculated:</strong> Sum of revenue grouped by Brand name.</p>
+      <div class="chart-wrap" style="height:280px">
+        <canvas id="chartBrandBar"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKU Table -->
+  <div class="chart-card reveal" style="margin-top:20px">
+    <h3>Top 20 SKU Detail Table <span class="badge">FULL DATA</span></h3>
+    <p class="subtitle">Complete KPI breakdown per SKU</p>
+    <div style="overflow-x:auto;margin-top:12px">
+      <table class="data-table" id="skuTable">
+        <thead>
+          <tr>
+            <th>#</th><th>SKU</th><th>Product</th><th>Brand</th><th>Category</th>
+            <th>Revenue (BDT)</th><th>Share %</th><th>Cumul %</th>
+            <th>Orders</th><th>Buyers</th><th>Revenue Bar</th>
+          </tr>
+        </thead>
+        <tbody id="skuTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ BASKET ════════════════════ -->
+<section class="section" id="sec-basket">
+  <div class="insight-box">
+    <span class="insight-icon">🛒</span>
+    <div class="insight-text">
+      <strong>Market Basket Analysis (Apriori-style Association Mining)</strong><br>
+      Co-purchase frequency across all outlet transactions. <strong>Support</strong> = how often items appear together 
+      as % of all orders. <strong>Confidence A→B</strong> = given A purchased, probability B also purchased. 
+      <strong>Lift &gt;1</strong> = positive association (items bought together more than by chance).
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--grad:linear-gradient(90deg,#06b6d4,#4f8ef7)">
+      <div class="kpi-icon">🔗</div>
+      <div class="kpi-val" id="kpi-pairs">—</div>
+      <div class="kpi-lbl">Significant Pairs Found</div>
+      <div class="kpi-sub">Min. 50 co-occurrences</div>
+    </div>
+    <div class="kpi-card" style="--grad:linear-gradient(90deg,#8b5cf6,#f43f5e)">
+      <div class="kpi-icon">📊</div>
+      <div class="kpi-val" id="kpi-multiorder">—</div>
+      <div class="kpi-lbl">Multi-Item Orders</div>
+      <div class="kpi-sub">Orders with 2+ SKUs</div>
+    </div>
+    <div class="kpi-card" style="--grad:linear-gradient(90deg,#10b981,#4f8ef7)">
+      <div class="kpi-icon">⚡</div>
+      <div class="kpi-val" id="kpi-toplift">—</div>
+      <div class="kpi-lbl">Top Pair Lift</div>
+      <div class="kpi-sub">Highest association score</div>
+    </div>
+    <div class="kpi-card" style="--grad:linear-gradient(90deg,#f59e0b,#10b981)">
+      <div class="kpi-icon">🧺</div>
+      <div class="kpi-val" id="kpi-avgbasket">—</div>
+      <div class="kpi-lbl">Avg Basket Size</div>
+      <div class="kpi-sub">SKUs per order</div>
+    </div>
+  </div>
+
+  <!-- Full-Width Advanced Association Mining (Pairs A->B & Triplets A+B->C) -->
+  <div class="chart-card reveal mb-20">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:10px">
+      <div>
+        <h3 style="margin-bottom:2px" id="basketSectionTitle">Market Basket Association Rules <span class="badge" id="basketMiningBadge">PAIRS (A → B)</span></h3>
+        <p class="subtitle" style="margin-bottom:0"><strong>Meaning:</strong> Discovers high-frequency co-purchases & high-lift predictive combinations across 1.68M transactions.</p>
+      </div>
+      <button class="chart-dl" onclick="chartDL('topPairs')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel (Multi-Sheet .xlsx)</button>
+    </div>
+
+    <!-- Interactive Controls Bar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:14px;padding:12px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px">
+      <!-- Mode Switcher -->
+      <div style="display:flex;align-items:center;gap:4px;background:rgba(0,0,0,0.35);padding:4px;border-radius:8px">
+        <button id="btnBasketPairs" class="basket-mode-btn active" onclick="setBasketMode('pairs')">🔗 Pairs (A → B)</button>
+        <button id="btnBasketTriplets" class="basket-mode-btn" onclick="setBasketMode('triplets')">⚡ 3-Item Triplet (A + B → C)</button>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <button id="btnBasketVol" class="basket-filter-btn active" onclick="setBasketFilter('volume')">🔥 Top Volume (Co-Buys)</button>
+        <button id="btnBasketLift" class="basket-filter-btn" onclick="setBasketFilter('lift')">⚡ Highest Lift</button>
+        <button id="btnBasketTea" class="basket-filter-btn" onclick="setBasketFilter('tea')">☕ Tea Combos</button>
+      </div>
+
+      <!-- Search box -->
+      <div style="position:relative;flex:1;min-width:180px;max-width:280px">
+        <input type="text" id="basketSearchInput" placeholder="🔍 Search product or brand..." oninput="filterBasketList()" style="width:100%;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.12);padding:7px 12px;border-radius:8px;color:#fff;font-size:12px;outline:none">
+      </div>
+    </div>
+
+    <div class="pair-list" id="pairList" style="margin-top:16px;max-height:560px;overflow-y:auto;padding-right:4px"></div>
+  </div>
+
+  <!-- 2-Column Grid for Basket Distribution & Heatmap underneath Association Rules -->
+  <div class="grid-2">
+    <!-- Basket Size Distribution -->
+    <div class="chart-card reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h3 style="margin-bottom:0">Basket Size Distribution <span class="badge">HISTOGRAM</span></h3>
+        <button class="chart-dl" onclick="chartDL('basketDist')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+      </div>
+      <p class="subtitle"><strong>Meaning:</strong> Distribution of unique items (SKUs) across all retail invoices.</p>
+      <div class="chart-wrap" style="height:280px">
+        <canvas id="chartBasketDist"></canvas>
+      </div>
+    </div>
+
+    <!-- Lift Matrix Heatmap -->
+    <div class="chart-card reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h3 style="margin-bottom:0">Co-Purchase Confidence Matrix <span class="badge">HEATMAP</span></h3>
+        <button class="chart-dl" onclick="chartDL('liftMatrix')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+      </div>
+      <p class="subtitle"><strong>Meaning:</strong> Predicts % probability of buying Pitch SKU given Trigger SKU.</p>
+      <div class="chart-wrap" style="height:280px">
+        <canvas id="chartLiftHeatmap"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ TIERS ════════════════════ -->
+<section class="section" id="sec-tiers">
+  <div class="sec-title">Outlet Tier Classification — Industry-Standard FMCG Scale</div>
+
+  <!-- TIER METHODOLOGY & AI/ML K-MEANS CRITERIA BANNER -->
+  <div class="insight-box" style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.3);border-radius:14px;padding:18px 22px;margin-bottom:20px;box-shadow:0 4px 20px rgba(0,0,0,0.04);">
+    <div style="width:100%">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="background:linear-gradient(135deg,#10b981,#059669);color:#fff;font-size:11px;font-weight:900;padding:4px 10px;border-radius:6px;letter-spacing:0.5px;display:flex;align-items:center;gap:5px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            ML ENGINE: K-MEANS CLUSTERING (k=4)
+          </span>
+          <h4 style="color:var(--emerald);font-size:14px;font-weight:800;margin:0">
+            Outlet Tier Classification — 4-Dimensional K-Means Machine Learning & FMCG Scale
+          </h4>
+        </div>
+        <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
+          <span class="lang-pill active" data-lang="en">EN</span>
+          <span style="opacity:0.35">|</span>
+          <span class="lang-pill" data-lang="bn">বাংলা</span>
+        </button>
+      </div>
+
+      <!-- Tab Buttons: K-Means ML Model vs FMCG Commercial Slabs -->
+      <div style="display:flex;gap:8px;margin-bottom:14px;border-bottom:1px solid rgba(16,185,129,0.2);padding-bottom:10px;">
+        <button id="btnKMeansTab" onclick="switchTierTab('kmeans')" style="background:var(--emerald);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;display:flex;align-items:center;gap:6px;transition:all .2s;">
+          🧠 K-Means 4D ML Clusters (Mathematical Centroids)
+        </button>
+        <button id="btnFmcgTab" onclick="switchTierTab('fmcg')" style="background:var(--card);color:var(--text);border:1px solid var(--border);padding:6px 14px;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;display:flex;align-items:center;gap:6px;transition:all .2s;">
+          🏢 FMCG Field Commercial Scale (Operational Slabs)
+        </button>
+      </div>
+
+      <!-- K-Means Machine Learning View -->
+      <div id="tabKMeansContent" class="note-en" style="font-size:12px;color:var(--text);line-height:1.65">
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:12px 14px;margin-bottom:12px;">
+          <strong>🤖 Model Specification:</strong> Unsupervised <strong>K-Means Clustering ($k=4$)</strong> fitted on a standardized 4-dimensional normalized vector: <code>[ln(1+Revenue), ln(1+Orders), ln(1+Visits), ln(1+Basket AOV)]</code> across all <strong>208,873 transacting retail doors</strong> (Silhouette Score $s = 0.642$, Convergence in 50 iterations):
+        </div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:11.5px;margin-bottom:8px;text-align:left;">
+            <thead>
+              <tr style="background:rgba(16,185,129,0.12);color:var(--emerald);border-bottom:1.5px solid rgba(16,185,129,0.3);">
+                <th style="padding:6px 10px;">ML Cluster Tier</th>
+                <th style="padding:6px 10px;">Outlets (% Total)</th>
+                <th style="padding:6px 10px;">Revenue Share</th>
+                <th style="padding:6px 10px;">Centroid Mean 4M Sales</th>
+                <th style="padding:6px 10px;">Mean Orders</th>
+                <th style="padding:6px 10px;">Mean Visits</th>
+                <th style="padding:6px 10px;">Mean Basket (AOV)</th>
+                <th style="padding:6px 10px;">Core Behavioral Persona</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:6px 10px;font-weight:800;color:#06b6d4;">💎 Platinum (VIP Wholesalers)</td>
+                <td style="padding:6px 10px;font-weight:700;">47,206 (22.6%)</td>
+                <td style="padding:6px 10px;font-weight:800;color:var(--emerald);">63.3% (৳307.7 Cr)</td>
+                <td style="padding:6px 10px;font-family:'JetBrains Mono';font-weight:700;">৳65,190</td>
+                <td style="padding:6px 10px;">35.1 orders</td>
+                <td style="padding:6px 10px;">11.1 visits</td>
+                <td style="padding:6px 10px;font-weight:700;color:#3b82f6;">৳1,787</td>
+                <td style="padding:6px 10px;font-size:10.5px;color:var(--text3);">High Volume & Repeat Wholesalers</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:6px 10px;font-weight:800;color:#f59e0b;">🥇 Gold (Bulk Retailers)</td>
+                <td style="padding:6px 10px;font-weight:700;">27,920 (13.4%)</td>
+                <td style="padding:6px 10px;font-weight:800;color:var(--emerald);">21.0% (৳101.9 Cr)</td>
+                <td style="padding:6px 10px;font-family:'JetBrains Mono';font-weight:700;">৳36,489</td>
+                <td style="padding:6px 10px;">9.3 orders</td>
+                <td style="padding:6px 10px;">3.0 visits</td>
+                <td style="padding:6px 10px;font-weight:800;color:#10b981;">৳4,709 ⭐</td>
+                <td style="padding:6px 10px;font-size:10.5px;color:var(--text3);">Massive Basket Size / Bulk Buyers</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:6px 10px;font-weight:800;color:#94a3b8;">🥈 Silver (Regular Grocers)</td>
+                <td style="padding:6px 10px;font-weight:700;">93,563 (44.8%)</td>
+                <td style="padding:6px 10px;font-weight:800;color:var(--emerald);">14.4% (৳69.8 Cr)</td>
+                <td style="padding:6px 10px;font-family:'JetBrains Mono';font-weight:700;">৳7,464</td>
+                <td style="padding:6px 10px;">16.0 orders</td>
+                <td style="padding:6px 10px;">9.0 visits</td>
+                <td style="padding:6px 10px;font-weight:700;color:#94a3b8;">৳498</td>
+                <td style="padding:6px 10px;font-size:10.5px;color:var(--text3);">High Frequency Steady Neighborhood Grocers</td>
+              </tr>
+              <tr>
+                <td style="padding:6px 10px;font-weight:800;color:#cd7f32;">🥉 Bronze (Micro Casual)</td>
+                <td style="padding:6px 10px;font-weight:700;">40,184 (19.2%)</td>
+                <td style="padding:6px 10px;font-weight:800;color:var(--emerald);">1.4% (৳6.7 Cr)</td>
+                <td style="padding:6px 10px;font-family:'JetBrains Mono';font-weight:700;">৳1,675</td>
+                <td style="padding:6px 10px;">3.3 orders</td>
+                <td style="padding:6px 10px;">2.4 visits</td>
+                <td style="padding:6px 10px;font-weight:700;color:#cd7f32;">৳547</td>
+                <td style="padding:6px 10px;font-size:10.5px;color:var(--text3);">Micro Tea Stalls / Peripheral Shops</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <strong>💡 Key Data Science Insight:</strong> K-Means discovers that <strong>Gold Outlets</strong> have the highest average basket size (<strong>৳4,709 / order</strong>), while <strong>Silver Outlets</strong> order with the highest routine consistency (<strong>16.0 orders / cycle</strong>).
+      </div>
+
+      <!-- FMCG Operational Slabs View (Hidden by default or toggled) -->
+      <div id="tabFmcgContent" class="note-en" style="display:none;font-size:12px;color:var(--text);line-height:1.6">
+        Rather than using artificial equal quartiles (25% each), outlets are segmented using <strong>FMCG Purchasing Power &amp; Commercial Scale Thresholds</strong> calibrated to field sales operations:<br>
+        • <strong>💎 Platinum (17,446 Outlets / 8.4%):</strong> 4-Month Revenue <strong>≥ BDT 50,000</strong> (Avg ৳12.5k+/mo) — Top Wholesalers &amp; VIP Key Accounts driving <strong>55.4% (৳258.8 Cr)</strong> of national revenue.<br>
+        • <strong>🥇 Gold (47,585 Outlets / 22.8%):</strong> 4-Month Revenue <strong>BDT 15,000 – 50,000</strong> (Avg ৳3.75k–12.5k/mo) — High-volume repeat retailers generating <strong>26.7% (৳124.7 Cr)</strong>.<br>
+        • <strong>🥈 Silver (73,192 Outlets / 35.0%):</strong> 4-Month Revenue <strong>BDT 5,000 – 15,000</strong> (Avg ৳1.25k–3.75k/mo) — Regular grocery stores driving <strong>14.3% (৳66.6 Cr)</strong>.<br>
+        • <strong>🥉 Bronze (70,647 Outlets / 33.8%):</strong> 4-Month Revenue <strong>&lt; BDT 5,000</strong> (Avg &lt; ৳1.25k/mo) — Micro tea stalls / casual buyers generating <strong>3.7% (৳17.1 Cr)</strong>.<br>
+        • <strong>Commercial Takeaway:</strong> <strong>Top 31.2% doors (Platinum + Gold)</strong> generate <strong>82.1% (৳383.5 Cr)</strong> of all company sales. Focus field SR servicing and priority stock allocation on Platinum &amp; Gold.
+      </div>
+
+      <!-- Bengali Translation -->
+      <div class="note-bn" style="display:none;font-size:12px;color:var(--text);line-height:1.65">
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:12px 14px;margin-bottom:10px;">
+          <strong>🤖 এআই/এমএল মডেল মেথডোলজি:</strong> সারা দেশের <strong>২,০৮,৮৭৩টি বিক্রয়কারী দোকানের</strong> ওপর ৪-ডাইমেনশনাল <strong>K-Means Unsupervised Clustering ($k=4$)</strong> অ্যালগরিদম প্রয়োগ করা হয়েছে (ফিচার ভেক্টর: রেভিনিউ, অর্ডার সংখ্যা, এসআর ভিজিট, বাস্কেট সাইজ AOV):
+        </div>
+        • <strong>💎 Platinum (৪৭,২০৬টি দোকান / ২২.৬%):</strong> গড় সেলস <strong>৳ ৬৫,১৯০</strong> (গড় অর্ডার ৩৫.১টি) — মোট রেভিনিউয়ের <strong>৬৩.৩% (৳ ৩০৭.৭ কোটি)</strong> একাই তৈরি করে।<br>
+        • <strong>🥇 Gold (২৭,৯২০টি দোকান / ১৩.৪%):</strong> গড় সেলস <strong>৳ ৩৬,৪৮৯</strong> — এদের প্রতি অর্ডারে বাস্কেট সাইজ সবচেয়ে বেশি (<strong>৳ ৪,৭০৯ / অর্ডার</strong>), যা রেভিনিউয়ের <strong>২১.০% (৳ ১০১.৯ কোটি)</strong> দেয়।<br>
+        • <strong>🥈 Silver (৯৩,৫৬৩টি দোকান / ৪৪.৮%):</strong> গড় সেলস <strong>৳ ৭,৪৬৪</strong> — নিয়মিত মুদি দোকান যারা সারা বছর সর্বোচ্চ ঘন ঘন অর্ডার দেয় (গড় ১৬.০টি অর্ডার / রাজস্বের <strong>১৪.৪% / ৳ ৬৯.৮ কোটি</strong>)।<br>
+        • <strong>🥉 Bronze (৪০,১৮৪টি দোকান / ১৯.২%):</strong> গড় সেলস <strong>৳ ১,৬৭৫</strong> (গড় অর্ডার ৩.৩টি) — প্রান্তিক চা দোকান বা অনিয়মিত আউটলেট (রাজস্বের <strong>১.৪% / ৳ ৬.৭ কোটি</strong>)।<br>
+        • <strong>মূল বাণিজ্যিক সিদ্ধান্ত:</strong> মেশিন লার্নিং প্রমাণ করে যে <strong>টপ ৩৬.০% দোকান (Platinum + Gold)</strong> কোম্পানির <strong>৮৪.৩% (৳ ৪০৯.৬ কোটি)</strong> সেলস নিয়ন্ত্রণ করে।
+      </div>
+    </div>
+  </div>
+
+  <div class="tier-grid" id="tierGrid"></div>
+
+  <div class="grid-2">
+    <div class="chart-card reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h3 style="margin-bottom:0">Outlet Count by Tier <span class="badge">DISTRIBUTION</span></h3>
+        <button class="chart-dl" onclick="chartDL('tierCount')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+      </div>
+      <p class="subtitle"><strong>Meaning:</strong> Shows how many stores fall into each tier. <strong>Criteria:</strong> Platinum (≥৳50k), Gold (৳15k-50k), Silver (৳5k-15k), Bronze (&lt;৳5k).</p>
+      <div class="chart-wrap" style="height:280px">
+        <canvas id="chartTierCount"></canvas>
+      </div>
+    </div>
+    <div class="chart-card reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h3 style="margin-bottom:0">Revenue Share by Tier <span class="badge">CONCENTRATION</span></h3>
+        <button class="chart-dl" onclick="chartDL('tierRev')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+      </div>
+      <p class="subtitle"><strong>Meaning:</strong> Highlights where the most money comes from. <strong>Key Insight:</strong> Top 31.2% (Platinum + Gold) generates 82.1% of national revenue.</p>
+      <div class="chart-wrap" style="height:280px">
+        <canvas id="chartTierRev"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-card reveal">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <h3 style="margin-bottom:0">Tier Performance Summary</h3>
+      <button class="chart-dl" onclick="chartDL('tierTable')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+    </div>
+    <p class="subtitle"><strong>Meaning:</strong> Comprehensive breakdown of active retail doors across FMCG Purchasing Power Tiers.</p>
+    <div style="overflow-x:auto;margin-top:12px">
+      <table class="data-table" id="tierTable">
+        <thead>
+          <tr>
+            <th>Tier</th><th>Criteria</th><th>Outlets</th><th>Revenue (BDT)</th>
+            <th>Rev Share</th><th>Avg Rev / Outlet</th><th>Revenue Bar</th><th>Export</th>
+          </tr>
+        </thead>
+        <tbody id="tierTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ════════════════════ SIMULATION ════════════════════ -->
+<section class="section" id="sec-simulation">
+  <div class="sec-title">Financial Simulation — Tier Upgrade Uplift Model</div>
+
+  <div class="sim-card reveal" id="simMain">
+    <!-- filled by JS -->
+  </div>
+
+  <div class="grid-2">
+    <div class="chart-card reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h3 style="margin-bottom:0">Tier Upgrade Revenue Opportunity <span class="badge">BDT</span></h3>
+        <button class="chart-dl" onclick="chartDL('uplift')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+      </div>
+      <p class="subtitle"><strong>Meaning:</strong> The financial potential of targeted upselling. <strong>How it's calculated:</strong> (Avg Revenue of Next Tier - Avg Revenue of Current Tier) × Number of Outlets in Current Tier.</p>
+      <div class="chart-wrap" style="height:280px">
+        <canvas id="chartUplift"></canvas>
+      </div>
+    </div>
+    <div class="chart-card reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h3 style="margin-bottom:0">Scenario: % of Outlets Upgraded <span class="badge">SIMULATION</span></h3>
+        <button class="chart-dl" onclick="chartDL('scenario')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+      </div>
+      <p class="subtitle"><strong>Meaning:</strong> Projects total revenue gain if lower-tier outlets are successfully pushed to Gold-tier spending levels. <strong>How it's calculated:</strong> Simulates upgrading 10%, 20%, ... 100% of outlets to the Gold tier average.</p>
+      <div class="chart-wrap" style="height:280px">
+        <canvas id="chartScenario"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ PENETRATION GAPS ════════════════════ -->
+<section class="section" id="sec-penetration">
+  <div class="insight-box">
+    <span class="insight-icon">🎯</span>
+    <div class="insight-text">
+      <strong>Territory Category Penetration Gaps</strong><br>
+      Cross-tabulation of high-revenue territories with near-zero penetration in emerging/secondary categories, quantifying the push opportunity.
+      <strong>Green</strong> indicates strong category presence (&gt;60%). <strong>Yellow</strong> indicates moderate presence. <strong>Red</strong> highlights critical blind spots (&lt;30%).
+    </div>
+  </div>
+  <div class="sec-title">Category Penetration Matrix by Territory</div>
+  
+  <div class="chart-card reveal" style="padding:0;overflow:hidden;margin-bottom:20px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px 8px 20px">
+      <h3 style="margin-bottom:0">Category Penetration Heatmap</h3>
+      <button class="chart-dl" onclick="chartDL('penetration')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="data-table" id="penetrationTable">
+        <thead id="penThead"></thead>
+        <tbody id="penTbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ TREND ════════════════════ -->
+<section class="section" id="sec-trend">
+  <div class="insight-box">
+    <span class="insight-icon">📈</span>
+    <div class="insight-text">
+      <strong>How to read the Monthly Trend Charts:</strong><br>
+      • <strong>Time Series:</strong> The main line chart shows your raw total revenue month by month. Look for overall upward or downward patterns.<br>
+      • <strong>MoM % (Month-over-Month):</strong> The bar chart shows how much revenue grew (Green) or shrank (Red) compared to the <em>previous</em> month. It helps spot sudden performance drops.<br>
+      • <strong>3-Month Rolling Avg:</strong> A smoothed version of your revenue line. It averages the last 3 months to cancel out temporary one-month spikes and show the "true" direction of your business.
+    </div>
+  </div>
+  <div class="sec-title">Monthly Revenue Trend</div>
+
+  <div class="chart-card reveal mb-20">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <h3 style="margin-bottom:0">Monthly Revenue Performance <span class="badge">TIME SERIES</span></h3>
+      <button class="chart-dl" onclick="chartDL('monthlyTrend')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+    </div>
+    <p class="subtitle"><strong>Meaning:</strong> Tracks overall business growth. <strong>How it's calculated:</strong> Sum of all non-cancelled order amounts aggregated by month.</p>
+    <div class="chart-wrap" style="height:360px">
+      <canvas id="chartMonthly"></canvas>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="chart-card reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h3 style="margin-bottom:0">Month-over-Month Growth Rate <span class="badge">MoM %</span></h3>
+        <button class="chart-dl" onclick="chartDL('momGrowth')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+      </div>
+      <p class="subtitle"><strong>Meaning:</strong> Shows growth momentum. <strong>How it's calculated:</strong> ((Current Month Revenue - Previous Month Revenue) / Previous Month Revenue) × 100.</p>
+      <div class="chart-wrap" style="height:260px">
+        <canvas id="chartMoM"></canvas>
+      </div>
+    </div>
+    <div class="chart-card reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h3 style="margin-bottom:0">Revenue Momentum (3-Month Rolling Avg)</h3>
+        <button class="chart-dl" onclick="chartDL('rollingAvg')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Excel</button>
+      </div>
+      <p class="subtitle"><strong>Meaning:</strong> Removes short-term spikes to reveal the true underlying trend. <strong>How it's calculated:</strong> The average revenue of the current month and the previous two months.</p>
+      <div class="chart-wrap" style="height:260px">
+        <canvas id="chartRolling"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tier Outlets Export Modal -->
+<div id="tierExportModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(6px)">
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;max-width:580px;width:92%;padding:26px;box-shadow:0 25px 60px rgba(0,0,0,0.6);position:relative">
+    <button onclick="closeTierExportModal()" style="position:absolute;right:18px;top:18px;background:rgba(255,255,255,0.06);border:none;color:var(--text2);font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center">&times;</button>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+      <div style="font-size:28px">🏢</div>
+      <div>
+        <h3 style="margin:0;font-size:18px;color:var(--text)">Export Outlet Tiers &amp; Customer Lists</h3>
+        <p style="color:var(--text2);font-size:12px;margin:2px 0 0 0">Select a specific tier or download all 208,870 outlets</p>
+      </div>
+    </div>
+    <div style="margin:14px 0 18px 0;padding:10px 14px;background:rgba(79,142,247,0.08);border:1px solid rgba(79,142,247,0.2);border-radius:10px;font-size:12px;color:var(--text2)">
+      📊 <strong>Included columns in each file:</strong> Outlet Code, Outlet Name, Owner Name, Phone Number, Address, Territory, Tier, Total Revenue (BDT), Total Orders, Unique SKUs Bought, Avg Order Value (BDT).
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button class="btn" style="background:linear-gradient(135deg,rgba(220,220,220,0.18),rgba(150,150,150,0.08));border:1px solid rgba(220,220,220,0.4);color:#fff;padding:12px 16px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="exportTierOutlets('Platinum')">
+        <span>💎 <strong>Platinum Outlets</strong> (17,446 Outlets · ≥ ৳50,000 · 55.4% Revenue)</span>
+        <span style="font-size:11px;background:rgba(255,255,255,0.15);padding:4px 10px;border-radius:6px;font-weight:700">CSV 📥</span>
+      </button>
+      <button class="btn" style="background:linear-gradient(135deg,rgba(245,158,11,0.18),rgba(217,119,6,0.08));border:1px solid rgba(245,158,11,0.4);color:#fbbf24;padding:12px 16px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="exportTierOutlets('Gold')">
+        <span>🥇 <strong>Gold Outlets</strong> (47,585 Outlets · ৳15,000 – ৳50,000 · 26.7% Revenue)</span>
+        <span style="font-size:11px;background:rgba(245,158,11,0.2);padding:4px 10px;border-radius:6px;font-weight:700">CSV 📥</span>
+      </button>
+      <button class="btn" style="background:linear-gradient(135deg,rgba(148,163,184,0.18),rgba(100,116,139,0.08));border:1px solid rgba(148,163,184,0.4);color:#94a3b8;padding:12px 16px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="exportTierOutlets('Silver')">
+        <span>🥈 <strong>Silver Outlets</strong> (73,192 Outlets · ৳5,000 – ৳15,000 · 14.3% Revenue)</span>
+        <span style="font-size:11px;background:rgba(148,163,184,0.2);padding:4px 10px;border-radius:6px;font-weight:700">CSV 📥</span>
+      </button>
+      <button class="btn" style="background:linear-gradient(135deg,rgba(205,124,42,0.18),rgba(146,64,14,0.08));border:1px solid rgba(205,124,42,0.4);color:#fdba74;padding:12px 16px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="exportTierOutlets('Bronze')">
+        <span>🥉 <strong>Bronze Outlets</strong> (70,647 Outlets · &lt; ৳5,000 · 3.7% Revenue)</span>
+        <span style="font-size:11px;background:rgba(205,124,42,0.2);padding:4px 10px;border-radius:6px;font-weight:700">CSV 📥</span>
+      </button>
+      <button class="btn" style="background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;border:none;padding:12px 16px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;margin-top:6px;font-weight:700" onclick="exportAllOutlets()">
+        <span>📁 <strong>Download All Outlets Combined (208,870 Outlets)</strong></span>
+        <span style="font-size:11px;background:rgba(0,0,0,0.25);padding:4px 10px;border-radius:6px">FULL CSV 📥</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ──────────────────────────────────────────────────────
+const D = window.MODULE2_DATA || null;
+if (!D) {
+  document.getElementById('loading').innerHTML = '<div style="text-align:center"><div style="font-size:40px;margin-bottom:12px">❌</div><p style="color:#f43f5e;font-size:14px">module2_data.js not found.<br>Run build_module2.py first.</p></div>';
+  throw new Error('MODULE2_DATA not defined');
+}
+const fmt = (n, dec=0) => {
+  if(n >= 1e9) return (n/1e9).toFixed(dec||1)+'B';
+  if(n >= 1e6) return (n/1e6).toFixed(dec||1)+'M';
+  if(n >= 1e3) return (n/1e3).toFixed(dec||0)+'K';
+  return n.toFixed(dec);
+};
+const fmtBDT = n => 'BDT ' + fmt(n);
+const pct = n => n.toFixed(1)+'%';
+
+// ──────────────────────────────────────────────────────
+// NAV
+// ──────────────────────────────────────────────────────
+function switchTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+  setTimeout(revealAll, 100);
+  setTimeout(() => renderChartsForTab(id), 150);
+}
+
+// ──────────────────────────────────────────────────────
+// HEADER STATS
+// ──────────────────────────────────────────────────────
+function populateHeader() {
+  const s = D.summary;
+  document.getElementById('h-rev').textContent = fmtBDT(s.total_revenue);
+  document.getElementById('h-orders').textContent = fmt(s.total_orders);
+  document.getElementById('h-skus').textContent = s.total_skus;
+  document.getElementById('h-outlets').textContent = fmt(s.total_outlets);
+}
+
+// ──────────────────────────────────────────────────────
+// PARETO SECTION
+// ──────────────────────────────────────────────────────
+function buildPareto() {
+  const c = D.pareto.concentration;
+  document.getElementById('kpi-top1').textContent = pct(c.top1);
+  document.getElementById('kpi-top5').textContent = pct(c.top5);
+  document.getElementById('kpi-totalskus').textContent = c.total_skus;
+  document.getElementById('kpi-totalrev').textContent = fmtBDT(c.total_revenue);
+
+  // Concentration bars
+  const items = [
+    {label:'Top 1 SKU', pct: c.top1, color:'#f43f5e'},
+    {label:'Top 3 SKUs', pct: c.top3, color:'#f97316'},
+    {label:'Top 5 SKUs', pct: c.top5, color:'#f59e0b'},
+    {label:'Top 10 SKUs', pct: c.top10, color:'#4f8ef7'},
+    {label:'Top 20 SKUs', pct: c.top20, color:'#10b981'},
+  ];
+  const concDiv = document.getElementById('concBars');
+  concDiv.innerHTML = items.map(it => `
+    <div class="conc-item">
+      <div class="conc-header"><span class="conc-name">${it.label}</span><span class="conc-pct">${it.pct.toFixed(1)}%</span></div>
+      <div class="conc-bar"><div class="conc-fill" style="width:${it.pct}%;background:${it.color}"></div></div>
+    </div>
+  `).join('');
+
+  // SKU Table
+  const tbody = document.getElementById('skuTableBody');
+  const maxRev = D.pareto.sku[0].revenue;
+  tbody.innerHTML = D.pareto.sku.map(s => `
+    <tr>
+      <td class="mono">${s.rank}</td>
+      <td class="mono">${s.sku}</td>
+      <td class="highlight">${s.name.substring(0,30)}</td>
+      <td>${s.brand.substring(0,18)}</td>
+      <td><span style="background:rgba(79,142,247,.1);color:#4f8ef7;padding:2px 8px;border-radius:6px;font-size:10px">${s.category}</span></td>
+      <td class="mono">${fmt(s.revenue,1)}</td>
+      <td class="mono" style="color:${s.revenue_share_pct>10?'#f43f5e':s.revenue_share_pct>5?'#f59e0b':'#10b981'}">${s.revenue_share_pct.toFixed(2)}%</td>
+      <td class="mono">${s.cumulative_pct.toFixed(1)}%</td>
+      <td class="mono">${fmt(s.order_count)}</td>
+      <td class="mono">${fmt(s.buyer_count)}</td>
+      <td style="width:120px">
+        <div class="bar-wrap">
+          <div class="bar-bg" style="height:6px">
+            <div class="bar-fill" style="width:${(s.revenue/maxRev*100).toFixed(1)}%;background:linear-gradient(90deg,#4f8ef7,#7c3aed)"></div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// ──────────────────────────────────────────────────────
+// BASKET SECTION
+// ──────────────────────────────────────────────────────
+// ──────────────────────────────────────────────────────
+// BASKET SECTION (Interactive Association Mining Engine)
+// ──────────────────────────────────────────────────────
+let currentBasketMode = 'pairs';     // 'pairs' | 'triplets'
+let currentBasketFilter = 'volume';   // 'volume' | 'lift' | 'tea'
+let currentBasketSearch = '';
+
+function getCatClass(cat) {
+  if (!cat) return '';
+  const c = cat.toLowerCase();
+  if (c.includes('tea')) return 'tea';
+  if (c.includes('biscuit') || c.includes('bakery')) return 'biscuits';
+  if (c.includes('chip') || c.includes('snack')) return 'chips';
+  if (c.includes('rice')) return 'rice';
+  return '';
+}
+
+function setBasketMode(mode) {
+  currentBasketMode = mode;
+  document.getElementById('btnBasketPairs').classList.toggle('active', mode === 'pairs');
+  document.getElementById('btnBasketTriplets').classList.toggle('active', mode === 'triplets');
+  
+  const badge = document.getElementById('basketMiningBadge');
+  if (badge) {
+    badge.textContent = mode === 'pairs' ? 'PAIRS (A → B)' : 'TRIPLETS (A + B → C)';
+  }
+  renderBasketList();
+}
+
+function setBasketFilter(filter) {
+  currentBasketFilter = filter;
+  document.getElementById('btnBasketVol').classList.toggle('active', filter === 'volume');
+  document.getElementById('btnBasketLift').classList.toggle('active', filter === 'lift');
+  document.getElementById('btnBasketTea').classList.toggle('active', filter === 'tea');
+  renderBasketList();
+}
+
+function filterBasketList() {
+  currentBasketSearch = (document.getElementById('basketSearchInput')?.value || '').toLowerCase().trim();
+  renderBasketList();
+}
+
+function getActiveBasketData() {
+  const b = D.basket || {};
+  let data = [];
+  if (currentBasketMode === 'pairs') {
+    if (currentBasketFilter === 'volume') data = b.pairs_by_volume || b.top_pairs || [];
+    else if (currentBasketFilter === 'lift') data = b.pairs_by_lift || b.top_pairs || [];
+    else if (currentBasketFilter === 'tea') data = b.tea_pairs || [];
+  } else {
+    if (currentBasketFilter === 'volume') data = b.triplets_by_volume || [];
+    else if (currentBasketFilter === 'lift') data = b.triplets_by_lift || [];
+    else if (currentBasketFilter === 'tea') data = b.tea_triplets || [];
+  }
+
+  if (currentBasketSearch) {
+    data = data.filter(item => {
+      const txt = `${item.name_a} ${item.brand_a} ${item.cat_a} ${item.name_b} ${item.brand_b} ${item.cat_b} ${item.name_c||''} ${item.brand_c||''} ${item.cat_c||''}`.toLowerCase();
+      return txt.includes(currentBasketSearch);
+    });
+  }
+  return data;
+}
+
+function renderBasketList() {
+  const pairList = document.getElementById('pairList');
+  if (!pairList) return;
+
+  const data = getActiveBasketData();
+  const COLORS = ['#f43f5e','#f97316','#f59e0b','#4f8ef7','#10b981','#8b5cf6','#06b6d4'];
+
+  if (!data || data.length === 0) {
+    pairList.innerHTML = `<div style="text-align:center;padding:32px;color:var(--text3);font-size:12px">No matching association rules found for "<strong>${currentBasketSearch}</strong>"</div>`;
+    return;
+  }
+
+  if (currentBasketMode === 'pairs') {
+    pairList.innerHTML = data.slice(0, 25).map((p, i) => `
+      <div class="pair-card">
+        <span class="pair-rank">#${i+1}</span>
+        <div class="pair-names">
+          <div class="pair-a">
+            <span style="color:#60a5fa">📦 Trigger (A):</span> <strong>${p.name_a}</strong>
+            <span class="pair-cat-pill ${getCatClass(p.cat_a)}">${p.cat_a||'General'}</span>
+          </div>
+          <div class="pair-b">
+            <span style="color:#34d399">🛒 Pitch (B):</span> <strong>${p.name_b}</strong>
+            <span class="pair-cat-pill ${getCatClass(p.cat_b)}">${p.cat_b||'General'}</span>
+          </div>
+        </div>
+        <div class="pair-metrics">
+          <span class="pair-metric highlight">Conf A→B: ${p.confidence_ab}%</span>
+          <span class="pair-metric">Co-Buys: <strong>${p.co_count.toLocaleString()}</strong> orders</span>
+          <span class="pair-metric">Supp: ${p.support}%</span>
+        </div>
+        <div class="pair-lift" style="background:linear-gradient(135deg,${COLORS[i%COLORS.length]},${COLORS[(i+2)%COLORS.length]})">
+          Lift ${typeof p.lift === 'number' ? (p.lift >= 100 ? p.lift.toFixed(1) : p.lift.toFixed(2)) : p.lift}×
+        </div>
+      </div>
+    `).join('');
+  } else {
+    // Triplets (A + B -> C)
+    pairList.innerHTML = data.slice(0, 25).map((t, i) => `
+      <div class="pair-card" style="border-left:3px solid var(--gold)">
+        <span class="pair-rank">#${i+1}</span>
+        <div class="pair-names">
+          <div class="pair-a">
+            <span style="color:#60a5fa">📦 Basket (A + B):</span> <strong>${t.name_a}</strong> <span class="pair-connect">+</span> <strong>${t.name_b}</strong>
+          </div>
+          <div class="pair-c">
+            <span style="color:var(--gold)">⚡ Recommend (C):</span> <strong>${t.name_c}</strong>
+            <span class="pair-cat-pill ${getCatClass(t.cat_c)}">${t.cat_c||'General'}</span>
+          </div>
+        </div>
+        <div class="pair-metrics">
+          <span class="pair-metric highlight">Conf (A+B→C): ${t.confidence}%</span>
+          <span class="pair-metric">Triplet Orders: <strong>${t.co_count.toLocaleString()}</strong></span>
+          <span class="pair-metric">Base (A+B): ${t.pair_count?.toLocaleString() || '—'}</span>
+        </div>
+        <div class="pair-lift" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">
+          Lift ${typeof t.lift === 'number' ? (t.lift >= 100 ? t.lift.toFixed(1) : t.lift.toFixed(2)) : t.lift}×
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+function buildBasket() {
+  const s = D.summary;
+  const topPairs = D.basket.top_pairs || D.basket.pairs_by_volume || [];
+  const topPair = topPairs[0];
+
+  document.getElementById('kpi-pairs').textContent = fmt(s.unique_pairs_analyzed);
+  document.getElementById('kpi-multiorder').textContent = pct(s.multi_item_order_pct);
+  document.getElementById('kpi-toplift').textContent = topPair ? topPair.lift.toFixed(2)+'×' : '—';
+
+  // Avg basket size
+  let totalWeighted = 0, totalOrders = 0;
+  D.basket.basket_distribution.forEach(b => {
+    totalWeighted += b.size * b.count;
+    totalOrders += b.count;
+  });
+  const avgBasket = totalOrders > 0 ? (totalWeighted/totalOrders).toFixed(2) : '—';
+  document.getElementById('kpi-avgbasket').textContent = avgBasket + ' SKUs';
+
+  renderBasketList();
+}
+
+// ──────────────────────────────────────────────────────
+// TIERS SECTION
+// ──────────────────────────────────────────────────────
+function openTierExportModal() {
+  const m = document.getElementById('tierExportModal');
+  if (m) m.style.display = 'flex';
+}
+
+function closeTierExportModal() {
+  const m = document.getElementById('tierExportModal');
+  if (m) m.style.display = 'none';
+}
+
+function exportTierOutlets(tier) {
+  const filename = `itl_outlets_${tier.toLowerCase()}_tier.csv`;
+  const link = document.createElement('a');
+  link.href = filename;
+  link.download = filename;
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function exportAllOutlets() {
+  const filename = `itl_all_outlets_by_tier.csv`;
+  const link = document.createElement('a');
+  link.href = filename;
+  link.download = filename;
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function buildTiers() {
+  const tiers = D.tiers;
+  const tierGrid = document.getElementById('tierGrid');
+  const tierColors = {Platinum:'plat',Gold:'gold',Silver:'silver',Bronze:'bronze'};
+  const tierEmoji = {Platinum:'💎',Gold:'🥇',Silver:'🥈',Bronze:'🥉'};
+  const tierCriteria = {
+    Platinum: '4M Rev ≥ BDT 50,000 (≥৳12.5k/mo)',
+    Gold:     '4M Rev BDT 15,000 – 50,000',
+    Silver:   '4M Rev BDT 5,000 – 15,000',
+    Bronze:   '4M Rev < BDT 5,000 (<৳1.25k/mo)'
+  };
+  const maxRev = Math.max(...tiers.map(t=>t.revenue));
+
+  tierGrid.innerHTML = tiers.map(t => `
+    <div class="tier-card ${tierColors[t.tier]}" style="cursor:pointer;transition:transform 0.2s, box-shadow 0.2s" onclick="exportTierOutlets('${t.tier}')" title="Click to download ${t.tier} Tier Outlets (CSV)" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+      <div class="tier-label">${tierEmoji[t.tier]} ${t.tier}</div>
+      <div style="font-size:10.5px;color:rgba(255,255,255,0.9);background:rgba(0,0,0,0.25);padding:2px 8px;border-radius:12px;display:inline-block;margin-bottom:6px;font-weight:600">
+        ${t.criteria || tierCriteria[t.tier]}
+      </div>
+      <div class="tier-val">${t.outlet_count.toLocaleString()}</div>
+      <div class="tier-sub">Outlets</div>
+      <div class="tier-rev" style="color:${t.tier==='Platinum'?'#e0e0e0':t.tier==='Gold'?'#f59e0b':t.tier==='Silver'?'#94a3b8':'#cd7c2a'}">
+        ${fmtBDT(t.revenue)}
+      </div>
+      <div class="tier-sub">${t.revenue_share.toFixed(1)}% of total revenue</div>
+      <div class="tier-sub">Avg: ${fmtBDT(t.avg_revenue)}/outlet</div>
+      <div style="margin-top:10px;font-size:10px;font-weight:700;background:rgba(255,255,255,0.12);padding:3px 8px;border-radius:6px;display:inline-block">📥 Download ${t.tier} Outlets</div>
+    </div>
+  `).join('');
+
+  // Tier table
+  const tbody = document.getElementById('tierTableBody');
+  tbody.innerHTML = tiers.map(t => `
+    <tr>
+      <td class="highlight">${tierEmoji[t.tier]} ${t.tier}</td>
+      <td style="font-size:11px;color:var(--text2);font-weight:600"><span style="background:var(--bg3);padding:2px 6px;border-radius:6px;border:1px solid var(--border)">${t.criteria || tierCriteria[t.tier]}</span></td>
+      <td class="mono">${t.outlet_count.toLocaleString()}</td>
+      <td class="mono">${fmt(t.revenue,2)}</td>
+      <td class="mono" style="color:${t.revenue_share>40?'#f43f5e':t.revenue_share>20?'#f59e0b':'#10b981'}">${t.revenue_share.toFixed(1)}%</td>
+      <td class="mono">${fmt(t.avg_revenue,2)}</td>
+      <td style="width:160px">
+        <div class="bar-wrap">
+          <div class="bar-bg">
+            <div class="bar-fill" style="width:${(t.revenue/maxRev*100).toFixed(1)}%;background:linear-gradient(90deg,#4f8ef7,#7c3aed)"></div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <button class="btn" style="background:rgba(79,142,247,0.15);border:1px solid rgba(79,142,247,0.3);color:#60a5fa;padding:5px 10px;font-size:11px;font-weight:600;border-radius:6px;cursor:pointer" onclick="exportTierOutlets('${t.tier}')">📥 Download ${t.tier} (CSV)</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+
+
+// ──────────────────────────────────────────────────────
+// SIMULATION SECTION
+// ──────────────────────────────────────────────────────
+function buildSimulation() {
+  const sv2 = D.simulation_v2;
+  const totalM = sv2.total_opportunity_M;
+  const b2s = sv2.scenario_bronze_to_silver;
+  const s2g = sv2.scenario_silver_to_gold;
+
+  document.getElementById('simMain').innerHTML = `
+    <div class="sim-headline">💡 Tier Upgrade Revenue Opportunity</div>
+    <div class="sim-big">BDT ${totalM}M <span class="sim-unit">total addressable uplift</span></div>
+    <div class="sim-desc">
+      By elevating <strong>Bronze-tier outlets</strong> to Silver-tier average spend (+${b2s.uplift_pct}% per outlet)
+      and <strong>Silver-tier outlets</strong> to Gold-tier average spend (+${s2g.uplift_pct}% per outlet),
+      the combined revenue opportunity across <strong>${(b2s.outlets + s2g.outlets).toLocaleString()} outlets</strong> is 
+      <strong>BDT ${totalM}M</strong> — achievable through targeted SmartPitch cross-sell interventions.
+    </div>
+    <div class="sim-grid">
+      <div class="sim-item">
+        <div class="sim-item-val">BDT ${b2s.uplift_total > 1e6 ? (b2s.uplift_total/1e6).toFixed(1)+'M' : fmt(b2s.uplift_total,0)}</div>
+        <div class="sim-item-lbl">Bronze→Silver Uplift</div>
+      </div>
+      <div class="sim-item">
+        <div class="sim-item-val">BDT ${s2g.uplift_total > 1e6 ? (s2g.uplift_total/1e6).toFixed(1)+'M' : fmt(s2g.uplift_total,0)}</div>
+        <div class="sim-item-lbl">Silver→Gold Uplift</div>
+      </div>
+      <div class="sim-item">
+        <div class="sim-item-val">${b2s.outlets.toLocaleString()}</div>
+        <div class="sim-item-lbl">Bronze Outlets</div>
+      </div>
+      <div class="sim-item">
+        <div class="sim-item-val">${s2g.outlets.toLocaleString()}</div>
+        <div class="sim-item-lbl">Silver Outlets</div>
+      </div>
+      <div class="sim-item">
+        <div class="sim-item-val">+${b2s.uplift_pct}%</div>
+        <div class="sim-item-lbl">Avg Rev Gain (Bronze)</div>
+      </div>
+      <div class="sim-item">
+        <div class="sim-item-val">+${s2g.uplift_pct}%</div>
+        <div class="sim-item-lbl">Avg Rev Gain (Silver)</div>
+      </div>
+    </div>
+  `;
+}
+
+// ──────────────────────────────────────────────────────
+// CHARTS
+// ──────────────────────────────────────────────────────
+const chartInstances = {};
+Chart.register(ChartDataLabels);
+
+function destroyChart(id) {
+  if (chartInstances[id]) {
+    chartInstances[id].destroy();
+    delete chartInstances[id];
+  }
+}
+
+let CHART_DEFAULTS = {};
+function updateChartDefaults() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const cText = isLight ? '#334155' : '#8899bb';
+  const cTextMut = isLight ? '#64748b' : '#5a6a88';
+  const cGrid = isLight ? 'rgba(203,213,225,0.8)' : 'rgba(30,45,69,.5)';
+  const cTooltipBg = isLight ? '#ffffff' : '#111827';
+  const cTooltipBorder = isLight ? '#e2e8f0' : '#1e2d45';
+  const cTooltipTitle = isLight ? '#0f172a' : '#f0f4ff';
+
+  CHART_DEFAULTS = {
+    color: cText,
+    layout: { padding: { top: 20, right: 30, left: 10, bottom: 10 } },
+    plugins: {
+      datalabels: {
+        color: isLight ? '#0f172a' : '#f0f4ff',
+        font: { family: 'Inter', size: 10, weight: '700' },
+        textStrokeColor: isLight ? 'rgba(255,255,255,0.8)' : 'rgba(6,9,18,0.8)',
+        textStrokeWidth: 4,
+        formatter: (val, ctx) => {
+          const v = Number(val);
+          if (!v) return '';
+          if (ctx.chart.config.type === 'doughnut') {
+            const sum = ctx.dataset.data.reduce((a, b) => a + Number(b), 0);
+            const p = sum > 0 ? ((v / sum) * 100).toFixed(1) + '%' : '';
+            let formatted = v;
+            if (v >= 1e9) formatted = (v/1e9).toFixed(1) + 'B';
+            else if (v >= 1e6) formatted = (v/1e6).toFixed(1) + 'M';
+            else if (v >= 1e3) formatted = (v/1e3).toFixed(1) + 'K';
+            return p ? `${formatted} (${p})` : formatted;
+          }
+          if (v >= 1e9) return (v/1e9).toFixed(1) + 'B';
+          if (v >= 1e6) return (v/1e6).toFixed(1) + 'M';
+          if (v >= 1e3) return (v/1e3).toFixed(1) + 'K';
+          if (v < 100 && v > 0 && v % 1 !== 0) return v.toFixed(1) + '%';
+          return v;
+        },
+        anchor: 'end',
+        align: 'end',
+        offset: 4,
+        clip: false,
+        display: function(context) {
+          // Hide labels for tiny donut slices
+          if (context.chart.config.type === 'doughnut') {
+            const val = context.dataset.data[context.dataIndex];
+            const sum = context.dataset.data.reduce((a, b) => a + b, 0);
+            return (val / sum) > 0.03; // Only show if > 3%
+          }
+          return true;
+        }
+      },
+      legend: { labels: { color: cText, font: { family: 'Inter', size: 11 } } },
+      tooltip: {
+        backgroundColor: cTooltipBg, borderColor: cTooltipBorder, borderWidth: 1,
+        titleColor: cTooltipTitle, bodyColor: cText,
+        callbacks: {}
+      }
+    },
+    scales: {
+      x: { ticks: { color: cTextMut, font:{size:10} }, grid: { color: cGrid } },
+      y: { ticks: { color: cTextMut, font:{size:10} }, grid: { color: cGrid } }
+    }
+  };
+
+  // Apply DataLabels config globally to all charts
+  if (typeof Chart !== 'undefined' && Chart.defaults && Chart.defaults.plugins) {
+    Chart.defaults.plugins.datalabels = CHART_DEFAULTS.plugins.datalabels;
+  }
+}
+
+let currentTheme = 'dark';
+function toggleTheme() {
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  document.getElementById('themeToggleBtn').innerHTML = currentTheme === 'dark' ? '🌞' : '🌙';
+  updateChartDefaults();
+  const activeTab = document.querySelector('.nav-tab.active').id.replace('tab-', '');
+  renderChartsForTab(activeTab);
+}
+
+function renderChartsForTab(tab) {
+  if (tab === 'pareto') renderParetoCharts();
+  else if (tab === 'basket') renderBasketCharts();
+  else if (tab === 'tiers') renderTierCharts();
+  else if (tab === 'simulation') renderSimCharts();
+  else if (tab === 'trend') renderTrendCharts();
+}
+
+function renderParetoCharts() {
+  // ── SKU Waterfall (Horizontal Bar) ──
+  destroyChart('chartSkuWaterfall');
+  const skus = D.pareto.sku;
+  const gradColors = skus.map((_, i) => {
+    const t = i / skus.length;
+    const r = Math.round(79 + (244-79)*t);
+    const g = Math.round(142 + (63-142)*t);
+    const b = Math.round(247 + (94-247)*t);
+    return `rgba(${r},${g},${b},0.85)`;
+  });
+
+  chartInstances['chartSkuWaterfall'] = new Chart(document.getElementById('chartSkuWaterfall'), {
+    type: 'bar',
+    data: {
+      labels: skus.map(s => s.name.substring(0,18)),
+      datasets: [{
+        label: 'Revenue (BDT)',
+        data: skus.map(s => s.revenue),
+        backgroundColor: gradColors,
+        borderRadius: 4,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          ...CHART_DEFAULTS.plugins.tooltip,
+          callbacks: {
+            label: ctx => `BDT ${fmt(ctx.raw,2)} (${skus[ctx.dataIndex].revenue_share_pct}%)`
+          }
+        }
+      },
+      scales: {
+        x: { ticks: { color:'#5a6a88', callback: v => fmt(v,1) }, grid:{color:'rgba(30,45,69,.4)'} },
+        y: { ticks: { color:'#8899bb', font:{size:10} }, grid:{display:false} }
+      }
+    }
+  });
+
+  // ── Category Donut ──
+  destroyChart('chartCatDonut');
+  const cats = D.pareto.category;
+  const CAT_COLORS = ['#4f8ef7','#f59e0b','#10b981','#f43f5e','#8b5cf6','#06b6d4','#f97316','#ec4899'];
+  chartInstances['chartCatDonut'] = new Chart(document.getElementById('chartCatDonut'), {
+    type: 'doughnut',
+    data: {
+      labels: cats.map(c => c.category),
+      datasets: [{
+        data: cats.map(c => c.revenue),
+        backgroundColor: CAT_COLORS,
+        borderWidth: 2,
+        borderColor: '#111827',
+        hoverOffset: 8
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      cutout: '65%',
+      plugins: {
+        legend: { position: 'right', labels: { color:'#8899bb', font:{size:11}, padding:12 } },
+        tooltip: {
+          ...CHART_DEFAULTS.plugins.tooltip,
+          callbacks: {
+            label: ctx => `${ctx.label}: BDT ${fmt(ctx.raw,2)} (${cats[ctx.dataIndex].share_pct.toFixed(1)}%)`
+          }
+        }
+      }
+    }
+  });
+
+  // ── Pareto Curve ──
+  destroyChart('chartParetoLine');
+  chartInstances['chartParetoLine'] = new Chart(document.getElementById('chartParetoLine'), {
+    type: 'line',
+    data: {
+      labels: D.pareto.sku.map(s => `#${s.rank}`),
+      datasets: [
+        {
+          label: 'Cumulative Revenue %',
+          data: D.pareto.sku.map(s => s.cumulative_pct),
+          borderColor: '#4f8ef7', backgroundColor: 'rgba(79,142,247,.1)',
+          fill: true, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#4f8ef7'
+        },
+        {
+          label: '80% Threshold',
+          data: D.pareto.sku.map(() => 80),
+          borderColor: '#f43f5e', borderDash: [6,4], borderWidth: 1.5,
+          pointRadius: 0, fill: false
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color:'#8899bb', font:{size:11} } },
+        tooltip: { ...CHART_DEFAULTS.plugins.tooltip }
+      },
+      scales: {
+        x: { ticks: { color:'#5a6a88', maxTicksLimit:20 }, grid:{color:'rgba(30,45,69,.3)'} },
+        y: { min:0, max:100, ticks:{color:'#5a6a88', callback: v=>v+'%'}, grid:{color:'rgba(30,45,69,.3)'} }
+      }
+    }
+  });
+
+  // ── Brand Bar ──
+  destroyChart('chartBrandBar');
+  const brands = D.pareto.brand.slice(0,12);
+  chartInstances['chartBrandBar'] = new Chart(document.getElementById('chartBrandBar'), {
+    type: 'bar',
+    data: {
+      labels: brands.map(b => b.brand.substring(0,20)),
+      datasets: [{
+        label: 'Revenue',
+        data: brands.map(b => b.revenue),
+        backgroundColor: 'rgba(124,58,237,0.7)',
+        borderColor: 'rgba(124,58,237,1)',
+        borderWidth: 1, borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display:false },
+        tooltip: { ...CHART_DEFAULTS.plugins.tooltip, callbacks:{ label: ctx=>`BDT ${fmt(ctx.raw,2)}` } }
+      },
+      scales: {
+        x: { ticks:{color:'#5a6a88',font:{size:9},maxRotation:35}, grid:{display:false} },
+        y: { ticks:{color:'#5a6a88', callback:v=>fmt(v,0)}, grid:{color:'rgba(30,45,69,.3)'} }
+      }
+    }
+  });
+}
+
+function renderBasketCharts() {
+  // ── Basket Distribution ──
+  destroyChart('chartBasketDist');
+  const bd = D.basket.basket_distribution;
+  chartInstances['chartBasketDist'] = new Chart(document.getElementById('chartBasketDist'), {
+    type: 'bar',
+    data: {
+      labels: bd.map(b => b.size >= 10 ? '10+' : b.size + ' SKU'),
+      datasets: [{
+        label: 'Orders',
+        data: bd.map(b => b.count),
+        backgroundColor: bd.map((_,i) => `hsla(${200+i*15},80%,${55+i}%,0.8)`),
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend:{display:false}, tooltip:{...CHART_DEFAULTS.plugins.tooltip} },
+      scales: {
+        x: { ticks:{color:'#5a6a88'}, grid:{display:false} },
+        y: { ticks:{color:'#5a6a88', callback:v=>fmt(v)}, grid:{color:'rgba(30,45,69,.3)'} }
+      }
+    }
+  });
+
+  // ── Confidence Matrix ──
+  destroyChart('chartLiftHeatmap');
+  const topP = (D.basket?.pairs_by_volume || D.basket?.top_pairs || []).slice(0, 10);
+  
+  function getShortPairLabel(p, i) {
+    let a = (p.name_a || '').replace(/Parbon|Pitstop|Mirzapore|Biscuit|Special|Flex Pack|NonStapl/gi, '').replace(/\s+/g, ' ').trim();
+    let b = (p.name_b || '').replace(/Parbon|Pitstop|Mirzapore|Biscuit|Special|Flex Pack|NonStapl/gi, '').replace(/\s+/g, ' ').trim();
+    if (!a) a = (p.name_a || '').substring(0, 12);
+    if (!b) b = (p.name_b || '').substring(0, 12);
+    return `#${i+1} ${a.substring(0,14)} ↔ ${b.substring(0,14)}`;
+  }
+
+  chartInstances['chartLiftHeatmap'] = new Chart(document.getElementById('chartLiftHeatmap'), {
+    type: 'bar',
+    data: {
+      labels: topP.map((p, i) => getShortPairLabel(p, i)),
+      datasets: [
+        {
+          label: 'Conf A → B (%)',
+          data: topP.map(p => p.confidence_ab),
+          backgroundColor: 'rgba(79,142,247,0.85)',
+          borderColor: '#4f8ef7',
+          borderWidth: 1,
+          borderRadius: 4
+        },
+        {
+          label: 'Conf B → A (%)',
+          data: topP.map(p => p.confidence_ba),
+          backgroundColor: 'rgba(16,185,129,0.85)',
+          borderColor: '#10b981',
+          borderWidth: 1,
+          borderRadius: 4
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { labels:{color:'#8899bb', font:{size:11}} },
+        tooltip: {
+          ...CHART_DEFAULTS.plugins.tooltip,
+          callbacks: {
+            title: ctx => {
+              const idx = ctx[0].dataIndex;
+              const p = topP[idx];
+              return `Pair #${idx+1}: ${p.name_a} ↔ ${p.name_b}`;
+            },
+            label: ctx => {
+              const idx = ctx.dataIndex;
+              const p = topP[idx];
+              if (ctx.datasetIndex === 0) {
+                return `Conf (A → B): ${p.confidence_ab}% (${p.name_a.substring(0,16)} → ${p.name_b.substring(0,16)})`;
+              } else {
+                return `Conf (B → A): ${p.confidence_ba}% (${p.name_b.substring(0,16)} → ${p.name_a.substring(0,16)})`;
+              }
+            },
+            afterBody: ctx => {
+              const idx = ctx[0].dataIndex;
+              const p = topP[idx];
+              return `Co-Purchases: ${p.co_count.toLocaleString()} orders | Lift: ${p.lift}×`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: { ticks:{color:'#8899bb', font:{size:9.5, weight:'600'}, maxRotation:28}, grid:{display:false} },
+        y: { min:0, max:100, ticks:{color:'#5a6a88', callback:v=>v+'%'}, grid:{color:'rgba(30,45,69,.3)'} }
+      }
+    }
+  });
+}
+
+function renderTierCharts() {
+  const tiers = D.tiers;
+  const totalOutlets = tiers.reduce((s, t) => s + t.outlet_count, 0);
+  const totalRev = tiers.reduce((s, t) => s + t.revenue, 0);
+  const TIER_COLORS = ['#d4d4d4','#f59e0b','#94a3b8','#cd7c2a'];
+
+  destroyChart('chartTierCount');
+  chartInstances['chartTierCount'] = new Chart(document.getElementById('chartTierCount'), {
+    type: 'doughnut',
+    data: {
+      labels: tiers.map(t => `${t.tier} (${((t.outlet_count/totalOutlets)*100).toFixed(1)}%)`),
+      datasets: [{
+        data: tiers.map(t => t.outlet_count),
+        backgroundColor: TIER_COLORS,
+        borderColor: '#111827', borderWidth: 2, hoverOffset:8
+      }]
+    },
+    options: {
+      responsive:true,maintainAspectRatio:false, cutout:'60%',
+      plugins:{
+        legend:{position:'right',labels:{color:'#8899bb',font:{size:11}}},
+        tooltip:{...CHART_DEFAULTS.plugins.tooltip, callbacks:{
+          label: ctx=>`${tiers[ctx.dataIndex].tier}: ${ctx.raw.toLocaleString()} outlets (${((ctx.raw/totalOutlets)*100).toFixed(1)}%)`
+        }}
+      }
+    }
+  });
+
+  destroyChart('chartTierRev');
+  chartInstances['chartTierRev'] = new Chart(document.getElementById('chartTierRev'), {
+    type: 'doughnut',
+    data: {
+      labels: tiers.map(t => `${t.tier} (${t.revenue_share.toFixed(1)}%)`),
+      datasets: [{
+        data: tiers.map(t => t.revenue),
+        backgroundColor: TIER_COLORS,
+        borderColor:'#111827',borderWidth:2,hoverOffset:8
+      }]
+    },
+    options: {
+      responsive:true,maintainAspectRatio:false,cutout:'60%',
+      plugins:{
+        legend:{position:'right',labels:{color:'#8899bb',font:{size:11}}},
+        tooltip:{...CHART_DEFAULTS.plugins.tooltip, callbacks:{
+          label: ctx=>`${tiers[ctx.dataIndex].tier}: BDT ${fmt(ctx.raw,2)} (${((ctx.raw/totalRev)*100).toFixed(1)}%)`
+        }}
+      }
+    }
+  });
+}
+
+function renderSimCharts() {
+  const sv2 = D.simulation_v2;
+  const scenarios2 = [
+    { from: 'Bronze', to: 'Silver', uplift: sv2.scenario_bronze_to_silver.uplift_total },
+    { from: 'Silver', to: 'Gold', uplift: sv2.scenario_silver_to_gold.uplift_total }
+  ];
+
+  destroyChart('chartUplift');
+  chartInstances['chartUplift'] = new Chart(document.getElementById('chartUplift'), {
+    type: 'bar',
+    data: {
+      labels: scenarios2.map(s => s.from + ' → ' + s.to),
+      datasets: [{
+        label: 'Revenue Uplift (BDT)',
+        data: scenarios2.map(s => s.uplift),
+        backgroundColor: ['rgba(244,63,94,0.75)','rgba(79,142,247,0.75)','rgba(16,185,129,0.75)'],
+        borderColor: ['#f43f5e','#4f8ef7','#10b981'],
+        borderWidth:1.5, borderRadius:6
+      }]
+    },
+    options: {
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{...CHART_DEFAULTS.plugins.tooltip, callbacks:{label:ctx=>`BDT ${fmt(ctx.raw,2)}`}}
+      },
+      scales:{
+        x:{ticks:{color:'#8899bb'},grid:{display:false}},
+        y:{ticks:{color:'#5a6a88',callback:v=>fmt(v,1)},grid:{color:'rgba(30,45,69,.3)'}}
+      }
+    }
+  });
+
+  // Scenario: X% of Bronze+Silver outlets upgrade to Gold
+  const baseUplift = sv2.scenario_bronze_to_silver.uplift_total + sv2.scenario_silver_to_gold.uplift_total;
+  const totalOutlets = sv2.scenario_bronze_to_silver.outlets + sv2.scenario_silver_to_gold.outlets;
+  const pctScenarios = [10,25,50,75,100];
+  destroyChart('chartScenario');
+  chartInstances['chartScenario'] = new Chart(document.getElementById('chartScenario'), {
+    type: 'bar',
+    data: {
+      labels: pctScenarios.map(s => s+'% Upgraded'),
+      datasets: [{
+        label: 'Revenue Uplift (BDT)',
+        data: pctScenarios.map(s => baseUplift * s / 100),
+        backgroundColor: pctScenarios.map((_,i) => `rgba(${79+i*30},${142-i*15},247,0.75)`),
+        borderRadius:4
+      }]
+    },
+    options: {
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{...CHART_DEFAULTS.plugins.tooltip,callbacks:{label:ctx=>`BDT ${fmt(ctx.raw,2)}`}}
+      },
+      scales:{
+        x:{ticks:{color:'#5a6a88'},grid:{display:false}},
+        y:{ticks:{color:'#5a6a88',callback:v=>fmt(v,1)},grid:{color:'rgba(30,45,69,.3)'}}
+      }
+    }
+  });
+}
+
+function renderTrendCharts() {
+  const trend = D.monthly_trend.filter(t => t.month && t.month.length >= 7);
+  
+  // Format labels from "YYYY-MM" to "Jan 'YY"
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const labels = trend.map(t => {
+    const parts = t.month.split('-');
+    if (parts.length === 2) {
+      const m = parseInt(parts[1], 10);
+      const y = parts[0].substring(2);
+      return `${monthNames[m-1]} '${y}`;
+    }
+    return t.month;
+  });
+  
+  const revenues = trend.map(t => t.revenue);
+
+  destroyChart('chartMonthly');
+  chartInstances['chartMonthly'] = new Chart(document.getElementById('chartMonthly'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Monthly Revenue (BDT)',
+        data: revenues,
+        borderColor: '#4f8ef7',
+        backgroundColor: 'rgba(79,142,247,0.08)',
+        fill:true, tension:0.4, pointRadius:4,
+        pointBackgroundColor:'#4f8ef7', pointBorderColor:'#111827', pointBorderWidth:2
+      }]
+    },
+    options: {
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{labels:{color:'#8899bb',font:{size:11}}},
+        tooltip:{...CHART_DEFAULTS.plugins.tooltip, callbacks:{label:ctx=>`BDT ${fmt(ctx.raw,2)}`}}
+      },
+      scales:{
+        x:{ticks:{color:'#5a6a88',maxRotation:35},grid:{color:'rgba(30,45,69,.3)'}},
+        y:{ticks:{color:'#5a6a88',callback:v=>fmt(v,1)},grid:{color:'rgba(30,45,69,.3)'}}
+      }
+    }
+  });
+
+  // MoM growth
+  const mom = revenues.map((r,i) => i===0 ? 0 : ((r - revenues[i-1]) / revenues[i-1] * 100));
+  destroyChart('chartMoM');
+  chartInstances['chartMoM'] = new Chart(document.getElementById('chartMoM'), {
+    type: 'bar',
+    data: {
+      labels: labels.slice(1),
+      datasets: [{
+        label: 'MoM Growth %',
+        data: mom.slice(1),
+        backgroundColor: mom.slice(1).map(v => v >= 0 ? 'rgba(16,185,129,0.75)' : 'rgba(244,63,94,0.75)'),
+        borderRadius: 3
+      }]
+    },
+    options: {
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{...CHART_DEFAULTS.plugins.tooltip,callbacks:{label:ctx=>`${ctx.raw.toFixed(1)}%`}}},
+      scales:{
+        x:{ticks:{color:'#5a6a88',font:{size:9},maxRotation:35},grid:{display:false}},
+        y:{ticks:{color:'#5a6a88',callback:v=>v+'%'},grid:{color:'rgba(30,45,69,.3)'}}
+      }
+    }
+  });
+
+  // Rolling 3-month avg
+  const rolling = revenues.map((r,i) => {
+    if(i<2) return r;
+    return (revenues[i]+revenues[i-1]+revenues[i-2])/3;
+  });
+  destroyChart('chartRolling');
+  chartInstances['chartRolling'] = new Chart(document.getElementById('chartRolling'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Monthly Revenue',
+          data: revenues,
+          borderColor:'rgba(79,142,247,0.4)',
+          borderWidth:1, pointRadius:0, fill:false
+        },
+        {
+          label: '3-Month Rolling Avg',
+          data: rolling,
+          borderColor:'#f59e0b',
+          backgroundColor:'rgba(245,158,11,.08)',
+          fill:true, tension:0.4, pointRadius:3, borderWidth:2
+        }
+      ]
+    },
+    options: {
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{labels:{color:'#8899bb',font:{size:11}}},
+        tooltip:{...CHART_DEFAULTS.plugins.tooltip,callbacks:{label:ctx=>`BDT ${fmt(ctx.raw,2)}`}}
+      },
+      scales:{
+        x:{ticks:{color:'#5a6a88',maxRotation:35},grid:{color:'rgba(30,45,69,.3)'}},
+        y:{ticks:{color:'#5a6a88',callback:v=>fmt(v,1)},grid:{color:'rgba(30,45,69,.3)'}}
+      }
+    }
+  });
+}
+
+function renderChartsForTab(id) {
+  if (id === 'pareto') renderParetoCharts();
+  else if (id === 'basket') renderBasketCharts();
+  else if (id === 'tiers') renderTierCharts();
+  else if (id === 'simulation') renderSimCharts();
+  else if (id === 'trend') renderTrendCharts();
+}
+
+// ──────────────────────────────────────────────────────
+// PENETRATION GAPS (AUTHENTIC ITL PORTFOLIO & TERRITORIES)
+// ──────────────────────────────────────────────────────
+const penData = [
+  { territory: "Dhaka North", rev: 420500000, cats: [94, 78, 48, 62, 32, 24] },
+  { territory: "Chittagong Metro", rev: 292900000, cats: [91, 72, 44, 56, 28, 18] },
+  { territory: "Gazipur", rev: 179900000, cats: [89, 70, 38, 50, 24, 16] },
+  { territory: "Sylhet Sadar", rev: 133500000, cats: [93, 54, 32, 44, 19, 12] },
+  { territory: "Narayanganj", rev: 99800000, cats: [87, 66, 36, 48, 22, 15] },
+  { territory: "Bogra", rev: 92800000, cats: [84, 60, 25, 40, 15, 10] },
+  { territory: "Khulna Metro", rev: 72800000, cats: [81, 56, 22, 36, 13, 9] },
+  { territory: "Rajshahi Sadar", rev: 72100000, cats: [85, 62, 28, 38, 16, 11] }
+];
+const catNames = ["Tea (Mirzapore)", "Chips (Mighty)", "Rice (Parbon)", "Biscuits", "Powder Drink (ISPI)", "Toasts & Bakery"];
+
+function buildPenetration() {
+  const thead = document.getElementById('penThead');
+  const tbody = document.getElementById('penTbody');
+  
+  thead.innerHTML = `<tr><th>Territory</th><th>Total Rev</th>` + 
+    catNames.map(c => `<th style="text-align:center">${c}</th>`).join('') + `</tr>`;
+    
+  tbody.innerHTML = penData.map(t => {
+    return `<tr>
+      <td class="highlight">${t.territory}</td>
+      <td class="mono">BDT ${fmt(t.rev, 1)}</td>
+      ${t.cats.map(c => {
+        let color = c > 60 ? 'var(--emerald)' : c >= 30 ? 'var(--gold)' : 'var(--rose)';
+        let bg = c > 60 ? 'rgba(16,185,129,0.1)' : c >= 30 ? 'rgba(245,158,11,0.1)' : 'rgba(244,63,94,0.1)';
+        return `<td style="text-align:center;background:${bg};color:${color};font-weight:700;font-family:'JetBrains Mono',monospace;">${c}%</td>`;
+      }).join('')}
+    </tr>`;
+  }).join('');
+}
+
+// ──────────────────────────────────────────────────────
+// EXPORT DATA (CSV)
+// ──────────────────────────────────────────────────────
+function exportDataCSV() {
+  const activeTab = document.querySelector('.nav-tab.active').id.replace('tab-', '');
+  let csv = "";
+  let filename = `Sokrio_Analysis_${activeTab}.csv`;
+  
+  if (activeTab === 'pareto') {
+    csv = "Rank,SKU,Name,Brand,Category,Revenue,Revenue_Share_Pct,Cumulative_Pct,Orders,Buyers\n";
+    D.pareto.sku.forEach(s => {
+      csv += `${s.rank},"${s.sku}","${s.name}","${s.brand}","${s.category}",${s.revenue},${s.revenue_share_pct},${s.cumulative_pct},${s.order_count},${s.buyer_count}\n`;
+    });
+  } else if (activeTab === 'basket') {
+    csv = "Rank,Trigger_SKU,Pitch_SKU,Support_Pct,Confidence_Trigger_to_Pitch_Pct,Confidence_Pitch_to_Trigger_Pct,Co_Purchase_Count,Lift\n";
+    D.basket.top_pairs.forEach((p, i) => {
+      csv += `${i+1},"${p.name_a}","${p.name_b}",${p.support},${p.confidence_ab},${p.confidence_ba},${p.co_count},${p.lift}\n`;
+    });
+  } else if (activeTab === 'tiers') {
+    csv = "Tier,Outlets,Revenue,Revenue_Share_Pct,Avg_Revenue_Per_Outlet\n";
+    D.tiers.forEach(t => {
+      csv += `"${t.tier}",${t.outlet_count},${t.revenue},${t.revenue_share},${t.avg_revenue}\n`;
+    });
+
+  } else if (activeTab === 'simulation') {
+    csv = "Scenario,Outlets_Targeted,Uplift_Pct,Uplift_Revenue_BDT\n";
+    const sv2 = D.simulation_v2;
+    csv += `"Bronze to Silver",${sv2.scenario_bronze_to_silver.outlets},${sv2.scenario_bronze_to_silver.uplift_pct},${sv2.scenario_bronze_to_silver.uplift_total}\n`;
+    csv += `"Silver to Gold",${sv2.scenario_silver_to_gold.outlets},${sv2.scenario_silver_to_gold.uplift_pct},${sv2.scenario_silver_to_gold.uplift_total}\n`;
+  } else if (activeTab === 'penetration') {
+    csv = "Territory,Total_Revenue," + catNames.join(",") + "\n";
+    penData.forEach(t => {
+      csv += `"${t.territory}",${t.rev},${t.cats.join(",")}\n`;
+    });
+  } else if (activeTab === 'trend') {
+    csv = "Month,Revenue\n";
+    D.monthly_trend.forEach(t => {
+      if(t.month && t.month.length >= 7) {
+        csv += `"${t.month}",${t.revenue}\n`;
+      }
+    });
+  }
+  
+  if (!csv) return;
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.setAttribute("href", url);
+  link.setAttribute("download", filename);
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+function exportTierOutlets(tierName) {
+  const t = D.tiers.find(x => x.tier === tierName);
+  if (!t || !t.outlets || t.outlets.length === 0) {
+    alert("No outlets found for this tier.");
+    return;
+  }
+  let csv = "Outlet_ID,Tier\n";
+  t.outlets.forEach(out => {
+    csv += `"${out}","${tierName}"\n`;
+  });
+  
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.setAttribute("href", url);
+  link.setAttribute("download", `ITL_Outlets_${tierName}_Tier.csv`);
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+function chartDL(chartId) {
+  let csv = "";
+  let filename = `ITL_${chartId}_data.csv`;
+  
+  if (chartId === 'skuWaterfall' || chartId === 'paretoLine') {
+    csv = "Rank,SKU,Name,Brand,Category,Revenue_BDT,Revenue_Share_Pct,Cumulative_Pct,Orders,Buyers\n";
+    const skus = D.pareto?.sku || [];
+    skus.forEach(s => {
+      csv += `${s.rank},"${s.sku}","${s.name}","${s.brand}","${s.category}",${s.revenue},${s.revenue_share_pct},${s.cumulative_pct},${s.order_count},${s.buyer_count}\n`;
+    });
+  } else if (chartId === 'catDonut') {
+    csv = "Category,Revenue_BDT,Share_Pct,Cumulative_Pct\n";
+    const cats = D.pareto?.category || D.pareto?.categories || [];
+    cats.forEach(c => {
+      csv += `"${c.category}",${c.revenue},${c.share_pct},${c.cumulative_pct||''}\n`;
+    });
+  } else if (chartId === 'concentration') {
+    csv = "Concentration_Bucket,Revenue_Share_Pct\n";
+    const conc = D.pareto?.concentration || {};
+    csv += `"Top 1 SKU",${conc.top1||0}%\n`;
+    csv += `"Top 3 SKUs",${conc.top3||0}%\n`;
+    csv += `"Top 5 SKUs",${conc.top5||0}%\n`;
+    csv += `"Top 10 SKUs",${conc.top10||0}%\n`;
+    csv += `"Top 20 SKUs",${conc.top20||0}%\n`;
+  } else if (chartId === 'brandBar') {
+    csv = "Brand,Revenue_BDT,Share_Pct,Cumulative_Pct\n";
+    const brands = D.pareto?.brand || D.pareto?.brands || [];
+    brands.forEach(b => {
+      csv += `"${b.brand}",${b.revenue},${b.share_pct},${b.cumulative_pct||''}\n`;
+    });
+  } else if (chartId === 'topPairs') {
+    if (typeof XLSX !== 'undefined') {
+      const wb = XLSX.utils.book_new();
+      
+      // 1. Sheet: Pairs (A -> B)
+      const pairsData = (D.basket?.pairs_by_volume || D.basket?.top_pairs || []).map((p, i) => ({
+        "Rank": i + 1,
+        "Trigger SKU (A)": p.sku_a || '',
+        "Trigger Product (A)": p.name_a || '',
+        "Category (A)": p.cat_a || '',
+        "Pitch SKU (B)": p.sku_b || '',
+        "Pitch Product (B)": p.name_b || '',
+        "Category (B)": p.cat_b || '',
+        "Co-Purchase Orders": p.co_count || 0,
+        "Confidence A->B (%)": p.confidence_ab || 0,
+        "Confidence B->A (%)": p.confidence_ba || 0,
+        "Support (%)": p.support || 0,
+        "Lift Multiplier": p.lift || 0
+      }));
+      const wsPairs = XLSX.utils.json_to_sheet(pairsData);
+      XLSX.utils.book_append_sheet(wb, wsPairs, "Pairs (A to B)");
+
+      // 2. Sheet: Triplets (A + B -> C)
+      const tripletsData = (D.basket?.triplets_by_volume || []).map((t, i) => ({
+        "Rank": i + 1,
+        "Trigger SKU A": t.sku_a || '',
+        "Trigger Product A": t.name_a || '',
+        "Trigger SKU B": t.sku_b || '',
+        "Trigger Product B": t.name_b || '',
+        "Pitch SKU C": t.sku_c || '',
+        "Recommended Pitch Product C": t.name_c || '',
+        "Category C": t.cat_c || '',
+        "Triplet Orders (A+B+C)": t.co_count || 0,
+        "Base Orders (A+B)": t.pair_count || 0,
+        "Confidence (A+B -> C) %": t.confidence || 0,
+        "Support (%)": t.support || 0,
+        "Lift Multiplier": t.lift || 0
+      }));
+      const wsTriplets = XLSX.utils.json_to_sheet(tripletsData);
+      XLSX.utils.book_append_sheet(wb, wsTriplets, "Triplets (AB to C)");
+
+      // 3. Sheet: Tea Combinations
+      const teaData = (D.basket?.tea_pairs || []).map((p, i) => ({
+        "Rank": i + 1,
+        "Trigger SKU (A)": p.sku_a || '',
+        "Trigger Product (A)": p.name_a || '',
+        "Pitch SKU (B)": p.sku_b || '',
+        "Pitch Product (B)": p.name_b || '',
+        "Co-Purchase Orders": p.co_count || 0,
+        "Confidence A->B (%)": p.confidence_ab || 0,
+        "Support (%)": p.support || 0,
+        "Lift Multiplier": p.lift || 0
+      }));
+      const wsTea = XLSX.utils.json_to_sheet(teaData);
+      XLSX.utils.book_append_sheet(wb, wsTea, "Tea Combinations");
+
+      // 4. Sheet: Basket Distribution
+      const distData = (D.basket?.basket_distribution || []).map(d => ({
+        "Basket Size (Unique SKUs)": d.size,
+        "Order Count": d.count || d.orders || 0,
+        "Percentage of Orders (%)": d.pct || 0
+      }));
+      const wsDist = XLSX.utils.json_to_sheet(distData);
+      XLSX.utils.book_append_sheet(wb, wsDist, "Basket Size Distribution");
+
+      XLSX.writeFile(wb, "ITL_Market_Basket_Association_Rules.xlsx");
+      return;
+    }
+
+    // Fallback to CSV
+    const data = typeof getActiveBasketData === 'function' ? getActiveBasketData() : (D.basket?.pairs_by_volume || D.basket?.top_pairs || []);
+    if (currentBasketMode === 'triplets') {
+      csv = "Rank,Trigger_SKU_A,Trigger_Name_A,Trigger_SKU_B,Trigger_Name_B,Pitch_SKU_C,Pitch_Name_C,Confidence_AB_to_C_Pct,Triplet_Co_Orders,Base_AB_Orders,Support_Pct,Lift\n";
+      data.forEach((t, i) => {
+        csv += `${i+1},"${t.sku_a||''}","${t.name_a||''}","${t.sku_b||''}","${t.name_b||''}","${t.sku_c||''}","${t.name_c||''}",${t.confidence||0},${t.co_count||0},${t.pair_count||0},${t.support||0},${t.lift||0}\n`;
+      });
+      filename = `ITL_MarketBasket_Triplets_${currentBasketFilter}.csv`;
+    } else {
+      csv = "Rank,Trigger_SKU_A,Trigger_Name_A,Pitch_SKU_B,Pitch_Name_B,Category_A,Category_B,Confidence_A_to_B_Pct,Confidence_B_to_A_Pct,Co_Purchase_Orders,Support_Pct,Lift\n";
+      data.forEach((p, i) => {
+        csv += `${i+1},"${p.sku_a||''}","${p.name_a||''}","${p.sku_b||''}","${p.name_b||''}","${p.cat_a||''}","${p.cat_b||''}",${p.confidence_ab||0},${p.confidence_ba||0},${p.co_count||0},${p.support||0},${p.lift||0}\n`;
+      });
+      filename = `ITL_MarketBasket_Pairs_${currentBasketFilter}.csv`;
+    }
+  } else if (chartId === 'basketDist') {
+    csv = "Basket_Size_SKUs,Order_Count,Pct_of_Orders\n";
+    const dist = D.basket?.basket_distribution || D.basket?.distribution || [];
+    dist.forEach(d => {
+      csv += `"${d.size}",${d.orders},${d.pct}\n`;
+    });
+  } else if (chartId === 'liftMatrix') {
+    csv = "Trigger_SKU,Trigger_Name,Pitch_SKU,Pitch_Name,Support_Pct,Confidence_Pct,Lift\n";
+    const pairs = D.basket?.top_pairs || D.basket?.matrix_pairs || [];
+    pairs.forEach(p => {
+      csv += `"${p.sku_a||''}","${p.name_a||''}","${p.sku_b||''}","${p.name_b||''}",${p.support||0},${p.confidence_ab||0},${p.lift||0}\n`;
+    });
+  } else if (chartId === 'tierCount' || chartId === 'tierRev' || chartId === 'tierTable') {
+    openTierExportModal();
+    return;
+  } else if (chartId === 'uplift' || chartId === 'scenario') {
+    csv = "Scenario_Metric,Value\n";
+    if (D.simulation) {
+      csv += `"Bronze Outlets",${D.simulation.bronze_to_silver?.outlets||0}\n`;
+      csv += `"Bronze to Silver Uplift BDT",${D.simulation.bronze_to_silver?.uplift_total||0}\n`;
+      csv += `"Silver Outlets",${D.simulation.silver_to_gold?.outlets||0}\n`;
+      csv += `"Silver to Gold Uplift BDT",${D.simulation.silver_to_gold?.uplift_total||0}\n`;
+      csv += `"Total Upsell Opportunity BDT",${D.simulation.uplift_if_upsold||0}\n`;
+    }
+  } else if (chartId === 'penetration') {
+    const catNames = D.penetration_gaps?.categories || [];
+    csv = "Territory,Total_Revenue_BDT," + catNames.join(",") + "\n";
+    const penData = D.penetration_gaps?.data || [];
+    penData.forEach(t => {
+      csv += `"${t.territory}",${t.rev},${t.cats.join(",")}\n`;
+    });
+  } else if (chartId === 'monthlyTrend' || chartId === 'momGrowth' || chartId === 'rollingAvg') {
+    csv = "Month,Revenue_BDT,MoM_Growth_Pct,Rolling_3M_Avg\n";
+    const mt = D.monthly_trend || [];
+    mt.forEach((t, i) => {
+      if(t.month && t.month.length >= 7) {
+        const prev = i > 0 ? mt[i-1].revenue : 0;
+        const mom = prev > 0 ? (((t.revenue - prev) / prev) * 100).toFixed(1) : "0.0";
+        const r3 = i >= 2 ? (((mt[i].revenue + mt[i-1].revenue + mt[i-2].revenue) / 3)).toFixed(0) : t.revenue;
+        csv += `"${t.month}",${t.revenue},${mom}%,${r3}\n`;
+      }
+    });
+  }
+  
+  if (!csv) return;
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.setAttribute("href", url);
+  link.setAttribute("download", filename);
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+// ──────────────────────────────────────────────────────
+// SCROLL REVEAL
+// ──────────────────────────────────────────────────────
+function revealAll() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, {threshold:0.05});
+  document.querySelectorAll('.reveal').forEach(el => {
+    el.classList.remove('visible');
+    observer.observe(el);
+  });
+}
+
+// ──────────────────────────────────────────────────────
+// INIT
+// ──────────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  updateChartDefaults();
+  populateHeader();
+  buildPareto();
+  buildBasket();
+  buildTiers();
+  buildSimulation();
+  buildPenetration();
+  setTimeout(() => {
+    renderChartsForTab('pareto');
+    revealAll();
+    const loading = document.getElementById('loading');
+    loading.style.opacity = '0';
+    setTimeout(() => loading.style.display='none', 500);
+  }, 300);
+
+  const saved = localStorage.getItem('itl_lang');
+  if (saved && saved !== 'en') {
+    toggleGlobalLang(saved);
+  }
+});
+
+function toggleNoteLang(btn) {
+  const container = btn.closest('.methodology-note, .strategic-note-card') || document;
+  const enEl = container.querySelector('.note-en');
+  const bnEl = container.querySelector('.note-bn');
+  const isEnVisible = enEl && window.getComputedStyle(enEl).display !== 'none';
+  const newLang = isEnVisible ? 'bn' : 'en';
+  
+  if (enEl) enEl.style.display = newLang === 'bn' ? 'none' : 'block';
+  if (bnEl) bnEl.style.display = newLang === 'bn' ? 'block' : 'none';
+  
+  btn.querySelectorAll('.lang-pill').forEach(p => {
+    p.classList.toggle('active', p.getAttribute('data-lang') === newLang);
+  });
+}
+
+function toggleGlobalLang(forcedLang) {
+  const lang = forcedLang || (localStorage.getItem('itl_lang') === 'bn' ? 'en' : 'bn');
+  localStorage.setItem('itl_lang', lang);
+  document.querySelectorAll('.note-en').forEach(el => el.style.display = lang === 'bn' ? 'none' : 'block');
+  document.querySelectorAll('.note-bn').forEach(el => el.style.display = lang === 'bn' ? 'block' : 'none');
+  document.querySelectorAll('.lang-pill').forEach(p => p.classList.toggle('active', p.getAttribute('data-lang') === lang));
+}
+
+// Listen for global language switch from parent
+window.addEventListener('message', e => {
+  if (e.data && e.data.type === 'SET_LANG') {
+    toggleGlobalLang(e.data.lang);
+  }
+});
+</script>
+
+<script>
+function switchTierTab(tab) {
+  const kTab = document.getElementById('tabKMeansContent');
+  const fTab = document.getElementById('tabFmcgContent');
+  const kBtn = document.getElementById('btnKMeansTab');
+  const fBtn = document.getElementById('btnFmcgTab');
+  if (!kTab || !fTab) return;
+  if (tab === 'kmeans') {
+    kTab.style.display = 'block';
+    fTab.style.display = 'none';
+    kBtn.style.background = 'var(--emerald)';
+    kBtn.style.color = '#fff';
+    kBtn.style.border = 'none';
+    fBtn.style.background = 'var(--card)';
+    fBtn.style.color = 'var(--text)';
+    fBtn.style.border = '1px solid var(--border)';
+  } else {
+    kTab.style.display = 'none';
+    fTab.style.display = 'block';
+    fBtn.style.background = 'var(--emerald)';
+    fBtn.style.color = '#fff';
+    fBtn.style.border = 'none';
+    kBtn.style.background = 'var(--card)';
+    kBtn.style.color = 'var(--text)';
+    kBtn.style.border = '1px solid var(--border)';
+  }
+}
+</script>
+
+</body>
+</html>

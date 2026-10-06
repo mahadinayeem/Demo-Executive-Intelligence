@@ -8,5 +8,6 @@ product_profile.csv
 ~$*
 *.pyc
 __pycache__/
+scratch/
 .env
 .DS_Store

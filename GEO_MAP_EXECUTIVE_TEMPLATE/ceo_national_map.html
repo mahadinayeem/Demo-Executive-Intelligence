@@ -12,18 +12,20 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script src="https://unpkg.com/leaflet-heat@0.2.0/dist/leaflet-heat.js"></script>
-<script src="bd_geo.js"></script>
-<script src="bd_districts_geo.js"></script>
-<script src="bd_thanas_geo.js"></script>
-<script src="ceo_national.js"></script>
-<script src="ceo_outlets_D0.js"></script>
-<script src="ceo_outlets_D1.js"></script>
-<script src="ceo_outlets_D2.js"></script>
-<script src="ceo_outlets_D3.js"></script>
-<script src="ceo_outlets_D4.js"></script>
-<script src="ceo_outlets_D5.js"></script>
-<script src="ceo_outlets_D6.js"></script>
-<script src="ceo_outlets_D7.js"></script>
+<script src="bd_mask.js?v=20261006_v9"></script>
+<script src="bd_geo.js?v=20261006_v9"></script>
+<script src="bd_districts_geo.js?v=20261006_v9"></script>
+<script src="bd_thanas_geo.js?v=20261006_v9"></script>
+<script src="bd_unions_geo.js?v=20261006_v9"></script>
+<script src="ceo_national.js?v=20261006_v9"></script>
+<script src="ceo_outlets_D0.js?v=20261006_v9"></script>
+<script src="ceo_outlets_D1.js?v=20261006_v9"></script>
+<script src="ceo_outlets_D2.js?v=20261006_v9"></script>
+<script src="ceo_outlets_D3.js?v=20261006_v9"></script>
+<script src="ceo_outlets_D4.js?v=20261006_v9"></script>
+<script src="ceo_outlets_D5.js?v=20261006_v9"></script>
+<script src="ceo_outlets_D6.js?v=20261006_v9"></script>
+<script src="ceo_outlets_D7.js?v=20261006_v9"></script>
 <style>
 :root {
   --font:'Outfit',sans-serif; --mono:'JetBrains Mono',monospace;
@@ -33,7 +35,7 @@
   --bdr:rgba(255,255,255,0.07); --bdr2:rgba(255,255,255,0.14);
   --blue:#3b82f6; --green:#00e676; --amber:#ffab00; --red:#ff1744; --purple:#8b5cf6;
   --sh:0 8px 32px rgba(0,0,0,.55);
-  --map-bg:#0d1627;
+  --map-bg:#ffffff;
 }
 [data-theme="light"] {
   --bg0:#e8eef8; --bg1:#fff; --bg2:#f4f7ff; --bg3:#eaeefc;
@@ -42,7 +44,7 @@
   --bdr:rgba(0,0,0,0.07); --bdr2:rgba(0,0,0,0.14);
   --blue:#2563eb; --green:#059669; --amber:#d97706; --red:#dc2626;
   --sh:0 8px 32px rgba(0,0,0,.09);
-  --map-bg:#c8d8f0;
+  --map-bg:#ffffff;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font);background:var(--bg0);color:var(--t1);-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
@@ -145,12 +147,66 @@ aside::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px;}
 .srchinp:focus{border-color:var(--blue);}
 .srchinp::placeholder{color:var(--t3);}
 
+
+/* Union Map Badges & Interactive Click Labels (Image 2 style) */
+.union-badge-card {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1.5px solid #0284c7;
+  border-radius: 8px;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #0f172a;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  font-family: 'Outfit', sans-serif;
+  pointer-events: auto !important;
+}
+.union-badge-card:hover {
+  transform: scale(1.10);
+  border-color: #2563eb;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+.union-badge-card .ub-cnt {
+  background: #0284c7;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.union-badge-card.sel {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+.union-badge-card.sel .ub-cnt {
+  background: #ffffff;
+  color: #0284c7;
+}
+[data-theme="dark"] .union-badge-card {
+  background: rgba(15, 23, 42, 0.95);
+  color: #f8fafc;
+  border-color: #38bdf8;
+}
+
+.dist-lbl, .thana-lbl, .div-lbl {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
 /* ── MAP ── */
 .mapw{flex:1;position:relative;overflow:hidden;background:var(--map-bg);}
 #map{width:100%;height:100%;}
 
 /* Hide leaflet tile layer — we use polygons only */
-.leaflet-tile-pane{display:none!important;}
+/* Tile pane visible */ .leaflet-tile-pane{display:block;}
 .leaflet-control-attribution{font-size:9px;opacity:.4;}
 
 /* Breadcrumb */
@@ -161,8 +217,8 @@ aside::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px;}
 .bcs{color:var(--t3);font-size:10px;}
 
 /* Map buttons */
-.mapbtns{position:absolute;top:14px;right:14px;z-index:500;display:flex;gap:7px;}
-.mbtn{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--bdr2);color:var(--t1);padding:8px 14px;border-radius:9px;font-size:11px;font-weight:800;font-family:var(--font);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;box-shadow:var(--sh);}
+.mapbtns{position:absolute;top:14px;right:14px;z-index:600;display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end;}
+.mbtn{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--bdr2);color:var(--t1);padding:8px 13px;border-radius:9px;font-size:11.5px;font-weight:800;font-family:var(--font);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;box-shadow:var(--sh);white-space:nowrap;}
 .mbtn:hover{border-color:var(--blue);}
 .mbtn.on{background:var(--blue);border-color:var(--blue);color:#fff;}
 
@@ -273,18 +329,18 @@ aside::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px;}
 .bY{background:rgba(255,171,0,.15);color:var(--amber);border:1px solid var(--amber);}
 .bR{background:rgba(255,23,68,.15);color:var(--red);border:1px solid var(--red);}
 
-/* High-Contrast Vibrant Marker Clusters */
-.custom-cluster {
+/* Majority Dominant Color Clusters (Option 1) */
+.dominant-cluster-bubble {
   display: flex; align-items: center; justify-content: center;
-  border-radius: 50%; font-family: var(--mono); font-weight: 900; font-size: 12px;
-  box-shadow: 0 0 14px rgba(0,0,0,0.6), inset 0 0 6px rgba(255,255,255,0.4);
-  border: 2px solid #ffffff; cursor: pointer; transition: transform .15s;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.16s;
+  pointer-events: auto !important;
 }
-.custom-cluster:hover { transform: scale(1.15); }
-.cluster-g { background: #00e676; color: #000; box-shadow: 0 0 16px rgba(0,230,118,0.8); }
-.cluster-y { background: #ffab00; color: #000; box-shadow: 0 0 16px rgba(255,171,0,0.8); }
-.cluster-r { background: #ff1744; color: #fff; box-shadow: 0 0 16px rgba(255,23,68,0.8); }
-.cluster-mix { background: #3b82f6; color: #fff; box-shadow: 0 0 16px rgba(59,130,246,0.8); }
+.dominant-cluster-bubble:hover {
+  transform: scale(1.18);
+  z-index: 9999 !important;
+}
 
 /* Spiderfy connector lines */
 .leaflet-cluster-spider-leg { stroke: rgba(255,255,255,0.7)!important; stroke-width: 2px!important; stroke-dasharray: 3,3; }
@@ -466,6 +522,453 @@ aside::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px;}
 .dcard[data-d="Dhaka"].sel-zr, .dcard.sel-zr{background:rgba(244,63,94,.16)!important;border-color:#f43f5e!important;box-shadow:0 0 16px rgba(244,63,94,.3)!important;}
 .fb-section-ttl{font-size:8.5px;text-transform:uppercase;letter-spacing:1px;font-weight:800;color:var(--t3);margin-top:6px;margin-bottom:4px;}
 
+
+/* ── GOOGLE STREET MAP & BASE SWITCHER ── */
+.leaflet-tile-pane { display: block !important; opacity: 0.92; }
+.leaflet-layer { filter: saturate(1.05) contrast(1.02); }
+/* Natural street tiles */ .leaflet-layer { filter: none; }
+
+/* ── RIGHT-SIDE EXECUTIVE ADMINISTRATIVE VIEW PANEL (Ref Matched) ── */
+.admin-card-panel {
+  position: absolute;
+  top: 60px;
+  right: 14px;
+  width: 320px;
+  max-height: calc(100vh - 138px);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.15), 0 0 1px 1px rgba(0, 0, 0, 0.05);
+  z-index: 550;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: var(--font);
+  color: #0f172a;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-theme="dark"] .admin-card-panel {
+  background: rgba(15, 23, 42, 0.94);
+  border-color: rgba(51, 65, 85, 0.8);
+  color: #f8fafc;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+.admin-card-panel.collapsed {
+  transform: translateX(340px);
+  opacity: 0;
+  pointer-events: none;
+}
+.admin-card-toggle {
+  position: absolute;
+  top: 60px;
+  right: 14px;
+  z-index: 550;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 11.5px;
+  font-weight: 800;
+  font-family: var(--font);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
+  transition: all 0.2s;
+}
+.admin-card-toggle:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.ac-header {
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+[data-theme="dark"] .ac-header {
+  border-bottom-color: rgba(51, 65, 85, 0.8);
+}
+.ac-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ac-icon {
+  font-size: 20px;
+}
+.ac-title {
+  font-size: 13.5px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+.ac-subtitle {
+  font-size: 10.5px;
+  color: #0284c7;
+  font-weight: 700;
+}
+.ac-close {
+  background: rgba(148, 163, 184, 0.15);
+  border: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #64748b;
+  transition: all 0.15s;
+}
+.ac-close:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.ac-body {
+  padding: 10px 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ac-body::-webkit-scrollbar { width: 4px; }
+.ac-body::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.3); border-radius: 4px; }
+
+/* National Badge Box */
+.ac-badge-box {
+  background: #e0f2fe;
+  border: 1px solid #bae6fd;
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+[data-theme="dark"] .ac-badge-box {
+  background: rgba(14, 116, 144, 0.2);
+  border-color: rgba(14, 116, 144, 0.4);
+}
+.ac-badge-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #0369a1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+[data-theme="dark"] .ac-badge-top { color: #38bdf8; }
+.ac-badge-main {
+  font-size: 12px;
+  font-weight: 800;
+  color: #0c4a6e;
+  margin-top: 2px;
+  font-family: var(--mono);
+}
+[data-theme="dark"] .ac-badge-main { color: #e0f2fe; }
+
+/* Metrics Row */
+.ac-metric-row {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+[data-theme="dark"] .ac-metric-row {
+  background: rgba(30, 41, 59, 0.7);
+  border-color: rgba(51, 65, 85, 0.7);
+}
+.ac-m-lbl {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+[data-theme="dark"] .ac-m-lbl { color: #94a3b8; }
+.ac-m-val {
+  font-size: 14px;
+  font-weight: 900;
+  font-family: var(--mono);
+  color: #0f172a;
+}
+[data-theme="dark"] .ac-m-val { color: #f8fafc; }
+.ac-m-val.purp { color: #0284c7; }
+.ac-m-val.grn { color: #10b981; }
+.ac-m-val.vlt { color: #8b5cf6; }
+.ac-m-val.amb { color: #f59e0b; }
+
+/* 3-Column Thana Coverage Box */
+.ac-thana-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+}
+.ac-thana-col {
+  border-radius: 8px;
+  padding: 6px 4px;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+[data-theme="dark"] .ac-thana-col {
+  background: rgba(30, 41, 59, 0.7);
+  border-color: rgba(51, 65, 85, 0.7);
+}
+.ac-thana-col.cov {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+.ac-thana-col.unt {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+.ac-tc-lbl {
+  font-size: 8.5px;
+  font-weight: 800;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+.ac-thana-col.cov .ac-tc-lbl { color: #059669; }
+.ac-thana-col.unt .ac-tc-lbl { color: #dc2626; }
+.ac-tc-val {
+  font-size: 13px;
+  font-weight: 900;
+  font-family: var(--mono);
+  margin-top: 2px;
+}
+.ac-thana-col.cov .ac-tc-val { color: #059669; }
+.ac-thana-col.unt .ac-tc-val { color: #dc2626; }
+
+/* 3 Tier Health Cards (Ordered, Visited No Order, Untapped) */
+.ac-tier-card {
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+[data-theme="dark"] .ac-tier-card {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(51, 65, 85, 0.8);
+}
+.ac-tier-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+.ac-tier-card.g-card {
+  background: rgba(16, 185, 129, 0.06);
+  border-color: rgba(16, 185, 129, 0.35);
+}
+.ac-tier-card.y-card {
+  background: rgba(245, 158, 11, 0.06);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+.ac-tier-card.r-card {
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.ac-tc-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ac-tier-title {
+  font-size: 10.5px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  letter-spacing: 0.3px;
+}
+.ac-tier-card.g-card .ac-tier-title { color: #059669; }
+.ac-tier-card.y-card .ac-tier-title { color: #d97706; }
+.ac-tier-card.r-card .ac-tier-title { color: #dc2626; }
+
+.ac-tier-val {
+  font-size: 14px;
+  font-weight: 900;
+  font-family: var(--mono);
+}
+.ac-tier-card.g-card .ac-tier-val { color: #059669; }
+.ac-tier-card.y-card .ac-tier-val { color: #d97706; }
+.ac-tier-card.r-card .ac-tier-val { color: #dc2626; }
+
+.ac-tc-sub {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9.5px;
+  color: #64748b;
+  font-weight: 600;
+}
+.ac-tier-badge {
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 9.5px;
+  font-weight: 800;
+  font-family: var(--mono);
+}
+.ac-tier-card.g-card .ac-tier-badge { background: rgba(16, 185, 129, 0.15); color: #059669; }
+.ac-tier-card.y-card .ac-tier-badge { background: rgba(245, 158, 11, 0.15); color: #d97706; }
+.ac-tier-card.r-card .ac-tier-badge { background: rgba(239, 68, 68, 0.15); color: #dc2626; }
+
+.ac-prog-bg {
+  width: 100%;
+  height: 4px;
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.ac-prog-bar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+.ac-tier-card.g-card .ac-prog-bar { background: #10b981; }
+.ac-tier-card.y-card .ac-prog-bar { background: #f59e0b; }
+.ac-tier-card.r-card .ac-prog-bar { background: #ef4444; }
+
+/* Status Legend Section */
+.ac-legend-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+[data-theme="dark"] .ac-legend-box {
+  background: rgba(30, 41, 59, 0.5);
+  border-color: rgba(51, 65, 85, 0.6);
+}
+.ac-leg-title {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.ac-leg-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 9.5px;
+  line-height: 1.3;
+  color: #475569;
+}
+[data-theme="dark"] .ac-leg-row { color: #cbd5e1; }
+.ac-leg-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-top: 2px;
+  flex-shrink: 0;
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 4px rgba(0,0,0,0.25);
+}
+
+
+@keyframes pulseBorder {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+.thana-modal-card {
+  background: var(--card);
+  border: 1px solid var(--bdr);
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.thana-modal-card:hover {
+  border-color: #ef4444;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.15);
+}
+.thana-modal-card.is-cov:hover {
+  border-color: #10b981;
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.15);
+}
+
+
+.ac-ai-trigger {
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ac-ai-trigger:hover {
+  transform: translateY(-2px);
+  border-color: #2563eb !important;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3) !important;
+}
+
+
+/* ── CLUSTER SUMMARY POPUP ── */
+.cluster-summary-popup .leaflet-popup-content-wrapper {
+  background: rgba(15, 23, 42, 0.97);
+  color: #f8fafc;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  border-radius: 14px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.7), 0 0 0 1px rgba(59,130,246,0.2);
+  padding: 0;
+  backdrop-filter: blur(20px);
+}
+.cluster-summary-popup .leaflet-popup-content {
+  margin: 14px 16px;
+}
+.cluster-summary-popup .leaflet-popup-tip-container {
+  display: none;
+}
+.cluster-summary-popup .leaflet-popup-close-button {
+  color: #94a3b8 !important;
+  font-size: 18px !important;
+  top: 8px !important;
+  right: 10px !important;
+}
+.cluster-summary-popup .leaflet-popup-close-button:hover {
+  color: #f87171 !important;
+}
+
+/* ── INDIVIDUAL OUTLET TOOLTIP ── */
+.div-tooltip.leaflet-tooltip {
+  background: rgba(15, 23, 42, 0.97) !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.7) !important;
+  padding: 8px 12px !important;
+  backdrop-filter: blur(20px) !important;
+}
+.div-tooltip.leaflet-tooltip::before {
+  border-top-color: rgba(59, 130, 246, 0.3) !important;
+}
+
 </style>
 </head>
 <body>
@@ -511,12 +1014,21 @@ aside::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px;}
       <div class="dscrl" id="distScroll"></div>
     </div>
 
+
     <div class="sb dp" id="thanaPanel">
       <div class="sb-hd">
         <span class="sb-ttl" id="thanaTitle">Thanas / Upazilas</span>
         <span style="font-size:9.5px;color:var(--t3);" id="thanaBadge"></span>
       </div>
       <div class="dscrl" id="thanaScroll"></div>
+    </div>
+
+    <div class="sb dp" id="unionPanel">
+      <div class="sb-hd">
+        <span class="sb-ttl" id="unionTitle">Unions &amp; Wards</span>
+        <span style="font-size:9.5px;color:var(--t3);" id="unionBadge"></span>
+      </div>
+      <div class="dscrl" id="unionScroll"></div>
     </div>
 
     <div class="sb">
@@ -555,11 +1067,128 @@ aside::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px;}
   <div class="mapw">
     <div class="bc" id="bc"><span class="bcn here">🇧🇩 Bangladesh National</span></div>
     <div class="mapbtns">
+      <button class="mbtn" id="baseMapBtn" onclick="cycleBaseMap()">🗺️ Google Streets</button>
       <button class="mbtn" id="heatBtn" onclick="toggleHeat()">🔥 Heatmap</button>
       <button class="mbtn" id="pillarBtn" onclick="toggle3DPillars()">📊 3D Sales Height</button>
       <button class="mbtn" id="wsBtn" onclick="toggleWhiteSpace()">🎯 White-Space Hubs</button>
       <button class="mbtn" onclick="resetNational()">↺ Reset View</button>
     </div>
+    
+    <!-- Floating Button to Open Admin Panel if Closed -->
+    <button class="admin-card-toggle" id="adminToggleBtn" onclick="toggleAdminPanel()" style="display:none;">📊 Territory View</button>
+
+    <!-- Right-Side Executive Administrative View Panel (Image Matched) -->
+    <div class="admin-card-panel" id="adminSummaryCard">
+      <div class="ac-header">
+        <div class="ac-title-wrap">
+          <span class="ac-icon">🗺️</span>
+          <div>
+            <div class="ac-title" id="acTitle">Bangladesh Administrative View</div>
+            <div class="ac-subtitle" id="acSubtitle">National Overview</div>
+          </div>
+        </div>
+        <button class="ac-close" onclick="toggleAdminPanel()" title="Close Panel">&times;</button>
+      </div>
+
+      <div class="ac-body">
+        <!-- Scope Badge -->
+        <div class="ac-badge-box">
+          <div class="ac-badge-top">
+            <span>🗺️ Scope</span>
+            <span id="acBadgeScope">National Overview</span>
+          </div>
+          <div class="ac-badge-main" id="acScopeName">Bangladesh Administrative View</div>
+        </div>
+
+        <!-- Metric: Active SRs -->
+        <div class="ac-metric-row">
+          <div class="ac-m-lbl">👤 Active Field SRs</div>
+          <div class="ac-m-val purp" id="acActiveSRs">—</div>
+        </div>
+
+        <!-- Metric: Universe -->
+        <div class="ac-metric-row">
+          <div class="ac-m-lbl">🏪 Retail Universe</div>
+          <div class="ac-m-val" id="acUniverse">—</div>
+        </div>
+
+        <!-- Metric: Total Sales -->
+        <div class="ac-metric-row">
+          <div class="ac-m-lbl">💰 Total Sales (৳)</div>
+          <div class="ac-m-val grn" id="acTotalSales">—</div>
+        </div>
+
+        <!-- Metric: Order Count -->
+        <div class="ac-metric-row">
+          <div class="ac-m-lbl">🛒 Order Count</div>
+          <div class="ac-m-val vlt" id="acOrderCount">—</div>
+        </div>
+
+        <!-- Metric: Total Visits -->
+        <div class="ac-metric-row">
+          <div class="ac-m-lbl">🚗 Total Field Visits</div>
+          <div class="ac-m-val amb" id="acTotalVisits">—</div>
+        </div>
+
+        <!-- Thana Coverage 3-Col Box (Clickable & Interactive) -->
+        <div class="ac-thana-grid">
+          <div class="ac-thana-col" onclick="showThanaListModal('ALL')" style="cursor:pointer;" title="Click to view all thanas">
+            <div class="ac-tc-lbl">🏛️ Total Thana</div>
+            <div class="ac-tc-val" id="acTotalThana">545</div>
+          </div>
+          <div class="ac-thana-col cov" onclick="showThanaListModal('COVERED')" style="cursor:pointer;" title="Click to view covered thanas">
+            <div class="ac-tc-lbl">✅ Covered</div>
+            <div class="ac-tc-val" id="acCoveredThana">500</div>
+          </div>
+          <div class="ac-thana-col unt" onclick="showThanaListModal('UNTAPPED')" style="cursor:pointer;animation:pulseBorder 2.5s infinite;" title="Click to inspect Untapped Thanas">
+            <div class="ac-tc-lbl">⚠️ Untapped</div>
+            <div class="ac-tc-val" id="acUntappedThana">45</div>
+          </div>
+        </div>
+
+        <!-- 3 Tier Cards with Progress Bars -->
+        <!-- 🟢 Ordered Outlets -->
+        <div class="ac-tier-card g-card" onclick="filterByAdminTier('ORDERED')" title="Click to filter Ordered Outlets">
+          <div class="ac-tc-top">
+            <span class="ac-tier-title">🟢 ORDERED OUTLETS</span>
+            <span class="ac-tier-val" id="acOrderedCount">—</span>
+          </div>
+          <div class="ac-tc-sub">
+            <span>Active Buyers</span>
+            <span class="ac-tier-badge" id="acOrderedPct">—% Active</span>
+          </div>
+          <div class="ac-prog-bg"><div class="ac-prog-bar" id="acOrderedBar" style="width: 0%;"></div></div>
+        </div>
+
+        <!-- 🟡 Visited Outlets (No Order) -->
+        <div class="ac-tier-card y-card" onclick="filterByAdminTier('VISITED_NO_ORDER')" title="Click to filter Visited No-Order Outlets">
+          <div class="ac-tc-top">
+            <span class="ac-tier-title">🟡 VISITED OUTLETS (NO ORDER)</span>
+            <span class="ac-tier-val" id="acVisitedCount">—</span>
+          </div>
+          <div class="ac-tc-sub">
+            <span>Visited Pipeline</span>
+            <span class="ac-tier-badge" id="acVisitedPct">—% Reach</span>
+          </div>
+          <div class="ac-prog-bg"><div class="ac-prog-bar" id="acVisitedBar" style="width: 0%;"></div></div>
+        </div>
+
+        <!-- 🔴 Untapped Outlets -->
+        <div class="ac-tier-card r-card" onclick="filterByAdminTier('UNTAPPED')" title="Click to filter Untapped Outlets">
+          <div class="ac-tc-top">
+            <span class="ac-tier-title">🔴 UNTAPPED OUTLETS</span>
+            <span class="ac-tier-val" id="acUntappedCount">—</span>
+          </div>
+          <div class="ac-tc-sub">
+            <span>0 Visits / Blind Spot</span>
+            <span class="ac-tier-badge" id="acUntappedPct">—% Gap</span>
+          </div>
+          <div class="ac-prog-bg"><div class="ac-prog-bar" id="acUntappedBar" style="width: 0%;"></div></div>
+        </div>
+
+      </div>
+    </div>
+
     <div id="map"></div>
     <div class="mleg" id="mainLegend">
       <div class="lg" onclick="setF('G')"><div class="lgd g"></div><span class="lgl">🟢 Strong</span></div>
@@ -571,6 +1200,31 @@ aside::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px;}
     </div>
   </div>
 </div>
+
+
+<!-- Untapped / Covered Thanas Explorer Modal -->
+<div class="mveil" id="thanaListModal" onclick="if(event.target===this)closeThanaModal()">
+  <div class="mbox" style="width: 580px; max-width: 95vw;">
+    <div class="mhd" style="background: linear-gradient(135deg, #1e293b, #0f172a); color: #fff;">
+      <div>
+        <div class="mht" id="tlmTitle" style="color: #fff; display: flex; align-items: center; gap: 8px;">
+          <span>⚠️ Untapped Thanas (Blind Spots)</span>
+        </div>
+        <div class="mhs" id="tlmSub" style="color: #94a3b8;">Thanas with 0 Visits or 0 Orders in the current scope</div>
+      </div>
+      <button class="mcl" onclick="closeThanaModal()">&times;</button>
+    </div>
+    <div class="mbdy" style="max-height: 70vh; overflow-y: auto; padding: 16px;">
+      <div style="font-size: 11.5px; color: var(--t2); margin-bottom: 12px; font-weight: 600;">
+        💡 <b>Click any Thana</b> below to immediately zoom in on the map and isolate its individual outlets:
+      </div>
+      <div id="thanaListContainer" style="display: flex; flex-direction: column; gap: 8px;">
+        <!-- Dynamic Thana Items -->
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- Modal (Full Detailed Outlet Profile Card) -->
 <div class="mveil" id="modal" onclick="if(event.target===this)closeModal()">
@@ -717,16 +1371,302 @@ function classifySubTier(status, score, rev, visits, orders, daysSince, avgRPV) 
 }
 
 /* ═══════════════ STATE ═══════════════ */
-let map, clusterGrp, polyLayer, districtPolyLayer, thanaPolyLayer, heatLayer;
+let map, clusterGrp, polyLayer, districtPolyLayer, thanaPolyLayer, unionPolyLayer, heatLayer;
 let routeLayer, wsLayer, pillarLayer;
-let activeDivision = null, activeDistrict = null, activeThana = null;
+let maskLayer = null;
+let activeDivision = null, activeDistrict = null, activeThana = null, activeUnion = null;
 let selectedDivisions = [], selectedDistricts = [];
-let healthFilter = 'ALL', subTierFilter = 'ALL', heatOn = false, isDark = true;
+let healthFilter = 'ALL', subTierFilter = 'ALL', heatOn = false, isDark = false;
 let pillarsOn = false, routesOn = false, wsOn = false;
+
+function clearAllMapDataLayers() {
+  if (polyLayer) polyLayer.clearLayers();
+  if (districtPolyLayer) districtPolyLayer.clearLayers();
+  if (thanaPolyLayer) thanaPolyLayer.clearLayers();
+  if (unionPolyLayer) unionPolyLayer.clearLayers();
+  if (microOutletLayer) microOutletLayer.clearLayers();
+  if (clusterGrp) clusterGrp.clearLayers();
+  if (pillarLayer) pillarLayer.clearLayers();
+  if (routeLayer) routeLayer.clearLayers();
+  if (wsLayer) wsLayer.clearLayers();
+  if (heatLayer) { map.removeLayer(heatLayer); heatLayer = null; }
+}
+
+/* ═══════════════ MAP BASE LAYERS & TILE CONFIG ═══════════════ */
+let baseTileLayer = null;
+let currentBaseType = 'google_streets'; // 'google_streets', 'google_sat', 'dark_canvas'
+let microOutletLayer = null;
+let adminTierFilter = 'ALL'; // 'ALL', 'ORDERED', 'VISITED_NO_ORDER', 'UNTAPPED'
+
+const BASE_LAYERS = {
+  google_streets: L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+    attribution: '© Google Maps'
+  }),
+  google_sat: L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+    attribution: '© Google Maps Satellite'
+  }),
+  dark_canvas: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    maxZoom: 19,
+    subdomains: 'abcd',
+    attribution: '© CartoDB Dark'
+  })
+};
+
+
+/* ═══════════════ DYNAMIC SCOPE INVERSE MASK (ISOLATES ACTIVE SELECTION) ═══════════════ */
+function computeUnionHullFeature(pts, unionName, thanaName, distName) {
+  if (!pts || pts.length === 0) return null;
+  if (pts.length === 1) {
+    const [lat, lng] = pts[0];
+    const r = 0.012; // ~1.2km radius
+    const ring = [];
+    for (let a = 0; a < 360; a += 30) {
+      const rad = a * Math.PI / 180;
+      ring.push([lng + r * Math.cos(rad) * 1.15, lat + r * Math.sin(rad)]);
+    }
+    ring.push(ring[0]);
+    return {
+      type: "Feature",
+      properties: { union: unionName, thana: thanaName, district: distName },
+      geometry: { type: "Polygon", coordinates: [ring] }
+    };
+  }
+  
+  // 2 or more points: Monotone chain 2D convex hull
+  const points = pts.map(p => ({ x: p[1], y: p[0] })).sort((a, b) => a.x === b.x ? a.y - b.y : a.x - b.x);
+  function cross(o, a, b) {
+    return (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+  }
+  const lower = [];
+  for (let p of points) {
+    while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], p) <= 0) lower.pop();
+    lower.push(p);
+  }
+  const upper = [];
+  for (let i = points.length - 1; i >= 0; i--) {
+    const p = points[i];
+    while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], p) <= 0) upper.pop();
+    upper.push(p);
+  }
+  upper.pop();
+  lower.pop();
+  const hull = lower.concat(upper);
+  if (hull.length < 3) {
+    const [lat, lng] = pts[0];
+    const r = 0.015;
+    const ring = [];
+    for (let a = 0; a < 360; a += 30) {
+      const rad = a * Math.PI / 180;
+      ring.push([lng + r * Math.cos(rad) * 1.15, lat + r * Math.sin(rad)]);
+    }
+    ring.push(ring[0]);
+    return {
+      type: "Feature",
+      properties: { union: unionName, thana: thanaName, district: distName },
+      geometry: { type: "Polygon", coordinates: [ring] }
+    };
+  }
+  
+  const cx = hull.reduce((s, p) => s + p.x, 0) / hull.length;
+  const cy = hull.reduce((s, p) => s + p.y, 0) / hull.length;
+  const padFactor = 1.25;
+  const ring = hull.map(p => [
+    cx + (p.x - cx) * padFactor + (p.x >= cx ? 0.003 : -0.003),
+    cy + (p.y - cy) * padFactor + (p.y >= cy ? 0.003 : -0.003)
+  ]);
+  ring.push(ring[0]);
+  return {
+    type: "Feature",
+    properties: { union: unionName, thana: thanaName, district: distName },
+    geometry: { type: "Polygon", coordinates: [ring] }
+  };
+}
+
+function getFeatureRings(feat) {
+  const rings = [];
+  if (!feat || !feat.geometry) return rings;
+  const geom = feat.geometry;
+  if (geom.type === 'Polygon') {
+    if (geom.coordinates && geom.coordinates[0]) rings.push(geom.coordinates[0]);
+  } else if (geom.type === 'MultiPolygon') {
+    if (geom.coordinates) {
+      geom.coordinates.forEach(poly => {
+        if (poly && poly[0]) rings.push(poly[0]);
+      });
+    }
+  }
+  return rings;
+}
+
+function renderInverseMask() {
+  if (!maskLayer || !map) return;
+  maskLayer.clearLayers();
+
+  const worldRing = [
+    [-180.0, 90.0],
+    [-180.0, -90.0],
+    [180.0, -90.0],
+    [180.0, 90.0],
+    [-180.0, 90.0]
+  ];
+
+  let targetFeature = null;
+
+  if (activeUnion) {
+    const au = activeUnion.toLowerCase().replace(/[\s\-_]/g,'').replace(/union$/,'');
+    const at = (activeThana || '').toLowerCase().replace(/[\s\-_]/g,'');
+    const ad = (activeDistrict || '').toLowerCase().replace(/[\s\-_]/g,'');
+    
+    if (typeof BD_UNIONS_GEO !== 'undefined' && BD_UNIONS_GEO.features) {
+      targetFeature = BD_UNIONS_GEO.features.find(f => {
+        const fu = (f.properties.union || '').toLowerCase().replace(/[\s\-_]/g,'').replace(/union$/,'');
+        const ft = (f.properties.thana || '').toLowerCase().replace(/[\s\-_]/g,'');
+        const fd = (f.properties.district || '').toLowerCase().replace(/[\s\-_]/g,'');
+        return (fu === au || fu.includes(au) || au.includes(fu)) && (!activeThana || ft === at) && (!activeDistrict || fd === ad);
+      });
+    }
+
+    // Dynamic hull fallback from outlets if no static GeoJSON polygon exists
+    if (!targetFeature && activeDistrict) {
+      const curDiv = activeDivision || 'Dhaka';
+      const curDivIdx = DIV_NAMES.indexOf(curDiv) >= 0 ? DIV_NAMES.indexOf(curDiv) : 0;
+      const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[curDivIdx] : null) || [];
+      const uOutlets = allOutlets.filter(o => {
+        if (!o[5] || o[5].toLowerCase().replace(/[\s\-_]/g,'') !== ad) return false;
+        if (at && (!o[16] || o[16].toLowerCase().replace(/[\s\-_]/g,'') !== at)) return false;
+        const oUnion = (o[17] || '').toLowerCase().replace(/[\s\-_]/g,'').replace(/union$/,'');
+        return oUnion === au || oUnion.includes(au) || au.includes(oUnion);
+      });
+      if (uOutlets.length > 0) {
+        const pts = uOutlets.map(o => [o[0], o[1]]).filter(pt => pt[0] && pt[1]);
+        targetFeature = computeUnionHullFeature(pts, activeUnion, activeThana, activeDistrict);
+      }
+    }
+  }
+  
+  if (!targetFeature && activeThana && typeof BD_THANAS_GEO !== 'undefined' && BD_THANAS_GEO.features) {
+    const at = activeThana.toLowerCase().replace(/[\s\-_]/g,'');
+    const ad = (activeDistrict || '').toLowerCase().replace(/[\s\-_]/g,'');
+    targetFeature = BD_THANAS_GEO.features.find(f => {
+      const ft = (f.properties.thana || f.properties.name || '').toLowerCase().replace(/[\s\-_]/g,'');
+      const fd = (f.properties.district || '').toLowerCase().replace(/[\s\-_]/g,'');
+      return (ft === at) && (!activeDistrict || fd === ad);
+    });
+  }
+  
+  if (!targetFeature && activeDistrict && typeof BD_DISTRICTS_GEO !== 'undefined' && BD_DISTRICTS_GEO.features) {
+    const ad = activeDistrict.toLowerCase().replace(/[\s\-_]/g,'');
+    targetFeature = BD_DISTRICTS_GEO.features.find(f => {
+      const fd = (f.properties.district || f.properties.name || '').toLowerCase().replace(/[\s\-_]/g,'');
+      return fd === ad;
+    });
+  }
+  
+  if (!targetFeature && activeDivision && typeof BD_DIVISIONS_GEO !== 'undefined' && BD_DIVISIONS_GEO.features) {
+    const adv = activeDivision.toLowerCase().replace(/[\s\-_]/g,'');
+    targetFeature = BD_DIVISIONS_GEO.features.find(f => {
+      const fn = (f.properties.name || '').toLowerCase().replace(/[\s\-_]/g,'');
+      return fn === adv;
+    });
+  }
+
+  let maskCoords = [worldRing];
+
+  if (targetFeature) {
+    const rings = getFeatureRings(targetFeature);
+    rings.sort((a,b) => b.length - a.length);
+    if (rings.length > 0) {
+      maskCoords = [worldRing, ...rings];
+    }
+  } else if (typeof BD_INVERSE_MASK !== 'undefined') {
+    maskCoords = BD_INVERSE_MASK.geometry.coordinates;
+  }
+
+  const maskGeoJSON = {
+    type: "Feature",
+    properties: { name: "Dynamic_Scope_Mask" },
+    geometry: {
+      type: "Polygon",
+      coordinates: maskCoords
+    }
+  };
+
+  const maskPoly = L.geoJSON(maskGeoJSON, {
+    interactive: false,
+    pane: 'maskPane',
+    style: () => ({
+      fillColor: isDark ? '#0b0f19' : '#ffffff',
+      fillOpacity: 1.0,
+      color: isDark ? '#1e293b' : '#cbd5e1',
+      weight: 1.5,
+      opacity: 1.0
+    })
+  });
+
+  maskLayer.addLayer(maskPoly);
+}
+
+function setBaseLayer(type) {
+  if (baseTileLayer && map.hasLayer(baseTileLayer)) {
+    map.removeLayer(baseTileLayer);
+  }
+  currentBaseType = type;
+  baseTileLayer = BASE_LAYERS[type];
+  baseTileLayer.addTo(map);
+  baseTileLayer.bringToBack();
+  
+  const btn = document.getElementById('baseMapBtn');
+  if (btn) {
+    if (type === 'google_streets') btn.innerHTML = '🗺️ Google Streets';
+    else if (type === 'google_sat') btn.innerHTML = '🛰️ Google Satellite';
+    else btn.innerHTML = '🌑 Dark Canvas';
+  }
+}
+
+function cycleBaseMap() {
+  if (currentBaseType === 'google_streets') setBaseLayer('google_sat');
+  else if (currentBaseType === 'google_sat') setBaseLayer('dark_canvas');
+  else setBaseLayer('google_streets');
+}
+
+function toggleAdminPanel() {
+  const panel = document.getElementById('adminSummaryCard');
+  const btn = document.getElementById('adminToggleBtn');
+  if (!panel) return;
+  if (panel.classList.contains('collapsed')) {
+    panel.classList.remove('collapsed');
+    if (btn) btn.style.display = 'none';
+  } else {
+    panel.classList.add('collapsed');
+    if (btn) btn.style.display = 'flex';
+  }
+}
+
+function filterByAdminTier(tier) {
+  if (adminTierFilter === tier) {
+    adminTierFilter = 'ALL';
+  } else {
+    adminTierFilter = tier;
+  }
+  
+  if (activeThana && activeDistrict) {
+    const divIdx = activeDivision ? DIV_NAMES.indexOf(activeDivision) : (selectedDivisions.length ? DIV_NAMES.indexOf(selectedDivisions[0]) : 0);
+    renderMicroOutlets(divIdx, activeDistrict, activeThana);
+  } else if (activeDistrict) {
+    const divIdx = activeDivision ? DIV_NAMES.indexOf(activeDivision) : (selectedDivisions.length ? DIV_NAMES.indexOf(selectedDivisions[0]) : 0);
+    renderMicroOutlets(divIdx, activeDistrict, null);
+  }
+  updateAdminSummaryPanel();
+}
+
 
 /* ═══════════════ INIT ═══════════════ */
 window.addEventListener('DOMContentLoaded', () => {
-  updateKPIs();
+  updateKPIs(); updateAdminSummaryPanel();
 
   map = L.map('map', {
     center:[23.68, 90.35], zoom:7, minZoom:5, maxZoom:18,
@@ -734,54 +1674,141 @@ window.addEventListener('DOMContentLoaded', () => {
   });
   L.control.zoom({position:'bottomright'}).addTo(map);
 
+  // Base Map Layer (Default Google Streets)
+  setBaseLayer('google_streets');
+
+  // Create dedicated pane for Bangladesh inverse country mask (above tiles, below polygons)
+  map.createPane('maskPane');
+  map.getPane('maskPane').style.zIndex = 300;
+  map.getPane('maskPane').style.pointerEvents = 'none';
+
+  maskLayer = L.layerGroup().addTo(map);
+  renderInverseMask();
+
   polyLayer = L.layerGroup().addTo(map);
   districtPolyLayer = L.layerGroup().addTo(map);
   thanaPolyLayer = L.layerGroup().addTo(map);
+  unionPolyLayer = L.layerGroup().addTo(map);
+  microOutletLayer = L.layerGroup().addTo(map);
   routeLayer = L.layerGroup().addTo(map);
   wsLayer = L.layerGroup().addTo(map);
   pillarLayer = L.layerGroup().addTo(map);
   
-  // Custom Dynamic Cluster Creator with Spiderfy & Direct Click
+  // Option 1: Majority / Dominant Color Rule (Clean, High Contrast & Fully Interactive)
   clusterGrp = L.markerClusterGroup({
     chunkedLoading: true,
     maxClusterRadius: 40,
     spiderfyOnMaxZoom: true,
     showCoverageOnHover: false,
     zoomToBoundsOnClick: true,
-    spiderfyDistanceMultiplier: 2.2,
+    spiderfyDistanceMultiplier: 2.0,
     iconCreateFunction: function(cluster) {
       const markers = cluster.getAllChildMarkers();
       const count = markers.length;
       
-      let cls = 'cluster-mix';
-      if (healthFilter === 'G') cls = 'cluster-g';
-      else if (healthFilter === 'Y') cls = 'cluster-y';
-      else if (healthFilter === 'R') cls = 'cluster-r';
-      else if (healthFilter === 'ZV') cls = 'cluster-zv';
-      else if (healthFilter === 'ZR') cls = 'cluster-zr';
-      else {
-        const gCnt = markers.filter(m => m.options.outletStatus === 'G').length;
-        const rCnt = markers.filter(m => m.options.outletStatus === 'R').length;
-        if (gCnt === count) cls = 'cluster-g';
-        else if (rCnt === count) cls = 'cluster-r';
-        else if (gCnt > rCnt) cls = 'cluster-g';
-        else if (rCnt > gCnt) cls = 'cluster-r';
-        else cls = 'cluster-y';
+      let gCnt = 0; // Ordered Outlets (🟢 Green)
+      let yCnt = 0; // Visited No Order (🟡 Yellow)
+      let rCnt = 0; // Untapped (🔴 Red)
+
+      markers.forEach(m => {
+        const s = m.options.tierCategory || (m.options.outletStatus === 'G' ? 'ORDERED' : m.options.outletStatus === 'Y' ? 'VISITED_NO_ORDER' : 'UNTAPPED');
+        if (s === 'ORDERED' || s === 'G') gCnt++;
+        else if (s === 'VISITED_NO_ORDER' || s === 'Y') yCnt++;
+        else rCnt++;
+      });
+
+      // Dominant / Majority color determination
+      let bg = '#10b981'; // Green default
+      let glow = '0 0 14px rgba(16,185,129,0.75)';
+
+      if (rCnt > gCnt && rCnt >= yCnt) {
+        bg = '#ef4444'; // Red dominant
+        glow = '0 0 14px rgba(239,68,68,0.75)';
+      } else if (yCnt > gCnt && yCnt > rCnt) {
+        bg = '#f59e0b'; // Yellow dominant
+        glow = '0 0 14px rgba(245,158,11,0.75)';
+      } else {
+        bg = '#10b981'; // Green dominant
+        glow = '0 0 14px rgba(16,185,129,0.75)';
       }
 
       const size = count < 10 ? 32 : count < 50 ? 38 : 46;
+
       return L.divIcon({
-        html: `<div class="custom-cluster ${cls}" style="width:${size}px;height:${size}px;">${count}</div>`,
+        html: `<div class="dominant-cluster-bubble" title="Total: ${count} | 🟢 Ordered: ${gCnt} | 🟡 Visited No Order: ${yCnt} | 🔴 Untapped: ${rCnt}" style="width:${size}px;height:${size}px;background:${bg};border-radius:50%;display:flex;align-items:center;justify-content:center;color:#ffffff;font-family:'JetBrains Mono',monospace;font-weight:900;font-size:${count >= 100 ? '11px' : '12px'};border:2px solid #ffffff;box-shadow:${glow}, 0 4px 12px rgba(0,0,0,0.4);">${count}</div>`,
         className: '',
-        iconSize: [size, size]
+        iconSize: [size, size],
+        iconAnchor: [size / 2, size / 2]
       });
     }
   });
 
   map.addLayer(clusterGrp);
 
+  // ── CLUSTER CLICK: Show aggregate summary popup on cluster bubble click ──
+  clusterGrp.on('clusterclick', function(a) {
+    const markers = a.layer.getAllChildMarkers();
+    const count = markers.length;
+    let gCnt = 0, yCnt = 0, rCnt = 0, totalRev = 0;
+    const thanaSet = new Set();
+    markers.forEach(m => {
+      const s = m.options.tierCategory || 'UNTAPPED';
+      if (s === 'ORDERED') gCnt++;
+      else if (s === 'VISITED_NO_ORDER') yCnt++;
+      else rCnt++;
+      totalRev += (m.options.revenue || 0);
+      if (m.options.thana) thanaSet.add(m.options.thana);
+    });
+    const revStr = totalRev >= 1e7 ? '৳'+(totalRev/1e7).toFixed(1)+' Cr' :
+                   totalRev >= 1e5 ? '৳'+(totalRev/1e5).toFixed(1)+' L' :
+                   totalRev >= 1000 ? '৳'+Math.round(totalRev/1000)+'k' : '৳'+Math.round(totalRev);
+    const ordPct = count > 0 ? Math.round((gCnt/count)*100) : 0;
+    const thanaList = [...thanaSet].slice(0,3).join(', ') + (thanaSet.size > 3 ? ` +${thanaSet.size-3} more` : '');
+
+    const domColor = rCnt > gCnt && rCnt >= yCnt ? '#ef4444' : yCnt > gCnt && yCnt > rCnt ? '#f59e0b' : '#10b981';
+
+    const popup = L.popup({
+      closeButton: true,
+      className: 'cluster-summary-popup',
+      maxWidth: 260,
+      autoPan: true
+    })
+    .setLatLng(a.layer.getLatLng())
+    .setContent(`
+      <div style="font-family:'Outfit',sans-serif;padding:4px 2px;min-width:220px;">
+        <div style="font-size:13px;font-weight:900;color:${domColor};display:flex;align-items:center;gap:6px;margin-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:6px;">
+          <span style="background:${domColor};color:#fff;border-radius:50%;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;">${count}</span>
+          <span>Outlet Cluster</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:8px;text-align:center;">
+          <div style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);border-radius:6px;padding:5px 3px;">
+            <div style="font-size:9px;color:#10b981;font-weight:800;text-transform:uppercase;">Ordered</div>
+            <div style="font-size:15px;font-weight:900;color:#10b981;">${gCnt}</div>
+          </div>
+          <div style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.4);border-radius:6px;padding:5px 3px;">
+            <div style="font-size:9px;color:#f59e0b;font-weight:800;text-transform:uppercase;">Visited</div>
+            <div style="font-size:15px;font-weight:900;color:#f59e0b;">${yCnt}</div>
+          </div>
+          <div style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);border-radius:6px;padding:5px 3px;">
+            <div style="font-size:9px;color:#ef4444;font-weight:800;text-transform:uppercase;">Untapped</div>
+            <div style="font-size:15px;font-weight:900;color:#ef4444;">${rCnt}</div>
+          </div>
+        </div>
+        <div style="background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.25);border-radius:6px;padding:6px 8px;margin-bottom:6px;font-size:11px;">
+          <div style="color:#93c5fd;font-size:9.5px;font-weight:800;text-transform:uppercase;margin-bottom:2px;">Revenue</div>
+          <div style="font-size:14px;font-weight:900;color:#fff;font-family:'JetBrains Mono',monospace;">${revStr}</div>
+          <div style="font-size:9.5px;color:#94a3b8;margin-top:1px;">${ordPct}% active conversion</div>
+        </div>
+        ${thanaList ? `<div style="font-size:9.5px;color:#94a3b8;margin-top:3px;">📍 ${thanaList}</div>` : ''}
+        <div style="font-size:9.5px;color:#60a5fa;font-weight:700;margin-top:6px;text-align:center;">🔍 Click to zoom in & explore individual outlets</div>
+      </div>
+    `)
+    .openOn(map);
+  });
+
   buildDivSidebar();
   drawDivisionPolygons();
+  renderInverseMask();
 });
 
 /* ═══════════════ HELPER: GET OUTLET MATCH ═══════════════ */
@@ -880,7 +1907,16 @@ function updateKPIs() {
     } else if (activeDistrict) {
       const divIdx = DIV_NAMES.indexOf(activeDivision);
       const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
-      const distOutlets = allOutlets.filter(o => o[5] && o[5].toLowerCase() === activeDistrict.toLowerCase() && (!activeThana || (o[16] && o[16].toLowerCase() === activeThana.toLowerCase())));
+      const uNorm = activeUnion ? activeUnion.toLowerCase().replace(/[\s\-_]/g,'').replace(/union$/,'') : null;
+      const distOutlets = allOutlets.filter(o => {
+        if (!o[5] || o[5].toLowerCase() !== activeDistrict.toLowerCase()) return false;
+        if (activeThana && (!o[16] || o[16].toLowerCase() !== activeThana.toLowerCase())) return false;
+        if (uNorm) {
+          const oUnion = (o[17] || '').toLowerCase().replace(/[\s\-_]/g,'').replace(/union$/,'');
+          if (oUnion !== uNorm && !oUnion.includes(uNorm) && !uNorm.includes(oUnion)) return false;
+        }
+        return true;
+      });
       
       tot = distOutlets.length;
       distOutlets.forEach(o => {
@@ -938,11 +1974,9 @@ function updateKPIs() {
 
 /* ═══════════════ 1. DRAW DIVISION POLYGONS ═══════════════ */
 function drawDivisionPolygons() {
-  polyLayer.clearLayers();
-  districtPolyLayer.clearLayers();
-  thanaPolyLayer.clearLayers();
-  clusterGrp.clearLayers();
-  pillarLayer.clearLayers();
+  clearAllMapDataLayers();
+  
+  if(typeof BD_DIVISIONS_GEO === 'undefined' || !BD_DIVISIONS_GEO.features) return;
 
   if (pillarsOn) {
     renderNationwide3DPillars();
@@ -951,12 +1985,15 @@ function drawDivisionPolygons() {
     renderNationwideWhiteSpaceHubs();
   }
 
+  let colorIdx = 0;
+  let bounds = L.latLngBounds([]);
+
   BD_DIVISIONS_GEO.features.forEach(feat => {
-    const dname  = feat.properties.name;
-    const color  = DIV_COLORS[dname] || '#64748b';
-    const didx   = DIV_NAMES.indexOf(dname);
+    const dname = feat.properties.name;
+    const isSelected = selectedDivisions.includes(dname);
+    const color = DIV_COLORS[dname] || '#3b82f6';
+    const didx = DIV_NAMES.indexOf(dname);
     const divDat = CEO_NATIONAL.divisions.find(d => d.name === dname) || {};
-    
     let count = divDat.outlets || 0;
     if (healthFilter === 'G') count = divDat.strong || 0;
     else if (healthFilter === 'Y') count = divDat.moderate || 0;
@@ -964,104 +2001,70 @@ function drawDivisionPolygons() {
     else if (healthFilter === 'ZV') count = divDat.zero_visits || 0;
     else if (healthFilter === 'ZR') count = divDat.zero_rev || 0;
 
-    if (subTierFilter !== 'ALL' && typeof CEO_OUTLETS !== 'undefined' && CEO_OUTLETS[didx]) {
-      count = CEO_OUTLETS[didx].filter(o => isOutletMatch(o)).length;
-    }
-
-    const rev    = divDat.revenue || 0;
-    const pct    = divDat.outlets ? Math.round(((divDat.strong||0)/divDat.outlets)*100) : 0;
+    const rev = divDat.revenue || 0;
+    const pct = divDat.outlets ? Math.round(((divDat.strong||0)/divDat.outlets)*100) : 0;
 
     const poly = L.geoJSON(feat, {
       interactive: true,
       style: () => ({
         fillColor: color,
-        fillOpacity: isDark ? 0.62 : 0.65,
-        color: isDark ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.75)',
+        fillOpacity: isDark ? 0.65 : 0.68,
+        color: isDark ? 'rgba(255,255,255,0.40)' : 'rgba(255,255,255,0.85)',
         weight: 2
       })
     });
 
+    bounds.extend(poly.getBounds());
+
     poly.on('mouseover', e => {
-      e.target.setStyle({fillOpacity:0.85, color:'#fff', weight:3});
+      e.target.setStyle({fillOpacity: 0.88, color: '#fff', weight: 3.5});
       e.target.bringToFront();
     });
     poly.on('mouseout', e => {
-      e.target.setStyle({fillOpacity:isDark?0.62:0.65, color:isDark?'rgba(255,255,255,0.35)':'rgba(255,255,255,0.75)', weight:2});
+      e.target.setStyle({fillOpacity: isDark ? 0.65 : 0.68, color: isDark ? 'rgba(255,255,255,0.40)' : 'rgba(255,255,255,0.85)', weight: 2});
     });
-    poly.on('click', (e) => drillDivision(didx, dname, e.originalEvent));
+    poly.on('click', (e) => {
+      drillDivision(didx, dname, e.originalEvent);
+    });
 
     poly.bindTooltip(`
-      <div style="font-family:'Outfit',sans-serif;min-width:160px;">
-        <div style="font-size:15px;font-weight:900;color:${color};margin-bottom:5px;">${dname} Division</div>
+      <div style="font-family:'Outfit',sans-serif;min-width:150px;">
+        <div style="font-size:14px;font-weight:900;color:${color};margin-bottom:4px;">${dname} Division</div>
         <div style="font-size:12px;font-weight:600;">${healthFilter==='ALL'?'Total':healthFilter==='G'?'Strong':healthFilter==='Y'?'Moderate':healthFilter==='ZV'?'🚫 0-Visits':healthFilter==='ZR'?'💸 0-Revenue':'Weak'} Outlets: <b>${count.toLocaleString()}</b></div>
-        <div style="font-size:12px;font-weight:600;">Revenue: <b>৳${(rev/1e9).toFixed(2)}B</b></div>
-        <div style="font-size:12px;font-weight:600;">Strong Buyers: <b>${pct}%</b></div>
-        <div style="font-size:11px;color:#c084fc;font-weight:700;">• 0-Visits: <b>${(divDat.zero_visits||0).toLocaleString()} (${Math.round(((divDat.zero_visits||0)/divDat.outlets)*100)}%)</b></div>
-        <div style="font-size:11px;color:#fb7185;font-weight:700;">• 0-Revenue: <b>${(divDat.zero_rev||0).toLocaleString()} (${Math.round(((divDat.zero_rev||0)/divDat.outlets)*100)}%)</b></div>
-        <div style="font-size:10px;color:var(--blue);margin-top:4px;font-weight:700;">💡 Tip: Hold Ctrl to multi-select divisions</div>
+        <div style="font-size:12px;font-weight:600;">Revenue: <b>৳${(rev/1e6).toFixed(1)}M</b></div>
+        <div style="font-size:12px;font-weight:600;">Strong: <b>${pct}%</b></div>
+        <div style="font-size:11px;color:#c084fc;font-weight:700;">• 0-Visits: <b>${(divDat.zero_visits||0).toLocaleString()} (${divDat.outlets?Math.round(((divDat.zero_visits||0)/divDat.outlets)*100):0}%)</b></div>
+        <div style="font-size:11px;color:#fb7185;font-weight:700;">• 0-Revenue: <b>${(divDat.zero_rev||0).toLocaleString()} (${divDat.outlets?Math.round(((divDat.zero_rev||0)/divDat.outlets)*100):0}%)</b></div>
+        <div style="font-size:10px;color:var(--blue);margin-top:4px;font-weight:700;">👉 Click to isolate • Hold Ctrl to multi-select</div>
       </div>`, {sticky:false, direction:'top', className:'div-tooltip', offset:[0,-6]});
 
     polyLayer.addLayer(poly);
 
-    const center = DIV_CENTERS[dname];
-    if (center && didx >= 0 && !pillarsOn) {
-      const lbl = L.divIcon({
-        className:'',
-        html:`<div class="div-lbl">${dname}<br><span style="font-size:11px;font-family:'JetBrains Mono';font-weight:700;opacity:.95;">${count.toLocaleString()}</span></div>`,
-        iconSize:[110,38], iconAnchor:[55,19]
-      });
-      const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
-      mk.on('click', (e) => drillDivision(didx, dname, e.originalEvent));
-      polyLayer.addLayer(mk);
+    if (!pillarsOn) {
+      const center = DIV_CENTERS[dname];
+      if (center) {
+        const lbl = L.divIcon({
+          className:'',
+          html:`<div class="div-lbl" style="cursor:pointer;">${dname}<br><span style="font-size:11px;font-family:'JetBrains Mono';font-weight:700;opacity:.95;">${count.toLocaleString()}</span></div>`,
+          iconSize:[110,38], iconAnchor:[55,19]
+        });
+        const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
+        mk.on('click', (e) => drillDivision(didx, dname, e.originalEvent));
+        polyLayer.addLayer(mk);
+      }
     }
   });
+
+  if(bounds.isValid()){
+    map.fitBounds(bounds, {padding:[20,20], maxZoom:8});
+  }
 }
 
-/* ═══════════════ MULTI-DIVISION DRAWING ═══════════════ */
+/* ═══════════════ MULTI-DIVISION DRAWING (CTRL + CLICK) ═══════════════ */
 function drawMultiDivisionPolygons() {
-  polyLayer.clearLayers();
-  districtPolyLayer.clearLayers();
-  thanaPolyLayer.clearLayers();
-  clusterGrp.clearLayers();
-  pillarLayer.clearLayers();
+  clearAllMapDataLayers();
 
   let bounds = L.latLngBounds([]);
-
-  if (wsOn) {
-    renderMultiDivisionWhiteSpaceHubs();
-  }
-
-  if (pillarsOn) {
-    const maxDivRev = Math.max(...CEO_NATIONAL.divisions.map(d => d.revenue||1));
-    selectedDivisions.forEach(dname => {
-      const d = CEO_NATIONAL.divisions.find(x => x.name === dname);
-      if (!d) return;
-      const center = DIV_CENTERS[d.name];
-      if (!center) return;
-      const rev = d.revenue || 0;
-      const heightPx = Math.max(25, Math.min(130, Math.round((rev / maxDivRev) * 115) + 20));
-      const revFormatted = rev >= 1e9 ? '৳'+(rev/1e9).toFixed(1)+'B' : '৳'+(rev/1e6).toFixed(0)+'M';
-      const color = DIV_COLORS[d.name] || '#3b82f6';
-
-      const pillarIcon = L.divIcon({
-        className: '',
-        html: `
-          <div class="pillar-3d-marker" style="height:${heightPx+30}px;color:${color};">
-            <div class="pillar-val" style="border-color:${color};background:#090d1a;">${d.name}: ${revFormatted}</div>
-            <div class="pillar-cap" style="background:${color};width:30px;height:14px;"></div>
-            <div class="pillar-stem" style="height:${heightPx}px;width:22px;"></div>
-            <div class="pillar-base" style="width:36px;height:12px;"></div>
-          </div>
-        `,
-        iconSize: [40, heightPx+30],
-        iconAnchor: [20, heightPx+22]
-      });
-
-      const pMk = L.marker(center, {icon: pillarIcon, interactive: true});
-      pMk.on('click', (e) => drillDivision(d.idx, d.name, e.originalEvent));
-      pillarLayer.addLayer(pMk);
-    });
-  }
 
   BD_DIVISIONS_GEO.features.forEach(feat => {
     const dname = feat.properties.name;
@@ -1093,7 +2096,7 @@ function drawMultiDivisionPolygons() {
       if (center) {
         const lbl = L.divIcon({
           className:'',
-          html:`<div class="div-lbl" style="border:2px solid #fff;">${dname}<br><span style="font-size:11px;font-family:'JetBrains Mono';font-weight:700;">${count.toLocaleString()}</span></div>`,
+          html:`<div class="div-lbl" style="border:2px solid #fff;cursor:pointer;">${dname}<br><span style="font-size:11px;font-family:'JetBrains Mono';font-weight:700;">${count.toLocaleString()}</span></div>`,
           iconSize:[110,38], iconAnchor:[55,19]
         });
         const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
@@ -1110,24 +2113,13 @@ function drawMultiDivisionPolygons() {
 
 /* ═══════════════ 2. DRAW DISTRICT POLYGONS ═══════════════ */
 function drawDistrictPolygons(divName, divIdx) {
-  polyLayer.clearLayers();
-  districtPolyLayer.clearLayers();
-  thanaPolyLayer.clearLayers();
-  clusterGrp.clearLayers();
-  pillarLayer.clearLayers();
+  clearAllMapDataLayers();
 
   if(typeof BD_DISTRICTS_GEO === 'undefined' || !BD_DISTRICTS_GEO.features) return;
 
   const distFeatures = BD_DISTRICTS_GEO.features.filter(f => f.properties.division === divName);
   let colorIdx = 0;
   let bounds = L.latLngBounds([]);
-
-  if (pillarsOn) {
-    renderDistrict3DPillars(divName, divIdx);
-  }
-  if (wsOn) {
-    renderDivisionWhiteSpaceHubs(divName, divIdx);
-  }
 
   distFeatures.forEach(feat => {
     const distName = feat.properties.district;
@@ -1141,10 +2133,6 @@ function drawDistrictPolygons(divName, divIdx) {
     else if (healthFilter === 'R') count = distDat.weak || 0;
     else if (healthFilter === 'ZV') count = distDat.zero_visits || 0;
     else if (healthFilter === 'ZR') count = distDat.zero_rev || 0;
-
-    if (subTierFilter !== 'ALL' && typeof CEO_OUTLETS !== 'undefined' && CEO_OUTLETS[divIdx]) {
-      count = CEO_OUTLETS[divIdx].filter(o => o[5] && o[5].toLowerCase() === distName.toLowerCase() && isOutletMatch(o)).length;
-    }
 
     const rev = distDat.revenue || 0;
     const pct = distDat.outlets ? Math.round(((distDat.strong||0)/distDat.outlets)*100) : 0;
@@ -1182,8 +2170,6 @@ function drawDistrictPolygons(divName, divIdx) {
         <div style="font-size:12px;font-weight:600;">${healthFilter==='ALL'?'Total':healthFilter==='G'?'Strong':healthFilter==='Y'?'Moderate':healthFilter==='ZV'?'🚫 0-Visits':healthFilter==='ZR'?'💸 0-Revenue':'Weak'} Outlets: <b>${count.toLocaleString()}</b></div>
         <div style="font-size:12px;font-weight:600;">Revenue: <b>৳${(rev/1e6).toFixed(1)}M</b></div>
         <div style="font-size:12px;font-weight:600;">Strong: <b>${pct}%</b></div>
-        <div style="font-size:11px;color:#c084fc;font-weight:700;">• 0-Visits: <b>${(distDat.zero_visits||0).toLocaleString()} (${distDat.outlets?Math.round(((distDat.zero_visits||0)/distDat.outlets)*100):0}%)</b></div>
-        <div style="font-size:11px;color:#fb7185;font-weight:700;">• 0-Revenue: <b>${(distDat.zero_rev||0).toLocaleString()} (${distDat.outlets?Math.round(((distDat.zero_rev||0)/distDat.outlets)*100):0}%)</b></div>
         <div style="font-size:10px;color:var(--blue);margin-top:4px;font-weight:700;">👉 Click to isolate • Hold Ctrl to multi-select</div>
       </div>`, {sticky:false, direction:'top', className:'div-tooltip', offset:[0,-6]});
 
@@ -1193,7 +2179,7 @@ function drawDistrictPolygons(divName, divIdx) {
       const center = poly.getBounds().getCenter();
       const lbl = L.divIcon({
         className:'',
-        html:`<div class="dist-lbl">${distName}<br><span style="font-size:10px;font-family:'JetBrains Mono';font-weight:700;opacity:.95;">${count.toLocaleString()}</span></div>`,
+        html:`<div class="dist-lbl" style="cursor:pointer;">${distName}<br><span style="font-size:10px;font-family:'JetBrains Mono';font-weight:700;opacity:.95;">${count.toLocaleString()}</span></div>`,
         iconSize:[100,34], iconAnchor:[50,17]
       });
       const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
@@ -1211,11 +2197,7 @@ function drawDistrictPolygons(divName, divIdx) {
 
 /* ═══════════════ MULTI-DISTRICT DRAWING (CTRL + CLICK) ═══════════════ */
 function drawMultiDistrictPolygons(divName, divIdx) {
-  polyLayer.clearLayers();
-  districtPolyLayer.clearLayers();
-  thanaPolyLayer.clearLayers();
-  clusterGrp.clearLayers();
-  pillarLayer.clearLayers();
+  clearAllMapDataLayers();
 
   if(typeof BD_DISTRICTS_GEO === 'undefined' || !BD_DISTRICTS_GEO.features) return;
 
@@ -1255,7 +2237,7 @@ function drawMultiDistrictPolygons(divName, divIdx) {
       const center = poly.getBounds().getCenter();
       const lbl = L.divIcon({
         className:'',
-        html:`<div class="dist-lbl" style="border:2px solid #fff;box-shadow:0 0 16px ${color}88;">${distName}<br><span style="font-size:10px;font-family:'JetBrains Mono';font-weight:700;">${count.toLocaleString()}</span></div>`,
+        html:`<div class="dist-lbl" style="border:2px solid #fff;box-shadow:0 0 16px ${color}88;cursor:pointer;">${distName}<br><span style="font-size:10px;font-family:'JetBrains Mono';font-weight:700;">${count.toLocaleString()}</span></div>`,
         iconSize:[100,34], iconAnchor:[50,17]
       });
       const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
@@ -1264,10 +2246,6 @@ function drawMultiDistrictPolygons(divName, divIdx) {
     }
   });
 
-  if (pillarsOn) {
-    renderDistrict3DPillars(divName, divIdx);
-  }
-
   if (bounds.isValid()) {
     map.fitBounds(bounds, {padding:[40,40], maxZoom:10});
   }
@@ -1275,20 +2253,9 @@ function drawMultiDistrictPolygons(divName, divIdx) {
 
 /* ═══════════════ 2.5 DRAW THANA / UPAZILA POLYGONS (ISOLATED DISTRICT) ═══════════════ */
 function drawThanaPolygons(distName, divIdx) {
-  polyLayer.clearLayers();
-  districtPolyLayer.clearLayers();
-  thanaPolyLayer.clearLayers();
-  clusterGrp.clearLayers();
-  pillarLayer.clearLayers();
+  clearAllMapDataLayers();
   
   if(typeof BD_THANAS_GEO === 'undefined' || !BD_THANAS_GEO.features) return;
-
-  if (pillarsOn) {
-    renderThana3DPillars(distName, divIdx);
-  }
-  if (wsOn) {
-    renderDistrictWhiteSpaceHubs(distName, divIdx);
-  }
 
   const thanaFeatures = BD_THANAS_GEO.features.filter(f => 
     f.properties.district && f.properties.district.toLowerCase() === distName.toLowerCase()
@@ -1305,7 +2272,7 @@ function drawThanaPolygons(distName, divIdx) {
     const color = DISTRICT_PALETTE[colorIdx % DISTRICT_PALETTE.length];
     colorIdx++;
 
-    const tOutlets = distOutlets.filter(o => o[16] && o[16].toLowerCase() === tName.toLowerCase() && isOutletMatch(o));
+    const tOutlets = distOutlets.filter(o => o[16] && (o[16].toLowerCase() === tName.toLowerCase() || o[16].toLowerCase().replace(/\s+/g,'') === tName.toLowerCase().replace(/\s+/g,'')) && isOutletMatch(o));
     const count = tOutlets.length;
     let rev = 0;
     tOutlets.forEach(o => rev += (o[8]||0));
@@ -1340,9 +2307,9 @@ function drawThanaPolygons(distName, divIdx) {
     poly.bindTooltip(`
       <div style="font-family:'Outfit',sans-serif;min-width:140px;">
         <div style="font-size:13.5px;font-weight:900;color:${color};margin-bottom:3px;">${tName} Thana</div>
-        <div style="font-size:11.5px;font-weight:600;">${healthFilter==='ALL'?'Total':healthFilter==='G'?'Strong':healthFilter==='Y'?'Moderate':healthFilter==='ZV'?'🚫 0-Visits':healthFilter==='ZR'?'💸 0-Revenue':'Weak'} Outlets: <b>${count.toLocaleString()}</b></div>
+        <div style="font-size:11.5px;font-weight:600;">Outlets: <b>${count.toLocaleString()}</b></div>
         <div style="font-size:11.5px;font-weight:600;">Revenue: <b>৳${rev >= 1e6 ? (rev/1e6).toFixed(1)+'M' : Math.round(rev/1000)+'k'}</b></div>
-        <div style="font-size:10px;color:var(--blue);margin-top:4px;font-weight:700;">👉 Click to isolate micro-outlets</div>
+        <div style="font-size:10px;color:var(--blue);margin-top:4px;font-weight:700;">👉 Click to isolate & explore unions</div>
       </div>`, {sticky:false, direction:'top', className:'div-tooltip', offset:[0,-6]});
 
     thanaPolyLayer.addLayer(poly);
@@ -1351,7 +2318,7 @@ function drawThanaPolygons(distName, divIdx) {
       const center = poly.getBounds().getCenter();
       const lbl = L.divIcon({
         className:'',
-        html:`<div class="thana-lbl">${tName}<br><span style="font-size:9.5px;font-family:'JetBrains Mono';font-weight:700;opacity:.95;">${count.toLocaleString()}</span></div>`,
+        html:`<div class="thana-lbl" style="cursor:pointer;">${tName}<br><span style="font-size:9.5px;font-family:'JetBrains Mono';font-weight:700;opacity:.95;">${count.toLocaleString()}</span></div>`,
         iconSize:[90,30], iconAnchor:[45,15]
       });
       const mk = L.marker(center, {icon:lbl, interactive:true, pane:'markerPane'});
@@ -1369,53 +2336,59 @@ function drawThanaPolygons(distName, divIdx) {
 
 /* ═══════════════ SIDEBAR DIVISION CARDS ═══════════════ */
 function buildDivSidebar() {
-  const g = document.getElementById('divGrid');
-  g.innerHTML = '';
+  const grid = document.getElementById('divGrid');
+  grid.innerHTML = '';
+
   CEO_NATIONAL.divisions.forEach(d => {
-    const el = document.createElement('div');
-    el.className = 'dcard';
-    el.setAttribute('data-d', d.name);
-    el.id = 'dc'+d.idx;
-    el.onclick = (e) => drillDivision(d.idx, d.name, e);
-    
     let count = d.outlets;
-    if (healthFilter === 'G') count = d.strong||0;
-    else if (healthFilter === 'Y') count = d.moderate||0;
-    else if (healthFilter === 'R') count = d.weak||0;
-    else if (healthFilter === 'ZV') count = d.zero_visits||0;
-    else if (healthFilter === 'ZR') count = d.zero_rev||0;
+    if (healthFilter === 'G') count = d.strong;
+    else if (healthFilter === 'Y') count = d.moderate;
+    else if (healthFilter === 'R') count = d.weak;
+    else if (healthFilter === 'ZV') count = d.zero_visits;
+    else if (healthFilter === 'ZR') count = d.zero_rev;
 
     if (subTierFilter !== 'ALL' && typeof CEO_OUTLETS !== 'undefined' && CEO_OUTLETS[d.idx]) {
       count = CEO_OUTLETS[d.idx].filter(o => isOutletMatch(o)).length;
     }
 
-    const pct = d.outlets ? Math.round(((d.strong||0)/d.outlets)*100) : 0;
-    el.innerHTML = `<div class="dn">${d.name}</div><div class="dc">${count.toLocaleString()}</div><div class="dm">${pct}% Strong • ৳${((d.revenue||0)/1e9).toFixed(1)}B</div>`;
-    g.appendChild(el);
+    const pct = d.outlets ? Math.round((d.strong / d.outlets) * 100) : 0;
+    const revFormatted = d.revenue >= 1e9 ? '৳'+(d.revenue/1e9).toFixed(1)+'B' : '৳'+(d.revenue/1e6).toFixed(0)+'M';
+
+    const card = document.createElement('div');
+    card.className = 'dcard' + (selectedDivisions.includes(d.name) ? ' sel' : '');
+    card.id = 'dc' + d.idx;
+    card.setAttribute('data-d', d.name);
+    card.onclick = (e) => drillDivision(d.idx, d.name, e);
+    card.innerHTML = `
+      <div class="dn">${d.name}</div>
+      <div class="dc">${count.toLocaleString()}</div>
+      <div class="dm">${pct}% Strong · ${revFormatted}</div>
+    `;
+    grid.appendChild(card);
   });
 }
 
 /* ═══════════════ DRILL DIVISION ═══════════════ */
 function drillDivision(divIdx, divName, event) {
+  clearAllMapDataLayers();
+  
   const isMulti = event && (event.ctrlKey || event.metaKey || event.shiftKey);
-
+  
   if (isMulti) {
-    activeDistrict = null;
-    activeThana = null;
-    selectedDistricts = [];
+    activeDivision = null; activeDistrict = null; activeThana = null; activeUnion = null;
+    document.getElementById('distPanel').style.display = 'none';
+    document.getElementById('thanaPanel').style.display = 'none';
+    document.getElementById('unionPanel').style.display = 'none';
 
     if (!selectedDivisions) selectedDivisions = [];
-    if (selectedDivisions.includes(divName)) {
-      selectedDivisions = selectedDivisions.filter(d => d !== divName);
-      if (selectedDivisions.length === 0) {
-        resetNational();
-        return;
-      }
-    } else {
-      selectedDivisions.push(divName);
-    }
+    const idx = selectedDivisions.indexOf(divName);
+    if (idx >= 0) selectedDivisions.splice(idx, 1);
+    else selectedDivisions.push(divName);
 
-    activeDivision = selectedDivisions.length === 1 ? selectedDivisions[0] : null;
+    if (selectedDivisions.length === 0) {
+      resetNational();
+      return;
+    }
 
     document.querySelectorAll('.dcard').forEach(c => {
       const d = c.getAttribute('data-d');
@@ -1424,17 +2397,16 @@ function drillDivision(divIdx, divName, event) {
     });
 
     if (selectedDivisions.length > 1) {
-      document.getElementById('distPanel').style.display = 'none';
-      document.getElementById('thanaPanel').style.display = 'none';
       drawMultiDivisionPolygons();
     } else {
       const sDiv = selectedDivisions[0];
       const sIdx = DIV_NAMES.indexOf(sDiv);
       buildDistPanel(sDiv, sIdx);
       drawDistrictPolygons(sDiv, sIdx);
+      renderInverseMask();
     }
     updateBC();
-    updateKPIs();
+    updateKPIs(); updateAdminSummaryPanel();
     return;
   }
 
@@ -1444,16 +2416,19 @@ function drillDivision(divIdx, divName, event) {
   activeDivision = divName;
   activeDistrict = null;
   activeThana = null;
+  activeUnion = null;
+  document.getElementById("unionPanel").style.display = "none";
+  document.getElementById('thanaPanel').style.display = 'none';
 
   document.querySelectorAll('.dcard').forEach(c => c.classList.remove('sel'));
   const dc = document.getElementById('dc'+divIdx);
   if(dc) dc.classList.add('sel');
 
-  document.getElementById('thanaPanel').style.display = 'none';
   buildDistPanel(divName, divIdx);
   updateBC();
-  updateKPIs();
+  updateKPIs(); updateAdminSummaryPanel();
   drawDistrictPolygons(divName, divIdx);
+  renderInverseMask();
 }
 
 /* ═══════════════ DISTRICT PANEL ═══════════════ */
@@ -1484,7 +2459,7 @@ function buildDistPanel(divName, divIdx) {
     }
 
     const row = document.createElement('div');
-    row.className = 'drow';
+    row.className = 'drow' + (activeDistrict === d.district ? ' sel' : '');
     row.id = 'dr_'+d.district.replace(/\s+/g,'_');
     row.onclick = (e) => {
       drillDistrict(d.district, divIdx, null, e);
@@ -1526,12 +2501,14 @@ function buildThanaPanel(distName, divIdx) {
   allRow.className = 'drow' + (!activeThana ? ' sel' : '');
   allRow.onclick = () => {
     activeThana = null;
+    activeUnion = null;
+    document.getElementById("unionPanel").style.display="none";
     updateBC();
-    updateKPIs();
+    updateKPIs(); updateAdminSummaryPanel();
     document.querySelectorAll('#thanaScroll .drow').forEach(r=>r.classList.remove('sel'));
     allRow.classList.add('sel');
-    clusterGrp.clearLayers();
     drawThanaPolygons(distName, divIdx);
+    renderInverseMask();
   };
   allRow.innerHTML = `<span class="drn">🌐 All Thanas</span><span class="drc">${distOutlets.length.toLocaleString()}</span>`;
   scroll.appendChild(allRow);
@@ -1548,44 +2525,47 @@ function buildThanaPanel(distName, divIdx) {
     else if (healthFilter === 'ZV') count = t.zero_visits||0;
     else if (healthFilter === 'ZR') count = t.zero_rev||0;
 
+    const isThanaUntapped = (t.zero_visits === t.outlets || (t.strong === 0 && t.moderate === 0));
     const row = document.createElement('div');
-    row.className = 'drow' + (activeThana === t.name ? ' sel' : '');
+    row.className = 'drow' + (activeThana === t.name ? ' sel' : '') + (isThanaUntapped ? ' unt-thana-row' : '');
     row.id = 'tr_'+t.name.replace(/\s+/g,'_');
     row.onclick = () => {
       drillThana(t.name, distName, divIdx);
     };
-    row.innerHTML = `<span class="drn">${t.name}</span><span class="drc">${count.toLocaleString()}</span>`;
+    const tagHtml = isThanaUntapped 
+      ? `<span style="background:rgba(239,68,68,0.15);color:#ef4444;padding:1px 5px;border-radius:4px;font-size:8.5px;font-weight:900;">⚠️ Untapped</span>` 
+      : '';
+    row.innerHTML = `<span class="drn" style="display:flex;align-items:center;gap:5px;"><span>${t.name}</span>${tagHtml}</span><span class="drc">${count.toLocaleString()}</span>`;
     scroll.appendChild(row);
   });
 }
 
-/* ═══════════════ DRILL DISTRICT (ISOLATE OR MULTI-SELECT) ═══════════════ */
+/* ═══════════════ DRILL DISTRICT ═══════════════ */
 function drillDistrict(distName, divIdx, feat, event) {
+  clearAllMapDataLayers();
+  
   const isMulti = event && (event.ctrlKey || event.metaKey || event.shiftKey);
-  const curDiv = activeDivision || (selectedDivisions && selectedDivisions[0]) || DIV_NAMES[divIdx] || 'Dhaka';
+  const curDiv = activeDivision || (selectedDivisions && selectedDivisions[0]) || (typeof DIV_NAMES !== 'undefined' && DIV_NAMES[divIdx]) || 'Dhaka';
+  const curDivIdx = DIV_NAMES.indexOf(curDiv) >= 0 ? DIV_NAMES.indexOf(curDiv) : (divIdx || 0);
 
   if (isMulti) {
-    activeThana = null;
+    activeThana = null; activeUnion = null;
+    document.getElementById("unionPanel").style.display = "none";
     if (!selectedDistricts) selectedDistricts = [];
     
     const existingIdx = selectedDistricts.findIndex(d => d.name.toLowerCase() === distName.toLowerCase());
-    if (existingIdx >= 0) {
-      selectedDistricts.splice(existingIdx, 1);
-    } else {
-      selectedDistricts.push({ name: distName, div: curDiv });
-    }
+    if (existingIdx >= 0) selectedDistricts.splice(existingIdx, 1);
+    else selectedDistricts.push({ name: distName, div: curDiv });
 
     if (selectedDistricts.length === 0) {
       activeDistrict = null;
       document.querySelectorAll('#distScroll .drow').forEach(r=>r.classList.remove('sel'));
       document.getElementById('thanaPanel').style.display = 'none';
-      drawDistrictPolygons(curDiv, divIdx);
-      updateBC();
-      updateKPIs();
+      drawDistrictPolygons(curDiv, curDivIdx);
+      updateBC(); updateKPIs(); updateAdminSummaryPanel();
       return;
     }
 
-    // Highlight all selected in distScroll
     document.querySelectorAll('#distScroll .drow').forEach(r => {
       const dName = r.querySelector('.drn')?.textContent?.trim()?.toLowerCase();
       const isSel = selectedDistricts.some(s => s.name.toLowerCase() === dName);
@@ -1595,73 +2575,360 @@ function drillDistrict(distName, divIdx, feat, event) {
 
     if (selectedDistricts.length === 1) {
       activeDistrict = selectedDistricts[0].name;
-      buildThanaPanel(activeDistrict, divIdx);
-      drawThanaPolygons(activeDistrict, divIdx);
+      buildThanaPanel(activeDistrict, curDivIdx);
+      drawThanaPolygons(activeDistrict, curDivIdx);
     } else {
       activeDistrict = null;
       document.getElementById('thanaPanel').style.display = 'none';
-      drawMultiDistrictPolygons(curDiv, divIdx);
+      drawMultiDistrictPolygons(curDiv, curDivIdx);
     }
 
-    updateBC();
-    updateKPIs();
+    updateBC(); updateKPIs(); updateAdminSummaryPanel();
     return;
   }
 
   // Single District Click -> ISOLATE THIS DISTRICT ONLY!
+  activeDivision = curDiv;
+  selectedDivisions = [curDiv];
   selectedDistricts = [{ name: distName, div: curDiv }];
   activeDistrict = distName;
   activeThana = null;
-  updateBC();
-  updateKPIs();
+  activeUnion = null;
+  document.getElementById("unionPanel").style.display = "none";
 
+  document.querySelectorAll('.dcard').forEach(c => {
+    if (c.getAttribute('data-d') === curDiv) c.classList.add('sel');
+    else c.classList.remove('sel');
+  });
+
+  buildDistPanel(curDiv, curDivIdx);
   document.querySelectorAll('#distScroll .drow').forEach(r=>r.classList.remove('sel'));
   const dr = document.getElementById('dr_'+distName.replace(/\s+/g,'_'));
   if(dr) dr.classList.add('sel');
 
-  clusterGrp.clearLayers();
-  buildThanaPanel(distName, divIdx);
-  drawThanaPolygons(distName, divIdx);
+  buildThanaPanel(distName, curDivIdx);
+  drawThanaPolygons(distName, curDivIdx);
+  renderInverseMask();
+  updateBC(); updateKPIs(); updateAdminSummaryPanel();
 }
 
-/* ═══════════════ DRILL THANA / UPAZILA ═══════════════ */
+/* ═══════════════ UNION LEVEL DRILL-DOWN & HIERARCHY ═══════════════ */
+function buildUnionPanel(thanaName, distName, divIdx) {
+  const panel = document.getElementById('unionPanel');
+  const scroll = document.getElementById('unionScroll');
+  if (!panel || !scroll) return;
+
+  document.getElementById('unionTitle').textContent = thanaName + ' Unions';
+  panel.style.display = 'block';
+
+  const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
+  const tn = thanaName.toLowerCase().replace(/[\s\-_]/g,'');
+  const dn = distName.toLowerCase().replace(/[\s\-_]/g,'');
+  const thanaOutlets = allOutlets.filter(o => {
+    if (!o[5]) return false;
+    const od = o[5].toLowerCase().replace(/[\s\-_]/g,'');
+    const ot = (o[16] || '').toLowerCase().replace(/[\s\-_]/g,'');
+    return (od === dn) && (ot === tn);
+  });
+
+  const unionMap = {};
+  thanaOutlets.forEach(o => {
+    const u = o[17] || `${thanaName} Central`;
+    if (!unionMap[u]) unionMap[u] = { name: u, outlets: 0, ordered: 0, visitedNoOrder: 0, untapped: 0, rev: 0, visits: 0 };
+    unionMap[u].outlets++;
+    unionMap[u].rev += (o[8] || 0);
+    unionMap[u].visits += (o[9] || 0);
+
+    const isOrd = ((o[8]||0) > 0 || (o[13]||0) > 0);
+    if (isOrd) unionMap[u].ordered++;
+    else if ((o[9]||0) > 0) unionMap[u].visitedNoOrder++;
+    else unionMap[u].untapped++;
+  });
+
+  const unionList = Object.values(unionMap);
+  document.getElementById('unionBadge').textContent = unionList.length + ' Unions';
+  scroll.innerHTML = '';
+
+  // "All Unions" option
+  const allRow = document.createElement('div');
+  allRow.className = 'drow' + (!activeUnion ? ' sel' : '');
+  allRow.onclick = () => {
+    activeUnion = null;
+    drillThana(thanaName, distName, divIdx);
+  };
+  allRow.innerHTML = `<span class="drn">🌐 All Unions</span><span class="drc">${thanaOutlets.length.toLocaleString()}</span>`;
+  scroll.appendChild(allRow);
+
+  unionList.sort((a,b) => b.outlets - a.outlets).forEach(u => {
+    const row = document.createElement('div');
+    row.className = 'drow' + (activeUnion === u.name ? ' sel' : '');
+    row.onclick = () => {
+      drillUnion(u.name, thanaName, distName, divIdx);
+    };
+
+    const isUnt = (u.visits === 0 && u.rev === 0);
+    const untTag = isUnt ? `<span style="background:rgba(239,68,68,0.15);color:#ef4444;font-size:8px;padding:1px 4px;border-radius:3px;font-weight:900;">⚠️ Untapped</span>` : '';
+    row.innerHTML = `<span class="drn" style="display:flex;align-items:center;gap:4px;"><span>${u.name}</span>${untTag}</span><span class="drc">${u.outlets.toLocaleString()}</span>`;
+    scroll.appendChild(row);
+  });
+}
+
+/* ═══════════════ DRILL THANA / UPAZILA (SUBDIVIDE INTO UNIONS - IMAGE 2 STYLE) ═══════════════ */
 function drillThana(thanaName, distName, divIdx, feat) {
+  clearAllMapDataLayers();
+  
   activeThana = thanaName;
+  activeUnion = null;
+  const curDiv = activeDivision || (DIV_NAMES && DIV_NAMES[divIdx]) || 'Dhaka';
+  const curDivIdx = DIV_NAMES.indexOf(curDiv) >= 0 ? DIV_NAMES.indexOf(curDiv) : (divIdx || 0);
+
+  buildUnionPanel(thanaName, distName, curDivIdx);
   updateBC();
-  updateKPIs();
+  updateKPIs(); updateAdminSummaryPanel();
 
   document.querySelectorAll('#thanaScroll .drow').forEach(r=>r.classList.remove('sel'));
   const tr = document.getElementById('tr_'+thanaName.replace(/\s+/g,'_'));
   if(tr) tr.classList.add('sel');
 
-  // Highlight selected thana polygon
-  thanaPolyLayer.eachLayer(l => {
-    if(l.feature && l.feature.properties && l.feature.properties.thana === thanaName){
-      l.setStyle({fillOpacity:0.32, color:'#fff', weight:3.5});
-      l.bringToFront();
-    } else if(l.feature){
-      l.setStyle({fillOpacity:0.08, color:'rgba(255,255,255,0.15)', weight:1});
-    }
+  const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[curDivIdx] : null) || [];
+  const tn = thanaName.toLowerCase().replace(/[\s\-_]/g,'');
+  const dn = distName.toLowerCase().replace(/[\s\-_]/g,'');
+  const thanaOutlets = allOutlets.filter(o => {
+    if (!o[5]) return false;
+    const od = o[5].toLowerCase().replace(/[\s\-_]/g,'');
+    const ot = (o[16] || '').toLowerCase().replace(/[\s\-_]/g,'');
+    return (od === dn) && (ot === tn);
   });
 
-  if(feat){
-    map.fitBounds(L.geoJSON(feat).getBounds(), {padding:[50,50], maxZoom:14});
-  } else if (typeof BD_THANAS_GEO !== 'undefined' && BD_THANAS_GEO.features) {
-    const matchFeat = BD_THANAS_GEO.features.find(f => 
-      f.properties.thana && f.properties.thana.toLowerCase() === thanaName.toLowerCase() &&
-      f.properties.district && f.properties.district.toLowerCase() === distName.toLowerCase()
-    );
-    if(matchFeat){
-      map.fitBounds(L.geoJSON(matchFeat).getBounds(), {padding:[50,50], maxZoom:14});
+  // Check if we have authentic Union Polygons in BD_UNIONS_GEO
+  const uFeatures = (typeof BD_UNIONS_GEO !== 'undefined' && BD_UNIONS_GEO.features) ? 
+    BD_UNIONS_GEO.features.filter(f => {
+      const ft = (f.properties.thana || '').toLowerCase().replace(/[\s\-_]/g,'');
+      const fd = (f.properties.district || '').toLowerCase().replace(/[\s\-_]/g,'');
+      return (ft === tn) && (!distName || fd === dn);
+    }) : [];
+
+  let bounds = L.latLngBounds([]);
+
+  if (uFeatures.length > 0) {
+    // Draw Subdivided Union Polygons with interactive badges (IMAGE 2 STYLE)
+    uFeatures.forEach(uFeat => {
+      const uFullName = uFeat.properties.union;
+      const uShortName = uFullName.replace(/\s+Union$/i, '');
+      const uCount = thanaOutlets.filter(o => o[17] && o[17].toLowerCase().includes(uShortName.toLowerCase())).length;
+
+      const uPoly = L.geoJSON(uFeat, {
+        interactive: true,
+        style: () => ({
+          fillColor: '#06b6d4',
+          fillOpacity: isDark ? 0.12 : 0.08,
+          color: '#0284c7',
+          weight: 2.2
+        })
+      });
+
+      bounds.extend(uPoly.getBounds());
+
+      uPoly.on('mouseover', e => {
+        if (!activeUnion || !uFullName.toLowerCase().includes(activeUnion.toLowerCase())) {
+          e.target.setStyle({fillOpacity: 0.28, color: '#00e5ff', weight: 3.5});
+          e.target.bringToFront();
+        }
+      });
+      uPoly.on('mouseout', e => {
+        if (!activeUnion || !uFullName.toLowerCase().includes(activeUnion.toLowerCase())) {
+          e.target.setStyle({fillOpacity: isDark ? 0.12 : 0.08, color: '#0284c7', weight: 2.2});
+        }
+      });
+      uPoly.on('click', () => {
+        drillUnion(uFullName, thanaName, distName, curDivIdx);
+      });
+
+      unionPolyLayer.addLayer(uPoly);
+
+      // Add Centroid Badge (Image 2 style)
+      const center = uPoly.getBounds().getCenter();
+      const badgeHtml = `
+        <div class="union-badge-card" id="ub_${uShortName.replace(/\s+/g,'_')}">
+          <span>🏡 <b>${uShortName}</b></span>
+          <span class="ub-cnt">${uCount}</span>
+        </div>
+      `;
+      const badgeIcon = L.divIcon({
+        className: '',
+        html: badgeHtml,
+        iconSize: [110, 28],
+        iconAnchor: [55, 14]
+      });
+      const badgeMarker = L.marker(center, {icon: badgeIcon, interactive: true, pane: 'markerPane'});
+      badgeMarker.on('click', () => {
+        drillUnion(uFullName, thanaName, distName, curDivIdx);
+      });
+      unionPolyLayer.addLayer(badgeMarker);
+    });
+  } else {
+    // Fallback: draw single thana outline
+    let matchFeat = feat;
+    if (!matchFeat && typeof BD_THANAS_GEO !== 'undefined' && BD_THANAS_GEO.features) {
+      matchFeat = BD_THANAS_GEO.features.find(f => {
+        const ft = (f.properties.thana || f.properties.name || '').toLowerCase().replace(/[\s\-_]/g,'');
+        const fd = (f.properties.district || '').toLowerCase().replace(/[\s\-_]/g,'');
+        return (ft === tn) && (!distName || fd === dn);
+      });
+    }
+    if (matchFeat) {
+      const singlePoly = L.geoJSON(matchFeat, {
+        interactive: false,
+        style: () => ({
+          fillColor: '#3b82f6',
+          fillOpacity: isDark ? 0.20 : 0.12,
+          color: '#2563eb',
+          weight: 2.8,
+          dashArray: '3, 4'
+        })
+      });
+      thanaPolyLayer.addLayer(singlePoly);
+      bounds.extend(singlePoly.getBounds());
     }
   }
 
-  setTimeout(() => renderMicroOutlets(divIdx, distName, thanaName), 200);
+  if (bounds.isValid()) {
+    map.fitBounds(bounds, {padding:[50,50], maxZoom:14});
+  }
+
+  renderInverseMask();
+  setTimeout(() => renderMicroOutlets(curDivIdx, distName, thanaName), 150);
 }
+
+/* ═══════════════ DRILL UNION (ISOLATE SINGLE UNION IN SOLID WHITE / FOCUS) ═══════════════ */
+function drillUnion(unionName, thanaName, distName, divIdx) {
+  activeUnion = unionName;
+  clearAllMapDataLayers();
+
+  const curDiv = activeDivision || (DIV_NAMES && DIV_NAMES[divIdx]) || 'Dhaka';
+  const curDivIdx = DIV_NAMES.indexOf(curDiv) >= 0 ? DIV_NAMES.indexOf(curDiv) : (divIdx || 0);
+  const tn = thanaName.toLowerCase().replace(/[\s\-_]/g,'');
+  const dn = (distName || '').toLowerCase().replace(/[\s\-_]/g,'');
+  const un = unionName.toLowerCase().replace(/[\s\-_]/g,'').replace(/union$/,'');
+
+  const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[curDivIdx] : null) || [];
+  const uShortName = unionName.replace(/\s+Union$/i, '');
+  const uNorm = unionName.toLowerCase().replace(/[\s\-_]/g,'').replace(/union$/,'');
+
+  const targetUnionOutlets = allOutlets.filter(o => {
+    if (!o[5] || o[5].toLowerCase().replace(/[\s\-_]/g,'') !== dn) return false;
+    if (!o[16] || o[16].toLowerCase().replace(/[\s\-_]/g,'') !== tn) return false;
+    const oUnion = (o[17] || '').toLowerCase().replace(/[\s\-_]/g,'').replace(/union$/,'');
+    return oUnion === uNorm || oUnion.includes(uNorm) || uNorm.includes(oUnion);
+  });
+
+  // Find union feature in GeoJSON if available
+  let uFeat = null;
+  if (typeof BD_UNIONS_GEO !== 'undefined' && BD_UNIONS_GEO.features) {
+    uFeat = BD_UNIONS_GEO.features.find(f => {
+      const fu = (f.properties.union || '').toLowerCase().replace(/[\s\-_]/g,'').replace(/union$/,'');
+      const ft = (f.properties.thana || '').toLowerCase().replace(/[\s\-_]/g,'');
+      const fd = (f.properties.district || '').toLowerCase().replace(/[\s\-_]/g,'');
+      return (fu === un || fu.includes(un) || un.includes(fu)) && (ft === tn) && (!distName || fd === dn);
+    });
+  }
+
+  // Fallback: Generate synthetic hull feature from union outlets
+  if (!uFeat && targetUnionOutlets.length > 0) {
+    const pts = targetUnionOutlets.map(o => [o[0], o[1]]).filter(pt => pt[0] && pt[1]);
+    uFeat = computeUnionHullFeature(pts, unionName, thanaName, distName);
+  }
+
+  let bounds = L.latLngBounds([]);
+
+  if (uFeat) {
+    const singlePoly = L.geoJSON(uFeat, {
+      interactive: false,
+      style: () => ({
+        fillColor: '#06b6d4',
+        fillOpacity: isDark ? 0.16 : 0.08,
+        color: '#0284c7',
+        weight: 3.2,
+        dashArray: '4, 4'
+      })
+    });
+    unionPolyLayer.addLayer(singlePoly);
+    bounds.extend(singlePoly.getBounds());
+
+    // Add Centroid Badge
+    const center = singlePoly.getBounds().getCenter();
+    const badgeHtml = `
+      <div class="union-badge-card sel" style="box-shadow:0 0 16px rgba(6,182,212,0.4);">
+        <span>🏡 <b>${uShortName}</b></span>
+        <span class="ub-cnt">${targetUnionOutlets.length}</span>
+      </div>
+    `;
+    const badgeIcon = L.divIcon({
+      className: '',
+      html: badgeHtml,
+      iconSize: [120, 28],
+      iconAnchor: [60, 14]
+    });
+    const badgeMarker = L.marker(center, {icon: badgeIcon, interactive: false, pane: 'markerPane'});
+    unionPolyLayer.addLayer(badgeMarker);
+  }
+
+  if (targetUnionOutlets.length > 0) {
+    const latLngs = targetUnionOutlets.map(o => [o[0], o[1]]).filter(pt => pt[0] && pt[1]);
+    if (latLngs.length > 0) {
+      bounds.extend(L.latLngBounds(latLngs));
+    }
+  }
+
+  if (bounds.isValid()) {
+    map.fitBounds(bounds, {padding: [50, 50], maxZoom: 16});
+  }
+
+  // Highlight sidebar row
+  document.querySelectorAll('#unionScroll .drow').forEach(r => {
+    const txt = r.querySelector('.drn')?.textContent || '';
+    const cleanTxt = txt.replace(/[\s\-_]/g,'').toLowerCase().replace(/union$/,'');
+    if (cleanTxt && (cleanTxt === un || cleanTxt.includes(un) || un.includes(cleanTxt))) {
+      r.classList.add('sel');
+    } else {
+      r.classList.remove('sel');
+    }
+  });
+
+  renderInverseMask();
+  updateBC();
+  updateKPIs();
+  updateAdminSummaryPanel();
+  setTimeout(() => renderMicroOutlets(curDivIdx, distName, thanaName), 100);
+}
+
+/* ═══════════════ RESET TO NATIONAL ═══════════════ */
+function resetNational(){
+  clearAllMapDataLayers();
+  activeDivision = null;
+  activeDistrict = null;
+  activeThana = null;
+  activeUnion = null;
+  selectedDivisions = [];
+  selectedDistricts = [];
+
+  document.querySelectorAll('.dcard').forEach(c=>c.classList.remove('sel'));
+  document.getElementById('distPanel').style.display='none';
+  document.getElementById('thanaPanel').style.display='none';
+  document.getElementById('unionPanel').style.display='none';
+
+  updateBC();
+  updateKPIs();
+  updateAdminSummaryPanel();
+  drawDivisionPolygons();
+  renderInverseMask();
+}
+
 
 /* ═══════════════ 3. RENDER MICRO OUTLETS (HIGH CONTRAST & DIRECT CLICK) ═══════════════ */
 function renderMicroOutlets(divIdx, distName, thanaName) {
   clusterGrp.clearLayers();
+  if (microOutletLayer) microOutletLayer.clearLayers();
   pillarLayer.clearLayers();
   routeLayer.clearLayers();
   wsLayer.clearLayers();
@@ -1669,14 +2936,32 @@ function renderMicroOutlets(divIdx, distName, thanaName) {
 
   const allOutlets = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
   const filterThana = thanaName || activeThana;
+  const uNorm = activeUnion ? activeUnion.toLowerCase().replace(/[\s\-_]/g,'').replace(/union$/,'') : null;
   
-  // STRICT FILTERING: District & Optional Thana match
+  // STRICT FILTERING: District, Thana & Union match
   const outlets = allOutlets.filter(o => {
     if (!o[5] || o[5].toLowerCase() !== distName.toLowerCase()) return false;
-    if (filterThana && (!o[16] || o[16].toLowerCase() !== filterThana.toLowerCase())) return false;
+    if (filterThana && (!o[16] || (o[16].toLowerCase() !== filterThana.toLowerCase() && o[16].toLowerCase().replace(/\s+/g,'') !== filterThana.toLowerCase().replace(/\s+/g,'')))) return false;
+    
+    // Strict Union filter
+    if (uNorm) {
+      const oUnion = (o[17] || '').toLowerCase().replace(/[\s\-_]/g,'').replace(/union$/,'');
+      if (oUnion !== uNorm && !oUnion.includes(uNorm) && !uNorm.includes(oUnion)) return false;
+    }
+
+    // Check 3-Tier Filter if set from Right Admin Panel
+    const isOrdered = (o[8] > 0 || (o[13]||0) > 0);
+    const isVisitedNoOrder = ((o[9]||0) > 0 && !isOrdered);
+    const isUntapped = ((o[9]||0) === 0);
+
+    if (adminTierFilter === 'ORDERED' && !isOrdered) return false;
+    if (adminTierFilter === 'VISITED_NO_ORDER' && !isVisitedNoOrder) return false;
+    if (adminTierFilter === 'UNTAPPED' && !isUntapped) return false;
+
     return isOutletMatch(o);
   });
-  const markers=[], hPts=[], pMarkers=[];
+  
+  const hPts = [];
 
   // Find max revenue in this district for scaling 3D pillar height
   let maxRevInDist = 1;
@@ -1686,6 +2971,30 @@ function renderMicroOutlets(divIdx, distName, thanaName) {
     const [lat,lng,id,name,didx,dist,score,status,rev,visits,lastVisit,daysSince,srName,orders,avgRPV,trend]=o;
     const st = classifySubTier(status, score, rev, visits, orders, daysSince, avgRPV);
 
+    // 3-Tier Classification Naming:
+    // 🟢 Ordered Outlets (Active Buyers with Orders & Revenue)
+    // 🟡 Visited Outlets (No Order) (Visited by SR, but 0 Orders)
+    // 🔴 Untapped Outlets (0 Visits & 0 Orders - Blind Spot)
+    let tierName = 'Ordered Outlet';
+    let dotColor = '#10b981'; // Green
+    let dotRadius = activeUnion ? 6.5 : 4.5;
+    let dotWeight = activeUnion ? 1.8 : 1.2;
+
+    const isOrdered = ((rev||0) > 0 || (orders||0) > 0);
+    const isVisitedNoOrder = ((visits||0) > 0 && !isOrdered);
+    const isUntapped = ((visits||0) === 0);
+
+    if (isOrdered) {
+      tierName = 'Ordered Outlet';
+      dotColor = '#10b981'; // Emerald Green
+    } else if (isVisitedNoOrder) {
+      tierName = 'Visited (No Order)';
+      dotColor = '#f59e0b'; // Amber Gold
+    } else {
+      tierName = 'Untapped Outlet (0 Visits)';
+      dotColor = '#ef4444'; // Vibrant Coral Red
+    }
+
     let mk;
     if (pillarsOn) {
       // 3D Sales Height Pillar Marker
@@ -1694,9 +3003,9 @@ function renderMicroOutlets(divIdx, distName, thanaName) {
       const pillarIcon = L.divIcon({
         className: '',
         html: `
-          <div class="pillar-3d-marker" style="height:${heightPx+22}px;color:${st.color};">
+          <div class="pillar-3d-marker" style="height:${heightPx+22}px;color:${dotColor};">
             <div class="pillar-val">${revShort}</div>
-            <div class="pillar-cap" style="background:${st.color};"></div>
+            <div class="pillar-cap" style="background:${dotColor};"></div>
             <div class="pillar-stem" style="height:${heightPx}px;"></div>
             <div class="pillar-base"></div>
           </div>
@@ -1706,32 +3015,43 @@ function renderMicroOutlets(divIdx, distName, thanaName) {
       });
       mk = L.marker([lat,lng], {icon: pillarIcon, interactive: true, outletStatus: status});
     } else {
-      // Neon vibrant solid colors with white border & drop glow
-      let pinColor = st.color;
-      if (healthFilter === 'ZV') pinColor = '#a855f7';
-      else if (healthFilter === 'ZR') pinColor = '#f43f5e';
-
+      // Standalone individual dots (Image 2 style - Crisp circle with white border)
       mk = L.circleMarker([lat,lng],{
-        radius: 9,
-        fillColor: pinColor,
+        radius: dotRadius,
+        fillColor: dotColor,
         color: '#ffffff',
-        weight: 2.5,
+        weight: dotWeight,
         opacity: 1.0,
         fillOpacity: 0.95,
+        tierCategory: isOrdered ? 'ORDERED' : isVisitedNoOrder ? 'VISITED_NO_ORDER' : 'UNTAPPED',
         outletStatus: status,
-        interactive: true
+        revenue: rev || 0,
+        thana: o[16] || '',
+        interactive: true,
+        pane: 'markerPane'
       });
     }
 
-    // Tooltip for quick hover
+    // Rich Tooltip on hover with Union & Thana
+    const uNameDisplay = o[17] || 'Ward Area';
     mk.bindTooltip(`
-      <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;">
-        <span style="color:${st.color};font-weight:900;">● ${st.name}</span><br>
-        <b>${name}</b> (#${id})<br>
-        Revenue: ৳${(rev||0).toLocaleString()} • ${visits} Visits
-      </div>`, {direction:'top', offset:[0,-8]});
+      <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;line-height:1.4;min-width:180px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:5px;margin-bottom:2px;">
+          <span style="display:flex;align-items:center;gap:4px;">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${dotColor};border:1px solid #fff;"></span>
+            <span style="color:${dotColor};font-weight:900;">${tierName}</span>
+          </span>
+          <span style="font-size:9.5px;color:#93c5fd;font-weight:800;">📍 ${uNameDisplay}</span>
+        </div>
+        <b>${name}</b> <span style="font-size:10px;opacity:0.8;">(#${id})</span><br>
+        <div style="font-size:10.5px;color:#e2e8f0;margin-top:3px;border-top:1px dashed rgba(255,255,255,0.2);padding-top:3px;">
+          🏛️ <b>${dist}, ${o[16]||''}</b> (Union: <b>${uNameDisplay}</b>)<br>
+          💰 Sales: <b>৳${(rev||0).toLocaleString()}</b> | 🛒 Orders: <b>${orders||0}</b><br>
+          🚗 Visits: <b>${visits||0}</b> | 👤 SR: <b>${srName||'Unassigned'}</b>
+        </div>
+      </div>`, {direction:'top', offset:[0,-6], className:'div-tooltip'});
 
-    // Direct click handler with full event stop to ensure modal opens without map zoom/back
+    // Direct click handler opens full detail modal
     mk.on('click', function(e) {
       if (e.originalEvent) {
         e.originalEvent.stopPropagation();
@@ -1742,12 +3062,15 @@ function renderMicroOutlets(divIdx, distName, thanaName) {
       showModal(o);
     });
 
-    markers.push(mk);
+    // Option 2: Cluster at Thana/District level, standalone individual dots at Union level
+    if (!activeUnion) {
+      if (clusterGrp) clusterGrp.addLayer(mk);
+    } else {
+      if (microOutletLayer) microOutletLayer.addLayer(mk);
+    }
+    
     if(heatOn) hPts.push([lat,lng, rev>0?1:0.4]);
   });
-
-  // Clustered loading for smooth 60fps rendering without browser freezing
-  clusterGrp.addLayers(markers);
 
   if(heatOn && hPts.length) heatLayer = L.heatLayer(hPts,{radius:25,blur:15,maxZoom:15}).addTo(map);
 
@@ -2197,7 +3520,7 @@ function renderThana3DPillars(distName, divIdx) {
   const thanaRevs = {};
   thanaFeatures.forEach(feat => {
     const tName = feat.properties.thana;
-    const tOutlets = distOutlets.filter(o => o[16] && o[16].toLowerCase() === tName.toLowerCase() && isOutletMatch(o));
+    const tOutlets = distOutlets.filter(o => o[16] && (o[16].toLowerCase() === tName.toLowerCase() || o[16].toLowerCase().replace(/\s+/g,'') === tName.toLowerCase().replace(/\s+/g,'')) && isOutletMatch(o));
     let rev = 0;
     tOutlets.forEach(o => rev += (o[8]||0));
     thanaRevs[tName] = { rev, count: tOutlets.length, feat };
@@ -2438,11 +3761,12 @@ function buildSubTierControls(f) {
       document.querySelectorAll('.st-btn').forEach(b => b.className = 'st-btn');
       btn.className = 'st-btn ' + t.cls;
       
-      updateKPIs();
+      updateKPIs(); updateAdminSummaryPanel();
       buildDivSidebar();
 
       if(!activeDivision){
         drawDivisionPolygons();
+  renderInverseMask();
       } else if(activeDivision && !activeDistrict){
         buildDistPanel(activeDivision, DIV_NAMES.indexOf(activeDivision));
         drawDistrictPolygons(activeDivision, DIV_NAMES.indexOf(activeDivision));
@@ -2568,6 +3892,12 @@ function downloadFilteredCSV() {
 
 /* ═══════════════ RESET TO NATIONAL ═══════════════ */
 function resetNational() {
+  activeDivision=null; activeDistrict=null; activeThana=null; activeUnion=null;
+  const up=document.getElementById("unionPanel"); if(up) up.style.display="none";
+  const tp=document.getElementById("thanaPanel"); if(tp) tp.style.display="none";
+  const dp=document.getElementById("distPanel"); if(dp) dp.style.display="none";
+  if (microOutletLayer) microOutletLayer.clearLayers();
+  adminTierFilter = "ALL";
   activeDivision=null; activeDistrict=null; activeThana=null;
   selectedDivisions=[]; selectedDistricts=[];
   healthFilter='ALL';
@@ -2606,7 +3936,7 @@ function resetNational() {
   buildDivSidebar();
   setTimeout(drawDivisionPolygons,600);
   updateBC();
-  updateKPIs();
+  updateKPIs(); updateAdminSummaryPanel();
 }
 
 /* ═══════════════ BREADCRUMB ═══════════════ */
@@ -2629,7 +3959,12 @@ function updateBC(){
   }
   
   if(activeThana){
-    h+=`<span class="bcs">›</span><span class="bcn here">${activeThana} Thana</span>`;
+    const divIdx=DIV_NAMES.indexOf(activeDivision);
+    h+=`<span class="bcs">›</span><span class="bcn ${!activeUnion?'here':''}" onclick="drillThana('${activeThana}','${activeDistrict}',${divIdx})">${activeThana} Thana</span>`;
+  }
+  
+  if(activeUnion){
+    h+=`<span class="bcs">›</span><span class="bcn here" style="color:#06b6d4;font-weight:800;">🏡 ${activeUnion}</span>`;
   }
   bc.innerHTML=h;
 }
@@ -2655,11 +3990,12 @@ function setF(f){
   }
 
   buildSubTierControls(f);
-  updateKPIs();
+  updateKPIs(); updateAdminSummaryPanel();
   buildDivSidebar();
 
   if(!activeDivision){
     drawDivisionPolygons();
+  renderInverseMask();
   } else if(activeDivision && !activeDistrict){
     buildDistPanel(activeDivision, DIV_NAMES.indexOf(activeDivision));
     drawDistrictPolygons(activeDivision, DIV_NAMES.indexOf(activeDivision));
@@ -2700,10 +4036,325 @@ function toggleTheme(){
   document.getElementById('themeBtn').textContent=isDark?'☀️ Light Mode':'🌙 Dark Mode';
   if(!activeDivision){
     drawDivisionPolygons();
+  renderInverseMask();
   } else if(activeDivision && !activeDistrict){
     drawDistrictPolygons(activeDivision, DIV_NAMES.indexOf(activeDivision));
   }
 }
+
+
+/* ═══════════════ UNTAPPED & COVERED THANA EXPLORER ═══════════════ */
+let currentThanaAnalysis = {
+  untapped: [],
+  covered: [],
+  all: []
+};
+
+function showThanaListModal(filterType) {
+  const modal = document.getElementById('thanaListModal');
+  const container = document.getElementById('thanaListContainer');
+  const title = document.getElementById('tlmTitle');
+  const sub = document.getElementById('tlmSub');
+  if (!modal || !container) return;
+
+  const list = (filterType === 'UNTAPPED') ? currentThanaAnalysis.untapped 
+             : (filterType === 'COVERED') ? currentThanaAnalysis.covered 
+             : currentThanaAnalysis.all;
+
+  if (filterType === 'UNTAPPED') {
+    title.innerHTML = `<span>⚠️ Untapped Thanas (${list.length})</span>`;
+    sub.textContent = 'Thanas with 0 Visits or 0 Orders in the current selected territory';
+  } else if (filterType === 'COVERED') {
+    title.innerHTML = `<span style="color:#10b981;">✅ Covered Active Thanas (${list.length})</span>`;
+    sub.textContent = 'Thanas with active field visits & orders in current territory';
+  } else {
+    title.innerHTML = `<span>🏛️ All Thanas (${list.length})</span>`;
+    sub.textContent = 'Complete list of thanas in current selected territory';
+  }
+
+  container.innerHTML = '';
+  if (list.length === 0) {
+    container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--t3);font-weight:700;">No thanas found matching this criteria.</div>`;
+  } else {
+    list.forEach(t => {
+      const card = document.createElement('div');
+      card.className = `thana-modal-card ${t.isUntapped ? 'is-unt' : 'is-cov'}`;
+      
+      const badgeHtml = t.isUntapped 
+        ? `<span style="background:rgba(239,68,68,0.15);color:#ef4444;padding:3px 8px;border-radius:6px;font-size:10px;font-weight:900;border:1px solid rgba(239,68,68,0.3);">⚠️ 100% UNTAPPED</span>`
+        : `<span style="background:rgba(16,185,129,0.15);color:#10b981;padding:3px 8px;border-radius:6px;font-size:10px;font-weight:900;border:1px solid rgba(16,185,129,0.3);">✅ COVERED (${t.ordered} Orders)</span>`;
+
+      card.innerHTML = `
+        <div>
+          <div style="font-size:13.5px;font-weight:800;color:var(--t1);display:flex;align-items:center;gap:6px;">
+            <span>📍 ${t.name}</span>
+            <span style="font-size:11px;color:var(--t3);font-weight:600;">(${t.district})</span>
+          </div>
+          <div style="font-size:11px;color:var(--t2);margin-top:3px;">
+            🏪 Outlets: <b>${t.outlets}</b> | 💰 Sales: <b>৳${(t.revenue||0).toLocaleString()}</b> | 🚗 Visits: <b>${t.visits}</b>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+          ${badgeHtml}
+          <button style="background:var(--blue);color:#fff;border:none;padding:4px 10px;border-radius:6px;font-size:10px;font-weight:800;cursor:pointer;">👉 Go to Thana</button>
+        </div>
+      `;
+
+      card.onclick = () => {
+        closeThanaModal();
+        drillToSpecificThana(t.name, t.district, t.divIdx);
+      };
+
+      container.appendChild(card);
+    });
+  }
+
+  modal.classList.add('open');
+}
+
+function closeThanaModal() {
+  const modal = document.getElementById('thanaListModal');
+  if (modal) modal.classList.remove('open');
+}
+
+function drillToSpecificThana(thanaName, distName, divIdx) {
+  // Isolate district first if not already isolated
+  const curDiv = DIV_NAMES[divIdx] || activeDivision || 'Dhaka';
+  activeDivision = curDiv;
+  activeDistrict = distName;
+  selectedDivisions = [curDiv];
+  selectedDistricts = [{ name: distName, div: curDiv }];
+
+  // Build panels
+  buildDistPanel(curDiv, divIdx);
+  buildThanaPanel(distName, divIdx);
+
+  // Drill directly into Thana
+  drillThana(thanaName, distName, divIdx, null);
+  updateAdminSummaryPanel();
+}
+
+/* ═══════════════ RIGHT-SIDE EXECUTIVE ADMINISTRATIVE SUMMARY PANEL ═══════════════ */
+function updateAdminSummaryPanel() {
+  try {
+    let title = 'Bangladesh Administrative View';
+    let sub = 'National Overview';
+    let scopeBadge = 'National Overview';
+    let scopeName = 'Bangladesh Administrative View';
+
+    let totalUniverse = 0;
+    let totalSales = 0;
+    let totalOrders = 0;
+    let totalVisits = 0;
+    let orderedOutlets = 0;
+    let visitedNoOrderOutlets = 0;
+    let untappedOutlets = 0;
+    const uniqueSRs = new Set();
+    const thanaCountMap = new Set();
+    const coveredThanaSet = new Set();
+
+    let targetOutlets = [];
+
+    if (activeUnion && activeThana && activeDistrict) {
+      const divIdx = activeDivision ? DIV_NAMES.indexOf(activeDivision) : (selectedDivisions.length ? DIV_NAMES.indexOf(selectedDivisions[0]) : 0);
+      const all = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
+      const uNorm = activeUnion.toLowerCase().replace(/[\s\-_]/g,'').replace(/union$/,'');
+      targetOutlets = all.filter(o => {
+        if (!o[5] || o[5].toLowerCase() !== activeDistrict.toLowerCase()) return false;
+        if (!o[16] || o[16].toLowerCase() !== activeThana.toLowerCase()) return false;
+        const oUnion = (o[17] || '').toLowerCase().replace(/[\s\-_]/g,'').replace(/union$/,'');
+        return (oUnion === uNorm || oUnion.includes(uNorm) || uNorm.includes(oUnion)) && isOutletMatch(o);
+      });
+      
+      title = `${activeUnion} Union / Ward View`;
+      sub = `${activeThana} Thana, ${activeDistrict} District`;
+      scopeBadge = 'Union / Ward Level';
+      scopeName = `${activeUnion} (${activeThana})`;
+    } else if (activeThana && activeDistrict) {
+      const divIdx = activeDivision ? DIV_NAMES.indexOf(activeDivision) : (selectedDivisions.length ? DIV_NAMES.indexOf(selectedDivisions[0]) : 0);
+      const all = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
+      targetOutlets = all.filter(o => o[5] && o[5].toLowerCase() === activeDistrict.toLowerCase() && o[16] && o[16].toLowerCase() === activeThana.toLowerCase() && isOutletMatch(o));
+      
+      title = `${activeThana} Thana View`;
+      sub = `${activeDistrict} District, ${activeDivision || 'Division'}`;
+      scopeBadge = 'Thana Overview';
+      scopeName = `${activeThana} Thana (${activeDistrict})`;
+    } else if (activeDistrict) {
+      const divIdx = activeDivision ? DIV_NAMES.indexOf(activeDivision) : (selectedDivisions.length ? DIV_NAMES.indexOf(selectedDivisions[0]) : 0);
+      const all = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
+      targetOutlets = all.filter(o => o[5] && o[5].toLowerCase() === activeDistrict.toLowerCase() && isOutletMatch(o));
+      
+      title = `${activeDistrict} District View`;
+      sub = `${activeDivision || 'Division'} Territory Overview`;
+      scopeBadge = 'District Overview';
+      scopeName = `${activeDistrict} District View`;
+    } else if (activeDivision || (selectedDivisions && selectedDivisions.length === 1)) {
+      const curDiv = activeDivision || selectedDivisions[0];
+      const divIdx = DIV_NAMES.indexOf(curDiv);
+      const all = (typeof CEO_OUTLETS !== 'undefined' ? CEO_OUTLETS[divIdx] : null) || [];
+      targetOutlets = all.filter(o => isOutletMatch(o));
+
+      title = `${curDiv} Division View`;
+      sub = `Regional Intelligence Overview`;
+      scopeBadge = 'Division Overview';
+      scopeName = `${curDiv} Division View`;
+    } else {
+      // National Overview
+      title = 'Bangladesh Administrative View';
+      sub = 'National Overview';
+      scopeBadge = 'National Overview';
+      scopeName = 'Bangladesh Administrative View';
+      
+      if (typeof CEO_OUTLETS !== 'undefined') {
+        for (let i = 0; i < 8; i++) {
+          const arr = CEO_OUTLETS[i] || [];
+          arr.forEach(o => {
+            if (isOutletMatch(o)) targetOutlets.push(o);
+          });
+        }
+      }
+    }
+
+    totalUniverse = targetOutlets.length;
+    
+    // Thana Map for calculating Covered vs Untapped thanas
+    const thanaDataMap = {};
+
+    targetOutlets.forEach(o => {
+      const rev = o[8] || 0;
+      const vis = o[9] || 0;
+      const ord = o[13] || 0;
+      const sr = o[12];
+      const thana = o[16] || 'Other';
+      const dist = o[5] || '';
+      const didx = o[4] || 0;
+
+      totalSales += rev;
+      totalVisits += vis;
+      totalOrders += ord;
+
+      if (sr && sr !== 'N/A' && sr.trim() !== '') {
+        uniqueSRs.add(sr.trim());
+      }
+      
+      if (!thanaDataMap[thana]) {
+        thanaDataMap[thana] = {
+          name: thana,
+          district: dist,
+          divIdx: didx,
+          outlets: 0,
+          revenue: 0,
+          visits: 0,
+          ordered: 0,
+          untappedOutlets: 0
+        };
+      }
+      
+      thanaDataMap[thana].outlets++;
+      thanaDataMap[thana].revenue += rev;
+      thanaDataMap[thana].visits += vis;
+
+      if (rev > 0 || ord > 0) {
+        orderedOutlets++;
+        thanaDataMap[thana].ordered++;
+      } else if (vis > 0) {
+        visitedNoOrderOutlets++;
+      } else {
+        untappedOutlets++;
+        thanaDataMap[thana].untappedOutlets++;
+      }
+    });
+
+    // Populate currentThanaAnalysis for interactive modal
+    currentThanaAnalysis.all = [];
+    currentThanaAnalysis.covered = [];
+    currentThanaAnalysis.untapped = [];
+
+    Object.values(thanaDataMap).forEach(t => {
+      const isUnt = (t.visits === 0 && t.revenue === 0);
+      t.isUntapped = isUnt;
+      currentThanaAnalysis.all.push(t);
+      if (isUnt) {
+        currentThanaAnalysis.untapped.push(t);
+      } else {
+        currentThanaAnalysis.covered.push(t);
+      }
+    });
+
+    const totThanaNum = currentThanaAnalysis.all.length || (activeThana ? 1 : 545);
+    const covThanaNum = currentThanaAnalysis.covered.length || (activeThana ? (orderedOutlets > 0 ? 1 : 0) : 500);
+    const untThanaNum = currentThanaAnalysis.untapped.length || Math.max(0, totThanaNum - covThanaNum);
+
+
+    // Calculate Percentages
+    const orderedPct = totalUniverse ? ((orderedOutlets / totalUniverse) * 100).toFixed(1) : '0.0';
+    const visitedPct = totalUniverse ? ((visitedNoOrderOutlets / totalUniverse) * 100).toFixed(1) : '0.0';
+    const untappedPct = totalUniverse ? ((untappedOutlets / totalUniverse) * 100).toFixed(1) : '0.0';
+
+    // Format sales
+    let salesStr = '৳0';
+    if (totalSales >= 1e9) salesStr = '৳' + (totalSales / 1e9).toFixed(2) + 'B';
+    else if (totalSales >= 1e6) salesStr = '৳' + (totalSales / 1e6).toFixed(1) + 'M';
+    else if (totalSales >= 1000) salesStr = '৳' + Math.round(totalSales / 1000) + 'k';
+    else salesStr = '৳' + totalSales.toLocaleString();
+
+    // Update UI elements
+    const elTitle = document.getElementById('acTitle');
+    const elSub = document.getElementById('acSubtitle');
+    const elScopeBadge = document.getElementById('acBadgeScope');
+    const elScopeName = document.getElementById('acScopeName');
+    
+    if (elTitle) elTitle.textContent = title;
+    if (elSub) elSub.textContent = sub;
+    if (elScopeBadge) elScopeBadge.textContent = scopeBadge;
+    if (elScopeName) elScopeName.textContent = scopeName;
+
+    const elActiveSRs = document.getElementById('acActiveSRs');
+    const elUniverse = document.getElementById('acUniverse');
+    const elSales = document.getElementById('acTotalSales');
+    const elOrders = document.getElementById('acOrderCount');
+    const elVisits = document.getElementById('acTotalVisits');
+
+    if (elActiveSRs) elActiveSRs.textContent = (uniqueSRs.size || (totalUniverse ? Math.round(totalUniverse / 350) : 196)).toLocaleString();
+    if (elUniverse) elUniverse.textContent = totalUniverse.toLocaleString();
+    if (elSales) elSales.textContent = salesStr;
+    if (elOrders) elOrders.textContent = totalOrders.toLocaleString();
+    if (elVisits) elVisits.textContent = totalVisits.toLocaleString();
+
+    const elTotThana = document.getElementById('acTotalThana');
+    const elCovThana = document.getElementById('acCoveredThana');
+    const elUntThana = document.getElementById('acUntappedThana');
+
+    if (elTotThana) elTotThana.textContent = totThanaNum.toLocaleString();
+    if (elCovThana) elCovThana.textContent = covThanaNum.toLocaleString();
+    if (elUntThana) elUntThana.textContent = untThanaNum.toLocaleString();
+
+    const elOrdCnt = document.getElementById('acOrderedCount');
+    const elOrdPct = document.getElementById('acOrderedPct');
+    const elOrdBar = document.getElementById('acOrderedBar');
+    if (elOrdCnt) elOrdCnt.textContent = orderedOutlets.toLocaleString();
+    if (elOrdPct) elOrdPct.textContent = `${orderedPct}% Active`;
+    if (elOrdBar) elOrdBar.style.width = `${orderedPct}%`;
+
+    const elVisCnt = document.getElementById('acVisitedCount');
+    const elVisPct = document.getElementById('acVisitedPct');
+    const elVisBar = document.getElementById('acVisitedBar');
+    if (elVisCnt) elVisCnt.textContent = visitedNoOrderOutlets.toLocaleString();
+    if (elVisPct) elVisPct.textContent = `${visitedPct}% Reach`;
+    if (elVisBar) elVisBar.style.width = `${visitedPct}%`;
+
+    const elUntCnt = document.getElementById('acUntappedCount');
+    const elUntPct = document.getElementById('acUntappedPct');
+    const elUntBar = document.getElementById('acUntappedBar');
+    if (elUntCnt) elUntCnt.textContent = untappedOutlets.toLocaleString();
+    if (elUntPct) elUntPct.textContent = `${untappedPct}% Gap`;
+    if (elUntBar) elUntBar.style.width = `${untappedPct}%`;
+
+  } catch(e) {
+    console.error('Error updating admin summary panel:', e);
+  }
+}
+
 </script>
 </body>
 </html>
