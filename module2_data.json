@@ -6905,17 +6905,62 @@
     "multi_item_orders_pct": 46.0
   },
   "simulation_v2": {
-    "total_opportunity_M": 567.4,
+    "total_opportunity_M": 1723.6,
+    "full_potential_M": 7537.2,
     "scenario_bronze_to_silver": {
-      "outlets": 52217,
-      "uplift_pct": 226.5,
-      "uplift_total": 208417889.46
+      "outlets": 70647,
+      "current_avg": 2414.78,
+      "target_avg": 9102.06,
+      "uplift_total": 472436270.16,
+      "uplift_pct": 276.9
     },
     "scenario_silver_to_gold": {
-      "outlets": 52217,
-      "uplift_pct": 119.5,
-      "uplift_total": 359021638.69
-    }
+      "outlets": 73192,
+      "current_avg": 9102.06,
+      "target_avg": 26196.3,
+      "uplift_total": 1251161614.08,
+      "uplift_pct": 187.8
+    },
+    "scenario_gold_to_platinum": {
+      "outlets": 47585,
+      "current_avg": 26196.3,
+      "target_avg": 148369.15,
+      "uplift_total": 5813595067.25,
+      "uplift_pct": 466.4
+    },
+    "tier_upgrade_scenarios": [
+      {
+        "from": "Bronze",
+        "to": "Silver",
+        "outlets": 70647,
+        "uplift": 472436270.16,
+        "uplift_M": 472.4,
+        "uplift_pct": 276.9
+      },
+      {
+        "from": "Silver",
+        "to": "Gold",
+        "outlets": 73192,
+        "uplift": 1251161614.08,
+        "uplift_M": 1251.2,
+        "uplift_pct": 187.8
+      },
+      {
+        "from": "Gold",
+        "to": "Platinum",
+        "outlets": 47585,
+        "uplift": 5813595067.25,
+        "uplift_M": 5813.6,
+        "uplift_pct": 466.4
+      },
+      {
+        "from": "Bronze+Silver",
+        "to": "Gold",
+        "outlets": 143839,
+        "uplift": 1723597884.24,
+        "uplift_M": 1723.6
+      }
+    ]
   },
   "smartpitch": [
     {
