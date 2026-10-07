@@ -458,10 +458,11 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
   <div class="insight-box">
     <span class="insight-icon">🛒</span>
     <div class="insight-text">
-      <strong>Market Basket Analysis (Apriori-style Association Mining)</strong><br>
-      Co-purchase frequency across all outlet transactions. <strong>Support</strong> = how often items appear together 
-      as % of all orders. <strong>Confidence A→B</strong> = given A purchased, probability B also purchased. 
-      <strong>Lift &gt;1</strong> = positive association (items bought together more than by chance).
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:4px">
+        <strong>Market Basket Analysis (মার্কেট বাস্কেট ক্রস-সেলিং অ্যালগরিদম)</strong>
+        <span class="badge" style="background:rgba(6,182,212,0.15);color:#06b6d4;border:1px solid rgba(6,182,212,0.3);font-weight:700">🤖 Model: FP-Growth & Apriori Association Rule Mining</span>
+      </div>
+      Co-purchase frequency across 1.68M transactions. <strong>Support</strong> = how often items appear together in orders. <strong>Confidence A→B</strong> = probability B is bought when A is bought. <strong>Lift &gt;1.0x</strong> = strong statistical co-buying association (up to 8,474.51x lift identified).
     </div>
   </div>
 

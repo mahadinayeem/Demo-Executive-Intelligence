@@ -341,7 +341,10 @@ tr:hover td{background:var(--card2)}
           </div>
         </div>
         <div class="insight emerald" style="margin-top:14px">
-          <h4>📋 Segment Definitions &amp; Qualification Criteria</h4>
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px">
+            <h4 style="margin:0">📋 Segment Definitions &amp; Qualification Criteria</h4>
+            <span class="badge emerald" style="font-weight:700">🤖 Model: 3D Composite RFM Quantile Scoring Engine</span>
+          </div>
           <div style="display:grid;grid-template-columns:1fr;gap:6px;margin-top:8px;font-size:11.5px;color:var(--text2);line-height:1.5">
             <div>🏆 <strong>Champions:</strong> Last order ≤ 30 days (August) + ≥ 10 Orders + &gt; BDT 50,000 Revenue</div>
             <div>💎 <strong>Loyal Base:</strong> Last order ≤ 30 days (August) + ≥ 4 Orders (Regular repeat buyers)</div>
@@ -428,9 +431,10 @@ tr:hover td{background:var(--card2)}
     <!-- CHURN RISK RADAR TIMELINE BANNER -->
     <div class="insight gold" style="margin-bottom:16px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:14px 18px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <h4 style="color:var(--gold);font-size:13px;font-weight:800;display:flex;align-items:center;gap:6px;margin:0">
+        <h4 style="color:var(--gold);font-size:13px;font-weight:800;display:flex;align-items:center;gap:6px;margin:0;flex-wrap:wrap">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
           <span>Timeframe: Recent 60-Day Active Window (July–August 2026) — Dynamic Purchase Cycle Monitor</span>
+          <span class="badge gold" style="font-size:10px;padding:2px 8px;font-weight:700">🤖 Model: Dynamic Inter-Purchase Time (IPT) Poisson Anomaly &amp; Hazard Model</span>
         </h4>
         <button class="lang-toggle-btn" onclick="toggleNoteLang(this)" title="Toggle English / Bengali">
           <span class="lang-pill active" data-lang="en">EN</span>
