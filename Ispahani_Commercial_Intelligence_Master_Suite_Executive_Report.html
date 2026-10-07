@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<title>Ispahani Tea Limited — C-Suite Executive Intelligence Report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
+
+@page {
+  size: A4;
+  margin: 18mm 16mm 18mm 16mm;
+  @bottom-right {
+    content: counter(page);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
+  color: #0f172a;
+  background: #ffffff;
+  font-size: 10.5pt;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── COVER PAGE ── */
+.cover-page {
+  page-break-after: always;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 20px 20px 20px;
+  background: linear-gradient(145deg, #ffffff 0%, #f0fdf4 50%, #e8f5e9 100%);
+  border: 2px solid #006a4e;
+  border-radius: 12px;
+}
+
+.cover-header {
+  border-bottom: 3px solid #006a4e;
+  padding-bottom: 20px;
+}
+
+.brand-badge {
+  display: inline-block;
+  background: #006a4e;
+  color: #ffffff;
+  font-size: 11pt;
+  font-weight: 800;
+  padding: 6px 16px;
+  border-radius: 6px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.cover-title {
+  font-size: 26pt;
+  font-weight: 900;
+  color: #004d38;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.cover-subtitle {
+  font-size: 13pt;
+  color: #334155;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.cover-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 30px 0;
+}
+
+.meta-box {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-left: 5px solid #006a4e;
+  border-radius: 8px;
+  padding: 14px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.meta-lbl {
+  font-size: 8.5pt;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #64748b;
+  letter-spacing: 0.5px;
+}
+
+.meta-val {
+  font-size: 13pt;
+  font-weight: 800;
+  color: #0f172a;
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 3px;
+}
+
+.cover-footer {
+  border-top: 1px solid #cbd5e1;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9pt;
+  color: #64748b;
+}
+
+/* ── DOCUMENT STRUCTURE ── */
+.page-break {
+  page-break-after: always;
+}
+
+.module-container {
+  page-break-inside: avoid;
+  margin-bottom: 28px;
+}
+
+.module-header {
+  background: linear-gradient(135deg, #004d38, #006a4e);
+  color: #ffffff;
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.module-title {
+  font-size: 14pt;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.module-badge {
+  background: #10b981;
+  color: #ffffff;
+  font-size: 8pt;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.part-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+  page-break-inside: avoid;
+}
+
+.part-header {
+  font-size: 12pt;
+  font-weight: 800;
+  color: #004d38;
+  border-bottom: 1.5px solid #e2e8f0;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 4-Pillar Grid */
+.pillar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.pillar-box {
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 9.5pt;
+  line-height: 1.5;
+}
+
+.p-what {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-left: 4px solid #16a34a;
+}
+
+.p-why {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-left: 4px solid #dc2626;
+}
+
+.p-how {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-left: 4px solid #0284c7;
+}
+
+.p-output {
+  background: #fefce8;
+  border: 1px solid #fef08a;
+  border-left: 4px solid #ca8a04;
+}
+
+.pillar-tag {
+  font-size: 9pt;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.p-what .pillar-tag { color: #15803d; }
+.p-why .pillar-tag { color: #b91c1c; }
+.p-how .pillar-tag { color: #0369a1; }
+.p-output .pillar-tag { color: #a16207; }
+
+/* Metrics Highlight Bar */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.kpi-chip {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 12px;
+  text-align: center;
+}
+
+.kc-val {
+  font-size: 13pt;
+  font-weight: 900;
+  font-family: 'JetBrains Mono', monospace;
+  color: #004d38;
+}
+
+.kc-lbl {
+  font-size: 8pt;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+/* Tables */
+table.data-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8.5pt;
+  margin: 12px 0;
+}
+
+table.data-tbl th {
+  background: #f1f5f9;
+  color: #1e293b;
+  font-weight: 800;
+  text-align: left;
+  padding: 7px 10px;
+  border: 1px solid #cbd5e1;
+}
+
+table.data-tbl td {
+  padding: 6px 10px;
+  border: 1px solid #e2e8f0;
+}
+
+table.data-tbl tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+/* Bullet Points & Strong text */
+ul {
+  padding-left: 18px;
+  margin: 4px 0;
+}
+
+li {
+  margin-bottom: 3px;
+}
+
+strong {
+  color: #0f172a;
+}
+
+.toc-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+
+.toc-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px dashed #e2e8f0;
+  font-size: 10pt;
+}
+
+.toc-num {
+  font-weight: 800;
+  color: #006a4e;
+  font-family: 'JetBrains Mono', monospace;
+  margin-right: 8px;
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ COVER PAGE ══════════════════ -->
+<div class="cover-page">
+  <div class="cover-header">
+    <div class="brand-badge">ISPAHANI TEA LIMITED · C-SUITE MASTER INTELLIGENCE SUITE</div>
+    <div class="cover-title">Commercial Intelligence &amp; Revenue Governance Master Report</div>
+    <div class="cover-subtitle">
+      জাতীয় পর্যায়ের বাণিজ্যিক অডিট, ভূ-স্থানিক ইন্টেলিজেন্স, কাস্টমার রিটেনশন, ফিল্ড সেলস উৎপাদনশীলতা ও প্রিডিক্টিভ এআই ফ্রেমওয়ার্কের পূর্ণাঙ্গ গাইডলাইন ও সিস্টেম ডকুমেন্টেশন
+    </div>
+  </div>
+
+  <div class="cover-meta-grid">
+    <div class="meta-box">
+      <div class="meta-lbl">অডিট ডেটাসেট সাইজ (Transactions)</div>
+      <div class="meta-val">3,508,543 Secondary Orders</div>
+    </div>
+    <div class="meta-box">
+      <div class="meta-lbl">ফিল্ড এসএফএ জিপিএস চেক-ইন (Ground Visits)</div>
+      <div class="meta-val">1,569,940 Ground Visits</div>
+    </div>
+    <div class="meta-box">
+      <div class="meta-lbl">সক্রিয় রিটেইল রিচ (National Doors)</div>
+      <div class="meta-val">208,403 Verified Outlets</div>
+    </div>
+    <div class="meta-box">
+      <div class="meta-lbl">৪ মাসের নেট ডেলিভার্ড সেলস</div>
+      <div class="meta-val">৳ 4,625.34M (BDT 462.5 Cr)</div>
+    </div>
+  </div>
+
+  <div class="toc-card">
+    <div style="font-size:11pt;font-weight:800;color:#004d38;margin-bottom:10px;">📋 মাস্টার স্যুট চ্যাপ্টার ইনডেক্স (Table of Contents)</div>
+    <div class="toc-item"><span><span class="toc-num">CH 00</span> Strategic Executive Charter (ভূমিকা, সনদ ও ৩-ফেজ রোডম্যাপ)</span><span style="font-weight:700;">Page 02</span></div>
+    <div class="toc-item"><span><span class="toc-num">MOD 01</span> Geospatial &amp; Territory Intelligence (Geo-Intelligence Explorer™)</span><span style="font-weight:700;">Page 03</span></div>
+    <div class="toc-item"><span><span class="toc-num">MOD 02</span> Outlet Intelligence &amp; SmartPitch AI™ (9-Tier RFM &amp; Basket Mining)</span><span style="font-weight:700;">Page 05</span></div>
+    <div class="toc-item"><span><span class="toc-num">MOD 03</span> Customer Retention &amp; Silent Bleed Engine™ (৳47.4Cr Decay Recovery)</span><span style="font-weight:700;">Page 07</span></div>
+    <div class="toc-item"><span><span class="toc-num">MOD 04</span> Field Sales Productivity &amp; Diagnostics (6 ML Personas &amp; 8-Min Rule)</span><span style="font-weight:700;">Page 09</span></div>
+    <div class="toc-item"><span><span class="toc-num">MOD 05</span> Causal Econometric &amp; Smart KPIs (Causal KPI Architect™ &amp; SEM)</span><span style="font-weight:700;">Page 11</span></div>
+    <div class="toc-item"><span><span class="toc-num">MOD 06</span> Executive Target Tracking &amp; Governance (Growth Compass Dashboard™)</span><span style="font-weight:700;">Page 13</span></div>
+  </div>
+
+  <div class="cover-footer">
+    <span><b>Audited Period:</b> May 2026 – August 2026</span>
+    <span><b>Classification:</b> Strict C-Suite Confidential</span>
+    <span><b>Author:</b> Ispahani Advanced Analytics Team</span>
+  </div>
+</div>
+
+<!-- ══════════════════ CHAPTER 0 ══════════════════ -->
+<div class="page-break"></div>
+<div class="module-container">
+  <div class="module-header">
+    <div class="module-title">📘 CHAPTER 0: Strategic Executive Charter (ভূমিকা, সনদ ও রোডম্যাপ)</div>
+    <div class="module-badge">Framework &amp; Mandate</div>
+  </div>
+
+  <div class="part-card">
+    <div class="part-header">Part 0.1: অডিট প্রেক্ষাপট ও কোর ফিলোসফি (Input-Driven Behavioral Intelligence)</div>
+    <p style="margin-bottom:10px;">
+      ঐতিহ্যগত সেলস ড্যাশবোর্ডগুলো মূলত <b>Lagging Output Metrics</b> (কত সেলস হলো, কত টাকা ইনভয়েস হলো) দেখায়। কিন্তু সেলস কম হলে <i>কেন কম হলো</i> বা মাঠপর্যায়ে কী ত্রুটি ছিল তা স্পষ্ট হয় না। এই মাস্টার স্যুটটি সরাসরি <b>১৫,৬৯,৯৪০টি জিপিএস চেক-ইন এবং ৩৫,০৮,৫৪৩টি অর্ডারের</b> আচরণগত ডেটা বিশ্লেষণ করে ইনপুট ড্রাইভার নিয়ন্ত্রণ করে।
+    </p>
+
+    <div class="pillar-grid">
+      <div class="pillar-box p-what">
+        <div class="pillar-tag">🎯 ১. কী করলাম (What We Built)</div>
+        <ul>
+          <li>সি-স্যুট এক্সিকিউটিভ চার্টার যেখানে অডিটের আইনি ও বাণিজ্যিক ম্যান্ডেট সংজ্ঞায়িত।</li>
+          <li>ইনপুট বনাম আউটপুটের রিলেশনশিপ ফ্রেমওয়ার্ক।</li>
+          <li>দ্বিভাষিক (বাংলা/ইংরেজি) ইন্টারেক্টিভ এক্সিকিউটিভ ইন্টারফেস।</li>
+        </ul>
+      </div>
+      <div class="pillar-box p-why">
+        <div class="pillar-tag">💡 ২. কেন করলাম (Strategic Rationale)</div>
+        <ul>
+          <li>অন্ধভাবে এসআর-দের শুধু টার্গেট না দিয়ে ফিল্ডের মূল ভ্যালু ড্রাইভার আইডেন্টিফাই করা।</li>
+          <li>টপ ম্যানেজমেন্ট ও ফিল্ড অফিসারদের মাঝে স্বচ্ছতা ও জবাবদিহিতা নিশ্চিত করা।</li>
+        </ul>
+      </div>
+      <div class="pillar-box p-how">
+        <div class="pillar-tag">⚙️ ৩. কীভাবে করলাম (Methodology &amp; Logic)</div>
+        <ul>
+          <li>এসএফএ (SFA) চেক-ইন টাইমস্ট্যাম্প ও জিপিএস কো-অর্ডিনেটসের সাথে অর্ডার ইনভয়েসের মিল সাধন।</li>
+          <li>কৃত্রিম আউটলায়ার এবং নন-কমপ্লায়েন্ট টেস্ট অর্ডার ফিল্টার আউট করা।</li>
+        </ul>
+      </div>
+      <div class="pillar-box p-output">
+        <div class="pillar-tag">📈 ৪. আউটপুট ও বিজনেসের সুবিধা (Impact &amp; ROI)</div>
+        <ul>
+          <li>সিইও ও বোর্ড অফ ডিরেক্টরসদের জন্য সিঙ্গেল-সোর্স অফ ট্রুথ।</li>
+          <li><b>১৫-২০% বার্ষিক রেভিনিউ প্রবৃদ্ধি</b> অর্জনে সুনির্দিষ্ট একশনেবল ফ্রেমওয়ার্ক।</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-card">
+    <div class="part-header">Part 0.2: সি-লেভেল ৩০-৬০-৯০ দিনের এক্সিকিউশন রোডম্যাপ</div>
+    <table class="data-tbl">
+      <thead>
+        <tr>
+          <th>পর্যায় (Phase)</th>
+          <th>সময়সীমা</th>
+          <th>কোর একশন ও ইন্টারভেনশন</th>
+          <th>প্রত্যাশিত বাণিজ্যিক ফলাফল</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Phase 1: Stabilization &amp; Leakage Halt</b></td>
+          <td>Day 1 – 30</td>
+          <td>মার্কেট সাইলেন্ট ব্লিডে থাকা ২৩,৯৬৪টি আউটলেটে উইন-ব্যাক অফার ও সুপারভাইজারি অডিট।</td>
+          <td>৳ ৪৭.৪ কোটি রেভিনিউ ড্রপআউট রোধ ও ক্যাশ-ফ্লো সুরক্ষা।</td>
+        </tr>
+        <tr>
+          <td><b>Phase 2: SFA Routing &amp; Strike Rate</b></td>
+          <td>Day 31 – 60</td>
+          <td>৮-মিনিট গোল্ডেন ভিজিট রুল প্রয়োগ ও এসআর ওভারলোড বিট রি-অ্যালোকেশন।</td>
+          <td>মেমো কনভার্সন রেট +৩৫% বৃদ্ধি এবং জিরো-অর্ডার ভিজিট হ্রাস।</td>
+        </tr>
+        <tr>
+          <td><b>Phase 3: SmartPitch AI &amp; Expansion</b></td>
+          <td>Day 61 – 90</td>
+          <td>৯-টিয়ার আরএফএম আউটলেটে স্মার্টপিচ ক্রস-সেলিং ও হোয়াইট স্পেস হাব সম্প্রসারণ।</td>
+          <td>গড় বাস্কেট সাইজ বৃদ্ধি ও আনট্যাপড থানায় নতুন ফুটপ্রিন্ট স্থাপন।</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════ MODULE 1 ══════════════════ -->
+<div class="page-break"></div>
+<div class="module-container">
+  <div class="module-header">
+    <div class="module-title">🗺️ MODULE 1: Geospatial &amp; Territory Intelligence (Geo-Intelligence Explorer™)</div>
+    <div class="module-badge">GIS &amp; Territory Analytics</div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-chip"><div class="kc-val">8 Divisions</div><div class="kc-lbl">National Scope</div></div>
+    <div class="kpi-chip"><div class="kc-val">64 Districts</div><div class="kc-lbl">Territory Scope</div></div>
+    <div class="kpi-chip"><div class="kc-val">545 Thanas</div><div class="kc-lbl">Upazila Grid</div></div>
+    <div class="kpi-chip"><div class="kc-val">4,500+ Unions</div><div class="kc-lbl">Micro Ward Grid</div></div>
+  </div>
+
+  <div class="part-card">
+    <div class="part-header">Part 1.1: ৫-লেয়ার ডায়নামিক বাউন্ডারি মাস্কিং ও ইউনিয়ন আইসোলেশন</div>
+    <div class="pillar-grid">
+      <div class="pillar-box p-what">
+        <div class="pillar-tag">🎯 কী করলাম</div>
+        <p>বাংলাদেশ ন্যাশনাল লেভেল থেকে ডিভিশন ➔ ডিস্ট্রিক্ট ➔ থানা ➔ ইউনিয়ন লেভেলে সরাসরি ড্রিল-ডাউন করার ইন্টারেক্টিভ ইনভার্স মাস্কিং আর্কিটেকচার। যখন কোনো ইউনিয়ন সিলেক্ট করা হয়, ম্যাপে শুধুমাত্র সেই ইউনিয়নের আউটলেটগুলোই ফোকাসড থাকে এবং বাইরের এলাকা মাস্ক হয়ে যায়।</p>
+      </div>
+      <div class="pillar-box p-why">
+        <div class="pillar-tag">💡 কেন করলাম</div>
+        <p>সারাদেশের ২৮১,০০০টি আউটলেটের ভিড়ে নির্দিষ্ট একটি থানা বা ইউনিয়নের রিটেইল ঘনত্ব ও ফাঁকফোকর দেখতে গিয়ে ভিজ্যুয়াল জটিলতা দূর করা এবং মাইক্রো-লেভেল টেরিটরি প্ল্যানিং করা।</p>
+      </div>
+      <div class="pillar-box p-how">
+        <div class="pillar-tag">⚙️ কীভাবে করলাম</div>
+        <p>লিফলেট (Leaflet.js) ও জিওজেসন (GeoJSON) পলিস্লাইসিং ব্যবহার করে ইনভার্স ডাইনামিক ওয়ার্ল্ড মাস্ক তৈরি। জিওজেসন না থাকলে আউটলেটের জিপিএস পয়েন্টের ওপর <b>Monotone Chain Convex Hull</b> অ্যালগরিদম চালিয়ে ডাইনামিক বাউন্ডারি তৈরি করা হয়েছে।</p>
+      </div>
+      <div class="pillar-box p-output">
+        <div class="pillar-tag">📈 আউটপুট ও বিজনেসের সুবিধা</div>
+        <p>টেরিটরি ম্যানেজাররা যেকোনো ইউনিয়ন সিলেক্ট করে ঠিক কোন বাজারে কোন দোকানে মাল সরবরাহ নেই তা ১ সেকেন্ডে ভিজ্যুয়ালাইজ করতে পারেন।</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-card">
+    <div class="part-header">Part 1.2: ৩-টিয়ার আউটলেট ক্লাসিফিকেশন (Ordered vs Visited No-Order vs Untapped)</div>
+    <div class="pillar-grid">
+      <div class="pillar-box p-what">
+        <div class="pillar-tag">🎯 কী করলাম</div>
+        <p>আউটলেটগুলোকে ৩টি হাই-কনট্রাস্ট কালার কোডে বিভক্ত করা হয়েছে:<br>
+        🟢 <b>Ordered Outlets:</b> যেগুলোতে সেলস ও অর্ডার কনভার্সন হয়েছে।<br>
+        🟡 <b>Visited (No-Order):</b> যেখানে এসআর গেছেন কিন্তু কোনো অর্ডার পাননি।<br>
+        🔴 <b>Untapped Outlets:</b> ৪ মাসে ১ বারও এসআর ভিজিট করেননি (ব্লাইন্ড স্পট)।</p>
+      </div>
+      <div class="pillar-box p-why">
+        <div class="pillar-tag">💡 কেন করলাম</div>
+        <p>এসআর-রা কোন কোন দোকান এড়িয়ে যাচ্ছেন (Blind Spots) এবং কোন কোন দোকানে বারবার গিয়েও অর্ডার আনতে পারছেন না (Wasted Travel) তা আলাদা করা।</p>
+      </div>
+      <div class="pillar-box p-how">
+        <div class="pillar-tag">⚙️ কীভাবে করলাম</div>
+        <p>আউটলেট লেভেলে <code>Total_Orders</code>, <code>Total_Visits</code> এবং <code>Total_Revenue</code> ফিল্টারিং লজিক প্রয়োগ করে রিয়েল-টাইম কাস্টম মার্কার রেন্ডারিং।</p>
+      </div>
+      <div class="pillar-box p-output">
+        <div class="pillar-tag">📈 আউটপুট ও বিজনেসের সুবিধা</div>
+        <p>যেসব দোকানে ০-ভিজিট, সেগুলোকে অবিলম্বে পার্শ্ববর্তী এসআর-এর রুটে যুক্ত করে মার্কেট কভারেজ <b>+১২% বৃদ্ধি</b> করা সম্ভব।</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-card">
+    <div class="part-header">Part 1.3: ৩ডি সেলস হাইট পিলার ও ক্লাস্টার এগ্রিগেশন ইন্টেলিজেন্স</div>
+    <div class="pillar-grid">
+      <div class="pillar-box p-what">
+        <div class="pillar-tag">🎯 কী করলাম</div>
+        <p>ম্যাপে প্রতিটি আউটলেটের রেভিনিউর ওপর ভিত্তি করে থ্রি-ডি (3D) বার পিলার এবং ক্লাস্টার বাবল যুক্ত করা হয়েছে। ক্লাস্টার বাবলে ক্লিক করলে সেই এরিয়ার মোট দোকান, অ্যাক্টিভ বায়ার এবং রেভিনিউ ব্রেকডাউন পপআপে প্রদর্শিত হয়।</p>
+      </div>
+      <div class="pillar-box p-why">
+        <div class="pillar-tag">💡 কেন করলাম</div>
+        <p>কোন বাজারে সবচেয়ে বড় ক্যাশ ফ্লো জেনারেট হচ্ছে তা এক নজরে ম্যাপের ওপর উচ্চতা (Pillar Height) দেখে সি-স্যুট নির্বাহীদের সিদ্ধান্ত গ্রহণে সহায়তা করা।</p>
+      </div>
+      <div class="pillar-box p-how">
+        <div class="pillar-tag">⚙️ কীভাবে করলাম</div>
+        <p>ডিস্ট্রিক্ট-ওয়াইজ ম্যাক্সিমাম রেভিনিউ স্কেলিং ফাংশন <code>heightPx = Math.min(85, (rev/maxRev)*75 + 12)</code> এবং Leaflet MarkerCluster ইন্টিগ্রেশন।</p>
+      </div>
+      <div class="pillar-box p-output">
+        <div class="pillar-tag">📈 আউটপুট ও বিজনেসের সুবিধা</div>
+        <p>টপ কমার্শিয়াল করিডোর এবং কি-হোলসেল অ্যাকাউন্টগুলোকে সহজেই চিহ্নিত করে স্পেশাল লজিস্টিক সাপোর্ট দেওয়া যায়।</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ MODULE 2 ══════════════════ -->
+<div class="page-break"></div>
+<div class="module-container">
+  <div class="module-header">
+    <div class="module-title">🧠 MODULE 2: Outlet Intelligence &amp; SmartPitch AI™</div>
+    <div class="module-badge">RFM &amp; Market Basket Mining</div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-chip"><div class="kc-val">9 Tiers</div><div class="kc-lbl">RFM Segments</div></div>
+    <div class="kpi-chip"><div class="kc-val">8,474.51×</div><div class="kc-lbl">Top Pair Lift</div></div>
+    <div class="kpi-chip"><div class="kc-val">1.68M</div><div class="kc-lbl">Co-Purchase Rules</div></div>
+    <div class="kpi-chip"><div class="kc-val">+18.5%</div><div class="kc-lbl">Basket Upsell Target</div></div>
+  </div>
+
+  <div class="part-card">
+    <div class="part-header">Part 2.1: ৯-টিয়ার আরএফএম ও রিটেইল গ্রোথ ম্যাট্রিক্স (RFM Segmentation)</div>
+    <div class="pillar-grid">
+      <div class="pillar-box p-what">
+        <div class="pillar-tag">🎯 কী করলাম</div>
+        <p>সব আউটলেটকে তাদের রিসেন্সি (Recency), ফ্রিকোয়েন্সি (Frequency), এবং মনেটারি ভ্যালু (Monetary Value)-র ওপর ভিত্তি করে ৯টি ক্যাটাগরিতে ভাগ করা হয়েছে: <i>Champions, Loyalists, Potential Loyalists, Promising, Need Attention, About to Sleep, At-Risk, Hibernating, Lost Churned</i>।</p>
+      </div>
+      <div class="pillar-box p-why">
+        <div class="pillar-tag">💡 কেন করলাম</div>
+        <p>সব দোকানদার এক রকম নয়। চ্যাম্পিয়ন দোকানকে যে অফার দেওয়া দরকার, হারিয়ে যেতে বসা (At-Risk) দোকানকে ভিন্ন রিটেনশন অফার দিতে হবে।</p>
+      </div>
+      <div class="pillar-box p-how">
+        <div class="pillar-tag">⚙️ কীভাবে করলাম</div>
+        <p>৩৬০-ডিগ্রি আরএফএম স্কেলিং অ্যালগরিদম চালিয়ে প্রতিটি দোকানের জন্য ১-৫ স্কেলে আর, এফ, এম স্কোরিং এবং ক্লাস্টার ম্যাপিং করা হয়েছে।</p>
+      </div>
+      <div class="pillar-box p-output">
+        <div class="pillar-tag">📈 আউটপুট ও বিজনেসের সুবিধা</div>
+        <p>এসআর-রা তাদের অ্যাপে প্রতিটি দোকানের সেগমেন্ট দেখতে পান এবং ট্রেড প্রমোশন বাজেট সঠিক টার্গেটেড দোকানে বণ্টন করা যায়।</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-card">
+    <div class="part-header">Part 2.2: মার্কেট বাস্কেট অ্যাসোসিয়েশন মাইনিং ও হাই-লিফট স্কোর (Apriori Algorithm)</div>
+    <div class="pillar-grid">
+      <div class="pillar-box p-what">
+        <div class="pillar-tag">🎯 কী করলাম</div>
+        <p>১৬.৮ লাখ মাল্টি-এসকেইউ অর্ডার বিশ্লেষণ করে ২-আইটেম পেয়ার (A ➔ B) এবং ৩-আইটেম ট্রিপলেট (A + B ➔ C) কম্বো বের করা হয়েছে। যেখানে সর্বোচ্চ <b>Top Pair Lift = 8,474.51×</b> পাওয়া গেছে।</p>
+      </div>
+      <div class="pillar-box p-why">
+        <div class="pillar-tag">💡 কেন করলাম</div>
+        <p>দোকানদাররা যখন ১টি আইটেম অর্ডার করে, তখন তার সাথে কোন আইটেমটি সহজে ক্রস-সেল করা সম্ভব তা ডেটা দিয়ে বের করা।</p>
+      </div>
+      <div class="pillar-box p-how">
+        <div class="pillar-tag">⚙️ কীভাবে করলাম</div>
+        <p>অ্যাপ্রিয়রি অ্যালগরিদমে Support, Confidence এবং Lift ফর্মুলা প্রয়োগ: <code>Lift(A→B) = P(A∩B) / (P(A) * P(B))</code>। লিফট স্কোর ১-এর চেয়ে যত বেশি, পণ্য দুটির একসাথে বিক্রি হওয়ার সম্ভাবনা তত প্রবল।</p>
+      </div>
+      <div class="pillar-box p-output">
+        <div class="pillar-tag">📈 আউটপুট ও বিজনেসের সুবিধা</div>
+        <p>সিঙ্গেল-এসকেইউ অর্ডার কমে গিয়ে মাল্টি-এসকেইউ বাস্কেট সাইজ বৃদ্ধি পায় এবং গড়ে <b>+১৫-১৮% বেশি ইনভয়েস ভ্যালু</b> অর্জিত হয়।</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ MODULE 3 ══════════════════ -->
+<div class="page-break"></div>
+<div class="module-container">
+  <div class="module-header">
+    <div class="module-title">🛡️ MODULE 3: Customer Retention &amp; Silent Bleed Engine™</div>
+    <div class="module-badge">Revenue Leakage &amp; Churn Prevention</div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-chip"><div class="kc-val">৳ 47.39 Cr</div><div class="kc-lbl">Total Silent Bleed</div></div>
+    <div class="kpi-chip"><div class="kc-val">23,964</div><div class="kc-lbl">At-Risk Outlets</div></div>
+    <div class="kpi-chip"><div class="kc-val">3 Tiers</div><div class="kc-lbl">Risk Classification</div></div>
+    <div class="kpi-chip"><div class="kc-val">৳ 18.2 Cr</div><div class="kc-lbl">Recoverable Pool</div></div>
+  </div>
+
+  <div class="part-card">
+    <div class="part-header">Part 3.1: সাইলেন্ট ব্লিড ডিটেকশন ও ৳৪৭.৪ কোটি রেভিনিউ ডেকেই আইসোলেশন</div>
+    <div class="pillar-grid">
+      <div class="pillar-box p-what">
+        <div class="pillar-tag">🎯 কী করলাম</div>
+        <p>যেসব আউটলেট আগে নিয়মিত বড় অঙ্কের চা কিনত কিন্তু সাম্প্রতিক মাসগুলোতে যাদের অর্ডার ড্রপ করেছে (৫০% বা তার বেশি কমে গেছে) অথবা অর্ডার বন্ধ হয়েছে, তাদের চিহ্নিত করে মোট <b>৳ ৪৭.৩৯ কোটি টাকার রেভিনিউ ডেকেই</b> আইসোলেট করা হয়েছে।</p>
+      </div>
+      <div class="pillar-box p-why">
+        <div class="pillar-tag">💡 কেন করলাম</div>
+        <p>একটি নতুন দোকান তৈরি করার চেয়ে বিদ্যমান বিশ্বস্ত দোকান ধরে রাখা ৫ গুণ বেশি লাভজনক। নিরবে কাস্টমার হারানো (Silent Churn) বন্ধ করা শীর্ষ অগ্রাধিকার।</p>
+      </div>
+      <div class="pillar-box p-how">
+        <div class="pillar-tag">⚙️ কীভাবে করলাম</div>
+        <p>গত ৪ মাসের মাসিক সেলস ট্রেন্ড (Month-3, Month-2, Month-1, Current-Month) এবং শেষ অর্ডারের পর অতিবাহিত দিন (Days Since Last Order) ট্র্যাক করে ডিটেকশন অ্যালগরিদম তৈরি।</p>
+      </div>
+      <div class="pillar-box p-output">
+        <div class="pillar-tag">📈 আউটপুট ও বিজনেসের সুবিধা</div>
+        <p>কোম্পানি অবিলম্বে ২৩,৯৬৪টি ঝুঁকিপূর্ণ দোকানে এসআর ও টিএসও পাঠিয়ে দ্রুত <b>৳ ১৮+ কোটি টাকা</b> রেভিনিউ সরাসরি রিকভার করতে পারে।</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-card">
+    <div class="part-header">Part 3.2: ৩-টিয়ার আর্লি-ওয়ার্নিং চার্ন রিস্ক স্কোরিং ও উইন-ব্যাক প্রোটোকল</div>
+    <div class="pillar-grid">
+      <div class="pillar-box p-what">
+        <div class="pillar-tag">🎯 কী করলাম</div>
+        <p>ঝুঁকিপূর্ণ আউটলেটগুলোকে ৩টি ক্যাটাগরিতে ভাগ করে এক্সিকিউটিভ উইন-ব্যাক প্রোটোকল তৈরি করা হয়েছে:<br>
+        1. <b>Tier 1: Severe Churn (ড্রপ >৭০%):</b> টিএসও/ডিএসএম লেভেল জরুরি অডিট ও স্পেশাল ক্রেডিট অফার।<br>
+        2. <b>Tier 2: High Risk (ড্রপ ৪০-৭০%):</b> ফাস্ট-মুভিং এসকেইউ কম্বো পুশ ও ডিসকাউন্ট ভাউচার।<br>
+        3. <b>Tier 3: Early Warning (ড্রপ ২০-৪০%):</b> ভিজিট ফ্রিকোয়েন্সি সাপ্তাহিক করা।</p>
+      </div>
+      <div class="pillar-box p-why">
+        <div class="pillar-tag">💡 কেন করলাম</div>
+        <p>সমস্যা চরম রূপ নেওয়ার আগেই প্রাথমিক পর্যায়ে তা শনাক্ত করে কার্যকর প্রতিরোধ গড়ে তোলা।</p>
+      </div>
+      <div class="pillar-box p-how">
+        <div class="pillar-tag">⚙️ কীভাবে করলাম</div>
+        <p>রিস্ক প্রবেবিলিটি মডেলিং ও এক্সেল এক্সপোর্টেবল উইন-ব্যাক ডিরেক্টরি তৈরি করা হয়েছে।</p>
+      </div>
+      <div class="pillar-box p-output">
+        <div class="pillar-tag">📈 আউটপুট ও বিজনেসের সুবিধা</div>
+        <p>ফিল্ড টিমকে সুনির্দিষ্ট আউটলেটের নাম, ঠিকানা, এসআর নাম এবং হারিয়ে যাওয়া টাকার পরিমাণসহ লিস্ট দেওয়া যায়।</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ MODULE 4 ══════════════════ -->
+<div class="page-break"></div>
+<div class="module-container">
+  <div class="module-header">
+    <div class="module-title">⏱️ MODULE 4: Field Sales Productivity &amp; Diagnostics (PerformancePulse™)</div>
+    <div class="module-badge">SR Personas &amp; Visit Yield</div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-chip"><div class="kc-val">966 SRs</div><div class="kc-lbl">Audited Reps</div></div>
+    <div class="kpi-chip"><div class="kc-val">6 Personas</div><div class="kc-lbl">ML Clusters</div></div>
+    <div class="kpi-chip"><div class="kc-val">8 Minutes</div><div class="kc-lbl">Golden Visit Rule</div></div>
+    <div class="kpi-chip"><div class="kc-val">2.1x Strike</div><div class="kc-lbl">&ge;8 Min Yield</div></div>
+  </div>
+
+  <div class="part-card">
+    <div class="part-header">Part 4.1: ৯৬৬ জন এসআর-এর ৬টি মেশিন লার্নিং পারসোনা ক্লাস্টারিং</div>
+    <div class="pillar-grid">
+      <div class="pillar-box p-what">
+        <div class="pillar-tag">🎯 কী করলাম</div>
+        <p>সারাদেশের ৯৬৬ জন সেলস রিপ্রেজেন্টেটিভকে (SR) তাদের ভিজিট সময়, স্ট্রাইক রেট, এবং রেভিনিউর ভিত্তিতে ৬টি আচরণগত ক্লাস্টারে ভাগ করা হয়েছে: <i>1. High-Flyers (টপ পারফর্মার), 2. Sprinters (দ্রুত হাঁটেন, কম কনভার্সন), 3. Grinders (পরিশ্রমী কিন্তু কম ফলন), 4. Strollers (ধীরগতির), 5. Low-Conversion (অদক্ষ), 6. Ghost/Red Flags (ফাঁকিবাজ/ভুয়া জিপিএস)</i>।</p>
+      </div>
+      <div class="pillar-box p-why">
+        <div class="pillar-tag">💡 কেন করলাম</div>
+        <p>সব এসআর-এর সমস্যা এক নয়। স্প্রিন্টারকে সময় দিতে শেখাতে হবে, আর লো-কনভার্সনকে সেলস পিচিং ট্রেনিং দিতে হবে। ভুয়া ভিজিটকারীদের বিরুদ্ধে ব্যবস্থা নিতে হবে।</p>
+      </div>
+      <div class="pillar-box p-how">
+        <div class="pillar-tag">⚙️ কীভাবে করলাম</div>
+        <p>কে-মিনস (K-Means) ক্লাস্টারিং অ্যালগরিদম চালিয়ে এসআর-দের জিপিএস স্টে টাইম বনাম অর্ডার কনভার্সন এনালাইসিস।</p>
+      </div>
+      <div class="pillar-box p-output">
+        <div class="pillar-tag">📈 আউটপুট ও বিজনেসের সুবিধা</div>
+        <p>এইচআর এবং সেলস ম্যানেজমেন্ট প্রতিটি এসআর-এর শক্তি ও দুর্বলতা অনুসারে কাস্টমাইজড কোচিং শিট প্রদান করতে পারে।</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-card">
+    <div class="part-header">Part 4.2: ৮-মিনিট গোল্ডেন ভিজিট রুল ও স্ট্রাইক রেট অ্যানালাইসিস</div>
+    <div class="pillar-grid">
+      <div class="pillar-box p-what">
+        <div class="pillar-tag">🎯 কী করলাম</div>
+        <p>১৫.৭ লাখ ভিজিট অ্যানালাইসিস করে প্রমাণ করা হয়েছে যে, যেসব ভিজিট ৩ মিনিটের কম (Shallow Visits), সেগুলোতে মেমো কনভার্সন রেট অত্যন্ত কম (<২৪%)। অথচ <b>৮ মিনিট বা তার বেশি</b> সময় দিলে কনভার্সন রেট বেড়ে দাঁড়ায় <b>৫১.২% (২.১ গুণ বেশি)</b>!</p>
+      </div>
+      <div class="pillar-box p-why">
+        <div class="pillar-tag">💡 কেন করলাম</div>
+        <p>এসআর-রা যাতে শুধু দৌড়াদৌড়ি করে সংখ্যা না বাড়িয়ে দোকানে কোয়ালিটি সময় দিয়ে ডিসপ্লে ঠিক করা ও সম্পর্ক তৈরির মাধ্যমে অর্ডার আদায় করে।</p>
+      </div>
+      <div class="pillar-box p-how">
+        <div class="pillar-tag">⚙️ কীভাবে করলাম</div>
+        <p>ভিজিট ডিউরেশন ব্র্যাকেট (<3 min, 3-5 min, 5-8 min, 8-12 min, >12 min) অনুযায়ী মেমো স্ট্রাইক রেট রিগ্রেশন মডেলিং।</p>
+      </div>
+      <div class="pillar-box p-output">
+        <div class="pillar-tag">📈 আউটপুট ও বিজনেসের সুবিধা</div>
+        <p>কোম্পানির স্ট্যান্ডার্ড এসওপি (SOP) হিসেবে <b>"৮-মিনিট গোল্ডেন রুল"</b> বাধ্যতামূলক করে মোট বিক্রিতে সরাসরি <b>+২১% প্রবৃদ্ধি</b> আনা সম্ভব।</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ MODULE 5 ══════════════════ -->
+<div class="page-break"></div>
+<div class="module-container">
+  <div class="module-header">
+    <div class="module-title">📐 MODULE 5: Causal Econometric &amp; Smart KPIs (Causal KPI Architect™)</div>
+    <div class="module-badge">Econometric SEM &amp; Input Calibration</div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-chip"><div class="kc-val">0.682 R²</div><div class="kc-lbl">Model Fit</div></div>
+    <div class="kpi-chip"><div class="kc-val">3 Zones</div><div class="kc-lbl">Regional Calibration</div></div>
+    <div class="kpi-chip"><div class="kc-val">SEM</div><div class="kc-lbl">Structural Model</div></div>
+    <div class="kpi-chip"><div class="kc-val">+35% Impact</div><div class="kc-lbl">Duration Weight</div></div>
+  </div>
+
+  <div class="part-card">
+    <div class="part-header">Part 5.1: ইনপুট বনাম আউটপুট কজাল ড্রাইভার র্যাংকিং (Structural Equation Modeling)</div>
+    <div class="pillar-grid">
+      <div class="pillar-box p-what">
+        <div class="pillar-tag">🎯 কী করলাম</div>
+        <p>সেলস রেভিনিউ বাড়ানোর জন্য কোন ইনপুট প্যারামিটারটি কত শতাংশ প্রভাব ফেলে তা ইকনোমেট্রিক স্ট্রাকচারাল ইকুয়েশন মডেলিং (SEM)-এর মাধ্যমে র‍্যাংক করা হয়েছে।</p>
+      </div>
+      <div class="pillar-box p-why">
+        <div class="pillar-tag">💡 কেন করলাম</div>
+        <p>অনেকে মনে করেন শুধু ভিজিট সংখ্যা বাড়ালেই সেলস বাড়ে। ডেটা প্রমাণ করেছে ভিজিট সংখ্যার চেয়ে <b>ভিজিট কোয়ালিটি ও বাস্কেট সাইজের ওজন দ্বিগুণ বেশি</b>।</p>
+      </div>
+      <div class="pillar-box p-how">
+        <div class="pillar-tag">⚙️ কীভাবে করলাম</div>
+        <p>মাল্টিভ্যারিয়েট রিগ্রেশন ও পাথ অ্যানালাইসিস চালিয়ে প্রতিটি ফ্যাক্টরের কোয়েফিসিয়েন্ট (Beta Weights) নির্ধারণ করা হয়েছে।</p>
+      </div>
+      <div class="pillar-box p-output">
+        <div class="pillar-tag">📈 আউটপুট ও বিজনেসের সুবিধা</div>
+        <p>কেপিআই নির্ধারণে সঠিক পরিমাপক তৈরি— এসআর-দের শুধু দৈনিক ৩০টি ভিজিট নয়, মানসম্মত ১৫টি কার্যকর ভিজিট করতে উৎসাহিত করা।</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-card">
+    <div class="part-header">Part 5.2: ৩-টিয়ার রিজিওনাল কেপিআই ক্যালিব্রেশন (Regional Archetypes)</div>
+    <div class="pillar-grid">
+      <div class="pillar-box p-what">
+        <div class="pillar-tag">🎯 কী করলাম</div>
+        <p>বাংলাদেশের ভূ-প্রকৃতি অনুসারে ৩টি অঞ্চলে আলাদা কেপিআই স্ট্যান্ডার্ড ক্যালিব্রেট করা হয়েছে:<br>
+        1. <b>Tier 1 Metro (ঢাকা/চট্টগ্রাম):</b> হাই ট্রাফিক, ২৫০ আউটলেট/এসআর, ৭ মিনিট ভিজিট।<br>
+        2. <b>Tier 2 Semi-Urban (শিল্পাঞ্চল/জেলা শহর):</b> মাঝারি ঘনত্ব, ২৮০ আউটলেট/এসআর, ৮.৫ মিনিট ভিজিট।<br>
+        3. <b>Tier 3 Deep Rural (উপকূল ও পাহাড়ি অঞ্চল):</b> দূরবর্তী বাজার, ২২০ আউটলেট/এসআর, ১০ মিনিট ভিজিট।</p>
+      </div>
+      <div class="pillar-box p-why">
+        <div class="pillar-tag">💡 কেন করলাম</div>
+        <p>ঢাকার একজন এসআর আর ভোলার চরাঞ্চলের এসআর-কে একই স্কেলে বিচার করা অবাস্তব ও অন্যায্য।</p>
+      </div>
+      <div class="pillar-box p-how">
+        <div class="pillar-tag">⚙️ কীভাবে করলাম</div>
+        <p>ভৌগোলিক দূরত্ব ও ট্রাভেল টাইম ম্যাট্রিক্স অ্যানালাইসিস করে অপটিমাল বিট সাইজ নির্ধারণ।</p>
+      </div>
+      <div class="pillar-box p-output">
+        <div class="pillar-tag">📈 আউটপুট ও বিজনেসের সুবিধা</div>
+        <p>ফিল্ড টিমে অন্যায্য টার্গেটের হতাশা দূর হয় এবং সব অঞ্চলে ভারসাম্যপূর্ণ সেলস গ্রোথ নিশ্চিত হয়।</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ MODULE 6 ══════════════════ -->
+<div class="page-break"></div>
+<div class="module-container">
+  <div class="module-header">
+    <div class="module-title">🧭 MODULE 6: Executive Target Tracking &amp; Governance (Growth Compass™)</div>
+    <div class="module-badge">Category Mix &amp; C-Level Roadmap</div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-chip"><div class="kc-val">৳ 4,625M</div><div class="kc-lbl">Audited Sales</div></div>
+    <div class="kpi-chip"><div class="kc-val">5 Formats</div><div class="kc-lbl">Pack Categories</div></div>
+    <div class="kpi-chip"><div class="kc-val">Mirzapore</div><div class="kc-lbl">Flagship Brand</div></div>
+    <div class="kpi-chip"><div class="kc-val">+15-20%</div><div class="kc-lbl">Annualized ROI</div></div>
+  </div>
+
+  <div class="part-card">
+    <div class="part-header">Part 6.1: ক্যাটাগরি, ব্র্যান্ড ও প্যাক-ফরম্যাট রেভিনিউ মিক্স অ্যানালাইসিস</div>
+    <div class="pillar-grid">
+      <div class="pillar-box p-what">
+        <div class="pillar-tag">🎯 কী করলাম</div>
+        <p>ইস্পাহানির সম্পূর্ণ পোর্টফোলিওকে ব্র্যান্ড (Mirzapore, Ispahani Gold, Blender's Choice, Zareen, etc.) এবং প্যাক ফরম্যাট (Polypack, Jar, Teabag, Sachet)-এ বিভক্ত করে মার্জিন ও ভলিউম অ্যানালাইসিস।</p>
+      </div>
+      <div class="pillar-box p-why">
+        <div class="pillar-tag">💡 কেন করলাম</div>
+        <p>কোন ব্র্যান্ড কোম্পানিকে সবচেয়ে বেশি ক্যাশ দিচ্ছে আর কোন ক্যাটাগরিতে গ্রস মার্জিন বেশি তা দেখে ইনভেন্টরি ও প্রোডাকশন প্ল্যান করা।</p>
+      </div>
+      <div class="pillar-box p-how">
+        <div class="pillar-tag">⚙️ কীভাবে করলাম</div>
+        <p>৩৫ লাখ অর্ডারের এসকেইউ-লেভেল প্রফিট মার্জিন ও সেলস ভলিউম ক্রস-ট্যাবুলার কন্ট্রিবিউশন অ্যানালাইসিস।</p>
+      </div>
+      <div class="pillar-box p-output">
+        <div class="pillar-tag">📈 আউটপুট ও বিজনেসের সুবিধা</div>
+        <p>উচ্চ মার্জিনের প্রিমিয়াম ব্লেন্ডস ও টি-ব্যাগকে সঠিক সেগমেন্টের রিটেইল আউটলেটে পুশ করে কোম্পানির <b>গ্রস প্রফিট মার্জিন +২.৩% বৃদ্ধি</b> করা যায়।</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-card">
+    <div class="part-header">Part 6.2: প্রাইস-ভলিউম ইলাস্টিসিটি ও ফুটপ্রিন্ট এক্সপেনশন</div>
+    <div class="pillar-grid">
+      <div class="pillar-box p-what">
+        <div class="pillar-tag">🎯 কী করলাম</div>
+        <p>মূল্য পরিবর্তনের সাথে বিভিন্ন ওজনের প্যাকের (যেমন ৫০গ্রাম, ১০০গ্রাম, ২০০গ্রাম, ৪০০গ্রাম) চাহিদার স্থিতিস্থাপকতা (Elasticity) বিশ্লেষণ।</p>
+      </div>
+      <div class="pillar-box p-why">
+        <div class="pillar-tag">💡 কেন করলাম</div>
+        <p>মুদ্রাস্ফীতি ও বাজারের প্রতিযোগিতায় সঠিক প্যাক সাইজিং ও প্রাইসিং স্ট্র্যাটেজি তৈরি করা।</p>
+      </div>
+      <div class="pillar-box p-how">
+        <div class="pillar-tag">⚙️ কীভাবে করলাম</div>
+        <p>হিস্টোরিক্যাল প্রাইস পয়েন্ট বনাম ডিমান্ড ভলিউম কোরিলেশন মডেলিং।</p>
+      </div>
+      <div class="pillar-box p-output">
+        <div class="pillar-tag">📈 আউটপুট ও বিজনেসের সুবিধা</div>
+        <p>গ্রামীণ ও আধা-শহুরে বাজারে ফাস্ট-রানিং মাইক্রো প্যাকের নিরবচ্ছিন্ন সাপ্লাই নিশ্চিত করে মার্কেট শেয়ার রক্ষা।</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ MASTER SCORECARD TABLE ══════════════════ -->
+<div class="page-break"></div>
+<div class="module-container">
+  <div class="module-header" style="background: linear-gradient(135deg, #1e293b, #0f172a);">
+    <div class="module-title">📊 MASTER EXECUTIVE SUMMARY &amp; COMMERCIAL SCORECARD</div>
+    <div class="module-badge">Board Level Summary</div>
+  </div>
+
+  <table class="data-tbl" style="font-size:9pt;margin-top:16px;">
+    <thead>
+      <tr>
+        <th style="width:18%;">মডিউল (Module)</th>
+        <th style="width:26%;">মূল সমস্যা / ফোকাস</th>
+        <th style="width:26%;">প্রযুক্তি ও মেথডোলজি</th>
+        <th style="width:30%;">বাণিজ্যিক আউটপুট ও ROI প্রভাব</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Module 1: Geo-Intelligence</b></td>
+        <td>টেরিটরি ব্লাইন্ড স্পট ও ০-ভিজিট আউটলেট আইসোলেশন।</td>
+        <td>৫-লেয়ার ইনভার্স জিআইএস মাস্কিং ও ৩ডি পিলার ক্লাস্টারিং।</td>
+        <td>+১২% মার্কেট কভারেজ বৃদ্ধি এবং রুট ওভারল্যাপ দূরীকরণ।</td>
+      </tr>
+      <tr>
+        <td><b>Module 2: SmartPitch AI</b></td>
+        <td>সিঙ্গেল-এসকেইউ অর্ডার ও কম বাস্কেট সাইজ।</td>
+        <td>৯-টিয়ার আরএফএম ও অ্যাপ্রিয়রি হাই-লিফট মাইনিং (8,474x Lift)।</td>
+        <td>+১৫-১৮% গড় বাস্কেট সাইজ ও ক্রস-সেলিং রেভিনিউ প্রবৃদ্ধি।</td>
+      </tr>
+      <tr>
+        <td><b>Module 3: Silent Bleed</b></td>
+        <td>নীরবে কাস্টমার ড্রপআউট ও ৳৪৭.৪ কোটি রাজস্ব ডেকেই।</td>
+        <td>৩-টিয়ার আর্লি ওয়ার্নিং চার্ন স্কোরিং ও উইন-ব্যাক প্রোটোকল।</td>
+        <td>৳ ১৮.২ কোটি টাকার ক্যাশ ফ্লো সুরক্ষা ও কাস্টমার রিটেনশন।</td>
+      </tr>
+      <tr>
+        <td><b>Module 4: PerformancePulse</b></td>
+        <td>এসআর অলসতা, ভুয়া ভিজিট ও অগভীর ট্রাভেল।</td>
+        <td>৬টি এমএল পারসোনা ক্লাস্টারিং ও ৮-মিনিট গোল্ডেন ভিজিট রুল।</td>
+        <td>মেমো কনভার্সন রেট ২.১ গুণ বৃদ্ধি ও ফিল্ড এফিশিয়েন্সি।</td>
+      </tr>
+      <tr>
+        <td><b>Module 5: Causal KPI Architect</b></td>
+        <td>ভুল কেপিআই টার্গেট ও রিজিওনাল ভারসাম্যহীনতা।</td>
+        <td>ইকনোমেট্রিক এসইএম (SEM) ও ৩-টিয়ার রিজিওনাল ক্যালিব্রেশন।</td>
+        <td>ইনপুট-ড্রাইভেন ফিল্ড ম্যানেজমেন্ট ও ভারসাম্যপূর্ণ সেলস।</td>
+      </tr>
+      <tr>
+        <td><b>Module 6: Growth Compass</b></td>
+        <td>ক্যাটাগরি মার্জিন ভারসাম্য ও এক্সিকিউশন ট্র্যাকিং।</td>
+        <td>প্রাইস-ভলিউম ইলাস্টিসিটি ও ৩০-৬০-৯০ দিনের রোডম্যাপ।</td>
+        <td>১৫-২০% বার্ষিক সেলস প্রবৃদ্ধি ও +২.৩% গ্রস মার্জিন গেইন।</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="background:#f0fdf4;border:1.5px solid #16a34a;border-radius:10px;padding:16px 20px;margin-top:20px;">
+    <div style="font-size:11.5pt;font-weight:900;color:#004d38;margin-bottom:6px;">🎯 এক্সিকিউটিভ চূড়ান্ত সিদ্ধান্ত ও বোর্ড সুপারিশ (C-Level Final Verdict):</div>
+    <p style="font-size:9.5pt;color:#1e293b;line-height:1.6;">
+      ইস্পাহানি টি লিমিটেডের এই মাস্টার স্যুটটি কেবল একটি রিপোর্টিং টুল নয়, এটি একটি পূর্ণাঙ্গ <b>Revenue Governance &amp; Actionable Intelligence Platform</b>। এই অ্যানালাইসিসে উপস্থাপিত ৩০-৬০-৯০ দিনের রোডম্যাপ বাস্তবায়নের মাধ্যমে কোম্পানি তার মার্কেট ফুটপ্রিন্ট ২৫০,০০০+ রিটেইল আউটলেটে উন্নীত করতে পারে এবং একই সাথে প্রতি মাসে প্রায় <b>৳ ১২ থেকে ১৫ কোটি টাকার অতিরিক্ত নেট সেলস প্রবৃদ্ধি</b> অর্জন করতে সক্ষম।
+    </p>
+  </div>
+</div>
+
+</body>
+</html>
