@@ -1,799 +1,465 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ispahani Tea Limited — C-Suite Executive Intelligence Portal</title>
-<meta name="description" content="Ispahani Tea Limited (ITL) C-Suite National Sales, Geospatial, AI Recommendation, Churn Prevention, Field Productivity & Predictive Intelligence Master Suite">
+<title>Executive Portal Authentication | Ispahani Tea Limited</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --sidebar-w: 370px;
-  --bg: #f8fafc;
-  --bg-sidebar: #ffffff;
-  --card: #ffffff;
-  --card2: #f1f5f9;
-  --border: #e2e8f0;
-  --border2: #cbd5e1;
-  --text: #0f172a;
-  --text2: #334155;
-  --text3: #64748b;
-  --primary: #006a4e; /* Ispahani Signature Heritage Green */
+  --primary: #006a4e;
   --primary-dark: #004d38;
   --primary-light: #e8f5e9;
-  --primary-subtle: rgba(0, 106, 78, 0.08);
   --accent: #10b981;
-  --accent2: #2563eb;
-  --gold: #b45309;
-  --gold-bg: #fef3c7;
-  --rose: #e11d48;
-  --rose-bg: #ffe4e6;
-  --cyan: #0284c7;
-  --purple: #7c3aed;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 20px -2px rgba(0,0,0,0.07);
-  --shadow-lg: 0 12px 32px -4px rgba(0,0,0,0.1);
-}
-
-[data-theme="dark"] {
-  --bg: #070a13;
-  --bg-sidebar: #0d121f;
-  --card: #111827;
-  --card2: #192237;
-  --border: #1e293b;
-  --border2: #334155;
+  --bg: #090d16;
+  --card: rgba(17, 24, 39, 0.85);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-focus: #10b981;
   --text: #f8fafc;
-  --text2: #94a3b8;
-  --text3: #64748b;
-  --primary: #10b981;
-  --primary-dark: #059669;
-  --primary-light: rgba(16, 185, 129, 0.12);
-  --primary-subtle: rgba(16, 185, 129, 0.06);
-  --gold: #f59e0b;
-  --gold-bg: rgba(245, 158, 11, 0.12);
-  --rose: #f43f5e;
-  --rose-bg: rgba(244, 63, 94, 0.12);
-  --shadow-md: 0 8px 30px rgba(0,0,0,0.6);
-  --shadow-lg: 0 15px 40px rgba(0,0,0,0.8);
+  --text-muted: #94a3b8;
+  --danger: #ef4444;
+  --danger-bg: rgba(239, 68, 68, 0.12);
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
-html, body { height: 100%; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ── BOOK-STYLE APPLICATION CONTAINER ── */
-.book-app {
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-}
-
-/* ── LEFT EXECUTIVE SIDEBAR (BOOK DIRECTORY) ── */
-.book-sidebar {
-  width: var(--sidebar-w);
-  min-width: var(--sidebar-w);
-  height: 100vh;
-  background: var(--bg-sidebar);
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  z-index: 100;
-  box-shadow: var(--shadow-md);
-}
-
-/* Sidebar Brand Header */
-.sidebar-header {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-sidebar);
-}
-.brand-identity {
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
 }
-.brand-logo-img {
-  height: 42px;
-  max-width: 120px;
-  object-fit: contain;
+
+/* Ambient animated background glow */
+.bg-glow-1 {
+  position: absolute;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(0, 106, 78, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
+  top: -150px;
+  left: -150px;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  animation: floatSlow 12s ease-in-out infinite alternate;
 }
-.brand-meta h1 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--text);
-  letter-spacing: -0.3px;
-  line-height: 1.2;
+
+.bg-glow-2 {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(0, 0, 0, 0) 70%);
+  bottom: -180px;
+  right: -180px;
+  border-radius: 50%;
+  filter: blur(90px);
+  z-index: 0;
+  animation: floatSlow 14s ease-in-out infinite alternate-reverse;
 }
-.csuite-badge {
-  background: var(--primary);
-  color: #ffffff;
-  font-size: 9.5px;
-  font-weight: 800;
-  padding: 2px 7px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  display: inline-block;
-  margin-top: 3px;
+
+.bg-grid {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
 }
-.audit-pill {
+
+@keyframes floatSlow {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, 50px) scale(1.1); }
+}
+
+/* Auth Card */
+.auth-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 440px;
+}
+
+.auth-card {
+  background: var(--card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px 36px;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7),
+              0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.brand-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.brand-logo-badge {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #006a4e 0%, #10b981 100%);
+  border-radius: 18px;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  background: var(--gold-bg);
-  color: var(--gold);
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 10.5px;
-  font-weight: 700;
-  font-family: 'JetBrains Mono', monospace;
-  margin-top: 8px;
-  border: 1px solid rgba(180, 83, 9, 0.2);
-}
-
-/* Scrollable Sidebar Content */
-.sidebar-scroll {
-  flex: 1;
-  overflow-y: auto;
-  padding: 14px 14px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
-}
-.sidebar-scroll::-webkit-scrollbar { width: 5px; }
-.sidebar-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-
-/* Section Labels */
-.section-lbl {
+  justify-content: center;
   font-family: 'Outfit', sans-serif;
-  font-size: 11px;
-  font-weight: 800;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 10px 6px 6px;
+  font-size: 26px;
+  font-weight: 900;
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 106, 78, 0.4);
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* ── TABLE OF CONTENTS (CHAPTERS) ── */
-.chapter-list {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+.brand-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
 }
-.chapter-card {
-  padding: 9px 12px;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  background: transparent;
+
+.brand-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.security-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 4px 10px;
+  border-radius: 100px;
+  margin-top: 10px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  letter-spacing: 0.4px;
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.input-box {
+  position: relative;
+}
+
+.input-box svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  pointer-events: none;
+  transition: color 0.2s;
+}
+
+.form-input {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 13px 44px 13px 42px;
+  font-size: 14px;
+  color: #ffffff;
+  font-family: inherit;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--border-focus);
+  background: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+}
+
+.form-input:focus + svg {
+  color: var(--accent);
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #64748b;
   cursor: pointer;
+  padding: 6px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  text-align: left;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color 0.2s;
+}
+
+.toggle-password:hover {
+  color: #cbd5e1;
+}
+
+/* Remember me & Auto Login hint */
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  font-size: 12.5px;
+}
+
+.remember-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  cursor: pointer;
   user-select: none;
 }
-.chapter-card:hover {
-  background: var(--card2);
-  border-color: var(--border);
-}
-.chapter-card.active {
-  background: var(--primary-light);
-  border-color: var(--primary);
-  box-shadow: 0 2px 8px rgba(0, 106, 78, 0.12);
-}
-.chapter-card.intro-card {
-  background: rgba(37, 99, 235, 0.05);
-  border: 1px dashed rgba(37, 99, 235, 0.3);
-  margin-bottom: 6px;
-}
-.chapter-card.intro-card.active {
-  background: rgba(37, 99, 235, 0.12);
-  border: 1px solid var(--accent2);
-}
-.chapter-num {
-  width: 26px;
-  height: 26px;
-  border-radius: 7px;
-  background: var(--card2);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11.5px;
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 800;
-  color: var(--text2);
-  flex-shrink: 0;
-}
-.chapter-card.active .chapter-num {
-  background: var(--primary);
-  color: #ffffff;
-  border-color: var(--primary);
-}
-.chapter-card.intro-card .chapter-num {
-  background: var(--accent2);
-  color: #ffffff;
-  border-color: var(--accent2);
-}
-.chapter-info {
-  flex: 1;
-  min-width: 0;
-}
-.chapter-title {
-  font-size: 12.5px;
-  font-weight: 700;
-  color: var(--text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.chapter-card.active .chapter-title {
-  color: var(--primary);
-  font-weight: 800;
-}
-.chapter-card.intro-card.active .chapter-title {
-  color: var(--accent2);
-  font-weight: 800;
-}
-.chapter-sub {
-  font-size: 10.5px;
-  color: var(--text3);
-  margin-top: 1px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
-/* Macro KPI Widget */
-.sidebar-macro-kpi {
-  background: var(--card2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px;
-  margin-top: 14px;
-}
-.macro-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-.macro-lbl { font-size: 9.5px; text-transform: uppercase; color: var(--text3); font-weight: 700; }
-.macro-val { font-size: 15px; font-weight: 900; font-family: 'JetBrains Mono', monospace; color: var(--primary); }
-.macro-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px solid var(--border);
-}
-.macro-item-lbl { font-size: 9px; color: var(--text3); font-weight: 600; text-transform: uppercase; }
-.macro-item-val { font-size: 11.5px; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: var(--text); }
-
-/* Sidebar Footer */
-.sidebar-footer {
-  padding: 12px 14px;
-  border-top: 1px solid var(--border);
-  background: var(--bg-sidebar);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.footer-btn-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-.action-btn {
-  background: var(--card);
-  border: 1px solid var(--border);
-  color: var(--text2);
-  padding: 8px 10px;
-  border-radius: 8px;
+.remember-label input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: 700;
-  font-size: 11.5px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: var(--shadow-sm);
-}
-.action-btn:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-  background: var(--primary-subtle);
-}
-.action-btn.primary {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  color: #ffffff;
-  border-color: transparent;
-  width: 100%;
-}
-.action-btn.primary:hover {
-  box-shadow: 0 4px 14px rgba(0, 106, 78, 0.35);
-  color: #ffffff;
 }
 
-/* ── RIGHT MAIN CANVAS (BOOK VIEWPORT) ── */
-.book-stage {
-  flex: 1;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: var(--bg);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Top Canvas Strip */
-.stage-topbar {
-  background: var(--card);
-  border-bottom: 1px solid var(--border);
-  padding: 9px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  box-shadow: var(--shadow-sm);
-  z-index: 10;
-}
-.stage-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.stage-badge {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+/* Submit Button */
+.btn-submit {
+  width: 100%;
+  background: linear-gradient(135deg, #006a4e 0%, #059669 100%);
   color: #ffffff;
-  font-size: 10.5px;
-  font-weight: 800;
-  padding: 4px 10px;
-  border-radius: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  box-shadow: 0 2px 6px rgba(0, 106, 78, 0.25);
-}
-.stage-badge.blue {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
-}
-.stage-question {
-  font-size: 12.5px;
-  color: var(--text2);
-}
-.stage-question strong { color: var(--text); }
-.stage-right { display: flex; align-items: center; gap: 10px; }
-.stage-btn {
-  background: transparent;
-  border: 1px solid var(--border);
-  padding: 5px 12px;
-  border-radius: 6px;
-  font-size: 11.5px;
-  font-weight: 700;
-  color: var(--text2);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  transition: all 0.2s;
-}
-.stage-btn:hover {
-  color: var(--primary);
-  border-color: var(--primary);
-  background: var(--primary-subtle);
-}
-
-/* Iframe Stage Viewport */
-.stage-viewport {
-  flex: 1;
-  width: 100%;
-  height: calc(100vh - 49px);
-  position: relative;
-  background: var(--bg);
-}
-.module-iframe {
-  width: 100%;
-  height: 100%;
   border: none;
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.module-iframe.active {
-  display: block;
-}
-
-/* ── MODALS (SHARING GUIDE) ── */
-.modal-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(8px);
-  z-index: 999;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-}
-.modal-overlay.active { display: flex; }
-.modal-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  max-width: 840px;
-  width: 100%;
-  max-height: 88vh;
-  overflow-y: auto;
-  padding: 32px;
-  box-shadow: var(--shadow-lg);
-  position: relative;
-  animation: modalIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-@keyframes modalIn {
-  from { opacity: 0; transform: scale(0.96) translateY(10px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-.modal-close-icon {
-  position: absolute;
-  top: 22px; right: 22px;
-  background: var(--card2); border: 1px solid var(--border);
-  color: var(--text2); width: 34px; height: 34px;
-  border-radius: 50%; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 15px; font-weight: 800; transition: all 0.2s;
-}
-.modal-close-icon:hover { background: var(--rose); color: #fff; border-color: var(--rose); }
-
-.share-step-box {
-  background: var(--card2);
-  border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 12px;
-}
-.share-step-title {
+  padding: 14px;
+  font-size: 14.5px;
+  font-weight: 700;
   font-family: 'Outfit', sans-serif;
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--primary);
-  margin-bottom: 4px;
+  letter-spacing: 0.3px;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 8px 20px rgba(0, 106, 78, 0.35);
+  transition: all 0.25s ease;
 }
-.share-step-desc { font-size: 12.5px; color: var(--text2); line-height: 1.5; }
-.code-snippet {
-  background: #0f172a;
-  color: #38bdf8;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-family: 'JetBrains Mono', monospace;
+
+.btn-submit:hover {
+  background: linear-gradient(135deg, #007a5a 0%, #10b981 100%);
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-submit:active {
+  transform: translateY(1px);
+}
+
+/* Error banner */
+.error-banner {
+  display: none;
+  background: var(--danger-bg);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  margin-bottom: 20px;
+  align-items: center;
+  gap: 9px;
+  animation: shake 0.35s ease-in-out;
+}
+
+.error-banner.show {
+  display: flex;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* Success Animation */
+.success-banner {
+  display: none;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #6ee7b7;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  align-items: center;
+  gap: 9px;
+}
+
+.success-banner.show {
+  display: flex;
+}
+
+.footer-copy {
+  text-align: center;
+  margin-top: 24px;
   font-size: 11.5px;
-  margin-top: 6px;
-  display: block;
+  color: #64748b;
+  letter-spacing: 0.3px;
 }
 </style>
 </head>
 <body>
 
-<div class="book-app">
+<div class="bg-grid"></div>
+<div class="bg-glow-1"></div>
+<div class="bg-glow-2"></div>
 
-  <!-- ════════════════════ LEFT EXECUTIVE SIDEBAR (BOOK DIRECTORY) ════════════════════ -->
-  <aside class="book-sidebar">
+<div class="auth-wrapper">
+  <div class="auth-card">
     
-    <!-- Header with Official Logo -->
-    <div class="sidebar-header">
-      <div class="brand-identity">
-        <img src="Ispahani-logo-sm.png" alt="Ispahani Tea Limited" class="brand-logo-img" onerror="this.style.display='none'">
-        <div class="brand-meta">
-          <h1>Ispahani Tea Limited</h1>
-          <span class="csuite-badge">C-Suite Master Portal</span>
-        </div>
-      </div>
-      <div>
-        <span class="audit-pill">📅 May 2026 – Aug 2026 Full Audit Cycle</span>
+    <div class="brand-header">
+      <div class="brand-logo-badge">ITL</div>
+      <h1 class="brand-title">Ispahani Tea Limited</h1>
+      <p class="brand-subtitle">C-Suite Executive Commercial Intelligence Portal</p>
+      <div class="security-tag">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>SECURE ENTERPRISE ENCLAVE</span>
       </div>
     </div>
 
-    <!-- Scrollable Chapter Index & Insights -->
-    <div class="sidebar-scroll">
-      
-      <!-- Section 1: Executive Strategic Charter -->
-      <div class="section-lbl">
-        <span>Strategic Framework (ভূমিকা ও সনদ)</span>
-      </div>
-      
-      <div class="chapter-card intro-card active" id="tab-m0" onclick="switchModule(0)">
-        <div class="chapter-num">0</div>
-        <div class="chapter-info">
-          <div class="chapter-title">📘 Strategic Executive Charter</div>
-          <div class="chapter-sub">Check Introduction · Why, ROI & 30-60-90D Roadmap</div>
-        </div>
-      </div>
-
-      <!-- Section 2: Book Chapters / 6 Modules -->
-      <div class="section-lbl">
-        <span>Executive Chapters (৬টি মডিউল)</span>
-      </div>
-
-      <nav class="chapter-list">
-        
-        <div class="chapter-card" id="tab-m1" onclick="switchModule(1)">
-          <div class="chapter-num">1</div>
-          <div class="chapter-info">
-            <div class="chapter-title">Geospatial & Territory Intelligence</div>
-            <div class="chapter-sub">Geo-Intelligence Explorer™ · 3D Sales Height</div>
-          </div>
-        </div>
-
-        <div class="chapter-card" id="tab-m2" onclick="switchModule(2)">
-          <div class="chapter-num">2</div>
-          <div class="chapter-info">
-            <div class="chapter-title">Outlet Intelligence & SmartPitch AI™</div>
-            <div class="chapter-sub">SmartPitch AI™ · 9-Tier Segmentation</div>
-          </div>
-        </div>
-
-        <div class="chapter-card" id="tab-m3" onclick="switchModule(3)">
-          <div class="chapter-num">3</div>
-          <div class="chapter-info">
-            <div class="chapter-title">Customer Retention & Silent Bleed</div>
-            <div class="chapter-sub">Silent Bleed Engine™ · ৳47.4Cr Decay &amp; Churn Recovery</div>
-          </div>
-        </div>
-
-        <div class="chapter-card" id="tab-m4" onclick="switchModule(4)">
-          <div class="chapter-num">4</div>
-          <div class="chapter-info">
-            <div class="chapter-title">Field Sales Productivity & Diagnostics</div>
-            <div class="chapter-sub">PerformancePulse™ · 6 ML Personas & Yield</div>
-          </div>
-        </div>
-
-        <div class="chapter-card" id="tab-m5" onclick="switchModule(5)">
-          <div class="chapter-num">5</div>
-          <div class="chapter-info">
-            <div class="chapter-title">Causal Econometric & Smart KPIs</div>
-            <div class="chapter-sub">Causal KPI Architect™ · Pure Input SEM</div>
-          </div>
-        </div>
-
-        <div class="chapter-card" id="tab-m6" onclick="switchModule(6)">
-          <div class="chapter-num">6</div>
-          <div class="chapter-info">
-            <div class="chapter-title">Executive Target Tracking & Governance</div>
-            <div class="chapter-sub">Growth Compass™ · Category Mix & Roadmap</div>
-          </div>
-        </div>
-
-      </nav>
-
+    <div class="error-banner" id="errorBanner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span id="errorMsg">ইমেইল অথবা পাসওয়ার্ড সঠিক নয়। পুনরায় চেষ্টা করুন।</span>
     </div>
 
-    <!-- Sidebar Footer -->
-    <div class="sidebar-footer">
-      <button class="action-btn" style="width:100%" onclick="toggleTheme()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <span id="themeBtnText">Dark Mode</span>
+    <div class="success-banner" id="successBanner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>যাচাইকরণ সফল! পোর্টালে প্রবেশ করা হচ্ছে...</span>
+    </div>
+
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label class="form-label" for="userEmail">Executive Email ID</label>
+        <div class="input-box">
+          <input type="email" id="userEmail" class="form-input" placeholder="name@company.com" required autocomplete="username">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="userPass">Portal Access Password</label>
+        <div class="input-box">
+          <input type="password" id="userPass" class="form-input" placeholder="••••••••••••" required autocomplete="current-password">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <button type="button" class="toggle-password" onclick="togglePassVisibility()" title="Show/Hide Password">
+            <svg id="eyeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <label class="remember-label">
+          <input type="checkbox" id="rememberMe" checked>
+          <span>Remember session</span>
+        </label>
+        <span style="font-size:11.5px;color:#64748b;">Enterprise 256-bit SSL</span>
+      </div>
+
+      <button type="submit" class="btn-submit" id="btnSubmit">
+        <span>Enter Intelligence Portal</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </button>
-    </div>
+    </form>
 
-  </aside>
+    <p class="footer-copy">© 2026 Ispahani Tea Limited · C-Suite Confidential</p>
 
-  <!-- ════════════════════ RIGHT MAIN EXPANSIVE CANVAS (THE BOOK PAGES) ════════════════════ -->
-  <main class="book-stage">
-    
-    <!-- Top Context & Action Strip -->
-    <div class="stage-topbar">
-      <div class="stage-left">
-        <span class="stage-badge blue" id="stageBadge">CHAPTER 0 · STRATEGIC CHARTER</span>
-        <div class="stage-question" id="stageQuestion">
-          <strong>Strategic Overview:</strong> Comprehensive audit mandate, quantified commercial ROI, and 30-60-90 day execution roadmap.
-        </div>
-      </div>
-      <div class="stage-right">
-        <button class="stage-btn" id="globalLangBtn" onclick="toggleGlobalAppLang()" title="Toggle English / Bengali globally across all modules">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          <span id="globalLangText">বাংলা</span>
-        </button>
-        <button class="stage-btn" onclick="openCurrentInNewTab()" title="Open active module in full browser tab">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-          Fullscreen
-        </button>
-        <button class="stage-btn" onclick="openShareModal()">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></svg>
-          Share with CEO
-        </button>
-      </div>
-    </div>
-
-    <!-- 7 Live Iframes Viewport (Intro + 6 Modules) -->
-    <div class="stage-viewport">
-      <iframe class="module-iframe active" id="frame-m0" src="introduction_module.html"></iframe>
-      <iframe class="module-iframe" id="frame-m1" src="ceo_national_map.html?v=20261006_v16"></iframe>
-      <iframe class="module-iframe" id="frame-m2" src="module2_smartpitch.html?v=20261006_tiers_v7"></iframe>
-      <iframe class="module-iframe" id="frame-m3" src="module3_retention.html?v=20261006_v4"></iframe>
-      <iframe class="module-iframe" id="frame-m4" src="module4_performance.html"></iframe>
-      <iframe class="module-iframe" id="frame-m5" src="module5_kpi_architect.html?v=20261006_causal_v18"></iframe>
-      <iframe class="module-iframe" id="frame-m6" src="module6_growth_compass.html"></iframe>
-    </div>
-
-  </main>
-
-</div>
-
-<!-- ════════════════════ SHARING & DEPLOYMENT MODAL ════════════════════ -->
-<div class="modal-overlay" id="shareModal" onclick="closeModal('shareModal')">
-  <div class="modal-card" onclick="event.stopPropagation()">
-    <button class="modal-close-icon" onclick="closeModal('shareModal')">✕</button>
-    <div style="margin-bottom:16px">
-      <span class="csuite-badge">Seamless Executive Sharing</span>
-      <h2 style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:var(--text);margin-top:6px">
-        How to Share This Master Suite with the CEO
-      </h2>
-    </div>
-
-    <div class="share-step-box">
-      <div class="share-step-title">📦 Method 1: Instant Offline ZIP Package (সবচেয়ে সহজ অফলাইন পদ্ধতি)</div>
-      <div class="share-step-desc">
-        এই সম্পূর্ণ ফোল্ডারটিকে ZIP করে ইমেইল, গুগল ড্রাইভ বা পেনড্রাইভে দিয়ে দিন। অপর প্রান্তে যে কেউ আনজিপ করে <code>start_dashboard.bat</code> ফাইলে ডাবল ক্লিক করলেই সম্পূর্ণ ড্যাশবোর্ড অফলাইনে ওপেন হয়ে যাবে (কোনো ইনস্টলেশন ছাড়াই)।
-      </div>
-    </div>
-
-    <div class="share-step-box">
-      <div class="share-step-title">🌐 Method 2: Free 1-Click Cloud Live Web Link (Netlify / Tiiny.host)</div>
-      <div class="share-step-desc">
-        যদি সিইও-কে সরাসরি ব্রাউজার লিঙ্ক হিসেবে পাঠাতে চান:
-        <br>১. <a href="https://app.netlify.com/drop" target="_blank" style="color:var(--accent2);font-weight:700">Netlify Drop</a> বা <a href="https://tiiny.host" target="_blank" style="color:var(--accent2);font-weight:700">Tiiny.host</a> ওপেন করুন।
-        <br>২. এই প্রজেক্টের পুরো ফোল্ডারটি ড্র্যাগ অ্যান্ড ড্রপ করুন।
-        <br>৩. মাত্র ১০ সেকেন্ডে একটি লাইভ পাবলিক লিঙ্ক তৈরি হবে যা বিশ্বের যেকোনো প্রান্ত থেকে মোবাইলে ও ল্যাপটপে সরাসরি দেখা যাবে।
-      </div>
-    </div>
-
-    <div class="share-step-box">
-      <div class="share-step-title">⚡ Method 3: Instant Local Network Tunneling (Live Temporary Link)</div>
-      <div class="share-step-desc">
-        টার্মিনালে মাত্র ১টি কমান্ড দিয়ে আপনার লোকাল পিসি থেকে সিইও-র মোবাইলে লাইভ লিঙ্ক শেয়ার করতে পারেন:
-        <span class="code-snippet">npx localtunnel --port 8765</span>
-      </div>
-    </div>
   </div>
 </div>
 
 <script>
-let currentModule = 0;
+// Authorized Credentials
+const AUTH_EMAIL = "sokrio2026@gmail.com";
+const AUTH_PASS  = "2026sokrio@S";
 
-const moduleMeta = {
-  0: {
-    badge: 'CHAPTER 0 · STRATEGIC CHARTER',
-    badgeClass: 'blue',
-    question: '<strong>Strategic Overview:</strong> Comprehensive audit mandate, quantified commercial ROI, and 30-60-90 day execution roadmap.',
-    file: 'introduction_module.html?v=20261006_v5'
-  },
-  1: {
-    badge: 'MODULE 1 · GEO-INTELLIGENCE EXPLORER™',
-    badgeClass: '',
-    question: '<strong>Strategic Objective:</strong> National market penetration, district revenue distribution, and high-visit zero-order blindspot detection.',
-    file: 'ceo_national_map.html?v=20261006_v22'
-  },
-  2: {
-    badge: 'MODULE 2 · SMARTPITCH AI™ ENGINE',
-    badgeClass: '',
-    question: '<strong>Strategic Objective:</strong> Prescriptive AI cross-selling recommendations and 9-tier outlet segmentation to maximize basket size.',
-    file: 'module2_smartpitch.html?v=20261006_v5'
-  },
-  3: {
-    badge: 'MODULE 3 · SILENT BLEED ENGINE™',
-    badgeClass: '',
-    question: '<strong>Strategic Objective:</strong> Early churn risk detection, order cadence decay, and silent-bleed recovery across 23,964 at-risk doors.',
-    file: 'module3_retention.html?v=20261006_v5'
-  },
-  4: {
-    badge: 'MODULE 4 · PERFORMANCEPULSE ANALYZER™',
-    badgeClass: '',
-    question: '<strong>Strategic Objective:</strong> Field staff productivity diagnostics, visit duration conversion yield, 6 ML personas, and SR coaching sheets.',
-    file: 'module4_performance.html?v=20261006_v5'
-  },
-  5: {
-    badge: 'MODULE 5 · SMART KPI ARCHITECT™',
-    badgeClass: '',
-    question: '<strong>Strategic Objective:</strong> ML behavioral driver ranking, the 8-minute golden visit rule, regional KPI calibration, and sales forecasting.',
-    file: 'module5_kpi_architect.html?v=20261006_v5'
-  },
-  6: {
-    badge: 'MODULE 6 · GROWTH COMPASS DASHBOARD™',
-    badgeClass: '',
-    question: '<strong>Strategic Objective:</strong> Category revenue mix, retail reach, brand price-volume matrix, and C-level 30-60-90 day strategic execution roadmap.',
-    file: 'module6_growth_compass.html?v=20261006_v5'
-  }
-};
+// If already authenticated, redirect to portal
+if (sessionStorage.getItem('itl_auth') === 'true' || localStorage.getItem('itl_auth') === 'true') {
+  window.location.replace('portal.html');
+}
 
-function switchModule(n) {
-  currentModule = n;
-  
-  // Update Chapter Active Classes
-  document.querySelectorAll('.chapter-card').forEach(c => {
-    c.classList.toggle('active', c.id === `tab-m${n}`);
-  });
-
-  // Update Frame Visibility
-  document.querySelectorAll('.module-iframe').forEach(f => {
-    f.classList.toggle('active', f.id === `frame-m${n}`);
-  });
-
-  // Update Topbar Badge and Question
-  const meta = moduleMeta[n];
-  if (meta) {
-    const b = document.getElementById('stageBadge');
-    b.textContent = meta.badge;
-    b.className = 'stage-badge ' + (meta.badgeClass || '');
-    document.getElementById('stageQuestion').innerHTML = meta.question;
+function togglePassVisibility() {
+  const pInput = document.getElementById('userPass');
+  const eye = document.getElementById('eyeIcon');
+  if (pInput.type === 'password') {
+    pInput.type = 'text';
+    eye.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+  } else {
+    pInput.type = 'password';
+    eye.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
   }
 }
 
-function openCurrentInNewTab() {
-  const meta = moduleMeta[currentModule];
-  if (meta) window.open(meta.file, '_blank');
-}
+function handleLogin(e) {
+  e.preventDefault();
+  const emailInput = document.getElementById('userEmail').value.trim();
+  const passInput  = document.getElementById('userPass').value.trim();
+  const remember   = document.getElementById('rememberMe').checked;
+  const errBanner  = document.getElementById('errorBanner');
+  const succBanner = document.getElementById('successBanner');
+  const btnSubmit  = document.getElementById('btnSubmit');
 
-function openShareModal() {
-  document.getElementById('shareModal').classList.add('active');
-}
+  errBanner.classList.remove('show');
+  succBanner.classList.remove('show');
 
-function closeModal(id) {
-  document.getElementById(id).classList.remove('active');
-}
+  if (emailInput === AUTH_EMAIL && passInput === AUTH_PASS) {
+    // Authentication successful
+    succBanner.classList.add('show');
+    btnSubmit.disabled = true;
+    btnSubmit.style.opacity = '0.7';
 
-function toggleTheme() {
-  // Enforce clean crisp Light Mode as primary executive standard
-  document.documentElement.setAttribute('data-theme', 'light');
-  document.querySelectorAll('.module-iframe').forEach(f => {
-    try {
-      if (f.contentDocument && f.contentDocument.documentElement) {
-        f.contentDocument.documentElement.setAttribute('data-theme', 'light');
-      }
-    } catch(e){}
-  });
-}
+    // Set auth tokens
+    sessionStorage.setItem('itl_auth', 'true');
+    sessionStorage.setItem('itl_user', emailInput);
+    if (remember) {
+      localStorage.setItem('itl_auth', 'true');
+      localStorage.setItem('itl_user', emailInput);
+    }
 
-let appLang = localStorage.getItem('itl_lang') || 'en';
-
-function applyGlobalAppLang(lang) {
-  appLang = lang;
-  localStorage.setItem('itl_lang', lang);
-  const btnText = document.getElementById('globalLangText');
-  if (btnText) btnText.textContent = lang === 'en' ? 'বাংলা' : 'English';
-  
-  // Broadcast to all iframes
-  document.querySelectorAll('.module-iframe').forEach(f => {
-    try {
-      f.contentWindow.postMessage({ type: 'SET_LANG', lang: lang }, '*');
-    } catch(e){}
-  });
-}
-
-function toggleGlobalAppLang() {
-  applyGlobalAppLang(appLang === 'en' ? 'bn' : 'en');
-}
-
-// Initialize on page load
-window.addEventListener('DOMContentLoaded', () => {
-  applyGlobalAppLang(appLang);
-});
-
-// Global hotkeys (0-6 to switch chapters)
-window.addEventListener('keydown', e => {
-  const k = parseInt(e.key);
-  if (k >= 0 && k <= 6 && !e.ctrlKey && !e.altKey && !e.metaKey && e.target.tagName !== 'INPUT') {
-    switchModule(k);
+    setTimeout(() => {
+      window.location.replace('portal.html');
+    }, 600);
+  } else {
+    // Failed authentication
+    errBanner.classList.add('show');
+    const pField = document.getElementById('userPass');
+    pField.value = '';
+    pField.focus();
   }
-});
+}
 </script>
+
 </body>
 </html>
