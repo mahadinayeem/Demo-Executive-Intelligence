@@ -458,11 +458,10 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
   <div class="insight-box">
     <span class="insight-icon">🛒</span>
     <div class="insight-text">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:4px">
-        <strong>Market Basket Analysis (মার্কেট বাস্কেট ক্রস-সেলিং অ্যালগরিদম)</strong>
-        <span class="badge" style="background:rgba(6,182,212,0.15);color:#06b6d4;border:1px solid rgba(6,182,212,0.3);font-weight:700">🤖 Model: FP-Growth & Apriori Association Rule Mining</span>
-      </div>
-      Co-purchase frequency across 1.68M transactions. <strong>Support</strong> = how often items appear together in orders. <strong>Confidence A→B</strong> = probability B is bought when A is bought. <strong>Lift &gt;1.0x</strong> = strong statistical co-buying association (up to 8,474.51x lift identified).
+      <strong>Market Basket Analysis (Apriori-style Association Mining)</strong><br>
+      Co-purchase frequency across all outlet transactions. <strong>Support</strong> = how often items appear together 
+      as % of all orders. <strong>Confidence A→B</strong> = given A purchased, probability B also purchased. 
+      <strong>Lift &gt;1</strong> = positive association (items bought together more than by chance).
     </div>
   </div>
 
@@ -1214,38 +1213,40 @@ function buildSimulation() {
   const totalM = sv2.total_opportunity_M;
   const b2s = sv2.scenario_bronze_to_silver;
   const s2g = sv2.scenario_silver_to_gold;
-  const g2p = sv2.scenario_gold_to_platinum || { outlets: 47585, uplift_total: 5813595068.35, uplift_pct: 466.4 };
 
   document.getElementById('simMain').innerHTML = `
-    <div class="sim-headline">💡 FMCG Tier Upgrade Revenue Potential</div>
-    <div class="sim-big">BDT ${totalM}M <span class="sim-unit">Core Lower-Tier Upsell Potential (৳172.4 Cr)</span></div>
+    <div class="sim-headline">💡 Tier Upgrade Revenue Opportunity</div>
+    <div class="sim-big">BDT ${totalM}M <span class="sim-unit">total addressable uplift</span></div>
     <div class="sim-desc">
-      By executing targeted cross-sell and basket expansion interventions:
-      elevating <strong>Bronze-tier outlets</strong> (&lt;৳5k) to Silver-tier average spend (+${b2s.uplift_pct}% gain)
-      and <strong>Silver-tier outlets</strong> (৳5k–15k) to Gold-tier average spend (+${s2g.uplift_pct}% gain),
-      the total addressable upside across <strong>${(b2s.outlets + s2g.outlets).toLocaleString()} outlets</strong> (68.9% of universe) is 
-      <strong>BDT ${totalM}M</strong>. Furthermore, elevating Gold outlets to Platinum unlocks an additional <strong>BDT ${(g2p.uplift_total/1e6).toFixed(1)}M</strong>.
+      By elevating <strong>Bronze-tier outlets</strong> to Silver-tier average spend (+${b2s.uplift_pct}% per outlet)
+      and <strong>Silver-tier outlets</strong> to Gold-tier average spend (+${s2g.uplift_pct}% per outlet),
+      the combined revenue opportunity across <strong>${(b2s.outlets + s2g.outlets).toLocaleString()} outlets</strong> is 
+      <strong>BDT ${totalM}M</strong> — achievable through targeted SmartPitch cross-sell interventions.
     </div>
-    <div class="sim-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+    <div class="sim-grid">
       <div class="sim-item">
-        <div class="sim-item-val" style="color:#f43f5e;">BDT ${(b2s.uplift_total/1e6).toFixed(1)}M</div>
-        <div class="sim-item-lbl">Bronze → Silver Uplift (+${b2s.uplift_pct}%)</div>
-        <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">${b2s.outlets.toLocaleString()} outlets (&lt;৳5k)</div>
+        <div class="sim-item-val">BDT ${b2s.uplift_total > 1e6 ? (b2s.uplift_total/1e6).toFixed(1)+'M' : fmt(b2s.uplift_total,0)}</div>
+        <div class="sim-item-lbl">Bronze→Silver Uplift</div>
       </div>
       <div class="sim-item">
-        <div class="sim-item-val" style="color:#4f8ef7;">BDT ${(s2g.uplift_total/1e6).toFixed(1)}M</div>
-        <div class="sim-item-lbl">Silver → Gold Uplift (+${s2g.uplift_pct}%)</div>
-        <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">${s2g.outlets.toLocaleString()} outlets (৳5k–15k)</div>
+        <div class="sim-item-val">BDT ${s2g.uplift_total > 1e6 ? (s2g.uplift_total/1e6).toFixed(1)+'M' : fmt(s2g.uplift_total,0)}</div>
+        <div class="sim-item-lbl">Silver→Gold Uplift</div>
       </div>
       <div class="sim-item">
-        <div class="sim-item-val" style="color:#10b981;">BDT ${(g2p.uplift_total/1e6).toFixed(1)}M</div>
-        <div class="sim-item-lbl">Gold → Platinum Uplift (+${g2p.uplift_pct}%)</div>
-        <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">${g2p.outlets.toLocaleString()} outlets (৳15k–50k)</div>
+        <div class="sim-item-val">${b2s.outlets.toLocaleString()}</div>
+        <div class="sim-item-lbl">Bronze Outlets</div>
       </div>
       <div class="sim-item">
-        <div class="sim-item-val" style="color:#fbbf24;">${(b2s.outlets + s2g.outlets).toLocaleString()}</div>
-        <div class="sim-item-lbl">Core Target Lower Outlets</div>
-        <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">68.9% of total store universe</div>
+        <div class="sim-item-val">${s2g.outlets.toLocaleString()}</div>
+        <div class="sim-item-lbl">Silver Outlets</div>
+      </div>
+      <div class="sim-item">
+        <div class="sim-item-val">+${b2s.uplift_pct}%</div>
+        <div class="sim-item-lbl">Avg Rev Gain (Bronze)</div>
+      </div>
+      <div class="sim-item">
+        <div class="sim-item-val">+${s2g.uplift_pct}%</div>
+        <div class="sim-item-lbl">Avg Rev Gain (Silver)</div>
       </div>
     </div>
   `;
@@ -1640,9 +1641,8 @@ function renderTierCharts() {
 function renderSimCharts() {
   const sv2 = D.simulation_v2;
   const scenarios2 = [
-    { from: 'Bronze', to: 'Silver', uplift: sv2.scenario_bronze_to_silver.uplift_total, color: 'rgba(244,63,94,0.75)', border: '#f43f5e' },
-    { from: 'Silver', to: 'Gold', uplift: sv2.scenario_silver_to_gold.uplift_total, color: 'rgba(79,142,247,0.75)', border: '#4f8ef7' },
-    { from: 'Gold', to: 'Platinum', uplift: (sv2.scenario_gold_to_platinum ? sv2.scenario_gold_to_platinum.uplift_total : 5813595068.35), color: 'rgba(16,185,129,0.75)', border: '#10b981' }
+    { from: 'Bronze', to: 'Silver', uplift: sv2.scenario_bronze_to_silver.uplift_total },
+    { from: 'Silver', to: 'Gold', uplift: sv2.scenario_silver_to_gold.uplift_total }
   ];
 
   destroyChart('chartUplift');
@@ -1653,51 +1653,49 @@ function renderSimCharts() {
       datasets: [{
         label: 'Revenue Uplift (BDT)',
         data: scenarios2.map(s => s.uplift),
-        backgroundColor: scenarios2.map(s => s.color),
-        borderColor: scenarios2.map(s => s.border),
-        borderWidth: 1.5,
-        borderRadius: 6
+        backgroundColor: ['rgba(244,63,94,0.75)','rgba(79,142,247,0.75)','rgba(16,185,129,0.75)'],
+        borderColor: ['#f43f5e','#4f8ef7','#10b981'],
+        borderWidth:1.5, borderRadius:6
       }]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: { ...CHART_DEFAULTS.plugins.tooltip, callbacks: { label: ctx => `BDT ${fmt(ctx.raw, 2)}` } }
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{...CHART_DEFAULTS.plugins.tooltip, callbacks:{label:ctx=>`BDT ${fmt(ctx.raw,2)}`}}
       },
-      scales: {
-        x: { ticks: { color: '#8899bb' }, grid: { display: false } },
-        y: { ticks: { color: '#5a6a88', callback: v => fmt(v, 1) }, grid: { color: 'rgba(30,45,69,.3)' } }
+      scales:{
+        x:{ticks:{color:'#8899bb'},grid:{display:false}},
+        y:{ticks:{color:'#5a6a88',callback:v=>fmt(v,1)},grid:{color:'rgba(30,45,69,.3)'}}
       }
     }
   });
 
-  // Scenario: X% of Bronze+Silver outlets upgrade to next tier
+  // Scenario: X% of Bronze+Silver outlets upgrade to Gold
   const baseUplift = sv2.scenario_bronze_to_silver.uplift_total + sv2.scenario_silver_to_gold.uplift_total;
-  const pctScenarios = [10, 25, 50, 75, 100];
+  const totalOutlets = sv2.scenario_bronze_to_silver.outlets + sv2.scenario_silver_to_gold.outlets;
+  const pctScenarios = [10,25,50,75,100];
   destroyChart('chartScenario');
   chartInstances['chartScenario'] = new Chart(document.getElementById('chartScenario'), {
     type: 'bar',
     data: {
-      labels: pctScenarios.map(s => s + '% Adoption'),
+      labels: pctScenarios.map(s => s+'% Upgraded'),
       datasets: [{
-        label: 'Lower-Tier Revenue Uplift (BDT)',
+        label: 'Revenue Uplift (BDT)',
         data: pctScenarios.map(s => baseUplift * s / 100),
-        backgroundColor: pctScenarios.map((_, i) => `rgba(${79 + i * 30},${142 - i * 15},247,0.75)`),
-        borderRadius: 4
+        backgroundColor: pctScenarios.map((_,i) => `rgba(${79+i*30},${142-i*15},247,0.75)`),
+        borderRadius:4
       }]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: { ...CHART_DEFAULTS.plugins.tooltip, callbacks: { label: ctx => `BDT ${fmt(ctx.raw, 2)}` } }
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{...CHART_DEFAULTS.plugins.tooltip,callbacks:{label:ctx=>`BDT ${fmt(ctx.raw,2)}`}}
       },
-      scales: {
-        x: { ticks: { color: '#5a6a88' }, grid: { display: false } },
-        y: { ticks: { color: '#5a6a88', callback: v => fmt(v, 1) }, grid: { color: 'rgba(30,45,69,.3)' } }
+      scales:{
+        x:{ticks:{color:'#5a6a88'},grid:{display:false}},
+        y:{ticks:{color:'#5a6a88',callback:v=>fmt(v,1)},grid:{color:'rgba(30,45,69,.3)'}}
       }
     }
   });
@@ -1879,13 +1877,10 @@ function exportDataCSV() {
     });
 
   } else if (activeTab === 'simulation') {
-    csv = "Scenario,Outlets_Targeted,Current_Avg_BDT,Target_Avg_BDT,Uplift_Pct,Uplift_Revenue_BDT\n";
+    csv = "Scenario,Outlets_Targeted,Uplift_Pct,Uplift_Revenue_BDT\n";
     const sv2 = D.simulation_v2;
-    csv += `"Bronze to Silver",${sv2.scenario_bronze_to_silver.outlets},${sv2.scenario_bronze_to_silver.current_avg},${sv2.scenario_bronze_to_silver.target_avg},${sv2.scenario_bronze_to_silver.uplift_pct},${sv2.scenario_bronze_to_silver.uplift_total}\n`;
-    csv += `"Silver to Gold",${sv2.scenario_silver_to_gold.outlets},${sv2.scenario_silver_to_gold.current_avg},${sv2.scenario_silver_to_gold.target_avg},${sv2.scenario_silver_to_gold.uplift_pct},${sv2.scenario_silver_to_gold.uplift_total}\n`;
-    if (sv2.scenario_gold_to_platinum) {
-      csv += `"Gold to Platinum",${sv2.scenario_gold_to_platinum.outlets},${sv2.scenario_gold_to_platinum.current_avg},${sv2.scenario_gold_to_platinum.target_avg},${sv2.scenario_gold_to_platinum.uplift_pct},${sv2.scenario_gold_to_platinum.uplift_total}\n`;
-    }
+    csv += `"Bronze to Silver",${sv2.scenario_bronze_to_silver.outlets},${sv2.scenario_bronze_to_silver.uplift_pct},${sv2.scenario_bronze_to_silver.uplift_total}\n`;
+    csv += `"Silver to Gold",${sv2.scenario_silver_to_gold.outlets},${sv2.scenario_silver_to_gold.uplift_pct},${sv2.scenario_silver_to_gold.uplift_total}\n`;
   } else if (activeTab === 'penetration') {
     csv = "Territory,Total_Revenue," + catNames.join(",") + "\n";
     penData.forEach(t => {
@@ -2067,20 +2062,12 @@ function chartDL(chartId) {
     return;
   } else if (chartId === 'uplift' || chartId === 'scenario') {
     csv = "Scenario_Metric,Value\n";
-    if (D.simulation_v2) {
-      const sv2 = D.simulation_v2;
-      csv += `"Bronze Outlets (<5k)",${sv2.scenario_bronze_to_silver?.outlets||0}\n`;
-      csv += `"Bronze to Silver Uplift BDT",${sv2.scenario_bronze_to_silver?.uplift_total||0}\n`;
-      csv += `"Bronze to Silver Uplift Pct",${sv2.scenario_bronze_to_silver?.uplift_pct||0}%\n`;
-      csv += `"Silver Outlets (5k-15k)",${sv2.scenario_silver_to_gold?.outlets||0}\n`;
-      csv += `"Silver to Gold Uplift BDT",${sv2.scenario_silver_to_gold?.uplift_total||0}\n`;
-      csv += `"Silver to Gold Uplift Pct",${sv2.scenario_silver_to_gold?.uplift_pct||0}%\n`;
-      if (sv2.scenario_gold_to_platinum) {
-        csv += `"Gold Outlets (15k-50k)",${sv2.scenario_gold_to_platinum?.outlets||0}\n`;
-        csv += `"Gold to Platinum Uplift BDT",${sv2.scenario_gold_to_platinum?.uplift_total||0}\n`;
-        csv += `"Gold to Platinum Uplift Pct",${sv2.scenario_gold_to_platinum?.uplift_pct||0}%\n`;
-      }
-      csv += `"Core Lower-Tier Upsell Opportunity BDT",${(sv2.scenario_bronze_to_silver?.uplift_total||0)+(sv2.scenario_silver_to_gold?.uplift_total||0)}\n`;
+    if (D.simulation) {
+      csv += `"Bronze Outlets",${D.simulation.bronze_to_silver?.outlets||0}\n`;
+      csv += `"Bronze to Silver Uplift BDT",${D.simulation.bronze_to_silver?.uplift_total||0}\n`;
+      csv += `"Silver Outlets",${D.simulation.silver_to_gold?.outlets||0}\n`;
+      csv += `"Silver to Gold Uplift BDT",${D.simulation.silver_to_gold?.uplift_total||0}\n`;
+      csv += `"Total Upsell Opportunity BDT",${D.simulation.uplift_if_upsold||0}\n`;
     }
   } else if (chartId === 'penetration') {
     const catNames = D.penetration_gaps?.categories || [];

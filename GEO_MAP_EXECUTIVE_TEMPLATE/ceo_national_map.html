@@ -149,36 +149,51 @@ aside::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px;}
 
 
 /* Union Map Badges & Interactive Click Labels (Image 2 style) */
-.union-map-lbl {
-  background: transparent;
-  border: none;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 800;
+.union-badge-card {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1.5px solid #0284c7;
+  border-radius: 8px;
+  padding: 3px 8px;
   font-size: 11px;
-  color: #0369a1;
-  text-shadow: 0 1px 3px rgba(255,255,255,0.95), 0 0 8px rgba(255,255,255,0.9);
-  text-align: center;
-  pointer-events: auto !important;
-  cursor: pointer !important;
+  font-weight: 800;
+  color: #0f172a;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
   white-space: nowrap;
-  letter-spacing: 0.3px;
-  transition: transform 0.15s, color 0.15s;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  font-family: 'Outfit', sans-serif;
+  pointer-events: auto !important;
 }
-.union-map-lbl:hover {
-  transform: scale(1.15);
+.union-badge-card:hover {
+  transform: scale(1.10);
+  border-color: #2563eb;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+.union-badge-card .ub-cnt {
+  background: #0284c7;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.union-badge-card.sel {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+.union-badge-card.sel .ub-cnt {
+  background: #ffffff;
   color: #0284c7;
 }
-.union-map-lbl.sel {
-  color: #0284c7;
-  font-size: 12px;
-  font-weight: 900;
-}
-[data-theme="dark"] .union-map-lbl {
-  color: #38bdf8;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.95), 0 0 10px rgba(0,0,0,0.8);
-}
-[data-theme="dark"] .union-map-lbl.sel {
-  color: #00e5ff;
+[data-theme="dark"] .union-badge-card {
+  background: rgba(15, 23, 42, 0.95);
+  color: #f8fafc;
+  border-color: #38bdf8;
 }
 
 .dist-lbl, .thana-lbl, .div-lbl {
@@ -2731,21 +2746,25 @@ function drillThana(thanaName, distName, divIdx, feat) {
 
       unionPolyLayer.addLayer(uPoly);
 
-      // Add Clean Map Typography Label & Tooltip (No bulky box)
-      uPoly.bindTooltip(`<b>${uFullName}</b> (${uCount.toLocaleString()} Outlets)`, {sticky: true, direction: 'top'});
+      // Add Centroid Badge (Image 2 style)
       const center = uPoly.getBounds().getCenter();
-      const labelHtml = `<div class="union-map-lbl" id="ub_${uShortName.replace(/\s+/g,'_')}">${uShortName}</div>`;
-      const labelIcon = L.divIcon({
+      const badgeHtml = `
+        <div class="union-badge-card" id="ub_${uShortName.replace(/\s+/g,'_')}">
+          <span>🏡 <b>${uShortName}</b></span>
+          <span class="ub-cnt">${uCount}</span>
+        </div>
+      `;
+      const badgeIcon = L.divIcon({
         className: '',
-        html: labelHtml,
-        iconSize: [100, 20],
-        iconAnchor: [50, 10]
+        html: badgeHtml,
+        iconSize: [110, 28],
+        iconAnchor: [55, 14]
       });
-      const labelMarker = L.marker(center, {icon: labelIcon, interactive: true, pane: 'markerPane'});
-      labelMarker.on('click', () => {
+      const badgeMarker = L.marker(center, {icon: badgeIcon, interactive: true, pane: 'markerPane'});
+      badgeMarker.on('click', () => {
         drillUnion(uFullName, thanaName, distName, curDivIdx);
       });
-      unionPolyLayer.addLayer(labelMarker);
+      unionPolyLayer.addLayer(badgeMarker);
     });
   } else {
     // Fallback: draw single thana outline
@@ -2836,18 +2855,22 @@ function drillUnion(unionName, thanaName, distName, divIdx) {
     unionPolyLayer.addLayer(singlePoly);
     bounds.extend(singlePoly.getBounds());
 
-    // Add Clean Map Typography Label & Tooltip (No bulky box)
-    singlePoly.bindTooltip(`<b>${unionName}</b> (${targetUnionOutlets.length.toLocaleString()} Outlets)`, {sticky: true, direction: 'top'});
+    // Add Centroid Badge
     const center = singlePoly.getBounds().getCenter();
-    const labelHtml = `<div class="union-map-lbl sel">${uShortName}</div>`;
-    const labelIcon = L.divIcon({
+    const badgeHtml = `
+      <div class="union-badge-card sel" style="box-shadow:0 0 16px rgba(6,182,212,0.4);">
+        <span>🏡 <b>${uShortName}</b></span>
+        <span class="ub-cnt">${targetUnionOutlets.length}</span>
+      </div>
+    `;
+    const badgeIcon = L.divIcon({
       className: '',
-      html: labelHtml,
-      iconSize: [100, 20],
-      iconAnchor: [50, 10]
+      html: badgeHtml,
+      iconSize: [120, 28],
+      iconAnchor: [60, 14]
     });
-    const labelMarker = L.marker(center, {icon: labelIcon, interactive: false, pane: 'markerPane'});
-    unionPolyLayer.addLayer(labelMarker);
+    const badgeMarker = L.marker(center, {icon: badgeIcon, interactive: false, pane: 'markerPane'});
+    unionPolyLayer.addLayer(badgeMarker);
   }
 
   if (targetUnionOutlets.length > 0) {
