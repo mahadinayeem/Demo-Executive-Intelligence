@@ -3358,7 +3358,7 @@
       "red_flag_srs": 0
     },
     {
-      "territory": "Ispahani Foods Ltd.",
+      "territory": "Enterprise FMCG Foods Ltd.",
       "sr_count": 1,
       "revenue_bdt": 6399101.78,
       "total_visits": 1,
@@ -5012,7 +5012,7 @@
       "id": "1324",
       "name": "Jobair Arman",
       "code": "11153",
-      "territory": "Ispahani Foods Ltd.",
+      "territory": "Enterprise FMCG Foods Ltd.",
       "revenue": 6399101.78,
       "orders": 12,
       "aov": 533258.0,
@@ -11249,7 +11249,7 @@
       "id": "1324",
       "name": "Jobair Arman",
       "code": "11153",
-      "territory": "Ispahani Foods Ltd.",
+      "territory": "Enterprise FMCG Foods Ltd.",
       "revenue": 6399101.78,
       "orders": 12,
       "aov": 533258.0,

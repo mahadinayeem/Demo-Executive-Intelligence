@@ -88,7 +88,7 @@ window.MODULE6_DATA = {
       "reach_outlets": 44597
     },
     {
-      "category": "ITL Rice",
+      "category": "Premium Rice",
       "net_revenue": 19997870.0,
       "gross_demand": 19997870.0,
       "discount_bdt": 0.0,
@@ -619,7 +619,7 @@ window.MODULE6_DATA = {
   ],
   "value_volume_matrix": [
     {
-      "brand": "Mirzapore Best Leaf",
+      "brand": "Premium Gold Blend",
       "category": "Tea",
       "net_revenue": 998821975.8,
       "gross_demand": 998821980.8,
@@ -631,7 +631,7 @@ window.MODULE6_DATA = {
       "color": "#3b82f6"
     },
     {
-      "brand": "Mirzapore Tea Bag",
+      "brand": "Express Tea Bag",
       "category": "Tea",
       "net_revenue": 695088583.05,
       "gross_demand": 695088583.05,
@@ -643,7 +643,7 @@ window.MODULE6_DATA = {
       "color": "#3b82f6"
     },
     {
-      "brand": "Mighty Chips",
+      "brand": "Crispy Potato Chips",
       "category": "Chips",
       "net_revenue": 558668035.5,
       "gross_demand": 558668035.5,
@@ -655,7 +655,7 @@ window.MODULE6_DATA = {
       "color": "#3b82f6"
     },
     {
-      "brand": "Mirzapore BOP",
+      "brand": "Golden Leaf BOP",
       "category": "Tea",
       "net_revenue": 422041121.7,
       "gross_demand": 422041121.7,
@@ -667,7 +667,7 @@ window.MODULE6_DATA = {
       "color": "#3b82f6"
     },
     {
-      "brand": "Mirzapore PD",
+      "brand": "Rich Pekoe Dust",
       "category": "Tea",
       "net_revenue": 336963854.0,
       "gross_demand": 336963854.0,
@@ -679,7 +679,7 @@ window.MODULE6_DATA = {
       "color": "#3b82f6"
     },
     {
-      "brand": "Parbon Chinigura",
+      "brand": "Aromatic Grain",
       "category": "Rice",
       "net_revenue": 298257374.0,
       "gross_demand": 298257374.0,
@@ -691,7 +691,7 @@ window.MODULE6_DATA = {
       "color": "#10b981"
     },
     {
-      "brand": "Superior Tiger",
+      "brand": "Select Master Blend",
       "category": "Tea",
       "net_revenue": 165833856.0,
       "gross_demand": 165833856.0,
@@ -727,7 +727,7 @@ window.MODULE6_DATA = {
       "color": "#3b82f6"
     },
     {
-      "brand": "HTS PD",
+      "brand": "Commercial Dust",
       "category": "Tea",
       "net_revenue": 121475220.0,
       "gross_demand": 121475220.0,
@@ -847,7 +847,7 @@ window.MODULE6_DATA = {
       "color": "#8b5cf6"
     },
     {
-      "brand": "Blenders Choice GT Tea Bag",
+      "brand": "Executive Reserve GT Tea Bag",
       "category": "Tea",
       "net_revenue": 25459720.0,
       "gross_demand": 25459720.0,
@@ -859,7 +859,7 @@ window.MODULE6_DATA = {
       "color": "#8b5cf6"
     },
     {
-      "brand": "Ispahani Orange",
+      "brand": "Enterprise FMCG Orange",
       "category": "Biscuits",
       "net_revenue": 24833585.4,
       "gross_demand": 24833643.0,
@@ -943,8 +943,8 @@ window.MODULE6_DATA = {
       "color": "#8b5cf6"
     },
     {
-      "brand": "ITL Parbon Chinigura",
-      "category": "ITL Rice",
+      "brand": "ITL Aromatic Grain",
+      "category": "Premium Rice",
       "net_revenue": 12551400.0,
       "gross_demand": 12551400.0,
       "volume_units": 66060.0,
@@ -967,7 +967,7 @@ window.MODULE6_DATA = {
       "color": "#f59e0b"
     },
     {
-      "brand": "Zareen",
+      "brand": "Heritage Special",
       "category": "Tea",
       "net_revenue": 10245488.0,
       "gross_demand": 10245488.0,
@@ -979,7 +979,7 @@ window.MODULE6_DATA = {
       "color": "#8b5cf6"
     },
     {
-      "brand": "Ispahani Masalix",
+      "brand": "Enterprise FMCG Masalix",
       "category": "Chips",
       "net_revenue": 10061817.25,
       "gross_demand": 10061817.25,
@@ -1051,7 +1051,7 @@ window.MODULE6_DATA = {
       "color": "#8b5cf6"
     },
     {
-      "brand": "Blenders Choice",
+      "brand": "Executive Reserve",
       "category": "Tea",
       "net_revenue": 5576449.0,
       "gross_demand": 5576449.0,
@@ -1063,7 +1063,7 @@ window.MODULE6_DATA = {
       "color": "#8b5cf6"
     },
     {
-      "brand": "Ispahani Milkose",
+      "brand": "Enterprise FMCG Milkose",
       "category": "Biscuits",
       "net_revenue": 5491656.0,
       "gross_demand": 5491656.0,
